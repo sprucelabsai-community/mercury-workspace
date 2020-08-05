@@ -58,7 +58,7 @@
     "chokidar-cli": "^2.1.0",
     "concurrently": "^5.2.0",
     "eslint": "^7.6.0",
-    "eslint-config-spruce": "^10.7.15",
+    "eslint-config-spruce": "^10.7.16",
     "faker": "^4.1.0",
     "mocha": "^8.1.1",
     "prettier": "^2.0.5",
