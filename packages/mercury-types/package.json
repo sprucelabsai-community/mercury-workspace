@@ -1,0 +1,47 @@
+{
+  "name": "@sprucelabs/mercury-types",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "build"
+  ],
+  "version": "1.0.0",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "description": "Types for Mercury!",
+  "keywords": [
+    "node",
+    "components",
+    "sprucebot",
+    "sprucelabs"
+  ],
+  "homepage": "https://github.com/sprucelabsai/mercury-workspace",
+  "bugs": {
+    "url": "https://github.com/sprucelabsai/mercury-workspace/issues"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run build.node",
+    "build.node": "tsc | true",
+    "watch": "chokidar 'src/**/*.(js|jsx|ts|tsx)' -c 'npm run build'",
+    "clean": "rm -rf build/",
+    "#lint": "eslint '**/*.ts' && tsc -p . --noEmit",
+    "#lint.fix": "eslint --fix '**/*.ts'",
+    "#test": "exit 0",
+    "release": "semantic-release",
+    "arkit": "arkit -f index.ts -o docs/images/arkit.svg",
+    "arkit.png": "arkit -f index.ts -o docs/images/arkit.png"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@sprucelabs/semantic-release": "^4.0.5",
+    "arkit": "^1.6.4",
+    "chai": "^4.2.0",
+    "chokidar-cli": "^2.1.0",
+    "concurrently": "^5.2.0",
+    "eslint": "^7.6.0",
+    "eslint-config-spruce": "^10.7.16",
+    "mocha": "^8.1.1",
+    "typescript": "^3.9.7"
+  }
+}

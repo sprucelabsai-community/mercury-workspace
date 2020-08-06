@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="319px" preserveAspectRatio="none" style="width:348px;height:319px;" version="1.1" viewBox="0 0 348 319" width="348px" zoomAndPan="magnify"><defs/><g><!--MD5=[a6f11bb19cee6b13000111f5ad685e8b]
+cluster Dependencies--><path d="M25,224 L119,224 A4.5,4.5 0 0 1 122,227 L129,244.4844 L272,244.4844 A3,3 0 0 1 275,247.4844 L275,304 A3,3 0 0 1 272,307 L25,307 A3,3 0 0 1 22,304 L22,227 A3,3 0 0 1 25,224 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="22" x2="129" y1="244.4844" y2="244.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="94" x="26" y="238.0059">Dependencies</text><!--MD5=[92b113c9bd935edfd671bb14cfae0107]
+entity debug--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #383838; stroke-width: 1.0;" width="55" x="38.5" y="257"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="33.5" y="262"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="33.5" y="281.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="35" x="48.5" y="279.0059">debug</text><!--MD5=[79d1cdf0e2f9de35de7874284ab4fcc9]
+entity socket.io-client/socket--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #383838; stroke-width: 1.0;" width="153" x="105.5" y="257"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="100.5" y="262"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="100.5" y="281.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="133" x="115.5" y="279.0059">socket.io-client/socket</text><ellipse cx="106.2487" cy="25.242" fill="#F8F8F8" rx="27.7487" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="35" x="88.7487" y="28.9842">index</text><ellipse cx="77.7653" cy="141.2122" fill="#F8F8F8" rx="15.7653" ry="13.2122" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="18" x="68.7653" y="144.9544">log</text><!--MD5=[891dc5c5bdaa042be69ac13f3d7bb9d4]
+entity _Mercury--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="64" x="146" y="8"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="44" x="156" y="30.0059">Mercury</text><!--MD5=[165d5e689436c10014de48717b140238]
+entity _MercuryAdapter--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="107" x="230.5" y="124"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="87" x="240.5" y="146.0059">MercuryAdapter</text><!--MD5=[22c7123e9296c313d1559abd4a19dd35]
+entity _MercuryAdapterSocketIO--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="162" x="97" y="66"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="142" x="107" y="88.0059">MercuryAdapterSocketIO</text><!--MD5=[28e0dbe82cfbb0d162534cb046743381]
+link <b>index</b> to _Mercury--><path d="M133.562,25 C135.841,25 138.119,25 140.397,25 " fill="none" id="&lt;b&gt;index&lt;/b&gt;-&gt;_Mercury" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="145.713,25,136.713,21,140.713,25,136.713,29,145.713,25" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[8bd648c966d534545320bd4ec23dfa63]
+link log to debug--><path d="M76.8926,154.089 C74.8582,176.298 70.5019,223.8547 67.9579,251.6268 " fill="none" id="log-&gt;debug" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="67.4744,256.904,72.2788,248.3064,67.9305,251.9249,64.3121,247.5766,67.4744,256.904" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[b974831986ff63757d43fa6cd03ee331]
+link _Mercury to log--><path d="M145.615,40.05 C121.662,50.576 92.878,63.565 91,66 C78.4766,82.241 76.4325,106.445 76.7194,122.705 " fill="none" id="_Mercury-&gt;log" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="76.8944,127.892,80.5887,118.7623,76.7258,122.8948,72.5932,119.032,76.8944,127.892" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[39e6a75b03e3bf9ad770fbfec8261532]
+link _Mercury to _MercuryAdapter--><path d="M210.216,35.211 C226.963,41.266 246.429,50.941 259,66 C271.295,80.729 275.762,102.438 278.404,118.538 " fill="none" id="_Mercury-&gt;_MercuryAdapter" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="279.239,123.764,281.7694,114.2458,278.4504,118.8266,273.8696,115.5075,279.239,123.764" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[cfd7abad26b927dfc6a1e6de2f316e42]
+link _MercuryAdapter to _Mercury--><path d="M288.254,123.764 C288.672,107.436 284.685,82.394 271,66 C257.054,49.294 234.622,39.214 215.227,33.352 " fill="none" id="_MercuryAdapter-&gt;_Mercury" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="210.368,31.951,217.9087,38.2865,215.1725,33.3354,220.1236,30.5992,210.368,31.951" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[6dad50082aae6f32287fe8b51dd23f10]
+link _Mercury to _MercuryAdapterSocketIO--><path d="M173.876,42.198 C173.487,47.951 173.4,54.519 173.614,60.638 " fill="none" id="_Mercury-&gt;_MercuryAdapterSocketIO" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="173.865,65.645,177.4074,56.4553,173.6136,60.6513,169.4175,56.8575,173.865,65.645" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[cfb6a43fbbf9fe14fe11c8957fbb5fa3]
+link _MercuryAdapterSocketIO to _Mercury--><path d="M182.135,65.645 C182.518,59.876 182.6,53.305 182.38,47.195 " fill="none" id="_MercuryAdapterSocketIO-&gt;_Mercury" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="182.124,42.198,178.587,51.3898,182.3783,47.1915,186.5766,50.9829,182.124,42.198" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[d299d4830beac958ea4e93dcccbd71a0]
+link _MercuryAdapterSocketIO to log--><path d="M149.344,100.047 C131.77,109.889 109.865,122.156 94.9966,130.482 " fill="none" id="_MercuryAdapterSocketIO-&gt;log" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="90.6207,132.932,100.4277,132.0249,94.9833,130.4891,96.5191,125.0448,90.6207,132.932" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[fc50dc6fb6b7189e4954d2752f5000bf]
+link _MercuryAdapterSocketIO to _MercuryAdapter--><path d="M208.375,100.047 C221.016,106.725 235.771,114.52 248.874,121.443 " fill="none" id="_MercuryAdapterSocketIO-&gt;_MercuryAdapter" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="253.62,123.95,247.5306,116.2093,249.199,121.6145,243.7938,123.2829,253.62,123.95" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[56d955f22db28016f7c9d3b7b9babf14]
+link _MercuryAdapterSocketIO to socket.io-client/socket--><path d="M178.341,100.114 C179.061,134.148 180.738,213.357 181.547,251.5929 " fill="none" id="_MercuryAdapterSocketIO-&gt;socket.io-client/socket" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="181.66,256.9268,185.4686,247.8441,181.5542,251.9279,177.4704,248.0135,181.66,256.9268" style="stroke: #000000; stroke-width: 0.5;"/><script type="text/plantuml"><![CDATA[MD5=[93e05f27e6c3d25559f8587d45ace051]
+@startuml
+
+scale max 1920 width
+top to bottom direction
+
+skinparam nodesep 12
+skinparam ranksep 24
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Tahoma
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam dpi 150
+skinparam arrowColor black
+skinparam arrowThickness 0.5
+skinparam packageTitleAlignment left
+
+skinparam usecase {
+  borderThickness 0.5
+}
+
+skinparam rectangle {
+  borderThickness 0.5
+}
+
+skinparam component {
+  borderThickness 1
+}
+
+
+(<b>index</b>)
+(log)
+rectangle "Mercury" as _Mercury
+rectangle "MercuryAdapter" as _MercuryAdapter
+rectangle "MercuryAdapterSocketIO" as _MercuryAdapterSocketIO
+
+package "Dependencies" {
+  [debug]
+  [socket.io-client/socket]
+}
+
+(<b>index</b>) -[thickness=1]> _Mercury
+(log) ----> [debug]
+_Mercury --> (log)
+_Mercury --> _MercuryAdapter
+_Mercury --> _MercuryAdapterSocketIO
+_MercuryAdapter --> _Mercury
+_MercuryAdapterSocketIO --> (log)
+_MercuryAdapterSocketIO --> _Mercury
+_MercuryAdapterSocketIO --> _MercuryAdapter
+_MercuryAdapterSocketIO ----> [socket.io-client/socket]
+
+@enduml
+
+
+' View and edit on https://arkit.pro
+]]></script></g></svg>
