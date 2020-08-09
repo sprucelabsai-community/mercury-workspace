@@ -3435,10 +3435,10 @@ eslint-config-prettier@^6.11.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-spruce@^10.7.20:
-  version "10.7.20"
-  resolved "https://registry.yarnpkg.com/eslint-config-spruce/-/eslint-config-spruce-10.7.20.tgz#1d08bf18380dd27d5fda28092ee3674045f1fb5d"
-  integrity sha512-eDKb/4rupxzDSdv3ecF4UxE6SndMbs0agr0dg9uUbCnOv/vnlQoq2EaFhs4LwMZaYMLJ3w9yTbkqZgD3Wd/XPg==
+eslint-config-spruce@^10.7.21:
+  version "10.7.21"
+  resolved "https://registry.yarnpkg.com/eslint-config-spruce/-/eslint-config-spruce-10.7.21.tgz#798f5159f6fa6566bfa0582cf1493adc3320b209"
+  integrity sha512-z6aHW5V3thD8HX6mMRATHOr6ONu6gng5pmgdZlj9IJZKnc95OfPhmleEi2Mt2Hy4fZwjsEhUWBOc70ri6SP/HA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^3.8.0"
     "@typescript-eslint/parser" "^3.8.0"
@@ -3448,7 +3448,7 @@ eslint-config-spruce@^10.7.20:
     eslint-plugin-jsx-a11y "^6.3.1"
     eslint-plugin-prettier "^3.1.4"
     eslint-plugin-react "^7.20.5"
-    eslint-plugin-spruce "^10.7.20"
+    eslint-plugin-spruce "^10.7.21"
 
 eslint-import-resolver-node@^0.3.3:
   version "0.3.4"
@@ -3526,10 +3526,10 @@ eslint-plugin-react@^7.20.5:
     resolve "^1.17.0"
     string.prototype.matchall "^4.0.2"
 
-eslint-plugin-spruce@^10.7.20:
-  version "10.7.20"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-spruce/-/eslint-plugin-spruce-10.7.20.tgz#bcf0bfd77a9c77ac61f1bb3703609a81bb143f40"
-  integrity sha512-Z3MZpVTEgUTajGIwJu/C89FA8Fg6QAsEWW80MwV/DZlePxiYvLlyZoBx2MwxIueSl8YYO1N3uoxwfJSfEQf+aA==
+eslint-plugin-spruce@^10.7.21:
+  version "10.7.21"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-spruce/-/eslint-plugin-spruce-10.7.21.tgz#e4575f85ffd0b84172972f98c339f2a0c60322fe"
+  integrity sha512-s1gt1Quz3pgRU7Jr8elYkyyYXE63i8h3dwl/dKD29XA6JfebFoHP/3p2CDE/NoFwqIc2nW4KcJ0gwZCT7yFcLg==
   dependencies:
     pascal-case "^3.1.1"
 
@@ -4239,17 +4239,17 @@ git-semver-tags@^2.0.3:
     semver "^6.0.0"
 
 git-up@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/git-up/-/git-up-4.0.1.tgz#cb2ef086653640e721d2042fe3104857d89007c0"
-  integrity sha512-LFTZZrBlrCrGCG07/dm1aCjjpL1z9L3+5aEeI9SBhAqSc+kiA9Or1bgZhQFNppJX6h/f5McrvJt1mQXTFm6Qrw==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/git-up/-/git-up-4.0.2.tgz#10c3d731051b366dc19d3df454bfca3f77913a7c"
+  integrity sha512-kbuvus1dWQB2sSW4cbfTeGpCMd8ge9jx9RKnhXhuJ7tnvT+NIrTVfYZxjtflZddQYcmdOTlkAcjmx7bor+15AQ==
   dependencies:
     is-ssh "^1.3.0"
     parse-url "^5.0.0"
 
 git-url-parse@^11.1.2:
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-11.1.2.tgz#aff1a897c36cc93699270587bea3dbcbbb95de67"
-  integrity sha512-gZeLVGY8QVKMIkckncX+iCq2/L8PlwncvDFKiWkBn9EtCfYDbliRTTp6qzyQ1VMdITUfq7293zDzfpjdiGASSQ==
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-11.1.3.tgz#03625b6fc09905e9ad1da7bb2b84be1bf9123143"
+  integrity sha512-GPsfwticcu52WQ+eHp0IYkAyaOASgYdtsQDIt4rUp6GbiNt1P9ddrh3O0kQB0eD4UJZszVqNT3+9Zwcg40fywA==
   dependencies:
     git-up "^4.0.0"
 
@@ -5054,9 +5054,9 @@ is-set@^2.0.1:
   integrity sha512-eJEzOtVyenDs1TMzSQ3kU3K+E0GUS9sno+F0OBT97xsgcJsF9nXMBtkT9/kut5JEpM7oL7X/0qxR17K3mcwIAA==
 
 is-ssh@^1.3.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/is-ssh/-/is-ssh-1.3.1.tgz#f349a8cadd24e65298037a522cf7520f2e81a0f3"
-  integrity sha512-0eRIASHZt1E68/ixClI8bp2YK2wmBPVWEismTs6M+M099jKgrzl/3E976zIbImSIob48N2/XGe9y7ZiYdImSlg==
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/is-ssh/-/is-ssh-1.3.2.tgz#a4b82ab63d73976fd8263cceee27f99a88bdae2b"
+  integrity sha512-elEw0/0c2UscLrNG+OAorbP539E3rhliKPg+hDMWN9VwrDXfYK+4PBEykDPfxlYYtQvl84TascnQyobfQLHEhQ==
   dependencies:
     protocols "^1.1.0"
 
