@@ -1,72 +1,62 @@
 {
-  "name": "@sprucelabs/mercury-client",
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "build"
-  ],
-  "version": "1.1.4",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
-  "description": "The simple way to interact with the Spruce Experience Platform",
-  "keywords": [
-    "node",
-    "components",
-    "sprucebot",
-    "sprucelabs"
-  ],
-  "homepage": "https://github.com/sprucelabsai/mercury-workspace",
-  "bugs": {
-    "url": "https://github.com/sprucelabsai/mercury-workspace/issues"
-  },
-  "scripts": {
-    "#build": "npm run clean && npm run build.node && npm run build.umd",
-    "build": "npm run clean && npm run build.umd && npm run build.node",
-    "build.node": "tsc | true",
-    "build.browser": "tsc --project tsconfig.browser.json",
-    "build.umd": "rollup -c rollup.config.js && mkdir -p build/umd && cd build && sed s/index.js.map/mercury.js.map/ index.js > umd/mercury.js && mv index.js.map umd/mercury.js.map",
-    "watch": "chokidar 'src/**/*.(js|jsx|ts|tsx)' -c 'npm run build'",
-    "clean": "rm -rf build/",
-    "lint": "eslint '**/*.ts' && tsc -p . --noEmit",
-    "lint.fix": "eslint --fix '**/*.ts'",
-    "test": "mocha -r ts-node/register/transpile-only --exit 'tests/**/*Tests*'",
-    "release": "semantic-release",
-    "arkit": "arkit -f index.ts -o docs/images/arkit.svg",
-    "arkit.png": "arkit -f index.ts -o docs/images/arkit.png"
-  },
-  "dependencies": {
-    "debug": "^4.1.1",
-    "randombytes": "^2.1.0",
-    "socket.io-client": "^2.3.0",
-    "superagent": "^6.0.0"
-  },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^14.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "@rollup/plugin-typescript": "^5.0.2",
-    "@sprucelabs/semantic-release": "^4.0.5",
-    "@types/chai": "^4.2.12",
-    "@types/debug": "^4.1.5",
-    "@types/faker": "^4.1.12",
-    "@types/mocha": "^8.0.1",
-    "@types/socket.io-client": "^1.4.33",
-    "add": "^2.0.6",
-    "arkit": "^1.6.4",
-    "chai": "^4.2.0",
-    "chokidar-cli": "^2.1.0",
-    "concurrently": "^5.3.0",
-    "eslint": "^7.6.0",
-    "eslint-config-spruce": "^10.8.0",
-    "faker": "^4.1.0",
-    "mocha": "^8.1.1",
-    "prettier": "^2.0.5",
-    "rollup": "^2.23.1",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
-  }
+	"name": "@sprucelabs/mercury-client",
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"build"
+	],
+	"version": "1.1.4",
+	"main": "./build/index.js",
+	"types": "./build/index.d.ts",
+	"description": "The simple way to interact with the Spruce Experience Platform",
+	"keywords": [
+		"node",
+		"components",
+		"sprucebot",
+		"sprucelabs"
+	],
+	"homepage": "https://github.com/sprucelabsai/mercury-workspace",
+	"bugs": {
+		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
+	},
+	"scripts": {
+		"build": "npm run clean && npm run build.tsc",
+		"build.tsc": "tsc | true",
+		"#build.browser": "tsc --project tsconfig.browser.json",
+		"#build.umd": "rollup -c rollup.config.js && mkdir -p build/umd && cd build && sed s/index.js.map/mercury.js.map/ index.js > umd/mercury.js && mv index.js.map umd/mercury.js.map",
+		"watch": "chokidar 'src/**/*.(js|jsx|ts|tsx)' -c 'npm run build'",
+		"clean": "rm -rf build/",
+		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
+		"lint.fix": "eslint --fix '**/*.ts'",
+		"test": "mocha -r ts-node/register/transpile-only --exit 'tests/**/*Tests*'",
+		"release": "semantic-release",
+		"arkit": "arkit -f index.ts -o docs/images/arkit.svg",
+		"arkit.png": "arkit -f index.ts -o docs/images/arkit.png"
+	},
+	"dependencies": {
+		"socket.io-client": "^2.3.0",
+		"@sprucelabs/mercury-types": "1.0.0"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^14.0.0",
+		"@rollup/plugin-json": "^4.1.0",
+		"@rollup/plugin-node-resolve": "^8.4.0",
+		"@rollup/plugin-typescript": "^5.0.2",
+		"@sprucelabs/semantic-release": "^4.0.5",
+		"@types/debug": "^4.1.5",
+		"@types/faker": "^4.1.12",
+		"@types/socket.io-client": "^1.4.33",
+		"arkit": "^1.6.4",
+		"chokidar-cli": "^2.1.0",
+		"concurrently": "^5.3.0",
+		"eslint": "^7.6.0",
+		"eslint-config-spruce": "^10.8.0",
+		"prettier": "^2.0.5",
+		"rollup": "^2.23.1",
+		"rollup-plugin-node-builtins": "^2.1.2",
+		"rollup-plugin-node-globals": "^1.4.0",
+		"rollup-plugin-replace": "^2.2.0",
+		"typescript": "^3.9.7"
+	}
 }
