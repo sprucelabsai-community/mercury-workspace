@@ -3,7 +3,10 @@
 		"module": "commonjs",
 		"esModuleInterop": true,
 		"target": "ES2017",
-		"lib": ["ES2017", "DOM"],
+		"lib": [
+			"ES2017",
+			"DOM"
+		],
 		"declaration": true,
 		"noImplicitAny": true,
 		"forceConsistentCasingInFileNames": true,
@@ -15,9 +18,14 @@
 		"sourceMap": true,
 		"outDir": "build",
 		"baseUrl": ".",
-		"paths": {
-		}
+		"paths": {}
 	},
-	"include": ["./*.ts", "./**/*.ts"],
-	"exclude": ["**/node_modules/*", "build/*"]
+	"include": [
+		"./*.ts",
+		"./**/*.ts"
+	],
+	"exclude": [
+		"**/node_modules/*",
+		"build/*"
+	]
 }
