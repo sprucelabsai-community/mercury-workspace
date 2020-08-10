@@ -11,8 +11,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+*.tmp.ts
 build/
 mercury.min.*
+package-lock.json
 
-# Mac
-.DS_Store
+tmp/

@@ -1,35 +1,46 @@
 {
-  "version": "0.0.1",
-  "private": true,
-  "name": "spruce-mercury-workspace",
-  "workspaces": [
-    "packages/spruce-mercury-client"
-  ],
-  "engines": {
-    "node": ">=12",
-    "npm": ">=6"
-  },
-  "scripts": {
-    "lint": "lerna run lint",
-    "lint.fix": "lerna run lint.fix",
-    "build": "lerna run build",
-    "watch": "lerna run watch --no-sort --stream",
-    "test": "lerna run test --parallel",
-    "publish": "lerna publish",
-    "clean": "lerna run clean && rm -rf node_modules; for d in packages/*/node_modules; do echo $d; rm -rf $d; done",
-    "arkit": "lerna run arkit",
-    "arkit.png": "lerna run arkit.png",
-    "upgrade.packages": "yarn upgrade --latest && rm -f yarn.lock && yarn | true && yarn lint.fix || true",
-    "upgrade.packages.workspaces": "yarn && for d in packages/*; do cd $d; yarn-upgrade-all; cd ../..; done",
-    "upgrade.packages.all": "yarn upgrade.packages.workspaces && yarn upgrade.packages",
-    "upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build && yarn test"
-  },
-  "dependencies": {
-    "yarn-upgrade-all": "^0.5.4"
-  },
-  "devDependencies": {
-    "conventional-changelog-sprucelabs": "^1.1.0",
-    "lerna": "^3.22.1",
-    "typescript": "^3.9.7"
-  }
+	"version": "0.0.1",
+	"private": true,
+	"name": "spruce-mercury-workspace",
+	"workspaces": [
+		"packages/mercury-client",
+		"packages/mercury-types"
+	],
+	"engines": {
+		"node": ">=12",
+		"npm": ">=6"
+	},
+	"scripts": {
+		"lint": "lerna run lint",
+		"lint.fix": "lerna run lint.fix",
+		"build": "lerna run build",
+		"build.watch": "lerna run build.watch --stream",
+		"test": "lerna run test --parallel",
+		"test.watch": "lerna run test.watch --parallel",
+		"publish": "lerna publish",
+		"clean": "lerna run clean && rm -rf node_modules; for d in packages/*/node_modules; do echo $d; rm -rf $d; done",
+		"arkit": "lerna run arkit",
+		"arkit.png": "lerna run arkit.png",
+		"upgrade.packages": "yarn upgrade --latest && rm -f yarn.lock && yarn | true && yarn lint.fix || true",
+		"upgrade.packages.workspaces": "yarn && for d in packages/*; do cd $d; yarn-upgrade-all; cd ../..; done",
+		"upgrade.packages.all": "yarn upgrade.packages.workspaces && yarn upgrade.packages",
+		"upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build && yarn test"
+	},
+	"dependencies": {
+		"yarn-upgrade-all": "^0.5.4"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.10.5",
+		"@babel/core": "^7.11.1",
+		"@babel/plugin-proposal-class-properties": "^7.10.4",
+		"@babel/plugin-proposal-decorators": "^7.10.5",
+		"@babel/plugin-transform-runtime": "^7.11.0",
+		"@babel/preset-env": "^7.11.0",
+		"@babel/preset-typescript": "^7.10.4",
+		"@sprucelabs/babel-plugin-schema": "^1.0.4",
+		"babel-plugin-module-resolver": "^4.0.0",
+		"conventional-changelog-sprucelabs": "^1.1.0",
+		"lerna": "^3.22.1",
+		"typescript": "^3.9.7"
+	}
 }

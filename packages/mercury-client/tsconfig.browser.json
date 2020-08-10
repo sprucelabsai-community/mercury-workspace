@@ -13,8 +13,8 @@
 		"noUnusedLocals": true,
 		"resolveJsonModule": true,
 		"sourceMap": true,
-		"outDir": "./build",
-		"baseUrl": ".",
+		"outDir": "build",
+		"baseUrl": "src",
 		"paths": {
 			"*": ["node_modules/*"]
 		}

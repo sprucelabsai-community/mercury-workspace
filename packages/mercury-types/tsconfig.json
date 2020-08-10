@@ -14,11 +14,15 @@
 		"moduleResolution": "node",
 		"sourceMap": true,
 		"outDir": "build",
-		"baseUrl": ".",
+		"baseUrl": "src",
 		"paths": {
-			"*": ["node_modules/*"]
-		}
+			"#spruce/*": [
+				"../node_modules/@sprucelabs/schema/build/.spruce/*",
+				"../../../node_modules/@sprucelabs/schema/build/.spruce/*"
+			]
+		},
+		"experimentalDecorators": true
 	},
 	"include": ["./*.ts", "./**/*.ts"],
-	"exclude": ["**/node_modules/*", "build/*"]
+	"exclude": ["build"]
 }
