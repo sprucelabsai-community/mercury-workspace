@@ -3,7 +3,8 @@
   "private": true,
   "name": "spruce-mercury-workspace",
   "workspaces": [
-    "packages/spruce-mercury-client"
+    "packages/mercury-client",
+    "packages/mercury-types"
   ],
   "engines": {
     "node": ">=12",
