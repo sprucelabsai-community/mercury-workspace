@@ -7,7 +7,8 @@ import { SchemaValues } from "@sprucelabs/schema";
 interface TestContract extends MercuryContract {
     spruce: {
         test: {
-
+            listenResponsePayload: {}
+            emitPayload:{}
         }
     }
 }
