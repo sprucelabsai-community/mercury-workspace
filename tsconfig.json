@@ -15,9 +15,7 @@
 		"sourceMap": true,
 		"outDir": "build",
 		"baseUrl": ".",
-		"paths": {
-			"*": ["node_modules/*"]
-		}
+		"paths": {}
 	},
 	"include": ["./*.ts", "./**/*.ts"],
 	"exclude": ["**/node_modules/*", "build/*"]

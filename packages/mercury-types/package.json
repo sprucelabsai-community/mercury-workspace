@@ -30,18 +30,41 @@
     "#test": "exit 0",
     "release": "semantic-release",
     "arkit": "arkit -f index.ts -o docs/images/arkit.svg",
-    "arkit.png": "arkit -f index.ts -o docs/images/arkit.png"
+    "arkit.png": "arkit -f index.ts -o docs/images/arkit.png",
+    "test": "jest",
+    "test.watch": "jest --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@sprucelabs/schema": "^7.0.67"
+  },
   "devDependencies": {
     "@sprucelabs/semantic-release": "^4.0.5",
+    "@sprucelabs/test": "^5.3.123",
     "arkit": "^1.6.4",
     "chai": "^4.2.0",
     "chokidar-cli": "^2.1.0",
     "concurrently": "^5.2.0",
     "eslint": "^7.6.0",
     "eslint-config-spruce": "^10.7.16",
+    "jest": "^26.2.2",
     "mocha": "^8.1.1",
     "typescript": "^3.9.7"
+  },
+  "jest": {
+    "maxWorkers": 4,
+    "testTimeout": 120000,
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/tmp/",
+      "<rootDir>/src/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/build/__tests__/testDirsAndFiles/"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.js?(x)"
+    ],
+    "moduleNameMapper": {
+      "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
+    }
   }
 }
