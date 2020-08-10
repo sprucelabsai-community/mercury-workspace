@@ -29,7 +29,6 @@
 		"clean": "rm -rf build/",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
 		"lint.fix": "eslint --fix '**/*.ts'",
-		"test": "mocha -r ts-node/register/transpile-only --exit 'tests/**/*Tests*'",
 		"release": "semantic-release",
 		"arkit": "arkit -f index.ts -o docs/images/arkit.svg",
 		"arkit.png": "arkit -f index.ts -o docs/images/arkit.png"
