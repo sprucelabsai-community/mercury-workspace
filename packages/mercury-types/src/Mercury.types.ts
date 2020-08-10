@@ -5,14 +5,19 @@ export interface MercuryPagedResponse {
 }
 
 export interface MercuryAggregateResults {
-	responses: {}
+	responses: {
+		eventNamespace: string
+		payload: ResponsePayload
+	}[]
 }
+
+export type ResponsePayload = ISchema | MercuryPagedResponse
 
 export interface MercuryContract {
 	[eventNamespace: string]: {
 		[eventName: string]: {
-			listenResponsePayload: ISchema | MercuryPagedResponse
-			emitPayload: ISchema
+			listenResponsePayload: ResponsePayload | undefined
+			emitPayload: ISchema | undefined
 		}
 	}
 }
@@ -21,10 +26,12 @@ export type ExtractListenerPayload<
 	Payload extends ISchema | MercuryPagedResponse
 > = Payload extends ISchema ? ISchema : MercuryPagedResponse['payload']
 
+export type KeyOf<O extends Record<string, any>> = Extract<keyof O, string>
+
 export default interface MercuryClient<C extends MercuryContract> {
 	on<
-		EventNamespace extends string,
-		EventName extends string,
+		EventNamespace extends KeyOf<C>,
+		EventName extends KeyOf<C[EventNamespace]>,
 		EmitPayload extends SchemaValues<
 			C[EventNamespace][EventName]['emitPayload']
 		>,
@@ -37,13 +44,13 @@ export default interface MercuryClient<C extends MercuryContract> {
 		eventNamespace: EventNamespace,
 		eventName: EventName,
 		cb?: (
-			payload: EmitPayload
+			payload?: EmitPayload
 		) => ListenResponsePayload | Promise<ListenResponsePayload>
 	): Promise<void>
 
 	emit<
-		EventNamespace extends string,
-		EventName extends string,
+		EventNamespace extends KeyOf<C>,
+		EventName extends KeyOf<C[EventNamespace]>,
 		EmitPayload extends SchemaValues<
 			C[EventNamespace][EventName]['emitPayload']
 		>,
@@ -55,9 +62,9 @@ export default interface MercuryClient<C extends MercuryContract> {
 	>(
 		eventNamespace: EventNamespace,
 		eventName: EventName,
-		payload: EmitPayload,
-		cb?: (payload: ListenResponsePayload) => void | Promise<void>
-	): Promise<void>
+		payload?: EmitPayload,
+		cb?: (payload?: ListenResponsePayload) => void | Promise<void>
+	): Promise<MercuryAggregateResults>
 }
 
 export interface MercuryConstructor<C extends MercuryContract> {

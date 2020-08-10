@@ -18,7 +18,12 @@
     "sourceMap": true,
     "outDir": "build",
     "baseUrl": "src",
-    "paths": {},
+    "paths": {
+      "#spruce/*": [
+        "../node_modules/@sprucelabs/schema/build/.spruce/*",
+        "../../../node_modules/@sprucelabs/schema/build/.spruce/*",
+      ]
+    },
     "experimentalDecorators": true
   },
   "include": [

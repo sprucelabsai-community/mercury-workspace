@@ -1,69 +1,70 @@
 {
-  "name": "@sprucelabs/mercury-types",
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "build"
-  ],
-  "version": "1.0.0",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
-  "description": "Types for Mercury!",
-  "keywords": [
-    "node",
-    "components",
-    "sprucebot",
-    "sprucelabs"
-  ],
-  "homepage": "https://github.com/sprucelabsai/mercury-workspace",
-  "bugs": {
-    "url": "https://github.com/sprucelabsai/mercury-workspace/issues"
-  },
-  "scripts": {
-    "build": "npm run clean && npm run build.node",
-    "build.node": "tsc | true",
-    "watch": "chokidar 'src/**/*.(js|jsx|ts|tsx)' -c 'npm run build'",
-    "clean": "rm -rf build/",
-    "lint": "eslint '**/*.ts' && tsc -p . --noEmit",
-    "lint.fix": "eslint --fix '**/*.ts'",
-    "#test": "exit 0",
-    "release": "semantic-release",
-    "arkit": "arkit -f index.ts -o docs/images/arkit.svg",
-    "arkit.png": "arkit -f index.ts -o docs/images/arkit.png",
-    "test": "jest",
-    "test.watch": "jest --watch"
-  },
-  "dependencies": {
-    "@sprucelabs/schema": "^7.0.70"
-  },
-  "devDependencies": {
-    "@sprucelabs/semantic-release": "^4.0.5",
-    "@sprucelabs/test": "^5.3.126",
-    "arkit": "^1.6.4",
-    "chai": "^4.2.0",
-    "chokidar-cli": "^2.1.0",
-    "concurrently": "^5.3.0",
-    "eslint": "^7.6.0",
-    "eslint-config-spruce": "^10.7.25",
-    "jest": "^26.2.2",
-    "typescript": "^3.9.7"
-  },
-  "jest": {
-    "maxWorkers": 4,
-    "testTimeout": 120000,
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "<rootDir>/tmp/",
-      "<rootDir>/src/",
-      "<rootDir>/node_modules/",
-      "<rootDir>/build/__tests__/testDirsAndFiles/"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.test.js?(x)"
-    ],
-    "moduleNameMapper": {
-      "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
-    }
-  }
+	"name": "@sprucelabs/mercury-types",
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"build"
+	],
+	"version": "1.0.0",
+	"main": "./build/index.js",
+	"types": "./build/index.d.ts",
+	"description": "Types for Mercury!",
+	"keywords": [
+		"node",
+		"components",
+		"sprucebot",
+		"sprucelabs"
+	],
+	"homepage": "https://github.com/sprucelabsai/mercury-workspace",
+	"bugs": {
+		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
+	},
+	"scripts": {
+		"build": "yarn build.babel && yarn build.types",
+		"build.types": "tsc --emitDeclarationOnly && echo PASS",
+		"build.babel": "babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
+		"build.babel.debug": "node --inspect-brk=5200 ../../node_modules/.bin/babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
+		"build.watch": "concurrently 'yarn run build.babel --watch' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.types'\"",
+		"clean": "rm -rf build/",
+		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
+		"lint.fix": "eslint --fix '**/*.ts'",
+		"release": "semantic-release",
+		"arkit": "arkit -f index.ts -o docs/images/arkit.svg",
+		"arkit.png": "arkit -f index.ts -o docs/images/arkit.png",
+		"test": "jest",
+		"test.watch": "jest --watch"
+	},
+	"dependencies": {
+		"@sprucelabs/schema": "^7.0.70"
+	},
+	"devDependencies": {
+		"@sprucelabs/semantic-release": "^4.0.5",
+		"@sprucelabs/test": "^5.3.126",
+		"arkit": "^1.6.4",
+		"chai": "^4.2.0",
+		"chokidar-cli": "^2.1.0",
+		"concurrently": "^5.3.0",
+		"eslint": "^7.6.0",
+		"eslint-config-spruce": "^10.8.0",
+		"jest": "^26.2.2",
+		"typescript": "^3.9.7"
+	},
+	"jest": {
+		"maxWorkers": 4,
+		"testTimeout": 120000,
+		"testEnvironment": "node",
+		"testPathIgnorePatterns": [
+			"<rootDir>/tmp/",
+			"<rootDir>/src/",
+			"<rootDir>/node_modules/",
+			"<rootDir>/build/__tests__/testDirsAndFiles/"
+		],
+		"testMatch": [
+			"**/__tests__/**/*.test.js?(x)"
+		],
+		"moduleNameMapper": {
+			"^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
+		}
+	}
 }
