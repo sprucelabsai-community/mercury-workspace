@@ -1,15 +1,15 @@
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
-import { MercuryContract } from '../../Mercury.types'
-import { TestClient } from '../../TestClient'
+import TestClient from '../../TestClient'
 
-const listenResponsePayload = buildSchema({
+const responsePayload = buildSchema({
 	id: 'listenResponse',
 	name: 'Test listen response',
 	fields: {
-		id: {
+		responsePayloadField: {
 			type: FieldType.Text,
+			isRequired: true,
 		},
 	},
 })
@@ -18,35 +18,54 @@ const emitPayload = buildSchema({
 	id: 'emit',
 	name: 'Test emit payload',
 	fields: {
-		id: {
+		emitPayloadField: {
 			type: FieldType.Text,
+			isRequired: true,
 		},
 	},
 })
 
-interface TestContract extends MercuryContract {
-	spruce: {
-		testWithPayload: {
-			listenResponsePayload: typeof listenResponsePayload
-			emitPayload: typeof emitPayload
-		}
-		testWithoutPayload: {
-			listenResponsePayload: undefined
-			emitPayload: undefined
-		}
+interface TestContract {
+	['spruce.testWithPayload']: {
+		responsePayload: typeof responsePayload
+		emitPayload: typeof emitPayload
+	}
+	['spruce.testWithoutPayload']: {
+		responsePayload: undefined
+		emitPayload: undefined
 	}
 }
 
 export default class TypesWorkTest extends AbstractSpruceTest {
-	@test()
-	protected static async canCreateClientWithBasicContract() {
+	@test('Test contract with payload (always passes, types will fail)')
+	protected static async withPayload() {
 		const client = new TestClient<TestContract>()
+		const results = await client.emit(
+			'spruce.testWithPayload',
+			{
+				emitPayloadField: 'hello-world',
+			},
+			(response) => {
+				assert.isType<string | undefined>(
+					response.payload?.responsePayloadField
+				)
+				assert.isType<number>(response.totalContracts)
+			}
+		)
 
-		client.emit('spruce', 'testWithPayload')
+		assert.isType<string | undefined>(
+			results.responses[0].payload?.responsePayloadField
+		)
 	}
 
-	@test()
-	protected static async typesWork() {
-		assert.isTrue(false)
+	@test('Test contract without payload (always passes, types will fail')
+	protected static async withoutPayload() {
+		const client = new TestClient<TestContract>()
+		const results = await client.emit('spruce.testWithoutPayload', () => {
+			console.log('never called')
+		})
+
+		assert.isType<never | undefined>(results.responses[0]?.payload)
+		assert.isEqual(results.responses[0].responderName, 'test')
 	}
 }

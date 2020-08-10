@@ -1,66 +1,42 @@
-import { SchemaValues } from '@sprucelabs/schema'
+import { SchemaValues, ISchema } from '@sprucelabs/schema'
 import MercuryClient, {
-	MercuryContract,
-	ExtractListenerPayload,
 	KeyOf,
-	MercuryAggregateResults,
+	MercuryAggregateResponse,
+	EventSignature,
+	EmitCallback,
 } from 'Mercury.types'
 
-export class TestClient<C extends MercuryContract> implements MercuryClient<C> {
-	private invocations: {
-		eventNamespace: string
-		eventName: string
-		action: 'on' | 'emit'
-		payload?: Record<string, any>
-		cb?: (payload: any) => any
-	}[] = []
-
-	public async on<
-		EventNamespace extends KeyOf<C>,
-		EventName extends KeyOf<C[EventNamespace]>,
-		ListenPayload extends SchemaValues<
-			C[EventNamespace][EventName]['emitPayload']
-		>,
-		ListenResponsePayload extends SchemaValues<
-			ExtractListenerPayload<
-				C[EventNamespace][EventName]['listenResponsePayload']
-			>
-		>
-	>(
-		eventNamespace: EventNamespace,
-		eventName: EventName,
-		cb?: (
-			payload?: ListenPayload
-		) => ListenResponsePayload | Promise<ListenResponsePayload>
-	): Promise<void> {
-		this.invocations.push({ eventNamespace, eventName, action: 'on', cb })
-	}
-
+export default class TestClient<Contract extends Record<string, any>>
+	implements MercuryClient<Contract> {
 	public async emit<
-		EventNamespace extends KeyOf<C>,
-		EventName extends KeyOf<C[EventNamespace]>,
-		EmitPayload extends SchemaValues<
-			C[EventNamespace][EventName]['emitPayload']
-		>,
-		ListenResponsePayload extends SchemaValues<
-			ExtractListenerPayload<
-				C[EventNamespace][EventName]['listenResponsePayload']
-			>
-		>
+		EventName extends KeyOf<Contract>,
+		Payload extends Contract[EventName] extends EventSignature
+			? Contract[EventName]['emitPayload'] extends ISchema
+				? SchemaValues<Contract[EventName]['emitPayload']>
+				: never
+			: never,
+		ResponsePayload extends Contract[EventName] extends EventSignature
+			? Contract[EventName]['responsePayload'] extends ISchema
+				? SchemaValues<Contract[EventName]['responsePayload']>
+				: never
+			: never
 	>(
-		eventNamespace: EventNamespace,
-		eventName: EventName,
-		payload?: EmitPayload,
-		cb?: (payload?: ListenResponsePayload) => void | Promise<void>
-	): Promise<MercuryAggregateResults> {
-		this.invocations.push({
-			eventNamespace,
-			eventName,
-			action: 'emit',
-			cb,
-			payload,
-		})
+		_eventName: EventName,
+		_payload?: Payload | EmitCallback<Contract, EventName>,
+		_cb?: EmitCallback<Contract, EventName> | undefined
+	): Promise<MercuryAggregateResponse<ResponsePayload>> {
+		const results: MercuryAggregateResponse<ResponsePayload> = {
+			responses: [
+				{
+					responderName: 'test',
+					// @ts-ignore
+					payload: {
+						responsePayloadField: 'hello',
+					},
+				},
+			],
+		}
 
-		return ({} as unknown) as MercuryAggregateResults
+		return results
 	}
 }

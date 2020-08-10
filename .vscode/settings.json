@@ -69,6 +69,7 @@
         "spreedsheet"
     ],
     "files.exclude": {
-        "packages/*/build": false
-    },
+		"**/build": true,
+		"packages/*/build": false
+	},
 }

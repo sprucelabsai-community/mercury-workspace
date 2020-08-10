@@ -1,72 +1,78 @@
 import { ISchema, SchemaValues } from '@sprucelabs/schema'
 
-export interface MercuryPagedResponse {
-	payload: ISchema
-}
-
-export interface MercuryAggregateResults {
+export interface MercuryAggregateResponse<Payload> {
+	totalContracts: number
+	totalResponses: number
 	responses: {
-		eventNamespace: string
-		payload: ResponsePayload
+		responderName: string
+		errors?: Error[]
+		payload?: Payload
 	}[]
 }
 
-export type ResponsePayload = ISchema | MercuryPagedResponse
+export interface MercurySingleResponse<Payload> {
+	totalContracts: number
+	responseIdx: number
+	responderName: string
+	errors?: Error[]
+	payload?: Payload
+}
+
+export interface EventSignature {
+	responsePayload: ISchema | undefined
+	emitPayload: ISchema | undefined
+}
 
 export interface MercuryContract {
 	[eventNamespace: string]: {
-		[eventName: string]: {
-			listenResponsePayload: ResponsePayload | undefined
-			emitPayload: ISchema | undefined
-		}
+		[eventName: string]: EventSignature
 	}
 }
 
-export type ExtractListenerPayload<
-	Payload extends ISchema | MercuryPagedResponse
-> = Payload extends ISchema ? ISchema : MercuryPagedResponse['payload']
+export type KeyOf<O> = Extract<keyof O, string>
 
-export type KeyOf<O extends Record<string, any>> = Extract<keyof O, string>
+export type EmitCallback<
+	Contract extends Record<string, any>,
+	EventName extends KeyOf<Contract>,
+	ResponsePayload extends Contract[EventName] extends EventSignature
+		? Contract[EventName]['responsePayload'] extends ISchema
+			? SchemaValues<Contract[EventName]['responsePayload']>
+			: never
+		: never = Contract[EventName] extends EventSignature
+		? Contract[EventName]['responsePayload'] extends ISchema
+			? SchemaValues<Contract[EventName]['responsePayload']>
+			: never
+		: never
+> = (payload: MercurySingleResponse<ResponsePayload>) => void | Promise<void>
 
-export default interface MercuryClient<C extends MercuryContract> {
-	on<
-		EventNamespace extends KeyOf<C>,
-		EventName extends KeyOf<C[EventNamespace]>,
-		EmitPayload extends SchemaValues<
-			C[EventNamespace][EventName]['emitPayload']
-		>,
-		ListenResponsePayload extends SchemaValues<
-			ExtractListenerPayload<
-				C[EventNamespace][EventName]['listenResponsePayload']
-			>
-		>
+export default interface MercuryClient<Contract extends Record<string, any>> {
+	emit<
+		EventName extends KeyOf<Contract>,
+		Payload extends Contract[EventName] extends EventSignature
+			? Contract[EventName]['emitPayload'] extends ISchema
+				? SchemaValues<Contract[EventName]['emitPayload']>
+				: never
+			: never,
+		ResponsePayload extends Contract[EventName] extends EventSignature
+			? Contract[EventName]['responsePayload'] extends ISchema
+				? SchemaValues<Contract[EventName]['responsePayload']>
+				: never
+			: never
 	>(
-		eventNamespace: EventNamespace,
 		eventName: EventName,
-		cb?: (
-			payload?: EmitPayload
-		) => ListenResponsePayload | Promise<ListenResponsePayload>
-	): Promise<void>
+		payload: Payload,
+		cb?: EmitCallback<Contract, EventName>
+	): Promise<MercuryAggregateResponse<ResponsePayload>>
 
 	emit<
-		EventNamespace extends KeyOf<C>,
-		EventName extends KeyOf<C[EventNamespace]>,
-		EmitPayload extends SchemaValues<
-			C[EventNamespace][EventName]['emitPayload']
-		>,
-		ListenResponsePayload extends SchemaValues<
-			ExtractListenerPayload<
-				C[EventNamespace][EventName]['listenResponsePayload']
-			>
-		>
+		EventName extends KeyOf<Contract>,
+		ResponsePayload extends Contract[EventName] extends EventSignature
+			? Contract[EventName]['responsePayload'] extends ISchema
+				? SchemaValues<Contract[EventName]['responsePayload']>
+				: never
+			: never
 	>(
-		eventNamespace: EventNamespace,
 		eventName: EventName,
-		payload?: EmitPayload,
-		cb?: (payload?: ListenResponsePayload) => void | Promise<void>
-	): Promise<MercuryAggregateResults>
-}
-
-export interface MercuryConstructor<C extends MercuryContract> {
-	(): MercuryClient<C>
+		cb?: EmitCallback<Contract, EventName>
+	): Promise<MercuryAggregateResponse<ResponsePayload>>
 }
