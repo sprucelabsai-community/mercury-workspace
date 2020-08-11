@@ -2278,23 +2278,23 @@
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
 
-"@sprucelabs/error@^2.0.53":
+"@sprucelabs/error@^2.0.54":
   version "2.0.54"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.0.54.tgz#47e28fb81888c2a717971279dcd2d799b5e2175a"
   integrity sha512-J71wUAI9uGCfnoGJxP5IwMkc92bmMeL9P24TtWcmBKr73qnJQN2PfPYAfwtFY3fxnsXmBX9RoEzXrSJ0ZKUctg==
 
-"@sprucelabs/log@^10.2.100":
+"@sprucelabs/log@^10.2.101":
   version "10.2.101"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.101.tgz#1236c41fceb7c5cb5c24a379d6174cd25e468bf5"
   integrity sha512-/B4SoLnC1v5zB2ztwef9/T3riLMWqyzgnVqg/HOexHiYQJh3EWrQmWEXVyL33Z0HFKat2FvjE9BwBoAXu1H9iQ==
 
-"@sprucelabs/schema@^7.0.88":
-  version "7.0.88"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.88.tgz#69042a3b1ed9d2f15e099d25b723c1f24e6e33c5"
-  integrity sha512-ZyFTODfQBEcq9S1IGFHEzPzoKhrHmWj1gb9ltzpiWqPZngWPcgqOJ8xBEWZ8oJlltMNchnlI7c8AUMcWMTeaJg==
+"@sprucelabs/schema@^7.0.89":
+  version "7.0.89"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.89.tgz#512db48d298322f5ad02be00b6e4a7f6d2ac649b"
+  integrity sha512-4D/W9Y60/d/EJLXF0t9bEwIo8Y89PhZG/pxIBBp8V5J5mzAfANrVOu/uwU7N2MgJnYFNrpkexLamNUgnYA5IkA==
   dependencies:
-    "@sprucelabs/error" "^2.0.53"
-    "@sprucelabs/log" "^10.2.100"
+    "@sprucelabs/error" "^2.0.54"
+    "@sprucelabs/log" "^10.2.101"
     google-libphonenumber "^3.2.10"
     libphonenumber-js "^1.7.56"
     mime-db "^1.44.0"
@@ -5845,9 +5845,9 @@ globby@^9.2.0:
     slash "^2.0.0"
 
 google-libphonenumber@^3.2.10:
-  version "3.2.10"
-  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.2.10.tgz#021a314652747d736a39e2e60dc670f0431425ad"
-  integrity sha512-TsckE9O8QgqaIeaOXPjcJa4/kX3BzFdO1oCbMfmUpRZckml4xJhjJVxaT9Mdt/VrZZkT9lX44eHAEWfJK1tHtw==
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.2.11.tgz#c5704513366b18f468a9505ea13e53f6fbcc9eec"
+  integrity sha512-LmndkcaQGxYC1j5XEugxCcYKs5Foxc2sILzAKVfTJjFxonnLlYZLptbqu4a2z036kw9OBSQFdnyQCcMacHBIXQ==
 
 got@^6.7.1:
   version "6.7.1"
