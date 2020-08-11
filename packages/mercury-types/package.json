@@ -40,7 +40,7 @@
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^5.3.135",
+		"@sprucelabs/test": "^5.3.136",
 		"arkit": "^1.6.4",
 		"chai": "^4.2.0",
 		"chokidar-cli": "^2.1.0",
