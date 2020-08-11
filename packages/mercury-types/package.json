@@ -36,11 +36,11 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/schema": "^7.0.80"
+		"@sprucelabs/schema": "^7.0.81"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^5.3.133",
+		"@sprucelabs/test": "^5.3.134",
 		"arkit": "^1.6.4",
 		"chai": "^4.2.0",
 		"chokidar-cli": "^2.1.0",
