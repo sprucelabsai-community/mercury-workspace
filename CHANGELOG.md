@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.53](https://github.com/sprucelabsai/mercury-workspace/compare/v1.1.52...v1.1.53) (2020-08-12)
+
+
+### Bug Fixes
+
+* install before trying to use lerna ([fb1d0a3](https://github.com/sprucelabsai/mercury-workspace/commit/fb1d0a3))
+
+
+
+
+
 ## [1.1.52](https://github.com/sprucelabsai/mercury-workspace/compare/v1.1.51...v1.1.52) (2020-08-12)
 
 **Note:** Version bump only for package spruce-mercury-workspace
