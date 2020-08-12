@@ -26,9 +26,7 @@
 		"upgrade.packages.all": "yarn upgrade.packages.workspaces && yarn upgrade.packages",
 		"upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build && yarn test"
 	},
-	"dependencies": {
-		"yarn-upgrade-all": "^0.5.4"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@babel/cli": "^7.10.5",
 		"@babel/core": "^7.11.1",
@@ -37,10 +35,11 @@
 		"@babel/plugin-transform-runtime": "^7.11.0",
 		"@babel/preset-env": "^7.11.0",
 		"@babel/preset-typescript": "^7.10.4",
-		"@sprucelabs/babel-plugin-schema": "^1.0.4",
+		"@sprucelabs/babel-plugin-schema": "^1.0.20",
 		"babel-plugin-module-resolver": "^4.0.0",
 		"conventional-changelog-sprucelabs": "^1.1.0",
 		"lerna": "^3.22.1",
-		"typescript": "^3.9.7"
+		"typescript": "^3.9.7",
+		"yarn-upgrade-all": "^0.5.4"
 	}
 }
