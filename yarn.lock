@@ -2268,10 +2268,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^1.0.14":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.0.14.tgz#43157d12bca8ff71150d36487bd30e4a09ee4efd"
-  integrity sha512-AmmZmqLNKC2x5/WkXT9jFTTi/DIvaIW3LVAI2nAxT6bE4Qg0KJQ0uR3R+NMzY2XAUS1J1jMbcJdORzhNDR9uGA==
+"@sprucelabs/babel-plugin-schema@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.0.15.tgz#6a6d648d350e79ef351236ec5cf940744cc66dda"
+  integrity sha512-TwI3pibyNBV3Mene2A3hpy2wJo//fJiHymvWjah4TxXK0bbyO2TIqOvLHwtWfpnrJq6dIEXDPSTGXKuUY1D3Kw==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
@@ -2288,10 +2288,10 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.102.tgz#934cfc58f31dbbf8bd8c8e91ccc438a8ec9b8637"
   integrity sha512-4p9XpgpDEg8tfBCbe+lwPD2s0IDstOVaiOBygB3N9od9ukrTrGlO+Ek56L0Q+M2C6tcUzMMoGH0FfwXK/Vj++A==
 
-"@sprucelabs/schema@^7.0.91":
-  version "7.0.91"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.91.tgz#0af2fb764f1b8b13f9f3ed5a0d2544e8ccbbee15"
-  integrity sha512-5qhXB8K7H/u72SYkO9RLYK6BFgtx3Hwc6R1gbL0Ww221LcnBzYaGRTGN2hr66LJBiB+UZhkq1CQu0W1fL8M5Gw==
+"@sprucelabs/schema@^7.0.92":
+  version "7.0.92"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.92.tgz#94bba4fd5a22d44a58059e7263ca0969af873064"
+  integrity sha512-1Yma1Va0ZGriaftIVqAkArGix4auSp5WsHrJzDRg8b02GZMzNr3yQg/n2QDEveDIkvc0sEVzAhCfpfioederJg==
   dependencies:
     "@sprucelabs/error" "^2.0.55"
     "@sprucelabs/log" "^10.2.102"
