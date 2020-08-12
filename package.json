@@ -18,7 +18,7 @@
 		"test": "lerna run test --parallel",
 		"test.watch": "lerna run test.watch --parallel",
 		"publish": "lerna publish",
-		"clean": "lerna run clean && rm -rf node_modules; for d in packages/*/node_modules; do echo $d; rm -rf $d; done",
+		"clean": "lerna run clean",
 		"arkit": "lerna run arkit",
 		"arkit.png": "lerna run arkit.png",
 		"upgrade.packages": "yarn upgrade --latest && rm -f yarn.lock && yarn | true && yarn lint.fix || true",

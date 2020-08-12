@@ -6,9 +6,9 @@
 	"files": [
 		"build"
 	],
+	"main": "./build/mercury.types.js",
+	"types": "./build/mercury.types.d.ts",
 	"version": "1.1.52",
-	"main": "./build/index.js",
-	"types": "./build/index.d.ts",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
