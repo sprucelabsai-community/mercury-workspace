@@ -4,7 +4,7 @@ import MercuryClient, {
 	MercuryAggregateResponse,
 	EventSignature,
 	EmitCallback,
-} from 'Mercury.types'
+} from 'mercury.types'
 
 export default class TestClient<Contract extends Record<string, any>>
 	implements MercuryClient<Contract> {
