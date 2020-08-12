@@ -6,7 +6,7 @@
 	"files": [
 		"build"
 	],
-	"version": "1.1.51",
+	"version": "1.1.52",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"description": "Types for Mercury!",
