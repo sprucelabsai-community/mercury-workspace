@@ -19,14 +19,12 @@ export interface MercurySingleResponse<Payload> {
 }
 
 export interface EventSignature {
-	responsePayload: ISchema | undefined
-	emitPayload: ISchema | undefined
+	responsePayload?: ISchema | undefined
+	emitPayload?: ISchema | undefined
 }
 
 export interface MercuryContract {
-	[eventNamespace: string]: {
-		[eventName: string]: EventSignature
-	}
+	[eventNameWithOptionalNamespace: string]: EventSignature
 }
 
 export type KeyOf<O> = Extract<keyof O, string>
