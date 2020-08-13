@@ -2277,23 +2277,23 @@
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
 
-"@sprucelabs/error@^2.0.62":
+"@sprucelabs/error@^2.1.3":
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.1.3.tgz#1aa8bf2c4d3a27b5d296dee44974ed890773fe03"
   integrity sha512-XZ8Ph6DB7k0uzHz1+ZLpeXgfAOnUJBbgOqK50Mo8Jrvdq1U2gReppgB7X+9o9fWpzxGWCoV+bP8DaiWx2m66yw==
 
-"@sprucelabs/log@^10.2.109":
+"@sprucelabs/log@^10.2.110":
   version "10.2.110"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.110.tgz#7fecded9bd490713879ccd049fd58ba8bad6e1ee"
   integrity sha512-pdJmIQXwxJLiIY5zXobdD1plx0uec/P7zPOQ8Alq9hjGaXJdE2S2SvIVMa1v2bEqQVOqpzaHNrHdnLMNrPPv0w==
 
-"@sprucelabs/schema@^7.0.107":
-  version "7.0.107"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.107.tgz#35294e8de267eebb2e89f3b4593f417726d6453e"
-  integrity sha512-KRzLTh/COPGTurQvMLJr1GnG1K7yKd9r98EkN//8DhkklkBficUACMKCu4Hztc0JAphlKKOAHibHJBvVYtv9eg==
+"@sprucelabs/schema@^7.0.108":
+  version "7.0.108"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.108.tgz#6d98519e1336d6cb84b450bdf949b589c0667261"
+  integrity sha512-zjGlpEA49a6fFQhVnBDE/yuzF/NrvuvG8rZ1YlNsyBUOvK0JSUb1hpWZsHZQxESZKfis2WPG0uI4xh8Ccja//Q==
   dependencies:
-    "@sprucelabs/error" "^2.0.62"
-    "@sprucelabs/log" "^10.2.109"
+    "@sprucelabs/error" "^2.1.3"
+    "@sprucelabs/log" "^10.2.110"
     google-libphonenumber "^3.2.11"
     libphonenumber-js "^1.7.56"
     mime-db "^1.44.0"
@@ -2309,10 +2309,10 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/test@^5.3.150":
-  version "5.3.150"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-5.3.150.tgz#3458a1c0592acc47c379f13a3d98aab7317a2af9"
-  integrity sha512-93iT0kqy5GYaphLO/WabKp6gbXLeWXcwuW3tiiBlnK2hoB4DKruUiQo9TKJo/+hv1ipKDokficr16zZ5p67KHQ==
+"@sprucelabs/test@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-6.0.1.tgz#00ac731020a13835ee1c7605e1e5004fc6e50838"
+  integrity sha512-ztZwjsX1HFqHnL+NyUiRTjRyFfrWdvRt+d6EUHUBVHOubRmLmAU48nCAMu4HwF8QlkGC3DDY03DuJUedTmZ8pA==
   dependencies:
     "@babel/core" "^7.11.1"
     "@babel/preset-env" "^7.11.0"
