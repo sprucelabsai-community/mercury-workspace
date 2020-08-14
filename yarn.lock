@@ -2277,23 +2277,23 @@
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
 
-"@sprucelabs/error@^2.2.5":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.6.tgz#bf6e01f0b564c335e292b7b3dc66e1c5e1de3120"
-  integrity sha512-M1iMfgfma2412CzoaS1AePTYh5NYxe7CvxusI3wxNAEtfwIsm+Xzs9x0qktFaSkas9HDMK0DsdWJcUb+KWOAqw==
+"@sprucelabs/error@^2.2.6":
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.7.tgz#7300117b8f3b56c6f2b8b53f3cb5ff7298ca0cfc"
+  integrity sha512-LhZEmQpOLMNbkHRaym5hFmzoJQAqBItLW2c2lpQfZZWWth47qqAKhhHvQBlhxKnWb7UsubWlqlpMvKtnJB64RA==
 
-"@sprucelabs/log@^10.2.111":
+"@sprucelabs/log@^10.2.112":
   version "10.2.112"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.112.tgz#04c5983c9c33757ed075d40c618db812968c95b8"
   integrity sha512-m5E0qH6kDf0YHCmU2rmVnozUJAx3fhcs95P1VwVONPUYASmfrWWMJJ2hoq5LzWmsHsg0g5mEL61VzqEOw4YLBg==
 
-"@sprucelabs/schema@^7.0.113":
-  version "7.0.113"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.113.tgz#ee9903e53dbe6a35d4883673d9ad53c39d980c34"
-  integrity sha512-SbAVfT9MiP5h9Dqirp9iWty8dJhedzqPPX4E89ZLYxsP4TlF1wVdzazQbRmjtFZA8rxh/newbrLGGBmzV8J5ow==
+"@sprucelabs/schema@^7.0.114":
+  version "7.0.114"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.114.tgz#6b160b0a71f907de4731b89b23fa021d12fdf99c"
+  integrity sha512-bxmKGFDIdB/zYQpfIyVsqwceRF0/KlIw/SndyPM4trId2I4Vv7bC/dDpKQ2bzDr3raEDlZT/vNe7b7ofxE7Owg==
   dependencies:
-    "@sprucelabs/error" "^2.2.5"
-    "@sprucelabs/log" "^10.2.111"
+    "@sprucelabs/error" "^2.2.6"
+    "@sprucelabs/log" "^10.2.112"
     google-libphonenumber "^3.2.11"
     libphonenumber-js "^1.7.56"
     mime-db "^1.44.0"
