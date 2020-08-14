@@ -2267,33 +2267,33 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^1.1.7":
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.1.7.tgz#0120a918dfd57ae03a57afa3c6a9d711e97456e5"
-  integrity sha512-DeJECU1SnWudYD7oiWttBQIxUBdAiLVwmRvfL9bbjXlKmUD0EoxYvB/Vkq8VGFymHteQ/SwKaaiO0rdzDxS3LA==
+"@sprucelabs/babel-plugin-schema@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.1.8.tgz#8c806c10d778285d6c814efe3bc73e81105e6232"
+  integrity sha512-4okY3I+oLVYExC8N38OjhkSvHBqGdCp3BNtgboYunrx1tJSxEFdJpN8EOLZLLyuMoVgfPw9tIYTMZO1WEGSrzg==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
 
-"@sprucelabs/error@^2.2.11":
-  version "2.2.12"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.12.tgz#63ce327380018c395a746212cdc0e2c2fd7ffc88"
-  integrity sha512-53fYkl1RgJB+gKlTa89ru4sCJVk3GMTg94xx86wgRYiBRA+I8NN0I4UISX2tHjMwDpizLFduQI+lHHuTBWitOw==
+"@sprucelabs/error@^2.2.12":
+  version "2.2.13"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.13.tgz#36bde5a6e73f6737e32b42f8786557e5c40ec871"
+  integrity sha512-eS8wNzmue7kvoyMBXm3N1fNwyED9fXJoorJ6+VMWkfwgt2PsfflZ3IAYLgU1DMKuiTFdF4CPoPSANUI3RWxV8A==
 
-"@sprucelabs/log@^10.2.115":
+"@sprucelabs/log@^10.2.116":
   version "10.2.116"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.116.tgz#7e3e2fbe51af4d73816298c2fd07ed9204489194"
   integrity sha512-eGoro2HNp8dhgwW2qIHZYQ+53V4M/S1MPebztS+IT9lOrS7mlrUILjTaNjeKE+MsirvGKVjKq8CUGanRI/O8bQ==
 
-"@sprucelabs/schema@^7.0.119":
-  version "7.0.119"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.119.tgz#5186a392defdc0c3e74cc45ae29452e1cda88bb3"
-  integrity sha512-VKZBZzzf8bdypSfWcomm2Q2CPmScj4kOXLei8HIz+I6XmulkgyPqDLwfRRClg7Io1gPNsvOGs6ZiW4OLNtz97w==
+"@sprucelabs/schema@^7.0.120":
+  version "7.0.120"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.120.tgz#98269497ddda3d291dba4e48e7c64d3c136a8d1f"
+  integrity sha512-9JjOvxIhVP3YNhCCioS760ZDE9lEjR46KEy3g7o+Ztq4OgwroNZn+lIr1d3WfyHX7xeZWQQ83Jl+IJQhdSVq8Q==
   dependencies:
-    "@sprucelabs/error" "^2.2.11"
-    "@sprucelabs/log" "^10.2.115"
+    "@sprucelabs/error" "^2.2.12"
+    "@sprucelabs/log" "^10.2.116"
     google-libphonenumber "^3.2.11"
     libphonenumber-js "^1.7.56"
     mime-db "^1.44.0"
@@ -2309,14 +2309,14 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/test@^6.0.7":
-  version "6.0.7"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-6.0.7.tgz#4c290d8e5cf171a7eff9514c8971076922500bbd"
-  integrity sha512-yNFL9P9LtFwz0CwY5MCIhaHGfRRgry4fBOK++CLTcbAEfu/U9L5Rt0RJORxgmAjK5SKVm956N/KoFeHE8TrK+Q==
+"@sprucelabs/test@^6.0.8":
+  version "6.0.8"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-6.0.8.tgz#787def8283c1785bbd2bcbe8e5cb34af09429c2a"
+  integrity sha512-8bhEA1hb0dEhFDLRdFVjLOi0Ocmb8SFeNwQLc0lR3y9KIei1ivXbs41MCU+kb2Wm618+Vr4B80/myYdbR2zPyg==
   dependencies:
     "@babel/core" "^7.11.1"
     "@babel/preset-env" "^7.11.0"
-    "@types/jest" "^26.0.9"
+    "@types/jest" "^26.0.10"
     babel-jest "^26.3.0"
     deep-equal "^2.0.3"
     jest "^26.4.0"
@@ -2446,10 +2446,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@26.x", "@types/jest@^26.0.9":
-  version "26.0.9"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.9.tgz#0543b57da5f0cd949c5f423a00c56c492289c989"
-  integrity sha512-k4qFfJ5AUKrWok5KYXp2EPm89b0P/KZpl7Vg4XuOTVVQEhLDBDBU3iBFrjjdgd8fLw96aAtmnwhXHl63bWeBQQ==
+"@types/jest@26.x", "@types/jest@^26.0.10":
+  version "26.0.10"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.10.tgz#8faf7e9756c033c39014ae76a7329efea00ea607"
+  integrity sha512-i2m0oyh8w/Lum7wWK/YOZJakYF8Mx08UaKA1CtbmFeDquVhAEdA7znacsVSf2hJ1OQ/OfVMGN90pw/AtzF8s/Q==
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
