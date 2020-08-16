@@ -2287,14 +2287,14 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.118.tgz#a73222d59387b682d65d10e69902fdc7da013117"
   integrity sha512-WYXndpXfnWscOSPZZg29p6ECqGanLhjU7FLbM+LB66ijCy23hqP17V+Gte+VoeChJ6mGgYboCU0dpU0cKrJ/ZQ==
 
-"@sprucelabs/schema@^7.0.125":
-  version "7.0.125"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.125.tgz#95ba198efbe3ee630123ea2d18420dc2e1bedd3d"
-  integrity sha512-NmFD3nb7IDngPC5djpCGBhhIwGZ6814bansSdSDOQr7QkHJ17dGMGCUSp2nOBTAGHA6yEleIzuVB0dsFyl+KgQ==
+"@sprucelabs/schema@^7.0.126":
+  version "7.0.126"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.126.tgz#f69b1d8fee7523839014f931ed0d40b7aaa3f509"
+  integrity sha512-XTE3jG8KsIHxFcl9+3yJPJywMDzHzNqDU12y048c/a2L4ebb8ZEx+cvSbbHGr/AcXGmuxTxEGWhrh6r+4Vp+dA==
   dependencies:
     "@sprucelabs/error" "^2.2.17"
     "@sprucelabs/log" "^10.2.118"
-    google-libphonenumber "^3.2.11"
+    google-libphonenumber "^3.2.12"
     libphonenumber-js "^1.7.56"
     mime-db "^1.44.0"
     mime-type "^4.0.0"
@@ -5803,7 +5803,7 @@ globby@^9.2.0:
     pify "^4.0.1"
     slash "^2.0.0"
 
-google-libphonenumber@^3.2.11:
+google-libphonenumber@^3.2.12:
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.2.12.tgz#6190bbf15482fd75ca06ac887ad0333fa3361751"
   integrity sha512-vuDYnYNlCDQpIo5j7QDJTz2FNVAAuJZtbQ/khZgT6UBuRJV5GVQIQbOAdjTgu2uH4OFVChKAHQl8a2rgMnezOQ==
