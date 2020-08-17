@@ -36,16 +36,16 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/schema": "^7.0.131"
+		"@sprucelabs/schema": "^7.0.132"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^6.0.12",
+		"@sprucelabs/test": "^6.0.13",
 		"arkit": "^1.6.4",
 		"chokidar-cli": "^2.1.0",
 		"concurrently": "^5.3.0",
 		"eslint": "^7.7.0",
-		"eslint-config-spruce": "^10.8.13",
+		"eslint-config-spruce": "^10.8.14",
 		"jest": "^26.4.0",
 		"typescript": "^3.9.7"
 	},
