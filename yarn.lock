@@ -2277,22 +2277,22 @@
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
 
-"@sprucelabs/error@^2.2.31":
-  version "2.2.32"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.32.tgz#79897f14ee015e361d4623cbcf8252828da37607"
-  integrity sha512-0+G82p/fxutwqbZAHbZnVzVO6N69jwfWDDxQ9ApRaiMisD5+zevJd3AJ+0qeGyBXM1mvVlBTKWd5uBgT866Q5Q==
+"@sprucelabs/error@^2.2.32":
+  version "2.2.33"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.33.tgz#3fe9d2aa1e7cbd21f4b9eb0cf06d2a380503444c"
+  integrity sha512-7z3VWPRSNttRNv8RGsEY2NvYHrpuCuDdfuHVIGEwga4HqGc79C+rrpDHifZKY5eDv5ismDcgtfpEYIQ+mqwpPg==
 
 "@sprucelabs/log@^10.2.126":
   version "10.2.126"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.126.tgz#747930e4835da1cbe7b0131e9ab291409487ae92"
   integrity sha512-Ytv6lxdveYIxws+bGTXUHEXeoas1pVB79W2KrIe9nEYSK52qnO8YMBkgo2ojfb23S4rKrcXME5ijda3Ng9GF+w==
 
-"@sprucelabs/schema@^7.0.141":
-  version "7.0.141"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.141.tgz#c8081bcd8292f54948f124e60b291d7446280c27"
-  integrity sha512-CtPM1sM7nBHO3bsP1LFNNBdBPIiw6eXKKpr4/nUGPLbpeZdhYUPL+SSuaFej/h8QRCzw9RDp/ESeda6Gpxu8eA==
+"@sprucelabs/schema@^7.0.142":
+  version "7.0.142"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.142.tgz#ca69a94710b7e4a15060bdbfa77577bc7077c761"
+  integrity sha512-AUIhK8F+iD1OVhOyFTKB2uEMwKGxlcS0UwoxfI6jafWQrdxSERdELcNiXvrls9h8z5Gs8+Ph+xBUYGxDEgzePg==
   dependencies:
-    "@sprucelabs/error" "^2.2.31"
+    "@sprucelabs/error" "^2.2.32"
     "@sprucelabs/log" "^10.2.126"
     google-libphonenumber "^3.2.12"
     libphonenumber-js "^1.7.56"
@@ -2309,10 +2309,10 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/test@^6.0.17":
-  version "6.0.17"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-6.0.17.tgz#41b11aeda6c39392bbad9b6a289a04512b6b3725"
-  integrity sha512-1EFjlJXYD2ll7aTKeHFb8kLbTLlBua22TyD3BTARy9SuXJ/RlSH0HQ00/X9KjmUU5wN7n/ErteiyACrcmnJR/g==
+"@sprucelabs/test@^6.0.18":
+  version "6.0.18"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-6.0.18.tgz#a6f9d7ca577c3283d63074b29f3aec5ca0e56772"
+  integrity sha512-+PkFVzqWyrhAK77B7rLok9JcX5p94eq+J/nkDwk6WL0A4vVsgTTN6mYFaJPxT3donr4EBA2kJFMPvIrGZtUxQQ==
   dependencies:
     "@babel/core" "^7.11.1"
     "@babel/preset-env" "^7.11.0"
@@ -4647,9 +4647,9 @@ editor@~1.0.0:
   integrity sha1-YMf4e9YrzGqJT6jM1q+3gjok90I=
 
 electron-to-chromium@^1.3.523:
-  version "1.3.533"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.533.tgz#d7e5ca4d57e9bc99af87efbe13e7be5dde729b0f"
-  integrity sha512-YqAL+NXOzjBnpY+dcOKDlZybJDCOzgsq4koW3fvyty/ldTmsb4QazZpOWmVvZ2m0t5jbBf7L0lIGU3BUipwG+A==
+  version "1.3.534"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.534.tgz#fc7af8518dd00a5b22a24aed3f116b5d097e2330"
+  integrity sha512-7x2S3yUrspNHQOoPk+Eo+iHViSiJiEGPI6BpmLy1eT2KRNGCkBt/NUYqjfXLd1DpDCQp7n3+LfA1RkbG+LqTZQ==
 
 elliptic@^6.5.3:
   version "6.5.3"
