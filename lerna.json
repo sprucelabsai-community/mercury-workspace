@@ -1,7 +1,7 @@
 {
 	"npmClient": "yarn",
 	"useWorkspaces": true,
-	"version": "1.2.61",
+	"version": "1.2.62",
 	"command": {
 		"publish": {
 			"allowBranch": [
