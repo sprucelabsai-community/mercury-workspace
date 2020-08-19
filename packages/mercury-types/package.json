@@ -8,7 +8,7 @@
 	],
 	"main": "./build/mercury.types.js",
 	"types": "./build/mercury.types.d.ts",
-	"version": "1.2.68",
+	"version": "1.2.69",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
