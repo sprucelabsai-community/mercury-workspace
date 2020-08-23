@@ -2280,18 +2280,18 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.73.tgz#ccc84acd3d7cbcae1271060cf59423168b2dbc99"
   integrity sha512-tgOgzGhsGz4eKoZ8DQEHUumqnbsTJPKgqNLCMzqcMTrt1WpeSgsj5E9ggYSQSlZgNKTRY7Ttmy2AoCc6QOmzcg==
 
-"@sprucelabs/log@^10.2.139":
+"@sprucelabs/log@^10.2.140":
   version "10.2.140"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.140.tgz#ecfa795109308a02ffbe21838d084e6be6e71571"
   integrity sha512-C/whODjwwOZlw1+h+Y0qbHNhcrVWvF3X3Bd8EA9JdmxI7LUl9oTXNSddPyZUgMELMWrC63wMpqvtnNrJxiYG5g==
 
-"@sprucelabs/schema@^7.0.188":
-  version "7.0.188"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.188.tgz#8579e0bfa4ddd31ce0060ea05d886c92c15af0b9"
-  integrity sha512-Tg/XNon9d+9tqhB+OzCvgwmNLChZms2hG1mXLkfyTcYXdPdHiS3R5zxzR+oiBEBOlDeA4ysqBrmEBYMfiUg2ww==
+"@sprucelabs/schema@^7.0.189":
+  version "7.0.189"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.189.tgz#73b25f6998388bbcd9a79efbc5b766c6a5ba9fff"
+  integrity sha512-6ezJ35Zrax7GgmpFlI6Nx8vC9bcLp5XqlzwYBu40z4o9PtRJpcOQYRGhB286rGR5DEmDufigJXhirfW+mxqIFA==
   dependencies:
     "@sprucelabs/error" "^2.2.73"
-    "@sprucelabs/log" "^10.2.139"
+    "@sprucelabs/log" "^10.2.140"
     google-libphonenumber "^3.2.12"
     libphonenumber-js "^1.7.57"
     mime-db "^1.44.0"
