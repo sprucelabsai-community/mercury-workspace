@@ -1,5 +1,22 @@
 import { ISchema, SchemaValues } from '@sprucelabs/schema'
 
+const authorizerStatuses = [
+	'clocked-in',
+	'clocked-out',
+	'on-prem',
+	'off-prem',
+] as const
+
+export type AuthorizerStatus = typeof authorizerStatuses[number]
+
+export type PermissionAccess = {
+	[K in typeof authorizerStatuses[number]]?: boolean
+}
+
+export type PermissionContract = {
+	[name: string]: PermissionAccess
+}
+
 export interface MercuryAggregateResponse<Payload> {
 	totalContracts: number
 	totalResponses: number
@@ -19,8 +36,10 @@ export interface MercurySingleResponse<Payload> {
 }
 
 export interface EventSignature {
-	responsePayload?: ISchema | undefined
-	emitPayload?: ISchema | undefined
+	responsePayload?: ISchema
+	emitPayload?: ISchema
+	listenPermissionsAny?: PermissionContract
+	emitPermissionsAny?: PermissionContract
 }
 
 export interface MercuryContract {
