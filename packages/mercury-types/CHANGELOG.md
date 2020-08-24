@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/sprucelabsai/mercury-workspace/compare/v1.2.134...v1.3.0) (2020-08-24)
+
+
+### Features
+
+* permission types ([e64a3c6](https://github.com/sprucelabsai/mercury-workspace/commit/e64a3c6))
+
+
+
+
+
 ## [1.2.134](https://github.com/sprucelabsai/mercury-workspace/compare/v1.2.133...v1.2.134) (2020-08-24)
 
 **Note:** Version bump only for package @sprucelabs/mercury-types
