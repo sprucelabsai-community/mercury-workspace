@@ -2265,10 +2265,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^1.1.51":
-  version "1.1.51"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.1.51.tgz#e7a6edc69ee6c4ba712b6f3738345f5b0fe4f995"
-  integrity sha512-eLpabswDCKlMyF2g/f511ze97w1kt/e+Oyte4Dgj9Uz8XUnyZ3f2yAh50C0GmPT78VRn5K+QrSk8nCt2QzJc3A==
+"@sprucelabs/babel-plugin-schema@^1.1.52":
+  version "1.1.52"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.1.52.tgz#12e79c9db4f551a8381dbd2d316f011a25b91a77"
+  integrity sha512-OPKlWRxZKEfBbvYutoOf27nf9ARuaN9/FCXoY7iVS9eQXOFJOGUdSHaekXXBXorVT5ckd0XTFXSFjkDy4Jr5cQ==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
@@ -2276,19 +2276,19 @@
     tsconfig-paths "^3.9.0"
 
 "@sprucelabs/error@^2.2.84":
-  version "2.2.84"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.84.tgz#7903c66d1f09532a4aead485b6aa6b13ccabb490"
-  integrity sha512-Ousr9tHjORK+qiexq/4bM+7jekc/YOAGAdqdFNW6srMLeu7RV9mRU7g42hNySAb/bYHvIzGA7tGNMuwsNk8o5A==
+  version "2.2.85"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.85.tgz#b508a28ec18b4c75c299f30d77e6a4ad64213d23"
+  integrity sha512-FiFcUNsDmDAjPbA0YBletY5O+Vj+F8NxBQFWVz85tta70E+TFaOaptwvVvw4wolNFiNLI/XI3Yeuc4ecnq/zkQ==
 
 "@sprucelabs/log@^10.2.145":
   version "10.2.145"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.145.tgz#51ac901e26f096662ab0fa2ba3f7bc666f7e4911"
   integrity sha512-T69+L3uzrlm3XR0bcP085pMPVVjjpA8fY/eVHnHEeRBMg/QR8c8oIb+tNug5MjaLoXuBVh9dyJY27dIEcLhMpA==
 
-"@sprucelabs/schema@^7.0.201":
-  version "7.0.201"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.201.tgz#2479e8ccf94955ea6bbf73c944265a5911e2c208"
-  integrity sha512-e8aPLBov5aFZ0v2zx3wva+M8Ho8bDXNjseo98BkxHIIl0jpYwzdKjNBMxFBKbXA1eJtshFkZmGgZhp6hdG8jUg==
+"@sprucelabs/schema@^7.0.202":
+  version "7.0.202"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.0.202.tgz#e7a7a8875620471ae96024782573d61f917d85ce"
+  integrity sha512-NiLIUxdTG8AijgpPeNn+Nl7/yDbGBZQiYeF66CCAuniCRQ35VTwlqbkvDsYXm8qcNVdXWJMrO7y0sbJO31lrhw==
   dependencies:
     "@sprucelabs/error" "^2.2.84"
     "@sprucelabs/log" "^10.2.145"
