@@ -1,6 +1,6 @@
 import { ISchema, SchemaValues } from '@sprucelabs/schema'
 
-const authorizerStatuses = [
+export const authorizerStatuses = [
 	'clocked-in',
 	'clocked-out',
 	'on-prem',
