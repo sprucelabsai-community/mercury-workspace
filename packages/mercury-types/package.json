@@ -36,7 +36,7 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/schema": "^7.1.5"
+		"@sprucelabs/schema": "^7.1.6"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
