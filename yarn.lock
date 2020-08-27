@@ -2265,32 +2265,32 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^1.1.67":
-  version "1.1.67"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.1.67.tgz#f3c3ab47f0a8836b280b45648d34dfffd1cc08e5"
-  integrity sha512-rGanm8D1P06BJRjKurjy4dpY7LQZz8QKWOYusjoPp7UqzHM6xaMX5wI/CPz20rNbnUlOzsf2tX2hF9lVdtaJxw==
+"@sprucelabs/babel-plugin-schema@^1.1.68":
+  version "1.1.68"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.1.68.tgz#951f31fd7bad00f6e096833bc9340e1da6103440"
+  integrity sha512-amwsDB4070vDaD48dsS5QITuGdJ0ziVxephh9pCnqi/6c4QbLHfp0K/ikNdAQyO1GzxNuysMnS19QGDTDPi4pw==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
 
-"@sprucelabs/error@^2.2.109":
-  version "2.2.110"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.110.tgz#27342c2a375de15c06d24f89d8a3626e70ffab28"
-  integrity sha512-y6F4YCVO7ZtZbwXW/QbOGN+kPbaUr2QOYbnjM1E66LS0deew2OtGT5/1J0roX7w/nN0or/NetOqxxUxQznklbQ==
+"@sprucelabs/error@^2.2.110":
+  version "2.2.111"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.111.tgz#dfe50679a9ac823e6da0ef088292f03570e98e6f"
+  integrity sha512-pfRQFrSqbiE1MZXr2xf3bCEpPT2rL3jyLFJsY2QROcdYRRtr/wGrL9Wfpj6fATUt7x6EJeDbR6PzQ4V2Vw1zRQ==
 
 "@sprucelabs/log@^10.2.153":
-  version "10.2.153"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.153.tgz#fc310508de7c576f2aad4d48c2f433ed0dadf5ae"
-  integrity sha512-ROlAN+SHF5jZ/m6imiIuRH3DMOhek4JfbNCWhPn3p+QbxkTAeMQPpU6FImAVXy5+i2kOrLeNGq8xhe3HUxvE3w==
+  version "10.2.154"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.154.tgz#1343189f5d33be7d683230f47356a0f744569f51"
+  integrity sha512-hma04wFU6CgSN0hDmOiB4xYArE1peXAci62yKp9aeVhXbS054cwDaUa44hKLyLPRSK9Q7bFbt3eJu6gEjtEn2Q==
 
-"@sprucelabs/schema@^7.1.2":
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.1.2.tgz#b707bb2b5bb5865e2c2cccfb130d0664e1a1c874"
-  integrity sha512-fIgrsjJJzDsR+2akXS2/peCrcLd7DYg9aOY/QAjsihBrvZYQK0uQEiljIYGK+3o3bSn+JdPKZdVOHZOPA48wHw==
+"@sprucelabs/schema@^7.1.3":
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.1.3.tgz#c8af7ea8899f21b9ac711b6f11e02f59c8542d5d"
+  integrity sha512-Ur/Hn24Gy7BWxAw5x7pxEFRxcSqQQFZSfD9uBWOPQ9up87mZ9YLYL5xvqt7Q55YgXb2W4cL8e6ClfzKAkFFtBw==
   dependencies:
-    "@sprucelabs/error" "^2.2.109"
+    "@sprucelabs/error" "^2.2.110"
     "@sprucelabs/log" "^10.2.153"
     google-libphonenumber "^3.2.12"
     libphonenumber-js "^1.7.57"
@@ -10316,10 +10316,10 @@ rollup-pluginutils@^2.3.1, rollup-pluginutils@^2.6.0:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.26.5:
-  version "2.26.5"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.26.5.tgz#5562ec36fcba3eed65cfd630bd78e037ad0e0307"
-  integrity sha512-rCyFG3ZtQdnn9YwfuAVH0l/Om34BdO5lwCA0W6Hq+bNB21dVEBbCRxhaHOmu1G7OBFDWytbzAC104u7rxHwGjA==
+rollup@^2.26.6:
+  version "2.26.6"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.26.6.tgz#0b460c1da224c6af12a1e948a28c513aa11f2b93"
+  integrity sha512-iSB7eE3k/VNQHnI7ckS++4yIqTamoUCB1xo7MswhJ/fg22oFYR5+xCrUZVviBj97jvc5A31MPbVMw1Wc3jWxmw==
   optionalDependencies:
     fsevents "~2.1.2"
 
