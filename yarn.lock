@@ -2285,7 +2285,7 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.172.tgz#cc33a73b4cfba55a20e22a158285686ca102550d"
   integrity sha512-FVdlNdHS2Qtp9SRHLmK8aUu8/pYy4NJNPPonu7RxGW5+kMBOIvSxzGYWwAAqPiDRWw9CO1pLDdAmzeEjiPI3HQ==
 
-"@sprucelabs/schema@^7.2.41":
+"@sprucelabs/schema@^7.2.42":
   version "7.2.42"
   resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-7.2.42.tgz#eddbb1f9c6c7111a1ad8c1438a08ba9cea84e148"
   integrity sha512-41vlQfaVHm+yO9gAUnA6wS+gUQLqxR26sZ9a1hAzYRAoQvvA2/H/Rejqdj1k+gUXG/klThvlYc+xmgw+I8nZag==
