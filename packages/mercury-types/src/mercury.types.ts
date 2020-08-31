@@ -5,6 +5,7 @@ export const authorizerStatuses = [
 	'clocked-out',
 	'on-prem',
 	'off-prem',
+	// eslint-disable-next-line no-undef
 ] as const
 
 export type AuthorizerStatus = typeof authorizerStatuses[number]
