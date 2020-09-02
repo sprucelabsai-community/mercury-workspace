@@ -1,4 +1,5 @@
 import { ISchema, SchemaValues } from '@sprucelabs/schema'
+import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 
 export const authorizerStatuses = [
 	'clocked-in',
@@ -14,9 +15,7 @@ export type PermissionAccess = {
 	[K in typeof authorizerStatuses[number]]?: boolean
 }
 
-export type PermissionContract = {
-	[name: string]: PermissionAccess
-}
+export type PermissionContract = SpruceSchemas.Local.v2020_09_01.IPermissionContract
 
 export interface MercuryAggregateResponse<Payload> {
 	totalContracts: number
@@ -36,16 +35,9 @@ export interface MercurySingleResponse<Payload> {
 	payload?: Payload
 }
 
-export interface EventSignature {
-	responsePayload?: ISchema
-	emitPayload?: ISchema
-	listenPermissionsAny?: PermissionContract
-	emitPermissionsAny?: PermissionContract
-}
+export type EventSignature = SpruceSchemas.Local.v2020_09_01.IEventSignature
 
-export interface MercuryContract {
-	[eventNameWithOptionalNamespace: string]: EventSignature
-}
+export type MercuryContract = SpruceSchemas.Local.v2020_09_01.IMercuryContract
 
 export type KeyOf<O> = Extract<keyof O, string>
 

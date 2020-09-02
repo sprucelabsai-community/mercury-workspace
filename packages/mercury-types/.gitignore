@@ -17,3 +17,5 @@ mercury.min.*
 package-lock.json
 
 tmp/
+
+.env
