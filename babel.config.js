@@ -1,8 +1,5 @@
-const pathUtil = require('path')
-
-
 module.exports = (api) => {
-	api.cache(true)
+	api.cache(false)
 
 	return {
 		ignore: ["**/testDirsAndFiles/**", "**/spruce-templates/src/templates/**"],
@@ -25,12 +22,6 @@ module.exports = (api) => {
 				{
 					root: ['./'],
 					alias: {
-						'#spruce/schemas/fields/fieldTypeEnum':
-							'./node_modules/@sprucelabs/schema/build/.spruce/schemas/fields/fieldTypeEnum',
-						'#spruce/schemas/fields/fieldClassMap':
-							'./node_modules/@sprucelabs/schema/build/.spruce/schemas/fields/fieldClassMap',
-						'#spruce/schemas/fields/field.types':
-							'./node_modules/@sprucelabs/schema/build/.spruce/schemas/fields/field.type',
 						'#spruce': './src/.spruce',
 					},
 				},
