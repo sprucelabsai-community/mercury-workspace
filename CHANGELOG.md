@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.153](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.152...v1.3.153) (2020-09-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [1.3.152](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.151...v1.3.152) (2020-09-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [1.3.151](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.150...v1.3.151) (2020-09-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [1.3.150](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.149...v1.3.150) (2020-09-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
 ## [1.3.149](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.148...v1.3.149) (2020-09-03)
 
 **Note:** Version bump only for package spruce-mercury-workspace
