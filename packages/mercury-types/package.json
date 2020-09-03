@@ -21,9 +21,11 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
-		"build": "yarn build.tsc",
-		"build.tsc": "tsc && echo PASS",
-		"build.watch": "tsc -w",
+		"build": "yarn build.babel && yarn build.types",
+		"build.types": "tsc --emitDeclarationOnly && echo PASS",
+		"build.babel": "babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
+		"build.babel.debug": "node --inspect-brk=5200 ../../node_modules/.bin/babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
+		"build.watch": "concurrently 'yarn run build.babel --watch' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.types'\" \"chokidar '../spruce-templates/src/**/*' -c 'yarn clean.cache && yarn build.types'\"",
 		"clean": "rm -rf build/",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
 		"lint.fix": "eslint --fix '**/*.ts'",
@@ -36,7 +38,7 @@
 	"dependencies": {
 		"@sprucelabs/error": "^2.2.169",
 		"@sprucelabs/log": "^10.2.179",
-		"@sprucelabs/schema": "^8.1.24",
+		"@sprucelabs/schema": "^9.0.8",
 		"@sprucelabs/spruce-skill-utils": "^10.22.1"
 	},
 	"devDependencies": {

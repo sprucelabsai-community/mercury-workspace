@@ -18,10 +18,10 @@ export declare namespace SpruceSchemas.Spruce.v2020_07_22 {
 	export interface IAclSchema extends SpruceSchema.ISchema {
 		id: 'acl',
 		name: 'Access control list',
-		dynamicKeySignature: { 
+		dynamicFieldSignature: { 
 		    label: 'Permissions grouped by slug',
 		    type: FieldType.Text,
-		    key: 'slug',
+		    keyName: 'slug',
 		    isArray: true,
 		    options: undefined
 		}	}
@@ -573,9 +573,9 @@ export declare namespace SpruceSchemas.Local.v2020_09_01 {
 	export interface IMercuryContractSchema extends SpruceSchema.ISchema {
 		id: 'mercuryContract',
 		name: 'Mercury Contract',
-		dynamicKeySignature: { 
+		dynamicFieldSignature: { 
 		    type: FieldType.Schema,
-		    key: 'eventNameWithOptionalNamespace',
+		    keyName: 'eventNameWithOptionalNamespace',
 		    options: {schema: SpruceSchemas.Local.v2020_09_01.IEventSignatureSchema,}
 		}	}
 
@@ -587,41 +587,52 @@ export declare namespace SpruceSchemas.Local.v2020_09_01 {
 export declare namespace SpruceSchemas.Local.v2020_09_01 {
 
 	
-	export interface IPermissionAccess {
-			/** . */
-			[status:string]: boolean| undefined | null
-	}
-
-	export interface IPermissionAccessSchema extends SpruceSchema.ISchema {
-		id: 'permissionAccess',
-		name: 'Permission Access',
-		dynamicKeySignature: { 
-		    type: FieldType.Boolean,
-		    key: 'status',
-		    options: undefined
-		}	}
-
-	export type PermissionAccessEntity = SchemaEntity<SpruceSchemas.Local.v2020_09_01.IPermissionAccessSchema>
-
-}
-
-
-export declare namespace SpruceSchemas.Local.v2020_09_01 {
-
-	
 	export interface IPermissionContract {
-			/** . */
-			[name:string]: SpruceSchemas.Local.v2020_09_01.IPermissionAccess| undefined | null
+		
+			/** Clocked in. Is the person clocked in and ready to rock? */
+			'clockedIn'?: boolean| undefined | null
+			/** Clocked out. When someone is not working (off the clock). */
+			'clockedOut'?: boolean| undefined | null
+			/** On premise. Are they at work (maybe working, maybe visiting). */
+			'onPrem'?: boolean| undefined | null
+			/** Off premise. They aren't at the office or shop. */
+			'offPrem'?: boolean| undefined | null
 	}
 
 	export interface IPermissionContractSchema extends SpruceSchema.ISchema {
 		id: 'permissionContract',
 		name: 'Permission Contract',
-		dynamicKeySignature: { 
-		    type: FieldType.Schema,
-		    key: 'name',
-		    options: {schema: SpruceSchemas.Local.v2020_09_01.IPermissionAccessSchema,}
-		}	}
+		    fields: {
+		            /** Clocked in. Is the person clocked in and ready to rock? */
+		            'clockedIn': {
+		                label: 'Clocked in',
+		                type: FieldType.Boolean,
+		                hint: 'Is the person clocked in and ready to rock?',
+		                options: undefined
+		            },
+		            /** Clocked out. When someone is not working (off the clock). */
+		            'clockedOut': {
+		                label: 'Clocked out',
+		                type: FieldType.Boolean,
+		                hint: 'When someone is not working (off the clock).',
+		                options: undefined
+		            },
+		            /** On premise. Are they at work (maybe working, maybe visiting). */
+		            'onPrem': {
+		                label: 'On premise',
+		                type: FieldType.Boolean,
+		                hint: 'Are they at work (maybe working, maybe visiting).',
+		                options: undefined
+		            },
+		            /** Off premise. They aren't at the office or shop. */
+		            'offPrem': {
+		                label: 'Off premise',
+		                type: FieldType.Boolean,
+		                hint: 'They aren\'t at the office or shop.',
+		                options: undefined
+		            },
+		    }
+	}
 
 	export type PermissionContractEntity = SchemaEntity<SpruceSchemas.Local.v2020_09_01.IPermissionContractSchema>
 

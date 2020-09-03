@@ -1,6 +1,3 @@
-const pathUtil = require('path')
-
-
 module.exports = (api) => {
 	api.cache(true)
 

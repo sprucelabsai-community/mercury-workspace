@@ -2,19 +2,30 @@ import { ISchema, SchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 
 export const authorizerStatuses = [
-	'clocked-in',
-	'clocked-out',
-	'on-prem',
-	'off-prem',
+	{
+		name: 'clockedIn',
+		label: 'Clocked in',
+		hint: 'Is the person clocked in and ready to rock?',
+	},
+	{
+		name: 'clockedOut',
+		label: 'Clocked out',
+		hint: 'When someone is not working (off the clock).',
+	},
+	{
+		name: 'onPrem',
+		label: 'On premise',
+		hint: 'Are they at work (maybe working, maybe visiting).',
+	},
+	{
+		name: 'offPrem',
+		label: 'Off premise',
+		hint: "They aren't at the office or shop.",
+	},
 	// eslint-disable-next-line no-undef
 ] as const
 
-export type AuthorizerStatus = typeof authorizerStatuses[number]
-
-export type PermissionAccess = {
-	[K in typeof authorizerStatuses[number]]?: boolean
-}
-
+export type AuthorizerStatus = typeof authorizerStatuses[number]['name']
 export type PermissionContract = SpruceSchemas.Local.v2020_09_01.IPermissionContract
 
 export interface MercuryAggregateResponse<Payload> {
@@ -36,7 +47,6 @@ export interface MercurySingleResponse<Payload> {
 }
 
 export type EventSignature = SpruceSchemas.Local.v2020_09_01.IEventSignature
-
 export type MercuryContract = SpruceSchemas.Local.v2020_09_01.IMercuryContract
 
 export type KeyOf<O> = Extract<keyof O, string>

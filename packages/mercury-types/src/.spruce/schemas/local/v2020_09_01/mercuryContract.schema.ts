@@ -6,9 +6,9 @@ import eventSignatureSchema from '#spruce/schemas/local/v2020_09_01/eventSignatu
 const mercuryContractSchema: SpruceSchemas.Local.v2020_09_01.IMercuryContractSchema  = {
 	id: 'mercuryContract',
 	name: 'Mercury Contract',
-	dynamicKeySignature: { 
+	dynamicFieldSignature: { 
 	    type: FieldType.Schema,
-	    key: 'eventNameWithOptionalNamespace',
+	    keyName: 'eventNameWithOptionalNamespace',
 	    options: {schema: eventSignatureSchema,}
 	}}
 
