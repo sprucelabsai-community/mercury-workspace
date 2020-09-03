@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.149](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.148...v1.3.149) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.148](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.147...v1.3.148) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.147](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.146...v1.3.147) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.146](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.145...v1.3.146) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.145](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.144...v1.3.145) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.144](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.143...v1.3.144) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.143](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.142...v1.3.143) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.142](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.141...v1.3.142) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.141](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.140...v1.3.141) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.140](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.139...v1.3.140) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [1.3.139](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.138...v1.3.139) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
 ## [1.3.138](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.137...v1.3.138) (2020-09-02)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
