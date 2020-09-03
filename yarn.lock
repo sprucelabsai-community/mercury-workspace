@@ -2281,32 +2281,32 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^1.1.115":
-  version "1.1.115"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.1.115.tgz#edb294e895e5a9054dc1987cb791b1dc5eb2479d"
-  integrity sha512-dN6bzOv4x85WsSMfyTGPwy/BQHjy56ToWXAsWBdQxwHy5sF8k05qdl1/Gv7ROwCZMwk8+WJMPXS5ixUdfE9btg==
+"@sprucelabs/babel-plugin-schema@^1.1.116":
+  version "1.1.116"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-1.1.116.tgz#acbad22a59d277ab43e0d4941cf932009d27c256"
+  integrity sha512-CJKoxG/5Ot4plQQjOVke0TKoI5joSY2O66sbAPkDC8Thzs0ngNrHcPjNsXkbRaKEa6fSPwpnoL1HVnYaipNNfw==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
 
-"@sprucelabs/error@^2.2.178":
-  version "2.2.179"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.179.tgz#de801c10be08aa4e4f57e118bb33b975e17997fb"
-  integrity sha512-Aa4f/KmJnXKgHLOwo+BHI5bZCV4EZzIWcr0lwVbno/r2FsaXShCjy+fvcYAHBHwdPqUAaJXLkQxrbLmBUC8qaw==
+"@sprucelabs/error@^2.2.179":
+  version "2.2.180"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.180.tgz#c8af8fad584eff762afb61ecf1b07bdfee633119"
+  integrity sha512-RJkTW7FIeiVoqnMSI+hL2+BolzlAjVqUD5N5jYxpvnCVw6Rhy2XM9x7VQ5Ci9mcdcSyo5uw6BT8MWVegu576nQ==
 
 "@sprucelabs/log@^10.2.184":
   version "10.2.184"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.184.tgz#64d456130547b3158e6103a7dd0c2e8e16512144"
   integrity sha512-AHvBv1JdCUgJzi6WFf4UrSYjcemTRj0GUrkMtSeWZt/cOfN1awtLxPT1Tm0xJpcDP3zfn0qttrALPFB2YH0CXg==
 
-"@sprucelabs/schema@^9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-9.0.1.tgz#e6aa5012f82e60f782a249b44f327ae293693c80"
-  integrity sha512-M499+lgDT7OPL3E7jKmBSkiWTZqk0SiTfYtfz5Vff1yc36/t+moGFh74TzsX0LPyNjVAD6cMqVkRBhmn+g6FBA==
+"@sprucelabs/schema@^9.0.2":
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-9.0.2.tgz#90eda3cb89677eac3faccfcffa8b739ccae95689"
+  integrity sha512-lTGvl36cDcxrCJHAxK/yq0wPdWmNUFfyahkAOPzJyu5Q0OMgIA7VANFFXvHiy4NJPlkzlXm3ALSmKOfJKfJ6Kw==
   dependencies:
-    "@sprucelabs/error" "^2.2.178"
+    "@sprucelabs/error" "^2.2.179"
     "@sprucelabs/log" "^10.2.184"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.7.57"
