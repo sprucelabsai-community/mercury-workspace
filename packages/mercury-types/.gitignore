@@ -13,6 +13,7 @@ yarn-error.log*
 
 *.tmp.ts
 build/
+rollup/
 mercury.min.*
 package-lock.json
 

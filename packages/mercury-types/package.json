@@ -6,7 +6,7 @@
 	"files": [
 		"build"
 	],
-	"main": "./build/mercury.types.js",
+	"main": "./rollup/mercury.js",
 	"types": "./build/mercury.types.d.ts",
 	"version": "1.3.138",
 	"description": "Types for Mercury!",
@@ -21,8 +21,9 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
-		"build": "yarn build.babel && yarn build.types",
+		"build": "yarn build.babel && yarn build.types && yarn build.rollup",
 		"build.types": "tsc --emitDeclarationOnly && echo PASS",
+		"build.rollup": "rollup -c",
 		"build.babel": "babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
 		"build.babel.debug": "node --inspect-brk=5200 ../../node_modules/.bin/babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
 		"build.watch": "concurrently 'yarn run build.babel --watch' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.types'\" \"chokidar '../spruce-templates/src/**/*' -c 'yarn clean.cache && yarn build.types'\"",
@@ -42,12 +43,15 @@
 		"@sprucelabs/spruce-skill-utils": "^10.22.1"
 	},
 	"devDependencies": {
+		"@rollup/plugin-commonjs": "^15.0.0",
+		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@sprucelabs/semantic-release": "^4.0.5",
 		"@sprucelabs/test": "^6.0.103",
 		"arkit": "^1.6.4",
 		"eslint": "^7.8.1",
 		"eslint-config-spruce": "^10.9.29",
 		"jest": "^26.4.2",
+		"rollup": "^2.26.9",
 		"ts-node": "^9.0.0",
 		"tsconfig-paths": "^3.9.0",
 		"typescript": "^4.0.2"
