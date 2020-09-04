@@ -52,7 +52,7 @@
 		"eslint": "^7.8.1",
 		"eslint-config-spruce": "^10.9.31",
 		"prettier": "^2.1.1",
-		"rollup": "^2.26.9",
+		"rollup": "^2.26.10",
 		"rollup-plugin-node-builtins": "^2.1.2",
 		"rollup-plugin-node-globals": "^1.4.0",
 		"rollup-plugin-replace": "^2.2.0",
