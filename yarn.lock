@@ -2281,10 +2281,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.1.tgz#5e56191220cf9a4bc68242246b78d186cda1289d"
-  integrity sha512-R8HXp58F6dwXlOngl+C9iq/gNgAoPt17NC6kNgJce2ZFuIPRCp8XtDpXd1L1HNY5BWvLmvucUmPhKy8+sH6acg==
+"@sprucelabs/babel-plugin-schema@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.2.tgz#c950d1b4f0844eb2bd7206d1a40aa9bdd0ce85c1"
+  integrity sha512-jO1wXpdnSHUwhxpU55+/o8K/5/GW6f7Sfsnk14V/VFt1BG418QF+UpJ0PcT/1gxuATOdc3r8IeQ4kop8xWhqPA==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
