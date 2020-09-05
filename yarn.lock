@@ -2281,15 +2281,16 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.0.3.tgz#4c9558029b505bfcdd65180639280a2708c82e65"
-  integrity sha512-9hJ6TiLz64372mIeaDV8yLxEJwHTqImB0WWNK4tBOCMsiH2ZT0Z2EpSWCdLEDgOTm4RC6SI/54V45BvTlqOSlg==
+"@sprucelabs/babel-plugin-schema@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.1.tgz#5e56191220cf9a4bc68242246b78d186cda1289d"
+  integrity sha512-R8HXp58F6dwXlOngl+C9iq/gNgAoPt17NC6kNgJce2ZFuIPRCp8XtDpXd1L1HNY5BWvLmvucUmPhKy8+sH6acg==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
+    yargs "^15.4.1"
 
 "@sprucelabs/error@^2.2.186", "@sprucelabs/error@^2.2.201":
   version "2.2.201"
@@ -12268,7 +12269,7 @@ yargs@^14.2.2, yargs@^14.2.3:
     y18n "^4.0.0"
     yargs-parser "^15.0.1"
 
-yargs@^15.0.1, yargs@^15.1.0, yargs@^15.3.1:
+yargs@^15.0.1, yargs@^15.1.0, yargs@^15.3.1, yargs@^15.4.1:
   version "15.4.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.4.1.tgz#0d87a16de01aee9d8bec2bfbf74f67851730f4f8"
   integrity sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==
