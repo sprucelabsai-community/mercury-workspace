@@ -2281,10 +2281,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^2.1.5":
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.5.tgz#c14c28a60c8b6e26be9b475d0d4a054605bfea59"
-  integrity sha512-7p3hf1HIR7VY6X5USRAJ7F4JIOFBfkpoRePqMmGQ0pBzCTLgMnbFRG0+fcznzzkDRhQ4FXfIU4UWLhxkj0P1Jw==
+"@sprucelabs/babel-plugin-schema@^2.1.6":
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.6.tgz#23f67c63a82b336a71f6ba3705279557c66d75d7"
+  integrity sha512-t+ITl6QQmMAteyb3Wkkhm/+fOuoQvoTcdjeNmCjcXSFAkaRb3vE+1H9TTPtMocqHB8xhUdBcBVsul2KjlbD67A==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
@@ -2292,17 +2292,17 @@
     tsconfig-paths "^3.9.0"
     yargs "^15.4.1"
 
-"@sprucelabs/error@^2.2.186", "@sprucelabs/error@^2.2.206":
-  version "2.2.206"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.206.tgz#ae2af76bbeee774b597c33a2bdee8aab866e1596"
-  integrity sha512-tq+DSPt2d6m4a7rvT0rloKr/eyJ9GRmyWcgoLW6Fw0cRM1sCPE1RyeqtGy+zuw2baUzbQRj5/+Q1BdTv6N82kA==
+"@sprucelabs/error@^2.2.186", "@sprucelabs/error@^2.2.206", "@sprucelabs/error@^2.2.207":
+  version "2.2.207"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.207.tgz#890910702a90dd50ff2a50837f06a0334c8b2ca3"
+  integrity sha512-qb1GY2Iy9RyyD//wz6we1VpyfOvDdvmJ3zGmnAz0sj1zSmp7h878k/h9161F/1GAU7xF4rNgScNPLX9TdrRaHA==
 
 "@sprucelabs/log@^10.2.195":
   version "10.2.195"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.195.tgz#45109e5dfd2b3e97e0e546c8c1ef697d72f182eb"
   integrity sha512-LEOCS8ieQQVirrOYi04ryQjDzgLPpZsnLWWgmBJjn6UVLBpixmk+dhPxtgswvCn9M2r/3on2vqkPMJzaXoo8rw==
 
-"@sprucelabs/schema@^9.0.32":
+"@sprucelabs/schema@^9.0.33":
   version "9.0.33"
   resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-9.0.33.tgz#eb14abb7fa0fb3c2e3182db303b322fa8264f29e"
   integrity sha512-XHd2/TXS0VLHYbrVp9tf0HgX0OLNiOfGi1jbSKLVRgXrCq2TRdvN4rXcWhXwIdsu4Y9VwVTGXtj5dkphaXLMIA==
@@ -2335,10 +2335,10 @@
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^6.0.120":
-  version "6.0.120"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-6.0.120.tgz#f318bfef47e78cf76566f3fe18d15e78e3697952"
-  integrity sha512-s+gGBXjHf3RFUL7cJ54Sfx+lCC+jVupFGVPONY2sdY1iomyVz6uJr/FduEuTKQeqmEi5kYqZS0pR8LiX62cVLA==
+"@sprucelabs/test@^6.0.121":
+  version "6.0.121"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-6.0.121.tgz#0f02e3f23ef11cff419a23c7528e5e3b9144beff"
+  integrity sha512-fLy9YXCvU/Od0NbOIx/bUhYCkxUlsDhgOahdr8lSdh+wN4/Gd5ThuvVj7RQG30p2xhDs57h8SP9CG+Ys/BQDNA==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -11913,9 +11913,9 @@ whatwg-url@^7.0.0:
     webidl-conversions "^4.0.2"
 
 whatwg-url@^8.0.0:
-  version "8.2.1"
-  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-8.2.1.tgz#ed73417230784b281fb2a32c3c501738b46167c3"
-  integrity sha512-ZmVCr6nfBeaMxEHALLEGy0LszYjpJqf6PVNQUQ1qd9Et+q7Jpygd4rGGDXgHjD8e99yLFseD69msHDM4YwPZ4A==
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-8.2.2.tgz#85e7f9795108b53d554cec640b2e8aee2a0d4bfd"
+  integrity sha512-PcVnO6NiewhkmzV0qn7A+UZ9Xx4maNTI+O+TShmfE4pqjoCMwUMjkvoNhNHPTvgR7QH9Xt3R13iHuWy2sToFxQ==
   dependencies:
     lodash.sortby "^4.7.0"
     tr46 "^2.0.2"

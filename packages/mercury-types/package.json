@@ -36,16 +36,16 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.206",
+		"@sprucelabs/error": "^2.2.207",
 		"@sprucelabs/log": "^10.2.195",
-		"@sprucelabs/schema": "^9.0.32",
+		"@sprucelabs/schema": "^9.0.33",
 		"@sprucelabs/spruce-skill-utils": "^10.25.3"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^15.0.0",
 		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^6.0.120",
+		"@sprucelabs/test": "^6.0.121",
 		"arkit": "^1.6.4",
 		"eslint": "^7.8.1",
 		"eslint-config-spruce": "^10.9.35",
