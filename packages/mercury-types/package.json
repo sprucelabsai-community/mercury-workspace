@@ -38,7 +38,7 @@
 	"dependencies": {
 		"@sprucelabs/error": "^2.2.213",
 		"@sprucelabs/log": "^10.2.196",
-		"@sprucelabs/schema": "^9.0.39",
+		"@sprucelabs/schema": "^9.0.40",
 		"@sprucelabs/spruce-skill-utils": "^10.25.3"
 	},
 	"devDependencies": {
@@ -50,7 +50,7 @@
 		"eslint": "^7.8.1",
 		"eslint-config-spruce": "^10.9.37",
 		"jest": "^26.4.2",
-		"rollup": "^2.26.10",
+		"rollup": "^2.26.11",
 		"ts-node": "^9.0.0",
 		"tsconfig-paths": "^3.9.0",
 		"typescript": "^4.0.2"
