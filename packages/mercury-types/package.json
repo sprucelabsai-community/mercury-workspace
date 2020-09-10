@@ -36,19 +36,19 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.229",
-		"@sprucelabs/log": "^10.2.203",
-		"@sprucelabs/schema": "^9.1.4",
-		"@sprucelabs/spruce-skill-utils": "^10.25.18"
+		"@sprucelabs/error": "^2.2.230",
+		"@sprucelabs/log": "^10.2.204",
+		"@sprucelabs/schema": "^9.1.5",
+		"@sprucelabs/spruce-skill-utils": "^10.25.19"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^15.0.0",
 		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^6.0.131",
+		"@sprucelabs/test": "^6.0.132",
 		"arkit": "^1.6.4",
 		"eslint": "^7.8.1",
-		"eslint-config-spruce": "^10.9.39",
+		"eslint-config-spruce": "^10.9.40",
 		"jest": "^26.4.2",
 		"rollup": "^2.26.11",
 		"ts-node": "^9.0.0",
