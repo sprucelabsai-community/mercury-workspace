@@ -3,6 +3,601 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.73](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.72...v1.4.73) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.72](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.71...v1.4.72) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.71](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.70...v1.4.71) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.70](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.69...v1.4.70) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.69](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.68...v1.4.69) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.68](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.67...v1.4.68) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.67](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.66...v1.4.67) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.66](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.65...v1.4.66) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.65](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.64...v1.4.65) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.64](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.63...v1.4.64) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.63](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.62...v1.4.63) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.62](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.61...v1.4.62) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.61](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.60...v1.4.61) (2020-09-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.60](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.59...v1.4.60) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.59](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.58...v1.4.59) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.58](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.57...v1.4.58) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.57](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.56...v1.4.57) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.56](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.55...v1.4.56) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.55](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.54...v1.4.55) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.54](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.53...v1.4.54) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.53](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.52...v1.4.53) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.52](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.51...v1.4.52) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.51](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.50...v1.4.51) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.50](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.49...v1.4.50) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.49](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.48...v1.4.49) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.48](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.47...v1.4.48) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.47](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.46...v1.4.47) (2020-09-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.46](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.45...v1.4.46) (2020-09-08)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.45](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.44...v1.4.45) (2020-09-08)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.44](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.43...v1.4.44) (2020-09-08)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.43](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.42...v1.4.43) (2020-09-08)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.42](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.41...v1.4.42) (2020-09-08)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.41](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.40...v1.4.41) (2020-09-08)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.40](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.39...v1.4.40) (2020-09-08)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.39](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.38...v1.4.39) (2020-09-08)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.38](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.37...v1.4.38) (2020-09-07)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.37](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.36...v1.4.37) (2020-09-07)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.36](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.35...v1.4.36) (2020-09-07)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.35](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.34...v1.4.35) (2020-09-07)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.34](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.33...v1.4.34) (2020-09-07)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.33](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.32...v1.4.33) (2020-09-07)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.32](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.31...v1.4.32) (2020-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.31](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.30...v1.4.31) (2020-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.30](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.29...v1.4.30) (2020-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.29](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.28...v1.4.29) (2020-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.28](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.27...v1.4.28) (2020-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.27](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.26...v1.4.27) (2020-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.26](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.25...v1.4.26) (2020-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.25](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.24...v1.4.25) (2020-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.24](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.23...v1.4.24) (2020-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.23](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.22...v1.4.23) (2020-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.22](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.21...v1.4.22) (2020-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.21](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.20...v1.4.21) (2020-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.20](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.19...v1.4.20) (2020-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.19](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.18...v1.4.19) (2020-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.18](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.17...v1.4.18) (2020-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.17](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.16...v1.4.17) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.16](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.15...v1.4.16) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.15](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.14...v1.4.15) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.14](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.13...v1.4.14) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.13](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.12...v1.4.13) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.12](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.11...v1.4.12) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.11](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.10...v1.4.11) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.10](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.9...v1.4.10) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.9](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.8...v1.4.9) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.8](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.7...v1.4.8) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.7](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.6...v1.4.7) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.6](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.5...v1.4.6) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.5](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.4...v1.4.5) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.4](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.3...v1.4.4) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.3](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.2...v1.4.3) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.2](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.1...v1.4.2) (2020-09-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+## [1.4.1](https://github.com/sprucelabsai/mercury-workspace/compare/v1.4.0...v1.4.1) (2020-09-03)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
+# [1.4.0](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.154...v1.4.0) (2020-09-03)
+
+
+### Features
+
+* progress in move to schemas ([63bb6ea](https://github.com/sprucelabsai/mercury-workspace/commit/63bb6ea))
+
+
+
+
+
 ## [1.3.154](https://github.com/sprucelabsai/mercury-workspace/compare/v1.3.153...v1.3.154) (2020-09-03)
 
 **Note:** Version bump only for package @sprucelabs/mercury-types
