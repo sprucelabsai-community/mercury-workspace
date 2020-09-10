@@ -2281,16 +2281,16 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^2.1.23":
-  version "2.1.23"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.23.tgz#0a06ac66dccde648435cec196af2b84f83d27236"
-  integrity sha512-ybbaaqV+H2J2Gpvn/xNDwbnNV5n8V8r9bQ88jmnoG8YDNxD7kw+fupjK/VRVJIwLbgbs3Ib72UQanLz7OKCNug==
+"@sprucelabs/babel-plugin-schema@^2.1.24":
+  version "2.1.24"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.24.tgz#bf468f280d865ea84094072308521db87956081d"
+  integrity sha512-84YR4E2TLEKmQ5WdRKR9hhDoGdE3QtqxeZ4tlCJ6WjP8SfZM8viD1MRnkcWd9kEn+BMRkC4Xn1JgEAOMtjovoQ==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
     rimraf "^3.0.2"
     tsconfig-paths "^3.9.0"
-    yargs "^16.0.2"
+    yargs "^16.0.3"
 
 "@sprucelabs/error@^2.2.226":
   version "2.2.226"
@@ -2324,10 +2324,10 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.25.13":
-  version "10.25.13"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.25.13.tgz#ee7bb9ec587d7824c89a6396430e368fe07a4dd1"
-  integrity sha512-sl9qneRAZxOHAvwS55nGxnbrnFFMGRSbi7UNrbyBCGyMuhyce4wA7bzI869zNLNGcBCHyDFEu0SB7wcR2V3NZQ==
+"@sprucelabs/spruce-skill-utils@^10.25.15":
+  version "10.25.15"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.25.15.tgz#1e9486137ad8d4fc5273c1d5c61c66d67a0411ab"
+  integrity sha512-e+NgtpWHdSsaEUqUPJowvfVFzrRer7LTh2Hvjz6X1BLMEnQl80XIbvX60V08hWQaBBsG/nSb4LMXkvd3EPO9EA==
   dependencies:
     "@sprucelabs/error" "^2.2.226"
     fs-extra "^9.0.1"
@@ -12314,7 +12314,7 @@ yargs@^15.0.1, yargs@^15.1.0, yargs@^15.3.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^16.0.2:
+yargs@^16.0.3:
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.0.3.tgz#7a919b9e43c90f80d4a142a89795e85399a7e54c"
   integrity sha512-6+nLw8xa9uK1BOEOykaiYAJVh6/CjxWXK/q9b5FpRgNslt8s22F2xMBqVIKgCRjNgGvGPBy8Vog7WN7yh4amtA==
