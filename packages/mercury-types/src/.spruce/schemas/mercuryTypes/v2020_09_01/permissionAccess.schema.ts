@@ -3,9 +3,9 @@ import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
 
 
 
-const permissionContractSchema: SpruceSchemas.Local.v2020_09_01.IPermissionContractSchema  = {
-	id: 'permissionContract',
-	name: 'Permission Contract',
+const permissionAccessSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccessSchema  = {
+	id: 'permissionAccess',
+	name: 'Permission access',
 	    fields: {
 	            /** Clocked in. Is the person clocked in and ready to rock? */
 	            'clockedIn': {
@@ -38,4 +38,4 @@ const permissionContractSchema: SpruceSchemas.Local.v2020_09_01.IPermissionContr
 	    }
 }
 
-export default permissionContractSchema
+export default permissionAccessSchema

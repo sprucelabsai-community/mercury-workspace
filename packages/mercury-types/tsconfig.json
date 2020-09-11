@@ -21,6 +21,6 @@
 			"#spruce/*": [".spruce/*"]
 		}
 	},
-	"include": ["./*.ts", "./**/*.ts"],
+	"include": ["./*.ts", "./**/*.ts", "./src/.spruce/**/*"],
 	"exclude": ["build"]
 }

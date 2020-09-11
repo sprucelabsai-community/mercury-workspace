@@ -515,7 +515,7 @@ export declare namespace SpruceSchemas.Spruce.v2020_07_22 {
 }
 
 
-export declare namespace SpruceSchemas.Local.v2020_09_01 {
+export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 	
 	export interface IEventSignature {
@@ -525,9 +525,9 @@ export declare namespace SpruceSchemas.Local.v2020_09_01 {
 			
 			'emitPayload'?: (SpruceSchema.ISchema)| undefined | null
 			
-			'listenPermissionsAny'?: SpruceSchemas.Local.v2020_09_01.IPermissionContract| undefined | null
+			'listenPermissionsAny'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract| undefined | null
 			
-			'emitPermissionsAny'?: SpruceSchemas.Local.v2020_09_01.IPermissionContract| undefined | null
+			'emitPermissionsAny'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract| undefined | null
 	}
 
 	export interface IEventSignatureSchema extends SpruceSchema.ISchema {
@@ -547,27 +547,27 @@ export declare namespace SpruceSchemas.Local.v2020_09_01 {
 		            /** . */
 		            'listenPermissionsAny': {
 		                type: FieldType.Schema,
-		                options: {schema: SpruceSchemas.Local.v2020_09_01.IPermissionContractSchema,}
+		                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema,}
 		            },
 		            /** . */
 		            'emitPermissionsAny': {
 		                type: FieldType.Schema,
-		                options: {schema: SpruceSchemas.Local.v2020_09_01.IPermissionContractSchema,}
+		                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema,}
 		            },
 		    }
 	}
 
-	export type EventSignatureEntity = SchemaEntity<SpruceSchemas.Local.v2020_09_01.IEventSignatureSchema>
+	export type EventSignatureEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatureSchema>
 
 }
 
 
-export declare namespace SpruceSchemas.Local.v2020_09_01 {
+export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 	
 	export interface IMercuryContract {
 			/** . */
-			[eventNameWithOptionalNamespace:string]: SpruceSchemas.Local.v2020_09_01.IEventSignature| undefined | null
+			[eventNameWithOptionalNamespace:string]: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature| undefined | null
 	}
 
 	export interface IMercuryContractSchema extends SpruceSchema.ISchema {
@@ -576,18 +576,18 @@ export declare namespace SpruceSchemas.Local.v2020_09_01 {
 		dynamicFieldSignature: { 
 		    type: FieldType.Schema,
 		    keyName: 'eventNameWithOptionalNamespace',
-		    options: {schema: SpruceSchemas.Local.v2020_09_01.IEventSignatureSchema,}
+		    options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatureSchema,}
 		}	}
 
-	export type MercuryContractEntity = SchemaEntity<SpruceSchemas.Local.v2020_09_01.IMercuryContractSchema>
+	export type MercuryContractEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContractSchema>
 
 }
 
 
-export declare namespace SpruceSchemas.Local.v2020_09_01 {
+export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 	
-	export interface IPermissionContract {
+	export interface IPermissionAccess {
 		
 			/** Clocked in. Is the person clocked in and ready to rock? */
 			'clockedIn'?: boolean| undefined | null
@@ -599,9 +599,9 @@ export declare namespace SpruceSchemas.Local.v2020_09_01 {
 			'offPrem'?: boolean| undefined | null
 	}
 
-	export interface IPermissionContractSchema extends SpruceSchema.ISchema {
-		id: 'permissionContract',
-		name: 'Permission Contract',
+	export interface IPermissionAccessSchema extends SpruceSchema.ISchema {
+		id: 'permissionAccess',
+		name: 'Permission access',
 		    fields: {
 		            /** Clocked in. Is the person clocked in and ready to rock? */
 		            'clockedIn': {
@@ -634,7 +634,30 @@ export declare namespace SpruceSchemas.Local.v2020_09_01 {
 		    }
 	}
 
-	export type PermissionContractEntity = SchemaEntity<SpruceSchemas.Local.v2020_09_01.IPermissionContractSchema>
+	export type PermissionAccessEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccessSchema>
+
+}
+
+
+export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
+
+	
+	export interface IPermissionContract {
+			/** . */
+			[permissionName:string]: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccess
+	}
+
+	export interface IPermissionContractSchema extends SpruceSchema.ISchema {
+		id: 'permissionContract',
+		name: 'Permission Contract',
+		dynamicFieldSignature: { 
+		    type: FieldType.Schema,
+		    keyName: 'permissionName',
+		    isRequired: true,
+		    options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccessSchema,}
+		}	}
+
+	export type PermissionContractEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema>
 
 }
 
