@@ -39,7 +39,7 @@
 		"@sprucelabs/error": "^2.2.235",
 		"@sprucelabs/log": "^10.2.205",
 		"@sprucelabs/schema": "^9.1.11",
-		"@sprucelabs/spruce-skill-utils": "^10.26.3"
+		"@sprucelabs/spruce-skill-utils": "^10.26.4"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^15.0.0",
