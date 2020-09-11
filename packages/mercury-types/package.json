@@ -36,10 +36,10 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.234",
+		"@sprucelabs/error": "^2.2.235",
 		"@sprucelabs/log": "^10.2.205",
-		"@sprucelabs/schema": "^9.1.9",
-		"@sprucelabs/spruce-skill-utils": "^10.26.1"
+		"@sprucelabs/schema": "^9.1.10",
+		"@sprucelabs/spruce-skill-utils": "^10.26.2"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^15.0.0",
