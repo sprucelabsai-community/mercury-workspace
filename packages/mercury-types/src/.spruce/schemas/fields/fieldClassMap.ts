@@ -1,4 +1,4 @@
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
+import FieldType from './fieldTypeEnum'
 
 import { AddressField } from '@sprucelabs/schema'
 import { BooleanField } from '@sprucelabs/schema'

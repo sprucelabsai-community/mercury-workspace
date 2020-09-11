@@ -25,8 +25,10 @@ export const authorizerStatuses = [
 	// eslint-disable-next-line no-undef
 ] as const
 
-export type AuthorizerStatus = typeof authorizerStatuses[number]['name']
-export type PermissionContract = SpruceSchemas.Local.v2020_09_01.IPermissionContract
+export type EventContract = SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
+export type PermissionAccess = SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccess
+export type AuthorizerStatus = keyof PermissionAccess
+export type PermissionContract = SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract
 
 export interface MercuryAggregateResponse<Payload> {
 	totalContracts: number
@@ -46,8 +48,8 @@ export interface MercurySingleResponse<Payload> {
 	payload?: Payload
 }
 
-export type EventSignature = SpruceSchemas.Local.v2020_09_01.IEventSignature
-export type MercuryContract = SpruceSchemas.Local.v2020_09_01.IMercuryContract
+export type EventSignature = SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
+export type MercuryContract = SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContract
 
 export type KeyOf<O> = Extract<keyof O, string>
 
