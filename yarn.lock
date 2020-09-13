@@ -2053,16 +2053,16 @@
     once "^1.4.0"
 
 "@octokit/request@^5.2.0", "@octokit/request@^5.3.0", "@octokit/request@^5.4.0":
-  version "5.4.8"
-  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-5.4.8.tgz#13ad36e172bb57e78bacf02cd86210d1f7412f04"
-  integrity sha512-mWbxjsARJzAq5xp+ZrQfotc+MHFz3/Am2qATJwflv4PZ1TjhgIJnr60PCVdZT9Z/tl+uPXooaVgeviy1KkDlLQ==
+  version "5.4.9"
+  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-5.4.9.tgz#0a46f11b82351b3416d3157261ad9b1558c43365"
+  integrity sha512-CzwVvRyimIM1h2n9pLVYfTDmX9m+KHSgCpqPsY8F1NdEK8IaWqXhSBXsdjOBFZSpEcxNEeg4p0UO9cQ8EnOCLA==
   dependencies:
     "@octokit/endpoint" "^6.0.1"
     "@octokit/request-error" "^2.0.0"
     "@octokit/types" "^5.0.0"
     deprecation "^2.0.0"
     is-plain-object "^5.0.0"
-    node-fetch "^2.3.0"
+    node-fetch "^2.6.1"
     once "^1.4.0"
     universal-user-agent "^6.0.0"
 
@@ -2281,10 +2281,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^2.1.42":
-  version "2.1.42"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.42.tgz#f1fd421dd80888cc282a1ed0c49e572c0ed465a6"
-  integrity sha512-Rd5RsU2t7Em1EMu02i85++b/k+tK3v206nPxQVSZt87pgnRUErN9PtBxvp2/FrTdaLYnJQ1+gKFx1wBlrSTBhA==
+"@sprucelabs/babel-plugin-schema@^2.1.43":
+  version "2.1.43"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.43.tgz#4849eef3121ecba6ba868adefc871da574ac5898"
+  integrity sha512-5bDy0MzMXf6S2ezX3LAHm2PL59mVd/3l73eIiCPd6wi5yXYpi5VDoxa7LJKMY9sc9szb28gjV+7kKOD8m1f28Q==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
@@ -2292,23 +2292,23 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.250", "@sprucelabs/error@^2.2.251":
-  version "2.2.251"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.251.tgz#858357baf7219ea91fa844bf697fcf106f37b290"
-  integrity sha512-gIIw9uYJSxNxPcDmm4s3ilklqxJ2JYWYQGB1ZRS7zkMoINCaeG8ZFhD+siwCcrC/dbIPDVW2Q6BF/14H6ZmOqg==
+"@sprucelabs/error@^2.2.250", "@sprucelabs/error@^2.2.251", "@sprucelabs/error@^2.2.252":
+  version "2.2.252"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.252.tgz#40aba170243b9c9dfc2284b13a81cb971d4db8a4"
+  integrity sha512-wgNKTVbaWiKWX9YR1ZEtcdea4T49nY884XrfOddjJMCP1KN8ESqo6Bh6JteCzDZybKO5hKexDr6GXc/zw7QwPw==
 
-"@sprucelabs/log@^10.2.210", "@sprucelabs/log@^10.2.211":
-  version "10.2.211"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.211.tgz#dc9e9f10fe8e256221f32706d2b751d0259eba1d"
-  integrity sha512-2F2iw6nl4tYghj3CpUtaTePao6smgXHfbGxK4At/Q3lZKOabw+29y1zQ9d/s0gilv07u1ghFhLjNypDmsI7XyA==
+"@sprucelabs/log@^10.2.211", "@sprucelabs/log@^10.2.212":
+  version "10.2.212"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.212.tgz#314fb89593c58be0c901c4c6394df4e3aafed163"
+  integrity sha512-dI/txVsqGwbFO3iKssfsqAsv1hdq3t4R3nYY99nq2/blB0o9eONJHUCIaWBD8hXDmXrxkLiRmrBRzIR0yk33Hg==
 
-"@sprucelabs/schema@^9.3.9":
-  version "9.3.9"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-9.3.9.tgz#104837bb5b7f2c4ec0b1314e41d62f0d851858af"
-  integrity sha512-88EblPfa57vEzfAUMqP+Hdv3M9pAQoGAa6OOy184Z67PnKGGjO4/Av+Z6oLDfn1uX9yUtLVGERcgdoGAdk+f3g==
+"@sprucelabs/schema@^9.4.0":
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-9.4.0.tgz#da78eed4a16ab2ef6cdb617b6a668212ef448f59"
+  integrity sha512-qxlmnv5Fw+q5hq0HTUonLT9aP2KgjH6bypSm4aeReQh+n7mofjm4Sye45raw7uoyOKJKgbBvuExNi4rQgcvNYg==
   dependencies:
-    "@sprucelabs/error" "^2.2.250"
-    "@sprucelabs/log" "^10.2.210"
+    "@sprucelabs/error" "^2.2.251"
+    "@sprucelabs/log" "^10.2.211"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.7.57"
     mime-db "^1.44.0"
@@ -2335,10 +2335,10 @@
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^7.0.4":
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.4.tgz#cabe542fa0f8af496db2d8152529dea727069ed4"
-  integrity sha512-3syNJbaLnfEI3CewenDUjA3OvZkmZhzkRZObRTKpH/6EzoG0lgUpmFOgsHYkA0X1tLKv4Q1sGzyJEouvJLOoDw==
+"@sprucelabs/test@^7.0.5":
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.5.tgz#3180553360b1297b775f2f693d812072602fb377"
+  integrity sha512-tN5IozZwMhcAjb/6t9t2iFErg7mhPV+A9ye7uWrSC2thBivmCKUsObUJwCRIsg+bmV5zbLRgmB8VmRHEV1vM6Q==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -2723,9 +2723,9 @@ aggregate-error@^3.0.0:
     indent-string "^4.0.0"
 
 ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4:
-  version "6.12.4"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.4.tgz#0614facc4522127fa713445c6bfd3ebd376e2234"
-  integrity sha512-eienB2c9qVQs2KWexhkrdMLVDoIQCz5KSeLxwg9Lzk4DOfBtIK9PQwwufcsn1jjGuf9WZmqPMbGxOzfcuphJCQ==
+  version "6.12.5"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.5.tgz#19b0e8bae8f476e5ba666300387775fb1a00a4da"
+  integrity sha512-lRF8RORchjpKG50/WFf8xmg7sgCLFiYNNnqdKflk63whMQcWR5ngGjiSXkL9bjxy6B2npOK2HSMN49jEBMSkag==
   dependencies:
     fast-deep-equal "^3.1.1"
     fast-json-stable-stringify "^2.0.0"
@@ -8547,7 +8547,7 @@ node-fetch-npm@^2.0.2:
     json-parse-better-errors "^1.0.0"
     safe-buffer "^5.1.1"
 
-node-fetch@^2.3.0, node-fetch@^2.5.0:
+node-fetch@^2.5.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
