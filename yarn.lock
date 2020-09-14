@@ -2281,10 +2281,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^2.1.47":
-  version "2.1.47"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.47.tgz#1048a11640073028a0e393520c5efc75b1c95993"
-  integrity sha512-YfcXznIVIhNbmDxUdVjv6cidwMxvtle4J81FZce7qSzGSy1MbzByreVa/T8lmRrAnwYaAlKjQ79HAWnWpDl0Wg==
+"@sprucelabs/babel-plugin-schema@^2.1.48":
+  version "2.1.48"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.48.tgz#66aefd5cb28c778924a5a4b9874fbf13649c1d3e"
+  integrity sha512-soFt5nxW1uOvghoySxDeoJImWdAJcA13uSPG6P/TskavOs62sh//ylKD/Q/6XLa0yys2ud6jAvDM87GakKFcVA==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
@@ -2292,23 +2292,23 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.250", "@sprucelabs/error@^2.2.257", "@sprucelabs/error@^2.2.258":
-  version "2.2.258"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.258.tgz#f7d1af00c79b32b49973bed6b2611796e6d31069"
-  integrity sha512-TBnD3ze0PVloFhztyHgs17R/orp40riZAEkvBfyZF0TJe29awTNwWYT6B1fNcLYqH/ZJ1Ss3v8bhRcWnxbl3nA==
+"@sprucelabs/error@^2.2.257", "@sprucelabs/error@^2.2.258", "@sprucelabs/error@^2.2.259":
+  version "2.2.259"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.259.tgz#bfaded56acf6a9e9fac0b1abc2403ece412c045b"
+  integrity sha512-wxl8e6+zYdiXqYw/Kzn5bDViN834Yha2VC6H3oMTUMz07WDDqjZsgQRGAtNLM2xKbLgfuh1cwRNVa6c8b4RC2g==
 
-"@sprucelabs/log@^10.2.214", "@sprucelabs/log@^10.2.215":
+"@sprucelabs/log@^10.2.215":
   version "10.2.215"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.215.tgz#59d276eef725498c2763498b2c826b7f3c696365"
   integrity sha512-5XAGh839zWpkFtLNauJi6Fe1U0BgxIj2awQNR7OfQ3wbZ+iEG2Jyz5Y8Sq8Ybzu+HIzM4o+f5uN3hfC8DTqMwA==
 
-"@sprucelabs/schema@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.0.tgz#bd2c138495c3e53b8976330ff5c01247659c4d94"
-  integrity sha512-lAbR8hyJpc8bSfixLmA45PsGjS4+h7gmikYforWzSkZx3gRY5hgYgfHw2PPS289ASIMJu0QhMBzYheHwSD1mlA==
+"@sprucelabs/schema@^10.0.1":
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.1.tgz#e6dc1f8b27b9792f11d8fabf02d26e66d65692f9"
+  integrity sha512-9JWS9pGHITt5fCcj6kaDzmk6hYWuQZAuwbpZjcTe+1M9qn6outWAwF/p/g+/l9pVz6IUYwK5XCb0wNN8graCRg==
   dependencies:
-    "@sprucelabs/error" "^2.2.257"
-    "@sprucelabs/log" "^10.2.214"
+    "@sprucelabs/error" "^2.2.258"
+    "@sprucelabs/log" "^10.2.215"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.7.57"
     mime-db "^1.44.0"
@@ -2324,21 +2324,21 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.26.19":
-  version "10.26.19"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.19.tgz#f90197ebb1cec4184bdc149793d904253f76b9e7"
-  integrity sha512-XDq2I1tw0rHtZFcGy7bsZ00YDD9hsIz3eUL4GuHMJA8SdNniVoDyJQkWCw/0J/ZZeQ6X3OsrHaViOXRO+edV6g==
+"@sprucelabs/spruce-skill-utils@^10.26.20":
+  version "10.26.20"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.20.tgz#bbd4949ee9ec86f2e7a83f2508fb04c0ef8d42c8"
+  integrity sha512-D6huGqOJkd0tuvlVohxqM9PnuUs+incpD8Cgy/A8KDFO8vo5Ljzf6PcmMsxupY8fFB5JjTl+nOrmekdj71zZeg==
   dependencies:
-    "@sprucelabs/error" "^2.2.250"
+    "@sprucelabs/error" "^2.2.257"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^7.0.10":
-  version "7.0.10"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.10.tgz#d49432c56627934a580ba16b4ea35421651cd5b3"
-  integrity sha512-V9VHxYxQJcXU2v26QgD4/EejQkTFiC4TYu1J2LxD/+ALnW08oA6XRByUI/e8ftSiV8Kt0heFMdf3kXGdMvmj5g==
+"@sprucelabs/test@^7.0.11":
+  version "7.0.11"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.11.tgz#d0e488c61ad4668521c5e6547cd52d2dd5033a38"
+  integrity sha512-WEsxtk9tl+jQF6V2OquDq2t3R41X9C8Fq4oUq+x3+Fh5deE1v3pxtxwj0vLfbTP51Vvhcku7SaH4nJ+vWlYukA==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
