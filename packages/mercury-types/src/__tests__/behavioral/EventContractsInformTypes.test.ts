@@ -1,6 +1,7 @@
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
+import { MercuryContract } from '../../mercury.types'
 import TestClient from '../../TestClient'
 
 const responsePayload = buildSchema({
@@ -25,15 +26,17 @@ const emitPayload = buildSchema({
 	},
 })
 
-interface TestContract {
-	['spruce.testWithPayload']: {
-		responsePayload: typeof responsePayload
-		emitPayload: typeof emitPayload
-	}
-	['spruce.testWithoutPayload']: {
-		responsePayload: undefined
-		emitPayload: undefined
-	}
+interface TestContract extends MercuryContract {
+	eventSignatures: [
+		{
+			eventNameWithOptionalNamespace: 'spruce.testWithPayload'
+			responsePayload: typeof responsePayload
+			emitPayload: typeof emitPayload
+		},
+		{
+			eventNameWithOptionalNamespace: 'spruce.testWithoutPayload'
+		}
+	]
 }
 
 export default class TypesWorkTest extends AbstractSpruceTest {
@@ -42,9 +45,7 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 		const client = new TestClient<TestContract>()
 		const results = await client.emit(
 			'spruce.testWithPayload',
-			{
-				emitPayloadField: 'hello-world',
-			},
+			{ emitPayloadField: '100' },
 			(response) => {
 				assert.isType<string | undefined>(
 					response.payload?.responsePayloadField
@@ -53,19 +54,17 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 			}
 		)
 
-		assert.isType<string | undefined>(
-			results.responses[0].payload?.responsePayloadField
-		)
+		assert.isType<string>(results.responses[0].payload.responsePayloadField)
 	}
 
 	@test('Test contract without payload (always passes, types will fail')
 	protected static async withoutPayload() {
 		const client = new TestClient<TestContract>()
-		const results = await client.emit('spruce.testWithoutPayload', () => {
+		const results = await client.emit('spruce.testWithoutPayload', async () => {
 			console.log('never called')
 		})
 
-		assert.isType<never | undefined>(results.responses[0]?.payload)
+		assert.isType<never | undefined>(results.responses[0].payload)
 		assert.isEqual(results.responses[0].responderName, 'test')
 	}
 }

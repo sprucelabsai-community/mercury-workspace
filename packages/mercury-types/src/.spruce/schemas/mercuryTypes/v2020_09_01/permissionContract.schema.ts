@@ -6,11 +6,16 @@ import permissionAccessSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/per
 const permissionContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema  = {
 	id: 'permissionContract',
 	name: 'Permission Contract',
-	dynamicFieldSignature: { 
-	    type: FieldType.Schema,
-	    keyName: 'permissionName',
-	    isRequired: true,
-	    options: {schema: permissionAccessSchema,}
-	}}
+	    fields: {
+	            /** . */
+	            'permissionAccesses': {
+	                type: FieldType.Schema,
+	                keyName: 'permissionName',
+	                isRequired: true,
+	                isArray: true,
+	                options: {schema: permissionAccessSchema,}
+	            },
+	    }
+}
 
 export default permissionContractSchema
