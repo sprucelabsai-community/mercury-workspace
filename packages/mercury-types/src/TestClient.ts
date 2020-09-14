@@ -1,41 +1,56 @@
 import { SchemaValues, ISchema } from '@sprucelabs/schema'
 import MercuryClient, {
-	KeyOf,
 	MercuryAggregateResponse,
-	EventSignature,
 	EmitCallback,
+	MercuryContract,
+	EventSignature,
+	ContractMapper,
+	KeyOf,
 } from './mercury.types'
 
-export default class TestClient<Contract extends Record<string, any>>
+export default class TestClient<Contract extends MercuryContract>
 	implements MercuryClient<Contract> {
 	public async emit<
-		EventName extends KeyOf<Contract>,
-		Payload extends Contract[EventName] extends EventSignature
-			? Contract[EventName]['emitPayload'] extends ISchema
-				? SchemaValues<Contract[EventName]['emitPayload']>
-				: never
+		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
+		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
+		IEventSignature extends EventSignature = MappedContract[EventName],
+		EmitSchema extends
+			| ISchema
+			| never = IEventSignature['emitPayload'] extends ISchema
+			? IEventSignature['emitPayload']
 			: never,
-		ResponsePayload extends Contract[EventName] extends EventSignature
-			? Contract[EventName]['responsePayload'] extends ISchema
-				? SchemaValues<Contract[EventName]['responsePayload']>
-				: never
+		EmitPayload = EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never,
+		ResponseSchema extends
+			| ISchema
+			| never = IEventSignature['responsePayload'] extends ISchema
+			? IEventSignature['responsePayload']
+			: never,
+		ResponsePayload = ResponseSchema extends ISchema
+			? SchemaValues<ResponseSchema>
 			: never
 	>(
 		_eventName: EventName,
-		_payload?: Payload | EmitCallback<Contract, EventName>,
-		_cb?: EmitCallback<Contract, EventName> | undefined
+		_payload:
+			| (EmitPayload extends SchemaValues<EmitSchema>
+					? SchemaValues<EmitSchema>
+					: never)
+			| EmitCallback<MappedContract, EventName>
+			| undefined,
+		_cb?: EmitCallback<MappedContract, EventName> | undefined
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
-		const results: MercuryAggregateResponse<ResponsePayload> = {
+		//@ts-ignore
+		const results = {
+			totalContracts: 1,
+			totalResponses: 1,
 			responses: [
 				{
 					responderName: 'test',
-					// @ts-ignore
 					payload: {
 						responsePayloadField: 'hello',
 					},
 				},
 			],
-		}
+		} as MercuryAggregateResponse<ResponsePayload>
 
 		return results
 	}
