@@ -9,7 +9,6 @@ export default buildSchema({
 	fields: {
 		permissionAccesses: {
 			type: FieldType.Schema,
-			keyName: 'permissionName',
 			isRequired: true,
 			isArray: true,
 			options: {
@@ -17,6 +16,12 @@ export default buildSchema({
 					id: 'permissionAccess',
 					name: 'Permission access',
 					fields: {
+						name: {
+							type: FieldType.Text,
+							label: 'Permission name',
+							hint:
+								'Hyphen separated name for this permission, e.g. can-unlock-doors',
+						},
 						...authorizerStatuses.reduce((fields, status) => {
 							const { name, ...props } = status
 							// @ts-ignore

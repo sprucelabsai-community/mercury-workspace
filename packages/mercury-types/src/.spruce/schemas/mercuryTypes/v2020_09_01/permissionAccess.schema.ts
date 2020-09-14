@@ -7,6 +7,13 @@ const permissionAccessSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
 	id: 'permissionAccess',
 	name: 'Permission access',
 	    fields: {
+	            /** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
+	            'name': {
+	                label: 'Permission name',
+	                type: FieldType.Text,
+	                hint: 'Hyphen separated name for this permission, e.g. can-unlock-doors',
+	                options: undefined
+	            },
 	            /** Clocked in. Is the person clocked in and ready to rock? */
 	            'clockedIn': {
 	                label: 'Clocked in',

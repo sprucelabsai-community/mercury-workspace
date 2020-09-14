@@ -10,7 +10,6 @@ const permissionContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissi
 	            /** . */
 	            'permissionAccesses': {
 	                type: FieldType.Schema,
-	                keyName: 'permissionName',
 	                isRequired: true,
 	                isArray: true,
 	                options: {schema: permissionAccessSchema,}
