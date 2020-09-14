@@ -11,6 +11,7 @@ const permissionAccessSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
 	            'name': {
 	                label: 'Permission name',
 	                type: FieldType.Text,
+	                isRequired: true,
 	                hint: 'Hyphen separated name for this permission, e.g. can-unlock-doors',
 	                options: undefined
 	            },

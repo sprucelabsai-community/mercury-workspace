@@ -19,6 +19,7 @@ export default buildSchema({
 						name: {
 							type: FieldType.Text,
 							label: 'Permission name',
+							isRequired: true,
 							hint:
 								'Hyphen separated name for this permission, e.g. can-unlock-doors',
 						},

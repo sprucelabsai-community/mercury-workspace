@@ -604,7 +604,7 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 	export interface IPermissionAccess {
 		
 			/** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
-			'name'?: string| undefined | null
+			'name': string
 			/** Clocked in. Is the person clocked in and ready to rock? */
 			'clockedIn'?: boolean| undefined | null
 			/** Clocked out. When someone is not working (off the clock). */
@@ -623,6 +623,7 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 		            'name': {
 		                label: 'Permission name',
 		                type: FieldType.Text,
+		                isRequired: true,
 		                hint: 'Hyphen separated name for this permission, e.g. can-unlock-doors',
 		                options: undefined
 		            },
