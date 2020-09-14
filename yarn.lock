@@ -2292,10 +2292,10 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.258", "@sprucelabs/error@^2.2.260":
-  version "2.2.260"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.260.tgz#e639a10317ed96261f1209701eca1cb72951e64f"
-  integrity sha512-KwV0/n+dohBbCkKaInXhr4UBFVNJaBTfiiyUW68cDJXpj4HrGX/bWX1PcSgG/TVfDf+iZ1N8FZFi1QWdLNC4ow==
+"@sprucelabs/error@^2.2.258", "@sprucelabs/error@^2.2.260", "@sprucelabs/error@^2.2.261":
+  version "2.2.261"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.261.tgz#25d6387995f2ec93bbbcdac8c3046ee7090235ce"
+  integrity sha512-69XFESKcxrFrlQu6OQw59bQkTa+05p+7ejb6h0reeeiGYM64JeK7aeJNmUr2+lR5mUCrZylcXEXuc7NKDhRMPg==
 
 "@sprucelabs/log@^10.2.215":
   version "10.2.215"
@@ -2324,10 +2324,10 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.26.23":
-  version "10.26.23"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.23.tgz#a0e8641d314508758936b09d6e0a52fda5e39e09"
-  integrity sha512-9KCSJYunpqOCjqM9cNAGItePnaClZn1m+B0TGJcv4JeSy2bwLJggyIjpq4u/XCHdfdowobaAV31pGhXvhly5IA==
+"@sprucelabs/spruce-skill-utils@^10.26.24":
+  version "10.26.24"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.24.tgz#9656c06f246e0a6ca2cb752bfbaaa6b2b75ed31d"
+  integrity sha512-BqJANs4MYzMnjRWjBahtiPeM9QERqvoktwzG2lFiEY7F2ZedK0vv/3PNloi1XgpXPhjDj7HutWlEao62bUXyyw==
   dependencies:
     "@sprucelabs/error" "^2.2.260"
     fs-extra "^9.0.1"
@@ -2335,10 +2335,10 @@
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^7.0.11":
-  version "7.0.11"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.11.tgz#d0e488c61ad4668521c5e6547cd52d2dd5033a38"
-  integrity sha512-WEsxtk9tl+jQF6V2OquDq2t3R41X9C8Fq4oUq+x3+Fh5deE1v3pxtxwj0vLfbTP51Vvhcku7SaH4nJ+vWlYukA==
+"@sprucelabs/test@^7.0.12":
+  version "7.0.12"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.12.tgz#29db8aa2588068f858f5d042ca8420390b64c553"
+  integrity sha512-3uLcsMdrhvosvcm3/EMTWwLuZVmzTVsEKQBaVmak1do9dbCSQU0oDnxDEKue21k/r+rr7y3AftsBxYdSTQwEJw==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -2511,9 +2511,9 @@
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
 "@types/prettier@^2.0.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.1.0.tgz#5f96562c1075ee715a5b138f0b7f591c1f40f6b8"
-  integrity sha512-hiYA88aHiEIgDmeKlsyVsuQdcFn3Z2VuFd/Xm/HCnGnPD8UFU5BM128uzzRVVGEzKDKYUrRsRH9S2o+NUy/3IA==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.1.1.tgz#be148756d5480a84cde100324c03a86ae5739fb5"
+  integrity sha512-2zs+O+UkDsJ1Vcp667pd3f8xearMdopz/z54i99wtRDI5KLmngk7vlrYZD0ZjKHaROR03EznlBbVY9PfAEyJIQ==
 
 "@types/resolve@1.17.1":
   version "1.17.1"
