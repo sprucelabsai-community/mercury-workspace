@@ -34,7 +34,7 @@
 		"arkit.png": "arkit -f index.ts -o docs/images/arkit.png"
 	},
 	"dependencies": {
-		"@sprucelabs/mercury-types": "^1.5.10",
+		"@sprucelabs/mercury-types": "^1.5.9",
 		"socket.io-client": "^2.3.0"
 	},
 	"devDependencies": {
