@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/sprucelabsai/mercury-workspace/compare/v1.7.0...v1.7.1) (2020-09-15)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+# [1.7.0](https://github.com/sprucelabsai/mercury-workspace/compare/v1.6.0...v1.7.0) (2020-09-15)
+
+
+### Breaking Changes
+
+* event contracts use array of permissions vs permission contract ([b17769b](https://github.com/sprucelabsai/mercury-workspace/commit/b17769b))
+
+
+
+
+
 # [1.6.0](https://github.com/sprucelabsai/mercury-workspace/compare/v1.5.17...v1.6.0) (2020-09-15)
 
 
