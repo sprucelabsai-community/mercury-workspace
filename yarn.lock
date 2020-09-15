@@ -2281,10 +2281,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-3.0.0.tgz#9d5b568ce1ac9eb1854a178af94fc010b1ae800d"
-  integrity sha512-jzd8POVQ8fGcsN8d1Vv1LBB4UUMEpPcx/bSk4Ms8Ga/Py502gewEW5f5bwT2f01x5kus4uyR1Lk4Hu5fKzRBig==
+"@sprucelabs/babel-plugin-schema@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-3.0.1.tgz#41089165ddd2917b53be94980729f4e35ee26487"
+  integrity sha512-T2il2fRGNaVsRH5R1GxsUpY6uaZTyzPPVcZGOqB0sr1FmS2Hb5sAsps0HR4/KMHQU1vNwqb0ln5U3MdUHGXJ3g==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
@@ -2324,10 +2324,10 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.26.33":
-  version "10.26.33"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.33.tgz#7fd50aaa9a57cd6aafda40cfc89df34471b3c170"
-  integrity sha512-nvS+B0iQFlb8bG2M2SPPrlJ6yAGXYQ4egbUd8DyEBqFN10uhBur3qaXvuC+MsAoe+qhzCAMxmqc4D+fCMGGrFg==
+"@sprucelabs/spruce-skill-utils@^10.26.34":
+  version "10.26.34"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.34.tgz#4a529a55829805f3125cdbd95fd8ff6002ebb0e8"
+  integrity sha512-3SBk7yIYpMxPY1V7IPEnzTbBRmPCx5aF/j61IXVQrPgugFkazoFREbYkdbRq5DAC3F+xFT9mqBYlEyxEEFZd2Q==
   dependencies:
     "@sprucelabs/error" "^2.2.266"
     fs-extra "^9.0.1"
