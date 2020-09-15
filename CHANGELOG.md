@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/sprucelabsai/mercury-workspace/compare/v1.5.17...v1.6.0) (2020-09-15)
+
+
+### Breaking Changes
+
+* permission access renamed permissions ([57722f0](https://github.com/sprucelabsai/mercury-workspace/commit/57722f0))
+
+
+
+
+
 ## [1.5.17](https://github.com/sprucelabsai/mercury-workspace/compare/v1.5.16...v1.5.17) (2020-09-15)
 
 **Note:** Version bump only for package spruce-mercury-workspace
