@@ -1,18 +1,18 @@
 import { SpruceSchemas } from '../../schemas.types'
 import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
 
-import permissionAccessSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/permissionAccess.schema'
+import permissionSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/permission.schema'
 
 const permissionContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema  = {
 	id: 'permissionContract',
 	name: 'Permission Contract',
 	    fields: {
 	            /** . */
-	            'permissionAccesses': {
+	            'permissions': {
 	                type: FieldType.Schema,
 	                isRequired: true,
 	                isArray: true,
-	                options: {schema: permissionAccessSchema,}
+	                options: {schema: permissionSchema,}
 	            },
 	    }
 }

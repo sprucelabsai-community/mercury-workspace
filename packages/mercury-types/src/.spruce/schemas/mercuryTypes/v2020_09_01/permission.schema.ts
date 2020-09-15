@@ -3,9 +3,9 @@ import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
 
 
 
-const permissionAccessSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccessSchema  = {
-	id: 'permissionAccess',
-	name: 'Permission access',
+const permissionSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema  = {
+	id: 'permission',
+	name: 'Permission',
 	    fields: {
 	            /** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
 	            'name': {
@@ -46,4 +46,4 @@ const permissionAccessSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
 	    }
 }
 
-export default permissionAccessSchema
+export default permissionSchema

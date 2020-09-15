@@ -2,8 +2,8 @@ import { ISchema, SchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 
 export type EventContract = SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
-export type PermissionAccess = SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccess
-export type AuthorizerStatus = keyof PermissionAccess
+export type Permission = SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
+export type AuthorizerStatus = Omit<keyof Permission, 'name'>
 export type PermissionContract = SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract
 
 export type MercuryAggregateResponse<Payload> = {

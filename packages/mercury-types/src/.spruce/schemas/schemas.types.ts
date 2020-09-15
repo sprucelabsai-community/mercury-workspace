@@ -601,7 +601,7 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 	
-	export interface IPermissionAccess {
+	export interface IPermission {
 		
 			/** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
 			'name': string
@@ -615,9 +615,9 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 			'offPrem'?: boolean| undefined | null
 	}
 
-	export interface IPermissionAccessSchema extends SpruceSchema.ISchema {
-		id: 'permissionAccess',
-		name: 'Permission access',
+	export interface IPermissionSchema extends SpruceSchema.ISchema {
+		id: 'permission',
+		name: 'Permission',
 		    fields: {
 		            /** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
 		            'name': {
@@ -658,7 +658,7 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 		    }
 	}
 
-	export type PermissionAccessEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccessSchema>
+	export type PermissionEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema>
 
 }
 
@@ -669,7 +669,7 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 	export interface IPermissionContract {
 		
 			
-			'permissionAccesses': SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccess[]
+			'permissions': SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]
 	}
 
 	export interface IPermissionContractSchema extends SpruceSchema.ISchema {
@@ -677,11 +677,11 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 		name: 'Permission Contract',
 		    fields: {
 		            /** . */
-		            'permissionAccesses': {
+		            'permissions': {
 		                type: FieldType.Schema,
 		                isRequired: true,
 		                isArray: true,
-		                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionAccessSchema,}
+		                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
 		            },
 		    }
 	}

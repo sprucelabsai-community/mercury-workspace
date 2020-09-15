@@ -7,14 +7,14 @@ export default buildSchema({
 	name: 'Permission Contract',
 	description: '',
 	fields: {
-		permissionAccesses: {
+		permissions: {
 			type: FieldType.Schema,
 			isRequired: true,
 			isArray: true,
 			options: {
 				schema: {
-					id: 'permissionAccess',
-					name: 'Permission access',
+					id: 'permission',
+					name: 'Permission',
 					fields: {
 						name: {
 							type: FieldType.Text,
