@@ -2292,10 +2292,10 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.258", "@sprucelabs/error@^2.2.262":
-  version "2.2.262"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.262.tgz#36f2da96ef35072cfb039d1609877c7ba91e7294"
-  integrity sha512-1hXaIGAbN8ssm2MnZwIZVAf7Nt5tc/kB8CYPtr9dLXTcwdNcUOxoWg6bxOReT5Vsa7i0TdYACyJivceIQZvtOA==
+"@sprucelabs/error@^2.2.258", "@sprucelabs/error@^2.2.262", "@sprucelabs/error@^2.2.263":
+  version "2.2.263"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.263.tgz#1bb59a677015e5aa75e682686ca8802db34bdc01"
+  integrity sha512-bgce2E1XS5GsinBszm0PLw9PXHzzV/lmN8kggjSIy4qCp+bkZDInVT7ePnWZc7MTwXjgtRXGjmwAkPSL7s5Y9w==
 
 "@sprucelabs/log@^10.2.215":
   version "10.2.215"
@@ -2335,10 +2335,10 @@
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^7.0.12":
-  version "7.0.12"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.12.tgz#29db8aa2588068f858f5d042ca8420390b64c553"
-  integrity sha512-3uLcsMdrhvosvcm3/EMTWwLuZVmzTVsEKQBaVmak1do9dbCSQU0oDnxDEKue21k/r+rr7y3AftsBxYdSTQwEJw==
+"@sprucelabs/test@^7.0.13":
+  version "7.0.13"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.13.tgz#a8b5d591ab3e54c3518fcf7300d2c1cd60b9792c"
+  integrity sha512-CAWm7tN/PuBlBOHsacScYP/ElSA7x7CFvM2mP0PV9PmWhW52LP93RbetxsHgTlgUPD8G/cOkRUOWShzb4QSDbw==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -4697,9 +4697,9 @@ editor@~1.0.0:
   integrity sha1-YMf4e9YrzGqJT6jM1q+3gjok90I=
 
 electron-to-chromium@^1.3.564:
-  version "1.3.567"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.567.tgz#7a404288952ac990e447a7a86470d460ea953b8f"
-  integrity sha512-1aKkw0Hha1Bw9JA5K5PT5eFXC/TXbkJvUfNSNEciPUMgSIsRJZM1hF2GUEAGZpAbgvd8En21EA+Lv820KOhvqA==
+  version "1.3.568"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.568.tgz#0fa28cd3e5cbd9e8c66f72309eef0646f65a5b66"
+  integrity sha512-j9MlEwgTHVW/lq93Hw8yhzA886oLjDm3Hz7eDkWP2v4fzLVuqOWhpNluziSnmR/tBqgoYldagbLknrdg+B7Tlw==
 
 elliptic@^6.5.3:
   version "6.5.3"
