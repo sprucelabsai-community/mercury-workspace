@@ -2281,10 +2281,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sprucelabs/babel-plugin-schema@^2.1.49":
-  version "2.1.49"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-2.1.49.tgz#b1ad1ab8e12bc0a8c3fe38fc735d56abcf61bb9f"
-  integrity sha512-Se4Cf0oiy0zIT4NOylvg3snA87AbmlvAKHSFa8WDUdZbUmKy2RIsoYthzgnYRij23CFUM4AMSmqt4vWtovgAkw==
+"@sprucelabs/babel-plugin-schema@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/babel-plugin-schema/-/babel-plugin-schema-3.0.0.tgz#9d5b568ce1ac9eb1854a178af94fc010b1ae800d"
+  integrity sha512-jzd8POVQ8fGcsN8d1Vv1LBB4UUMEpPcx/bSk4Ms8Ga/Py502gewEW5f5bwT2f01x5kus4uyR1Lk4Hu5fKzRBig==
   dependencies:
     fs-extra "^9.0.1"
     globby "^11.0.1"
@@ -2292,20 +2292,20 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.258", "@sprucelabs/error@^2.2.260":
-  version "2.2.260"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.260.tgz#e639a10317ed96261f1209701eca1cb72951e64f"
-  integrity sha512-KwV0/n+dohBbCkKaInXhr4UBFVNJaBTfiiyUW68cDJXpj4HrGX/bWX1PcSgG/TVfDf+iZ1N8FZFi1QWdLNC4ow==
+"@sprucelabs/error@^2.2.258", "@sprucelabs/error@^2.2.266":
+  version "2.2.266"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.266.tgz#57847211c3b46ae04eb7f6d03a2272702f575076"
+  integrity sha512-cY0mCtROs/+6zTODMOStIYt/U++1kg0zZ9tZdcjvpJnQX+WkSvbZvGgOEXlgTek+1Q9KEo6wJ9dVrfKQJqEKbg==
 
 "@sprucelabs/log@^10.2.215":
   version "10.2.215"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.215.tgz#59d276eef725498c2763498b2c826b7f3c696365"
   integrity sha512-5XAGh839zWpkFtLNauJi6Fe1U0BgxIj2awQNR7OfQ3wbZ+iEG2Jyz5Y8Sq8Ybzu+HIzM4o+f5uN3hfC8DTqMwA==
 
-"@sprucelabs/schema@^10.0.1":
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.1.tgz#e6dc1f8b27b9792f11d8fabf02d26e66d65692f9"
-  integrity sha512-9JWS9pGHITt5fCcj6kaDzmk6hYWuQZAuwbpZjcTe+1M9qn6outWAwF/p/g+/l9pVz6IUYwK5XCb0wNN8graCRg==
+"@sprucelabs/schema@^10.0.2":
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.2.tgz#88a833424f9b0e24b4181de95458733e55b83441"
+  integrity sha512-zmOD21Xm1tsXPZFC2lSEg0Kd4sW8w5sYK2X0mtytFOkALTL9ELX+r0U/ldswxV2q9mXIrmTHfmPyl9gGQ/hgiA==
   dependencies:
     "@sprucelabs/error" "^2.2.258"
     "@sprucelabs/log" "^10.2.215"
@@ -2324,21 +2324,21 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.26.23":
-  version "10.26.23"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.23.tgz#a0e8641d314508758936b09d6e0a52fda5e39e09"
-  integrity sha512-9KCSJYunpqOCjqM9cNAGItePnaClZn1m+B0TGJcv4JeSy2bwLJggyIjpq4u/XCHdfdowobaAV31pGhXvhly5IA==
+"@sprucelabs/spruce-skill-utils@^10.26.33":
+  version "10.26.33"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.33.tgz#7fd50aaa9a57cd6aafda40cfc89df34471b3c170"
+  integrity sha512-nvS+B0iQFlb8bG2M2SPPrlJ6yAGXYQ4egbUd8DyEBqFN10uhBur3qaXvuC+MsAoe+qhzCAMxmqc4D+fCMGGrFg==
   dependencies:
-    "@sprucelabs/error" "^2.2.260"
+    "@sprucelabs/error" "^2.2.266"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^7.0.11":
-  version "7.0.11"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.11.tgz#d0e488c61ad4668521c5e6547cd52d2dd5033a38"
-  integrity sha512-WEsxtk9tl+jQF6V2OquDq2t3R41X9C8Fq4oUq+x3+Fh5deE1v3pxtxwj0vLfbTP51Vvhcku7SaH4nJ+vWlYukA==
+"@sprucelabs/test@^7.0.14":
+  version "7.0.14"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.14.tgz#ef9e285d9c8ec7bcab96ae26c6b31dcd6bb9a8bf"
+  integrity sha512-b3yVdIrfv+xF9Y9oTDE6nqa2hkP11/9feehqqdvlNhMP5qRt/URTu9Pt4B56VavzvMvgvNhqvRPX6EDRiF7Omw==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -2511,9 +2511,9 @@
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
 "@types/prettier@^2.0.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.1.0.tgz#5f96562c1075ee715a5b138f0b7f591c1f40f6b8"
-  integrity sha512-hiYA88aHiEIgDmeKlsyVsuQdcFn3Z2VuFd/Xm/HCnGnPD8UFU5BM128uzzRVVGEzKDKYUrRsRH9S2o+NUy/3IA==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.1.1.tgz#be148756d5480a84cde100324c03a86ae5739fb5"
+  integrity sha512-2zs+O+UkDsJ1Vcp667pd3f8xearMdopz/z54i99wtRDI5KLmngk7vlrYZD0ZjKHaROR03EznlBbVY9PfAEyJIQ==
 
 "@types/resolve@1.17.1":
   version "1.17.1"
@@ -3607,9 +3607,9 @@ camelcase@^6.0.0:
   integrity sha512-8KMDF1Vz2gzOq54ONPJS65IvTUaB1cHJ2DMM7MbPmLZljDH1qpzzLsWdiN9pHh6qvkRVDTi/07+eNGch/oLU4w==
 
 caniuse-lite@^1.0.30001125:
-  version "1.0.30001129"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001129.tgz#e6514b94c0ef50f98cf7476daa91228ddd2ef7bc"
-  integrity sha512-9945fTVKS810DZITpsAbuhQG7Lam0tEfVbZlsBaCFZaszepbryrArS05PWmJSBQ6mta+v9iz0pUIAbW1eBILIg==
+  version "1.0.30001131"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001131.tgz#afad8a28fc2b7a0d3ae9407e71085a0ead905d54"
+  integrity sha512-4QYi6Mal4MMfQMSqGIRPGbKIbZygeN83QsWq1ixpUwvtfgAZot5BrCKzGygvZaV+CnELdTwD0S4cqUNozq7/Cw==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -4697,9 +4697,9 @@ editor@~1.0.0:
   integrity sha1-YMf4e9YrzGqJT6jM1q+3gjok90I=
 
 electron-to-chromium@^1.3.564:
-  version "1.3.567"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.567.tgz#7a404288952ac990e447a7a86470d460ea953b8f"
-  integrity sha512-1aKkw0Hha1Bw9JA5K5PT5eFXC/TXbkJvUfNSNEciPUMgSIsRJZM1hF2GUEAGZpAbgvd8En21EA+Lv820KOhvqA==
+  version "1.3.568"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.568.tgz#0fa28cd3e5cbd9e8c66f72309eef0646f65a5b66"
+  integrity sha512-j9MlEwgTHVW/lq93Hw8yhzA886oLjDm3Hz7eDkWP2v4fzLVuqOWhpNluziSnmR/tBqgoYldagbLknrdg+B7Tlw==
 
 elliptic@^6.5.3:
   version "6.5.3"
