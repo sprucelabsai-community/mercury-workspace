@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '../../schemas.types'
 import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
 
-import permissionContractSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/permissionContract.schema'
+import permissionSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/permission.schema'
 
 const eventSignatureSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatureSchema  = {
 	id: 'eventSignature',
@@ -26,12 +26,14 @@ const eventSignatureSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatu
 	            /** . */
 	            'listenPermissionsAny': {
 	                type: FieldType.Schema,
-	                options: {schema: permissionContractSchema,}
+	                isArray: true,
+	                options: {schema: permissionSchema,}
 	            },
 	            /** . */
 	            'emitPermissionsAny': {
 	                type: FieldType.Schema,
-	                options: {schema: permissionContractSchema,}
+	                isArray: true,
+	                options: {schema: permissionSchema,}
 	            },
 	    }
 }

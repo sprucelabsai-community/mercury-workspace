@@ -30,14 +30,16 @@ export default buildSchema({
 						},
 						listenPermissionsAny: {
 							type: FieldType.Schema,
+							isArray: true,
 							options: {
-								schemaId: { id: 'permissionContract', version: 'v2020_09_01' },
+								schemaId: { id: 'permission', version: 'v2020_09_01' },
 							},
 						},
 						emitPermissionsAny: {
 							type: FieldType.Schema,
+							isArray: true,
 							options: {
-								schemaId: { id: 'permissionContract', version: 'v2020_09_01' },
+								schemaId: { id: 'permission', version: 'v2020_09_01' },
 							},
 						},
 					},

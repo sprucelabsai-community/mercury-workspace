@@ -527,9 +527,9 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 			
 			'emitPayload'?: (SpruceSchema.ISchema)| undefined | null
 			
-			'listenPermissionsAny'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract| undefined | null
+			'listenPermissionsAny'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]| undefined | null
 			
-			'emitPermissionsAny'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract| undefined | null
+			'emitPermissionsAny'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]| undefined | null
 	}
 
 	export interface IEventSignatureSchema extends SpruceSchema.ISchema {
@@ -555,12 +555,14 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 		            /** . */
 		            'listenPermissionsAny': {
 		                type: FieldType.Schema,
-		                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema,}
+		                isArray: true,
+		                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
 		            },
 		            /** . */
 		            'emitPermissionsAny': {
 		                type: FieldType.Schema,
-		                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema,}
+		                isArray: true,
+		                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
 		            },
 		    }
 	}
