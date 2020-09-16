@@ -20,6 +20,7 @@ export default class AbstractEventEmitter<Contract extends MercuryContract>
 
 	public constructor(contract: MercuryContract) {
 		this.contract = contract
+		console.log(this.contract)
 	}
 
 	public async emit<

@@ -14,8 +14,7 @@
 		"moduleResolution": "node",
 		"sourceMap": true,
 		"outDir": "build",
-		"baseUrl": ".",
-		"paths": {}
+		"baseUrl": "."
 	},
 	"include": ["./*.ts", "./**/*.ts"],
 	"exclude": ["**/node_modules/**", "./packages/**/build"]

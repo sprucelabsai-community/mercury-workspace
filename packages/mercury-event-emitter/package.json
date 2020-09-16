@@ -26,7 +26,7 @@
 		"build.babel": "babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
 		"build.babel.debug": "node --inspect-brk=5200 ../../node_modules/.bin/babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
 		"build.watch": "concurrently 'yarn run build.babel --watch' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.types && yarn build.resolve-paths'\"",
-		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts",
+		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts -v",
 		"rebuild": "cd ../ && yarn rebuild",
 		"clean": "rm -rf build/",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
