@@ -7,7 +7,7 @@
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "1.7.20",
+	"version": "1.7.22",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
@@ -38,10 +38,10 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.276",
+		"@sprucelabs/error": "^2.2.278",
 		"@sprucelabs/log": "^10.2.219",
-		"@sprucelabs/schema": "^10.0.16",
-		"@sprucelabs/spruce-skill-utils": "^10.26.49"
+		"@sprucelabs/schema": "^10.0.17",
+		"@sprucelabs/spruce-skill-utils": "^10.27.0"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
