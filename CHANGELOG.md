@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/sprucelabsai/mercury-workspace/compare/v1.9.1...v1.9.2) (2020-09-16)
+
+
+### Bug Fixes
+
+* include release.config.js for semanticrelease ([43c05ff](https://github.com/sprucelabsai/mercury-workspace/commit/43c05ff))
+
+
+
+
+
 ## [1.9.1](https://github.com/sprucelabsai/mercury-workspace/compare/v1.9.0...v1.9.1) (2020-09-16)
 
 **Note:** Version bump only for package spruce-mercury-workspace
