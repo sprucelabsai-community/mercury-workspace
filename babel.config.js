@@ -17,15 +17,33 @@ module.exports = (api) => {
 				},
 			],
 			['@babel/plugin-proposal-class-properties', {loose: true}],
-			[
-				'module-resolver',
-				{
-					root: ['./'],
-					alias: {
-						'#spruce': './src/.spruce',
-					},
-				},
-			],
+			
 		],
+		overrides: [
+			{
+				test: 'packages/mercury-types',
+				plugins: [[
+					'module-resolver',
+					{
+						root: ['./'],
+						alias: {
+							'#spruce': './src/.spruce',
+						},
+					},
+				]]
+			},
+			{
+				test: 'packages/mercury-event-emitter',
+				plugins: [[
+					'module-resolver',
+					{
+						root: ['./'],
+						alias: {
+							'#spruce': './node_modules/@sprucelabs/schema/build/.spruce',
+						},
+					},
+				]]
+			}
+		]
 	}
 }

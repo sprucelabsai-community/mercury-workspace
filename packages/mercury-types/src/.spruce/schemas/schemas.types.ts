@@ -578,7 +578,7 @@ export declare namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 	export interface IMercuryContract {
 		
 			
-			'eventSignatures': SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature[]
+			 'eventSignatures': SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature[]
 	}
 
 	export interface IMercuryContractSchema extends SpruceSchema.ISchema {

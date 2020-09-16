@@ -1,5 +1,5 @@
 {
-	"name": "@sprucelabs/mercury-types",
+	"name": "@sprucelabs/mercury-event-emitter",
 	"publishConfig": {
 		"access": "public"
 	},
@@ -7,7 +7,7 @@
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "1.7.22",
+	"version": "1.7.1",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
@@ -26,28 +26,24 @@
 		"build.babel": "babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
 		"build.babel.debug": "node --inspect-brk=5200 ../../node_modules/.bin/babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
 		"build.watch": "concurrently 'yarn run build.babel --watch' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.types && yarn build.resolve-paths'\"",
-		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts",
+		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts -v",
 		"rebuild": "cd ../ && yarn rebuild",
 		"clean": "rm -rf build/",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
 		"lint.fix": "eslint --fix '**/*.ts'",
 		"release": "semantic-release",
-		"arkit": "arkit -f index.ts -o docs/images/arkit.svg",
-		"arkit.png": "arkit -f index.ts -o docs/images/arkit.png",
 		"test": "jest",
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.278",
-		"@sprucelabs/log": "^10.2.219",
-		"@sprucelabs/schema": "^10.0.17",
-		"@sprucelabs/spruce-skill-utils": "^10.27.0"
+		"@sprucelabs/mercury-types": "^1.7.20",
+		"@sprucelabs/schema": "^10.0.2"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^7.0.19",
+		"@sprucelabs/test": "^7.0.14",
 		"eslint": "^7.9.0",
-		"eslint-config-spruce": "^10.9.48",
+		"eslint-config-spruce": "^10.9.46",
 		"jest": "^26.4.2",
 		"typescript": "^4.0.2"
 	},

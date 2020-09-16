@@ -40,8 +40,8 @@ interface TestContract extends MercuryContract {
 }
 
 export default class TypesWorkTest extends AbstractSpruceTest {
-	@test('Test contract with payload (always passes, types will fail)')
-	protected static async withPayload() {
+	@test('Emitting with contract with payload (always passes, types will fail)')
+	protected static async emitWithPayload() {
 		const client = new TestClient<TestContract>()
 		const results = await client.emit(
 			'spruce.testWithPayload',
@@ -57,8 +57,10 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 		assert.isType<string>(results.responses[0].payload.responsePayloadField)
 	}
 
-	@test('Test contract without payload (always passes, types will fail')
-	protected static async withoutPayload() {
+	@test(
+		'Emitting with contract without payload (always passes, types will fail'
+	)
+	protected static async emitWithoutPayload() {
 		const client = new TestClient<TestContract>()
 		const results = await client.emit('spruce.testWithoutPayload', async () => {
 			console.log('never called')
@@ -66,5 +68,25 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 
 		assert.isType<never | undefined>(results.responses[0].payload)
 		assert.isEqual(results.responses[0].responderName, 'test')
+	}
+
+	@test('On with contract with payload (always passes, types will fail')
+	protected static async onWithPayload() {
+		const client = new TestClient<TestContract>()
+
+		client.on('spruce.testWithPayload', async (payload) => {
+			assert.isExactType<typeof payload, { emitPayloadField: string }>(true)
+
+			return {
+				responsePayloadField: 'response!',
+			}
+		})
+	}
+
+	@test('On with contract without payload (always passes, types will fail')
+	protected static async onWithoutPayload() {
+		const client = new TestClient<TestContract>()
+
+		client.on('spruce.testWithoutPayload', () => {})
 	}
 }
