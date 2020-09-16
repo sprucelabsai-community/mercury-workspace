@@ -14,15 +14,10 @@ export default class TestClient<Contract extends MercuryContract>
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
 		IEventSignature extends EventSignature = MappedContract[EventName],
-		EmitSchema extends
-			| ISchema
-			| never = IEventSignature['emitPayload'] extends ISchema
+		EmitSchema extends ISchema = IEventSignature['emitPayload'] extends ISchema
 			? IEventSignature['emitPayload']
 			: never,
-		EmitPayload = EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never,
-		ResponseSchema extends
-			| ISchema
-			| never = IEventSignature['responsePayload'] extends ISchema
+		ResponseSchema extends ISchema = IEventSignature['responsePayload'] extends ISchema
 			? IEventSignature['responsePayload']
 			: never,
 		ResponsePayload = ResponseSchema extends ISchema
@@ -31,9 +26,7 @@ export default class TestClient<Contract extends MercuryContract>
 	>(
 		_eventName: EventName,
 		_payload:
-			| (EmitPayload extends SchemaValues<EmitSchema>
-					? SchemaValues<EmitSchema>
-					: never)
+			| (EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never)
 			| EmitCallback<MappedContract, EventName>
 			| undefined,
 		_cb?: EmitCallback<MappedContract, EventName> | undefined
@@ -53,5 +46,32 @@ export default class TestClient<Contract extends MercuryContract>
 		} as MercuryAggregateResponse<ResponsePayload>
 
 		return results
+	}
+
+	public on<
+		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
+		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
+		IEventSignature extends EventSignature = MappedContract[EventName],
+		EmitSchema extends ISchema = IEventSignature['emitPayload'] extends ISchema
+			? IEventSignature['emitPayload']
+			: never
+	>(
+		_eventName: EventName,
+		_cb: (
+			payload: EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never
+		) => IEventSignature['responsePayload'] extends ISchema
+			?
+					| Promise<SchemaValues<IEventSignature['responsePayload']>>
+					| SchemaValues<IEventSignature['responsePayload']>
+			: Promise<void> | void
+	): void {}
+
+	public off(
+		_eventName: Extract<
+			Contract['eventSignatures'][number]['eventNameWithOptionalNamespace'],
+			string
+		>
+	): number {
+		return 0
 	}
 }

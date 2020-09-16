@@ -1,5 +1,5 @@
 {
-	"name": "@sprucelabs/mercury-types",
+	"name": "@sprucelabs/mercury-event-emitter",
 	"publishConfig": {
 		"access": "public"
 	},
@@ -32,16 +32,12 @@
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
 		"lint.fix": "eslint --fix '**/*.ts'",
 		"release": "semantic-release",
-		"arkit": "arkit -f index.ts -o docs/images/arkit.svg",
-		"arkit.png": "arkit -f index.ts -o docs/images/arkit.png",
 		"test": "jest",
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.266",
-		"@sprucelabs/log": "^10.2.215",
-		"@sprucelabs/schema": "^10.0.2",
-		"@sprucelabs/spruce-skill-utils": "^10.26.34"
+		"@sprucelabs/mercury-types": "1.7.1",
+		"@sprucelabs/schema": "^10.0.2"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
