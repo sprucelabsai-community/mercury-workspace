@@ -26,26 +26,9 @@ export interface MercurySingleResponse<Payload> {
 	payload?: Payload
 }
 
-type DeepReadonly<T> = T extends (infer R)[]
-	? DeepReadonlyArray<R>
-	: T extends []
-	? T
-	: T extends Record<string, any>
-	? DeepReadonlyObject<T>
-	: T
+export type EventSignature = SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
 
-interface DeepReadonlyArray<T> extends ReadonlyArray<DeepReadonly<T>> {}
-
-type DeepReadonlyObject<T> = {
-	readonly [P in keyof T]: DeepReadonly<T[P]>
-}
-
-export type EventSignature = DeepReadonly<
-	SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
->
-export type MercuryContract = DeepReadonly<
-	SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContract
->
+export type MercuryContract = SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContract
 
 export type KeyOf<O> = Extract<keyof O, string>
 
