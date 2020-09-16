@@ -2292,7 +2292,7 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.270", "@sprucelabs/error@^2.2.271":
+"@sprucelabs/error@^2.2.271":
   version "2.2.271"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.271.tgz#df97be2df6ae48e58a13001b68b6a8154c7cb058"
   integrity sha512-irmpfF9rmc3WiLVs7vRHD0OOXIiklLkO/kmMb2P5e9HRqm6ryna0rVQ24CXGu2DU/iQ8GFLZX2PJiTiixwdWCw==
@@ -2302,12 +2302,12 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.218.tgz#958d63960f39c432786c151398e37608d821c924"
   integrity sha512-duwWvAlZTm1FfU9KoEe/4D/OmIhW6lHAdwE+oytplkS04iDhUhzuQ7hvjDh4WSIJBipYF5nYe2qtYRraB9EGtw==
 
-"@sprucelabs/schema@^10.0.10":
-  version "10.0.10"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.10.tgz#2974689bb9798a7505dc8e8b5d6b6ac31c6f3d7e"
-  integrity sha512-bYivmOSt91h6+pkmcM66HIyXTktz3vl/Xag3pTAaFEuv+MB4ET3vg/CLkw2J/QOFianKI8yp5ux5er/YGvMB+Q==
+"@sprucelabs/schema@^10.0.11":
+  version "10.0.11"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.11.tgz#5f095e88abb1717cb96631968c97b52ca59a2143"
+  integrity sha512-Eh9t1jOyhojI6Xi5Bc7YV6Xod6zqkpuHihuqeHPFxU29ureNaKcEjwQ/FPgatVfdlScT/En8+kQ6fgZl3TXAcw==
   dependencies:
-    "@sprucelabs/error" "^2.2.270"
+    "@sprucelabs/error" "^2.2.271"
     "@sprucelabs/log" "^10.2.218"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.7.57"
@@ -2324,12 +2324,12 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.26.40":
-  version "10.26.41"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.41.tgz#ab15610298e811a62f98e884d85c69c39df72b8b"
-  integrity sha512-pkyWDSfDa5S5zPDMVzwLQO14M5qjDKDPaFAmQdNhRxXms4yKR9wAlNDZZF1pMia2JK8qhK+8QkHuHzIUf3cK2Q==
+"@sprucelabs/spruce-skill-utils@^10.26.42":
+  version "10.26.42"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.26.42.tgz#4ba89dcefc0362b4af1cff188c91637c2c00c84a"
+  integrity sha512-GEiGU3NV9m/EWhnm0dhXFwneSdtnyiQnyLCy4vOqnfW4oo42Ce4119UoT+YgWCyh2bnq2YY5cd1zXcOmqgr9pQ==
   dependencies:
-    "@sprucelabs/error" "^2.2.270"
+    "@sprucelabs/error" "^2.2.271"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
