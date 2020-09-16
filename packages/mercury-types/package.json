@@ -40,7 +40,7 @@
 	"dependencies": {
 		"@sprucelabs/error": "^2.2.276",
 		"@sprucelabs/log": "^10.2.219",
-		"@sprucelabs/schema": "^10.0.16",
+		"@sprucelabs/schema": "^10.0.17",
 		"@sprucelabs/spruce-skill-utils": "^10.26.49"
 	},
 	"devDependencies": {
