@@ -4,3 +4,4 @@ export { default as mercuryContractSchema } from './.spruce/schemas/mercuryTypes
 export * from './mercury.types'
 export { default as MercuryClient } from './mercury.types'
 export * from './constants'
+export { default as buildMercuryContract } from './utilities/buildMercuryContract'

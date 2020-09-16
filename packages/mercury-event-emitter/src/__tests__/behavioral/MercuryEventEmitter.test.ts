@@ -2,6 +2,7 @@ import {
 	EventNames,
 	MercuryClient,
 	MercuryContract,
+	buildMercuryContract,
 } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
@@ -16,7 +17,29 @@ class EventEmitter<
 	}
 }
 
-const contract: MercuryContract = {
+type Contract = {
+	eventSignatures: [
+		{
+			eventNameWithOptionalNamespace: 'eventOne'
+		},
+		{
+			eventNameWithOptionalNamespace: 'eventTwo'
+		},
+		{
+			eventNameWithOptionalNamespace: 'eventWithPayload'
+			emitPayload: {
+				id: 'firstPayload'
+				name: 'First payload'
+				fields: {
+					optionalTextField: {
+						type: FieldType.Text
+					}
+				}
+			}
+		}
+	]
+}
+const contract = buildMercuryContract<Contract>({
 	eventSignatures: [
 		{
 			eventNameWithOptionalNamespace: 'eventOne',
@@ -37,9 +60,7 @@ const contract: MercuryContract = {
 			}),
 		},
 	],
-} as const
-
-type Contract = typeof contract
+})
 
 export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	private static emitter: MercuryClient<Contract>
