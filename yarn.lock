@@ -2302,12 +2302,12 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.219.tgz#99592bf3ca505aa09efe0808e228ce2254669e37"
   integrity sha512-DSzE9ZlJciPdIsmWH23PA4l7IKvCgfV4wlu8ePx36w/9sXltC4gmV8g5ysYa1at/+oqOzB5vDfwB2rDCLzIoeQ==
 
-"@sprucelabs/schema@^10.0.15":
-  version "10.0.15"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.15.tgz#875205f3ac45f0f82632e385c82ac2646071d207"
-  integrity sha512-cActzYLOQ/A7qArrxh3xROOX1LvReZva5Bzpnp3wuUzsgrYYwAgj17h7L0tdAQLvI1y+YDWD+nppEGqHff1DQA==
+"@sprucelabs/schema@^10.0.16":
+  version "10.0.16"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.16.tgz#050efc836c138e102d80ee2a379f7bbd5d727ec0"
+  integrity sha512-yRLLfCYzIX+3/BUT7DWVnkMXbFE3CaMwWxcPJEWozmn6w3t9HwTDRt8aTUZvbzsZTZBpEVQ70gJDNeV4EgoYHA==
   dependencies:
-    "@sprucelabs/error" "^2.2.275"
+    "@sprucelabs/error" "^2.2.276"
     "@sprucelabs/log" "^10.2.219"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.7.57"
