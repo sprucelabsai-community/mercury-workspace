@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/sprucelabsai/mercury-workspace/compare/v1.8.1...v1.9.0) (2020-09-16)
+
+
+### Breaking Changes
+
+* looser typing (removed deep readonly) ([5f62668](https://github.com/sprucelabsai/mercury-workspace/commit/5f62668))
+
+
+
+
+
 ## [1.8.1](https://github.com/sprucelabsai/mercury-workspace/compare/v1.8.0...v1.8.1) (2020-09-16)
 
 **Note:** Version bump only for package @sprucelabs/mercury-types
