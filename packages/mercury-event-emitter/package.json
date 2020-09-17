@@ -7,7 +7,7 @@
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "1.10.0",
+	"version": "1.10.1",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
@@ -36,7 +36,7 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/mercury-types": "^1.10.0",
+		"@sprucelabs/mercury-types": "^1.10.1",
 		"@sprucelabs/schema": "^11.0.4"
 	},
 	"devDependencies": {
