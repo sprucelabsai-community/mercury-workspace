@@ -2324,7 +2324,7 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.27.8":
+"@sprucelabs/spruce-skill-utils@^10.27.9":
   version "10.27.9"
   resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.27.9.tgz#feff4e93d1f7c446b76dccb0f50637aa47bb4b12"
   integrity sha512-1rzmYlNFFHNaBC5BsrUNLOr2L35gmvyplPKEsPqwDW5fwM9A5aL5UgDvMX2D3Ywy09Znig6iCH0S1M7fdG6/ug==
