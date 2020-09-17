@@ -2292,15 +2292,15 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.282":
-  version "2.2.282"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.282.tgz#56cb52df27a5956b05de3a93cbc05eecac99232a"
-  integrity sha512-7cRs5khBtiNM13h0GgA7BuXKivK+n4jJuev6/QhXns5jmZARnlqXP+8TH86l3USju9JHQuFbFqVQDQ/ittbtaQ==
+"@sprucelabs/error@^2.2.282", "@sprucelabs/error@^2.2.283":
+  version "2.2.283"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.283.tgz#99dcd6fe7120ddeb366b808b6c0105a70bd0ed75"
+  integrity sha512-4YTCDHHqhdvfOkmP9JdL7lhbKY+n/V1b6UA2cGWcZOc/zMpdZVwe9KD+Jhqt3LoEeYoUEaYOt38HFSx3tWBl/g==
 
-"@sprucelabs/log@^10.2.222":
-  version "10.2.222"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.222.tgz#02857eae0bfa41cff0409babb44fcaedcd6cc6ad"
-  integrity sha512-Jdwz6PRzQED1aQyg8usllTy6lUU4SIHOeb/aeN3IzG0JekvvpWzvhKRwVS1qexV0gss6MqgyNn6cFgg6w0vxEg==
+"@sprucelabs/log@^10.2.222", "@sprucelabs/log@^10.2.223":
+  version "10.2.223"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.223.tgz#7ccabc7a61d66d0b5bdc694482eadbc9f91a1205"
+  integrity sha512-Ut/g4LVSP4pnB3Wsrdhz1LcYed3dXVkA9lzG3YB7y2x+mvue2rMwe3fpEeGWJEYalJAlWuy1SXEkdfuBsUD+rg==
 
 "@sprucelabs/schema@^10.0.22":
   version "10.0.22"
@@ -10369,10 +10369,10 @@ rollup-pluginutils@^2.3.1, rollup-pluginutils@^2.6.0:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.27.0:
-  version "2.27.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.27.0.tgz#f2b70a8dd583bc3675b36686289aa9a51e27af4f"
-  integrity sha512-1WlbhNdzhLjdhh2wsf6CDxmuBAYG+5O53fYqCcGv8aJOoX/ymCfCY6oZnvllXZzaC/Ng+lPPwq9EMbHOKc5ozA==
+rollup@^2.27.1:
+  version "2.27.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.27.1.tgz#372744e1d36eba0fd942d997600c2fc2ca266305"
+  integrity sha512-GiWHQvnmMgBktSpY/1+nrGpwPsTw4b9P28og2uedfeq4JZ16rzAmnQ5Pm/E0/BEmDNia1ZbY7+qu3nBgNa19Hg==
   optionalDependencies:
     fsevents "~2.1.2"
 
