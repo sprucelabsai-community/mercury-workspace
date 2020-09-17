@@ -2292,7 +2292,7 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.282", "@sprucelabs/error@^2.2.283":
+"@sprucelabs/error@^2.2.283":
   version "2.2.283"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.283.tgz#99dcd6fe7120ddeb366b808b6c0105a70bd0ed75"
   integrity sha512-4YTCDHHqhdvfOkmP9JdL7lhbKY+n/V1b6UA2cGWcZOc/zMpdZVwe9KD+Jhqt3LoEeYoUEaYOt38HFSx3tWBl/g==
@@ -2302,15 +2302,15 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.223.tgz#7ccabc7a61d66d0b5bdc694482eadbc9f91a1205"
   integrity sha512-Ut/g4LVSP4pnB3Wsrdhz1LcYed3dXVkA9lzG3YB7y2x+mvue2rMwe3fpEeGWJEYalJAlWuy1SXEkdfuBsUD+rg==
 
-"@sprucelabs/schema@^10.0.23":
-  version "10.0.23"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.23.tgz#d80477f8386dbf397860cf66ac983706a9c3f47f"
-  integrity sha512-ZSpW5LV8AZlqajQMkB03NMKX6DEIpWqdX40uOei38PB2tzLEPVaJhM2qoshg2j4ZRBaQAgmtkJT9ynA2frGjeA==
+"@sprucelabs/schema@^10.0.24":
+  version "10.0.24"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-10.0.24.tgz#54531cff8f8f0f0a83a6964a9dddd3e06b8c3727"
+  integrity sha512-7sA8jh2zBcz8f4OAkftBeXMmsfsS9j4SHbsl3/RH8u47/ByPnmcTNyOBJ5OCFP1j4cIfrLymMHoSac0X1+b+iA==
   dependencies:
     "@sprucelabs/error" "^2.2.283"
     "@sprucelabs/log" "^10.2.223"
     google-libphonenumber "^3.2.13"
-    libphonenumber-js "^1.7.57"
+    libphonenumber-js "^1.7.58"
     mime-db "^1.44.0"
     mime-type "^4.0.0"
 
@@ -2324,12 +2324,12 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.27.7":
-  version "10.27.7"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.27.7.tgz#90e3eb3e4e072329d89044319cf72699edb9a3a5"
-  integrity sha512-ugL0dq73VMnscuHluC8knSsFd9m/2v2RgSvx4vQddQIh4E6PZxlpgWvkxWQREjk+ojIiaPnomGi7GKBZ4iK4RA==
+"@sprucelabs/spruce-skill-utils@^10.27.8":
+  version "10.27.9"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.27.9.tgz#feff4e93d1f7c446b76dccb0f50637aa47bb4b12"
+  integrity sha512-1rzmYlNFFHNaBC5BsrUNLOr2L35gmvyplPKEsPqwDW5fwM9A5aL5UgDvMX2D3Ywy09Znig6iCH0S1M7fdG6/ug==
   dependencies:
-    "@sprucelabs/error" "^2.2.282"
+    "@sprucelabs/error" "^2.2.283"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
@@ -7725,7 +7725,7 @@ libnpx@^10.2.4:
     y18n "^4.0.0"
     yargs "^14.2.3"
 
-libphonenumber-js@^1.7.57:
+libphonenumber-js@^1.7.58:
   version "1.7.58"
   resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.7.58.tgz#301c024a8ba7c08e977d0405f63b08eccada45f2"
   integrity sha512-PTowDXzEHtp6+z93lQZltIYRCbmguUGq59G2CYnDS2RyIB+ZnZFvh8WizTuve5GY7l/mHtkA+59Q4hre7iLUPA==
