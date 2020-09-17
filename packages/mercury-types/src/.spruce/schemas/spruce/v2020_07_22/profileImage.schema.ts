@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '../../schemas.types'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
+
 
 
 
@@ -11,28 +11,28 @@ const profileImageSchema: SpruceSchemas.Spruce.v2020_07_22.IProfileImageSchema  
 	            /** 60x60. */
 	            'profile60': {
 	                label: '60x60',
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                options: undefined
 	            },
 	            /** 150x150. */
 	            'profile150': {
 	                label: '150x150',
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                options: undefined
 	            },
 	            /** 60x60. */
 	            'profile60@2x': {
 	                label: '60x60',
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                options: undefined
 	            },
 	            /** 150x150. */
 	            'profile150@2x': {
 	                label: '150x150',
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                options: undefined
 	            },

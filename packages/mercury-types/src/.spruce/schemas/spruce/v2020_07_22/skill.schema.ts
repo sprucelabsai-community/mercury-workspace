@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '../../schemas.types'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
+
 
 import skillCreatorSchema from '#spruce/schemas/spruce/v2020_07_22/skillCreator.schema'
 
@@ -11,14 +11,14 @@ const skillSchema: SpruceSchemas.Spruce.v2020_07_22.ISkillSchema  = {
 	            /** Id. */
 	            'id': {
 	                label: 'Id',
-	                type: FieldType.Id,
+	                type: 'id',
 	                isRequired: true,
 	                options: undefined
 	            },
 	            /** Id. */
 	            'apiKey': {
 	                label: 'Id',
-	                type: FieldType.Id,
+	                type: 'id',
 	                isPrivate: true,
 	                isRequired: true,
 	                options: undefined
@@ -26,27 +26,27 @@ const skillSchema: SpruceSchemas.Spruce.v2020_07_22.ISkillSchema  = {
 	            /** Name. */
 	            'name': {
 	                label: 'Name',
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                options: undefined
 	            },
 	            /** Description. */
 	            'description': {
 	                label: 'Description',
-	                type: FieldType.Text,
+	                type: 'text',
 	                options: undefined
 	            },
 	            /** Slug. */
 	            'slug': {
 	                label: 'Slug',
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                options: undefined
 	            },
 	            /** Creators. The people or skills who created and own this skill. */
 	            'creators': {
 	                label: 'Creators',
-	                type: FieldType.Schema,
+	                type: 'schema',
 	                isPrivate: true,
 	                isRequired: true,
 	                hint: 'The people or skills who created and own this skill.',

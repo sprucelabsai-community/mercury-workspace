@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '../../schemas.types'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
+
 
 import aclSchema from '#spruce/schemas/spruce/v2020_07_22/acl.schema'
 
@@ -11,13 +11,13 @@ const jobSchema: SpruceSchemas.Spruce.v2020_07_22.IJobSchema  = {
 	            /** Id. */
 	            'id': {
 	                label: 'Id',
-	                type: FieldType.Id,
+	                type: 'id',
 	                options: undefined
 	            },
 	            /** Is default. Is this job one that comes with every org? Mapped to roles (owner, groupManager, manager, guest). */
 	            'isDefault': {
 	                label: 'Is default',
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                hint: 'Is this job one that comes with every org? Mapped to roles (owner, groupManager, manager, guest).',
 	                options: undefined
@@ -25,27 +25,27 @@ const jobSchema: SpruceSchemas.Spruce.v2020_07_22.IJobSchema  = {
 	            /** Name. */
 	            'name': {
 	                label: 'Name',
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                options: undefined
 	            },
 	            /** Role. */
 	            'role': {
 	                label: 'Role',
-	                type: FieldType.Select,
+	                type: 'select',
 	                isRequired: true,
 	                options: {choices: [{"value":"owner","label":"Owner"},{"value":"groupManager","label":"District/region manager"},{"value":"manager","label":"Manager"},{"value":"teammate","label":"Teammate"},{"value":"guest","label":"Guest"}],}
 	            },
 	            /** On work permissions. */
 	            'inStoreAcls': {
 	                label: 'On work permissions',
-	                type: FieldType.Schema,
+	                type: 'schema',
 	                options: {schema: aclSchema,}
 	            },
 	            /** Off work permissions. */
 	            'acls': {
 	                label: 'Off work permissions',
-	                type: FieldType.Schema,
+	                type: 'schema',
 	                options: {schema: aclSchema,}
 	            },
 	    }

@@ -1,6 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
 import { MercuryContract } from '../../mercury.types'
 import TestClient from '../../TestClient'
 
@@ -9,7 +8,7 @@ const responsePayload = buildSchema({
 	name: 'Test listen response',
 	fields: {
 		responsePayloadField: {
-			type: FieldType.Text,
+			type: 'text',
 			isRequired: true,
 		},
 	},
@@ -20,7 +19,7 @@ const emitPayload = buildSchema({
 	name: 'Test emit payload',
 	fields: {
 		emitPayloadField: {
-			type: FieldType.Text,
+			type: 'text',
 			isRequired: true,
 		},
 	},

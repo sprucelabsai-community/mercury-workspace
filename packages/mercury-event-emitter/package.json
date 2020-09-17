@@ -36,8 +36,8 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/mercury-types": "^1.9.18",
-		"@sprucelabs/schema": "^10.0.27"
+		"@sprucelabs/mercury-types": "^1.9.14",
+		"@sprucelabs/schema": "^11.0.4"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",

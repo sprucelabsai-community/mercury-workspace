@@ -1,5 +1,4 @@
 import { buildSchema } from '@sprucelabs/schema'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
 
 export default buildSchema({
 	id: 'mercuryContract',
@@ -7,7 +6,7 @@ export default buildSchema({
 	description: '',
 	fields: {
 		eventSignatures: {
-			type: FieldType.Schema,
+			type: 'schema',
 			isRequired: true,
 			isArray: true,
 			options: {
@@ -17,26 +16,26 @@ export default buildSchema({
 					description: '',
 					fields: {
 						eventNameWithOptionalNamespace: {
-							type: FieldType.Text,
+							type: 'text',
 							isRequired: true,
 						},
 						responsePayload: {
-							type: FieldType.Raw,
+							type: 'raw',
 							options: { valueType: 'SpruceSchema.ISchema' },
 						},
 						emitPayload: {
-							type: FieldType.Raw,
+							type: 'raw',
 							options: { valueType: 'SpruceSchema.ISchema' },
 						},
 						listenPermissionsAny: {
-							type: FieldType.Schema,
+							type: 'schema',
 							isArray: true,
 							options: {
 								schemaId: { id: 'permission', version: 'v2020_09_01' },
 							},
 						},
 						emitPermissionsAny: {
-							type: FieldType.Schema,
+							type: 'schema',
 							isArray: true,
 							options: {
 								schemaId: { id: 'permission', version: 'v2020_09_01' },

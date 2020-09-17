@@ -1,5 +1,4 @@
 import { buildSchema } from '@sprucelabs/schema'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
 import { authorizerStatuses } from '../../constants'
 
 export default buildSchema({
@@ -8,7 +7,7 @@ export default buildSchema({
 	description: '',
 	fields: {
 		permissions: {
-			type: FieldType.Schema,
+			type: 'schema',
 			isRequired: true,
 			isArray: true,
 			options: {
@@ -17,7 +16,7 @@ export default buildSchema({
 					name: 'Permission',
 					fields: {
 						name: {
-							type: FieldType.Text,
+							type: 'text',
 							label: 'Permission name',
 							isRequired: true,
 							hint:
@@ -28,7 +27,7 @@ export default buildSchema({
 							// @ts-ignore
 							fields[name] = {
 								...props,
-								type: FieldType.Boolean,
+								type: 'boolean',
 							}
 
 							return fields
