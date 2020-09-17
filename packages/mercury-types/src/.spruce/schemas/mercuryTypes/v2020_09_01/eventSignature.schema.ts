@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '../../schemas.types'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
+
 
 import permissionSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/permission.schema'
 
@@ -9,29 +9,29 @@ const eventSignatureSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatu
 	    fields: {
 	            /** . */
 	            'eventNameWithOptionalNamespace': {
-	                type: FieldType.Text,
+	                type: 'text',
 	                isRequired: true,
 	                options: undefined
 	            },
 	            /** . */
 	            'responsePayload': {
-	                type: FieldType.Raw,
+	                type: 'raw',
 	                options: {valueType: `SpruceSchema.ISchema`,}
 	            },
 	            /** . */
 	            'emitPayload': {
-	                type: FieldType.Raw,
+	                type: 'raw',
 	                options: {valueType: `SpruceSchema.ISchema`,}
 	            },
 	            /** . */
 	            'listenPermissionsAny': {
-	                type: FieldType.Schema,
+	                type: 'schema',
 	                isArray: true,
 	                options: {schema: permissionSchema,}
 	            },
 	            /** . */
 	            'emitPermissionsAny': {
-	                type: FieldType.Schema,
+	                type: 'schema',
 	                isArray: true,
 	                options: {schema: permissionSchema,}
 	            },

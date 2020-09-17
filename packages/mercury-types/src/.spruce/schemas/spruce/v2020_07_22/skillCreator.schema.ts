@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '../../schemas.types'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
+
 
 
 
@@ -9,12 +9,12 @@ const skillCreatorSchema: SpruceSchemas.Spruce.v2020_07_22.ISkillCreatorSchema  
 	    fields: {
 	            /** . */
 	            'skillId': {
-	                type: FieldType.Text,
+	                type: 'text',
 	                options: undefined
 	            },
 	            /** . */
 	            'personId': {
-	                type: FieldType.Text,
+	                type: 'text',
 	                options: undefined
 	            },
 	    }

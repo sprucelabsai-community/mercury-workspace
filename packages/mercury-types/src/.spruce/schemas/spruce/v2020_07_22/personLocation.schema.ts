@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '../../schemas.types'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
+
 
 import jobSchema from '#spruce/schemas/spruce/v2020_07_22/job.schema'
 import locationSchema from '#spruce/schemas/spruce/v2020_07_22/location.schema'
@@ -13,13 +13,13 @@ const personLocationSchema: SpruceSchemas.Spruce.v2020_07_22.IPersonLocationSche
 	            /** Id. */
 	            'id': {
 	                label: 'Id',
-	                type: FieldType.Id,
+	                type: 'id',
 	                options: undefined
 	            },
 	            /** Name. */
 	            'roles': {
 	                label: 'Name',
-	                type: FieldType.Select,
+	                type: 'select',
 	                isRequired: true,
 	                isArray: true,
 	                options: {choices: [{"value":"owner","label":"Owner"},{"value":"groupManager","label":"District/region manager"},{"value":"manager","label":"Manager"},{"value":"teammate","label":"Teammate"},{"value":"guest","label":"Guest"}],}
@@ -27,40 +27,40 @@ const personLocationSchema: SpruceSchemas.Spruce.v2020_07_22.IPersonLocationSche
 	            /** Status. */
 	            'status': {
 	                label: 'Status',
-	                type: FieldType.Text,
+	                type: 'text',
 	                options: undefined
 	            },
 	            /** Total visits. */
 	            'visits': {
 	                label: 'Total visits',
-	                type: FieldType.Number,
+	                type: 'number',
 	                isRequired: true,
 	                options: {choices: [{"value":"owner","label":"Owner"},{"value":"groupManager","label":"District/region manager"},{"value":"manager","label":"Manager"},{"value":"teammate","label":"Teammate"},{"value":"guest","label":"Guest"}],}
 	            },
 	            /** Last visit. */
 	            'lastRecordedVisit': {
 	                label: 'Last visit',
-	                type: FieldType.DateTime,
+	                type: 'dateTime',
 	                options: undefined
 	            },
 	            /** Job. */
 	            'job': {
 	                label: 'Job',
-	                type: FieldType.Schema,
+	                type: 'schema',
 	                isRequired: true,
 	                options: {schema: jobSchema,}
 	            },
 	            /** Location. */
 	            'location': {
 	                label: 'Location',
-	                type: FieldType.Schema,
+	                type: 'schema',
 	                isRequired: true,
 	                options: {schema: locationSchema,}
 	            },
 	            /** Person. */
 	            'person': {
 	                label: 'Person',
-	                type: FieldType.Schema,
+	                type: 'schema',
 	                isRequired: true,
 	                options: {schema: personSchema,}
 	            },

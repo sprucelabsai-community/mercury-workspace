@@ -6,7 +6,6 @@ import {
 } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
-import FieldType from '#spruce/schemas/fields/fieldTypeEnum'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 
 class EventEmitter<
@@ -32,7 +31,7 @@ type Contract = {
 				name: 'First payload'
 				fields: {
 					optionalTextField: {
-						type: FieldType.Text
+						type: 'text'
 					}
 				}
 			}
@@ -54,7 +53,7 @@ const contract = buildMercuryContract<Contract>({
 				name: 'First payload',
 				fields: {
 					optionalTextField: {
-						type: FieldType.Text,
+						type: 'text',
 					},
 				},
 			}),
