@@ -41,7 +41,7 @@
 		"@sprucelabs/error": "^2.2.282",
 		"@sprucelabs/log": "^10.2.222",
 		"@sprucelabs/schema": "^10.0.22",
-		"@sprucelabs/spruce-skill-utils": "^10.27.6"
+		"@sprucelabs/spruce-skill-utils": "^10.27.7"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
