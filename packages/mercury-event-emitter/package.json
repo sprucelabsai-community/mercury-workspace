@@ -37,11 +37,11 @@
 	},
 	"dependencies": {
 		"@sprucelabs/mercury-types": "^1.10.4",
-		"@sprucelabs/schema": "^11.0.4"
+		"@sprucelabs/schema": "^11.0.5"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^7.0.27",
+		"@sprucelabs/test": "^7.0.28",
 		"eslint": "^7.9.0",
 		"eslint-config-spruce": "^10.9.52",
 		"jest": "^26.4.2",
