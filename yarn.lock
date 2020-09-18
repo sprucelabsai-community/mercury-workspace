@@ -2303,9 +2303,9 @@
   integrity sha512-J9AlKdNFkW6sZ5AMdEO7TaZc4CI5rmOEk5Kn2nf+qL7iVZIGZe0kD83iGyNqPWj9B0v4fwpGxz2exV987HEArg==
 
 "@sprucelabs/schema@^11.0.4":
-  version "11.0.4"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-11.0.4.tgz#219697019de843145442027eab06de7057e89132"
-  integrity sha512-1cv+u/gA2mCCDMnvpL4KIKbii11PmV/aJbHMe9iAwB7RwjQYM42mp2stLS1/BZF6V2fqpC61Sp4INJKvLlqShA==
+  version "11.0.5"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-11.0.5.tgz#cb24f4432ff377f7df221ce855ba3dff1712ef79"
+  integrity sha512-QeLWdhEwYGmTyHNcozopZiaL/j6Ygwl2enAyOsWNHzxOlNTiBBNd6w9LEEyNGxNwioB76OfH+LUs4AluMMzikw==
   dependencies:
     "@sprucelabs/error" "^2.2.289"
     "@sprucelabs/log" "^10.2.226"
@@ -10105,9 +10105,9 @@ regexpp@^3.0.0, regexpp@^3.1.0:
   integrity sha512-ZOIzd8yVsQQA7j8GCSlPGXwg5PfmA1mrq0JP4nGhh54LaKN3xdai/vHUDu74pKwV8OxseMS65u2NImosQcSD0Q==
 
 regexpu-core@^4.7.0:
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-4.7.0.tgz#fcbf458c50431b0bb7b45d6967b8192d91f3d938"
-  integrity sha512-TQ4KXRnIn6tz6tjnrXEkD/sshygKH/j5KzK86X8MkeHyZ8qst/LZ89j3X4/8HEIfHANTFIP/AbXakeRhWIl5YQ==
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-4.7.1.tgz#2dea5a9a07233298fbf0db91fa9abc4c6e0f8ad6"
+  integrity sha512-ywH2VUraA44DZQuRKzARmw6S66mr48pQVva4LBeRhcOltJ6hExvWly5ZjFLYo67xbIxb6W1q4bAGtgfEl20zfQ==
   dependencies:
     regenerate "^1.4.0"
     regenerate-unicode-properties "^8.2.0"
