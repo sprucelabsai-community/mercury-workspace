@@ -2324,10 +2324,10 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-skill-utils@^10.28.20":
-  version "10.28.20"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.28.20.tgz#ad2180a09eef8c0f1c3fed1cc99d28f10140f7b1"
-  integrity sha512-LvvsSCwMaFi1uaTICNTO8B68wo++t3ojoPI6hlOgFHX/v1beAJ/0xYb8R1hPiIS/PKZh7dZibTdqX4cv/7norw==
+"@sprucelabs/spruce-skill-utils@^10.28.21":
+  version "10.28.21"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.28.21.tgz#847644981373b580270999b6e956907ad5e9aa96"
+  integrity sha512-4IMO6qun6aNIe1LvCNLLxqW0MlR0cIwKX2JTuWzulc5vt7w7ycl6tI/NdmAgU/6iFKOLaYrzpZLRbxo8zbyRdQ==
   dependencies:
     "@sprucelabs/error" "^2.2.300"
     fs-extra "^9.0.1"
