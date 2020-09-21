@@ -6,7 +6,7 @@
 	"files": [
 		"build"
 	],
-	"version": "1.10.33",
+	"version": "1.10.34",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"description": "The simple way to interact with the Spruce Experience Platform",
@@ -34,7 +34,7 @@
 		"arkit.png": "arkit -f index.ts -o docs/images/arkit.png"
 	},
 	"dependencies": {
-		"@sprucelabs/mercury-types": "^1.10.33",
+		"@sprucelabs/mercury-types": "^1.10.34",
 		"socket.io-client": "^2.3.0"
 	},
 	"devDependencies": {
