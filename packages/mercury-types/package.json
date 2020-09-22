@@ -38,14 +38,14 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.311",
-		"@sprucelabs/log": "^10.2.234",
+		"@sprucelabs/error": "^2.2.312",
+		"@sprucelabs/log": "^10.2.235",
 		"@sprucelabs/schema": "^12.0.23",
 		"@sprucelabs/spruce-skill-utils": "^10.28.22"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^7.0.39",
+		"@sprucelabs/test": "^7.0.40",
 		"eslint": "^7.9.0",
 		"eslint-config-spruce": "^10.9.56",
 		"jest": "^26.4.2",
