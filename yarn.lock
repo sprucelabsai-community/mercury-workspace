@@ -2303,14 +2303,14 @@
   integrity sha512-W4VfaWU0FV3q9RaqGjsWCqY+UMy9IHCp8D0EcAtSMUmDIJ8uO6KcEbWWedbLoM8XfgyjxeFI2jQPJPbd9IcioQ==
 
 "@sprucelabs/schema@^12.0.28":
-  version "12.0.28"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.0.28.tgz#1b638fd24495d21da621a89b4bae0414ce8747e0"
-  integrity sha512-hNV7mfhUzXvHtt7Gn6LcnKrkclo7bccaZxbJ0q3xzCqTmUzi8OPgAGSO6atr86j+TZE8a5mPc1+7hbdbAgW9vA==
+  version "12.0.29"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.0.29.tgz#137dabc31e1219a7541c95834368338a720fabaa"
+  integrity sha512-O3p3u4c3a15y994CBn2sHVHGn6hfVCmFHWENeRFqxBoN6A7Jr1WbjzPdRaARwkccpUgprjoOcRYKFwXZa3WYig==
   dependencies:
     "@sprucelabs/error" "^2.2.316"
     "@sprucelabs/log" "^10.2.236"
     google-libphonenumber "^3.2.13"
-    libphonenumber-js "^1.7.58"
+    libphonenumber-js "^1.8.0"
     mime-db "^1.44.0"
     mime-type "^4.0.0"
 
@@ -7732,10 +7732,10 @@ libnpx@^10.2.4:
     y18n "^4.0.0"
     yargs "^14.2.3"
 
-libphonenumber-js@^1.7.58:
-  version "1.7.58"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.7.58.tgz#301c024a8ba7c08e977d0405f63b08eccada45f2"
-  integrity sha512-PTowDXzEHtp6+z93lQZltIYRCbmguUGq59G2CYnDS2RyIB+ZnZFvh8WizTuve5GY7l/mHtkA+59Q4hre7iLUPA==
+libphonenumber-js@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.0.tgz#ba2544aaa76a84c933b7576c7948297cbed80229"
+  integrity sha512-XUWAwnGciulHTsopU5w5+AuWFXfMkKPf2yyHJVxNSTgx9RiqhoJXCnBA60IZIzYQJgPkkI+Gp/T2QzLNRo0VIQ==
   dependencies:
     minimist "^1.2.5"
     xml2js "^0.4.17"
