@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '../../schemas.types'
 
 
+
 import eventSignatureSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/eventSignature.schema'
 
 const mercuryContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContractSchema  = {

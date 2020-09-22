@@ -41,6 +41,7 @@
 		"@sprucelabs/error": "^2.2.317",
 		"@sprucelabs/log": "^10.2.236",
 		"@sprucelabs/schema": "^12.0.29",
+		"@sprucelabs/spruce-core-schemas": "^10.28.24",
 		"@sprucelabs/spruce-skill-utils": "^10.28.24"
 	},
 	"devDependencies": {
