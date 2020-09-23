@@ -2297,6 +2297,11 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.317.tgz#fd806ecc68f38fa943da87a54a81903716865b28"
   integrity sha512-b+5cYGRgvLTv4mYCfOuW2fRJcSFj8WD9JlqbnMp4o+52eSLiHF7601jSAI/trE0wM8awfWxtRLkmuPLAIFiMiQ==
 
+"@sprucelabs/error@^2.2.324":
+  version "2.2.324"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.324.tgz#6eed0a713b30103c36c6f109fc6b2160346f24ed"
+  integrity sha512-RrNmT+OUM1E/BSFAcU6BQcAntFHg0mJ6E+aeYJubQygI3M4Oz9EDit8qjetjwWDuDZUJUfsJjNtTL8lUy+uQNA==
+
 "@sprucelabs/log@^10.2.236":
   version "10.2.236"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.236.tgz#d6fcc1af588bb46e7b63af1fdb0990e8360f8472"

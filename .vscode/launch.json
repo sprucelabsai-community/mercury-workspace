@@ -16,20 +16,33 @@
 			"type": "node",
 			"request": "launch",
 			"name": "test.file",
-			"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
-			"args": ["${file}"],
-			"skipFiles": [
-				"node_modules",
-				"async_hooks.js",
-				"inspector_async_hooks.js"
-			]
+			"runtimeExecutable": "${env:NVM_BIN}/node",
+			"runtimeArgs": [
+				"--inspect-brk",
+				"--trace-warnings",
+				"${workspaceFolder}/node_modules/.bin/jest",
+				"${fileBasenameNoExtension}",
+				"--detectOpenHandles"
+			],
+			"port": 9229,
+			"cwd": "${workspaceFolder}/packages/mercury-event-emitter",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen"
 		},
 		{
 			"type": "node",
 			"request": "launch",
 			"name": "test.all",
-			"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
-			"skipFiles": ["coverage", "node_modules"]
+			"runtimeExecutable": "${env:NVM_BIN}/node",
+			"runtimeArgs": [
+				"--inspect-brk",
+				"--trace-warnings",
+				"${workspaceFolder}/node_modules/.bin/jest"
+			],
+			"port": 9229,
+			"cwd": "${workspaceFolder}/packages/mercury-event-emitter",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen"
 		}
 	]
 }

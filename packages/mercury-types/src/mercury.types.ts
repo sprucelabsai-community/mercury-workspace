@@ -1,55 +1,66 @@
+import AbstractSpruceError from '@sprucelabs/error'
 import { ISchema, SchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 import { authorizerStatuses } from './constants'
 
-export type EventContract = SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
+export type DeepReadonly<T> = T extends (infer R)[]
+	? DeepReadonlyArray<R>
+	: // eslint-disable-next-line @typescript-eslint/ban-types
+	T extends Function
+	? T
+	: T extends Record<string, any>
+	? DeepReadonlyObject<T>
+	: T
+interface DeepReadonlyArray<T> extends ReadonlyArray<DeepReadonly<T>> {}
+type DeepReadonlyObject<T> = {
+	readonly [P in keyof T]: DeepReadonly<T[P]>
+}
+export type EventSignature = DeepReadonly<
+	SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
+>
+export type MercuryContract = DeepReadonly<
+	SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContract
+>
 export type Permission = SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
 type Statuses = typeof authorizerStatuses
 export type AuthorizerStatus = Statuses[number]['name']
 export type PermissionContract = SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract
-
 export type MercuryAggregateResponse<Payload> = {
 	totalContracts: number
 	totalResponses: number
+	totalErrors: number
 	responses: {
-		responderName: string
-		errors?: Error[]
+		responderName?: string
+		error?: AbstractSpruceError
 		payload: Payload
 	}[]
 }
-
 export interface MercurySingleResponse<Payload> {
 	totalContracts: number
 	responseIdx: number
-	responderName: string
-	errors?: Error[]
+	responderName?: string
+	error?: AbstractSpruceError
 	payload?: Payload
 }
-
-export type EventSignature = SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
-
-export type MercuryContract = SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContract
-
 export type KeyOf<O> = Extract<keyof O, string>
-
-export type ContractMapper<Contract extends MercuryContract> = {
-	[K in Contract['eventSignatures'][number]['eventNameWithOptionalNamespace']]: Contract['eventSignatures'][number] & {
-		eventNameWithOptionalNamespace: K
+export declare type ContractMapper<Contract extends MercuryContract> = {
+	readonly [K in Contract['eventSignatures'][number]['eventNameWithOptionalNamespace']]: Contract['eventSignatures'][number] & {
+		readonly eventNameWithOptionalNamespace: K
 	}
 }
-
-export type EventNames<
+export declare type EventNames<
 	Contract extends MercuryContract,
 	MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 	EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>
 > = EventName
-
-export type EmitCallback<
+export declare type EmitCallback<
 	MappedContract extends ContractMapper<MercuryContract> = ContractMapper<
 		MercuryContract
 	>,
 	EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-	IEventSignature extends EventSignature = MappedContract[EventName],
+	IEventSignature extends DeepReadonly<
+		EventSignature
+	> = MappedContract[EventName],
 	ResponseSchema extends ISchema = IEventSignature['responsePayload'] extends ISchema
 		? IEventSignature['responsePayload']
 		: never,
@@ -57,7 +68,6 @@ export type EmitCallback<
 		? SchemaValues<ResponseSchema>
 		: never
 > = (payload: MercurySingleResponse<ResponsePayload>) => void | Promise<void>
-
 export default interface MercuryClient<Contract extends MercuryContract> {
 	emit<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
@@ -68,39 +78,31 @@ export default interface MercuryClient<Contract extends MercuryContract> {
 			: never,
 		ResponseSchema extends ISchema = IEventSignature['responsePayload'] extends ISchema
 			? IEventSignature['responsePayload']
-			: never,
-		ResponsePayload = ResponseSchema extends ISchema
-			? SchemaValues<ResponseSchema>
 			: never
 	>(
 		eventName: EventName,
-		payload: EmitSchema extends SchemaValues<EmitSchema>
-			? SchemaValues<EmitSchema>
-			: never,
+		payload: SchemaValues<EmitSchema>,
 		cb?: EmitCallback<MappedContract, EventName>
-	): Promise<MercuryAggregateResponse<ResponsePayload>>
+	): Promise<MercuryAggregateResponse<SchemaValues<ResponseSchema>>>
 
 	emit<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
 		IEventSignature extends EventSignature = MappedContract[EventName],
-		ResponseSchema extends
-			| ISchema
-			| never = IEventSignature['responsePayload'] extends ISchema
+		ResponseSchema extends ISchema = IEventSignature['responsePayload'] extends ISchema
 			? IEventSignature['responsePayload']
-			: never,
-		ResponsePayload = ResponseSchema extends ISchema
-			? SchemaValues<ResponseSchema>
 			: never
 	>(
 		eventName: EventName,
 		cb?: EmitCallback<MappedContract, EventName>
-	): Promise<MercuryAggregateResponse<ResponsePayload>>
+	): Promise<MercuryAggregateResponse<SchemaValues<ResponseSchema>>>
 
 	on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends EventSignature = MappedContract[EventName],
+		IEventSignature extends DeepReadonly<
+			EventSignature
+		> = MappedContract[EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayload'] extends ISchema
 			? IEventSignature['emitPayload']
 			: never
@@ -120,3 +122,4 @@ export default interface MercuryClient<Contract extends MercuryContract> {
 		cb?: (payload?: Record<string, any>) => void
 	): number
 }
+export {}

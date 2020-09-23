@@ -2,11 +2,11 @@ import {
 	EventNames,
 	MercuryClient,
 	MercuryContract,
-	buildMercuryContract,
 } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
+import SpruceError from '../../errors/SpruceError'
 
 class EventEmitter<
 	Contract extends MercuryContract
@@ -16,29 +16,7 @@ class EventEmitter<
 	}
 }
 
-type Contract = {
-	eventSignatures: [
-		{
-			eventNameWithOptionalNamespace: 'eventOne'
-		},
-		{
-			eventNameWithOptionalNamespace: 'eventTwo'
-		},
-		{
-			eventNameWithOptionalNamespace: 'eventWithPayload'
-			emitPayload: {
-				id: 'firstPayload'
-				name: 'First payload'
-				fields: {
-					optionalTextField: {
-						type: 'text'
-					}
-				}
-			}
-		}
-	]
-}
-const contract = buildMercuryContract<Contract>({
+const contract = {
 	eventSignatures: [
 		{
 			eventNameWithOptionalNamespace: 'eventOne',
@@ -47,10 +25,10 @@ const contract = buildMercuryContract<Contract>({
 			eventNameWithOptionalNamespace: 'eventTwo',
 		},
 		{
-			eventNameWithOptionalNamespace: 'eventWithPayload',
+			eventNameWithOptionalNamespace: 'eventWithEmitPayload',
 			emitPayload: buildSchema({
-				id: 'firstPayload',
-				name: 'First payload',
+				id: 'emitPayloadWithOptionalTextField',
+				name: 'Emit payload with optional text field',
 				fields: {
 					optionalTextField: {
 						type: 'text',
@@ -58,8 +36,46 @@ const contract = buildMercuryContract<Contract>({
 				},
 			}),
 		},
+		{
+			eventNameWithOptionalNamespace: 'eventWithResponsePayload',
+			responsePayload: buildSchema({
+				id: 'responsePayloadWithRequiredTextField',
+				name: 'responsePayloadWithRequiredTextField',
+				fields: {
+					requiredTextField: {
+						type: 'text',
+						isRequired: true,
+					},
+				},
+			}),
+		},
+		{
+			eventNameWithOptionalNamespace: 'eventWithEmitAndResponsePayload',
+			emitPayload: buildSchema({
+				id: 'emitPayloadWithRequiredTextField',
+				name: 'emitPayloadWithRequiredTextField',
+				fields: {
+					requiredTextField: {
+						type: 'text',
+						isRequired: true,
+					},
+				},
+			}),
+			responsePayload: buildSchema({
+				id: 'secondPayloadWithRequiredTextField',
+				name: 'secondPayloadWithRequiredTextField',
+				fields: {
+					requiredTextField: {
+						type: 'text',
+						isRequired: true,
+					},
+				},
+			}),
+		},
 	],
-})
+} as const
+
+type Contract = typeof contract
 
 export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	private static emitter: MercuryClient<Contract>
@@ -137,6 +153,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		this.emitter.on('eventTwo', () => {})
 
 		this.emitter.off('eventOne')
+
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 0)
 		assert.isEqual(this.testEmitter.listenCount('eventTwo'), 1)
 	}
@@ -152,5 +169,333 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		await this.emitter.emit('eventOne')
 
 		assert.isTrue(fired)
+	}
+
+	@test()
+	protected static async emitPassesThroughEmitPayload() {
+		let payload: any | undefined
+
+		this.emitter.on('eventWithEmitPayload', (p) => {
+			payload = p
+		})
+
+		await this.emitter.emit('eventWithEmitPayload', {
+			optionalTextField: 'hello world',
+		})
+
+		assert.isEqualDeep(payload, { optionalTextField: 'hello world' })
+	}
+
+	@test()
+	protected static async oneListenerCanRespondWithPayload() {
+		this.emitter.on('eventWithResponsePayload', () => {
+			return {
+				requiredTextField: 'foo bar',
+			}
+		})
+
+		const responses = await this.emitter.emit('eventWithResponsePayload')
+
+		assert.isEqualDeep(responses, {
+			totalContracts: 1,
+			totalResponses: 1,
+			totalErrors: 0,
+			responses: [
+				{
+					payload: {
+						requiredTextField: 'foo bar',
+					},
+				},
+			],
+		})
+	}
+
+	@test()
+	protected static async multipleListenersCanRespondWithPayloads() {
+		this.emitter.on('eventWithResponsePayload', () => ({
+			requiredTextField: 'foo bar',
+		}))
+
+		this.emitter.on('eventWithResponsePayload', () => ({
+			requiredTextField: 'hello world',
+		}))
+
+		const responses = await this.emitter.emit('eventWithResponsePayload')
+
+		assert.isEqualDeep(responses, {
+			totalContracts: 2,
+			totalResponses: 2,
+			totalErrors: 0,
+			responses: [
+				{
+					payload: {
+						requiredTextField: 'foo bar',
+					},
+				},
+				{
+					payload: {
+						requiredTextField: 'hello world',
+					},
+				},
+			],
+		})
+	}
+
+	@test()
+	protected static async emitCanListenToEachListener() {
+		this.emitter.on('eventWithResponsePayload', () => ({
+			requiredTextField: 'foo bar',
+		}))
+
+		this.emitter.on('eventWithResponsePayload', () => ({
+			requiredTextField: 'hello world',
+		}))
+
+		let count = 0
+		const payloads: any[] = []
+
+		await this.emitter.emit('eventWithResponsePayload', (payload) => {
+			count++
+			payloads.push(payload)
+		})
+
+		assert.isEqual(count, 2)
+		assert.isEqualDeep(payloads, [
+			{
+				totalContracts: 2,
+				responseIdx: 0,
+				payload: {
+					requiredTextField: 'foo bar',
+				},
+			},
+			{
+				totalContracts: 2,
+				responseIdx: 1,
+				payload: {
+					requiredTextField: 'hello world',
+				},
+			},
+		])
+	}
+
+	@test()
+	protected static async emitAndRespondCanEachHandlePayloads() {
+		this.emitter.on('eventWithEmitAndResponsePayload', () => ({
+			requiredTextField: 'foo bar',
+		}))
+
+		this.emitter.on('eventWithEmitAndResponsePayload', () => ({
+			requiredTextField: 'hello world',
+		}))
+
+		let count = 0
+		const listenerResponses: any[] = []
+
+		const results = await this.emitter.emit(
+			'eventWithEmitAndResponsePayload',
+			{ requiredTextField: 'great' },
+			(response) => {
+				count++
+				listenerResponses.push(response)
+			}
+		)
+
+		assert.isEqual(count, 2)
+		assert.isEqualDeep(listenerResponses, [
+			{
+				totalContracts: 2,
+				responseIdx: 0,
+				payload: {
+					requiredTextField: 'foo bar',
+				},
+			},
+			{
+				totalContracts: 2,
+				responseIdx: 1,
+				payload: {
+					requiredTextField: 'hello world',
+				},
+			},
+		])
+
+		assert.isEqualDeep(results, {
+			totalContracts: 2,
+			totalResponses: 2,
+			totalErrors: 0,
+			responses: [
+				{
+					payload: {
+						requiredTextField: 'foo bar',
+					},
+				},
+				{
+					payload: {
+						requiredTextField: 'hello world',
+					},
+				},
+			],
+		})
+	}
+
+	@test()
+	protected static async emittingBadEventThrows() {
+		const error = (await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			this.emitter.emit('does-not-exist')
+		)) as SpruceError
+
+		this.assertError(error, 'INVALID_EVENT_NAME', {
+			validNames: [
+				'eventOne',
+				'eventTwo',
+				'eventWithEmitPayload',
+				'eventWithResponsePayload',
+				'eventWithEmitAndResponsePayload',
+			],
+		})
+	}
+
+	@test()
+	protected static async canValidateEmitPayload() {
+		const error = (await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			this.emitter.emit('eventWithEmitPayload', { bad: true })
+		)) as SpruceError
+
+		this.assertError(error, 'INVALID_PAYLOAD', {
+			eventNameWithOptionalNamespace: 'eventWithEmitPayload',
+		})
+	}
+
+	@test()
+	protected static async reportsBackSingleErrorFromListeners() {
+		this.emitter.on('eventOne', () => {
+			throw new Error('oh no!')
+		})
+
+		const totalListeners = 1
+		const expectedErrors = ['oh no!']
+
+		await this.emitAndAssertExpectedErrors(totalListeners, expectedErrors)
+	}
+
+	@test()
+	protected static async reportsBackOneErrorOneSuccessFromListeners() {
+		this.emitter.on('eventOne', () => {
+			throw new Error('oh no!')
+		})
+
+		this.emitter.on('eventOne', () => {})
+
+		const totalListeners = 2
+		const expectedErrors = ['oh no!', undefined]
+
+		await this.emitAndAssertExpectedErrors(totalListeners, expectedErrors)
+	}
+
+	@test()
+	protected static async reportsBackMultipleErrorsFromListeners() {
+		this.emitter.on('eventOne', () => {
+			throw new Error('oh no!')
+		})
+
+		this.emitter.on('eventOne', () => {})
+		this.emitter.on('eventOne', () => {
+			throw new Error('oh yes!')
+		})
+
+		const totalListeners = 3
+		const expectedErrors = ['oh no!', undefined, 'oh yes!']
+
+		await this.emitAndAssertExpectedErrors(totalListeners, expectedErrors)
+	}
+
+	private static async emitAndAssertExpectedErrors(
+		totalListeners: number,
+		expectedErrors: (string | undefined)[]
+	) {
+		let listenerResponses: Record<string, any>[] = []
+
+		const results = await this.emitter.emit('eventOne', (response) => {
+			listenerResponses.push(response)
+		})
+
+		listenerResponses = listenerResponses.sort((a, b) =>
+			a.responseIdx > b.responseIdx ? 1 : -1
+		)
+		this.assertExpectedErrors(
+			listenerResponses,
+			totalListeners,
+			expectedErrors,
+			results
+		)
+	}
+
+	private static assertExpectedErrors(
+		listenerResponses: Record<string, any>[],
+		totalListeners: number,
+		expectedErrors: (string | undefined)[],
+		results: any
+	) {
+		assert.isLength(listenerResponses, totalListeners)
+
+		let idx = 0
+		for (const listenerResponse of listenerResponses) {
+			assert.doesInclude(listenerResponse, {
+				totalContracts: totalListeners,
+				responseIdx: idx,
+			})
+
+			const errorMessage = expectedErrors[idx]
+			if (errorMessage) {
+				this.assertError(listenerResponse.error, 'LISTENER_ERROR', {
+					listenerIdx: idx,
+				})
+
+				assert.doesInclude(
+					listenerResponse.error.originalError?.message,
+					errorMessage
+				)
+			}
+
+			idx++
+		}
+
+		assert.doesInclude(results, {
+			totalContracts: totalListeners,
+			totalResponses: totalListeners,
+			totalErrors: expectedErrors.filter((err) => !!err).length,
+		})
+
+		assert.isLength(results.responses, totalListeners)
+
+		idx = 0
+		for (const response of results.responses) {
+			if (expectedErrors[idx]) {
+				const error = response.error
+				assert.isTruthy(error)
+
+				this.assertError(error, 'LISTENER_ERROR', { listenerIdx: idx })
+
+				assert.doesInclude(error.originalError?.message, expectedErrors[idx])
+			}
+			idx++
+		}
+	}
+
+	private static assertError(
+		error: SpruceError,
+		expectedCode: string,
+		expectedPartialOptions?: Record<string, any>
+	) {
+		if (error.options.code === expectedCode) {
+			if (expectedPartialOptions) {
+				assert.doesInclude(error.options, expectedPartialOptions)
+			}
+		} else {
+			assert.fail(
+				`Invalid error code. Expected ${expectedCode} but got ${error.options.code}`
+			)
+		}
 	}
 }
