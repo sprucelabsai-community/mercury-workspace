@@ -6,6 +6,7 @@ import MercuryClient, {
 	EventSignature,
 	ContractMapper,
 	KeyOf,
+	DeepReadonly,
 } from './mercury.types'
 
 export default class TestClient<Contract extends MercuryContract>
@@ -51,7 +52,9 @@ export default class TestClient<Contract extends MercuryContract>
 	public on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends EventSignature = MappedContract[EventName],
+		IEventSignature extends DeepReadonly<
+			EventSignature
+		> = MappedContract[EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayload'] extends ISchema
 			? IEventSignature['emitPayload']
 			: never

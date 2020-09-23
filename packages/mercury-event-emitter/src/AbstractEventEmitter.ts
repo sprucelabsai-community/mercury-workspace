@@ -1,3 +1,4 @@
+import AbstractSpruceError from '@sprucelabs/error'
 import {
 	ContractMapper,
 	EmitCallback,
@@ -6,8 +7,11 @@ import {
 	MercuryAggregateResponse,
 	MercuryClient,
 	MercuryContract,
+	DeepReadonly,
+	MercurySingleResponse,
 } from '@sprucelabs/mercury-types'
-import { ISchema, SchemaValues } from '@sprucelabs/schema'
+import { ISchema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
+import SpruceError from './errors/SpruceError'
 
 export default class AbstractEventEmitter<Contract extends MercuryContract>
 	implements MercuryClient<Contract> {
@@ -20,22 +24,18 @@ export default class AbstractEventEmitter<Contract extends MercuryContract>
 
 	public constructor(contract: MercuryContract) {
 		this.contract = contract
-		console.log(this.contract)
 	}
 
 	public async emit<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends EventSignature = MappedContract[EventName],
-		EmitSchema extends
-			| ISchema
-			| never = IEventSignature['emitPayload'] extends ISchema
+		IEventSignature extends DeepReadonly<EventSignature> = DeepReadonly<
+			MappedContract[EventName]
+		>,
+		EmitSchema extends ISchema = IEventSignature['emitPayload'] extends ISchema
 			? IEventSignature['emitPayload']
 			: never,
-		EmitPayload = EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never,
-		ResponseSchema extends
-			| ISchema
-			| never = IEventSignature['responsePayload'] extends ISchema
+		ResponseSchema extends ISchema = IEventSignature['responsePayload'] extends ISchema
 			? IEventSignature['responsePayload']
 			: never,
 		ResponsePayload = ResponseSchema extends ISchema
@@ -43,29 +43,164 @@ export default class AbstractEventEmitter<Contract extends MercuryContract>
 			: never
 	>(
 		eventName: EventName,
-		payload:
-			| (EmitPayload extends SchemaValues<EmitSchema>
+		payload?:
+			| (EmitSchema extends SchemaValues<EmitSchema>
 					? SchemaValues<EmitSchema>
 					: never)
-			| EmitCallback<MappedContract, EventName>
-			| undefined,
-		cb?: EmitCallback<MappedContract, EventName> | undefined
+			| EmitCallback<MappedContract, EventName>,
+		cb?: EmitCallback<MappedContract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
-		console.log(eventName, payload, cb)
+		const { actualPayload, actualCallback } = this.normalizePayloadAndCallback(
+			payload,
+			cb
+		)
+
+		const eventSignature = this.findEventSignatureByName(eventName)
+		const emitSchema = eventSignature.emitPayload
+
+		this.validatePayload(emitSchema, actualPayload, eventName)
+
 		const listeners = this.listenersByEvent[eventName] || []
-		const responses = await Promise.all(listeners.map((cb) => cb(payload)))
+		let totalErrors = 0
+
+		const responses = await Promise.all(
+			listeners.map(async (listenerCb, idx) => {
+				const response = await this.emitOne<EventName>({
+					idx,
+					listenerCb,
+					payload: actualPayload,
+					totalContracts: listeners.length,
+					actualCallback,
+				})
+
+				if (response.error) {
+					totalErrors++
+				}
+
+				return response
+			})
+		)
 
 		return {
 			totalContracts: listeners.length,
 			totalResponses: listeners.length,
+			totalErrors,
 			responses,
 		} as MercuryAggregateResponse<ResponsePayload>
+	}
+
+	private async emitOne<
+		EventName extends KeyOf<MappedContract>,
+		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
+		IEventSignature extends DeepReadonly<EventSignature> = DeepReadonly<
+			MappedContract[EventName]
+		>,
+		ResponseSchema extends ISchema = IEventSignature['responsePayload'] extends ISchema
+			? IEventSignature['responsePayload']
+			: never,
+		ResponsePayload = ResponseSchema extends ISchema
+			? SchemaValues<ResponseSchema>
+			: never
+	>(options: {
+		idx: number
+		listenerCb: (payload?: any) => Promise<ResponsePayload>
+		actualCallback?: () => void
+		payload?: Record<string, any>
+		totalContracts: number
+	}): Promise<Partial<MercurySingleResponse<ResponsePayload>>> {
+		let responsePayload: ResponsePayload | undefined
+		let error: AbstractSpruceError<any> | undefined
+
+		try {
+			responsePayload = await options.listenerCb(options.payload)
+		} catch (err) {
+			error = new SpruceError({
+				code: 'LISTENER_ERROR',
+				originalError: err,
+				listenerIdx: options.idx,
+			})
+		}
+
+		if (typeof options.actualCallback === 'function') {
+			const emitCallbackPayload: MercurySingleResponse<any> = {
+				totalContracts: options.totalContracts,
+				responseIdx: options.idx,
+			}
+
+			if (responsePayload) {
+				emitCallbackPayload.payload = responsePayload
+			}
+
+			if (error) {
+				emitCallbackPayload.error = error
+			}
+
+			await (options.actualCallback as EmitCallback<MappedContract, EventName>)(
+				emitCallbackPayload
+			)
+		}
+
+		const response: Partial<MercurySingleResponse<ResponsePayload>> = {
+			payload: responsePayload,
+		}
+
+		if (error) {
+			response.error = error
+		}
+
+		return response
+	}
+
+	private validatePayload(
+		schema: DeepReadonly<ISchema> | undefined | null,
+		actualPayload: any,
+		eventName: string
+	) {
+		if (schema) {
+			try {
+				//@ts-ignore
+				validateSchemaValues(schema, actualPayload ?? {})
+			} catch (err) {
+				throw new SpruceError({
+					code: 'INVALID_PAYLOAD',
+					originalError: err,
+					eventNameWithOptionalNamespace: eventName,
+				})
+			}
+		}
+	}
+
+	private getValidEventNames() {
+		return this.contract.eventSignatures.map(
+			(e) => e.eventNameWithOptionalNamespace
+		)
+	}
+
+	private findEventSignatureByName(eventName: string) {
+		const sig = this.contract.eventSignatures.find(
+			(sig) => sig.eventNameWithOptionalNamespace === eventName
+		)
+
+		if (!sig) {
+			const validNames = this.getValidEventNames()
+			throw new SpruceError({ code: 'INVALID_EVENT_NAME', validNames })
+		}
+
+		return sig
+	}
+
+	private normalizePayloadAndCallback(payload: any, cb: any) {
+		const actualPayload = typeof payload !== 'function' ? payload : undefined
+		const actualCallback = typeof payload === 'function' ? payload : cb
+		return { actualPayload, actualCallback }
 	}
 
 	public on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends EventSignature = MappedContract[EventName],
+		IEventSignature extends DeepReadonly<
+			EventSignature
+		> = MappedContract[EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayload'] extends ISchema
 			? IEventSignature['emitPayload']
 			: never
