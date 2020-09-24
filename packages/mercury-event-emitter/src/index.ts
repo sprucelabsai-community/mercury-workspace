@@ -1,1 +1,1 @@
-console.log('hello world')
+export { default as AbstractEventEmitter } from './AbstractEventEmitter'
