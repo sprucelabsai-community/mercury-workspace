@@ -2324,18 +2324,18 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.29.21":
-  version "10.29.21"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.29.21.tgz#bae8fcf0c9e1239df929ca96d53ebde3c6e37c0f"
-  integrity sha512-UEiwOAFymFBpsTMb/qqun/JXj9Xw9iYwHE/d3EvinnJZRs0WmrkBGQ7f3pSszZZdd8xqIbXy9dQk6NglferXdg==
+"@sprucelabs/spruce-core-schemas@^10.29.22":
+  version "10.29.22"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.29.22.tgz#a153fd0f469d81b1dc566269facd9d27842dc182"
+  integrity sha512-aq0Zg3aBKRUVPOdO9epm7Su/Bc/zw6SC8U4M3aSAZSshr7PIje34jWiBjcBySN8NpFq7I5evC7CHUjvz5cz8xQ==
   dependencies:
     "@sprucelabs/error" "^2.2.336"
     "@sprucelabs/schema" "^12.0.50"
 
-"@sprucelabs/spruce-skill-utils@^10.29.21":
-  version "10.29.21"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.29.21.tgz#be43f91f94e6deab258e9ebe00cd1566b3c5588d"
-  integrity sha512-CsXhujVR6Mco2UmmN8wtWo6BF2l9z9WljoUQtbVquplj+Kwi7iEGW8TRrnMc6e3BG7Gd7mN1rpe9waFLnPhLag==
+"@sprucelabs/spruce-skill-utils@^10.29.22":
+  version "10.29.22"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.29.22.tgz#0ab79b226e80700485560acbb7abfab667eb3efb"
+  integrity sha512-Q3HI59RDCNh33ew5OgegNS7ETOz8ZH6wRxGXcUPgfkW6UGVJpx6BBJTIEYhD+veTwIEuvIY8DgqvFi9wCZfLNw==
   dependencies:
     "@sprucelabs/error" "^2.2.336"
     fs-extra "^9.0.1"
@@ -2378,9 +2378,9 @@
     typescript "~3.9.7"
 
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
-  version "7.1.9"
-  resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.9.tgz#77e59d438522a6fb898fa43dc3455c6e72f3963d"
-  integrity sha512-sY2RsIJ5rpER1u3/aQ8OFSI7qGIy8o1NEEbgb2UaJcvOtXOMpd39ko723NBpjQFg9SIX7TXtjejZVGeIMLhoOw==
+  version "7.1.10"
+  resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.10.tgz#ca58fc195dd9734e77e57c6f2df565623636ab40"
+  integrity sha512-x8OM8XzITIMyiwl5Vmo2B1cR1S1Ipkyv4mdlbJjMa1lmuKvKY9FrBbEANIaMlnWn5Rf7uO+rC/VgYabNkE17Hw==
   dependencies:
     "@babel/parser" "^7.1.0"
     "@babel/types" "^7.0.0"
@@ -2396,9 +2396,9 @@
     "@babel/types" "^7.0.0"
 
 "@types/babel__template@*":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@types/babel__template/-/babel__template-7.0.2.tgz#4ff63d6b52eddac1de7b975a5223ed32ecea9307"
-  integrity sha512-/K6zCpeW7Imzgab2bLkLEbz0+1JlFSrUMdw7KoIIu+IUdu51GWaBZpd3y1VXGVXzynvGa4DaIaxNZHiON3GXUg==
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@types/babel__template/-/babel__template-7.0.3.tgz#b8aaeba0a45caca7b56a5de9459872dde3727214"
+  integrity sha512-uCoznIPDmnickEi6D0v11SBpW0OuVqHJCa7syXqQHy5uktSCreIlt0iglsCnmvz8yCb38hGcWeseA8cWJSwv5Q==
   dependencies:
     "@babel/parser" "^7.1.0"
     "@babel/types" "^7.0.0"
