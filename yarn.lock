@@ -2292,15 +2292,15 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.335":
-  version "2.2.335"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.335.tgz#38a8310bb60d8a80cd3f4174961846601cb8a40e"
-  integrity sha512-+Yo06bMJcBgvwLPqRV6sNQFzuDfR8iSzXb6e0Vju8SiBkVyU+PPNxy8cvM6y/+jtZHxnfETo+GN4X1G2JAJvfA==
+"@sprucelabs/error@^2.2.335", "@sprucelabs/error@^2.2.336":
+  version "2.2.336"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.336.tgz#f8149f74d8f33ebab233b13f3bdaa069e81c8e24"
+  integrity sha512-BrdFpUE8FZFrN1wIF/v0uOBkSjJLqzSy0jpzFuKCvbW3PD5z3YT+nLtFqKdG/Zv+anTW9MevRhWtb/72JvWj/g==
 
-"@sprucelabs/log@^10.2.241":
-  version "10.2.241"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.241.tgz#e22477fbf8096a70743e90e0f81f8e7f23b9c684"
-  integrity sha512-j8X2jphMgaqkyrnnPbZPLOr7dK8FZ3o2SpFVfJnPqXVda+2zXqYOlgSO4QDFMDqZAX+ddiyDw/175hwlvCLfxw==
+"@sprucelabs/log@^10.2.241", "@sprucelabs/log@^10.2.242":
+  version "10.2.242"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.242.tgz#b480452442f967f1847a05dc1e2ca1c3f96b5657"
+  integrity sha512-Xt5CiuHn7bJWMfVAfPUkQspa3KnNTmTiHaARaMCRKL9E16YBZwKl/w8y5a+CqhWcFyD5/14UP1jtaTiMcSN7GQ==
 
 "@sprucelabs/schema@^12.0.49":
   version "12.0.49"
@@ -2430,7 +2430,7 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
-"@types/faker@^5.1.1":
+"@types/faker@^5.1.2":
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/@types/faker/-/faker-5.1.2.tgz#3d5a97d5648502d7fb1eeb2809ca105edcd0d59b"
   integrity sha512-a3FADSHjjinczCwr7tTejoMZzbSS5vi70VCyns4C1idxJrDSRGZCQG0s27YppXLcoWrBOkwBbBsZ9vDRDpQK7A==
@@ -10391,10 +10391,10 @@ rollup-pluginutils@^2.3.1, rollup-pluginutils@^2.6.0:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.28.1:
-  version "2.28.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.28.1.tgz#ceedca3cdb013c2fa8f22f958a29c203368159ea"
-  integrity sha512-DOtVoqOZt3+FjPJWLU8hDIvBjUylc9s6IZvy76XklxzcLvAQLtVAG/bbhsMhcWnYxC0TKKcf1QQ/tg29zeID0Q==
+rollup@^2.28.2:
+  version "2.28.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.28.2.tgz#599ec4978144a82d8a8ec3d37670a8440cb04e4b"
+  integrity sha512-8txbsFBFLmm9Xdt4ByTOGa9Muonmc8MfNjnGAR8U8scJlF1ZW7AgNZa7aqBXaKtlvnYP/ab++fQIq9dB9NWUbg==
   optionalDependencies:
     fsevents "~2.1.2"
 
