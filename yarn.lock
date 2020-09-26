@@ -2292,10 +2292,10 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.344", "@sprucelabs/error@^2.2.347":
-  version "2.2.347"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.347.tgz#74075ad68a47cc85ce8880abcebefbbc41bce8cf"
-  integrity sha512-o8su2NA0DDinJJvTpdno765APulhiQA5BF2Txv7y+g6xM7QEmYgIyneE2DUbRz2QnOWTG00cwXtkly6Q5OB1qQ==
+"@sprucelabs/error@^2.2.344", "@sprucelabs/error@^2.2.347", "@sprucelabs/error@^2.2.348":
+  version "2.2.348"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.348.tgz#859985b38d6d4fe72b3a8e6389a043d09287c988"
+  integrity sha512-Yxxag66piDy1W4LhazEp3jyEozMmTUotOWEm1S5wKXpoU022+FHHFK+OrA4rrBRwW8CJqcqR5o7mJBzfRqZq6Q==
 
 "@sprucelabs/log@^10.2.245":
   version "10.2.245"
@@ -2343,10 +2343,10 @@
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^7.0.61":
-  version "7.0.61"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.61.tgz#6c42ddb85c7ce63666fe0140762b3b6298779c1c"
-  integrity sha512-FexjUbbwC78mX2Sthgp7pWjWBjyBlloUN8CGU2sXXTwXFcljwsFblq3hfZ9rZ5gWu5VbqzfiT46NFeNBHWvRFA==
+"@sprucelabs/test@^7.0.62":
+  version "7.0.62"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.62.tgz#ef5615fb2d85f09d053e80f519ab75bd23971da2"
+  integrity sha512-FCap9UvtGa3HXDMC7RwkJeEVsuVZhKOU1KVWzESMrrm05jFwD6aNx4s9ra7QkS4y6cR5skrr6Zdh3zzqrVBcBw==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
