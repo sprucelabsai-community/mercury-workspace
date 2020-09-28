@@ -2292,23 +2292,23 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.344", "@sprucelabs/error@^2.2.357":
-  version "2.2.357"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.357.tgz#17a8a7a6735de69991581ea13c9415ec4c1c87e6"
-  integrity sha512-tg927xUwrTmstilj5VSISrMjAU43pc5BHoALmRsXmZzGr7pe+yceIwtSiwYC0cobzA32yz+CVwcGYP0egOTpAg==
+"@sprucelabs/error@^2.2.344", "@sprucelabs/error@^2.2.358":
+  version "2.2.358"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.358.tgz#ed34096b6a39b31872d83d38d6a3b2198c1a5fe9"
+  integrity sha512-anncSL6wDCUL71aGOorVbqwSVEQNxbC99UnDpIud2MO+SAJfot2yOkJKgkNkgKMDzNtFVVoeRbH2W6itVbuZ3w==
 
-"@sprucelabs/log@^10.2.250":
-  version "10.2.250"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.250.tgz#7232d2eb7322a30a8be52cd4d49fcf421448d81c"
-  integrity sha512-5T4746v0mh7X/yDYTzOsRZ9zC2ZbKQqEGT19i/eeO/kG4Hw5r6N/MafuCPuJKQl/H3+tQMBofkI4LyD57OJyHA==
+"@sprucelabs/log@^10.2.251":
+  version "10.2.251"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.251.tgz#048e33084bcbc9aa65569b81969f5d790a173aac"
+  integrity sha512-UdNeFlsCees/U7DnMW1PAiszy/GpoUq/lnerEgIg41WF9QnjJc0hMZNmt9rTuuKZaEJM3qlmbZyha4EeUjWnNA==
 
 "@sprucelabs/schema@^12.0.59", "@sprucelabs/schema@^12.2.12":
-  version "12.2.12"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.2.12.tgz#53099dd67ea03dc04e30c3d006c9ca1b29638a48"
-  integrity sha512-26bUPgurgqrlVPcb0qlIBPukGZnFG0e0YY/nvQ78z8O3XKufKna66sCNTeJxvgH36Ew0unq/evDY//xwZBqOGg==
+  version "12.2.13"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.2.13.tgz#dd13834b8f46275147531bafcbf8b448de877d2c"
+  integrity sha512-OiynoWvTExiTLUM9IEMBnyMqPj0Bny7tq+bdTi+NE1hwA2QARgC4b3KdxRXe5XnLI6PHKqnpHUKTHr8Sae/PnQ==
   dependencies:
-    "@sprucelabs/error" "^2.2.357"
-    "@sprucelabs/log" "^10.2.250"
+    "@sprucelabs/error" "^2.2.358"
+    "@sprucelabs/log" "^10.2.251"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.8.1"
     mime-db "^1.45.0"
@@ -2343,10 +2343,10 @@
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^7.0.67":
-  version "7.0.67"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.67.tgz#da96aba2d85b9f3697a1b5afae27ee97433d0626"
-  integrity sha512-phQTp2YPaHQweoaR/Z26OOqReOzTWUGlf+PrKkZZMsJVA84oTTMqrmaGPcKDV258XU0CZi03Jh2+N90I3VhGSg==
+"@sprucelabs/test@^7.0.68":
+  version "7.0.68"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.68.tgz#d1b41e159875ff9d9ece4925632b44849932ff07"
+  integrity sha512-4dTuDsPDmzwPjsmmB5VVlBO8LflbCqVRFYxZacF6ntBieCTpf6kFS8G5gkfqETeM8GPuBpiDwwhP61d0E5XyGw==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -8160,9 +8160,9 @@ marked-terminal@^4.0.0:
     supports-hyperlinks "^2.1.0"
 
 marked@^1.0.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-1.1.1.tgz#e5d61b69842210d5df57b05856e0c91572703e6a"
-  integrity sha512-mJzT8D2yPxoPh7h0UXkB+dBj4FykPJ2OIfxAWeIHrvoHDkFxukV/29QxoFQoPM6RLEwhIFdJpmKBlqVM3s2ZIw==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-1.2.0.tgz#7221ce2395fa6cf6d722e6f2871a32d3513c85ca"
+  integrity sha512-tiRxakgbNPBr301ihe/785NntvYyhxlqcL3YaC8CaxJQh7kiaEtrN9B/eK2I2943Yjkh5gw25chYFDQhOMCwMA==
 
 md5.js@^1.3.4:
   version "1.3.5"
