@@ -2292,22 +2292,22 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.344", "@sprucelabs/error@^2.2.362", "@sprucelabs/error@^2.2.363":
-  version "2.2.363"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.363.tgz#920265024d654c35eb4c73c861d0622b1b3d18e1"
-  integrity sha512-z066ZgyzmAnRBEOu/pA6JfrWzVxDMrV11WTYlkTE1kyX/QvR8jvnpH7vgZDZhbLcttPTZe8w9ixvKsP2gEkI7A==
+"@sprucelabs/error@^2.2.344", "@sprucelabs/error@^2.2.363", "@sprucelabs/error@^2.2.364":
+  version "2.2.364"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.364.tgz#92d3cd88c3af9268a9c24dc176723084e281c1c7"
+  integrity sha512-TIq/GYl3e5wlHksR8IAOeX4fQNMMEfTkbzutQy/7aGKIS98vZ4U0RcM38ayIXxDIXQJIGnM+BOcgc/zUUy6YIg==
 
-"@sprucelabs/log@^10.2.252":
-  version "10.2.252"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.252.tgz#a8099aeb31450c2b70fe2098f897d2fc93ec9fbd"
-  integrity sha512-79RZCCtllTZPJbBF3dKcPkyw/kWiNhACvtBouIqBsKQqc/NPVRPzT2n7et7C0jZQTYqsImI74LneAumcg4eADQ==
+"@sprucelabs/log@^10.2.252", "@sprucelabs/log@^10.2.253":
+  version "10.2.253"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.253.tgz#10665214110c09bb736540fe18c767217408f4d9"
+  integrity sha512-7SjH9usidX6N2UVg2ttKg2WBJb75Tp79/+jpZVByrjxOSVVZwSJv8M5yfm9L7ratGePiI5uMbLGR1NuIjgm19Q==
 
-"@sprucelabs/schema@^12.0.59", "@sprucelabs/schema@^12.3.3":
-  version "12.3.3"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.3.3.tgz#a64b2ee9ef96f607f3ccee6ac1a8bbcd96e62b4e"
-  integrity sha512-ku9HTvziKMeYZ820q6XSY4RWibTHEd6iRb0i16KDHTTw9Bi2nRROQnsI3cF2rDhyNlCl2aamNTBw4D3cATdkWw==
+"@sprucelabs/schema@^12.0.59", "@sprucelabs/schema@^12.3.4":
+  version "12.3.4"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.3.4.tgz#722fc771e67829558078046eaea2a036d39749fd"
+  integrity sha512-SvxLPtUryV2gkcW+cZCaZGnguBk24iVOh7kmH0qMFPqXlO+gYnVXy7UWh5leaHP5lUqFCpVal3oTZSGt4Y6ERQ==
   dependencies:
-    "@sprucelabs/error" "^2.2.362"
+    "@sprucelabs/error" "^2.2.363"
     "@sprucelabs/log" "^10.2.252"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.8.1"
@@ -2343,10 +2343,10 @@
     lodash "^4.17.20"
     uuid "^8.3.0"
 
-"@sprucelabs/test@^7.0.70":
-  version "7.0.70"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.70.tgz#b2a50b72f125213021202ee13a111550913b1561"
-  integrity sha512-jKvEsYXBSTjyIfq3vFe4qrbxQmOw3w84dLZytvjCdxALOhNtI+/qOAUforBIpfsEVFk6kIbjpw2IFRuDkzN+tw==
+"@sprucelabs/test@^7.0.71":
+  version "7.0.71"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.71.tgz#3d3cae23480a1c2f2667b316cb6c3a426005ee81"
+  integrity sha512-Rwentefn/1Ktgv+UEYYzbNeQDlP8rUGPemSyvn0SithT95pjfFWZZTD3QDLdgGMg/riNmHyBWrPEEhzIu6NAbQ==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -8644,9 +8644,9 @@ normalize-url@^3.3.0:
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
 
 normalize-url@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-5.1.0.tgz#04b8f1b34ea49ff713fc20b2218eba41fb9974a3"
-  integrity sha512-UxHuSWsSAmzSqN+DSjasaZWQ3QPtEisHdlr4y9MJ5zg0RcImv5fQt8QM0izJSCdsdmhJGK+ubcTpJXwVDmwSVQ==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-5.2.0.tgz#a7e3e6cd90965e262500cc8a417de7bcb0c7f5af"
+  integrity sha512-7V6qmM0KFWk+W7lwWSVZg16kDxa0/CUhtNpNuEwjpNnbKIdjWm+9TbBTfkH2smnFakLAbZ8sh9cQ5xhcLbkd0g==
 
 npm-audit-report@^1.3.3:
   version "1.3.3"
