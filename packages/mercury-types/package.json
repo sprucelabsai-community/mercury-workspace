@@ -38,9 +38,9 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.368",
+		"@sprucelabs/error": "^2.2.369",
 		"@sprucelabs/log": "^10.2.253",
-		"@sprucelabs/schema": "^12.3.8",
+		"@sprucelabs/schema": "^12.3.10",
 		"@sprucelabs/spruce-core-schemas": "^10.30.0",
 		"@sprucelabs/spruce-skill-utils": "^10.30.0"
 	},
