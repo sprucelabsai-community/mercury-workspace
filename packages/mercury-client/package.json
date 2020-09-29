@@ -45,7 +45,7 @@
 		"@sprucelabs/semantic-release": "^4.0.5",
 		"@types/debug": "^4.1.5",
 		"@types/faker": "^5.1.2",
-		"@types/socket.io-client": "^1.4.33",
+		"@types/socket.io-client": "^1.4.34",
 		"arkit": "^1.6.4",
 		"chokidar-cli": "^2.1.0",
 		"concurrently": "^5.3.0",
