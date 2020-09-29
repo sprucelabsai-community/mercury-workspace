@@ -38,7 +38,7 @@
 	"dependencies": {
 		"@sprucelabs/error": "^2.2.367",
 		"@sprucelabs/mercury-types": "^1.11.60",
-		"@sprucelabs/schema": "^12.3.7"
+		"@sprucelabs/schema": "^12.3.8"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
