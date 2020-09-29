@@ -2,12 +2,12 @@
 /* eslint-disable no-redeclare */
 
 import { default as SchemaEntity } from '@sprucelabs/schema'
-export { SpruceSchemas } from '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/schemas.types'
+export { SpruceSchemas } from '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types'
 
 import * as SpruceSchema from '@sprucelabs/schema'
 
 
-declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/schemas.types' {
+declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
 
 
 	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
