@@ -21,7 +21,9 @@ export type EventSignature = DeepReadonly<
 export type MercuryContract = DeepReadonly<
 	SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContract
 >
-export type Permission = SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
+export type Permission = DeepReadonly<
+	SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
+>
 type Statuses = typeof authorizerStatuses
 export type AuthorizerStatus = Statuses[number]['name']
 export type PermissionContract = SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract
