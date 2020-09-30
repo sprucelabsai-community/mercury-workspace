@@ -11,8 +11,8 @@ export type DeepReadonly<T> = T extends (infer R)[]
 	: T extends Record<string, any>
 	? DeepReadonlyObject<T>
 	: T
-interface DeepReadonlyArray<T> extends ReadonlyArray<DeepReadonly<T>> {}
-type DeepReadonlyObject<T> = {
+export interface DeepReadonlyArray<T> extends ReadonlyArray<DeepReadonly<T>> {}
+export type DeepReadonlyObject<T> = {
 	readonly [P in keyof T]: DeepReadonly<T[P]>
 }
 export type EventSignature = DeepReadonly<
