@@ -1,6 +1,6 @@
 // AUTO-GENERATED. ALL CHANGES WILL BE OVERWRITTEN
 import pathUtil from 'path'
-import { IHealthCheckResults, ISkill, ISkillFeature } from '@sprucelabs/spruce-skill-utils'
+import { HealthCheckResults, ISkill, ISkillFeature } from '@sprucelabs/spruce-skill-utils'
 
 
 export class Skill implements ISkill {
@@ -24,8 +24,8 @@ export class Skill implements ISkill {
 		this.featureMap[featureCode] = feature
 	}
 
-	public checkHealth = async (): Promise<IHealthCheckResults> => {
-		const results: IHealthCheckResults = {
+	public checkHealth = async (): Promise<HealthCheckResults> => {
+		const results: HealthCheckResults = {
 			skill: {
 				status: 'passed'
 			}
@@ -35,7 +35,7 @@ export class Skill implements ISkill {
 			const isInstalled = await featureWithCode.feature.isInstalled()
 			if (isInstalled) {
 				const item = await featureWithCode.feature.checkHealth()
-
+				//@ts-ignore
 				results[featureWithCode.code] = item
 			}
 
