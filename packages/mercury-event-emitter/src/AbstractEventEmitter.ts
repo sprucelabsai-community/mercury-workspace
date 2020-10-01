@@ -122,10 +122,7 @@ export default class AbstractEventEmitter<Contract extends MercuryContract>
 		}
 
 		if (typeof options.actualCallback === 'function') {
-			const emitCallbackPayload: MercurySingleResponse<any> = {
-				totalContracts: options.totalContracts,
-				responseIdx: options.idx,
-			}
+			const emitCallbackPayload: MercurySingleResponse<any> = {}
 
 			if (responsePayload) {
 				emitCallbackPayload.payload = responsePayload
