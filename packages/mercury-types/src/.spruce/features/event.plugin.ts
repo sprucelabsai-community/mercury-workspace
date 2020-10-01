@@ -1,103 +1,104 @@
-import pathUtil from 'path'
-import fs from 'fs'
-import { IHealthCheckItem, IEventFeatureListener, ISkillFeature, ISkill } from '@sprucelabs/spruce-skill-utils';
-import globby from 'globby'
-
+import pathUtil from "path";
+import fs from "fs";
+import {
+	EventHealthCheckItem,
+	IEventFeatureListener,
+	ISkillFeature,
+	ISkill,
+} from "@sprucelabs/spruce-skill-utils";
+import globby from "globby";
 
 export class EventSkillFeature implements ISkillFeature {
+	private skill: ISkill;
+	private eventsPath: string;
+	private listeners: IEventFeatureListener[] = [];
 
-    private skill: ISkill
-    private eventsPath: string
-    private listeners: IEventFeatureListener[] = []
+	constructor(skill: ISkill) {
+		this.skill = skill;
+		this.eventsPath = pathUtil.join(this.skill.activeDir, "events");
+	}
 
-    constructor(skill: ISkill) {
-        this.skill = skill
-        this.eventsPath = pathUtil.join(
-            this.skill.activeDir,
-            'events',
-        )
+	public execute = async () => {
+		await this.loadListeners();
 
-    }
+		const willBoot = this.getListener("skill", "will-boot");
+		const didBoot = this.getListener("skill", "did-boot");
 
-    public execute = async () => {
-        await this.loadListeners()
+		if (willBoot) {
+			await willBoot(this.skill);
+		}
 
-        const willBoot = this.getListener('skill', 'will-boot')
-        const didBoot = this.getListener('skill', 'did-boot')
+		if (didBoot) {
+			await didBoot(this.skill);
+		}
+	};
 
-        if (willBoot) {
-            await willBoot(this.skill)
-        }
+	public checkHealth = async () => {
+		await this.loadListeners();
 
-        if (didBoot) {
-            await didBoot(this.skill)
-        }
-    };
+		const health: EventHealthCheckItem = {
+			status: "passed",
+			listeners: this.listeners,
+		};
 
-    public checkHealth = async () => {
+		return health;
+	};
 
-        await this.loadListeners()
+	isInstalled = async () => {
+		const isInstalled = fs.existsSync(this.eventsPath);
+		return isInstalled;
+	};
 
-        const health: IHealthCheckItem = {
-            status: 'passed',
-            listeners: this.listeners,
-        }
+	private getListener(eventNamespace: string, eventName: string) {
+		const match = this.listeners.find(
+			(listener) =>
+				listener.eventNamespace === eventNamespace &&
+				listener.eventName === eventName
+		);
+		if (match) {
+			return match.callback;
+		}
 
+		return undefined;
+	}
 
-        return health
-    }
+	private async loadListeners() {
+		const listenerMatches = await globby(
+			`${this.eventsPath}/**/*.listener.[j|t]s`
+		);
+		const listeners: IEventFeatureListener[] = [];
 
-    isInstalled = async () => {
-        const isInstalled = fs.existsSync(this.eventsPath)
-        return isInstalled
-    }
+		listenerMatches.map((match) => {
+			const matchParts = match.split(pathUtil.sep);
+			const fileName = matchParts.pop() as string;
 
-    private getListener(eventNamespace: string, eventName: string) {
-        const match = this.listeners.find(listener => listener.eventNamespace === eventNamespace && listener.eventName === eventName);
-        if (match) {
-            return match.callback
-        }
+			const eventName = fileName.split(".")[0] as string;
+			const eventNamespace = matchParts.pop() as string;
+			const version = matchParts.pop() as string;
+			const callback = require(match).default as
+				| IEventFeatureListener["callback"]
+				| undefined;
 
-        return undefined
-    }
+			if (!callback || typeof callback !== "function") {
+				throw new Error(
+					`The plugin at ${match} is missing a default export that is a function`
+				);
+			}
 
-    private async loadListeners() {
+			listeners.push({
+				eventName,
+				eventNamespace,
+				version,
+				callback,
+			});
+		});
 
-        const listenerMatches = await globby(`${this.eventsPath}/**/*.listener.[j|t]s`)
-        const listeners: IEventFeatureListener[] = []
-
-        listenerMatches.map((match) => {
-            const matchParts = match.split(pathUtil.sep)
-            const fileName = matchParts.pop() as string
-
-            const eventName = fileName.split('.')[0] as string
-            const eventNamespace = matchParts.pop() as string
-            const version = matchParts.pop() as string
-            const callback = require(match).default as IEventFeatureListener['callback'] | undefined
-
-            if (!callback || typeof callback !== 'function') {
-                throw new Error(`The plugin at ${match} is missing a default export that is a function`)
-            }
-
-            listeners.push({
-                eventName,
-                eventNamespace,
-                version,
-                callback
-            })
-        })
-
-
-
-        this.listeners = listeners
-
-    }
-
-
+		this.listeners = listeners;
+	}
 }
 
 export default (skill: ISkill) => {
-    const feature = new EventSkillFeature(skill)
+	const feature = new EventSkillFeature(skill);
 
-    skill.registerFeature('event', feature)
-}
+	skill.registerFeature("event", feature);
+};
