@@ -49,7 +49,6 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 				assert.isType<string | undefined>(
 					response.payload?.responsePayloadField
 				)
-				assert.isType<number>(response.totalContracts)
 			}
 		)
 
@@ -66,7 +65,7 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 		})
 
 		assert.isType<never | undefined>(results.responses[0].payload)
-		assert.isEqual(results.responses[0].responderName, 'test')
+		assert.isEqual(results.responses[0].responderRef, 'test')
 	}
 
 	@test('On with contract with payload (always passes, types will fail')

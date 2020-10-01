@@ -262,15 +262,11 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		assert.isEqual(count, 2)
 		assert.isEqualDeep(payloads, [
 			{
-				totalContracts: 2,
-				responseIdx: 0,
 				payload: {
 					requiredTextField: 'foo bar',
 				},
 			},
 			{
-				totalContracts: 2,
-				responseIdx: 1,
 				payload: {
 					requiredTextField: 'hello world',
 				},
@@ -303,15 +299,11 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		assert.isEqual(count, 2)
 		assert.isEqualDeep(listenerResponses, [
 			{
-				totalContracts: 2,
-				responseIdx: 0,
 				payload: {
 					requiredTextField: 'foo bar',
 				},
 			},
 			{
-				totalContracts: 2,
-				responseIdx: 1,
 				payload: {
 					requiredTextField: 'hello world',
 				},
@@ -420,9 +412,6 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 			listenerResponses.push(response)
 		})
 
-		listenerResponses = listenerResponses.sort((a, b) =>
-			a.responseIdx > b.responseIdx ? 1 : -1
-		)
 		this.assertExpectedErrors(
 			listenerResponses,
 			totalListeners,
@@ -439,47 +428,15 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	) {
 		assert.isLength(listenerResponses, totalListeners)
 
-		let idx = 0
-		for (const listenerResponse of listenerResponses) {
-			assert.doesInclude(listenerResponse, {
-				totalContracts: totalListeners,
-				responseIdx: idx,
-			})
-
-			const errorMessage = expectedErrors[idx]
-			if (errorMessage) {
-				this.assertError(listenerResponse.error, 'LISTENER_ERROR', {
-					listenerIdx: idx,
-				})
-
-				assert.doesInclude(
-					listenerResponse.error.originalError?.message,
-					errorMessage
-				)
-			}
-
-			idx++
-		}
-
 		assert.doesInclude(results, {
 			totalContracts: totalListeners,
 			totalResponses: totalListeners,
 			totalErrors: expectedErrors.filter((err) => !!err).length,
 		})
 
-		assert.isLength(results.responses, totalListeners)
-
-		idx = 0
-		for (const response of results.responses) {
-			if (expectedErrors[idx]) {
-				const error = response.error
-				assert.isTruthy(error)
-
-				this.assertError(error, 'LISTENER_ERROR', { listenerIdx: idx })
-
-				assert.doesInclude(error.originalError?.message, expectedErrors[idx])
-			}
-			idx++
+		for (const err of expectedErrors) {
+			assert.doesInclude(listenerResponses, { 'error.message': err })
+			assert.doesInclude(results.responses, { 'error.message': err })
 		}
 	}
 

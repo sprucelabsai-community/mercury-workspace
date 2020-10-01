@@ -38,7 +38,7 @@ export default class TestClient<Contract extends MercuryContract>
 			totalResponses: 1,
 			responses: [
 				{
-					responderName: 'test',
+					responderRef: 'test',
 					payload: {
 						responsePayloadField: 'hello',
 					},
