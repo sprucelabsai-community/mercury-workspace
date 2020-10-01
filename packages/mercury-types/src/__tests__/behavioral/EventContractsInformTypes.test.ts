@@ -52,6 +52,7 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 			}
 		)
 
+		assert.isTruthy(results.responses[0].payload)
 		assert.isType<string>(results.responses[0].payload.responsePayloadField)
 	}
 
