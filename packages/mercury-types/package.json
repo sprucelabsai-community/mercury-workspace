@@ -38,15 +38,15 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.374",
-		"@sprucelabs/log": "^10.2.253",
-		"@sprucelabs/schema": "^12.4.16",
-		"@sprucelabs/spruce-core-schemas": "^10.30.2",
-		"@sprucelabs/spruce-skill-utils": "^10.30.0"
+		"@sprucelabs/error": "^2.2.388",
+		"@sprucelabs/log": "^10.2.257",
+		"@sprucelabs/schema": "^12.4.38",
+		"@sprucelabs/spruce-core-schemas": "^10.31.18",
+		"@sprucelabs/spruce-skill-utils": "^10.31.18"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^7.0.78",
+		"@sprucelabs/test": "^7.0.88",
 		"eslint": "^7.10.0",
 		"jest": "^26.4.2",
 		"typescript": "^4.0.3"
