@@ -1,7 +1,7 @@
 import fs from 'fs'
 import pathUtil from 'path'
 import {
-	IHealthCheckItem,
+	HealthCheckItem,
 	ISkillFeature,
 	ISkill,
 } from '@sprucelabs/spruce-skill-utils'
@@ -16,7 +16,7 @@ class SchemaSkillFeature implements ISkillFeature {
 	public execute = async () => {}
 
 	public checkHealth = async () => {
-		const status: IHealthCheckItem['status'] = 'passed'
+		const status: HealthCheckItem['status'] = 'passed'
 		return {
 			status,
 		}
