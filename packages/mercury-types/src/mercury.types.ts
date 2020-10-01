@@ -31,11 +31,7 @@ export type MercuryAggregateResponse<Payload> = {
 	totalContracts: number
 	totalResponses: number
 	totalErrors: number
-	responses: {
-		responderRef?: string
-		error?: AbstractSpruceError
-		payload: Payload
-	}[]
+	responses: MercurySingleResponse<Payload>[]
 }
 export interface MercurySingleResponse<Payload> {
 	responderRef?: string
