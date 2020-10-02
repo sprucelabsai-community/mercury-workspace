@@ -391,13 +391,14 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 			throw new Error('oh no!')
 		})
 
-		this.emitter.on('eventOne', () => {})
 		this.emitter.on('eventOne', () => {
 			throw new Error('oh yes!')
 		})
 
+		this.emitter.on('eventOne', () => {})
+
 		const totalListeners = 3
-		const expectedErrors = ['oh no!', undefined, 'oh yes!']
+		const expectedErrors = ['oh no!', 'oh yes!', undefined]
 
 		await this.emitAndAssertExpectedErrors(totalListeners, expectedErrors)
 	}
@@ -434,9 +435,16 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 			totalErrors: expectedErrors.filter((err) => !!err).length,
 		})
 
+		let idx = 0
 		for (const err of expectedErrors) {
-			assert.doesInclude(listenerResponses, { 'error.message': err })
-			assert.doesInclude(results.responses, { 'error.message': err })
+			if (!err) {
+				assert.isFalsy(listenerResponses[idx].errors)
+				assert.isFalsy(results.responses[idx].errors)
+			} else {
+				assert.doesInclude(listenerResponses[idx], { 'errors[].message': err })
+				assert.doesInclude(results.responses[idx], { 'errors[].message': err })
+			}
+			idx++
 		}
 	}
 

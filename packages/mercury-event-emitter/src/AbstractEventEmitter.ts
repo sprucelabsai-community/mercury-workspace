@@ -73,8 +73,8 @@ export default class AbstractEventEmitter<Contract extends MercuryContract>
 					actualCallback,
 				})
 
-				if (response.error) {
-					totalErrors++
+				if (response.errors) {
+					totalErrors += response.errors.length
 				}
 
 				return response
@@ -129,7 +129,7 @@ export default class AbstractEventEmitter<Contract extends MercuryContract>
 			}
 
 			if (error) {
-				emitCallbackPayload.error = error
+				emitCallbackPayload.errors = [error]
 			}
 
 			await (options.actualCallback as EmitCallback<MappedContract, EventName>)(
@@ -142,7 +142,7 @@ export default class AbstractEventEmitter<Contract extends MercuryContract>
 		}
 
 		if (error) {
-			response.error = error
+			response.errors = [error]
 		}
 
 		return response
