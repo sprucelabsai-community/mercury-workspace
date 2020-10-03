@@ -2292,25 +2292,25 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.399", "@sprucelabs/error@^2.2.400":
-  version "2.2.400"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.400.tgz#b2ee8ce1e9fd677e46fcd787e5fe7c1de6f05497"
-  integrity sha512-xE9rctNpq7wBZbGe+MQMWbT0U2udfEVUT3eE6H4b0il1fWjEYmqcGLn8mqghmlUQLyo5kJs36IhsioOieSjHTA==
+"@sprucelabs/error@^2.2.399", "@sprucelabs/error@^2.2.400", "@sprucelabs/error@^2.2.401":
+  version "2.2.401"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.401.tgz#a2b6108e762641ffae763e84c7f6e0347cb5fc28"
+  integrity sha512-4PV6T7GAJclNqfjzDbQupfWs0/kuibxuAdm8JN33JHd/DqmcdRY2064b0ryZyyCMDxkchyY8nGRJHhVqziCRAg==
 
 "@sprucelabs/log@^10.2.260":
   version "10.2.260"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.260.tgz#903a2a90c528a68a765f8bd43ade03287cf633aa"
   integrity sha512-rXW4IDYgtZCCcxZwK+TUgVpBJ+76O6SmiTNExmqu3kscqOW2qHw7WMu3ZgkLzVlcJpWXFIegHHGJu9h08I864g==
 
-"@sprucelabs/schema@^12.4.105":
-  version "12.4.105"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.105.tgz#e2ca39bb6e63826be0350b88fcc1939609522f93"
-  integrity sha512-A8duaFZvhA3wbDxs4+DXPJBp2c3YjRqj5jvcQ3J0sjvk74uSSbZyp7a4nkkUibLBq8AuF8jlrQtzzoDmk4jbIg==
+"@sprucelabs/schema@^12.4.105", "@sprucelabs/schema@^12.4.106":
+  version "12.4.106"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.106.tgz#fa2e5dbd80a121a13aee60381210fbb179f7ec16"
+  integrity sha512-vW9HF6UaFoEUbAdtqUc+Q7hCVUGkQvPDRR07ioogdWNCUCs1cIul0UhJIX4FbB04eJ/fY15lEOBnoNRAWrxaSA==
   dependencies:
-    "@sprucelabs/error" "^2.2.399"
+    "@sprucelabs/error" "^2.2.400"
     "@sprucelabs/log" "^10.2.260"
     google-libphonenumber "^3.2.13"
-    libphonenumber-js "^1.8.2"
+    libphonenumber-js "^1.8.3"
     mime-db "^1.45.0"
     mime-type "^4.0.0"
 
@@ -7718,7 +7718,7 @@ libnpx@^10.2.4:
     y18n "^4.0.0"
     yargs "^14.2.3"
 
-libphonenumber-js@^1.8.2:
+libphonenumber-js@^1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.3.tgz#aa1c9d9d4fc8f3f9392480c76fedd5e7e1adc064"
   integrity sha512-F7h0pzzXh3ishzW2ZZF0tJNs1+SHovvSIDefqoOv2bNCxAmLxxz2Bkbav6pl9M12QFVK25EQo1l5aq8MvDOnPQ==
