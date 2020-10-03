@@ -2302,10 +2302,10 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.260.tgz#903a2a90c528a68a765f8bd43ade03287cf633aa"
   integrity sha512-rXW4IDYgtZCCcxZwK+TUgVpBJ+76O6SmiTNExmqu3kscqOW2qHw7WMu3ZgkLzVlcJpWXFIegHHGJu9h08I864g==
 
-"@sprucelabs/schema@^12.4.103", "@sprucelabs/schema@^12.4.104":
-  version "12.4.104"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.104.tgz#c64c6ef68beb64fc116ddacf4b92019ada11fa11"
-  integrity sha512-/ldl4Us8oltQBcJgmf8sg6soQYdosONoQ8dVI7R0c5fT7AskJS2jUF0QeM8zFc6C56Ty0h+C3+bJRXM2NS4dlA==
+"@sprucelabs/schema@^12.4.103", "@sprucelabs/schema@^12.4.105":
+  version "12.4.105"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.105.tgz#e2ca39bb6e63826be0350b88fcc1939609522f93"
+  integrity sha512-A8duaFZvhA3wbDxs4+DXPJBp2c3YjRqj5jvcQ3J0sjvk74uSSbZyp7a4nkkUibLBq8AuF8jlrQtzzoDmk4jbIg==
   dependencies:
     "@sprucelabs/error" "^2.2.399"
     "@sprucelabs/log" "^10.2.260"
@@ -7719,9 +7719,9 @@ libnpx@^10.2.4:
     yargs "^14.2.3"
 
 libphonenumber-js@^1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.2.tgz#fa0a2ec8181f7494d0832c3ceed90919e01f1a40"
-  integrity sha512-JPE96E3fHg/Jz6purZF1JKV9wgLzHWup06bwMK4XiIgqw6HL0yVh4crn6w7ztRt56ivHdFi5vlUScRJ1n9TsBg==
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.3.tgz#aa1c9d9d4fc8f3f9392480c76fedd5e7e1adc064"
+  integrity sha512-F7h0pzzXh3ishzW2ZZF0tJNs1+SHovvSIDefqoOv2bNCxAmLxxz2Bkbav6pl9M12QFVK25EQo1l5aq8MvDOnPQ==
   dependencies:
     minimist "^1.2.5"
     xml2js "^0.4.17"
