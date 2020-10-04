@@ -2292,20 +2292,20 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.403", "@sprucelabs/error@^2.2.405":
-  version "2.2.405"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.405.tgz#702e7dd2074db0a0f33bb2c8a0a28fb5f1cacf17"
-  integrity sha512-YyH4CPQUhW7fBCNLiQw5O/KESLIPLSR4qSf9PctuM6lFQR6ioxJEf9iIPI+YMyRkAXnxPNoK2ruo6pgg5+vJEQ==
+"@sprucelabs/error@^2.2.405", "@sprucelabs/error@^2.2.406":
+  version "2.2.406"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.406.tgz#3c578c87285801288c4c2a4cd083a99a02eb2a04"
+  integrity sha512-FfprWjJ7eE3v0Hz+k3YJYU4us/MidMs2y1SEnnIpkYyNyyveVEo0sdKkuWiWiZ+Gq6Z+ixnMXRiVCOE4rWOwCA==
 
-"@sprucelabs/log@^10.2.261":
-  version "10.2.261"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.261.tgz#3d696a3b7430d2c292077f0bb146ea93af779398"
-  integrity sha512-I/lnwOFfaUxWDEqkG1L8uJ7thJUgMkXTX3YGcj4XZagEoDrH0GoeMm7OukNXLK8H7LJNhvJI50UW/aq0EFtTuA==
+"@sprucelabs/log@^10.2.261", "@sprucelabs/log@^10.2.262":
+  version "10.2.262"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.262.tgz#184368bfb126edde3b5799e505a20623299e76b9"
+  integrity sha512-J/p5JUY7i/emeGrVGw82KeOGtVz0kMOIeTXw0p2Flrt9/cCVHfqsMEygXDg3pu46Y7c4VAvanAvT5mql/BSEJQ==
 
-"@sprucelabs/schema@^12.4.126", "@sprucelabs/schema@^12.4.128":
-  version "12.4.128"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.128.tgz#725ede2317509aa3e0d3073ec3cfeeb16a4c4aac"
-  integrity sha512-GZ1jfIi0JuHaeqRCP2oUdBz+yQRYe4/jZ3SgNDIgwF8QqofyWsz1X9KoUUblsJtZbuGsyS5w6yMXrQCGrSI1Jw==
+"@sprucelabs/schema@^12.4.128", "@sprucelabs/schema@^12.4.129":
+  version "12.4.129"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.129.tgz#5cc8135f07d21e6ea8beb35897459d0639bcc403"
+  integrity sha512-+RbKlKpWGWG/6GhhtqraQFhcLlH2jYRouPvIGd6IMo4Lq39+4x5Gc7GoYA6yxTBKAg18+fblhnAelJs1WkUq7Q==
   dependencies:
     "@sprucelabs/error" "^2.2.405"
     "@sprucelabs/log" "^10.2.261"
@@ -2324,29 +2324,29 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.31.68":
-  version "10.31.68"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.68.tgz#d814af93f77ad876cda9e1716e882764ea463523"
-  integrity sha512-kgcsFiN2kWZlyCWuUjsm58lCz8VjckzbeC3yauXPhQZDY4SIcv/DUNx1lNcO6ipn/go05lapVh+rBO8x+HE9Zw==
+"@sprucelabs/spruce-core-schemas@^10.31.69":
+  version "10.31.69"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.69.tgz#5019248c997d00d7e4566ac018eb82b85558e1e5"
+  integrity sha512-SNqVnTAIjVOpe2bbqAcB1AQVNoN1ELOU4+AkvAs37UZ27YXfkeIxPM4+420IKrRns0a5G/w4BD8WQSO0epdJGw==
   dependencies:
-    "@sprucelabs/error" "^2.2.403"
-    "@sprucelabs/schema" "^12.4.126"
+    "@sprucelabs/error" "^2.2.405"
+    "@sprucelabs/schema" "^12.4.128"
 
-"@sprucelabs/spruce-skill-utils@^10.31.68":
-  version "10.31.68"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.68.tgz#a12c7d2c3a76925b7b5f61ba82dc4576b6a7935c"
-  integrity sha512-XP4GdttvhF0ZWuXApZpnELRyW6giVVro/mGeIe8K/KRyxinIG8mIAy4R5BRecqiUVR4Vfls47w6sxUoqq6U+Hg==
+"@sprucelabs/spruce-skill-utils@^10.31.69":
+  version "10.31.69"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.69.tgz#9e256679a5ce17880dc8f047d748e715866d94aa"
+  integrity sha512-g/yPbpUe2hxNA0xZ/M4+xHwE+qprbfBTKjM5nv9rGHNXI+xF+CcAOlnC7pGTLI936YKIN8oARyiWPI5uJH8xzg==
   dependencies:
-    "@sprucelabs/error" "^2.2.403"
+    "@sprucelabs/error" "^2.2.405"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
     uuid "^8.3.1"
 
-"@sprucelabs/test@^7.0.98":
-  version "7.0.98"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.98.tgz#f727623d4ea8a099175332aec02f6b85f43609d1"
-  integrity sha512-/woHRrp6yIW21L0TGnAwLgCXOyTOhkI6CnLo/UYza85z25PK1iRQfGdRIq7rWj1GZkBuCmKPYjEgfuEavQVv4Q==
+"@sprucelabs/test@^7.0.99":
+  version "7.0.99"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.99.tgz#af3dbc7809c1180777a8b238846838c3c410e91c"
+  integrity sha512-4oY9OMPbzu+6jJ58MOXdLoJmBEyNcofANM5al6KHT6wO8cGTzZruygnVVcFrVOMx3XBOucpbuJRBxncLugHgxQ==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -2409,11 +2409,6 @@
   integrity sha512-Pzh9O3sTK8V6I1olsXpCfj2k/ygO2q1X0vhhnDrEQyYLHZesWz+zMZMVcwXLCYf0U36EtmyYaFGPfXlTtDHe3A==
   dependencies:
     "@babel/types" "^7.3.0"
-
-"@types/color-name@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
-  integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
 "@types/debug@^4.1.5":
   version "4.1.5"
@@ -2794,11 +2789,10 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
     color-convert "^1.9.0"
 
 ansi-styles@^4.0.0, ansi-styles@^4.1.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-4.2.1.tgz#90ae75c424d008d2624c5bf29ead3177ebfcf359"
-  integrity sha512-9VGjrMsG1vePxcSweQsN20KY/c4zN0h9fLjqAbwbPfahM3t+NL+M9HC8xeXG2I8pX5NoamTGNuomEUFI7fcUjA==
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-4.3.0.tgz#edd803628ae71c04c85ae7a0906edad34b648937"
+  integrity sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==
   dependencies:
-    "@types/color-name" "^1.1.1"
     color-convert "^2.0.1"
 
 ansicolors@~0.3.2:
