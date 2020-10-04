@@ -2292,22 +2292,22 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.401", "@sprucelabs/error@^2.2.403", "@sprucelabs/error@^2.2.404":
-  version "2.2.404"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.404.tgz#d3d1649fa721c449d5e0685070b8bb8b58a68a06"
-  integrity sha512-6Fbc43lkxysv9u0lD3aUDs5MNM9yeqxWy8rKMQ9FW+g0M6Ef88oEH/hftzR6B6bbPrdnBUkU9kzBKGA1VHz2qw==
+"@sprucelabs/error@^2.2.403", "@sprucelabs/error@^2.2.404", "@sprucelabs/error@^2.2.405":
+  version "2.2.405"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.405.tgz#702e7dd2074db0a0f33bb2c8a0a28fb5f1cacf17"
+  integrity sha512-YyH4CPQUhW7fBCNLiQw5O/KESLIPLSR4qSf9PctuM6lFQR6ioxJEf9iIPI+YMyRkAXnxPNoK2ruo6pgg5+vJEQ==
 
 "@sprucelabs/log@^10.2.261":
   version "10.2.261"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.261.tgz#3d696a3b7430d2c292077f0bb146ea93af779398"
   integrity sha512-I/lnwOFfaUxWDEqkG1L8uJ7thJUgMkXTX3YGcj4XZagEoDrH0GoeMm7OukNXLK8H7LJNhvJI50UW/aq0EFtTuA==
 
-"@sprucelabs/schema@^12.4.122", "@sprucelabs/schema@^12.4.126":
-  version "12.4.126"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.126.tgz#9c608e18baef59eaa78867f865a4794170f84d34"
-  integrity sha512-YnOFDcca63aQp1yxS8lg6BKIEsM8AAimxyRAAJanpCTBU5yWQgm1JKd/eUGaElm8W/azCOw/k571nk0obQNBCw==
+"@sprucelabs/schema@^12.4.126", "@sprucelabs/schema@^12.4.127":
+  version "12.4.127"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.127.tgz#b89072082bdf3a06a5765f7f93f427fc98a6ce21"
+  integrity sha512-Ltliz6u3eraqMWagnkIR3zoWYsKV/7OYc8rTQaQLoIbrj23AxPmFTXMKTQ8RhJTa2ICVk8V+4AYszNlngz8f0g==
   dependencies:
-    "@sprucelabs/error" "^2.2.403"
+    "@sprucelabs/error" "^2.2.404"
     "@sprucelabs/log" "^10.2.261"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.8.3"
@@ -2324,24 +2324,24 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.31.67":
-  version "10.31.67"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.67.tgz#b4314b0e3a8b609e26dba675d082103e71b6870d"
-  integrity sha512-Y72BmaADejzsY+kmFza357s3TZE2DRT7icpct1wC5oVA5MHwpJFuUgezZd5+4uIbBQL+AEnk+mP66+uYtfvR+w==
+"@sprucelabs/spruce-core-schemas@^10.31.68":
+  version "10.31.68"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.68.tgz#d814af93f77ad876cda9e1716e882764ea463523"
+  integrity sha512-kgcsFiN2kWZlyCWuUjsm58lCz8VjckzbeC3yauXPhQZDY4SIcv/DUNx1lNcO6ipn/go05lapVh+rBO8x+HE9Zw==
   dependencies:
-    "@sprucelabs/error" "^2.2.401"
-    "@sprucelabs/schema" "^12.4.122"
+    "@sprucelabs/error" "^2.2.403"
+    "@sprucelabs/schema" "^12.4.126"
 
-"@sprucelabs/spruce-skill-utils@^10.31.67":
-  version "10.31.67"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.67.tgz#916ca8404bf89d2de2fb9f831ce234e1d4d41ab1"
-  integrity sha512-Sj7G+jSsRHB1G9VJ2FXrc9qXBDRl9Qo9coOXx8+jHeCSAWTM5klS9FXe0Uzn6S8/mWCuXMN8NnRzeLi6zOLW0A==
+"@sprucelabs/spruce-skill-utils@^10.31.68":
+  version "10.31.68"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.68.tgz#a12c7d2c3a76925b7b5f61ba82dc4576b6a7935c"
+  integrity sha512-XP4GdttvhF0ZWuXApZpnELRyW6giVVro/mGeIe8K/KRyxinIG8mIAy4R5BRecqiUVR4Vfls47w6sxUoqq6U+Hg==
   dependencies:
-    "@sprucelabs/error" "^2.2.401"
+    "@sprucelabs/error" "^2.2.403"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
-    uuid "^8.3.0"
+    uuid "^8.3.1"
 
 "@sprucelabs/test@^7.0.98":
   version "7.0.98"
@@ -11774,7 +11774,7 @@ uuid@^3.0.1, uuid@^3.3.2, uuid@^3.3.3:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
-uuid@^8.3.0:
+uuid@^8.3.0, uuid@^8.3.1:
   version "8.3.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.1.tgz#2ba2e6ca000da60fce5a196954ab241131e05a31"
   integrity sha512-FOmRr+FmWEIG8uhZv6C2bTgEVXsHk08kE7mPlrBbEe+c3r9pjceVPgupIfNIhc4yx55H69OXANrUaSuu9eInKg==
