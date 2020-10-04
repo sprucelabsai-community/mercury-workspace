@@ -2292,7 +2292,7 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.403", "@sprucelabs/error@^2.2.404", "@sprucelabs/error@^2.2.405":
+"@sprucelabs/error@^2.2.403", "@sprucelabs/error@^2.2.405":
   version "2.2.405"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.405.tgz#702e7dd2074db0a0f33bb2c8a0a28fb5f1cacf17"
   integrity sha512-YyH4CPQUhW7fBCNLiQw5O/KESLIPLSR4qSf9PctuM6lFQR6ioxJEf9iIPI+YMyRkAXnxPNoK2ruo6pgg5+vJEQ==
@@ -2302,12 +2302,12 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.261.tgz#3d696a3b7430d2c292077f0bb146ea93af779398"
   integrity sha512-I/lnwOFfaUxWDEqkG1L8uJ7thJUgMkXTX3YGcj4XZagEoDrH0GoeMm7OukNXLK8H7LJNhvJI50UW/aq0EFtTuA==
 
-"@sprucelabs/schema@^12.4.126", "@sprucelabs/schema@^12.4.127":
-  version "12.4.127"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.127.tgz#b89072082bdf3a06a5765f7f93f427fc98a6ce21"
-  integrity sha512-Ltliz6u3eraqMWagnkIR3zoWYsKV/7OYc8rTQaQLoIbrj23AxPmFTXMKTQ8RhJTa2ICVk8V+4AYszNlngz8f0g==
+"@sprucelabs/schema@^12.4.126", "@sprucelabs/schema@^12.4.128":
+  version "12.4.128"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.128.tgz#725ede2317509aa3e0d3073ec3cfeeb16a4c4aac"
+  integrity sha512-GZ1jfIi0JuHaeqRCP2oUdBz+yQRYe4/jZ3SgNDIgwF8QqofyWsz1X9KoUUblsJtZbuGsyS5w6yMXrQCGrSI1Jw==
   dependencies:
-    "@sprucelabs/error" "^2.2.404"
+    "@sprucelabs/error" "^2.2.405"
     "@sprucelabs/log" "^10.2.261"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.8.3"
