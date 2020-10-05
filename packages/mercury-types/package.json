@@ -40,9 +40,9 @@
 	"dependencies": {
 		"@sprucelabs/error": "^2.2.408",
 		"@sprucelabs/log": "^10.2.263",
-		"@sprucelabs/schema": "^12.4.140",
-		"@sprucelabs/spruce-core-schemas": "^10.31.72",
-		"@sprucelabs/spruce-skill-utils": "^10.31.72"
+		"@sprucelabs/schema": "^12.4.141",
+		"@sprucelabs/spruce-core-schemas": "^10.31.73",
+		"@sprucelabs/spruce-skill-utils": "^10.31.73"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
