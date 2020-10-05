@@ -2292,22 +2292,22 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.408", "@sprucelabs/error@^2.2.409", "@sprucelabs/error@^2.2.410":
-  version "2.2.410"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.410.tgz#bcc0337207d26bd23d1d535a179e89c0fb8b1662"
-  integrity sha512-ZMV/ZdkNLRL7yc8CeZkeMXv+ihvYgi/8VTTgy5F02p99kHY5YgTM/6XBiaxOAOfsh8UQ1Z+/VB3g3HNl4vlFpQ==
+"@sprucelabs/error@^2.2.408", "@sprucelabs/error@^2.2.410", "@sprucelabs/error@^2.2.411":
+  version "2.2.411"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.411.tgz#c20c5866bedabec76c6bfa1c7ece3707006a5c79"
+  integrity sha512-bcBuIAEE+eU1QmV5+lQOixIGvLwIFQiaPy5F+fYmxokOVDtppIn3/hd29Ppw3QT4ybu3Zu7n6x3EZeEI1OGAWg==
 
 "@sprucelabs/log@^10.2.264":
   version "10.2.264"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.264.tgz#653e637ec4087366201908fffaa30947ef080420"
   integrity sha512-Zgyq6lIEcyRf2GVRtJFn2GsSzfV3Ak5F9m55JLW5lOirkOU2iEE0oCe6AjopB1EduKz0bWtync0x8uf7VtUYwg==
 
-"@sprucelabs/schema@^12.4.142", "@sprucelabs/schema@^12.4.143":
-  version "12.4.143"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.143.tgz#a5c4615a7c5b3eae9e0fa90ce7bac156cf91ba8a"
-  integrity sha512-IKdmqQmke1zT9TInvHNBV4+jJt7OAgYSMWJotBBLitKH0YBqvTfqHho6whRhEXZbAs3TxuPGzwLWFdwuoZh0Wg==
+"@sprucelabs/schema@^12.4.142", "@sprucelabs/schema@^12.4.144":
+  version "12.4.144"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.144.tgz#db7d18c6f2eadc0467ff644399f48074c30c1642"
+  integrity sha512-EIgL7hVLWZ+Cdi4BskcrwX2jx6K2oiMqgea7lz1K+poBYELXCRj8iEElDABtOrk8Tug3xJVUEgpeP1ui1YgN6w==
   dependencies:
-    "@sprucelabs/error" "^2.2.409"
+    "@sprucelabs/error" "^2.2.410"
     "@sprucelabs/log" "^10.2.264"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.8.3"
@@ -2343,10 +2343,10 @@
     lodash "^4.17.20"
     uuid "^8.3.1"
 
-"@sprucelabs/test@^7.0.102":
-  version "7.0.102"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.102.tgz#852b75c346fb23db77efca1ca58e210b45823920"
-  integrity sha512-HP/rLnNZ6zadkus7X4nUkC6ECr0C2jye8HNoNcIlIxNMFXPUmcf6fSCuN9yqD9YRylCkGBq18L7X3nkix9YPlQ==
+"@sprucelabs/test@^7.0.103":
+  version "7.0.103"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.103.tgz#d7032dffafa27ce69b79d8dfd1902ee5f366c725"
+  integrity sha512-2JVh2btM3WyODdaXa3oM8uXzqMjxF+CKS8/Pp98dOYm0tgn+adRpnV3+GvCgNQ0vCXLcwQ6uYg0U3K2vPHrBZQ==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -7077,9 +7077,9 @@ jest-resolve@^26.5.0:
     slash "^3.0.0"
 
 jest-runner@^26.5.0:
-  version "26.5.0"
-  resolved "https://registry.yarnpkg.com/jest-runner/-/jest-runner-26.5.0.tgz#77fa74966716ce46a19cfd03ea5e491da4dfc9aa"
-  integrity sha512-+FSgnB4dIwov+kqDPrbyATZ/zLMb5AGSQ7oi6mtrbcw9a0D2npuAworKTRAtgWo+XFZtpZwdH+HQAB5l3KrjWg==
+  version "26.5.1"
+  resolved "https://registry.yarnpkg.com/jest-runner/-/jest-runner-26.5.1.tgz#a56c1e1fbed7470ae69ebd5456ba4d4443c8701f"
+  integrity sha512-gFHXehvMZD8qwNzaIl2MDFFI99m4kKk06H2xh2u4IkC+tHYIJjE5J175l9cbL3RuU2slfS2m57KZgcPZfbTavQ==
   dependencies:
     "@jest/console" "^26.5.0"
     "@jest/environment" "^26.5.0"
