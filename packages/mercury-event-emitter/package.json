@@ -7,7 +7,7 @@
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "1.13.64",
+	"version": "1.13.65",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
@@ -37,7 +37,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "^2.2.408",
-		"@sprucelabs/mercury-types": "^1.13.64",
+		"@sprucelabs/mercury-types": "^1.13.65",
 		"@sprucelabs/schema": "^12.4.141"
 	},
 	"devDependencies": {
