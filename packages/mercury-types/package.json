@@ -38,11 +38,11 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.421",
+		"@sprucelabs/error": "^2.2.422",
 		"@sprucelabs/log": "^10.2.269",
-		"@sprucelabs/schema": "^12.4.162",
-		"@sprucelabs/spruce-core-schemas": "^10.31.83",
-		"@sprucelabs/spruce-skill-utils": "^10.31.83"
+		"@sprucelabs/schema": "^12.4.163",
+		"@sprucelabs/spruce-core-schemas": "^10.31.84",
+		"@sprucelabs/spruce-skill-utils": "^10.31.84"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
