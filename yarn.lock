@@ -2292,22 +2292,22 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.419", "@sprucelabs/error@^2.2.420", "@sprucelabs/error@^2.2.421":
-  version "2.2.421"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.421.tgz#705c45ce787316019ad492687b43110c4799ff02"
-  integrity sha512-+Gn06MyeIo7UQMpTJoYQ6vnrEPxYlBUe0GpXIqURhubDwiv+Q1zmW6iz0eyF9DtK2/7PD6WILW17H/WJ/04IPQ==
+"@sprucelabs/error@^2.2.420", "@sprucelabs/error@^2.2.422":
+  version "2.2.422"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.422.tgz#001b0956a75c5e724ed287ee546d454b208911bc"
+  integrity sha512-Z4dNmEpTHa4Dw+1v4uSu/qvZ1ZFBybev/wQuC+Lti1bOBMwJP9tLW0j6+gsuL6BP9mrOD2zUzxZeE4KpBhGhSA==
 
 "@sprucelabs/log@^10.2.269":
   version "10.2.269"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.269.tgz#5b89d092a75b424eaf9adf1c2420d091b6d07a69"
   integrity sha512-Kw5qhpvhZam0NySHsiwGHjUHNZThAgrGh9atQnsCSH+0bj5qSwJPG6JnI1UqLqXG7Z4L03noQnE//Vrv1v0QOA==
 
-"@sprucelabs/schema@^12.4.160", "@sprucelabs/schema@^12.4.162":
-  version "12.4.162"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.162.tgz#b00f2ca3264e27197ffb4b6915424bc530b9f255"
-  integrity sha512-0ZeZIphQ8xMlCtPWgR26mmt/37O9+Nr+vc105M6I3U4SnspSOR5FzJOng8iGqVep3lzxFWR7ujLgoHcNtHaDFA==
+"@sprucelabs/schema@^12.4.162", "@sprucelabs/schema@^12.4.163":
+  version "12.4.164"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.164.tgz#2dc59bf91446647fffcadf3a33a4b554ca2d5355"
+  integrity sha512-MH6RHOs5I9LjEhUqU04cigw4XpoHmGKz6rywk08bgge3qCUdGzpzZbyETvwLZQi5xCYUEmrffCBC7BPw/GUCYw==
   dependencies:
-    "@sprucelabs/error" "^2.2.420"
+    "@sprucelabs/error" "^2.2.422"
     "@sprucelabs/log" "^10.2.269"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.8.3"
@@ -2324,20 +2324,20 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.31.83":
-  version "10.31.83"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.83.tgz#1a69dc20645135ec2a314d1125a3ab5889126765"
-  integrity sha512-DyO/n++MVuANdcHP5I6jHOLU6KhSbkNpYiv/UM2kDWRYCRUbVv/yYhbc2HKkDJ4WlfQ3OacPQBbz56bXjqatbw==
+"@sprucelabs/spruce-core-schemas@^10.31.84":
+  version "10.31.84"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.84.tgz#811f098f68cc5382a9641d9003be154f69153079"
+  integrity sha512-jkBfxyMRtka0ROw/z/jVi+MvdVSQOS20RMZGl2ugAxVZNd6UUsFgu6nokcMEHCppu5ORrCNL3n/jMvZBNhjKzw==
   dependencies:
-    "@sprucelabs/error" "^2.2.419"
-    "@sprucelabs/schema" "^12.4.160"
+    "@sprucelabs/error" "^2.2.420"
+    "@sprucelabs/schema" "^12.4.162"
 
-"@sprucelabs/spruce-skill-utils@^10.31.83":
-  version "10.31.83"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.83.tgz#b53b9c967d3de24e30b8406dcfba107c587e555d"
-  integrity sha512-z6NIi3LRaqkrxjSocn05UcpMAAlA8nIA5gg/HTthOZ+LU9w612nfIUM6lxSGoFplcPQnmqWHS8W/kuxPlK1oVg==
+"@sprucelabs/spruce-skill-utils@^10.31.84":
+  version "10.31.84"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.84.tgz#716edc23c2358ed6d6a6d72a6d5e4c17a9fa7c29"
+  integrity sha512-ze1MKycjgxreEKHDdSHq4uIpU2Az6yV0T7xmbCoRwvzsJoOiRNaEkJdGnAmcSMkjSn5VO0iNovC58Y/vahLBww==
   dependencies:
-    "@sprucelabs/error" "^2.2.419"
+    "@sprucelabs/error" "^2.2.420"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
@@ -2501,9 +2501,9 @@
   integrity sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
 
 "@types/node@*", "@types/node@>= 8":
-  version "14.11.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.4.tgz#bf6ea3d5f7b1504232b11acbc40e1ac4c750d3b9"
-  integrity sha512-KmoLCUeW2cWKkEOQ0gQcECuqOc0g7B7zcmRPQNMT4ntNm0luKv3BTLcqIyWpTxkhLDzLTdMus11j/6DROaZdPw==
+  version "14.11.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.5.tgz#fecad41c041cae7f2404ad4b2d0742fdb628b305"
+  integrity sha512-jVFzDV6NTbrLMxm4xDSIW/gKnk8rQLF9wAzLWIOg+5nU6ACrIMndeBdXci0FGtqJbP9tQvm6V39eshc96TO2wQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
