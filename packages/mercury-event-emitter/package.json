@@ -36,13 +36,13 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.2.417",
+		"@sprucelabs/error": "^2.2.418",
 		"@sprucelabs/mercury-types": "^1.13.81",
-		"@sprucelabs/schema": "^12.4.157"
+		"@sprucelabs/schema": "^12.4.158"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.5",
-		"@sprucelabs/test": "^7.0.106",
+		"@sprucelabs/test": "^7.0.107",
 		"eslint": "^7.10.0",
 		"eslint-config-spruce": "^10.9.77",
 		"jest": "^26.5.0",
