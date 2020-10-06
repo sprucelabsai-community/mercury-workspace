@@ -40,7 +40,7 @@
 	"dependencies": {
 		"@sprucelabs/error": "^2.2.424",
 		"@sprucelabs/log": "^10.2.270",
-		"@sprucelabs/schema": "^12.4.167",
+		"@sprucelabs/schema": "^12.4.168",
 		"@sprucelabs/spruce-core-schemas": "^10.31.86",
 		"@sprucelabs/spruce-skill-utils": "^10.31.86"
 	},
@@ -48,7 +48,7 @@
 		"@sprucelabs/semantic-release": "^4.0.5",
 		"@sprucelabs/test": "^7.0.110",
 		"eslint": "^7.10.0",
-		"jest": "^26.5.0",
+		"jest": "^26.5.2",
 		"typescript": "^4.0.3"
 	},
 	"jest": {
