@@ -2292,17 +2292,17 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.419", "@sprucelabs/error@^2.2.420":
-  version "2.2.420"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.420.tgz#f7c722f78e59e0ca2eebcea9e922f7f326442d01"
-  integrity sha512-g6wF9DuTx9nX3H1X+EWwLZyu2Z7UCnARjDyWDnxBHvy5gIR86y7PrPKMxsrOh0SK0YCfGULhaUYQkI26RJLsUw==
+"@sprucelabs/error@^2.2.419", "@sprucelabs/error@^2.2.420", "@sprucelabs/error@^2.2.421":
+  version "2.2.421"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.421.tgz#705c45ce787316019ad492687b43110c4799ff02"
+  integrity sha512-+Gn06MyeIo7UQMpTJoYQ6vnrEPxYlBUe0GpXIqURhubDwiv+Q1zmW6iz0eyF9DtK2/7PD6WILW17H/WJ/04IPQ==
 
 "@sprucelabs/log@^10.2.269":
   version "10.2.269"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.269.tgz#5b89d092a75b424eaf9adf1c2420d091b6d07a69"
   integrity sha512-Kw5qhpvhZam0NySHsiwGHjUHNZThAgrGh9atQnsCSH+0bj5qSwJPG6JnI1UqLqXG7Z4L03noQnE//Vrv1v0QOA==
 
-"@sprucelabs/schema@^12.4.160", "@sprucelabs/schema@^12.4.161":
+"@sprucelabs/schema@^12.4.160", "@sprucelabs/schema@^12.4.162":
   version "12.4.162"
   resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-12.4.162.tgz#b00f2ca3264e27197ffb4b6915424bc530b9f255"
   integrity sha512-0ZeZIphQ8xMlCtPWgR26mmt/37O9+Nr+vc105M6I3U4SnspSOR5FzJOng8iGqVep3lzxFWR7ujLgoHcNtHaDFA==
@@ -2343,10 +2343,10 @@
     lodash "^4.17.20"
     uuid "^8.3.1"
 
-"@sprucelabs/test@^7.0.108":
-  version "7.0.108"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.108.tgz#1426923b739307f7f02cecbb5ee3bf81d95e5d2d"
-  integrity sha512-MPeXvswezknGgLzMR4qnFPzN88kQ15QoGbM9+Zvf1jVKQZW7z1owgC+QG1BIL4Z6TsI3/ihMTfWfO2ExuyrhGA==
+"@sprucelabs/test@^7.0.109":
+  version "7.0.109"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.109.tgz#5b940967e62f132c513b850a5c9327e7ced37f34"
+  integrity sha512-PktQ8oJgMFGHqXzs68R981Mvot7TXTfYAwzG6OhDu/jTaAVdMIsmPtjtaNAaJmtaO26ZLY8nn4y9V28DLjEsjQ==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -4674,9 +4674,9 @@ editor@~1.0.0:
   integrity sha1-YMf4e9YrzGqJT6jM1q+3gjok90I=
 
 electron-to-chromium@^1.3.571:
-  version "1.3.576"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.576.tgz#2e70234484e03d7c7e90310d7d79fd3775379c34"
-  integrity sha512-uSEI0XZ//5ic+0NdOqlxp0liCD44ck20OAGyLMSymIWTEAtHKVJi6JM18acOnRgUgX7Q65QqnI+sNncNvIy8ew==
+  version "1.3.577"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.577.tgz#9885f3f72c6e3367010b461ff6f2d9624a929720"
+  integrity sha512-dSb64JQSFif/pD8mpVAgSFkbVi6YHbK6JeEziwNNmXlr/Ne2rZtseFK5SM7JoWSLf6gP0gVvRGi4/2ZRhSX/rA==
 
 elliptic@^6.5.3:
   version "6.5.3"
