@@ -2292,7 +2292,7 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.426", "@sprucelabs/error@^2.2.429":
+"@sprucelabs/error@^2.2.429":
   version "2.2.429"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.429.tgz#05d94a986925d72aaf31c391d929998879c7dc26"
   integrity sha512-X2AR0lId78nEVsDcUDYWLSWTa5EGzRoT+u1nVvRazunERCHZKhjW1YyfB+c9oKr20NbncT3QNUXFPEf+3QTZMQ==
@@ -2301,18 +2301,6 @@
   version "10.2.272"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.272.tgz#0b91e0b6e11ae4b1a0047f073917eaf93948a6a2"
   integrity sha512-Bihl/hfZFQcvx8vsd3r2HP5vJMu88q9a0Ar43jSHy/uRYER2T6SXx25AE8Ng3uNi6Z/3MNDqE5UiC2rO+4AXUQ==
-
-"@sprucelabs/schema@^13.0.2", "@sprucelabs/schema@^13.0.5":
-  version "13.0.5"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.5.tgz#39459b8a784847a6a605f4189624a0fd93738546"
-  integrity sha512-36xZpLHxkBgZ8dQCZf9GTdyyyXuzEP/y7wdMfLua+ZA2ddDAf8VmEB6DEuHxwLn4IfH4uQHp/LMDhnuCv1qQVA==
-  dependencies:
-    "@sprucelabs/error" "^2.2.429"
-    "@sprucelabs/log" "^10.2.272"
-    google-libphonenumber "^3.2.13"
-    libphonenumber-js "^1.8.3"
-    mime-db "^1.45.0"
-    mime-type "^4.0.0"
 
 "@sprucelabs/schema@^13.0.6":
   version "13.0.6"
@@ -2336,13 +2324,13 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.31.92":
-  version "10.31.92"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.92.tgz#9c2514e451326e7b11960848c4cf5d4fb1a598da"
-  integrity sha512-DrgzuKNrirFV2NHs9MTPGA+sgZgTovX3tNF1uVZ+TbIOBoCizIcG6KWelPJq+UMxgHq/FlWWm3a11EnHPLbbzw==
+"@sprucelabs/spruce-core-schemas@^10.31.95":
+  version "10.31.95"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.95.tgz#6c132385c52f22fd51b8cf30a744adfbd02b77d0"
+  integrity sha512-zd596vKj4gxYuKYZQhAkjnZGEz5mZWKZr+oDmDpgXyJCvIDKWy4F0DWha4GtbbLRnhHutOFwlHalv2ZUP1wLZw==
   dependencies:
-    "@sprucelabs/error" "^2.2.426"
-    "@sprucelabs/schema" "^13.0.2"
+    "@sprucelabs/error" "^2.2.429"
+    "@sprucelabs/schema" "^13.0.6"
 
 "@sprucelabs/spruce-skill-utils@^10.31.95":
   version "10.31.95"
