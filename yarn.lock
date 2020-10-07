@@ -2292,20 +2292,20 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.429":
-  version "2.2.429"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.429.tgz#05d94a986925d72aaf31c391d929998879c7dc26"
-  integrity sha512-X2AR0lId78nEVsDcUDYWLSWTa5EGzRoT+u1nVvRazunERCHZKhjW1YyfB+c9oKr20NbncT3QNUXFPEf+3QTZMQ==
+"@sprucelabs/error@^2.2.429", "@sprucelabs/error@^2.2.430":
+  version "2.2.430"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.430.tgz#19315526993ea05225d64a219e1e02ad5c43e432"
+  integrity sha512-4RkTFUrOuQ01IeVIxux9iW8FU5M6jZcNWO6g//28b3hod22ky4jgcUCxiwkRhHRNCoFzgH1nmPiIXqhLB/3gPQ==
 
 "@sprucelabs/log@^10.2.272":
   version "10.2.272"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.272.tgz#0b91e0b6e11ae4b1a0047f073917eaf93948a6a2"
   integrity sha512-Bihl/hfZFQcvx8vsd3r2HP5vJMu88q9a0Ar43jSHy/uRYER2T6SXx25AE8Ng3uNi6Z/3MNDqE5UiC2rO+4AXUQ==
 
-"@sprucelabs/schema@^13.0.14":
-  version "13.0.14"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.14.tgz#d64e2d4fd2af5e91f51105e0dffa8b288a4fe2bd"
-  integrity sha512-wCInJejlvmyjQ5Su9+QLMjxIeLlzT5b0VAkqxM6i7Ea1ei2lKGcMrcj+EUqBcVlrfM2h5g4LMToSnYhNPGILAg==
+"@sprucelabs/schema@^13.0.15":
+  version "13.0.15"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.15.tgz#03a1ebb38bf1602040706acd1486e65176cfc1fe"
+  integrity sha512-5gVogB+4S3KNP9L69yarkcLPmV/lQa4K6UY0KvBdPbiNAycPRXJdpjHeWdOxJ0YMI6Azx+LMDZAtzC1xOXq0Xw==
   dependencies:
     "@sprucelabs/error" "^2.2.429"
     "@sprucelabs/log" "^10.2.272"
@@ -2324,18 +2324,18 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.31.103":
-  version "10.31.103"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.103.tgz#f0fdadd18d5e136e8ee24d1f68af5d62a7b22c6b"
-  integrity sha512-vEgVo/qzBPxSoMHcRJpjt/XYY1d/om8OtocyYjsPUr6lL0OTBsGB8oCqF8I1V+R1gsLGiah8XHC3yCYk6mu6/w==
+"@sprucelabs/spruce-core-schemas@^10.31.104":
+  version "10.31.104"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.31.104.tgz#c9ed801b1371840098d8695ed7d06ac9b468d50e"
+  integrity sha512-CRxBCQIVKX6eSGkQrNzbifHB0e6Ro30burcT9Bt741Ap4sHAzXPbWBD+tUBkl8GLe4Bw2UJ8o7GPGVtn21q0kw==
   dependencies:
     "@sprucelabs/error" "^2.2.429"
-    "@sprucelabs/schema" "^13.0.14"
+    "@sprucelabs/schema" "^13.0.15"
 
-"@sprucelabs/spruce-skill-utils@^10.31.95":
-  version "10.31.95"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.95.tgz#7966be9f68e46b6a985bb0d237673061fc7baf32"
-  integrity sha512-HIvtanQNaV9X/7fhOFkTMOGvTVCFmB2IYZbRkzTxXFphJ44SHCrJ3ylaF5k2E4r5KtWWx2W1R4ODmuTmuPVYvA==
+"@sprucelabs/spruce-skill-utils@^10.31.96":
+  version "10.31.96"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.96.tgz#fb82b86d2b20930b630609c17d02315a81a7f0b3"
+  integrity sha512-OV+TNuCgzlICcro6FnHRqL8dhccnhhfPyqL/N11qQlNTiL+EHcW+sSLNQQpWXuHdrVLho9K6FmeE4FQ56xyukw==
   dependencies:
     "@sprucelabs/error" "^2.2.429"
     fs-extra "^9.0.1"
@@ -2343,10 +2343,10 @@
     lodash "^4.17.20"
     uuid "^8.3.1"
 
-"@sprucelabs/test@^7.0.113":
-  version "7.0.113"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.113.tgz#e69a42275579190ade2291db7541af32a71daa5d"
-  integrity sha512-y/BsrXonrGIAcSfMAyzd4DnG1JDx9QeMCta051H+tQlW7k7dmalo0lEQe3eu1o733v8KHw6hH0T9iUTopzREVw==
+"@sprucelabs/test@^7.0.114":
+  version "7.0.114"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.114.tgz#e8fde44d2845799029a426d6756fe8b52ea684ac"
+  integrity sha512-Hm04TEsvp0wjS+VlJq6n3Gkkdq01Ii7XkPQ116yqJ0VfU0GEqc0uNfjX6wrMxGKIK9+aNyzeyvCL9OzEU2MK8g==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -4674,9 +4674,9 @@ editor@~1.0.0:
   integrity sha1-YMf4e9YrzGqJT6jM1q+3gjok90I=
 
 electron-to-chromium@^1.3.571:
-  version "1.3.577"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.577.tgz#9885f3f72c6e3367010b461ff6f2d9624a929720"
-  integrity sha512-dSb64JQSFif/pD8mpVAgSFkbVi6YHbK6JeEziwNNmXlr/Ne2rZtseFK5SM7JoWSLf6gP0gVvRGi4/2ZRhSX/rA==
+  version "1.3.578"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.578.tgz#e6671936f4571a874eb26e2e833aa0b2c0b776e0"
+  integrity sha512-z4gU6dA1CbBJsAErW5swTGAaU2TBzc2mPAonJb00zqW1rOraDo2zfBMDRvaz9cVic+0JEZiYbHWPw/fTaZlG2Q==
 
 elliptic@^6.5.3:
   version "6.5.3"
