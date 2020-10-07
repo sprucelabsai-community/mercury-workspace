@@ -2,6 +2,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"name": "spruce-mercury-workspace",
+	"description": "All the tools you need to connect to a Mercury compatible API. 💥",
 	"workspaces": [
 		"packages/mercury-client",
 		"packages/mercury-types",
