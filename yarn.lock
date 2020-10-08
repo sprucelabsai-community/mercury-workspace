@@ -2292,20 +2292,20 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.436":
-  version "2.2.436"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.436.tgz#69a9af2bf51868b605c984467f52ff7481246792"
-  integrity sha512-6iZnHHltC6ENGd74atpbBksj2GIlpqkr170YiFiKZ2nfDFnQ9M6Nl5GiTgHOQwUPfeOd2xJtkl7Uz/WSU+uFPA==
+"@sprucelabs/error@^2.2.436", "@sprucelabs/error@^2.2.437":
+  version "2.2.437"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.437.tgz#83fee16e1c9896569063956d70ffc4c9d3abc8fb"
+  integrity sha512-BxUoN5qQdUIs3JNC5hvMsgBAedWqHP0T5gb8qIk64UQyf4hMu8gO+aiL2gQFaDZuOCT1cORYSGgqrjYJ5xE6MA==
 
 "@sprucelabs/log@^10.2.273":
   version "10.2.273"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.273.tgz#e585224507f0fc93b2c54896d74bf740ac5f8083"
   integrity sha512-W9Y2xGsSOnNc7+7Tjz9XB8guPYpmumtk10+BXzTzDrEKlR4xjLyANBJ23+bsDQTf3fsQtErx+hEI9/FOxoPQdA==
 
-"@sprucelabs/schema@^13.0.51":
-  version "13.0.51"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.51.tgz#f1dd7f321d8eddaa2efc1ef4da43df329d34ae91"
-  integrity sha512-Hnjk3+BaJDjjrbbSfiSJLhZthCTd6r+b9ojKhJjf44IHKjMIqBLoYd8plTCegHkYEvwg+IwV4WWkZIzdkD/Psw==
+"@sprucelabs/schema@^13.0.52":
+  version "13.0.52"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.52.tgz#5907aaeca65d2873d10f9a13e952991787679e43"
+  integrity sha512-2adLwcX2pZhuh+t1dPUA9CG27q2Cs8hTXCfeBYZLyEv2Q6Cm+VJWVpgqBmTi72vE7XWvmTjP9/VLyjy617AYxg==
   dependencies:
     "@sprucelabs/error" "^2.2.436"
     "@sprucelabs/log" "^10.2.273"
@@ -2324,18 +2324,18 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.32.26":
-  version "10.32.26"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.32.26.tgz#de45ee690b0cd7fde9d14a4cb63b83fe1efb23bc"
-  integrity sha512-BJVrPPHgO4WY/qcex7VQDJP+WgE+tRG5AImvlRssK47rmxjQW3K1t+qwBQttR2Mz6uZP4OAjCi7rYG3BW/BqBA==
+"@sprucelabs/spruce-core-schemas@^10.32.27":
+  version "10.32.27"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.32.27.tgz#83773af73d804922badef49ec7bbfb9659b5e551"
+  integrity sha512-ceAvGumO00PpKu62jYV6rvhkvsYLVvRdeiFzu7hKLTAkSyjd8QvaWVlY8mJnvfTo3RzNq0LA8sRoo3UJ/QBqsQ==
   dependencies:
     "@sprucelabs/error" "^2.2.436"
-    "@sprucelabs/schema" "^13.0.51"
+    "@sprucelabs/schema" "^13.0.52"
 
-"@sprucelabs/spruce-skill-utils@^10.31.104":
-  version "10.31.104"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.104.tgz#d2eb3aa4bc7bfc721351d2e3c1c8d95a4c7841d3"
-  integrity sha512-wLAftNE/AK5utt1xH9pPbusnOav+4seLwV3NVZoqDV/TX4EtkFlT6d65bf4/eZuD7vt0KX9s05CS4QDp4DPBdg==
+"@sprucelabs/spruce-skill-utils@^10.31.105":
+  version "10.31.105"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.105.tgz#d3e6e2db8a1d91b75772f90ab29e7c20968233a8"
+  integrity sha512-8GiFJfzG9nYdttem2mABV0eU81wO4HVPvxQLaTBGM9D2d6PDEXa0BismjVa26NFst3TiSJ7vxwQtWvtA/QrAmA==
   dependencies:
     "@sprucelabs/error" "^2.2.436"
     fs-extra "^9.0.1"
@@ -2343,10 +2343,10 @@
     lodash "^4.17.20"
     uuid "^8.3.1"
 
-"@sprucelabs/test@^7.0.116":
-  version "7.0.116"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.116.tgz#d110d259f4818ce0bea3ca65bc3cd61141d92ede"
-  integrity sha512-Kabg9LiUBkw6m9u55MkYydsTL5b8rbMHnL0bgIz6M4HWN2aAdEARhkgN9K7bBVXmCqDelO704j7q1Zbb3EK7hA==
+"@sprucelabs/test@^7.0.117":
+  version "7.0.117"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.117.tgz#7844e8bc06e509aaa5121b9597fcb90326471ce1"
+  integrity sha512-IYCfda8pW2AzWl6IdbNdOe1ALxE37xgTF2Ul1CUuJaKt3B303J6aDIm+TVbLAYgyZoWsJwFpL2ZDc4zmtabkQg==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -11882,9 +11882,9 @@ whatwg-url@^7.0.0:
     webidl-conversions "^4.0.2"
 
 whatwg-url@^8.0.0:
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-8.3.0.tgz#d1e11e565334486cdb280d3101b9c3fd1c867582"
-  integrity sha512-BQRf/ej5Rp3+n7k0grQXZj9a1cHtsp4lqj01p59xBWFKdezR8sO37XnpafwNqiFac/v2Il12EIMjX/Y4VZtT8Q==
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-8.4.0.tgz#50fb9615b05469591d2b2bd6dfaed2942ed72837"
+  integrity sha512-vwTUFf6V4zhcPkWp/4CQPr1TW9Ml6SF4lVyaIMBdJw5i6qUUJ1QWM4Z6YYVkfka0OUIzVo/0aNtGVGk256IKWw==
   dependencies:
     lodash.sortby "^4.7.0"
     tr46 "^2.0.2"
