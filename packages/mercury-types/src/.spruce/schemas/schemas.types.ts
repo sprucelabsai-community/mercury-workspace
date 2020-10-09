@@ -1,13 +1,34 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable no-redeclare */
 
-import { default as SchemaEntity } from '@sprucelabs/schema'
 export { SpruceSchemas } from '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types'
+
+import { default as SchemaEntity } from '@sprucelabs/schema'
+
+
 
 import * as SpruceSchema from '@sprucelabs/schema'
 
 
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
@@ -29,6 +50,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 
 		interface IEventSignatureSchema extends SpruceSchema.ISchema {
 			id: 'eventSignature',
+			version: 'v2020_09_01',
+			namespace: 'MercuryTypes',
 			name: 'Event Signature',
 			    fields: {
 			            /** . */
@@ -78,6 +101,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 
 		interface IMercuryContractSchema extends SpruceSchema.ISchema {
 			id: 'mercuryContract',
+			version: 'v2020_09_01',
+			namespace: 'MercuryTypes',
 			name: 'Mercury Contract',
 			    fields: {
 			            /** . */
@@ -102,6 +127,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				/** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
 				'name': string
+				/** Fallback to permission contract. If the person does not have a permission set (to them or their role), I will fallback to the permission contract defined here. Note: if a new permission is added to the contract, setting this to false will mean everybody fails checking for it. */
+				'fallbackToPermissionContractIfPermissionNotSet'?: boolean| undefined | null
+				/** Match on. */
+				'match'?: ("all" | "any")| undefined | null
 				/** Clocked in. Is the person clocked in and ready to rock? */
 				'clockedIn'?: boolean| undefined | null
 				/** Clocked out. When someone is not working (off the clock). */
@@ -114,6 +143,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 
 		interface IPermissionSchema extends SpruceSchema.ISchema {
 			id: 'permission',
+			version: 'v2020_09_01',
+			namespace: 'MercuryTypes',
 			name: 'Permission',
 			    fields: {
 			            /** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
@@ -123,6 +154,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isRequired: true,
 			                hint: 'Hyphen separated name for this permission, e.g. can-unlock-doors',
 			                options: undefined
+			            },
+			            /** Fallback to permission contract. If the person does not have a permission set (to them or their role), I will fallback to the permission contract defined here. Note: if a new permission is added to the contract, setting this to false will mean everybody fails checking for it. */
+			            'fallbackToPermissionContractIfPermissionNotSet': {
+			                label: 'Fallback to permission contract',
+			                type: 'boolean',
+			                hint: 'If the person does not have a permission set (to them or their role), I will fallback to the permission contract defined here. Note: if a new permission is added to the contract, setting this to false will mean everybody fails checking for it.',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Match on. */
+			            'match': {
+			                label: 'Match on',
+			                type: 'select',
+			                defaultValue: "any",
+			                options: {choices: [{"label":"All","value":"all"},{"label":"Any","value":"any"}],}
 			            },
 			            /** Clocked in. Is the person clocked in and ready to rock? */
 			            'clockedIn': {
@@ -171,6 +217,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 
 		interface IPermissionContractSchema extends SpruceSchema.ISchema {
 			id: 'permissionContract',
+			version: 'v2020_09_01',
+			namespace: 'MercuryTypes',
 			name: 'Permission Contract',
 			    fields: {
 			            /** . */
