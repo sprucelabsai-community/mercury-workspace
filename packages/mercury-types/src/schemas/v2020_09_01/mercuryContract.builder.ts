@@ -27,14 +27,14 @@ export default buildSchema({
 							type: 'raw',
 							options: { valueType: 'SpruceSchema.ISchema' },
 						},
-						listenPermissionsAny: {
+						listenPermissions: {
 							type: 'schema',
 							isArray: true,
 							options: {
 								schemaId: { id: 'permission', version: 'v2020_09_01' },
 							},
 						},
-						emitPermissionsAny: {
+						emitPermissions: {
 							type: 'schema',
 							isArray: true,
 							options: {

@@ -43,9 +43,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'emitPayload'?: (SpruceSchema.ISchema)| undefined | null
 				
-				'listenPermissionsAny'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]| undefined | null
+				'listenPermissions'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]| undefined | null
 				
-				'emitPermissionsAny'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]| undefined | null
+				'emitPermissions'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]| undefined | null
 		}
 
 		interface IEventSignatureSchema extends SpruceSchema.ISchema {
@@ -71,13 +71,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `SpruceSchema.ISchema`,}
 			            },
 			            /** . */
-			            'listenPermissionsAny': {
+			            'listenPermissions': {
 			                type: 'schema',
 			                isArray: true,
 			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
 			            },
 			            /** . */
-			            'emitPermissionsAny': {
+			            'emitPermissions': {
 			                type: 'schema',
 			                isArray: true,
 			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
