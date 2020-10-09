@@ -2,6 +2,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"name": "spruce-mercury-workspace",
+	"description": "All the tools you need to connect to a Mercury compatible API. 💥",
 	"workspaces": [
 		"packages/mercury-client",
 		"packages/mercury-types",
@@ -42,7 +43,7 @@
 		"babel-plugin-module-resolver": "^4.0.0",
 		"conventional-changelog-sprucelabs": "^1.1.1",
 		"eslint": "^7.10.0",
-		"eslint-config-spruce": "10.9.80",
+		"eslint-config-spruce": "10.9.84",
 		"lerna": "^3.20.2",
 		"typescript": "^4.0.3",
 		"yarn-upgrade-all": "^0.5.4"
