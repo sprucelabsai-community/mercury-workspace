@@ -2302,15 +2302,15 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.278.tgz#5d96c10de81bea80adfb7e31eba174a8cd372840"
   integrity sha512-G663ruQcoSMDiDQW9VRMU0qB7P9AhuC8kKCSTHOAR23raqtqFNpVruPU8itQXZZrLTQOssbEq/AOhHi6B7MhmQ==
 
-"@sprucelabs/schema@^13.0.73":
-  version "13.0.73"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.73.tgz#81ea50dfea1426fbd71c4d044a203d3b8a7b0897"
-  integrity sha512-xyBCsOsKtfn36VEu7hf3t5bvHA3pDkGkv9sZkm4zoO4qgKnCRnSn2Hss1oM1py9pZweDtVrtpPIam3u9hwaeUw==
+"@sprucelabs/schema@^13.0.74":
+  version "13.0.74"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.74.tgz#86b8304c7f5dc447741683a89fa9f4e714c2bb3e"
+  integrity sha512-nSoPQr/IXV7JMLPJLj7cvam824890DRfUVsESUMPiuWYxRe4hBWgs2uDWNN45Ejn1d91kwiReY7P8Y7CJAEaWQ==
   dependencies:
     "@sprucelabs/error" "^2.2.445"
     "@sprucelabs/log" "^10.2.278"
     google-libphonenumber "^3.2.13"
-    libphonenumber-js "^1.8.3"
+    libphonenumber-js "^1.8.4"
     mime-db "^1.45.0"
     mime-type "^4.0.0"
 
@@ -2324,13 +2324,13 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.32.48":
-  version "10.32.48"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.32.48.tgz#08fb757ae9211504ade72b933df69446cd2582c1"
-  integrity sha512-8rULAlp9YOuiceCt3urb/ZforCIdfm/yZEGxth0Lc9fyf7T41t5P0CUT57QReCRVot2KlRgGNm3XVyccEQOJHg==
+"@sprucelabs/spruce-core-schemas@^10.32.49":
+  version "10.32.49"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.32.49.tgz#af79a7434e54dea7184727de334b3c41c5f91d70"
+  integrity sha512-JCcus6ANlaVANCDZNBbVBC6QY6kLxlpJ4r4ijD/oNAnyDT6XGJI9lH7c2pKKEHhRNTaOHsvJqB+t3Sbiqe3Crw==
   dependencies:
     "@sprucelabs/error" "^2.2.445"
-    "@sprucelabs/schema" "^13.0.73"
+    "@sprucelabs/schema" "^13.0.74"
 
 "@sprucelabs/spruce-skill-utils@^10.31.115":
   version "10.31.115"
@@ -7713,7 +7713,7 @@ libnpx@^10.2.4:
     y18n "^4.0.0"
     yargs "^14.2.3"
 
-libphonenumber-js@^1.8.3:
+libphonenumber-js@^1.8.4:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.4.tgz#e84eaa25b96bfebb2ac1a5c847b7f7f17da5bd59"
   integrity sha512-s0fTPZRB4hcsfDL9p6wUNOLngVh4y3fBPhH33dL7OfkHA2RirI8p3rlR+4f4SMxdcng9jPNOweS2Z47BivHMYw==
