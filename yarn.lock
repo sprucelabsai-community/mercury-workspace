@@ -2302,10 +2302,10 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.277.tgz#3256b9ad7608440dfc31ac5e7bf73cb5a05f3a52"
   integrity sha512-z5MFe8G+umsBO9pJ9/+bUHADgr0Fz0fMgFsWcJIchEaz6A4m07schepFccVwhZW8YaZcmxruRCVQJ8YdOMEx0Q==
 
-"@sprucelabs/schema@^13.0.65":
-  version "13.0.66"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.66.tgz#778d5301d95c8bde35974004da60f0ace8608787"
-  integrity sha512-8FLa82U7xrfd69QAninAVkdXU9eoTgIUI3EfGMxr9Xu3RrQJqnnwqPZF01TOc45xmrPpKvupHkkKuGseG74X+g==
+"@sprucelabs/schema@^13.0.66", "@sprucelabs/schema@^13.0.67":
+  version "13.0.67"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.67.tgz#43b33e3705f76e5877a6d0268563aea989f79281"
+  integrity sha512-QUPQuKSLCpyjDdTXlcPRPNfJVtIKZ8pZQP/oQWA7tv2V2lV3DRDrQOQiyknPOhVq+x4dsj/WcuUgo0gnWOjxVQ==
   dependencies:
     "@sprucelabs/error" "^2.2.443"
     "@sprucelabs/log" "^10.2.277"
@@ -2324,13 +2324,13 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.32.40":
-  version "10.32.40"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.32.40.tgz#2e030a6a74135ea922d394d78309a19d6bdbbc13"
-  integrity sha512-wMvsFrRVkuRniox0Gm0s/36870t1EMd3GtAN09TO437s4Z/L4d78tiE2D36GHFiT3pyGqje3mQ9W80dYM/R9iw==
+"@sprucelabs/spruce-core-schemas@^10.32.41":
+  version "10.32.41"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.32.41.tgz#edba202f9335961784e265efaa43626807011e9c"
+  integrity sha512-kzZ1Q/FZTArqAwUHhHFG37vHBoEf1quTK0qXtS8bz+gUfQJAhQHV2PCPWqFTVde3ZXf71uKDHcjU3sVeJoOnWQ==
   dependencies:
     "@sprucelabs/error" "^2.2.443"
-    "@sprucelabs/schema" "^13.0.65"
+    "@sprucelabs/schema" "^13.0.66"
 
 "@sprucelabs/spruce-skill-utils@^10.31.112":
   version "10.31.112"
@@ -2501,9 +2501,9 @@
   integrity sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
 
 "@types/node@*", "@types/node@>= 8":
-  version "14.11.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.7.tgz#4d9673b8331ce262628ea89d9ef3964b6c1e5489"
-  integrity sha512-hSEXknS4KiayUdZ7401J/T6eykXHJkDEipnyQMJ4/GstK4kWjbHnwXlcpvIWfPKiEH1JU96DkbzJ1nHRmpmKLw==
+  version "14.11.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.8.tgz#fe2012f2355e4ce08bca44aeb3abbb21cf88d33f"
+  integrity sha512-KPcKqKm5UKDkaYPTuXSx8wEP7vE9GnuaXIZKijwRYcePpZFDVuy2a57LarFKiORbHOuTOOwYzxVxcUzsh2P2Pw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
