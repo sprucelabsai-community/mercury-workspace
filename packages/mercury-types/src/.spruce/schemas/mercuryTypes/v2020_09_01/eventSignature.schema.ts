@@ -26,13 +26,13 @@ const eventSignatureSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatu
 	                options: {valueType: `SpruceSchema.ISchema`,}
 	            },
 	            /** . */
-	            'listenPermissionsAny': {
+	            'listenPermissions': {
 	                type: 'schema',
 	                isArray: true,
 	                options: {schema: permissionSchema,}
 	            },
 	            /** . */
-	            'emitPermissionsAny': {
+	            'emitPermissions': {
 	                type: 'schema',
 	                isArray: true,
 	                options: {schema: permissionSchema,}
