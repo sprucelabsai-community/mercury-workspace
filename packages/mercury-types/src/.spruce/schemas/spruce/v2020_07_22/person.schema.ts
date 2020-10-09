@@ -53,6 +53,17 @@ const personSchema: SpruceSchemas.Spruce.v2020_07_22.IPersonSchema  = {
 	                type: 'schema',
 	                options: {schema: profileImageSchema,}
 	            },
+	            /** . */
+	            'dateCreated': {
+	                type: 'number',
+	                isRequired: true,
+	                options: undefined
+	            },
+	            /** . */
+	            'dateScrambled': {
+	                type: 'number',
+	                options: undefined
+	            },
 	    }
 }
 

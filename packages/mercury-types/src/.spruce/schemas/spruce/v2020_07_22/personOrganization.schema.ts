@@ -38,6 +38,17 @@ const personOrganizationSchema: SpruceSchemas.Spruce.v2020_07_22.IPersonOrganiza
 	                isRequired: true,
 	                options: undefined
 	            },
+	            /** . */
+	            'dateCreated': {
+	                type: 'number',
+	                isRequired: true,
+	                options: undefined
+	            },
+	            /** . */
+	            'dateDeleted': {
+	                type: 'number',
+	                options: undefined
+	            },
 	    }
 }
 
