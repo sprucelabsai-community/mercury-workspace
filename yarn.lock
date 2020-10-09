@@ -2302,10 +2302,10 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.278.tgz#5d96c10de81bea80adfb7e31eba174a8cd372840"
   integrity sha512-G663ruQcoSMDiDQW9VRMU0qB7P9AhuC8kKCSTHOAR23raqtqFNpVruPU8itQXZZrLTQOssbEq/AOhHi6B7MhmQ==
 
-"@sprucelabs/schema@^13.0.72":
-  version "13.0.72"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.72.tgz#3b6ae4523e0e7bd802e713a711c61ba34f8b2bf9"
-  integrity sha512-DOspXri+X25scCpFPpUJjd7dZalXxdzaBT+oJfyGM1kuDNgKyReMSQL0t2lZmDJ/4c6ksDOnrMm/wpCp/Sc+tQ==
+"@sprucelabs/schema@^13.0.73":
+  version "13.0.73"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.73.tgz#81ea50dfea1426fbd71c4d044a203d3b8a7b0897"
+  integrity sha512-xyBCsOsKtfn36VEu7hf3t5bvHA3pDkGkv9sZkm4zoO4qgKnCRnSn2Hss1oM1py9pZweDtVrtpPIam3u9hwaeUw==
   dependencies:
     "@sprucelabs/error" "^2.2.445"
     "@sprucelabs/log" "^10.2.278"
@@ -2324,13 +2324,13 @@
     conventional-changelog-sprucelabs "^1.1.0"
     semantic-release "^17.0.4"
 
-"@sprucelabs/spruce-core-schemas@^10.32.47":
-  version "10.32.47"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.32.47.tgz#aa626bdf36d06e434fd2ee0acb511ee5f14ba575"
-  integrity sha512-GEZDP6dM29YJGCae84ky0POAR5J3ZXjqnU7W8z+VUQImWys7bDDCTO91Zs4+KqY+dZMNytCetT12DoJ6WZnLIg==
+"@sprucelabs/spruce-core-schemas@^10.32.48":
+  version "10.32.48"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-10.32.48.tgz#08fb757ae9211504ade72b933df69446cd2582c1"
+  integrity sha512-8rULAlp9YOuiceCt3urb/ZforCIdfm/yZEGxth0Lc9fyf7T41t5P0CUT57QReCRVot2KlRgGNm3XVyccEQOJHg==
   dependencies:
     "@sprucelabs/error" "^2.2.445"
-    "@sprucelabs/schema" "^13.0.72"
+    "@sprucelabs/schema" "^13.0.73"
 
 "@sprucelabs/spruce-skill-utils@^10.31.115":
   version "10.31.115"
@@ -7714,9 +7714,9 @@ libnpx@^10.2.4:
     yargs "^14.2.3"
 
 libphonenumber-js@^1.8.3:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.3.tgz#aa1c9d9d4fc8f3f9392480c76fedd5e7e1adc064"
-  integrity sha512-F7h0pzzXh3ishzW2ZZF0tJNs1+SHovvSIDefqoOv2bNCxAmLxxz2Bkbav6pl9M12QFVK25EQo1l5aq8MvDOnPQ==
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.4.tgz#e84eaa25b96bfebb2ac1a5c847b7f7f17da5bd59"
+  integrity sha512-s0fTPZRB4hcsfDL9p6wUNOLngVh4y3fBPhH33dL7OfkHA2RirI8p3rlR+4f4SMxdcng9jPNOweS2Z47BivHMYw==
   dependencies:
     minimist "^1.2.5"
     xml2js "^0.4.17"
