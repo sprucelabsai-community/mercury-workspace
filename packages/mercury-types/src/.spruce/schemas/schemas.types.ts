@@ -29,8 +29,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 
 
 
-
-
 	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 		
