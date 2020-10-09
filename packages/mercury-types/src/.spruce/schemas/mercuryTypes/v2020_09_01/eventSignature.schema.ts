@@ -1,11 +1,12 @@
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
-
-
 
 import permissionSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/permission.schema'
 
 const eventSignatureSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatureSchema  = {
 	id: 'eventSignature',
+	version: 'v2020_09_01',
+	namespace: 'MercuryTypes',
 	name: 'Event Signature',
 	    fields: {
 	            /** . */
@@ -38,5 +39,7 @@ const eventSignatureSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatu
 	            },
 	    }
 }
+
+SchemaRegistry.getInstance().trackSchema(eventSignatureSchema)
 
 export default eventSignatureSchema
