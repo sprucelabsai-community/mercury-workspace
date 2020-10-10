@@ -57,6 +57,17 @@ const locationSchema: SpruceSchemas.Spruce.v2020_07_22.ILocationSchema  = {
 	                isRequired: true,
 	                options: undefined
 	            },
+	            /** . */
+	            'dateCreated': {
+	                type: 'number',
+	                isRequired: true,
+	                options: undefined
+	            },
+	            /** . */
+	            'dateDeleted': {
+	                type: 'number',
+	                options: undefined
+	            },
 	    }
 }
 

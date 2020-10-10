@@ -55,6 +55,17 @@ const skillSchema: SpruceSchemas.Spruce.v2020_07_22.ISkillSchema  = {
 	                isArray: true,
 	                options: {schema: skillCreatorSchema,}
 	            },
+	            /** . */
+	            'dateCreated': {
+	                type: 'number',
+	                isRequired: true,
+	                options: undefined
+	            },
+	            /** . */
+	            'dateDeleted': {
+	                type: 'number',
+	                options: undefined
+	            },
 	    }
 }
 
