@@ -2292,11 +2292,6 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.454":
-  version "2.2.454"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.454.tgz#355ee4147687368efa993c625e4fb750123a2961"
-  integrity sha512-rRIU4z8uDE7bB7f0TLkixyh9thkU2F9K62i59NB8LUV9628Kwnh9AsYDvk5QxJ7C4axSS6budtdLH/lrPLo5vw==
-
 "@sprucelabs/error@^2.2.456":
   version "2.2.456"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.456.tgz#29203a69a23d884b69a6a9d5a80c0f3ae1e26d19"
@@ -2307,22 +2302,10 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.285.tgz#c2bfeb143517599f646f4e4f80a001259276389a"
   integrity sha512-yGOp3aOoPQNbfgRYaiJltn5RAv+NlAr7hd6T2D8aXtjvwV3CW2T3eh3ebkCJK7bbiUouplOXBO/O8ai7NwswkA==
 
-"@sprucelabs/schema@^13.0.87":
-  version "13.0.87"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.87.tgz#9ced1f0dfb31361016f8ec0ec25b1271ddd8a78b"
-  integrity sha512-laKm3DRFojAhXB6t/dIY+OYqnLLz6x2SWZykd1OX5YgSKFLKEoYIJxIZXX0s8kfqSZMXj7teIQcTIGZspqZGJA==
-  dependencies:
-    "@sprucelabs/error" "^2.2.454"
-    "@sprucelabs/log" "^10.2.285"
-    google-libphonenumber "^3.2.13"
-    libphonenumber-js "^1.8.4"
-    mime-db "^1.45.0"
-    mime-type "^4.0.0"
-
-"@sprucelabs/schema@^13.0.96":
-  version "13.0.96"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.96.tgz#87e0a82d903ee1eacbc9f7a07227b11c9f34f0b2"
-  integrity sha512-N1vEW9g3C5NLpUr/AnoG0pxwisHGHrx7KHt5VsF+MypM0dnNvKU/jjAho/VQaU9zKIAYzcqXxW8Wj/3tqXaxng==
+"@sprucelabs/schema@^13.0.97":
+  version "13.0.97"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.97.tgz#cfecdf6f9bc9fb47e1837864958926c24c4c6287"
+  integrity sha512-R4awEj8CG3FLuU1T0qXXWlRPjDruYChMO05NFQH8GVloU80xvQguYTexfWTZztl+aTUY3lKtDyj/j/JKEzXPaA==
   dependencies:
     "@sprucelabs/error" "^2.2.456"
     "@sprucelabs/log" "^10.2.285"
@@ -2341,12 +2324,12 @@
     conventional-changelog-sprucelabs "^1.1.2"
     semantic-release "^17.1.2"
 
-"@sprucelabs/spruce-core-schemas@^11.1.9":
-  version "11.1.9"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-11.1.9.tgz#6c24047854918d8a98923eeafd98ba16ff8f1e89"
-  integrity sha512-QUKPWeGQQaz167y1vj6KLTJaHAHYrsg6iKT3PewewNRiVNUGXikbGyHRTb+ey0AatwUZp4vHZilEn9XkA8lkGA==
+"@sprucelabs/spruce-core-schemas@^11.1.10":
+  version "11.1.10"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-11.1.10.tgz#ee1e22560bd67f8c1023ef610eaed3c8e879eb75"
+  integrity sha512-VUQUdWIFyCFGVv7hHNAW9TYvkiZeyEPWBGrwC44GT4EplEV9sDIAaMtbsi7WeNcmsl/07zpt5uWfx/9b7XMfxQ==
   dependencies:
-    "@sprucelabs/schema" "^13.0.96"
+    "@sprucelabs/schema" "^13.0.97"
 
 "@sprucelabs/spruce-skill-utils@^10.31.128":
   version "10.31.128"
@@ -2359,10 +2342,10 @@
     lodash "^4.17.20"
     uuid "^8.3.1"
 
-"@sprucelabs/test@^7.0.130":
-  version "7.0.130"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.130.tgz#54d66cf1c41208112ceb24c6dc76fa2e6953bcb7"
-  integrity sha512-IUh0/BsHlF21gU164sZDmJzPbQfFSIgC/resxH47ZFIAWs2r3BzaJ7VrCvW0nFMTfR1zYThtxkUMAzuYdinlqw==
+"@sprucelabs/test@^7.0.131":
+  version "7.0.131"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/test/-/test-7.0.131.tgz#6343299fd89e5f3f1f88510dcb1fd67a22958ab4"
+  integrity sha512-iTPGEhjfvCR19B9Xn3HJaWnL+HoXR9JM6yYAdJyKpA/M5PEgFrBms0nuORAVjyhcduA10F7QWNp+jUlGWKPIDQ==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
@@ -2532,9 +2515,9 @@
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
 "@types/prettier@^2.0.0":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.1.1.tgz#be148756d5480a84cde100324c03a86ae5739fb5"
-  integrity sha512-2zs+O+UkDsJ1Vcp667pd3f8xearMdopz/z54i99wtRDI5KLmngk7vlrYZD0ZjKHaROR03EznlBbVY9PfAEyJIQ==
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.1.2.tgz#4929992f87a0129f4960a110faeb526210562e7b"
+  integrity sha512-IiPhNnenzkqdSdQH3ifk9LoX7oQe61ZlDdDO4+MUv6FyWdPGDPr26gCPVs3oguZEMq//nFZZpwUZcVuNJsG+DQ==
 
 "@types/resolve@1.17.1":
   version "1.17.1"
@@ -4409,7 +4392,7 @@ debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
-debuglog@^1.0.1:
+debuglog@*, debuglog@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
   integrity sha1-qiT/uaw9+aI1GDfPstJ5NgzXhJI=
@@ -6209,7 +6192,7 @@ import-local@^3.0.2:
     pkg-dir "^4.2.0"
     resolve-cwd "^3.0.0"
 
-imurmurhash@^0.1.4:
+imurmurhash@*, imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
@@ -7841,6 +7824,11 @@ lockfile@^1.0.4:
   dependencies:
     signal-exit "^3.0.2"
 
+lodash._baseindexof@*:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/lodash._baseindexof/-/lodash._baseindexof-3.1.0.tgz#fe52b53a1c6761e42618d654e4a25789ed61822c"
+  integrity sha1-/lK1OhxnYeQmGNZU5KJXie1hgiw=
+
 lodash._baseuniq@~4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash._baseuniq/-/lodash._baseuniq-4.6.0.tgz#0ebb44e456814af7905c6212fa2c9b2d51b841e8"
@@ -7849,10 +7837,32 @@ lodash._baseuniq@~4.6.0:
     lodash._createset "~4.0.0"
     lodash._root "~3.0.0"
 
+lodash._bindcallback@*:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/lodash._bindcallback/-/lodash._bindcallback-3.0.1.tgz#e531c27644cf8b57a99e17ed95b35c748789392e"
+  integrity sha1-5THCdkTPi1epnhftlbNcdIeJOS4=
+
+lodash._cacheindexof@*:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/lodash._cacheindexof/-/lodash._cacheindexof-3.0.2.tgz#3dc69ac82498d2ee5e3ce56091bafd2adc7bde92"
+  integrity sha1-PcaayCSY0u5ePOVgkbr9Ktx73pI=
+
+lodash._createcache@*:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/lodash._createcache/-/lodash._createcache-3.1.2.tgz#56d6a064017625e79ebca6b8018e17440bdcf093"
+  integrity sha1-VtagZAF2JeeevKa4AY4XRAvc8JM=
+  dependencies:
+    lodash._getnative "^3.0.0"
+
 lodash._createset@~4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/lodash._createset/-/lodash._createset-4.0.3.tgz#0f4659fbb09d75194fa9e2b88a6644d363c9fe26"
   integrity sha1-D0ZZ+7CddRlPqeK4imZE02PJ/iY=
+
+lodash._getnative@*, lodash._getnative@^3.0.0:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
+  integrity sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=
 
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
@@ -7908,6 +7918,11 @@ lodash.memoize@4.x:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
+
+lodash.restparam@*:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
+  integrity sha1-k2pOMJ7zMKdkXtQUWYbIWuWyCAU=
 
 lodash.set@^4.3.2:
   version "4.3.2"
