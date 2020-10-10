@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v2.0.0...v3.0.0) (2020-10-10)
+
+
+### Breaking Changes
+
+* core schemas update ([86d1483](https://github.com/sprucelabsai/mercury-workspace/commit/86d1483))
+
+
+
+
+
 # [2.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v1.14.4...v2.0.0) (2020-10-09)
 
 
