@@ -16,36 +16,38 @@ const personOrganizationSchema: SpruceSchemas.Spruce.v2020_07_22.IPersonOrganiza
 	                isRequired: true,
 	                options: undefined
 	            },
-	            /** Name. */
+	            /** Role ids. */
 	            'roleIds': {
-	                label: 'Name',
+	                label: 'Role ids',
 	                type: 'id',
 	                isRequired: true,
 	                isArray: true,
 	                options: undefined
 	            },
-	            /** Organization. */
+	            /** Organization id. */
 	            'organizationId': {
-	                label: 'Organization',
+	                label: 'Organization id',
 	                type: 'id',
 	                isRequired: true,
 	                options: undefined
 	            },
-	            /** Person. */
+	            /** Person id. */
 	            'personId': {
-	                label: 'Person',
+	                label: 'Person id',
 	                type: 'id',
 	                isRequired: true,
 	                options: undefined
 	            },
-	            /** . */
+	            /** Date created. */
 	            'dateCreated': {
+	                label: 'Date created',
 	                type: 'number',
 	                isRequired: true,
 	                options: undefined
 	            },
-	            /** . */
+	            /** Date deleted. */
 	            'dateDeleted': {
+	                label: 'Date deleted',
 	                type: 'number',
 	                options: undefined
 	            },
