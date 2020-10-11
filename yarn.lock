@@ -2292,7 +2292,7 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.460", "@sprucelabs/error@^2.2.461":
+"@sprucelabs/error@^2.2.461":
   version "2.2.461"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.461.tgz#bf3f7c891ad5b80af06a0b2bf5e10967559853cf"
   integrity sha512-kkdlXMmHErtc2I9KeGE7Mstx1OS0wY3wQv1rIdzAkHixeGTFOO3LS1/TUNa1oyXS1A6w+KK5uRuE1urLs7/GLw==
@@ -2302,12 +2302,12 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.286.tgz#a1b29f1620182dd7e30b0dbc67cea7e51f70e837"
   integrity sha512-QFUoO87gLHJ4lMOtQcjTE9Kwto8PxEgQ0usOD31kr1G5zQO7ncrBjNSz19wHbU87W7QekIYiNZGN+FxYWB4kYQ==
 
-"@sprucelabs/schema@^13.0.115":
-  version "13.0.115"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.115.tgz#55a4605ed67501b0e1853e724f80cd7dae4c48a6"
-  integrity sha512-zaHc4RZ2xGuVQ4QGuHePqZj/7XfnYWCmuQGgXdbCq8/F11SEW3E61ESAAzEOcF5cmmgEfp90z/EaKGth7p/clQ==
+"@sprucelabs/schema@^13.0.116":
+  version "13.0.116"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.116.tgz#fd97c2065a25af6dfa3047ac47fd7d423e5eb850"
+  integrity sha512-7NYFItuR6BnGrWITUceBMWbj/7syHhxlOgyUx8yrXnL17CIxO7masItiofupDsf66IH9CgaGTPpOLwk7zKTF3w==
   dependencies:
-    "@sprucelabs/error" "^2.2.460"
+    "@sprucelabs/error" "^2.2.461"
     "@sprucelabs/log" "^10.2.286"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.8.4"
@@ -2324,19 +2324,19 @@
     conventional-changelog-sprucelabs "^1.1.2"
     semantic-release "^17.1.2"
 
-"@sprucelabs/spruce-core-schemas@^11.1.28":
-  version "11.1.28"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-11.1.28.tgz#2f22b1ef3acd715d1af400eab1586a59df678f82"
-  integrity sha512-3VPEx7pi9tHuuiV2ltMtRdWvMo5Xa0IaH7QNMIaBJRAb+OVDplS1JBShmqff+lTVEncep2IWFhvPvRjEL8uaaA==
+"@sprucelabs/spruce-core-schemas@^11.1.29":
+  version "11.1.29"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-11.1.29.tgz#e3d38252e9f9982385f9b77155b900dd1785ede8"
+  integrity sha512-IYlhKfkmcpGLXPAjpz42hQ9IZqdnfqlKguVaO3QD2uWI+FWMteeeL3Ov9btwPNe2zkqtt/DyXJOQOh34/A7bHA==
   dependencies:
-    "@sprucelabs/schema" "^13.0.115"
+    "@sprucelabs/schema" "^13.0.116"
 
-"@sprucelabs/spruce-skill-utils@^10.31.136":
-  version "10.31.136"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.136.tgz#7450f4ef322cb1fdadf495fe7b47130fa0b4df28"
-  integrity sha512-TkMWZt1QR23bB7C6WY+qLK/1Q+vRskzrVmTK2O52tbArg2junHZmpmrLz/XVEmmlSfaxWQJZG2efdHEXMJslDQ==
+"@sprucelabs/spruce-skill-utils@^10.31.137":
+  version "10.31.137"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.137.tgz#52994a534a85f4ed0d49f39ba856755b72b8a2c2"
+  integrity sha512-uUDC/QhLvdmcRZ3noUZXZx2eEWkTbOf9c5r1n+3S+MF3f9GZ5Lu8G6oW4MGBwcU5Y7TJMVl0VLLtupRhorZQMw==
   dependencies:
-    "@sprucelabs/error" "^2.2.460"
+    "@sprucelabs/error" "^2.2.461"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
