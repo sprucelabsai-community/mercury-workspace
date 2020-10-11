@@ -6,7 +6,7 @@
 	"files": [
 		"build"
 	],
-	"version": "3.0.2",
+	"version": "3.0.31",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"description": "The simple way to interact with the Spruce Experience Platform",
@@ -34,7 +34,7 @@
 		"arkit.png": "arkit -f index.ts -o docs/images/arkit.png"
 	},
 	"dependencies": {
-		"@sprucelabs/mercury-types": "^3.0.2",
+		"@sprucelabs/mercury-types": "^3.0.31",
 		"socket.io-client": "^2.3.1"
 	},
 	"devDependencies": {
@@ -50,7 +50,7 @@
 		"chokidar-cli": "^2.1.0",
 		"concurrently": "^5.3.0",
 		"eslint": "^7.11.0",
-		"eslint-config-spruce": "^10.9.88",
+		"eslint-config-spruce": "^10.9.90",
 		"prettier": "^2.1.2",
 		"rollup": "^2.29.0",
 		"rollup-plugin-node-builtins": "^2.1.2",
