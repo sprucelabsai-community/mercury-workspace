@@ -2302,10 +2302,32 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.456.tgz#29203a69a23d884b69a6a9d5a80c0f3ae1e26d19"
   integrity sha512-ICtIyZhIDyZkXhFdppF+zysGm/YcW/zQGqLkEF5EQgmk2Te1GAZd53zN7X77fEV1zky9Vh7h1WinvwH64WisQg==
 
+"@sprucelabs/error@^2.2.462":
+  version "2.2.463"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.463.tgz#458f754d3bc01745eab7157a32ff7273c8a1ab7e"
+  integrity sha512-lh6E3uRinpDjRybNoqYoQccmJI5t/bp5zMUJtfI/xttH4Bb5sN7vG+yC9Zn8i1vvMaO4Z7Rz/rGy6Uesc2TiHw==
+
 "@sprucelabs/log@^10.2.285":
   version "10.2.285"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.285.tgz#c2bfeb143517599f646f4e4f80a001259276389a"
   integrity sha512-yGOp3aOoPQNbfgRYaiJltn5RAv+NlAr7hd6T2D8aXtjvwV3CW2T3eh3ebkCJK7bbiUouplOXBO/O8ai7NwswkA==
+
+"@sprucelabs/log@^10.2.287":
+  version "10.2.288"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.288.tgz#22b0ec2b19a7f11ee37fd68865756fe079885fc1"
+  integrity sha512-FeMliUprRUjjqWsoO1Z2gcfPfd4kP2IEz+eD55D63YoEdp+jKiz3L0/EWEA+Ndck3+Czo+56I+k8VS8pO9CClw==
+
+"@sprucelabs/schema@^13.0.123":
+  version "13.0.123"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.123.tgz#43720951461379e4900a5379eef0c61936a5e19f"
+  integrity sha512-lT4WUlcjPw25n0RaydphvtLf4lScafmwhwPyUGpED6bG5lOJkLeRSvwKGBN1lARf8cGLk3XUPR/v05pB795HAA==
+  dependencies:
+    "@sprucelabs/error" "^2.2.462"
+    "@sprucelabs/log" "^10.2.287"
+    google-libphonenumber "^3.2.13"
+    libphonenumber-js "^1.8.4"
+    mime-db "^1.45.0"
+    mime-type "^4.0.0"
 
 "@sprucelabs/schema@^13.0.87":
   version "13.0.87"
@@ -2341,12 +2363,12 @@
     conventional-changelog-sprucelabs "^1.1.2"
     semantic-release "^17.1.2"
 
-"@sprucelabs/spruce-core-schemas@^11.1.9":
-  version "11.1.9"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-11.1.9.tgz#6c24047854918d8a98923eeafd98ba16ff8f1e89"
-  integrity sha512-QUKPWeGQQaz167y1vj6KLTJaHAHYrsg6iKT3PewewNRiVNUGXikbGyHRTb+ey0AatwUZp4vHZilEn9XkA8lkGA==
+"@sprucelabs/spruce-core-schemas@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-12.0.0.tgz#5e703ef2aed38070ee8e94428bb332bf01b37df4"
+  integrity sha512-Wf45xY0QoBuNzfEWPwxXl2Lkt0RaxxeWhNt7Ai08WD5KaPnyJ7kMQHcWrKZ/tdK2CuKU2upMlryRkgPNfLcJXA==
   dependencies:
-    "@sprucelabs/schema" "^13.0.96"
+    "@sprucelabs/schema" "^13.0.123"
 
 "@sprucelabs/spruce-skill-utils@^10.31.128":
   version "10.31.128"
