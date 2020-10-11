@@ -2302,10 +2302,10 @@
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.286.tgz#a1b29f1620182dd7e30b0dbc67cea7e51f70e837"
   integrity sha512-QFUoO87gLHJ4lMOtQcjTE9Kwto8PxEgQ0usOD31kr1G5zQO7ncrBjNSz19wHbU87W7QekIYiNZGN+FxYWB4kYQ==
 
-"@sprucelabs/schema@^13.0.109":
-  version "13.0.109"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.109.tgz#9a0e3494e5436592ba1e607994f98c4990507a7d"
-  integrity sha512-baiGvDdqE1Ccoizre9/AOWzNMIHIwDZrg3OXUpDj8zMces9REEuucE+xMYrvIsg9IQ4+XwgHBvSVUlm8UStWoA==
+"@sprucelabs/schema@^13.0.110":
+  version "13.0.110"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.110.tgz#20c9fbe1e98a937484e77e387a0c6e7d205d3a69"
+  integrity sha512-oHPO8FS58eq8QyUWnrVlWmJCgFYgpwJJuMasEIM0VYuJsK2eoIO1PtXHBWeIQtFmzv1zS5YSKaFsDqe3bJjGFA==
   dependencies:
     "@sprucelabs/error" "^2.2.458"
     "@sprucelabs/log" "^10.2.286"
@@ -2324,12 +2324,12 @@
     conventional-changelog-sprucelabs "^1.1.2"
     semantic-release "^17.1.2"
 
-"@sprucelabs/spruce-core-schemas@^11.1.22":
-  version "11.1.22"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-11.1.22.tgz#d5a467a92321026bf66c35e6acf08eea41e2cf7b"
-  integrity sha512-bUbb+ILBGlJSmrI8cBLos6OJVB7iLHBLtf0SOpKHMEk4IXM6vd6arYhMJbhrKBFVBxUF9V0i0Gim57dRDGgvJQ==
+"@sprucelabs/spruce-core-schemas@^11.1.23":
+  version "11.1.23"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-11.1.23.tgz#5e3e695208a667178cdd8c352145b132b33dec5f"
+  integrity sha512-HA6vQIoUZjDNkld1ucFvbanuQTCz/Gu8WRFVXWcSiPB8LuMk37TmeDs4JkU9HgGa9mDyn8DPL17YG2Xl7kdiAg==
   dependencies:
-    "@sprucelabs/schema" "^13.0.109"
+    "@sprucelabs/schema" "^13.0.110"
 
 "@sprucelabs/spruce-skill-utils@^10.31.131":
   version "10.31.131"
