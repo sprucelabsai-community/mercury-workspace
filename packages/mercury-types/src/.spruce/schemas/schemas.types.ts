@@ -13,22 +13,6 @@ import * as SpruceSchema from '@sprucelabs/schema'
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 		
