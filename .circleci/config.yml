@@ -19,18 +19,11 @@ jobs:
               circleci-agent step halt
             fi
       - run: node -v && npm -v && yarn -v
-      - restore_cache:
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - run: yarn clean
       - run: yarn build
       - run: yarn lint
       - run: yarn test
-      - save_cache:
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
       - run:
           name: Check branch for auto-upgrade
           command: |
@@ -63,9 +56,6 @@ jobs:
               echo "[npm-publish] detected. No publish necessary 👊"
               circleci-agent step halt
             fi
-      - restore_cache:
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install --frozen-lockfile
       - run: yarn run build
       - run: git config --global user.email "$GIT_AUTHOR_EMAIL"
