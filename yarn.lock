@@ -2292,23 +2292,23 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.467", "@sprucelabs/error@^2.2.469", "@sprucelabs/error@^2.2.470":
-  version "2.2.470"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.470.tgz#7b152c5686d7bca730147eaeaade4d48ac6d44fc"
-  integrity sha512-A8DuPqvfYg2ZmxGdVlNOtCPGCKgy81VoSV7NgBlokHtDjbyjrQYZ7stibZrCZyl1A6Xk3A2r1ZCcPs+Y9VTduA==
+"@sprucelabs/error@^2.2.470", "@sprucelabs/error@^2.2.471":
+  version "2.2.471"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.471.tgz#558cd49e109dfcd9a5ed188d6a9624235cc297e6"
+  integrity sha512-WRVBqowW+bgl1RVPHhjvRWCyn7rh9DtElBS5y96AUgWM7Bkv6zYrIHHxhVgPmSfJDQH30sDCa4GOGbJd1wJVvQ==
 
-"@sprucelabs/log@^10.2.289", "@sprucelabs/log@^10.2.291":
+"@sprucelabs/log@^10.2.291":
   version "10.2.291"
   resolved "https://registry.yarnpkg.com/@sprucelabs/log/-/log-10.2.291.tgz#e3300bcdf85e2867b82a1089a41e3d79691a1007"
   integrity sha512-qnin03ln8nRp0cEM4/RjKbI3BJFM226fr6uebHrfkIjw+G1HlQoUk/NqrySvS8+T5SFvuc9m0xe3Xdhk27Ffbw==
 
-"@sprucelabs/schema@^13.0.129":
-  version "13.0.129"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.129.tgz#a6a7bc236dd3404cf5f081195dd6117d012f24bd"
-  integrity sha512-kDY1OFAPsIiYJHQFeLBFBkZAIW1PjWpdwdINqL6irCJXfy5vMwIcaCyaau4QYGhFzljAy7RnxtUAzd+hoKIB7g==
+"@sprucelabs/schema@^13.0.130":
+  version "13.0.130"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/schema/-/schema-13.0.130.tgz#6a743eb10ab06f8083de1c2c3d2970705fda372a"
+  integrity sha512-rvmSvUuIlIad1zBrrswZ2V0CHrU0dMVF0ynBQSZEXbh97zA+TyDX5/+OXX/BHm4bLM1Pizqu62OxH66MY2DmQQ==
   dependencies:
-    "@sprucelabs/error" "^2.2.467"
-    "@sprucelabs/log" "^10.2.289"
+    "@sprucelabs/error" "^2.2.470"
+    "@sprucelabs/log" "^10.2.291"
     google-libphonenumber "^3.2.13"
     libphonenumber-js "^1.8.4"
     mime-db "^1.45.0"
@@ -2324,19 +2324,19 @@
     conventional-changelog-sprucelabs "^1.1.2"
     semantic-release "^17.1.2"
 
-"@sprucelabs/spruce-core-schemas@^12.0.11":
-  version "12.0.11"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-12.0.11.tgz#3b41751bbcfeab6fc179f69d0b3dc0204f7b6b9c"
-  integrity sha512-0mgXjSmMCFTIwbZm0YIFup8VjKojy3tljwLXka2LFU1C8xnLNIHDPxf4w+MQFq4n8PGaVJ8xwWpvGrQMaVGGhQ==
+"@sprucelabs/spruce-core-schemas@^12.0.12":
+  version "12.0.12"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-12.0.12.tgz#6a72f802c50c9a59ef5e576f92685b9f0239a830"
+  integrity sha512-5YOdXPP1wknFuIj2RNSOMVNbaLQm8vyLv5p6ad4VXXMxuk05Ivq0SG/BgeS8nVyaW+5Pf70a5F+GD3zOUNT23w==
   dependencies:
-    "@sprucelabs/schema" "^13.0.129"
+    "@sprucelabs/schema" "^13.0.130"
 
-"@sprucelabs/spruce-skill-utils@^10.31.149":
-  version "10.31.149"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.149.tgz#b1d40b15881d72b3722d1cd9595052318b797c46"
-  integrity sha512-eP2vIVl4x6QuS4naNxzShOs5JJ13SFq9Zn7ogomKlyq5t7OYJhS75/ilVr5Dduem7VhOZEGjDGsreC59OnqV9A==
+"@sprucelabs/spruce-skill-utils@^10.31.150":
+  version "10.31.150"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.150.tgz#b48016863ef8e51d71ac41f4ad120fcd18297add"
+  integrity sha512-bjEUA2mmJNBZOvB46oBs+rH6kub46IO8yGc7EYatk8EPLtjDkS+rKc/0WA/0FBBVvz3i7SjkfovMMewlram2+A==
   dependencies:
-    "@sprucelabs/error" "^2.2.469"
+    "@sprucelabs/error" "^2.2.470"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
@@ -4392,7 +4392,7 @@ debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
-debuglog@^1.0.1:
+debuglog@*, debuglog@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
   integrity sha1-qiT/uaw9+aI1GDfPstJ5NgzXhJI=
@@ -6192,7 +6192,7 @@ import-local@^3.0.2:
     pkg-dir "^4.2.0"
     resolve-cwd "^3.0.0"
 
-imurmurhash@^0.1.4:
+imurmurhash@*, imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
@@ -7824,6 +7824,11 @@ lockfile@^1.0.4:
   dependencies:
     signal-exit "^3.0.2"
 
+lodash._baseindexof@*:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/lodash._baseindexof/-/lodash._baseindexof-3.1.0.tgz#fe52b53a1c6761e42618d654e4a25789ed61822c"
+  integrity sha1-/lK1OhxnYeQmGNZU5KJXie1hgiw=
+
 lodash._baseuniq@~4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash._baseuniq/-/lodash._baseuniq-4.6.0.tgz#0ebb44e456814af7905c6212fa2c9b2d51b841e8"
@@ -7832,10 +7837,32 @@ lodash._baseuniq@~4.6.0:
     lodash._createset "~4.0.0"
     lodash._root "~3.0.0"
 
+lodash._bindcallback@*:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/lodash._bindcallback/-/lodash._bindcallback-3.0.1.tgz#e531c27644cf8b57a99e17ed95b35c748789392e"
+  integrity sha1-5THCdkTPi1epnhftlbNcdIeJOS4=
+
+lodash._cacheindexof@*:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/lodash._cacheindexof/-/lodash._cacheindexof-3.0.2.tgz#3dc69ac82498d2ee5e3ce56091bafd2adc7bde92"
+  integrity sha1-PcaayCSY0u5ePOVgkbr9Ktx73pI=
+
+lodash._createcache@*:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/lodash._createcache/-/lodash._createcache-3.1.2.tgz#56d6a064017625e79ebca6b8018e17440bdcf093"
+  integrity sha1-VtagZAF2JeeevKa4AY4XRAvc8JM=
+  dependencies:
+    lodash._getnative "^3.0.0"
+
 lodash._createset@~4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/lodash._createset/-/lodash._createset-4.0.3.tgz#0f4659fbb09d75194fa9e2b88a6644d363c9fe26"
   integrity sha1-D0ZZ+7CddRlPqeK4imZE02PJ/iY=
+
+lodash._getnative@*, lodash._getnative@^3.0.0:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
+  integrity sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=
 
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
@@ -7891,6 +7918,11 @@ lodash.memoize@4.x:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
+
+lodash.restparam@*:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
+  integrity sha1-k2pOMJ7zMKdkXtQUWYbIWuWyCAU=
 
 lodash.set@^4.3.2:
   version "4.3.2"
