@@ -2292,7 +2292,7 @@
     tsconfig-paths "^3.9.0"
     yargs "^16.0.3"
 
-"@sprucelabs/error@^2.2.467", "@sprucelabs/error@^2.2.468", "@sprucelabs/error@^2.2.469":
+"@sprucelabs/error@^2.2.467", "@sprucelabs/error@^2.2.469":
   version "2.2.469"
   resolved "https://registry.yarnpkg.com/@sprucelabs/error/-/error-2.2.469.tgz#8424b681a282e9a1366bcb4fc86aa46ab33f9aa9"
   integrity sha512-WoCM5SjjcWFCCM+kv5o7D8wizixe32rq0zYNQTmbjR+vvq1pjVfYEJh7JlQzwHtA1HinNyhOhmaABx8xBAby+w==
@@ -2324,19 +2324,19 @@
     conventional-changelog-sprucelabs "^1.1.2"
     semantic-release "^17.1.2"
 
-"@sprucelabs/spruce-core-schemas@^12.0.9":
-  version "12.0.9"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-12.0.9.tgz#30d4d4f7b6d1704bf4a12263543f5f14af76d777"
-  integrity sha512-/xvW+c9UdgLpZVcHtl9uT9n/NaBigXxhWbJLzkHt/vj2ExugsLda+7KhPgQpB65KmtehqkZERLfAHmdM3q8xlg==
+"@sprucelabs/spruce-core-schemas@^12.0.10":
+  version "12.0.10"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-core-schemas/-/spruce-core-schemas-12.0.10.tgz#632bccb66f78c57960e19d4680aa0b00743cfc42"
+  integrity sha512-SZpITTP88Kt7ffl9TY6hocwNfJbvgHKa8Gk9k8bq1Gw96pEiLHBM0rEO3Du1HvbgksqaK+xga6dL5M6gKN/A5g==
   dependencies:
     "@sprucelabs/schema" "^13.0.129"
 
-"@sprucelabs/spruce-skill-utils@^10.31.147":
-  version "10.31.147"
-  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.147.tgz#b159060e1b10029e6f16bc8a1c59904a15d3478d"
-  integrity sha512-nSKYCf/oRUazGXgN7DmrrYJzP2wsD191mAbBP0m7MJ0VCEiAJlxaYv4x/E7KUx145dhjudcWShSFypvoSLxiLw==
+"@sprucelabs/spruce-skill-utils@^10.31.148":
+  version "10.31.148"
+  resolved "https://registry.yarnpkg.com/@sprucelabs/spruce-skill-utils/-/spruce-skill-utils-10.31.148.tgz#1291783bffd86474423407b1375ef4a4dd736dfd"
+  integrity sha512-NFfr9YDvIaEdqFU7nUeLjefjijil2TTUXuM9l+zXciK3BT00cKfkjoQ2Jsj41oEdmOpR9ud9E1AwzVpqsazyWg==
   dependencies:
-    "@sprucelabs/error" "^2.2.468"
+    "@sprucelabs/error" "^2.2.469"
     fs-extra "^9.0.1"
     inflection "^1.12.0"
     lodash "^4.17.20"
