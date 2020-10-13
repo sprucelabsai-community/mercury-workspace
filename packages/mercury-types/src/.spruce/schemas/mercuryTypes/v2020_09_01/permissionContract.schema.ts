@@ -10,6 +10,12 @@ const permissionContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissi
 	name: 'Permission Contract',
 	    fields: {
 	            /** . */
+	            'requireAllPermissions': {
+	                type: 'boolean',
+	                defaultValue: false,
+	                options: undefined
+	            },
+	            /** . */
 	            'permissions': {
 	                type: 'schema',
 	                isRequired: true,

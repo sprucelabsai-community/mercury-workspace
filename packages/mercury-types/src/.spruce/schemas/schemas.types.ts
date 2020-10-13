@@ -16,6 +16,98 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 		
+		interface IPermission {
+			
+				/** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
+				'name': string
+				/** Require all statuses. */
+				'requireAllStatuses'?: boolean| undefined | null
+				
+				'defaultsByRoleBase'?: SpruceSchemas.MercuryTypes.v2020_09_01.IDefaultsByRole| undefined | null
+				
+				'can'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
+		}
+
+		interface IPermissionSchema extends SpruceSchema.ISchema {
+			id: 'permission',
+			version: 'v2020_09_01',
+			namespace: 'MercuryTypes',
+			name: 'Permission',
+			    fields: {
+			            /** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
+			            'name': {
+			                label: 'Permission name',
+			                type: 'text',
+			                isRequired: true,
+			                hint: 'Hyphen separated name for this permission, e.g. can-unlock-doors',
+			                options: undefined
+			            },
+			            /** Require all statuses. */
+			            'requireAllStatuses': {
+			                label: 'Require all statuses',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** . */
+			            'defaultsByRoleBase': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IDefaultsByRoleSchema,}
+			            },
+			            /** . */
+			            'can': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema,}
+			            },
+			    }
+		}
+
+		type PermissionEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema>
+
+	}
+
+
+	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
+
+		
+		interface IPermissionContract {
+			
+				
+				'requireAllPermissions'?: boolean| undefined | null
+				
+				'permissions': SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]
+		}
+
+		interface IPermissionContractSchema extends SpruceSchema.ISchema {
+			id: 'permissionContract',
+			version: 'v2020_09_01',
+			namespace: 'MercuryTypes',
+			name: 'Permission Contract',
+			    fields: {
+			            /** . */
+			            'requireAllPermissions': {
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** . */
+			            'permissions': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
+			            },
+			    }
+		}
+
+		type PermissionContractEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema>
+
+	}
+
+
+	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
+
+		
 		interface IEventSignature {
 			
 				
@@ -25,9 +117,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'emitPayload'?: (SpruceSchema.ISchema)| undefined | null
 				
-				'listenPermissions'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]| undefined | null
+				'listenPermissionContract'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract[]| undefined | null
 				
-				'emitPermissions'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]| undefined | null
+				'emitPermissionContract'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract[]| undefined | null
 		}
 
 		interface IEventSignatureSchema extends SpruceSchema.ISchema {
@@ -53,16 +145,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `SpruceSchema.ISchema`,}
 			            },
 			            /** . */
-			            'listenPermissions': {
+			            'listenPermissionContract': {
 			                type: 'schema',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema,}
 			            },
 			            /** . */
-			            'emitPermissions': {
+			            'emitPermissionContract': {
 			                type: 'schema',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema,}
 			            },
 			    }
 		}
@@ -105,14 +197,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 		
-		interface IPermission {
+		interface IStatusFlags {
 			
-				/** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
-				'name': string
-				/** Fallback to permission contract. If the person does not have a permission set (to them or their role), I will fallback to the permission contract defined here. Note: if a new permission is added to the contract, setting this to false will mean everybody fails checking for it. */
-				'fallbackToPermissionContractIfPermissionNotSet'?: boolean| undefined | null
-				/** Match on. */
-				'match'?: ("all" | "any")| undefined | null
+				/** . What is the fallback if no status is set? */
+				'default'?: boolean| undefined | null
 				/** Clocked in. Is the person clocked in and ready to rock? */
 				'clockedIn'?: boolean| undefined | null
 				/** Clocked out. When someone is not working (off the clock). */
@@ -123,34 +211,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'offPrem'?: boolean| undefined | null
 		}
 
-		interface IPermissionSchema extends SpruceSchema.ISchema {
-			id: 'permission',
+		interface IStatusFlagsSchema extends SpruceSchema.ISchema {
+			id: 'statusFlags',
 			version: 'v2020_09_01',
 			namespace: 'MercuryTypes',
-			name: 'Permission',
+			name: '',
 			    fields: {
-			            /** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
-			            'name': {
-			                label: 'Permission name',
-			                type: 'text',
-			                isRequired: true,
-			                hint: 'Hyphen separated name for this permission, e.g. can-unlock-doors',
-			                options: undefined
-			            },
-			            /** Fallback to permission contract. If the person does not have a permission set (to them or their role), I will fallback to the permission contract defined here. Note: if a new permission is added to the contract, setting this to false will mean everybody fails checking for it. */
-			            'fallbackToPermissionContractIfPermissionNotSet': {
-			                label: 'Fallback to permission contract',
+			            /** . What is the fallback if no status is set? */
+			            'default': {
 			                type: 'boolean',
-			                hint: 'If the person does not have a permission set (to them or their role), I will fallback to the permission contract defined here. Note: if a new permission is added to the contract, setting this to false will mean everybody fails checking for it.',
-			                defaultValue: true,
+			                hint: 'What is the fallback if no status is set?',
 			                options: undefined
-			            },
-			            /** Match on. */
-			            'match': {
-			                label: 'Match on',
-			                type: 'select',
-			                defaultValue: "any",
-			                options: {choices: [{"label":"All","value":"all"},{"label":"Any","value":"any"}],}
 			            },
 			            /** Clocked in. Is the person clocked in and ready to rock? */
 			            'clockedIn': {
@@ -183,7 +254,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type PermissionEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema>
+		type StatusFlagsEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema>
 
 	}
 
@@ -191,29 +262,60 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 		
-		interface IPermissionContract {
+		interface IDefaultsByRole {
 			
-				
-				'permissions': SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]
+				/** Owner. */
+				'owner'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
+				/** Group manager. */
+				'groupManager'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
+				/** Manager. */
+				'manager'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
+				/** Teammate. */
+				'teammate'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
+				/** Guest. */
+				'guest'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
 		}
 
-		interface IPermissionContractSchema extends SpruceSchema.ISchema {
-			id: 'permissionContract',
+		interface IDefaultsByRoleSchema extends SpruceSchema.ISchema {
+			id: 'defaultsByRole',
 			version: 'v2020_09_01',
 			namespace: 'MercuryTypes',
-			name: 'Permission Contract',
+			name: '',
 			    fields: {
-			            /** . */
-			            'permissions': {
+			            /** Owner. */
+			            'owner': {
+			                label: 'Owner',
 			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema,}
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema,}
+			            },
+			            /** Group manager. */
+			            'groupManager': {
+			                label: 'Group manager',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema,}
+			            },
+			            /** Manager. */
+			            'manager': {
+			                label: 'Manager',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema,}
+			            },
+			            /** Teammate. */
+			            'teammate': {
+			                label: 'Teammate',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema,}
+			            },
+			            /** Guest. */
+			            'guest': {
+			                label: 'Guest',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema,}
 			            },
 			    }
 		}
 
-		type PermissionContractEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContractSchema>
+		type DefaultsByRoleEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IDefaultsByRoleSchema>
 
 	}
 

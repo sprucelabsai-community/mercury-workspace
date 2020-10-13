@@ -1,11 +1,58 @@
-import { buildSchema } from '@sprucelabs/schema'
+import { buildSchema, schemaChoicesToHash } from '@sprucelabs/schema'
+import { roleSchema } from '@sprucelabs/spruce-core-schemas'
 import { authorizerStatuses } from '../../constants'
+
+const statusFields = authorizerStatuses.reduce((fields, status) => {
+	const { name, ...props } = status
+	// @ts-ignore
+	fields[name] = {
+		...props,
+		type: 'boolean',
+	}
+
+	return fields
+}, {})
+
+const statusFlagsSchema = buildSchema({
+	id: 'statusFlags',
+	fields: {
+		default: {
+			type: 'boolean',
+			hint: 'What is the fallback if no status is set?',
+		},
+		...statusFields,
+	},
+})
+
+const roleBases = schemaChoicesToHash(roleSchema, 'base')
+
+const defaultsByRoleSchema = buildSchema({
+	id: 'defaultsByRole',
+	fields: {
+		...Object.keys(roleBases).reduce((fields, baseSlug) => {
+			//@ts-ignore
+			fields[baseSlug] = {
+				//@ts-ignore
+				label: roleBases[baseSlug],
+				type: 'schema',
+				options: {
+					schema: statusFlagsSchema,
+				},
+			}
+			return fields
+		}, {}),
+	},
+})
 
 export default buildSchema({
 	id: 'permissionContract',
 	name: 'Permission Contract',
 	description: '',
 	fields: {
+		requireAllPermissions: {
+			type: 'boolean',
+			defaultValue: false,
+		},
 		permissions: {
 			type: 'schema',
 			isRequired: true,
@@ -22,39 +69,23 @@ export default buildSchema({
 							hint:
 								'Hyphen separated name for this permission, e.g. can-unlock-doors',
 						},
-						fallbackToPermissionContractIfPermissionNotSet: {
+						requireAllStatuses: {
 							type: 'boolean',
-							label: 'Fallback to permission contract',
-							hint: `If the person does not have a permission set (to them or their role), I will fallback to the permission contract defined here. Note: if a new permission is added to the contract, setting this to false will mean everybody fails checking for it.`,
-							defaultValue: true,
+							label: 'Require all statuses',
+							defaultValue: false,
 						},
-						match: {
-							type: 'select',
-							label: 'Match on',
-							defaultValue: 'any',
+						defaultsByRoleBase: {
+							type: 'schema',
 							options: {
-								choices: [
-									{
-										label: 'All',
-										value: 'all',
-									},
-									{
-										label: 'Any',
-										value: 'any',
-									},
-								],
+								schema: defaultsByRoleSchema,
 							},
 						},
-						...authorizerStatuses.reduce((fields, status) => {
-							const { name, ...props } = status
-							// @ts-ignore
-							fields[name] = {
-								...props,
-								type: 'boolean',
-							}
-
-							return fields
-						}, {}),
+						can: {
+							type: 'schema',
+							options: {
+								schema: statusFlagsSchema,
+							},
+						},
 					},
 				},
 			},

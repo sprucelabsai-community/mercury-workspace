@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import permissionSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/permission.schema'
+import permissionContractSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/permissionContract.schema'
 
 const eventSignatureSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatureSchema  = {
 	id: 'eventSignature',
@@ -26,16 +26,16 @@ const eventSignatureSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatu
 	                options: {valueType: `SpruceSchema.ISchema`,}
 	            },
 	            /** . */
-	            'listenPermissions': {
+	            'listenPermissionContract': {
 	                type: 'schema',
 	                isArray: true,
-	                options: {schema: permissionSchema,}
+	                options: {schema: permissionContractSchema,}
 	            },
 	            /** . */
-	            'emitPermissions': {
+	            'emitPermissionContract': {
 	                type: 'schema',
 	                isArray: true,
-	                options: {schema: permissionSchema,}
+	                options: {schema: permissionContractSchema,}
 	            },
 	    }
 }

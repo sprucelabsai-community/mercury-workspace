@@ -27,18 +27,18 @@ export default buildSchema({
 							type: 'raw',
 							options: { valueType: 'SpruceSchema.ISchema' },
 						},
-						listenPermissions: {
+						listenPermissionContract: {
 							type: 'schema',
 							isArray: true,
 							options: {
-								schemaId: { id: 'permission', version: 'v2020_09_01' },
+								schemaId: { id: 'permissionContract', version: 'v2020_09_01' },
 							},
 						},
-						emitPermissions: {
+						emitPermissionContract: {
 							type: 'schema',
 							isArray: true,
 							options: {
-								schemaId: { id: 'permission', version: 'v2020_09_01' },
+								schemaId: { id: 'permissionContract', version: 'v2020_09_01' },
 							},
 						},
 					},
