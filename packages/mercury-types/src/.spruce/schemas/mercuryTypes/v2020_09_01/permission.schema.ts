@@ -10,12 +10,26 @@ const permissionSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionSchema
 	namespace: 'MercuryTypes',
 	name: 'Permission',
 	    fields: {
-	            /** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
-	            'name': {
-	                label: 'Permission name',
+	            /** id. Hyphen separated di for this permission, e.g. can-unlock-doors */
+	            'id': {
+	                label: 'id',
 	                type: 'text',
 	                isRequired: true,
-	                hint: 'Hyphen separated name for this permission, e.g. can-unlock-doors',
+	                hint: 'Hyphen separated di for this permission, e.g. can-unlock-doors',
+	                options: undefined
+	            },
+	            /** Name. Human readable name for this permission */
+	            'name': {
+	                label: 'Name',
+	                type: 'text',
+	                isRequired: true,
+	                hint: 'Human readable name for this permission',
+	                options: undefined
+	            },
+	            /** Description. */
+	            'description': {
+	                label: 'Description',
+	                type: 'text',
 	                options: undefined
 	            },
 	            /** Require all statuses. */

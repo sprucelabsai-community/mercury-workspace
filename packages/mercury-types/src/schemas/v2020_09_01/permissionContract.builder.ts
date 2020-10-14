@@ -49,8 +49,23 @@ export default buildSchema({
 	name: 'Permission Contract',
 	description: '',
 	fields: {
+		id: {
+			type: 'text',
+			isRequired: true,
+		},
+		name: {
+			type: 'text',
+			label: 'Name',
+			isRequired: true,
+			hint: 'Human readable name for this contract',
+		},
+		description: {
+			type: 'text',
+			label: 'Description',
+		},
 		requireAllPermissions: {
 			type: 'boolean',
+			label: 'Require all permissions',
 			defaultValue: false,
 		},
 		permissions: {
@@ -62,12 +77,22 @@ export default buildSchema({
 					id: 'permission',
 					name: 'Permission',
 					fields: {
-						name: {
+						id: {
 							type: 'text',
-							label: 'Permission name',
+							label: 'id',
 							isRequired: true,
 							hint:
-								'Hyphen separated name for this permission, e.g. can-unlock-doors',
+								'Hyphen separated di for this permission, e.g. can-unlock-doors',
+						},
+						name: {
+							type: 'text',
+							label: 'Name',
+							isRequired: true,
+							hint: 'Human readable name for this permission',
+						},
+						description: {
+							type: 'text',
+							label: 'Description',
 						},
 						requireAllStatuses: {
 							type: 'boolean',

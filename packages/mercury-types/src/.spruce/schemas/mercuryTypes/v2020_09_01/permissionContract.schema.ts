@@ -10,7 +10,28 @@ const permissionContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissi
 	name: 'Permission Contract',
 	    fields: {
 	            /** . */
+	            'id': {
+	                type: 'text',
+	                isRequired: true,
+	                options: undefined
+	            },
+	            /** Name. Human readable name for this contract */
+	            'name': {
+	                label: 'Name',
+	                type: 'text',
+	                isRequired: true,
+	                hint: 'Human readable name for this contract',
+	                options: undefined
+	            },
+	            /** Description. */
+	            'description': {
+	                label: 'Description',
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** Require all permissions. */
 	            'requireAllPermissions': {
+	                label: 'Require all permissions',
 	                type: 'boolean',
 	                defaultValue: false,
 	                options: undefined

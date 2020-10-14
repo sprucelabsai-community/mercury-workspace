@@ -18,8 +18,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface IPermission {
 			
-				/** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
+				/** id. Hyphen separated di for this permission, e.g. can-unlock-doors */
+				'id': string
+				/** Name. Human readable name for this permission */
 				'name': string
+				/** Description. */
+				'description'?: string| undefined | null
 				/** Require all statuses. */
 				'requireAllStatuses'?: boolean| undefined | null
 				
@@ -34,12 +38,26 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'MercuryTypes',
 			name: 'Permission',
 			    fields: {
-			            /** Permission name. Hyphen separated name for this permission, e.g. can-unlock-doors */
-			            'name': {
-			                label: 'Permission name',
+			            /** id. Hyphen separated di for this permission, e.g. can-unlock-doors */
+			            'id': {
+			                label: 'id',
 			                type: 'text',
 			                isRequired: true,
-			                hint: 'Hyphen separated name for this permission, e.g. can-unlock-doors',
+			                hint: 'Hyphen separated di for this permission, e.g. can-unlock-doors',
+			                options: undefined
+			            },
+			            /** Name. Human readable name for this permission */
+			            'name': {
+			                label: 'Name',
+			                type: 'text',
+			                isRequired: true,
+			                hint: 'Human readable name for this permission',
+			                options: undefined
+			            },
+			            /** Description. */
+			            'description': {
+			                label: 'Description',
+			                type: 'text',
 			                options: undefined
 			            },
 			            /** Require all statuses. */
@@ -73,6 +91,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface IPermissionContract {
 			
 				
+				'id': string
+				/** Name. Human readable name for this contract */
+				'name': string
+				/** Description. */
+				'description'?: string| undefined | null
+				/** Require all permissions. */
 				'requireAllPermissions'?: boolean| undefined | null
 				
 				'permissions': SpruceSchemas.MercuryTypes.v2020_09_01.IPermission[]
@@ -85,7 +109,28 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Permission Contract',
 			    fields: {
 			            /** . */
+			            'id': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Name. Human readable name for this contract */
+			            'name': {
+			                label: 'Name',
+			                type: 'text',
+			                isRequired: true,
+			                hint: 'Human readable name for this contract',
+			                options: undefined
+			            },
+			            /** Description. */
+			            'description': {
+			                label: 'Description',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Require all permissions. */
 			            'requireAllPermissions': {
+			                label: 'Require all permissions',
 			                type: 'boolean',
 			                defaultValue: false,
 			                options: undefined
