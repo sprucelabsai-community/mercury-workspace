@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v4.0.0...v5.0.0) (2020-10-14)
+
+
+### Breaking Changes
+
+* listen and emit permission contract not array ([5ec1bd7](https://github.com/sprucelabsai/mercury-workspace/commit/5ec1bd7))
+
+
+
+
+
 # [4.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v3.0.54...v4.0.0) (2020-10-13)
 
 
