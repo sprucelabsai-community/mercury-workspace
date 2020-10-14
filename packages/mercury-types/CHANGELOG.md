@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v6.0.1...v7.0.0) (2020-10-14)
+
+
+### Breaking Changes
+
+* export changes ([e274f62](https://github.com/sprucelabsai/mercury-workspace/commit/e274f62))
+
+
+
+
+
 ## [6.0.1](https://github.com/sprucelabsai/mercury-workspace/compare/v6.0.0...v6.0.1) (2020-10-14)
 
 **Note:** Version bump only for package @sprucelabs/mercury-types
