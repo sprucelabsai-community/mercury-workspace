@@ -29,14 +29,12 @@ export default buildSchema({
 						},
 						listenPermissionContract: {
 							type: 'schema',
-							isArray: true,
 							options: {
 								schemaId: { id: 'permissionContract', version: 'v2020_09_01' },
 							},
 						},
 						emitPermissionContract: {
 							type: 'schema',
-							isArray: true,
 							options: {
 								schemaId: { id: 'permissionContract', version: 'v2020_09_01' },
 							},
