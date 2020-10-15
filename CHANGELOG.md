@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v7.0.1...v8.0.0) (2020-10-15)
+
+
+### Breaking Changes
+
+* renames progress ([adf17a3](https://github.com/sprucelabsai/mercury-workspace/commit/adf17a3))
+
+
+
+
+
 ## [7.0.1](https://github.com/sprucelabsai/mercury-workspace/compare/v7.0.0...v7.0.1) (2020-10-14)
 
 **Note:** Version bump only for package spruce-mercury-workspace
