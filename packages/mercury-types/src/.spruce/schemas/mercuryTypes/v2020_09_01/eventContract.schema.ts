@@ -3,11 +3,11 @@ import { SpruceSchemas } from '../../schemas.types'
 
 import eventSignatureSchema from '#spruce/schemas/mercuryTypes/v2020_09_01/eventSignature.schema'
 
-const mercuryContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContractSchema  = {
-	id: 'mercuryContract',
+const eventContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventContractSchema  = {
+	id: 'eventContract',
 	version: 'v2020_09_01',
 	namespace: 'MercuryTypes',
-	name: 'Mercury Contract',
+	name: 'Event contract',
 	    fields: {
 	            /** . */
 	            'eventSignatures': {
@@ -19,6 +19,6 @@ const mercuryContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryCont
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(mercuryContractSchema)
+SchemaRegistry.getInstance().trackSchema(eventContractSchema)
 
-export default mercuryContractSchema
+export default eventContractSchema

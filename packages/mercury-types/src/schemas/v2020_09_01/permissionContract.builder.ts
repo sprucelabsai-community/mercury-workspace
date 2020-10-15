@@ -46,7 +46,7 @@ const defaultsByRoleSchema = buildSchema({
 
 export default buildSchema({
 	id: 'permissionContract',
-	name: 'Permission Contract',
+	name: 'Permission contract',
 	description: '',
 	fields: {
 		id: {
