@@ -1,4 +1,4 @@
-export { default as mercuryContractSchema } from './.spruce/schemas/mercuryTypes/v2020_09_01/mercuryContract.schema'
+export { default as eventContractSchema } from './.spruce/schemas/mercuryTypes/v2020_09_01/eventContract.schema'
 export { default as permissionContractSchema } from './.spruce/schemas/mercuryTypes/v2020_09_01/permissionContract.schema'
 export * from './mercury.types'
 export { default as MercuryClient } from './mercury.types'

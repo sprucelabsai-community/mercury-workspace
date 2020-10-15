@@ -1,6 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
-import { MercuryContract } from '../../mercury.types'
+import { EventContract } from '../../mercury.types'
 import TestClient from '../../TestClient'
 
 const responsePayload = buildSchema({
@@ -25,7 +25,7 @@ const emitPayload = buildSchema({
 	},
 })
 
-interface TestContract extends MercuryContract {
+interface TestContract extends EventContract {
 	eventSignatures: [
 		{
 			eventNameWithOptionalNamespace: 'spruce.testWithPayload'

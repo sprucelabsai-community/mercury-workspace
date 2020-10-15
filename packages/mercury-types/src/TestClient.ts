@@ -2,14 +2,14 @@ import { SchemaValues, ISchema } from '@sprucelabs/schema'
 import MercuryClient, {
 	MercuryAggregateResponse,
 	EmitCallback,
-	MercuryContract,
+	EventContract,
 	EventSignature,
 	ContractMapper,
 	KeyOf,
 	DeepReadonly,
 } from './mercury.types'
 
-export default class TestClient<Contract extends MercuryContract>
+export default class TestClient<Contract extends EventContract>
 	implements MercuryClient<Contract> {
 	public async emit<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,

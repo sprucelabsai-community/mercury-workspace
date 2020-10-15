@@ -1,16 +1,16 @@
 import {
 	EventNames,
 	MercuryClient,
-	MercuryContract,
+	EventContract,
 } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 import SpruceError from '../../errors/SpruceError'
 
-class EventEmitter<
-	Contract extends MercuryContract
-> extends AbstractEventEmitter<Contract> {
+class EventEmitter<Contract extends EventContract> extends AbstractEventEmitter<
+	Contract
+> {
 	public listenCount(eventName: EventNames<Contract>) {
 		return (this.listenersByEvent[eventName] || []).length
 	}
