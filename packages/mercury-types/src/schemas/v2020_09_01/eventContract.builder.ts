@@ -1,8 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
 
 export default buildSchema({
-	id: 'mercuryContract',
-	name: 'Mercury Contract',
+	id: 'eventContract',
+	name: 'Event contract',
 	description: '',
 	fields: {
 		eventSignatures: {

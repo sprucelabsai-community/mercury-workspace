@@ -18,8 +18,8 @@ export type DeepReadonlyObject<T> = {
 export type EventSignature = DeepReadonly<
 	SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
 >
-export type MercuryContract = DeepReadonly<
-	SpruceSchemas.MercuryTypes.v2020_09_01.IMercuryContract
+export type EventContract = DeepReadonly<
+	SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract
 >
 export type Permission = DeepReadonly<
 	SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
@@ -39,19 +39,19 @@ export interface MercurySingleResponse<Payload> {
 	payload?: Payload
 }
 export type KeyOf<O> = Extract<keyof O, string>
-export declare type ContractMapper<Contract extends MercuryContract> = {
+export declare type ContractMapper<Contract extends EventContract> = {
 	readonly [K in Contract['eventSignatures'][number]['eventNameWithOptionalNamespace']]: Contract['eventSignatures'][number] & {
 		readonly eventNameWithOptionalNamespace: K
 	}
 }
 export declare type EventNames<
-	Contract extends MercuryContract,
+	Contract extends EventContract,
 	MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 	EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>
 > = EventName
 export declare type EmitCallback<
-	MappedContract extends ContractMapper<MercuryContract> = ContractMapper<
-		MercuryContract
+	MappedContract extends ContractMapper<EventContract> = ContractMapper<
+		EventContract
 	>,
 	EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
 	IEventSignature extends DeepReadonly<
@@ -64,7 +64,7 @@ export declare type EmitCallback<
 		? SchemaValues<ResponseSchema>
 		: never
 > = (payload: MercurySingleResponse<ResponsePayload>) => void | Promise<void>
-export default interface MercuryClient<Contract extends MercuryContract> {
+export default interface MercuryClient<Contract extends EventContract> {
 	emit<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,

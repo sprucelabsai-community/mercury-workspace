@@ -7,7 +7,7 @@ const permissionContractSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissi
 	id: 'permissionContract',
 	version: 'v2020_09_01',
 	namespace: 'MercuryTypes',
-	name: 'Permission Contract',
+	name: 'Permission contract',
 	    fields: {
 	            /** . */
 	            'id': {

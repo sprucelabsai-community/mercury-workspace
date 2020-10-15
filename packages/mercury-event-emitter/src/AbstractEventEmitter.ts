@@ -6,23 +6,23 @@ import {
 	KeyOf,
 	MercuryAggregateResponse,
 	MercuryClient,
-	MercuryContract,
+	EventContract,
 	DeepReadonly,
 	MercurySingleResponse,
 } from '@sprucelabs/mercury-types'
 import { ISchema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
 import SpruceError from './errors/SpruceError'
 
-export default class AbstractEventEmitter<Contract extends MercuryContract>
+export default class AbstractEventEmitter<Contract extends EventContract>
 	implements MercuryClient<Contract> {
-	private contract: MercuryContract
+	private contract: EventContract
 
 	protected listenersByEvent: Record<
 		string,
 		((payload?: any) => any | Promise<any>)[]
 	> = {}
 
-	public constructor(contract: MercuryContract) {
+	public constructor(contract: EventContract) {
 		this.contract = contract
 	}
 
