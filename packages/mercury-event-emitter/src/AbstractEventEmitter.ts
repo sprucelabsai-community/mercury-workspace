@@ -5,7 +5,7 @@ import {
 	EventSignature,
 	KeyOf,
 	MercuryAggregateResponse,
-	MercuryClient,
+	MercuryEventEmitter,
 	EventContract,
 	DeepReadonly,
 	MercurySingleResponse,
@@ -14,7 +14,7 @@ import { ISchema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
 import SpruceError from './errors/SpruceError'
 
 export default class AbstractEventEmitter<Contract extends EventContract>
-	implements MercuryClient<Contract> {
+	implements MercuryEventEmitter<Contract> {
 	private contract: EventContract
 
 	protected listenersByEvent: Record<

@@ -64,7 +64,7 @@ export declare type EmitCallback<
 		? SchemaValues<ResponseSchema>
 		: never
 > = (payload: MercurySingleResponse<ResponsePayload>) => void | Promise<void>
-export default interface MercuryClient<Contract extends EventContract> {
+export default interface MercuryEventEmitter<Contract extends EventContract> {
 	emit<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
