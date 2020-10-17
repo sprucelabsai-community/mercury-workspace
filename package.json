@@ -15,6 +15,7 @@
 	"scripts": {
 		"lint": "lerna run lint",
 		"lint.fix": "lerna run lint.fix",
+		"lint.watch": "lerna run lint.watch --stream --parallel",
 		"build": "lerna run build",
 		"build.watch": "lerna run build.watch --stream --parallel",
 		"rebuild": "yarn clean.all && yarn && yarn build",

@@ -1,5 +1,5 @@
 import { SchemaValues, ISchema } from '@sprucelabs/schema'
-import MercuryClient, {
+import MercuryEventEmitter, {
 	MercuryAggregateResponse,
 	EmitCallback,
 	EventContract,
@@ -10,7 +10,7 @@ import MercuryClient, {
 } from './mercury.types'
 
 export default class TestClient<Contract extends EventContract>
-	implements MercuryClient<Contract> {
+	implements MercuryEventEmitter<Contract> {
 	public async emit<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,

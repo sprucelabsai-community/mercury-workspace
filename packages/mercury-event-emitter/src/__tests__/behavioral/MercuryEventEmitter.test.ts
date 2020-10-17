@@ -1,6 +1,6 @@
 import {
 	EventNames,
-	MercuryClient,
+	MercuryEventEmitter,
 	EventContract,
 } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
@@ -78,7 +78,7 @@ const contract = {
 type Contract = typeof contract
 
 export default class MercuryEventEmitterTest extends AbstractSpruceTest {
-	private static emitter: MercuryClient<Contract>
+	private static emitter: MercuryEventEmitter<Contract>
 
 	// only use test emitter when accessing methods to make private state public
 	private static testEmitter: EventEmitter<Contract>
@@ -86,7 +86,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.testEmitter = new EventEmitter(contract)
-		this.emitter = this.testEmitter as MercuryClient<Contract>
+		this.emitter = this.testEmitter as MercuryEventEmitter<Contract>
 	}
 
 	@test()
