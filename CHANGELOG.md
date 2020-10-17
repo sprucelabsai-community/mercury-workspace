@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v8.0.5...v9.0.0) (2020-10-17)
+
+
+### Breaking Changes
+
+* MercuryClient -> MercuryEventEmitter ([1fc53dc](https://github.com/sprucelabsai/mercury-workspace/commit/1fc53dc))
+
+
+
+
+
 ## [8.0.5](https://github.com/sprucelabsai/mercury-workspace/compare/v8.0.4...v8.0.5) (2020-10-16)
 
 **Note:** Version bump only for package spruce-mercury-workspace
