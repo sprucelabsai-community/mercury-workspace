@@ -317,6 +317,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'teammate'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
 				/** Guest. */
 				'guest'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
+				/** Anonymous. */
+				'anonymous'?: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlags| undefined | null
 		}
 
 		interface IDefaultsByRoleSchema extends SpruceSchema.ISchema {
@@ -352,6 +354,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Guest. */
 			            'guest': {
 			                label: 'Guest',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema,}
+			            },
+			            /** Anonymous. */
+			            'anonymous': {
+			                label: 'Anonymous',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IStatusFlagsSchema,}
 			            },
