@@ -39,6 +39,12 @@ const defaultsByRoleSchema: SpruceSchemas.MercuryTypes.v2020_09_01.IDefaultsByRo
 	                type: 'schema',
 	                options: {schema: statusFlagsSchema,}
 	            },
+	            /** Anonymous. */
+	            'anonymous': {
+	                label: 'Anonymous',
+	                type: 'schema',
+	                options: {schema: statusFlagsSchema,}
+	            },
 	    }
 }
 
