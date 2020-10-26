@@ -45,7 +45,7 @@
 		"@sprucelabs/semantic-release": "^4.0.6",
 		"@sprucelabs/test": "^7.1.4",
 		"eslint": "^7.12.0",
-		"eslint-config-spruce": "^10.9.98",
+		"eslint-config-spruce": "^10.9.99",
 		"jest": "^26.6.1",
 		"typescript": "^4.0.3"
 	},
