@@ -19,11 +19,11 @@ export default buildSchema({
 							type: 'text',
 							isRequired: true,
 						},
-						responsePayload: {
+						responsePayloadSchema: {
 							type: 'raw',
 							options: { valueType: 'SpruceSchema.ISchema' },
 						},
-						emitPayload: {
+						emitPayloadSchema: {
 							type: 'raw',
 							options: { valueType: 'SpruceSchema.ISchema' },
 						},

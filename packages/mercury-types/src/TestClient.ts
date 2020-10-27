@@ -15,11 +15,11 @@ export default class TestClient<Contract extends EventContract>
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
 		IEventSignature extends EventSignature = MappedContract[EventName],
-		EmitSchema extends ISchema = IEventSignature['emitPayload'] extends ISchema
-			? IEventSignature['emitPayload']
+		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
+			? IEventSignature['emitPayloadSchema']
 			: never,
-		ResponseSchema extends ISchema = IEventSignature['responsePayload'] extends ISchema
-			? IEventSignature['responsePayload']
+		ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
+			? IEventSignature['responsePayloadSchema']
 			: never,
 		ResponsePayload = ResponseSchema extends ISchema
 			? SchemaValues<ResponseSchema>
@@ -55,17 +55,17 @@ export default class TestClient<Contract extends EventContract>
 		IEventSignature extends DeepReadonly<
 			EventSignature
 		> = MappedContract[EventName],
-		EmitSchema extends ISchema = IEventSignature['emitPayload'] extends ISchema
-			? IEventSignature['emitPayload']
+		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
+			? IEventSignature['emitPayloadSchema']
 			: never
 	>(
 		_eventName: EventName,
 		_cb: (
 			payload: EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never
-		) => IEventSignature['responsePayload'] extends ISchema
+		) => IEventSignature['responsePayloadSchema'] extends ISchema
 			?
-					| Promise<SchemaValues<IEventSignature['responsePayload']>>
-					| SchemaValues<IEventSignature['responsePayload']>
+					| Promise<SchemaValues<IEventSignature['responsePayloadSchema']>>
+					| SchemaValues<IEventSignature['responsePayloadSchema']>
 			: Promise<void> | void
 	): void {}
 

@@ -26,7 +26,7 @@ const contract = {
 		},
 		{
 			eventNameWithOptionalNamespace: 'eventWithEmitPayload',
-			emitPayload: buildSchema({
+			emitPayloadSchema: buildSchema({
 				id: 'emitPayloadWithOptionalTextField',
 				name: 'Emit payload with optional text field',
 				fields: {
@@ -38,7 +38,7 @@ const contract = {
 		},
 		{
 			eventNameWithOptionalNamespace: 'eventWithResponsePayload',
-			responsePayload: buildSchema({
+			responsePayloadSchema: buildSchema({
 				id: 'responsePayloadWithRequiredTextField',
 				name: 'responsePayloadWithRequiredTextField',
 				fields: {
@@ -51,7 +51,7 @@ const contract = {
 		},
 		{
 			eventNameWithOptionalNamespace: 'eventWithEmitAndResponsePayload',
-			emitPayload: buildSchema({
+			emitPayloadSchema: buildSchema({
 				id: 'emitPayloadWithRequiredTextField',
 				name: 'emitPayloadWithRequiredTextField',
 				fields: {
@@ -61,7 +61,7 @@ const contract = {
 					},
 				},
 			}),
-			responsePayload: buildSchema({
+			responsePayloadSchema: buildSchema({
 				id: 'secondPayloadWithRequiredTextField',
 				name: 'secondPayloadWithRequiredTextField',
 				fields: {
