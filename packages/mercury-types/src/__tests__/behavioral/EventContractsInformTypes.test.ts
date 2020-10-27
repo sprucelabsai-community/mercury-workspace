@@ -29,8 +29,8 @@ interface TestContract extends EventContract {
 	eventSignatures: [
 		{
 			eventNameWithOptionalNamespace: 'spruce.testWithPayload'
-			responsePayload: typeof responsePayload
-			emitPayload: typeof emitPayload
+			responsePayloadSchema: typeof responsePayload
+			emitPayloadSchema: typeof emitPayload
 		},
 		{
 			eventNameWithOptionalNamespace: 'spruce.testWithoutPayload'

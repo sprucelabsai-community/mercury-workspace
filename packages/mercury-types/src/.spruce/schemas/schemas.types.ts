@@ -158,9 +158,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'eventNameWithOptionalNamespace': string
 				
-				'responsePayload'?: (SpruceSchema.ISchema)| undefined | null
+				'responsePayloadSchema'?: (SpruceSchema.ISchema)| undefined | null
 				
-				'emitPayload'?: (SpruceSchema.ISchema)| undefined | null
+				'emitPayloadSchema'?: (SpruceSchema.ISchema)| undefined | null
 				
 				'listenPermissionContract'?: SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract| undefined | null
 				
@@ -180,12 +180,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: undefined
 			            },
 			            /** . */
-			            'responsePayload': {
+			            'responsePayloadSchema': {
 			                type: 'raw',
 			                options: {valueType: `SpruceSchema.ISchema`,}
 			            },
 			            /** . */
-			            'emitPayload': {
+			            'emitPayloadSchema': {
 			                type: 'raw',
 			                options: {valueType: `SpruceSchema.ISchema`,}
 			            },
