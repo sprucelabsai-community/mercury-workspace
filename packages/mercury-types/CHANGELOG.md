@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0](https://github.com/sprucelabsai/mercury-workspace/compare/v10.0.4...v10.1.0) (2020-10-30)
+
+
+### Features
+
+* export buildContract from mercury-types ([ed033fe](https://github.com/sprucelabsai/mercury-workspace/commit/ed033fe))
+* first tests for mercury client ([2b6ff41](https://github.com/sprucelabsai/mercury-workspace/commit/2b6ff41))
+
+
+
+
+
 ## [10.0.4](https://github.com/sprucelabsai/mercury-workspace/compare/v10.0.3...v10.0.4) (2020-10-30)
 
 **Note:** Version bump only for package @sprucelabs/mercury-types
