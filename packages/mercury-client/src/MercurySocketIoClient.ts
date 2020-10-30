@@ -31,8 +31,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				this.socket?.off('connect_error')
 			})
 
-			this.socket?.on('connect_error', (err) => {
-				debugger
+			this.socket?.on('connect_error', (err: string) => {
 				this.socket?.off('connect_error')
 				this.socket?.off('err')
 				reject(err)
