@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@sprucelabs/semantic-release": "^4.0.6",
-    "@sprucelabs/test-utils": "^1.1.756",
+    "@sprucelabs/test-utils": "^1.1.757",
     "@types/debug": "^4.1.5",
     "@types/faker": "^5.1.3",
     "@types/socket.io-client": "^1.4.34",
@@ -52,7 +52,7 @@
     "prettier": "^2.1.2",
     "rollup": "^2.32.1",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.28.0",
+    "rollup-plugin-typescript2": "^0.29.0",
     "typescript": "^4.0.5"
   },
   "jest": {
