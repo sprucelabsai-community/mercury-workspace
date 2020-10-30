@@ -3,3 +3,4 @@ export { default as permissionContractSchema } from './.spruce/schemas/mercuryTy
 export * from './mercury.types'
 export { default as MercuryEventEmitter } from './mercury.types'
 export * from './constants'
+export { default as buildContract } from './utilities/buildContract'
