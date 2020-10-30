@@ -19,8 +19,8 @@
 		"outDir": "build",
 		"baseUrl": "src",
 		"paths": {
-			"*": [
-				"node_modules/*"
+			"#spruce/*": [
+				".spruce/*"
 			]
 		}
 	},
