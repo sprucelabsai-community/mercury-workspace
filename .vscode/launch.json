@@ -15,7 +15,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "test.file",
+			"name": "client.test.file",
 			"runtimeExecutable": "${env:NVM_BIN}/node",
 			"runtimeArgs": [
 				"--inspect-brk",
@@ -25,14 +25,14 @@
 				"--detectOpenHandles"
 			],
 			"port": 9229,
-			"cwd": "${workspaceFolder}/packages/mercury-event-emitter",
+			"cwd": "${workspaceFolder}/packages/mercury-client",
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen"
 		},
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "test.all",
+			"name": "client.test.all",
 			"runtimeExecutable": "${env:NVM_BIN}/node",
 			"runtimeArgs": [
 				"--inspect-brk",
@@ -40,7 +40,7 @@
 				"${workspaceFolder}/node_modules/.bin/jest"
 			],
 			"port": 9229,
-			"cwd": "${workspaceFolder}/packages/mercury-event-emitter",
+			"cwd": "${workspaceFolder}/packages/mercury-client",
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen"
 		}

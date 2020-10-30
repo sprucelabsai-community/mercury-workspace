@@ -1,1 +1,1 @@
-export { default as MercuryClientFactory} from './MercuryClientFactory'
+export { default as MercuryClientFactory } from './MercuryClientFactory'

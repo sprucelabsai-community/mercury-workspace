@@ -1,3 +1,1 @@
-
-
-export default class MercuryClient implements {}
+export default class MercuryClient {}
