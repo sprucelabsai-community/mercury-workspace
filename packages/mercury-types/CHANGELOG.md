@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.28](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.27...v10.1.28) (2020-11-01)
+
+**Note:** Version bump only for package @sprucelabs/mercury-types
+
+
+
+
+
 ## [10.1.27](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.26...v10.1.27) (2020-11-01)
 
 **Note:** Version bump only for package @sprucelabs/mercury-types
