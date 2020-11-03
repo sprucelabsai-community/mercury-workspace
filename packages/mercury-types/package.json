@@ -7,7 +7,7 @@
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "10.1.75",
+	"version": "10.1.76",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
