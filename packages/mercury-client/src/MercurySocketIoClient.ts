@@ -11,29 +11,41 @@ import { ISchema, SchemaValues } from '@sprucelabs/schema'
 import io from 'socket.io-client'
 import { MercuryClient } from './client.types'
 
+/*global SocketIOClient*/
+
+type IoOptions = SocketIOClient.ConnectOpts
+
 export default class MercurySocketIoClient<Contract extends EventContract>
 	implements MercuryClient<Contract> {
 	private host: string
-	/*global SocketIOClient*/
+		private ioOptions: IoOptions
+
+	
 	private socket?: SocketIOClient.Socket
 
-	public constructor(options: { host: string }) {
+	public constructor(options: { host: string } & IoOptions) {
+		const {host, ...ioOptions} = options
 		this.host = options.host
+		this.ioOptions = ioOptions
+
 	}
 
 	public async connect() {
-		this.socket = io(this.host)
+		
+		this.socket = io(this.host, this.ioOptions)
 
 		await new Promise((resolve, reject) => {
-			this.socket?.on('connection', () => {
+			this.socket?.on('connect', () => {
+				this.socket?.removeAllListeners()
 				resolve()
-				this.socket?.off('connection')
-				this.socket?.off('connect_error')
+			})
+			
+			this.socket?.on('timeout', (err: string) => {
+				reject(err)
 			})
 
 			this.socket?.on('connect_error', (err: string) => {
-				this.socket?.off('connect_error')
-				this.socket?.off('err')
+				this.socket?.removeAllListeners()
 				reject(err)
 			})
 		})
@@ -66,6 +78,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		let totalErrors = 0
 		const listeners: any[] = []
 		const responses: any[] = []
+
+		
 
 		return {
 			totalContracts: listeners.length,
@@ -106,6 +120,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public async disconnect() {
+		this.socket?.disconnect()
 		return
+	}
+
+	public isConnected() {
+		return this.socket?.connected ?? false
 	}
 }

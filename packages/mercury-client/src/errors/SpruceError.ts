@@ -8,7 +8,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 
 		switch (options?.code) {
 			case 'INVALID_PROTOCOL':
-				message = 'A Invalid protocol just happened!'
+				message = 'You must connect via the https protocol.'
 				break
 
 			default:
