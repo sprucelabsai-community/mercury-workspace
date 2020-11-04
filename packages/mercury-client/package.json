@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@sprucelabs/semantic-release": "^4.0.6",
-    "@sprucelabs/test-utils": "^1.2.8",
+    "@sprucelabs/test-utils": "^1.2.9",
     "@types/debug": "^4.1.5",
     "@types/faker": "^5.1.4",
     "@types/socket.io-client": "^1.4.34",
@@ -48,7 +48,7 @@
     "concurrently": "^5.3.0",
     "eslint": "^7.12.1",
     "eslint-config-spruce": "^10.9.103",
-    "jest": "^26.6.2",
+    "jest": "^26.6.3",
     "prettier": "^2.1.2",
     "rollup": "^2.33.1",
     "rollup-plugin-terser": "^7.0.2",
