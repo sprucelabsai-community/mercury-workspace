@@ -36,11 +36,11 @@
   },
   "dependencies": {
     "@sprucelabs/mercury-types": "^10.1.140",
-    "socket.io-client": "^2.3.1"
+    "socket.io-client": "^3.0.0"
   },
   "devDependencies": {
     "@sprucelabs/semantic-release": "^4.0.6",
-    "@sprucelabs/test-utils": "^1.2.47",
+    "@sprucelabs/test-utils": "^1.2.48",
     "@types/debug": "^4.1.5",
     "@types/faker": "^5.1.4",
     "@types/socket.io-client": "^1.4.34",
