@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.165](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.164...v10.1.165) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
 ## [10.1.164](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.163...v10.1.164) (2020-11-06)
 
 **Note:** Version bump only for package spruce-mercury-workspace
