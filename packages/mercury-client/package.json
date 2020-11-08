@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@sprucelabs/semantic-release": "^4.0.6",
-    "@sprucelabs/test-utils": "^1.2.120",
+    "@sprucelabs/test-utils": "^1.2.121",
     "@types/debug": "^4.1.5",
     "@types/faker": "^5.1.4",
     "@types/socket.io-client": "^1.4.34",
