@@ -93,13 +93,15 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD')
 	}
 
-	@test()
+	@test.only()
 	protected static async canRunHealthCheck() {
 		const client = await this.connect()
 
 		const health = await client.emit('health')
 
-		assert.isEqualDeep(health, {
+		debugger
+
+		assert.isEqualDeep(health.responses[0].payload, {
 			skill: { status: 'passed' },
 			mercury: { status: 'passed' },
 		})

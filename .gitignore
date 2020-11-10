@@ -17,3 +17,4 @@ mercury.min.*
 
 # Mac
 .DS_Store
+.env

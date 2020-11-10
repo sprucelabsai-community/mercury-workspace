@@ -82,11 +82,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		const listeners: any[] = []
 		const responses: any[] = []
 
-		const health = this.getEventSignatureByName<MappedContract>(eventName)
+		const signature = this.getEventSignatureByName<MappedContract>(eventName)
 
-		if (health.emitPayloadSchema) {
+		if (signature.emitPayloadSchema) {
 			try {
-				validateSchemaValues(health.emitPayloadSchema as ISchema, payload ?? {})
+				validateSchemaValues(signature.emitPayloadSchema as ISchema, payload ?? {})
 			} catch (err) {
 				throw new SpruceError({ code: 'INVALID_PAYLOAD', originalError: err })
 			}
@@ -94,8 +94,21 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			throw new SpruceError({ code: 'UNEXPECTED_PAYLOAD' })
 		}
 
-		console.log(health)
-		debugger
+		await new Promise((resolve) => {
+			const args: any[] = []
+
+			if (payload) {
+				args.push(payload)
+			}
+
+			args.push((results: any) => {
+				debugger
+				console.log(results)
+			})
+
+			this.socket?.emit(eventName, ...args)
+		})
+
 
 		return {
 			totalContracts: listeners.length,
