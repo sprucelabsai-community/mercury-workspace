@@ -1,15 +1,13 @@
-import  { buildErrorSchema } from '@sprucelabs/schema'
-
+import { buildErrorSchema } from '@sprucelabs/schema'
 
 export default buildErrorSchema({
 	id: 'invalidEventName',
 	name: 'Invalid event name',
-    description: '',
+	description: '',
 	fields: {
 		eventNameWithOptionalNamespace: {
 			type: 'text',
-			isRequired: true
-		}
-	}
+			isRequired: true,
+		},
+	},
 })
-

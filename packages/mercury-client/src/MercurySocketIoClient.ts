@@ -23,18 +23,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private ioOptions: IoOptions
 	private eventContract: Contract
 
-	
 	private socket?: SocketIOClient.Socket
 
-	public constructor(options: { host: string, eventContract: Contract } & IoOptions) {
-		const {host, eventContract, ...ioOptions} = options
+	public constructor(
+		options: { host: string; eventContract: Contract } & IoOptions
+	) {
+		const { host, eventContract, ...ioOptions } = options
 		this.host = options.host
 		this.ioOptions = ioOptions
 		this.eventContract = eventContract
 	}
 
 	public async connect() {
-		
 		this.socket = io(this.host, this.ioOptions)
 
 		await new Promise((resolve, reject) => {
@@ -42,7 +42,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				this.socket?.removeAllListeners()
 				resolve()
 			})
-			
+
 			this.socket?.on('timeout', (err: string) => {
 				reject(err)
 			})
@@ -84,20 +84,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		const health = this.getEventSignatureByName<MappedContract>(eventName)
 
-		if (health.emitPayloadSchema){
+		if (health.emitPayloadSchema) {
 			try {
-
 				validateSchemaValues(health.emitPayloadSchema as ISchema, payload ?? {})
 			} catch (err) {
-				throw new SpruceError({code: 'INVALID_PAYLOAD', originalError: err})
+				throw new SpruceError({ code: 'INVALID_PAYLOAD', originalError: err })
 			}
 		} else if (payload) {
-			throw new SpruceError({code: 'UNEXPECTED_PAYLOAD'})
+			throw new SpruceError({ code: 'UNEXPECTED_PAYLOAD' })
 		}
 
 		console.log(health)
 		debugger
-		
 
 		return {
 			totalContracts: listeners.length,
@@ -107,14 +105,19 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		} as MercuryAggregateResponse<ResponsePayload>
 	}
 
-	private getEventSignatureByName<MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		
-		>(eventName: EventName) {
-		const sig = this.eventContract.eventSignatures.find(sig => sig.eventNameWithOptionalNamespace === eventName)
+	private getEventSignatureByName<
+		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
+		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>
+	>(eventName: EventName) {
+		const sig = this.eventContract.eventSignatures.find(
+			(sig) => sig.eventNameWithOptionalNamespace === eventName
+		)
 
 		if (!sig) {
-			throw new SpruceError({ code: 'INVALID_EVENT_NAME', eventNameWithOptionalNamespace: eventName })
+			throw new SpruceError({
+				code: 'INVALID_EVENT_NAME',
+				eventNameWithOptionalNamespace: eventName,
+			})
 		}
 		return sig
 	}

@@ -2,7 +2,10 @@ import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../MercuryClientFactory'
 import MercurySocketIoClient from '../../MercurySocketIoClient'
-import { TestEventContract, testEventContract } from '../support/TestEventContract'
+import {
+	TestEventContract,
+	testEventContract,
+} from '../support/TestEventContract'
 
 const TEST_HOST = 'https://localhost:8001'
 
@@ -14,24 +17,27 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async throwsWhenMissingContracts() {
-
 		let err = await assert.doesThrowAsync(() =>
-		//@ts-ignore
+			//@ts-ignore
 			MercuryClientFactory.Client({})
 		)
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', { parameters: ['contracts']})
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['contracts'],
+		})
 
 		err = await assert.doesThrowAsync(() =>
-		//@ts-ignore
-			MercuryClientFactory.Client({contracts: []})
+			//@ts-ignore
+			MercuryClientFactory.Client({ contracts: [] })
 		)
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {parameters: ['contracts']})
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['contracts'],
+		})
 	}
 
 	@test()
 	protected static async connectingToBadProtocolThrows() {
 		const err = await assert.doesThrowAsync(() =>
-			MercuryClientFactory.Client({ host: 'aoeu://tasty.org', contracts:[] })
+			MercuryClientFactory.Client({ host: 'aoeu://tasty.org', contracts: [] })
 		)
 		errorAssertUtil.assertError(err, 'INVALID_PROTOCOL')
 	}
@@ -39,7 +45,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	@test()
 	protected static async factoryReturnsSocketIoClient() {
 		const client = await this.connect()
-		
+
 		assert.isTruthy(client instanceof MercurySocketIoClient)
 		assert.isTrue(client.isConnected())
 
@@ -52,7 +58,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		return await MercuryClientFactory.Client<TestEventContract>({
 			host: TEST_HOST,
 			allowSelfSignedCrt: true,
-			contracts: [testEventContract]
+			contracts: [testEventContract],
 		})
 	}
 
@@ -61,29 +67,30 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		const client = await this.connect()
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => client.emit('health2'))
-		
-		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
 
+		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
 	@test()
 	protected static async cantEmitEventWithWithUnexpectedPayload() {
 		const client = await this.connect()
-		//@ts-ignore
-		const err = await assert.doesThrowAsync(() => client.emit('health', { taco: 'bravo'}))
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			client.emit('health', { taco: 'bravo' })
+		)
 
 		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD')
-	
 	}
 
 	@test()
 	protected static async cantEmitEventWithWithInvalidPayload() {
 		const client = await this.connect()
-		//@ts-ignore
-		const err = await assert.doesThrowAsync(() => client.emit('request-pin', {}))
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			client.emit('request-pin', {})
+		)
 
 		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD')
-	
 	}
 
 	@test()
@@ -99,5 +106,4 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 		await client.disconnect()
 	}
-
 }

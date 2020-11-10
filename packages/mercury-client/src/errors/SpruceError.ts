@@ -11,22 +11,19 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = 'You must connect via the https protocol.'
 				break
 
-			
-            case 'INVALID_EVENT_NAME':
-                message = 'A Invalid event name just happened!'
-                break
+			case 'INVALID_EVENT_NAME':
+				message = 'A Invalid event name just happened!'
+				break
 
+			case 'UNEXPECTED_PAYLOAD':
+				message = 'A Unexpected payload just happened!'
+				break
 
-            case 'UNEXPECTED_PAYLOAD':
-                message = 'A Unexpected payload just happened!'
-                break
+			case 'INVALID_PAYLOAD':
+				message = 'A Invalid payload just happened!'
+				break
 
-
-            case 'INVALID_PAYLOAD':
-                message = 'A Invalid payload just happened!'
-                break
-
-default:
+			default:
 				message = super.friendlyMessage()
 		}
 
