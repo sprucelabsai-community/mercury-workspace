@@ -7,9 +7,11 @@ import {
 	KeyOf,
 	MercuryAggregateResponse,
 } from '@sprucelabs/mercury-types'
+import { validateSchemaValues } from '@sprucelabs/schema'
 import { ISchema, SchemaValues } from '@sprucelabs/schema'
 import io from 'socket.io-client'
 import { MercuryClient } from './client.types'
+import SpruceError from './errors/SpruceError'
 
 /*global SocketIOClient*/
 
@@ -18,16 +20,17 @@ type IoOptions = SocketIOClient.ConnectOpts
 export default class MercurySocketIoClient<Contract extends EventContract>
 	implements MercuryClient<Contract> {
 	private host: string
-		private ioOptions: IoOptions
+	private ioOptions: IoOptions
+	private eventContract: Contract
 
 	
 	private socket?: SocketIOClient.Socket
 
-	public constructor(options: { host: string } & IoOptions) {
-		const {host, ...ioOptions} = options
+	public constructor(options: { host: string, eventContract: Contract } & IoOptions) {
+		const {host, eventContract, ...ioOptions} = options
 		this.host = options.host
 		this.ioOptions = ioOptions
-
+		this.eventContract = eventContract
 	}
 
 	public async connect() {
@@ -67,8 +70,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			? SchemaValues<ResponseSchema>
 			: never
 	>(
-		_eventName: EventName,
-		_payload?:
+		eventName: EventName,
+		payload?:
 			| (EmitSchema extends SchemaValues<EmitSchema>
 					? SchemaValues<EmitSchema>
 					: never)
@@ -79,6 +82,21 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		const listeners: any[] = []
 		const responses: any[] = []
 
+		const health = this.getEventSignatureByName<MappedContract>(eventName)
+
+		if (health.emitPayloadSchema){
+			try {
+
+				validateSchemaValues(health.emitPayloadSchema as ISchema, payload ?? {})
+			} catch (err) {
+				throw new SpruceError({code: 'INVALID_PAYLOAD', originalError: err})
+			}
+		} else if (payload) {
+			throw new SpruceError({code: 'UNEXPECTED_PAYLOAD'})
+		}
+
+		console.log(health)
+		debugger
 		
 
 		return {
@@ -87,6 +105,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			totalErrors,
 			responses,
 		} as MercuryAggregateResponse<ResponsePayload>
+	}
+
+	private getEventSignatureByName<MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
+		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
+		
+		>(eventName: EventName) {
+		const sig = this.eventContract.eventSignatures.find(sig => sig.eventNameWithOptionalNamespace === eventName)
+
+		if (!sig) {
+			throw new SpruceError({ code: 'INVALID_EVENT_NAME', eventNameWithOptionalNamespace: eventName })
+		}
+		return sig
 	}
 
 	public on<

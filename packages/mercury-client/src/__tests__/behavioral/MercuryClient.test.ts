@@ -2,6 +2,7 @@ import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../MercuryClientFactory'
 import MercurySocketIoClient from '../../MercurySocketIoClient'
+import { TestEventContract, testEventContract } from '../support/TestEventContract'
 
 const TEST_HOST = 'https://localhost:8001'
 
@@ -11,11 +12,26 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		assert.isTruthy(MercuryClientFactory.Client)
 	}
 
+	@test()
+	protected static async throwsWhenMissingContracts() {
+
+		let err = await assert.doesThrowAsync(() =>
+		//@ts-ignore
+			MercuryClientFactory.Client({})
+		)
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', { parameters: ['contracts']})
+
+		err = await assert.doesThrowAsync(() =>
+		//@ts-ignore
+			MercuryClientFactory.Client({contracts: []})
+		)
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {parameters: ['contracts']})
+	}
 
 	@test()
 	protected static async connectingToBadProtocolThrows() {
 		const err = await assert.doesThrowAsync(() =>
-			MercuryClientFactory.Client({ host: 'aoeu://tasty.org' })
+			MercuryClientFactory.Client({ host: 'aoeu://tasty.org', contracts:[] })
 		)
 		errorAssertUtil.assertError(err, 'INVALID_PROTOCOL')
 	}
@@ -33,29 +49,44 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	private static async connect() {
-		return await MercuryClientFactory.Client({
+		return await MercuryClientFactory.Client<TestEventContract>({
 			host: TEST_HOST,
-			allowSelfSignedCrt: true
+			allowSelfSignedCrt: true,
+			contracts: [testEventContract]
 		})
 	}
 
 	@test()
-	protected static async cantEmitEventWithoutContract() {
+	protected static async throwsWithBadEventName() {
 		const client = await this.connect()
-		const err = await assert.doesThrowAsync(() => client.emit('health'))
+		//@ts-ignore
+		const err = await assert.doesThrowAsync(() => client.emit('health2'))
+		
 		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
+
 	}
 
 	@test()
-	protected static async cantEmitEventWithInvalidPayload() {
+	protected static async cantEmitEventWithWithUnexpectedPayload() {
 		const client = await this.connect()
+		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => client.emit('health', { taco: 'bravo'}))
-		errorAssertUtil.assertError(err, 'INVALID_FIELD')
 
+		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD')
 	
 	}
 
-	@test.skip()
+	@test()
+	protected static async cantEmitEventWithWithInvalidPayload() {
+		const client = await this.connect()
+		//@ts-ignore
+		const err = await assert.doesThrowAsync(() => client.emit('request-pin', {}))
+
+		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD')
+	
+	}
+
+	@test()
 	protected static async canRunHealthCheck() {
 		const client = await this.connect()
 
