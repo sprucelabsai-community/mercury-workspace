@@ -6,7 +6,7 @@
   "files": [
     "build"
   ],
-  "version": "10.1.250",
+  "version": "10.1.251",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "description": "The simple way to interact with the Spruce Experience Platform",
@@ -35,7 +35,7 @@
     "test.watch": "jest --watch"
   },
   "dependencies": {
-    "@sprucelabs/mercury-types": "^10.1.250",
+    "@sprucelabs/mercury-types": "^10.1.251",
     "socket.io-client": "^3.0.1"
   },
   "devDependencies": {
