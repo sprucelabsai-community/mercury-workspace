@@ -3,6 +3,2261 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.2](https://github.com/sprucelabsai/mercury-workspace/compare/v11.0.1...v11.0.2) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [11.0.1](https://github.com/sprucelabsai/mercury-workspace/compare/v11.0.0...v11.0.1) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+# [11.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.277...v11.0.0) (2020-11-11)
+
+
+### Breaking Changes
+
+* buildContract -> buildEventContract ([2e81093](https://github.com/sprucelabsai/mercury-workspace/commit/2e81093))
+
+
+
+
+
+## [10.1.277](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.276...v10.1.277) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.276](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.275...v10.1.276) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.275](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.274...v10.1.275) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.274](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.273...v10.1.274) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.273](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.272...v10.1.273) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.272](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.271...v10.1.272) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.271](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.270...v10.1.271) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.270](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.269...v10.1.270) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.269](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.268...v10.1.269) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.268](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.267...v10.1.268) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.267](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.266...v10.1.267) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.266](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.265...v10.1.266) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.265](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.264...v10.1.265) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.264](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.263...v10.1.264) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.263](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.262...v10.1.263) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.262](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.261...v10.1.262) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.261](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.260...v10.1.261) (2020-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.260](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.259...v10.1.260) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.259](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.258...v10.1.259) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.258](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.257...v10.1.258) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.257](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.256...v10.1.257) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.256](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.255...v10.1.256) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.255](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.254...v10.1.255) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.254](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.253...v10.1.254) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.253](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.252...v10.1.253) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.252](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.251...v10.1.252) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.251](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.250...v10.1.251) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.250](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.249...v10.1.250) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.249](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.248...v10.1.249) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.248](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.247...v10.1.248) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.247](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.246...v10.1.247) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.246](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.245...v10.1.246) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.245](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.244...v10.1.245) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.244](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.243...v10.1.244) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.243](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.242...v10.1.243) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.242](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.241...v10.1.242) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.241](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.240...v10.1.241) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.240](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.239...v10.1.240) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.239](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.238...v10.1.239) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.238](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.237...v10.1.238) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.237](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.236...v10.1.237) (2020-11-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.236](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.235...v10.1.236) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.235](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.234...v10.1.235) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.234](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.233...v10.1.234) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.233](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.232...v10.1.233) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.232](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.231...v10.1.232) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.231](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.230...v10.1.231) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.230](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.229...v10.1.230) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.229](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.228...v10.1.229) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.228](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.227...v10.1.228) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.227](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.226...v10.1.227) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.226](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.225...v10.1.226) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.225](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.224...v10.1.225) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.224](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.223...v10.1.224) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.223](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.222...v10.1.223) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.222](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.221...v10.1.222) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.221](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.220...v10.1.221) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.220](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.219...v10.1.220) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.219](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.218...v10.1.219) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.218](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.217...v10.1.218) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.217](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.216...v10.1.217) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.216](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.215...v10.1.216) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.215](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.214...v10.1.215) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.214](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.213...v10.1.214) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.213](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.212...v10.1.213) (2020-11-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.212](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.211...v10.1.212) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.211](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.210...v10.1.211) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.210](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.209...v10.1.210) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.209](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.208...v10.1.209) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.208](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.207...v10.1.208) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.207](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.206...v10.1.207) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.206](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.205...v10.1.206) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.205](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.204...v10.1.205) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.204](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.203...v10.1.204) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.203](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.202...v10.1.203) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.202](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.201...v10.1.202) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.201](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.200...v10.1.201) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.200](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.199...v10.1.200) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.199](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.198...v10.1.199) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.198](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.197...v10.1.198) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.197](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.196...v10.1.197) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.196](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.195...v10.1.196) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.195](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.194...v10.1.195) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.194](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.193...v10.1.194) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.193](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.192...v10.1.193) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.192](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.191...v10.1.192) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.191](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.190...v10.1.191) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.190](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.189...v10.1.190) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.189](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.188...v10.1.189) (2020-11-08)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.188](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.187...v10.1.188) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.187](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.186...v10.1.187) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.186](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.185...v10.1.186) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.185](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.184...v10.1.185) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.184](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.183...v10.1.184) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.183](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.182...v10.1.183) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.182](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.181...v10.1.182) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.181](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.180...v10.1.181) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.180](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.179...v10.1.180) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.179](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.178...v10.1.179) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.178](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.177...v10.1.178) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.177](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.176...v10.1.177) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.176](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.175...v10.1.176) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.175](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.174...v10.1.175) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.174](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.173...v10.1.174) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.173](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.172...v10.1.173) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.172](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.171...v10.1.172) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.171](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.170...v10.1.171) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.170](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.169...v10.1.170) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.169](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.168...v10.1.169) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.168](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.167...v10.1.168) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.167](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.166...v10.1.167) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.166](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.165...v10.1.166) (2020-11-07)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.165](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.164...v10.1.165) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.164](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.163...v10.1.164) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.163](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.162...v10.1.163) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.162](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.161...v10.1.162) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.161](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.160...v10.1.161) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.160](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.159...v10.1.160) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.159](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.158...v10.1.159) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.158](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.157...v10.1.158) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.157](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.156...v10.1.157) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.156](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.155...v10.1.156) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.155](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.154...v10.1.155) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.154](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.153...v10.1.154) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.153](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.152...v10.1.153) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.152](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.151...v10.1.152) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.151](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.150...v10.1.151) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.150](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.149...v10.1.150) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.149](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.148...v10.1.149) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.148](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.147...v10.1.148) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.147](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.146...v10.1.147) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.146](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.145...v10.1.146) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.145](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.144...v10.1.145) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.144](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.143...v10.1.144) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.143](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.142...v10.1.143) (2020-11-06)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.142](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.141...v10.1.142) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.141](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.140...v10.1.141) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.140](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.139...v10.1.140) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.139](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.138...v10.1.139) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.138](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.137...v10.1.138) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.137](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.136...v10.1.137) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.136](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.135...v10.1.136) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.135](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.134...v10.1.135) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.134](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.133...v10.1.134) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.133](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.132...v10.1.133) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.132](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.131...v10.1.132) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.131](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.130...v10.1.131) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.130](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.129...v10.1.130) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.129](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.128...v10.1.129) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.128](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.127...v10.1.128) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.127](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.126...v10.1.127) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.126](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.125...v10.1.126) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.125](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.124...v10.1.125) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.124](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.123...v10.1.124) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.123](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.122...v10.1.123) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.122](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.121...v10.1.122) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.121](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.120...v10.1.121) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.120](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.119...v10.1.120) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.119](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.118...v10.1.119) (2020-11-05)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.118](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.117...v10.1.118) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.117](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.116...v10.1.117) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.116](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.115...v10.1.116) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.115](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.114...v10.1.115) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.114](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.113...v10.1.114) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.113](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.112...v10.1.113) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.112](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.111...v10.1.112) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.111](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.110...v10.1.111) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.110](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.109...v10.1.110) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.109](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.108...v10.1.109) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.108](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.107...v10.1.108) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.107](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.106...v10.1.107) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.106](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.105...v10.1.106) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.105](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.104...v10.1.105) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.104](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.103...v10.1.104) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.103](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.102...v10.1.103) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.102](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.101...v10.1.102) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.101](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.100...v10.1.101) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.100](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.99...v10.1.100) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.99](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.98...v10.1.99) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.98](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.97...v10.1.98) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.97](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.96...v10.1.97) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.96](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.95...v10.1.96) (2020-11-04)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.95](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.94...v10.1.95) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.94](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.93...v10.1.94) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.93](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.92...v10.1.93) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.92](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.91...v10.1.92) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.91](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.90...v10.1.91) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.90](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.89...v10.1.90) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.89](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.88...v10.1.89) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.88](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.87...v10.1.88) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.87](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.86...v10.1.87) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.86](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.85...v10.1.86) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.85](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.84...v10.1.85) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.84](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.83...v10.1.84) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.83](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.82...v10.1.83) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.82](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.81...v10.1.82) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.81](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.80...v10.1.81) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.80](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.79...v10.1.80) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.79](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.78...v10.1.79) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.78](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.77...v10.1.78) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.77](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.76...v10.1.77) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.76](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.75...v10.1.76) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.75](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.74...v10.1.75) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.74](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.73...v10.1.74) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.73](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.72...v10.1.73) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.72](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.71...v10.1.72) (2020-11-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.71](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.70...v10.1.71) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.70](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.69...v10.1.70) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.69](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.68...v10.1.69) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.68](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.67...v10.1.68) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.67](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.66...v10.1.67) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.66](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.65...v10.1.66) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.65](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.64...v10.1.65) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.64](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.63...v10.1.64) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.63](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.62...v10.1.63) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.62](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.61...v10.1.62) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.61](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.60...v10.1.61) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.60](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.59...v10.1.60) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.59](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.58...v10.1.59) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.58](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.57...v10.1.58) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.57](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.56...v10.1.57) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.56](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.55...v10.1.56) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.55](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.54...v10.1.55) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.54](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.53...v10.1.54) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.53](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.52...v10.1.53) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.52](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.51...v10.1.52) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.51](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.50...v10.1.51) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.50](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.49...v10.1.50) (2020-11-02)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.49](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.48...v10.1.49) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.48](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.47...v10.1.48) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.47](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.46...v10.1.47) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.46](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.45...v10.1.46) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.45](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.44...v10.1.45) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.44](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.43...v10.1.44) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.43](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.42...v10.1.43) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.42](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.41...v10.1.42) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.41](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.40...v10.1.41) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.40](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.39...v10.1.40) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.39](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.38...v10.1.39) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.38](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.37...v10.1.38) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.37](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.36...v10.1.37) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.36](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.35...v10.1.36) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.35](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.34...v10.1.35) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.34](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.33...v10.1.34) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.33](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.32...v10.1.33) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.32](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.31...v10.1.32) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.31](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.30...v10.1.31) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.30](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.29...v10.1.30) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.29](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.28...v10.1.29) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.28](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.27...v10.1.28) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.27](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.26...v10.1.27) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.26](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.25...v10.1.26) (2020-11-01)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.25](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.24...v10.1.25) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.24](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.23...v10.1.24) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.23](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.22...v10.1.23) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.22](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.21...v10.1.22) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.21](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.20...v10.1.21) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.20](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.19...v10.1.20) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.19](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.18...v10.1.19) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.18](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.17...v10.1.18) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.17](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.16...v10.1.17) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.16](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.15...v10.1.16) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.15](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.14...v10.1.15) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.14](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.13...v10.1.14) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.13](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.12...v10.1.13) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.12](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.11...v10.1.12) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.11](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.10...v10.1.11) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.10](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.9...v10.1.10) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.9](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.8...v10.1.9) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.8](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.7...v10.1.8) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.7](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.6...v10.1.7) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.6](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.5...v10.1.6) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.5](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.4...v10.1.5) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.4](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.3...v10.1.4) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.3](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.2...v10.1.3) (2020-10-31)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.2](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.1...v10.1.2) (2020-10-30)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [10.1.1](https://github.com/sprucelabsai/mercury-workspace/compare/v10.1.0...v10.1.1) (2020-10-30)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+# [10.1.0](https://github.com/sprucelabsai/mercury-workspace/compare/v10.0.4...v10.1.0) (2020-10-30)
+
+
+### Features
+
+* export buildContract from mercury-types ([ed033fe](https://github.com/sprucelabsai/mercury-workspace/commit/ed033fe))
+* first tests for mercury client ([2b6ff41](https://github.com/sprucelabsai/mercury-workspace/commit/2b6ff41))
+
+
+
+
+
 ## [10.0.4](https://github.com/sprucelabsai/mercury-workspace/compare/v10.0.3...v10.0.4) (2020-10-30)
 
 **Note:** Version bump only for package spruce-mercury-workspace

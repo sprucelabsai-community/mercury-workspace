@@ -7,7 +7,7 @@
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "10.0.4",
+	"version": "11.0.2",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
@@ -38,15 +38,14 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "^2.4.1",
-		"@sprucelabs/mercury-types": "^10.0.4",
-		"@sprucelabs/schema": "^14.1.1"
+		"@sprucelabs/mercury-types": "^11.0.2",
+		"@sprucelabs/schema": "^14.1.4"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.6",
-		"@sprucelabs/test": "^7.1.4",
-		"eslint": "^7.12.1",
-		"eslint-config-spruce": "^10.9.102",
-		"jest": "^26.6.1",
+		"@sprucelabs/test": "^7.2.0",
+		"eslint": "^7.13.0",
+		"eslint-config-spruce": "^10.9.105",
 		"typescript": "^4.0.5"
 	},
 	"jest": {
