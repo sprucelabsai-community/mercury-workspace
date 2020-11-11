@@ -21,7 +21,7 @@ jobs:
       - run:
           name: "ENV file creation"
           command: |
-            [ -n "$BASE64_ENV" ] && echo $BASE64_ENV | base64 --decode > packages/spruce-cli/.env
+            [ -n "$BASE64_ENV" ] && echo $BASE64_ENV | base64 --decode > packages/mercury-client/.env
       - run: node -v && npm -v && yarn -v
       - run: yarn install
       - run: yarn clean
