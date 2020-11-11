@@ -7,8 +7,9 @@ import {
 	TestEventContract,
 	testEventContract,
 } from '../support/TestEventContract'
+require('dotenv').config()
 
-const TEST_HOST = 'https://localhost:8001'
+const TEST_HOST = process.env.TEST_HOST ?? 'https://localhost:8001'
 
 export default class MercuryClientTest extends AbstractSpruceTest {
 
