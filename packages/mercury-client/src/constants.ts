@@ -1,1 +1,1 @@
-export const DEFAULT_HOST = 'wss://mercury.spruce.ai'
+export const DEFAULT_HOST = 'https://mercury.spruce.ai'

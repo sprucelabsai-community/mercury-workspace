@@ -8,7 +8,23 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 
 		switch (options?.code) {
 			case 'INVALID_PROTOCOL':
-				message = 'A Invalid protocol just happened!'
+				message = 'You must connect via the https protocol.'
+				break
+
+			case 'INVALID_EVENT_NAME':
+				message = 'A Invalid event name just happened!'
+				break
+
+			case 'UNEXPECTED_PAYLOAD':
+				message = 'A Unexpected payload just happened!'
+				break
+
+			case 'INVALID_PAYLOAD':
+				message = 'A Invalid payload just happened!'
+				break
+
+			case 'CONNECTION_FAILED':
+				message = `I couldn't connect to ${options.host}. The code I got back was ${options.statusCode}.`
 				break
 
 			default:
