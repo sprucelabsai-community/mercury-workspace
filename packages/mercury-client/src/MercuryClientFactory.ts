@@ -41,6 +41,7 @@ export default class MercuryClientFactory {
 
 		const client = new MercurySocketIoClient<Contract>({
 			host,
+			reconnection: false,
 			rejectUnauthorized: !connectionOptions?.allowSelfSignedCrt,
 			eventContract,
 		})
