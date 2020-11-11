@@ -29,7 +29,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		options: { host: string; eventContract: Contract } & IoOptions
 	) {
 		const { host, eventContract, ...ioOptions } = options
-		this.host = options.host
+		this.host = host
 		this.ioOptions = ioOptions
 		this.eventContract = eventContract
 	}
@@ -78,12 +78,14 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			| EmitCallback<MappedContract, EventName>,
 		_cb?: EmitCallback<MappedContract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
-
 		const signature = this.getEventSignatureByName<MappedContract>(eventName)
 
 		if (signature.emitPayloadSchema) {
 			try {
-				validateSchemaValues(signature.emitPayloadSchema as ISchema, payload ?? {})
+				validateSchemaValues(
+					signature.emitPayloadSchema as ISchema,
+					payload ?? {}
+				)
 			} catch (err) {
 				throw new SpruceError({ code: 'INVALID_PAYLOAD', originalError: err })
 			}
@@ -91,20 +93,21 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			throw new SpruceError({ code: 'UNEXPECTED_PAYLOAD' })
 		}
 
-		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise((resolve) => {
-			const args: any[] = []
+		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise(
+			(resolve) => {
+				const args: any[] = []
 
-			if (payload) {
-				args.push(payload)
+				if (payload) {
+					args.push(payload)
+				}
+
+				args.push((results: any) => {
+					resolve(results)
+				})
+
+				this.socket?.emit(eventName, ...args)
 			}
-
-			args.push((results: any) => {
-				resolve(results)
-			})
-
-			this.socket?.emit(eventName, ...args)
-		})
-
+		)
 
 		return results
 	}
@@ -158,14 +161,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 	public async disconnect() {
 		if (this.socket) {
-			await new Promise(resolve => {
+			await new Promise((resolve) => {
 				this.socket?.on('disconnect', () => {
-					
 					this.socket?.removeAllListeners()
 					this.socket = undefined
 					resolve()
 				})
-				
+
 				this.socket?.disconnect()
 			})
 		}

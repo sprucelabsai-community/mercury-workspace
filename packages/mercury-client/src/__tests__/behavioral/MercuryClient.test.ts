@@ -12,7 +12,6 @@ require('dotenv').config()
 const TEST_HOST = process.env.TEST_HOST ?? 'https://localhost:8001'
 
 export default class MercuryClientTest extends AbstractSpruceTest {
-
 	private static client?: MercuryClient<TestEventContract>
 
 	protected static async afterEach() {
@@ -117,8 +116,6 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 			mercury: { status: 'passed' },
 		})
 
-		
 		await client.disconnect()
-		
 	}
 }

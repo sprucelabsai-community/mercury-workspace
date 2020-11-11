@@ -1,4 +1,4 @@
-import { buildEventContract } from "@sprucelabs/mercury-types"
+import { buildEventContract } from '@sprucelabs/mercury-types'
 
 export const testEventContract = buildEventContract({
 	eventSignatures: [
