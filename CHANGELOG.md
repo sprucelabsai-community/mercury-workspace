@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.1.0](https://github.com/sprucelabsai/mercury-workspace/compare/v11.0.5...v11.1.0) (2020-11-11)
+
+
+### Features
+
+* TEST_HOST env support for testing ([45018be](https://github.com/sprucelabsai/mercury-workspace/commit/45018be))
+
+
+
+
+
 ## [11.0.5](https://github.com/sprucelabsai/mercury-workspace/compare/v11.0.4...v11.0.5) (2020-11-11)
 
 **Note:** Version bump only for package spruce-mercury-workspace
