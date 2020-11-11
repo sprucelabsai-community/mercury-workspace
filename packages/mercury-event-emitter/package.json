@@ -37,7 +37,7 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^2.4.1",
+		"@sprucelabs/error": "^3.0.0",
 		"@sprucelabs/mercury-types": "^11.1.0",
 		"@sprucelabs/schema": "^14.1.4"
 	},
