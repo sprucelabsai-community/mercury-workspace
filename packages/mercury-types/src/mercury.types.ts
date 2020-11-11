@@ -21,6 +21,7 @@ export type EventSignature = DeepReadonly<
 export type EventContract = DeepReadonly<
 	SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract
 >
+export type MutableEventContract = SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract
 export type Permission = DeepReadonly<
 	SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
 >

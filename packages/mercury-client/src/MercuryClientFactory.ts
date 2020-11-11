@@ -1,5 +1,4 @@
-import { EventContract } from '@sprucelabs/mercury-types'
-import { SpruceSchemas } from '#spruce/schemas/schemas.types'
+import { EventContract, MutableEventContract } from '@sprucelabs/mercury-types'
 import { ConnectionOptions, MercuryClient } from './client.types'
 import { DEFAULT_HOST } from './constants'
 import SpruceError from './errors/SpruceError'
@@ -28,8 +27,6 @@ export default class MercuryClientFactory {
 				parameters: ['contracts'],
 			})
 		}
-
-		type MutableEventContract = SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract
 
 		const unifiedContract: MutableEventContract = {
 			eventSignatures: [],

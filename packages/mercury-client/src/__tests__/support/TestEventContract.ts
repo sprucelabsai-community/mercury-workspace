@@ -1,4 +1,6 @@
-export const testEventContract = {
+import { buildEventContract } from "@sprucelabs/mercury-types"
+
+export const testEventContract = buildEventContract({
 	eventSignatures: [
 		{
 			eventNameWithOptionalNamespace: 'authenticate',
@@ -3720,6 +3722,6 @@ export const testEventContract = {
 			emitPayloadSchema: { id: 'whoAmIEmitPayload', fields: {} },
 		},
 	],
-} as const
+} as const)
 
 export type TestEventContract = typeof testEventContract

@@ -78,9 +78,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			| EmitCallback<MappedContract, EventName>,
 		_cb?: EmitCallback<MappedContract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
-		let totalErrors = 0
-		const listeners: any[] = []
-		const responses: any[] = []
 
 		const signature = this.getEventSignatureByName<MappedContract>(eventName)
 
@@ -94,7 +91,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			throw new SpruceError({ code: 'UNEXPECTED_PAYLOAD' })
 		}
 
-		await new Promise((resolve) => {
+		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise((resolve) => {
 			const args: any[] = []
 
 			if (payload) {
@@ -102,20 +99,14 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			}
 
 			args.push((results: any) => {
-				debugger
-				console.log(results)
+				resolve(results)
 			})
 
 			this.socket?.emit(eventName, ...args)
 		})
 
 
-		return {
-			totalContracts: listeners.length,
-			totalResponses: listeners.length,
-			totalErrors,
-			responses,
-		} as MercuryAggregateResponse<ResponsePayload>
+		return results
 	}
 
 	private getEventSignatureByName<
