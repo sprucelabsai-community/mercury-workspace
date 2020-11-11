@@ -84,7 +84,8 @@
 					"sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
 					"worksheetId": 843037832,
 					"testMap": {
-						"factoryReturnsSocketIoClient": "F8",
+						"cantEmitEventWithWithUnexpectedPayload": "F8",
+						"factoryReturnsSocketIoClient": "F12",
 						"canRunHealthCheck": "F13"
 					}
 				}
