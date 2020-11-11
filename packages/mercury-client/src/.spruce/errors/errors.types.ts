@@ -40,6 +40,27 @@ export declare namespace SpruceErrors.MercuryClient {
 export declare namespace SpruceErrors.MercuryClient {
 
 	
+	export interface IInvalidPayload {
+		
+	}
+
+	export interface IInvalidPayloadSchema extends SpruceSchema.ISchema {
+		id: 'invalidPayload',
+		namespace: 'MercuryClient',
+		name: 'Invalid payload',
+		    fields: {
+		    }
+	}
+
+	export type InvalidPayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.IInvalidPayloadSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
 	export interface IInvalidProtocol {
 		
 	}
@@ -82,19 +103,35 @@ export declare namespace SpruceErrors.MercuryClient {
 export declare namespace SpruceErrors.MercuryClient {
 
 	
-	export interface IInvalidPayload {
+	export interface IConnectionFailed {
 		
+			
+			'host': string
+			
+			'statusCode': number
 	}
 
-	export interface IInvalidPayloadSchema extends SpruceSchema.ISchema {
-		id: 'invalidPayload',
+	export interface IConnectionFailedSchema extends SpruceSchema.ISchema {
+		id: 'connectionFailed',
 		namespace: 'MercuryClient',
-		name: 'Invalid payload',
+		name: 'Connection failed',
 		    fields: {
+		            /** . */
+		            'host': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'statusCode': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
 		    }
 	}
 
-	export type InvalidPayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.IInvalidPayloadSchema>
+	export type ConnectionFailedEntity = SchemaEntity<SpruceErrors.MercuryClient.IConnectionFailedSchema>
 
 }
 

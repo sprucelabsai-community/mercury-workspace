@@ -63,9 +63,9 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		assert.isFalse(client.isConnected())
 	}
 
-	private static async connect() {
+	private static async connect(host = TEST_HOST) {
 		const client = await MercuryClientFactory.Client<TestEventContract>({
-			host: TEST_HOST,
+			host,
 			allowSelfSignedCrt: true,
 			contracts: [testEventContract],
 		})
@@ -93,6 +93,16 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		)
 
 		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD')
+	}
+
+	@test()
+	protected static async throwsHelpfulErrorWhenCantReachHost() {
+		const host = 'https://wontfindthisanywhere.com'
+		const err = await assert.doesThrowAsync(() => this.connect(host))
+		errorAssertUtil.assertError(err, 'CONNECTION_FAILED', {
+			host,
+			statusCode: 503,
+		})
 	}
 
 	@test()

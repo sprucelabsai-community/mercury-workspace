@@ -23,6 +23,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = 'A Invalid payload just happened!'
 				break
 
+			case 'CONNECTION_FAILED':
+				message = `I couldn't connect to ${options.host}. The code I got back was ${options.statusCode}.`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

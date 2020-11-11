@@ -40,6 +40,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		await new Promise((resolve, reject) => {
 			this.socket?.on('connect', () => {
 				this.socket?.removeAllListeners()
+
 				resolve()
 			})
 
@@ -47,11 +48,34 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				reject(err)
 			})
 
-			this.socket?.on('connect_error', (err: string) => {
+			this.socket?.on('connect_error', (err: Record<string, any>) => {
+				const error = this.mapSocketErrorToSpruceError(err)
 				this.socket?.removeAllListeners()
-				reject(err)
+				reject(error)
 			})
 		})
+	}
+
+	public mapSocketErrorToSpruceError(err: Record<string, any>) {
+		const originalError = new Error(err.message)
+		//@ts-ignore
+		originalError.socketError = err
+
+		switch (err.message) {
+			case 'xhr poll error':
+				return new SpruceError({
+					code: 'CONNECTION_FAILED',
+					host: this.host,
+					statusCode: err.description,
+					originalError,
+				})
+			default:
+				return new SpruceError({
+					code: 'UNKNOWN_ERROR',
+					originalError,
+					friendlyMessage: `Something went wrong when working with socketio`,
+				})
+		}
 	}
 
 	public async emit<
