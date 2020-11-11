@@ -157,7 +157,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public async disconnect() {
-		this.socket?.disconnect()
+		if (this.socket) {
+			await new Promise(resolve => {
+				this.socket?.on('disconnect', () => {
+					
+					this.socket?.removeAllListeners()
+					this.socket = undefined
+					resolve()
+				})
+				
+				this.socket?.disconnect()
+			})
+		}
 		return
 	}
 

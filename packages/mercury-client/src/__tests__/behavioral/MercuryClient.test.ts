@@ -1,5 +1,6 @@
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { MercuryClient } from '../../client.types'
 import MercuryClientFactory from '../../MercuryClientFactory'
 import MercurySocketIoClient from '../../MercurySocketIoClient'
 import {
@@ -10,6 +11,14 @@ import {
 const TEST_HOST = 'https://localhost:8001'
 
 export default class MercuryClientTest extends AbstractSpruceTest {
+
+	private static client?: MercuryClient<TestEventContract>
+
+	protected static async afterEach() {
+		await super.afterEach()
+		await this.client?.disconnect()
+	}
+
 	@test()
 	protected static async factoryCanCreateClient() {
 		assert.isTruthy(MercuryClientFactory.Client)
@@ -55,11 +64,15 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	private static async connect() {
-		return await MercuryClientFactory.Client<TestEventContract>({
+		const client = await MercuryClientFactory.Client<TestEventContract>({
 			host: TEST_HOST,
 			allowSelfSignedCrt: true,
 			contracts: [testEventContract],
 		})
+
+		this.client = client
+
+		return client
 	}
 
 	@test()
@@ -103,6 +116,8 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 			mercury: { status: 'passed' },
 		})
 
+		
 		await client.disconnect()
+		
 	}
 }
