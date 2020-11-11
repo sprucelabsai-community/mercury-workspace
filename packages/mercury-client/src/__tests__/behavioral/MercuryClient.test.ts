@@ -22,3 +22,5 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 			MercuryClientFactory.Client({ host: 'aoeu://tasty.org' })
 		)
 		errorAssertUtil.assertError(err, 'INVALID_PROTOCOL')
+	}
+}
