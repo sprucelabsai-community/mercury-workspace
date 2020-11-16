@@ -12,7 +12,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'INVALID_EVENT_NAME':
-				message = 'A Invalid event name just happened!'
+				message = `${options.eventNameWithOptionalNamespace} is not in the event contract. Check your spelling and try pulling the latest contracts.`
 				break
 
 			case 'UNEXPECTED_PAYLOAD':

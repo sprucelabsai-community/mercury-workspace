@@ -1,3 +1,4 @@
+import AbstractSpruceError from '@sprucelabs/error'
 import {
 	ContractMapper,
 	DeepReadonly,
@@ -12,6 +13,7 @@ import { ISchema, SchemaValues } from '@sprucelabs/schema'
 import io from 'socket.io-client'
 import { MercuryClient } from './client.types'
 import SpruceError from './errors/SpruceError'
+import socketIoEventUtil from './utilities/socketIoEventUtil.utility'
 
 /*global SocketIOClient*/
 
@@ -21,9 +23,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	implements MercuryClient<Contract> {
 	private host: string
 	private ioOptions: IoOptions
-	private eventContract: Contract
-
 	private socket?: SocketIOClient.Socket
+
+	protected eventContract: Contract
 
 	public constructor(
 		options: { host: string; eventContract: Contract } & IoOptions
@@ -129,14 +131,16 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					resolve(results)
 				})
 
-				this.socket?.emit(eventName, ...args)
+				const ioName = socketIoEventUtil.toSocketName(eventName)
+
+				this.socket?.emit(ioName, ...args)
 			}
 		)
 
 		return results
 	}
 
-	private getEventSignatureByName<
+	protected getEventSignatureByName<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>
 	>(eventName: EventName) {
@@ -153,7 +157,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		return sig
 	}
 
-	public on<
+	public async on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
 		IEventSignature extends DeepReadonly<
@@ -163,15 +167,37 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			? IEventSignature['emitPayloadSchema']
 			: never
 	>(
-		_eventName: EventName,
-		_cb: (
+		eventName: EventName,
+		cb: (
 			payload: EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never
 		) => IEventSignature['responsePayloadSchema'] extends ISchema
 			?
 					| Promise<SchemaValues<IEventSignature['responsePayloadSchema']>>
 					| SchemaValues<IEventSignature['responsePayloadSchema']>
 			: Promise<void> | void
-	) {}
+	) {
+		//@ts-ignore
+		const results = await this.emit('register-listeners', {
+			payload: { eventNamesWithOptionalNamespace: [eventName] },
+		})
+
+		if (results.totalErrors > 0) {
+			const options = results.responses[0].errors?.[0] ?? 'UNKNOWN_ERROR'
+			throw AbstractSpruceError.parse(options, SpruceError)
+		}
+
+		this.socket?.on(
+			eventName,
+			async (targetAndPayload: any, ioCallback: (p: any) => void) => {
+				if (cb) {
+					const results = await cb(targetAndPayload)
+					if (ioCallback) {
+						ioCallback(results)
+					}
+				}
+			}
+		)
+	}
 
 	public off(
 		_eventName: Extract<

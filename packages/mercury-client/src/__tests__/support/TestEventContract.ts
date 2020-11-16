@@ -1,9 +1,29 @@
-import { buildEventContract } from '@sprucelabs/mercury-types'
+import { validateEventContract } from '@sprucelabs/mercury-types'
+import { buildSchema } from '@sprucelabs/schema'
 
-export const testEventContract = buildEventContract({
+export const testEventContract = {
 	eventSignatures: [
 		{
 			eventNameWithOptionalNamespace: 'authenticate',
+			emitPayloadSchema: {
+				id: 'authenticateTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'authenticateEmitPayload',
+								fields: {
+									token: { type: 'text', isRequired: false },
+									skillId: { type: 'text', isRequired: false },
+									apiKey: { type: 'text', isRequired: false },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'authenticateResponsePayload',
 				fields: {
@@ -161,41 +181,65 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'authenticateEmitPayload',
-				fields: {
-					token: { type: 'text', isRequired: false },
-					skillId: { type: 'text', isRequired: false },
-					apiKey: { type: 'text', isRequired: false },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'can-listen',
+			emitPayloadSchema: {
+				id: 'canListenTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'canListenEmitPayload',
+								fields: {
+									authorizerStatuses: {
+										type: 'select',
+										options: {
+											choices: [
+												{ label: 'Clocked in', value: 'clockedIn' },
+												{ label: 'Clocked out', value: 'clockedOut' },
+												{ label: 'On premise', value: 'onPrem' },
+												{ label: 'Off premise', value: 'offPrem' },
+											],
+										},
+									},
+									eventNameWithOptionalNamespace: {
+										type: 'text',
+										isRequired: true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'canListenResponsePayload',
 				fields: { can: { type: 'boolean' } },
 			},
-			emitPayloadSchema: {
-				id: 'canListenEmitPayload',
-				fields: {
-					authorizerStatuses: {
-						type: 'select',
-						options: {
-							choices: [
-								{ label: 'Clocked in', value: 'clockedIn' },
-								{ label: 'Clocked out', value: 'clockedOut' },
-								{ label: 'On premise', value: 'onPrem' },
-								{ label: 'Off premise', value: 'offPrem' },
-							],
-						},
-					},
-					eventNameWithOptionalNamespace: { type: 'text', isRequired: true },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'confirm-pin',
+			emitPayloadSchema: {
+				id: 'confirmPinTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'confirmPinEmitPayload',
+								fields: {
+									challenge: { type: 'text', isRequired: true },
+									pin: { type: 'text', isRequired: true },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'confirmPinRespondPayload',
 				fields: {
@@ -278,16 +322,256 @@ export const testEventContract = buildEventContract({
 					token: { type: 'text', isRequired: true },
 				},
 			},
-			emitPayloadSchema: {
-				id: 'confirmPinEmitPayload',
-				fields: {
-					challenge: { type: 'text', isRequired: true },
-					pin: { type: 'text', isRequired: true },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'create-location',
+			emitPayloadSchema: {
+				id: 'createLocationTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'createLocationEmitPayload',
+								fields: {
+									name: { label: 'Name', type: 'text', isRequired: true },
+									num: {
+										label: 'Store number',
+										type: 'text',
+										hint:
+											'You can use other symbols, like # or dashes. #123 or 32-US-5',
+									},
+									isPublic: {
+										label: 'Public',
+										type: 'boolean',
+										hint: 'Is this location viewable by guests?',
+										defaultValue: false,
+									},
+									phone: { label: 'Main Phone', type: 'phone' },
+									timezone: {
+										label: 'Timezone',
+										type: 'select',
+										options: {
+											choices: [
+												{
+													value: 'etc/gmt+12',
+													label: 'International Date Line West',
+												},
+												{
+													value: 'pacific/midway',
+													label: 'Midway Island, Samoa',
+												},
+												{ value: 'pacific/honolulu', label: 'Hawaii' },
+												{ value: 'us/alaska', label: 'Alaska' },
+												{
+													value: 'america/los_Angeles',
+													label: 'Pacific Time (US & Canada)',
+												},
+												{
+													value: 'america/tijuana',
+													label: 'Tijuana, Baja California',
+												},
+												{ value: 'us/arizona', label: 'Arizona' },
+												{
+													value: 'america/chihuahua',
+													label: 'Chihuahua, La Paz, Mazatlan',
+												},
+												{
+													value: 'us/mountain',
+													label: 'Mountain Time (US & Canada)',
+												},
+												{ value: 'america/managua', label: 'Central America' },
+												{
+													value: 'us/central',
+													label: 'Central Time (US & Canada)',
+												},
+												{
+													value: 'america/mexico_City',
+													label: 'Guadalajara, Mexico City, Monterrey',
+												},
+												{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
+												{
+													value: 'america/bogota',
+													label: 'Bogota, Lima, Quito, Rio Branco',
+												},
+												{
+													value: 'us/eastern',
+													label: 'Eastern Time (US & Canada)',
+												},
+												{ value: 'us/east-indiana', label: 'Indiana (East)' },
+												{
+													value: 'Canada/atlantic',
+													label: 'Atlantic Time (Canada)',
+												},
+												{ value: 'america/caracas', label: 'Caracas, La Paz' },
+												{ value: 'america/manaus', label: 'Manaus' },
+												{ value: 'america/Santiago', label: 'Santiago' },
+												{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
+												{ value: 'america/Sao_Paulo', label: 'Brasilia' },
+												{
+													value: 'america/argentina/buenos_Aires',
+													label: 'Buenos Aires, Georgetown',
+												},
+												{ value: 'america/godthab', label: 'Greenland' },
+												{ value: 'america/montevideo', label: 'Montevideo' },
+												{ value: 'america/Noronha', label: 'Mid-Atlantic' },
+												{
+													value: 'atlantic/cape_Verde',
+													label: 'Cape Verde Is.',
+												},
+												{ value: 'atlantic/azores', label: 'Azores' },
+												{
+													value: 'africa/casablanca',
+													label: 'Casablanca, Monrovia, Reykjavik',
+												},
+												{
+													value: 'etc/gmt',
+													label:
+														'Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London',
+												},
+												{
+													value: 'europe/amsterdam',
+													label:
+														'Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna',
+												},
+												{
+													value: 'europe/belgrade',
+													label:
+														'Belgrade, Bratislava, Budapest, Ljubljana, Prague',
+												},
+												{
+													value: 'europe/brussels',
+													label: 'Brussels, Copenhagen, Madrid, Paris',
+												},
+												{
+													value: 'europe/Sarajevo',
+													label: 'Sarajevo, Skopje, Warsaw, Zagreb',
+												},
+												{ value: 'africa/lagos', label: 'West Central Africa' },
+												{ value: 'asia/amman', label: 'Amman' },
+												{
+													value: 'europe/athens',
+													label: 'Athens, Bucharest, Istanbul',
+												},
+												{ value: 'asia/beirut', label: 'Beirut' },
+												{ value: 'africa/cairo', label: 'Cairo' },
+												{ value: 'africa/Harare', label: 'Harare, Pretoria' },
+												{
+													value: 'europe/Helsinki',
+													label:
+														'Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius',
+												},
+												{ value: 'asia/Jerusalem', label: 'Jerusalem' },
+												{ value: 'europe/minsk', label: 'Minsk' },
+												{ value: 'africa/Windhoek', label: 'Windhoek' },
+												{
+													value: 'asia/Kuwait',
+													label: 'Kuwait, Riyadh, Baghdad',
+												},
+												{
+													value: 'europe/moscow',
+													label: 'Moscow, St. Petersburg, Volgograd',
+												},
+												{ value: 'africa/Nairobi', label: 'Nairobi' },
+												{ value: 'asia/tbilisi', label: 'Tbilisi' },
+												{ value: 'asia/tehran', label: 'Tehran' },
+												{ value: 'asia/muscat', label: 'Abu Dhabi, Muscat' },
+												{ value: 'asia/baku', label: 'Baku' },
+												{ value: 'asia/Yerevan', label: 'Yerevan' },
+												{ value: 'asia/Kabul', label: 'Kabul' },
+												{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
+												{
+													value: 'asia/Karachi',
+													label: 'Islamabad, Karachi, Tashkent',
+												},
+												{
+													value: 'asia/calcutta',
+													label: 'Chennai, Kolkata, Mumbai, New Delhi',
+												},
+												{
+													value: 'asia/calcutta',
+													label: 'Sri Jayawardenapura',
+												},
+												{ value: 'asia/Katmandu', label: 'Kathmandu' },
+												{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
+												{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
+												{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
+												{
+													value: 'asia/bangkok',
+													label: 'Bangkok, Hanoi, Jakarta',
+												},
+												{ value: 'asia/Krasnoyarsk', label: 'Krasnoyarsk' },
+												{
+													value: 'asia/Hong_Kong',
+													label: 'Beijing, Chongqing, Hong Kong, Urumqi',
+												},
+												{
+													value: 'asia/Kuala_Lumpur',
+													label: 'Kuala Lumpur, Singapore',
+												},
+												{
+													value: 'asia/Irkutsk',
+													label: 'Irkutsk, Ulaan Bataar',
+												},
+												{ value: 'Australia/Perth', label: 'Perth' },
+												{ value: 'asia/taipei', label: 'Taipei' },
+												{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
+												{ value: 'asia/Seoul', label: 'Seoul' },
+												{ value: 'asia/Yakutsk', label: 'Yakutsk' },
+												{ value: 'Australia/adelaide', label: 'Adelaide' },
+												{ value: 'Australia/Darwin', label: 'Darwin' },
+												{ value: 'Australia/brisbane', label: 'Brisbane' },
+												{
+													value: 'Australia/canberra',
+													label: 'Canberra, Melbourne, Sydney',
+												},
+												{ value: 'Australia/Hobart', label: 'Hobart' },
+												{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
+												{ value: 'asia/Vladivostok', label: 'Vladivostok' },
+												{
+													value: 'asia/magadan',
+													label: 'Magadan, Solomon Is., New Caledonia',
+												},
+												{
+													value: 'pacific/auckland',
+													label: 'Auckland, Wellington',
+												},
+												{
+													value: 'pacific/Fiji',
+													label: 'Fiji, Kamchatka, Marshall Is.',
+												},
+												{ value: 'pacific/tongatapu', label: "Nuku'alofa" },
+											],
+										},
+									},
+									address: {
+										label: 'Address',
+										type: 'address',
+										isRequired: true,
+									},
+									dateDeleted: { type: 'number' },
+									slug: { type: 'text', isRequired: false },
+								},
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'createLocationResponsePayload',
 				fields: {
@@ -351,10 +635,7 @@ export const testEventContract = buildEventContract({
 													value: 'us/mountain',
 													label: 'Mountain Time (US & Canada)',
 												},
-												{
-													value: 'america/managua',
-													label: 'Central America',
-												},
+												{ value: 'america/managua', label: 'Central America' },
 												{
 													value: 'us/central',
 													label: 'Central Time (US & Canada)',
@@ -363,10 +644,7 @@ export const testEventContract = buildEventContract({
 													value: 'america/mexico_City',
 													label: 'Guadalajara, Mexico City, Monterrey',
 												},
-												{
-													value: 'Canada/Saskatchewan',
-													label: 'Saskatchewan',
-												},
+												{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
 												{
 													value: 'america/bogota',
 													label: 'Bogota, Lima, Quito, Rio Branco',
@@ -380,16 +658,10 @@ export const testEventContract = buildEventContract({
 													value: 'Canada/atlantic',
 													label: 'Atlantic Time (Canada)',
 												},
-												{
-													value: 'america/caracas',
-													label: 'Caracas, La Paz',
-												},
+												{ value: 'america/caracas', label: 'Caracas, La Paz' },
 												{ value: 'america/manaus', label: 'Manaus' },
 												{ value: 'america/Santiago', label: 'Santiago' },
-												{
-													value: 'Canada/Newfoundland',
-													label: 'Newfoundland',
-												},
+												{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
 												{ value: 'america/Sao_Paulo', label: 'Brasilia' },
 												{
 													value: 'america/argentina/buenos_Aires',
@@ -430,10 +702,7 @@ export const testEventContract = buildEventContract({
 													value: 'europe/Sarajevo',
 													label: 'Sarajevo, Skopje, Warsaw, Zagreb',
 												},
-												{
-													value: 'africa/lagos',
-													label: 'West Central Africa',
-												},
+												{ value: 'africa/lagos', label: 'West Central Africa' },
 												{ value: 'asia/amman', label: 'Amman' },
 												{
 													value: 'europe/athens',
@@ -465,10 +734,7 @@ export const testEventContract = buildEventContract({
 												{ value: 'asia/baku', label: 'Baku' },
 												{ value: 'asia/Yerevan', label: 'Yerevan' },
 												{ value: 'asia/Kabul', label: 'Kabul' },
-												{
-													value: 'asia/Yekaterinburg',
-													label: 'Yekaterinburg',
-												},
+												{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
 												{
 													value: 'asia/Karachi',
 													label: 'Islamabad, Karachi, Tashkent',
@@ -482,10 +748,7 @@ export const testEventContract = buildEventContract({
 													label: 'Sri Jayawardenapura',
 												},
 												{ value: 'asia/Katmandu', label: 'Kathmandu' },
-												{
-													value: 'asia/almaty',
-													label: 'Almaty, Novosibirsk',
-												},
+												{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
 												{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
 												{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
 												{
@@ -507,10 +770,7 @@ export const testEventContract = buildEventContract({
 												},
 												{ value: 'Australia/Perth', label: 'Perth' },
 												{ value: 'asia/taipei', label: 'Taipei' },
-												{
-													value: 'asia/tokyo',
-													label: 'Osaka, Sapporo, Tokyo',
-												},
+												{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
 												{ value: 'asia/Seoul', label: 'Seoul' },
 												{ value: 'asia/Yakutsk', label: 'Yakutsk' },
 												{ value: 'Australia/adelaide', label: 'Adelaide' },
@@ -521,10 +781,7 @@ export const testEventContract = buildEventContract({
 													label: 'Canberra, Melbourne, Sydney',
 												},
 												{ value: 'Australia/Hobart', label: 'Hobart' },
-												{
-													value: 'pacific/guam',
-													label: 'Guam, Port Moresby',
-												},
+												{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
 												{ value: 'asia/Vladivostok', label: 'Vladivostok' },
 												{
 													value: 'asia/magadan',
@@ -556,194 +813,28 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'createLocationEmitPayload',
-				fields: {
-					name: { label: 'Name', type: 'text', isRequired: true },
-					num: {
-						label: 'Store number',
-						type: 'text',
-						hint:
-							'You can use other symbols, like # or dashes. #123 or 32-US-5',
-					},
-					isPublic: {
-						label: 'Public',
-						type: 'boolean',
-						hint: 'Is this location viewable by guests?',
-						defaultValue: false,
-					},
-					phone: { label: 'Main Phone', type: 'phone' },
-					timezone: {
-						label: 'Timezone',
-						type: 'select',
-						options: {
-							choices: [
-								{
-									value: 'etc/gmt+12',
-									label: 'International Date Line West',
-								},
-								{ value: 'pacific/midway', label: 'Midway Island, Samoa' },
-								{ value: 'pacific/honolulu', label: 'Hawaii' },
-								{ value: 'us/alaska', label: 'Alaska' },
-								{
-									value: 'america/los_Angeles',
-									label: 'Pacific Time (US & Canada)',
-								},
-								{
-									value: 'america/tijuana',
-									label: 'Tijuana, Baja California',
-								},
-								{ value: 'us/arizona', label: 'Arizona' },
-								{
-									value: 'america/chihuahua',
-									label: 'Chihuahua, La Paz, Mazatlan',
-								},
-								{
-									value: 'us/mountain',
-									label: 'Mountain Time (US & Canada)',
-								},
-								{ value: 'america/managua', label: 'Central America' },
-								{ value: 'us/central', label: 'Central Time (US & Canada)' },
-								{
-									value: 'america/mexico_City',
-									label: 'Guadalajara, Mexico City, Monterrey',
-								},
-								{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
-								{
-									value: 'america/bogota',
-									label: 'Bogota, Lima, Quito, Rio Branco',
-								},
-								{ value: 'us/eastern', label: 'Eastern Time (US & Canada)' },
-								{ value: 'us/east-indiana', label: 'Indiana (East)' },
-								{ value: 'Canada/atlantic', label: 'Atlantic Time (Canada)' },
-								{ value: 'america/caracas', label: 'Caracas, La Paz' },
-								{ value: 'america/manaus', label: 'Manaus' },
-								{ value: 'america/Santiago', label: 'Santiago' },
-								{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
-								{ value: 'america/Sao_Paulo', label: 'Brasilia' },
-								{
-									value: 'america/argentina/buenos_Aires',
-									label: 'Buenos Aires, Georgetown',
-								},
-								{ value: 'america/godthab', label: 'Greenland' },
-								{ value: 'america/montevideo', label: 'Montevideo' },
-								{ value: 'america/Noronha', label: 'Mid-Atlantic' },
-								{ value: 'atlantic/cape_Verde', label: 'Cape Verde Is.' },
-								{ value: 'atlantic/azores', label: 'Azores' },
-								{
-									value: 'africa/casablanca',
-									label: 'Casablanca, Monrovia, Reykjavik',
-								},
-								{
-									value: 'etc/gmt',
-									label:
-										'Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London',
-								},
-								{
-									value: 'europe/amsterdam',
-									label: 'Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna',
-								},
-								{
-									value: 'europe/belgrade',
-									label: 'Belgrade, Bratislava, Budapest, Ljubljana, Prague',
-								},
-								{
-									value: 'europe/brussels',
-									label: 'Brussels, Copenhagen, Madrid, Paris',
-								},
-								{
-									value: 'europe/Sarajevo',
-									label: 'Sarajevo, Skopje, Warsaw, Zagreb',
-								},
-								{ value: 'africa/lagos', label: 'West Central Africa' },
-								{ value: 'asia/amman', label: 'Amman' },
-								{
-									value: 'europe/athens',
-									label: 'Athens, Bucharest, Istanbul',
-								},
-								{ value: 'asia/beirut', label: 'Beirut' },
-								{ value: 'africa/cairo', label: 'Cairo' },
-								{ value: 'africa/Harare', label: 'Harare, Pretoria' },
-								{
-									value: 'europe/Helsinki',
-									label: 'Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius',
-								},
-								{ value: 'asia/Jerusalem', label: 'Jerusalem' },
-								{ value: 'europe/minsk', label: 'Minsk' },
-								{ value: 'africa/Windhoek', label: 'Windhoek' },
-								{ value: 'asia/Kuwait', label: 'Kuwait, Riyadh, Baghdad' },
-								{
-									value: 'europe/moscow',
-									label: 'Moscow, St. Petersburg, Volgograd',
-								},
-								{ value: 'africa/Nairobi', label: 'Nairobi' },
-								{ value: 'asia/tbilisi', label: 'Tbilisi' },
-								{ value: 'asia/tehran', label: 'Tehran' },
-								{ value: 'asia/muscat', label: 'Abu Dhabi, Muscat' },
-								{ value: 'asia/baku', label: 'Baku' },
-								{ value: 'asia/Yerevan', label: 'Yerevan' },
-								{ value: 'asia/Kabul', label: 'Kabul' },
-								{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
-								{
-									value: 'asia/Karachi',
-									label: 'Islamabad, Karachi, Tashkent',
-								},
-								{
-									value: 'asia/calcutta',
-									label: 'Chennai, Kolkata, Mumbai, New Delhi',
-								},
-								{ value: 'asia/calcutta', label: 'Sri Jayawardenapura' },
-								{ value: 'asia/Katmandu', label: 'Kathmandu' },
-								{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
-								{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
-								{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
-								{ value: 'asia/bangkok', label: 'Bangkok, Hanoi, Jakarta' },
-								{ value: 'asia/Krasnoyarsk', label: 'Krasnoyarsk' },
-								{
-									value: 'asia/Hong_Kong',
-									label: 'Beijing, Chongqing, Hong Kong, Urumqi',
-								},
-								{
-									value: 'asia/Kuala_Lumpur',
-									label: 'Kuala Lumpur, Singapore',
-								},
-								{ value: 'asia/Irkutsk', label: 'Irkutsk, Ulaan Bataar' },
-								{ value: 'Australia/Perth', label: 'Perth' },
-								{ value: 'asia/taipei', label: 'Taipei' },
-								{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
-								{ value: 'asia/Seoul', label: 'Seoul' },
-								{ value: 'asia/Yakutsk', label: 'Yakutsk' },
-								{ value: 'Australia/adelaide', label: 'Adelaide' },
-								{ value: 'Australia/Darwin', label: 'Darwin' },
-								{ value: 'Australia/brisbane', label: 'Brisbane' },
-								{
-									value: 'Australia/canberra',
-									label: 'Canberra, Melbourne, Sydney',
-								},
-								{ value: 'Australia/Hobart', label: 'Hobart' },
-								{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
-								{ value: 'asia/Vladivostok', label: 'Vladivostok' },
-								{
-									value: 'asia/magadan',
-									label: 'Magadan, Solomon Is., New Caledonia',
-								},
-								{ value: 'pacific/auckland', label: 'Auckland, Wellington' },
-								{
-									value: 'pacific/Fiji',
-									label: 'Fiji, Kamchatka, Marshall Is.',
-								},
-								{ value: 'pacific/tongatapu', label: "Nuku'alofa" },
-							],
-						},
-					},
-					address: { label: 'Address', type: 'address', isRequired: true },
-					dateDeleted: { type: 'number' },
-					slug: { type: 'text', isRequired: false },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'create-organization',
+			emitPayloadSchema: {
+				id: 'createOrganizationTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'createOrgEmitPayload',
+								fields: {
+									name: { label: 'Name', type: 'text', isRequired: true },
+									slug: { type: 'text', isRequired: false },
+									dateDeleted: { type: 'number' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'createOrgResponsePayload',
 				fields: {
@@ -770,17 +861,64 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'createOrgEmitPayload',
-				fields: {
-					name: { label: 'Name', type: 'text', isRequired: true },
-					slug: { type: 'text', isRequired: false },
-					dateDeleted: { type: 'number' },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'create-role',
+			emitPayloadSchema: {
+				id: 'createRoleTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'createRoleEmitPayload',
+								fields: {
+									name: { label: 'Name', type: 'text', isRequired: true },
+									base: {
+										label: 'Base',
+										type: 'select',
+										hint:
+											'Used to determine the default permissions when this role is created and the fallback for when a permission is not set on this role.',
+										options: {
+											choices: [
+												{ label: 'Owner', value: 'owner' },
+												{ label: 'Group manager', value: 'groupManager' },
+												{ label: 'Manager', value: 'manager' },
+												{ label: 'Teammate', value: 'teammate' },
+												{ label: 'Guest', value: 'guest' },
+												{ label: 'Anonymous', value: 'anonymous' },
+											],
+										},
+									},
+									description: { label: 'Description', type: 'text' },
+									dateDeleted: { type: 'number' },
+									isPublic: {
+										label: 'Public',
+										type: 'boolean',
+										hint:
+											'Should I let people that are not part of this organization this role?',
+									},
+								},
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'createRoleResponsePayload',
 				fields: {
@@ -830,39 +968,38 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'createRoleEmitPayload',
-				fields: {
-					name: { label: 'Name', type: 'text', isRequired: true },
-					base: {
-						label: 'Base',
-						type: 'select',
-						hint:
-							'Used to determine the default permissions when this role is created and the fallback for when a permission is not set on this role.',
-						options: {
-							choices: [
-								{ label: 'Owner', value: 'owner' },
-								{ label: 'Group manager', value: 'groupManager' },
-								{ label: 'Manager', value: 'manager' },
-								{ label: 'Teammate', value: 'teammate' },
-								{ label: 'Guest', value: 'guest' },
-								{ label: 'Anonymous', value: 'anonymous' },
-							],
-						},
-					},
-					description: { label: 'Description', type: 'text' },
-					dateDeleted: { type: 'number' },
-					isPublic: {
-						label: 'Public',
-						type: 'boolean',
-						hint:
-							'Should I let people that are not part of this organization this role?',
-					},
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'delete-location',
+			emitPayloadSchema: {
+				id: 'deleteLocationTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'deleteLocationEmitPayload',
+								fields: { id: { type: 'id', isRequired: true } },
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'deleteLocationResponsePayload',
 				fields: {
@@ -926,10 +1063,7 @@ export const testEventContract = buildEventContract({
 													value: 'us/mountain',
 													label: 'Mountain Time (US & Canada)',
 												},
-												{
-													value: 'america/managua',
-													label: 'Central America',
-												},
+												{ value: 'america/managua', label: 'Central America' },
 												{
 													value: 'us/central',
 													label: 'Central Time (US & Canada)',
@@ -938,10 +1072,7 @@ export const testEventContract = buildEventContract({
 													value: 'america/mexico_City',
 													label: 'Guadalajara, Mexico City, Monterrey',
 												},
-												{
-													value: 'Canada/Saskatchewan',
-													label: 'Saskatchewan',
-												},
+												{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
 												{
 													value: 'america/bogota',
 													label: 'Bogota, Lima, Quito, Rio Branco',
@@ -955,16 +1086,10 @@ export const testEventContract = buildEventContract({
 													value: 'Canada/atlantic',
 													label: 'Atlantic Time (Canada)',
 												},
-												{
-													value: 'america/caracas',
-													label: 'Caracas, La Paz',
-												},
+												{ value: 'america/caracas', label: 'Caracas, La Paz' },
 												{ value: 'america/manaus', label: 'Manaus' },
 												{ value: 'america/Santiago', label: 'Santiago' },
-												{
-													value: 'Canada/Newfoundland',
-													label: 'Newfoundland',
-												},
+												{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
 												{ value: 'america/Sao_Paulo', label: 'Brasilia' },
 												{
 													value: 'america/argentina/buenos_Aires',
@@ -1005,10 +1130,7 @@ export const testEventContract = buildEventContract({
 													value: 'europe/Sarajevo',
 													label: 'Sarajevo, Skopje, Warsaw, Zagreb',
 												},
-												{
-													value: 'africa/lagos',
-													label: 'West Central Africa',
-												},
+												{ value: 'africa/lagos', label: 'West Central Africa' },
 												{ value: 'asia/amman', label: 'Amman' },
 												{
 													value: 'europe/athens',
@@ -1040,10 +1162,7 @@ export const testEventContract = buildEventContract({
 												{ value: 'asia/baku', label: 'Baku' },
 												{ value: 'asia/Yerevan', label: 'Yerevan' },
 												{ value: 'asia/Kabul', label: 'Kabul' },
-												{
-													value: 'asia/Yekaterinburg',
-													label: 'Yekaterinburg',
-												},
+												{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
 												{
 													value: 'asia/Karachi',
 													label: 'Islamabad, Karachi, Tashkent',
@@ -1057,10 +1176,7 @@ export const testEventContract = buildEventContract({
 													label: 'Sri Jayawardenapura',
 												},
 												{ value: 'asia/Katmandu', label: 'Kathmandu' },
-												{
-													value: 'asia/almaty',
-													label: 'Almaty, Novosibirsk',
-												},
+												{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
 												{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
 												{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
 												{
@@ -1082,10 +1198,7 @@ export const testEventContract = buildEventContract({
 												},
 												{ value: 'Australia/Perth', label: 'Perth' },
 												{ value: 'asia/taipei', label: 'Taipei' },
-												{
-													value: 'asia/tokyo',
-													label: 'Osaka, Sapporo, Tokyo',
-												},
+												{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
 												{ value: 'asia/Seoul', label: 'Seoul' },
 												{ value: 'asia/Yakutsk', label: 'Yakutsk' },
 												{ value: 'Australia/adelaide', label: 'Adelaide' },
@@ -1096,10 +1209,7 @@ export const testEventContract = buildEventContract({
 													label: 'Canberra, Melbourne, Sydney',
 												},
 												{ value: 'Australia/Hobart', label: 'Hobart' },
-												{
-													value: 'pacific/guam',
-													label: 'Guam, Port Moresby',
-												},
+												{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
 												{ value: 'asia/Vladivostok', label: 'Vladivostok' },
 												{
 													value: 'asia/magadan',
@@ -1131,13 +1241,28 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'deleteLocationEmitPayload',
-				fields: { id: { type: 'id', isRequired: true } },
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'delete-organization',
+			emitPayloadSchema: {
+				id: 'deleteOrganizationTargetAndPayload',
+				fields: {
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'deleteOrgResponsePayload',
 				fields: {
@@ -1167,6 +1292,38 @@ export const testEventContract = buildEventContract({
 		},
 		{
 			eventNameWithOptionalNamespace: 'delete-role',
+			emitPayloadSchema: {
+				id: 'deleteRoleTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'deleteRoleEmitPayload',
+								fields: {
+									id: { type: 'id', isRequired: true },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'deleteRoleResponsePayload',
 				fields: {
@@ -1216,20 +1373,53 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
+		},
+		{
+			eventNameWithOptionalNamespace: 'get-event-contracts',
 			emitPayloadSchema: {
-				id: 'deleteRoleEmitPayload',
+				id: 'getEventContractsTargetAndPayload',
 				fields: {
-					id: { type: 'id', isRequired: true },
-					organizationId: { type: 'id' },
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: { id: 'getEventContractsEmitPayload', fields: {} },
+						},
+					},
 				},
 			},
 		},
 		{
-			eventNameWithOptionalNamespace: 'get-event-contracts',
-			emitPayloadSchema: { id: 'getEventContractsEmitPayload', fields: {} },
-		},
-		{
 			eventNameWithOptionalNamespace: 'get-location',
+			emitPayloadSchema: {
+				id: 'getLocationTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'getLocationEmitPayload',
+								fields: { id: { type: 'id', isRequired: true } },
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'getLocationResponsePayload',
 				fields: {
@@ -1293,10 +1483,7 @@ export const testEventContract = buildEventContract({
 													value: 'us/mountain',
 													label: 'Mountain Time (US & Canada)',
 												},
-												{
-													value: 'america/managua',
-													label: 'Central America',
-												},
+												{ value: 'america/managua', label: 'Central America' },
 												{
 													value: 'us/central',
 													label: 'Central Time (US & Canada)',
@@ -1305,10 +1492,7 @@ export const testEventContract = buildEventContract({
 													value: 'america/mexico_City',
 													label: 'Guadalajara, Mexico City, Monterrey',
 												},
-												{
-													value: 'Canada/Saskatchewan',
-													label: 'Saskatchewan',
-												},
+												{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
 												{
 													value: 'america/bogota',
 													label: 'Bogota, Lima, Quito, Rio Branco',
@@ -1322,16 +1506,10 @@ export const testEventContract = buildEventContract({
 													value: 'Canada/atlantic',
 													label: 'Atlantic Time (Canada)',
 												},
-												{
-													value: 'america/caracas',
-													label: 'Caracas, La Paz',
-												},
+												{ value: 'america/caracas', label: 'Caracas, La Paz' },
 												{ value: 'america/manaus', label: 'Manaus' },
 												{ value: 'america/Santiago', label: 'Santiago' },
-												{
-													value: 'Canada/Newfoundland',
-													label: 'Newfoundland',
-												},
+												{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
 												{ value: 'america/Sao_Paulo', label: 'Brasilia' },
 												{
 													value: 'america/argentina/buenos_Aires',
@@ -1372,10 +1550,7 @@ export const testEventContract = buildEventContract({
 													value: 'europe/Sarajevo',
 													label: 'Sarajevo, Skopje, Warsaw, Zagreb',
 												},
-												{
-													value: 'africa/lagos',
-													label: 'West Central Africa',
-												},
+												{ value: 'africa/lagos', label: 'West Central Africa' },
 												{ value: 'asia/amman', label: 'Amman' },
 												{
 													value: 'europe/athens',
@@ -1407,10 +1582,7 @@ export const testEventContract = buildEventContract({
 												{ value: 'asia/baku', label: 'Baku' },
 												{ value: 'asia/Yerevan', label: 'Yerevan' },
 												{ value: 'asia/Kabul', label: 'Kabul' },
-												{
-													value: 'asia/Yekaterinburg',
-													label: 'Yekaterinburg',
-												},
+												{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
 												{
 													value: 'asia/Karachi',
 													label: 'Islamabad, Karachi, Tashkent',
@@ -1424,10 +1596,7 @@ export const testEventContract = buildEventContract({
 													label: 'Sri Jayawardenapura',
 												},
 												{ value: 'asia/Katmandu', label: 'Kathmandu' },
-												{
-													value: 'asia/almaty',
-													label: 'Almaty, Novosibirsk',
-												},
+												{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
 												{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
 												{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
 												{
@@ -1449,10 +1618,7 @@ export const testEventContract = buildEventContract({
 												},
 												{ value: 'Australia/Perth', label: 'Perth' },
 												{ value: 'asia/taipei', label: 'Taipei' },
-												{
-													value: 'asia/tokyo',
-													label: 'Osaka, Sapporo, Tokyo',
-												},
+												{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
 												{ value: 'asia/Seoul', label: 'Seoul' },
 												{ value: 'asia/Yakutsk', label: 'Yakutsk' },
 												{ value: 'Australia/adelaide', label: 'Adelaide' },
@@ -1463,10 +1629,7 @@ export const testEventContract = buildEventContract({
 													label: 'Canberra, Melbourne, Sydney',
 												},
 												{ value: 'Australia/Hobart', label: 'Hobart' },
-												{
-													value: 'pacific/guam',
-													label: 'Guam, Port Moresby',
-												},
+												{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
 												{ value: 'asia/Vladivostok', label: 'Vladivostok' },
 												{
 													value: 'asia/magadan',
@@ -1498,13 +1661,28 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'getLocationEmitPayload',
-				fields: { id: { type: 'id', isRequired: true } },
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'get-organization',
+			emitPayloadSchema: {
+				id: 'getOrganizationTargetAndPayload',
+				fields: {
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'getOrgResponsePayload',
 				fields: {
@@ -1534,6 +1712,35 @@ export const testEventContract = buildEventContract({
 		},
 		{
 			eventNameWithOptionalNamespace: 'get-role',
+			emitPayloadSchema: {
+				id: 'getRoleTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'getRoleEmitPayload',
+								fields: { id: { type: 'id', isRequired: true } },
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'getRoleResponsePayload',
 				fields: {
@@ -1583,14 +1790,10 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'getRoleEmitPayload',
-				fields: { id: { type: 'id', isRequired: true } },
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'health',
-			responsePayloadSchema: {
+			responsePayloadSchema: buildSchema({
 				id: 'healthResponsePayload',
 				fields: {
 					skill: {
@@ -1626,21 +1829,72 @@ export const testEventContract = buildEventContract({
 						},
 					},
 				},
-			},
+			}),
 		},
 		{
 			eventNameWithOptionalNamespace: 'install-skill',
-			responsePayloadSchema: {
-				id: 'installSkillResponsePayload',
-				fields: {},
-			},
 			emitPayloadSchema: {
-				id: 'installSkillEmitPayload',
-				fields: { skillId: { type: 'id', isRequired: true } },
+				id: 'installSkillTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'installSkillEmitPayload',
+								fields: { skillId: { type: 'id', isRequired: true } },
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
 			},
+			responsePayloadSchema: { id: 'installSkillResponsePayload', fields: {} },
 		},
 		{
 			eventNameWithOptionalNamespace: 'list-locations',
+			emitPayloadSchema: {
+				id: 'listLocationsTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'listLocationsEmitPayload',
+								fields: { includePrivateLocations: { type: 'boolean' } },
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'listLocationsResponsePayload',
 				fields: {
@@ -1705,10 +1959,7 @@ export const testEventContract = buildEventContract({
 													value: 'us/mountain',
 													label: 'Mountain Time (US & Canada)',
 												},
-												{
-													value: 'america/managua',
-													label: 'Central America',
-												},
+												{ value: 'america/managua', label: 'Central America' },
 												{
 													value: 'us/central',
 													label: 'Central Time (US & Canada)',
@@ -1717,10 +1968,7 @@ export const testEventContract = buildEventContract({
 													value: 'america/mexico_City',
 													label: 'Guadalajara, Mexico City, Monterrey',
 												},
-												{
-													value: 'Canada/Saskatchewan',
-													label: 'Saskatchewan',
-												},
+												{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
 												{
 													value: 'america/bogota',
 													label: 'Bogota, Lima, Quito, Rio Branco',
@@ -1734,16 +1982,10 @@ export const testEventContract = buildEventContract({
 													value: 'Canada/atlantic',
 													label: 'Atlantic Time (Canada)',
 												},
-												{
-													value: 'america/caracas',
-													label: 'Caracas, La Paz',
-												},
+												{ value: 'america/caracas', label: 'Caracas, La Paz' },
 												{ value: 'america/manaus', label: 'Manaus' },
 												{ value: 'america/Santiago', label: 'Santiago' },
-												{
-													value: 'Canada/Newfoundland',
-													label: 'Newfoundland',
-												},
+												{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
 												{ value: 'america/Sao_Paulo', label: 'Brasilia' },
 												{
 													value: 'america/argentina/buenos_Aires',
@@ -1784,10 +2026,7 @@ export const testEventContract = buildEventContract({
 													value: 'europe/Sarajevo',
 													label: 'Sarajevo, Skopje, Warsaw, Zagreb',
 												},
-												{
-													value: 'africa/lagos',
-													label: 'West Central Africa',
-												},
+												{ value: 'africa/lagos', label: 'West Central Africa' },
 												{ value: 'asia/amman', label: 'Amman' },
 												{
 													value: 'europe/athens',
@@ -1819,10 +2058,7 @@ export const testEventContract = buildEventContract({
 												{ value: 'asia/baku', label: 'Baku' },
 												{ value: 'asia/Yerevan', label: 'Yerevan' },
 												{ value: 'asia/Kabul', label: 'Kabul' },
-												{
-													value: 'asia/Yekaterinburg',
-													label: 'Yekaterinburg',
-												},
+												{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
 												{
 													value: 'asia/Karachi',
 													label: 'Islamabad, Karachi, Tashkent',
@@ -1836,10 +2072,7 @@ export const testEventContract = buildEventContract({
 													label: 'Sri Jayawardenapura',
 												},
 												{ value: 'asia/Katmandu', label: 'Kathmandu' },
-												{
-													value: 'asia/almaty',
-													label: 'Almaty, Novosibirsk',
-												},
+												{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
 												{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
 												{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
 												{
@@ -1861,10 +2094,7 @@ export const testEventContract = buildEventContract({
 												},
 												{ value: 'Australia/Perth', label: 'Perth' },
 												{ value: 'asia/taipei', label: 'Taipei' },
-												{
-													value: 'asia/tokyo',
-													label: 'Osaka, Sapporo, Tokyo',
-												},
+												{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
 												{ value: 'asia/Seoul', label: 'Seoul' },
 												{ value: 'asia/Yakutsk', label: 'Yakutsk' },
 												{ value: 'Australia/adelaide', label: 'Adelaide' },
@@ -1875,10 +2105,7 @@ export const testEventContract = buildEventContract({
 													label: 'Canberra, Melbourne, Sydney',
 												},
 												{ value: 'Australia/Hobart', label: 'Hobart' },
-												{
-													value: 'pacific/guam',
-													label: 'Guam, Port Moresby',
-												},
+												{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
 												{ value: 'asia/Vladivostok', label: 'Vladivostok' },
 												{
 													value: 'asia/magadan',
@@ -1910,13 +2137,19 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'listLocationsEmitPayload',
-				fields: { includePrivateLocations: { type: 'boolean' } },
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'list-organizations',
+			emitPayloadSchema: {
+				id: 'listOrganizationsTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: { schema: { id: 'listOrgs', fields: {} } },
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'listOrgsResponsePayload',
 				fields: {
@@ -1944,10 +2177,38 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: { id: 'listOrgs', fields: {} },
 		},
 		{
 			eventNameWithOptionalNamespace: 'list-roles',
+			emitPayloadSchema: {
+				id: 'listRolesTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'listRolesEmitPayload',
+								fields: { includePrivateRoles: { type: 'boolean' } },
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'listRolesResponsePayload',
 				fields: {
@@ -1998,439 +2259,509 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'listRolesEmitPayload',
-				fields: { includePrivateRoles: { type: 'boolean' } },
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'register-events',
-			responsePayloadSchema: {
-				id: 'registerEventsResponsePayload',
-				fields: {},
-			},
 			emitPayloadSchema: {
-				id: 'registerEventsEmitPayload',
+				id: 'registerEventsTargetAndPayload',
 				fields: {
-					contract: {
+					payload: {
 						type: 'schema',
 						isRequired: true,
 						options: {
 							schema: {
-								id: 'eventContract',
-								version: 'v2020_09_01',
-								namespace: 'MercuryTypes',
-								name: 'Event contract',
+								id: 'registerEventsEmitPayload',
 								fields: {
-									eventSignatures: {
+									contract: {
 										type: 'schema',
 										isRequired: true,
-										isArray: true,
 										options: {
 											schema: {
-												id: 'eventSignature',
+												id: 'eventContract',
 												version: 'v2020_09_01',
 												namespace: 'MercuryTypes',
-												name: 'Event Signature',
+												name: 'Event contract',
 												fields: {
-													eventNameWithOptionalNamespace: {
-														type: 'text',
-														isRequired: true,
-													},
-													responsePayloadSchema: {
-														type: 'raw',
-														options: { valueType: 'SpruceSchema.ISchema' },
-													},
-													emitPayloadSchema: {
-														type: 'raw',
-														options: { valueType: 'SpruceSchema.ISchema' },
-													},
-													listenPermissionContract: {
+													eventSignatures: {
 														type: 'schema',
+														isRequired: true,
+														isArray: true,
 														options: {
 															schema: {
-																id: 'permissionContract',
+																id: 'eventSignature',
 																version: 'v2020_09_01',
 																namespace: 'MercuryTypes',
-																name: 'Permission contract',
+																name: 'Event Signature',
 																fields: {
-																	id: { type: 'text', isRequired: true },
-																	name: {
-																		label: 'Name',
+																	eventNameWithOptionalNamespace: {
 																		type: 'text',
 																		isRequired: true,
-																		hint:
-																			'Human readable name for this contract',
 																	},
-																	description: {
-																		label: 'Description',
-																		type: 'text',
+																	responsePayloadSchema: {
+																		type: 'raw',
+																		options: {
+																			valueType: 'SpruceSchema.ISchema',
+																		},
 																	},
-																	requireAllPermissions: {
-																		label: 'Require all permissions',
-																		type: 'boolean',
-																		defaultValue: false,
+																	emitPayloadSchema: {
+																		type: 'raw',
+																		options: {
+																			valueType: 'SpruceSchema.ISchema',
+																		},
 																	},
-																	permissions: {
+																	listenPermissionContract: {
 																		type: 'schema',
-																		isRequired: true,
-																		isArray: true,
 																		options: {
 																			schema: {
-																				id: 'permission',
+																				id: 'permissionContract',
 																				version: 'v2020_09_01',
 																				namespace: 'MercuryTypes',
-																				name: 'Permission',
+																				name: 'Permission contract',
 																				fields: {
 																					id: {
-																						label: 'id',
 																						type: 'text',
 																						isRequired: true,
-																						hint:
-																							'Hyphen separated di for this permission, e.g. can-unlock-doors',
 																					},
 																					name: {
 																						label: 'Name',
 																						type: 'text',
 																						isRequired: true,
 																						hint:
-																							'Human readable name for this permission',
+																							'Human readable name for this contract',
 																					},
 																					description: {
 																						label: 'Description',
 																						type: 'text',
 																					},
-																					requireAllStatuses: {
-																						label: 'Require all statuses',
+																					requireAllPermissions: {
+																						label: 'Require all permissions',
 																						type: 'boolean',
 																						defaultValue: false,
 																					},
-																					defaultsByRoleBase: {
+																					permissions: {
 																						type: 'schema',
+																						isRequired: true,
+																						isArray: true,
 																						options: {
 																							schema: {
-																								id: 'defaultsByRole',
+																								id: 'permission',
 																								version: 'v2020_09_01',
 																								namespace: 'MercuryTypes',
-																								name: '',
+																								name: 'Permission',
 																								fields: {
-																									owner: {
-																										label: 'Owner',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									groupManager: {
-																										label: 'Group manager',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									manager: {
-																										label: 'Manager',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									teammate: {
-																										label: 'Teammate',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									guest: {
-																										label: 'Guest',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									anonymous: {
-																										label: 'Anonymous',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																								},
-																							},
-																						},
-																					},
-																					can: {
-																						type: 'schema',
-																						options: {
-																							schema: {
-																								id: 'statusFlags',
-																								version: 'v2020_09_01',
-																								namespace: 'MercuryTypes',
-																								name: '',
-																								fields: {
-																									default: {
-																										type: 'boolean',
+																									id: {
+																										label: 'id',
+																										type: 'text',
+																										isRequired: true,
 																										hint:
-																											'What is the fallback if no status is set?',
+																											'Hyphen separated di for this permission, e.g. can-unlock-doors',
 																									},
-																									clockedIn: {
-																										label: 'Clocked in',
-																										type: 'boolean',
+																									name: {
+																										label: 'Name',
+																										type: 'text',
+																										isRequired: true,
 																										hint:
-																											'Is the person clocked in and ready to rock?',
+																											'Human readable name for this permission',
 																									},
-																									clockedOut: {
-																										label: 'Clocked out',
-																										type: 'boolean',
-																										hint:
-																											'When someone is not working (off the clock).',
+																									description: {
+																										label: 'Description',
+																										type: 'text',
 																									},
-																									onPrem: {
-																										label: 'On premise',
+																									requireAllStatuses: {
+																										label:
+																											'Require all statuses',
 																										type: 'boolean',
-																										hint:
-																											'Are they at work (maybe working, maybe visiting).',
+																										defaultValue: false,
 																									},
-																									offPrem: {
-																										label: 'Off premise',
-																										type: 'boolean',
-																										hint:
-																											"They aren't at the office or shop.",
+																									defaultsByRoleBase: {
+																										type: 'schema',
+																										options: {
+																											schema: {
+																												id: 'defaultsByRole',
+																												version: 'v2020_09_01',
+																												namespace:
+																													'MercuryTypes',
+																												name: '',
+																												fields: {
+																													owner: {
+																														label: 'Owner',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													groupManager: {
+																														label:
+																															'Group manager',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													manager: {
+																														label: 'Manager',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													teammate: {
+																														label: 'Teammate',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													guest: {
+																														label: 'Guest',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													anonymous: {
+																														label: 'Anonymous',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																												},
+																											},
+																										},
+																									},
+																									can: {
+																										type: 'schema',
+																										options: {
+																											schema: {
+																												id: 'statusFlags',
+																												version: 'v2020_09_01',
+																												namespace:
+																													'MercuryTypes',
+																												name: '',
+																												fields: {
+																													default: {
+																														type: 'boolean',
+																														hint:
+																															'What is the fallback if no status is set?',
+																													},
+																													clockedIn: {
+																														label: 'Clocked in',
+																														type: 'boolean',
+																														hint:
+																															'Is the person clocked in and ready to rock?',
+																													},
+																													clockedOut: {
+																														label:
+																															'Clocked out',
+																														type: 'boolean',
+																														hint:
+																															'When someone is not working (off the clock).',
+																													},
+																													onPrem: {
+																														label: 'On premise',
+																														type: 'boolean',
+																														hint:
+																															'Are they at work (maybe working, maybe visiting).',
+																													},
+																													offPrem: {
+																														label:
+																															'Off premise',
+																														type: 'boolean',
+																														hint:
+																															"They aren't at the office or shop.",
+																													},
+																												},
+																											},
+																										},
 																									},
 																								},
 																							},
@@ -2440,396 +2771,459 @@ export const testEventContract = buildEventContract({
 																			},
 																		},
 																	},
-																},
-															},
-														},
-													},
-													emitPermissionContract: {
-														type: 'schema',
-														options: {
-															schema: {
-																id: 'permissionContract',
-																version: 'v2020_09_01',
-																namespace: 'MercuryTypes',
-																name: 'Permission contract',
-																fields: {
-																	id: { type: 'text', isRequired: true },
-																	name: {
-																		label: 'Name',
-																		type: 'text',
-																		isRequired: true,
-																		hint:
-																			'Human readable name for this contract',
-																	},
-																	description: {
-																		label: 'Description',
-																		type: 'text',
-																	},
-																	requireAllPermissions: {
-																		label: 'Require all permissions',
-																		type: 'boolean',
-																		defaultValue: false,
-																	},
-																	permissions: {
+																	emitPermissionContract: {
 																		type: 'schema',
-																		isRequired: true,
-																		isArray: true,
 																		options: {
 																			schema: {
-																				id: 'permission',
+																				id: 'permissionContract',
 																				version: 'v2020_09_01',
 																				namespace: 'MercuryTypes',
-																				name: 'Permission',
+																				name: 'Permission contract',
 																				fields: {
 																					id: {
-																						label: 'id',
 																						type: 'text',
 																						isRequired: true,
-																						hint:
-																							'Hyphen separated di for this permission, e.g. can-unlock-doors',
 																					},
 																					name: {
 																						label: 'Name',
 																						type: 'text',
 																						isRequired: true,
 																						hint:
-																							'Human readable name for this permission',
+																							'Human readable name for this contract',
 																					},
 																					description: {
 																						label: 'Description',
 																						type: 'text',
 																					},
-																					requireAllStatuses: {
-																						label: 'Require all statuses',
+																					requireAllPermissions: {
+																						label: 'Require all permissions',
 																						type: 'boolean',
 																						defaultValue: false,
 																					},
-																					defaultsByRoleBase: {
+																					permissions: {
 																						type: 'schema',
+																						isRequired: true,
+																						isArray: true,
 																						options: {
 																							schema: {
-																								id: 'defaultsByRole',
+																								id: 'permission',
 																								version: 'v2020_09_01',
 																								namespace: 'MercuryTypes',
-																								name: '',
+																								name: 'Permission',
 																								fields: {
-																									owner: {
-																										label: 'Owner',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									groupManager: {
-																										label: 'Group manager',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									manager: {
-																										label: 'Manager',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									teammate: {
-																										label: 'Teammate',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									guest: {
-																										label: 'Guest',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																									anonymous: {
-																										label: 'Anonymous',
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																								},
-																							},
-																						},
-																					},
-																					can: {
-																						type: 'schema',
-																						options: {
-																							schema: {
-																								id: 'statusFlags',
-																								version: 'v2020_09_01',
-																								namespace: 'MercuryTypes',
-																								name: '',
-																								fields: {
-																									default: {
-																										type: 'boolean',
+																									id: {
+																										label: 'id',
+																										type: 'text',
+																										isRequired: true,
 																										hint:
-																											'What is the fallback if no status is set?',
+																											'Hyphen separated di for this permission, e.g. can-unlock-doors',
 																									},
-																									clockedIn: {
-																										label: 'Clocked in',
-																										type: 'boolean',
+																									name: {
+																										label: 'Name',
+																										type: 'text',
+																										isRequired: true,
 																										hint:
-																											'Is the person clocked in and ready to rock?',
+																											'Human readable name for this permission',
 																									},
-																									clockedOut: {
-																										label: 'Clocked out',
-																										type: 'boolean',
-																										hint:
-																											'When someone is not working (off the clock).',
+																									description: {
+																										label: 'Description',
+																										type: 'text',
 																									},
-																									onPrem: {
-																										label: 'On premise',
+																									requireAllStatuses: {
+																										label:
+																											'Require all statuses',
 																										type: 'boolean',
-																										hint:
-																											'Are they at work (maybe working, maybe visiting).',
+																										defaultValue: false,
 																									},
-																									offPrem: {
-																										label: 'Off premise',
-																										type: 'boolean',
-																										hint:
-																											"They aren't at the office or shop.",
+																									defaultsByRoleBase: {
+																										type: 'schema',
+																										options: {
+																											schema: {
+																												id: 'defaultsByRole',
+																												version: 'v2020_09_01',
+																												namespace:
+																													'MercuryTypes',
+																												name: '',
+																												fields: {
+																													owner: {
+																														label: 'Owner',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													groupManager: {
+																														label:
+																															'Group manager',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													manager: {
+																														label: 'Manager',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													teammate: {
+																														label: 'Teammate',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													guest: {
+																														label: 'Guest',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																													anonymous: {
+																														label: 'Anonymous',
+																														type: 'schema',
+																														options: {
+																															schema: {
+																																id:
+																																	'statusFlags',
+																																version:
+																																	'v2020_09_01',
+																																namespace:
+																																	'MercuryTypes',
+																																name: '',
+																																fields: {
+																																	default: {
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'What is the fallback if no status is set?',
+																																	},
+																																	clockedIn: {
+																																		label:
+																																			'Clocked in',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Is the person clocked in and ready to rock?',
+																																	},
+																																	clockedOut: {
+																																		label:
+																																			'Clocked out',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'When someone is not working (off the clock).',
+																																	},
+																																	onPrem: {
+																																		label:
+																																			'On premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			'Are they at work (maybe working, maybe visiting).',
+																																	},
+																																	offPrem: {
+																																		label:
+																																			'Off premise',
+																																		type:
+																																			'boolean',
+																																		hint:
+																																			"They aren't at the office or shop.",
+																																	},
+																																},
+																															},
+																														},
+																													},
+																												},
+																											},
+																										},
+																									},
+																									can: {
+																										type: 'schema',
+																										options: {
+																											schema: {
+																												id: 'statusFlags',
+																												version: 'v2020_09_01',
+																												namespace:
+																													'MercuryTypes',
+																												name: '',
+																												fields: {
+																													default: {
+																														type: 'boolean',
+																														hint:
+																															'What is the fallback if no status is set?',
+																													},
+																													clockedIn: {
+																														label: 'Clocked in',
+																														type: 'boolean',
+																														hint:
+																															'Is the person clocked in and ready to rock?',
+																													},
+																													clockedOut: {
+																														label:
+																															'Clocked out',
+																														type: 'boolean',
+																														hint:
+																															'When someone is not working (off the clock).',
+																													},
+																													onPrem: {
+																														label: 'On premise',
+																														type: 'boolean',
+																														hint:
+																															'Are they at work (maybe working, maybe visiting).',
+																													},
+																													offPrem: {
+																														label:
+																															'Off premise',
+																														type: 'boolean',
+																														hint:
+																															"They aren't at the office or shop.",
+																													},
+																												},
+																											},
+																										},
 																									},
 																								},
 																							},
@@ -2853,22 +3247,56 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
+			responsePayloadSchema: {
+				id: 'registerEventsResponsePayload',
+				fields: {},
+			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'register-listeners',
 			emitPayloadSchema: {
-				id: 'registerListenersEmitPayload',
+				id: 'registerListenersTargetAndPayload',
 				fields: {
-					eventNamesWithOptionalNamespace: {
-						type: 'text',
+					payload: {
+						type: 'schema',
 						isRequired: true,
-						isArray: true,
+						options: {
+							schema: {
+								id: 'registerListenersEmitPayload',
+								fields: {
+									eventNamesWithOptionalNamespace: {
+										type: 'text',
+										isRequired: true,
+										isArray: true,
+									},
+								},
+							},
+						},
 					},
 				},
 			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'register-skill',
+			emitPayloadSchema: {
+				id: 'registerSkillTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'registerSkillEmitPayload',
+								fields: {
+									name: { label: 'Name', type: 'text', isRequired: true },
+									description: { label: 'Description', type: 'text' },
+									slug: { label: 'Slug', type: 'text', isRequired: false },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'registerSkillResponsePayload',
 				fields: {
@@ -2922,64 +3350,371 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'registerSkillEmitPayload',
-				fields: {
-					name: { label: 'Name', type: 'text', isRequired: true },
-					description: { label: 'Description', type: 'text' },
-					slug: { label: 'Slug', type: 'text', isRequired: false },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'request-pin',
+			emitPayloadSchema: {
+				id: 'requestPinTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'requestPinEmitPayload',
+								fields: { phone: { type: 'phone', isRequired: true } },
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'requestPinResponsePayload',
 				fields: { challenge: { type: 'text', isRequired: true } },
 			},
-			emitPayloadSchema: {
-				id: 'requestPinEmitPayload',
-				fields: { phone: { type: 'phone', isRequired: true } },
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'scramble-account',
+			emitPayloadSchema: {
+				id: 'scrambleAccountTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: { id: 'scrambleAccountEmitPayload', fields: {} },
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'scrambleAccountResponsePayload',
 				fields: {},
 			},
-			emitPayloadSchema: { id: 'scrambleAccountEmitPayload', fields: {} },
 		},
 		{
 			eventNameWithOptionalNamespace: 'un-register-events',
+			emitPayloadSchema: {
+				id: 'unRegisterEventsTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'unRegisterEventsEmitPayload',
+								fields: {
+									eventNamesWithOptionalNamespace: {
+										type: 'text',
+										isRequired: true,
+										isArray: true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'unRegisterEventsResponsePayload',
 				fields: {},
 			},
-			emitPayloadSchema: {
-				id: 'unRegisterEventsEmitPayload',
-				fields: {
-					eventNamesWithOptionalNamespace: {
-						type: 'text',
-						isRequired: true,
-						isArray: true,
-					},
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'uninstall-skill',
+			emitPayloadSchema: {
+				id: 'uninstallSkillTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'unInstallSkillEmitPayload',
+								fields: { skillId: { type: 'id', isRequired: true } },
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'unInstallSkillResponsePayload',
 				fields: {},
 			},
-			emitPayloadSchema: {
-				id: 'unInstallSkillEmitPayload',
-				fields: { skillId: { type: 'id', isRequired: true } },
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'update-location',
+			emitPayloadSchema: {
+				id: 'updateLocationTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'updateLocationEmitPayload',
+								fields: {
+									name: { label: 'Name', type: 'text', isRequired: false },
+									num: {
+										label: 'Store number',
+										type: 'text',
+										hint:
+											'You can use other symbols, like # or dashes. #123 or 32-US-5',
+										isRequired: false,
+									},
+									slug: { label: 'Slug', type: 'text', isRequired: false },
+									isPublic: {
+										label: 'Public',
+										type: 'boolean',
+										hint: 'Is this location viewable by guests?',
+										defaultValue: false,
+										isRequired: false,
+									},
+									phone: {
+										label: 'Main Phone',
+										type: 'phone',
+										isRequired: false,
+									},
+									timezone: {
+										label: 'Timezone',
+										type: 'select',
+										options: {
+											choices: [
+												{
+													value: 'etc/gmt+12',
+													label: 'International Date Line West',
+												},
+												{
+													value: 'pacific/midway',
+													label: 'Midway Island, Samoa',
+												},
+												{ value: 'pacific/honolulu', label: 'Hawaii' },
+												{ value: 'us/alaska', label: 'Alaska' },
+												{
+													value: 'america/los_Angeles',
+													label: 'Pacific Time (US & Canada)',
+												},
+												{
+													value: 'america/tijuana',
+													label: 'Tijuana, Baja California',
+												},
+												{ value: 'us/arizona', label: 'Arizona' },
+												{
+													value: 'america/chihuahua',
+													label: 'Chihuahua, La Paz, Mazatlan',
+												},
+												{
+													value: 'us/mountain',
+													label: 'Mountain Time (US & Canada)',
+												},
+												{ value: 'america/managua', label: 'Central America' },
+												{
+													value: 'us/central',
+													label: 'Central Time (US & Canada)',
+												},
+												{
+													value: 'america/mexico_City',
+													label: 'Guadalajara, Mexico City, Monterrey',
+												},
+												{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
+												{
+													value: 'america/bogota',
+													label: 'Bogota, Lima, Quito, Rio Branco',
+												},
+												{
+													value: 'us/eastern',
+													label: 'Eastern Time (US & Canada)',
+												},
+												{ value: 'us/east-indiana', label: 'Indiana (East)' },
+												{
+													value: 'Canada/atlantic',
+													label: 'Atlantic Time (Canada)',
+												},
+												{ value: 'america/caracas', label: 'Caracas, La Paz' },
+												{ value: 'america/manaus', label: 'Manaus' },
+												{ value: 'america/Santiago', label: 'Santiago' },
+												{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
+												{ value: 'america/Sao_Paulo', label: 'Brasilia' },
+												{
+													value: 'america/argentina/buenos_Aires',
+													label: 'Buenos Aires, Georgetown',
+												},
+												{ value: 'america/godthab', label: 'Greenland' },
+												{ value: 'america/montevideo', label: 'Montevideo' },
+												{ value: 'america/Noronha', label: 'Mid-Atlantic' },
+												{
+													value: 'atlantic/cape_Verde',
+													label: 'Cape Verde Is.',
+												},
+												{ value: 'atlantic/azores', label: 'Azores' },
+												{
+													value: 'africa/casablanca',
+													label: 'Casablanca, Monrovia, Reykjavik',
+												},
+												{
+													value: 'etc/gmt',
+													label:
+														'Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London',
+												},
+												{
+													value: 'europe/amsterdam',
+													label:
+														'Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna',
+												},
+												{
+													value: 'europe/belgrade',
+													label:
+														'Belgrade, Bratislava, Budapest, Ljubljana, Prague',
+												},
+												{
+													value: 'europe/brussels',
+													label: 'Brussels, Copenhagen, Madrid, Paris',
+												},
+												{
+													value: 'europe/Sarajevo',
+													label: 'Sarajevo, Skopje, Warsaw, Zagreb',
+												},
+												{ value: 'africa/lagos', label: 'West Central Africa' },
+												{ value: 'asia/amman', label: 'Amman' },
+												{
+													value: 'europe/athens',
+													label: 'Athens, Bucharest, Istanbul',
+												},
+												{ value: 'asia/beirut', label: 'Beirut' },
+												{ value: 'africa/cairo', label: 'Cairo' },
+												{ value: 'africa/Harare', label: 'Harare, Pretoria' },
+												{
+													value: 'europe/Helsinki',
+													label:
+														'Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius',
+												},
+												{ value: 'asia/Jerusalem', label: 'Jerusalem' },
+												{ value: 'europe/minsk', label: 'Minsk' },
+												{ value: 'africa/Windhoek', label: 'Windhoek' },
+												{
+													value: 'asia/Kuwait',
+													label: 'Kuwait, Riyadh, Baghdad',
+												},
+												{
+													value: 'europe/moscow',
+													label: 'Moscow, St. Petersburg, Volgograd',
+												},
+												{ value: 'africa/Nairobi', label: 'Nairobi' },
+												{ value: 'asia/tbilisi', label: 'Tbilisi' },
+												{ value: 'asia/tehran', label: 'Tehran' },
+												{ value: 'asia/muscat', label: 'Abu Dhabi, Muscat' },
+												{ value: 'asia/baku', label: 'Baku' },
+												{ value: 'asia/Yerevan', label: 'Yerevan' },
+												{ value: 'asia/Kabul', label: 'Kabul' },
+												{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
+												{
+													value: 'asia/Karachi',
+													label: 'Islamabad, Karachi, Tashkent',
+												},
+												{
+													value: 'asia/calcutta',
+													label: 'Chennai, Kolkata, Mumbai, New Delhi',
+												},
+												{
+													value: 'asia/calcutta',
+													label: 'Sri Jayawardenapura',
+												},
+												{ value: 'asia/Katmandu', label: 'Kathmandu' },
+												{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
+												{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
+												{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
+												{
+													value: 'asia/bangkok',
+													label: 'Bangkok, Hanoi, Jakarta',
+												},
+												{ value: 'asia/Krasnoyarsk', label: 'Krasnoyarsk' },
+												{
+													value: 'asia/Hong_Kong',
+													label: 'Beijing, Chongqing, Hong Kong, Urumqi',
+												},
+												{
+													value: 'asia/Kuala_Lumpur',
+													label: 'Kuala Lumpur, Singapore',
+												},
+												{
+													value: 'asia/Irkutsk',
+													label: 'Irkutsk, Ulaan Bataar',
+												},
+												{ value: 'Australia/Perth', label: 'Perth' },
+												{ value: 'asia/taipei', label: 'Taipei' },
+												{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
+												{ value: 'asia/Seoul', label: 'Seoul' },
+												{ value: 'asia/Yakutsk', label: 'Yakutsk' },
+												{ value: 'Australia/adelaide', label: 'Adelaide' },
+												{ value: 'Australia/Darwin', label: 'Darwin' },
+												{ value: 'Australia/brisbane', label: 'Brisbane' },
+												{
+													value: 'Australia/canberra',
+													label: 'Canberra, Melbourne, Sydney',
+												},
+												{ value: 'Australia/Hobart', label: 'Hobart' },
+												{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
+												{ value: 'asia/Vladivostok', label: 'Vladivostok' },
+												{
+													value: 'asia/magadan',
+													label: 'Magadan, Solomon Is., New Caledonia',
+												},
+												{
+													value: 'pacific/auckland',
+													label: 'Auckland, Wellington',
+												},
+												{
+													value: 'pacific/Fiji',
+													label: 'Fiji, Kamchatka, Marshall Is.',
+												},
+												{ value: 'pacific/tongatapu', label: "Nuku'alofa" },
+											],
+										},
+										isRequired: false,
+									},
+									address: {
+										label: 'Address',
+										type: 'address',
+										isRequired: false,
+									},
+									dateCreated: { type: 'number', isRequired: false },
+									dateDeleted: { type: 'number', isRequired: false },
+									organizationId: { type: 'id', isRequired: false },
+									id: { type: 'id', isRequired: true },
+								},
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'updateLocationResponsePayload',
 				fields: {
@@ -3043,10 +3778,7 @@ export const testEventContract = buildEventContract({
 													value: 'us/mountain',
 													label: 'Mountain Time (US & Canada)',
 												},
-												{
-													value: 'america/managua',
-													label: 'Central America',
-												},
+												{ value: 'america/managua', label: 'Central America' },
 												{
 													value: 'us/central',
 													label: 'Central Time (US & Canada)',
@@ -3055,10 +3787,7 @@ export const testEventContract = buildEventContract({
 													value: 'america/mexico_City',
 													label: 'Guadalajara, Mexico City, Monterrey',
 												},
-												{
-													value: 'Canada/Saskatchewan',
-													label: 'Saskatchewan',
-												},
+												{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
 												{
 													value: 'america/bogota',
 													label: 'Bogota, Lima, Quito, Rio Branco',
@@ -3072,16 +3801,10 @@ export const testEventContract = buildEventContract({
 													value: 'Canada/atlantic',
 													label: 'Atlantic Time (Canada)',
 												},
-												{
-													value: 'america/caracas',
-													label: 'Caracas, La Paz',
-												},
+												{ value: 'america/caracas', label: 'Caracas, La Paz' },
 												{ value: 'america/manaus', label: 'Manaus' },
 												{ value: 'america/Santiago', label: 'Santiago' },
-												{
-													value: 'Canada/Newfoundland',
-													label: 'Newfoundland',
-												},
+												{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
 												{ value: 'america/Sao_Paulo', label: 'Brasilia' },
 												{
 													value: 'america/argentina/buenos_Aires',
@@ -3122,10 +3845,7 @@ export const testEventContract = buildEventContract({
 													value: 'europe/Sarajevo',
 													label: 'Sarajevo, Skopje, Warsaw, Zagreb',
 												},
-												{
-													value: 'africa/lagos',
-													label: 'West Central Africa',
-												},
+												{ value: 'africa/lagos', label: 'West Central Africa' },
 												{ value: 'asia/amman', label: 'Amman' },
 												{
 													value: 'europe/athens',
@@ -3157,10 +3877,7 @@ export const testEventContract = buildEventContract({
 												{ value: 'asia/baku', label: 'Baku' },
 												{ value: 'asia/Yerevan', label: 'Yerevan' },
 												{ value: 'asia/Kabul', label: 'Kabul' },
-												{
-													value: 'asia/Yekaterinburg',
-													label: 'Yekaterinburg',
-												},
+												{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
 												{
 													value: 'asia/Karachi',
 													label: 'Islamabad, Karachi, Tashkent',
@@ -3174,10 +3891,7 @@ export const testEventContract = buildEventContract({
 													label: 'Sri Jayawardenapura',
 												},
 												{ value: 'asia/Katmandu', label: 'Kathmandu' },
-												{
-													value: 'asia/almaty',
-													label: 'Almaty, Novosibirsk',
-												},
+												{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
 												{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
 												{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
 												{
@@ -3199,10 +3913,7 @@ export const testEventContract = buildEventContract({
 												},
 												{ value: 'Australia/Perth', label: 'Perth' },
 												{ value: 'asia/taipei', label: 'Taipei' },
-												{
-													value: 'asia/tokyo',
-													label: 'Osaka, Sapporo, Tokyo',
-												},
+												{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
 												{ value: 'asia/Seoul', label: 'Seoul' },
 												{ value: 'asia/Yakutsk', label: 'Yakutsk' },
 												{ value: 'Australia/adelaide', label: 'Adelaide' },
@@ -3213,10 +3924,7 @@ export const testEventContract = buildEventContract({
 													label: 'Canberra, Melbourne, Sydney',
 												},
 												{ value: 'Australia/Hobart', label: 'Hobart' },
-												{
-													value: 'pacific/guam',
-													label: 'Guam, Port Moresby',
-												},
+												{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
 												{ value: 'asia/Vladivostok', label: 'Vladivostok' },
 												{
 													value: 'asia/magadan',
@@ -3248,200 +3956,42 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'updateLocationEmitPayload',
-				fields: {
-					name: { label: 'Name', type: 'text', isRequired: false },
-					num: {
-						label: 'Store number',
-						type: 'text',
-						hint:
-							'You can use other symbols, like # or dashes. #123 or 32-US-5',
-						isRequired: false,
-					},
-					slug: { label: 'Slug', type: 'text', isRequired: false },
-					isPublic: {
-						label: 'Public',
-						type: 'boolean',
-						hint: 'Is this location viewable by guests?',
-						defaultValue: false,
-						isRequired: false,
-					},
-					phone: { label: 'Main Phone', type: 'phone', isRequired: false },
-					timezone: {
-						label: 'Timezone',
-						type: 'select',
-						options: {
-							choices: [
-								{
-									value: 'etc/gmt+12',
-									label: 'International Date Line West',
-								},
-								{ value: 'pacific/midway', label: 'Midway Island, Samoa' },
-								{ value: 'pacific/honolulu', label: 'Hawaii' },
-								{ value: 'us/alaska', label: 'Alaska' },
-								{
-									value: 'america/los_Angeles',
-									label: 'Pacific Time (US & Canada)',
-								},
-								{
-									value: 'america/tijuana',
-									label: 'Tijuana, Baja California',
-								},
-								{ value: 'us/arizona', label: 'Arizona' },
-								{
-									value: 'america/chihuahua',
-									label: 'Chihuahua, La Paz, Mazatlan',
-								},
-								{
-									value: 'us/mountain',
-									label: 'Mountain Time (US & Canada)',
-								},
-								{ value: 'america/managua', label: 'Central America' },
-								{ value: 'us/central', label: 'Central Time (US & Canada)' },
-								{
-									value: 'america/mexico_City',
-									label: 'Guadalajara, Mexico City, Monterrey',
-								},
-								{ value: 'Canada/Saskatchewan', label: 'Saskatchewan' },
-								{
-									value: 'america/bogota',
-									label: 'Bogota, Lima, Quito, Rio Branco',
-								},
-								{ value: 'us/eastern', label: 'Eastern Time (US & Canada)' },
-								{ value: 'us/east-indiana', label: 'Indiana (East)' },
-								{ value: 'Canada/atlantic', label: 'Atlantic Time (Canada)' },
-								{ value: 'america/caracas', label: 'Caracas, La Paz' },
-								{ value: 'america/manaus', label: 'Manaus' },
-								{ value: 'america/Santiago', label: 'Santiago' },
-								{ value: 'Canada/Newfoundland', label: 'Newfoundland' },
-								{ value: 'america/Sao_Paulo', label: 'Brasilia' },
-								{
-									value: 'america/argentina/buenos_Aires',
-									label: 'Buenos Aires, Georgetown',
-								},
-								{ value: 'america/godthab', label: 'Greenland' },
-								{ value: 'america/montevideo', label: 'Montevideo' },
-								{ value: 'america/Noronha', label: 'Mid-Atlantic' },
-								{ value: 'atlantic/cape_Verde', label: 'Cape Verde Is.' },
-								{ value: 'atlantic/azores', label: 'Azores' },
-								{
-									value: 'africa/casablanca',
-									label: 'Casablanca, Monrovia, Reykjavik',
-								},
-								{
-									value: 'etc/gmt',
-									label:
-										'Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London',
-								},
-								{
-									value: 'europe/amsterdam',
-									label: 'Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna',
-								},
-								{
-									value: 'europe/belgrade',
-									label: 'Belgrade, Bratislava, Budapest, Ljubljana, Prague',
-								},
-								{
-									value: 'europe/brussels',
-									label: 'Brussels, Copenhagen, Madrid, Paris',
-								},
-								{
-									value: 'europe/Sarajevo',
-									label: 'Sarajevo, Skopje, Warsaw, Zagreb',
-								},
-								{ value: 'africa/lagos', label: 'West Central Africa' },
-								{ value: 'asia/amman', label: 'Amman' },
-								{
-									value: 'europe/athens',
-									label: 'Athens, Bucharest, Istanbul',
-								},
-								{ value: 'asia/beirut', label: 'Beirut' },
-								{ value: 'africa/cairo', label: 'Cairo' },
-								{ value: 'africa/Harare', label: 'Harare, Pretoria' },
-								{
-									value: 'europe/Helsinki',
-									label: 'Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius',
-								},
-								{ value: 'asia/Jerusalem', label: 'Jerusalem' },
-								{ value: 'europe/minsk', label: 'Minsk' },
-								{ value: 'africa/Windhoek', label: 'Windhoek' },
-								{ value: 'asia/Kuwait', label: 'Kuwait, Riyadh, Baghdad' },
-								{
-									value: 'europe/moscow',
-									label: 'Moscow, St. Petersburg, Volgograd',
-								},
-								{ value: 'africa/Nairobi', label: 'Nairobi' },
-								{ value: 'asia/tbilisi', label: 'Tbilisi' },
-								{ value: 'asia/tehran', label: 'Tehran' },
-								{ value: 'asia/muscat', label: 'Abu Dhabi, Muscat' },
-								{ value: 'asia/baku', label: 'Baku' },
-								{ value: 'asia/Yerevan', label: 'Yerevan' },
-								{ value: 'asia/Kabul', label: 'Kabul' },
-								{ value: 'asia/Yekaterinburg', label: 'Yekaterinburg' },
-								{
-									value: 'asia/Karachi',
-									label: 'Islamabad, Karachi, Tashkent',
-								},
-								{
-									value: 'asia/calcutta',
-									label: 'Chennai, Kolkata, Mumbai, New Delhi',
-								},
-								{ value: 'asia/calcutta', label: 'Sri Jayawardenapura' },
-								{ value: 'asia/Katmandu', label: 'Kathmandu' },
-								{ value: 'asia/almaty', label: 'Almaty, Novosibirsk' },
-								{ value: 'asia/Dhaka', label: 'Astana, Dhaka' },
-								{ value: 'asia/Rangoon', label: 'Yangon (Rangoon)' },
-								{ value: 'asia/bangkok', label: 'Bangkok, Hanoi, Jakarta' },
-								{ value: 'asia/Krasnoyarsk', label: 'Krasnoyarsk' },
-								{
-									value: 'asia/Hong_Kong',
-									label: 'Beijing, Chongqing, Hong Kong, Urumqi',
-								},
-								{
-									value: 'asia/Kuala_Lumpur',
-									label: 'Kuala Lumpur, Singapore',
-								},
-								{ value: 'asia/Irkutsk', label: 'Irkutsk, Ulaan Bataar' },
-								{ value: 'Australia/Perth', label: 'Perth' },
-								{ value: 'asia/taipei', label: 'Taipei' },
-								{ value: 'asia/tokyo', label: 'Osaka, Sapporo, Tokyo' },
-								{ value: 'asia/Seoul', label: 'Seoul' },
-								{ value: 'asia/Yakutsk', label: 'Yakutsk' },
-								{ value: 'Australia/adelaide', label: 'Adelaide' },
-								{ value: 'Australia/Darwin', label: 'Darwin' },
-								{ value: 'Australia/brisbane', label: 'Brisbane' },
-								{
-									value: 'Australia/canberra',
-									label: 'Canberra, Melbourne, Sydney',
-								},
-								{ value: 'Australia/Hobart', label: 'Hobart' },
-								{ value: 'pacific/guam', label: 'Guam, Port Moresby' },
-								{ value: 'asia/Vladivostok', label: 'Vladivostok' },
-								{
-									value: 'asia/magadan',
-									label: 'Magadan, Solomon Is., New Caledonia',
-								},
-								{ value: 'pacific/auckland', label: 'Auckland, Wellington' },
-								{
-									value: 'pacific/Fiji',
-									label: 'Fiji, Kamchatka, Marshall Is.',
-								},
-								{ value: 'pacific/tongatapu', label: "Nuku'alofa" },
-							],
-						},
-						isRequired: false,
-					},
-					address: { label: 'Address', type: 'address', isRequired: false },
-					dateCreated: { type: 'number', isRequired: false },
-					dateDeleted: { type: 'number', isRequired: false },
-					organizationId: { type: 'id', isRequired: false },
-					id: { type: 'id', isRequired: true },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'update-organization',
+			emitPayloadSchema: {
+				id: 'updateOrganizationTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'updateOrgWithoutSlugSchema',
+								fields: {
+									name: { label: 'Name', type: 'text', isRequired: false },
+									dateCreated: { type: 'number', isRequired: false },
+									dateDeleted: { type: 'number', isRequired: false },
+								},
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'updateOrgResponsePayload',
 				fields: {
@@ -3462,17 +4012,71 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'updateOrgWithoutSlugSchema',
-				fields: {
-					name: { label: 'Name', type: 'text', isRequired: false },
-					dateCreated: { type: 'number', isRequired: false },
-					dateDeleted: { type: 'number', isRequired: false },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'update-role',
+			emitPayloadSchema: {
+				id: 'updateRoleTargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'updateRoleEmitPayload',
+								fields: {
+									name: { label: 'Name', type: 'text', isRequired: false },
+									base: {
+										label: 'Base',
+										type: 'select',
+										hint:
+											'Used to determine the default permissions when this role is created and the fallback for when a permission is not set on this role.',
+										options: {
+											choices: [
+												{ label: 'Owner', value: 'owner' },
+												{ label: 'Group manager', value: 'groupManager' },
+												{ label: 'Manager', value: 'manager' },
+												{ label: 'Teammate', value: 'teammate' },
+												{ label: 'Guest', value: 'guest' },
+												{ label: 'Anonymous', value: 'anonymous' },
+											],
+										},
+										isRequired: false,
+									},
+									description: {
+										label: 'Description',
+										type: 'text',
+										isRequired: false,
+									},
+									dateDeleted: { type: 'number', isRequired: false },
+									isPublic: {
+										label: 'Public',
+										type: 'boolean',
+										hint:
+											'Should I let people that are not part of this organization this role?',
+										isRequired: false,
+									},
+									id: { type: 'id', isRequired: true },
+								},
+							},
+						},
+					},
+					target: {
+						type: 'schema',
+						isRequired: true,
+						options: {
+							schema: {
+								id: 'eventTargetSchema',
+								fields: {
+									locationId: { type: 'id' },
+									personId: { type: 'id' },
+									organizationId: { type: 'id' },
+								},
+							},
+						},
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'updateRoleResponsePayload',
 				fields: {
@@ -3522,46 +4126,19 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: {
-				id: 'updateRoleEmitPayload',
-				fields: {
-					name: { label: 'Name', type: 'text', isRequired: false },
-					base: {
-						label: 'Base',
-						type: 'select',
-						hint:
-							'Used to determine the default permissions when this role is created and the fallback for when a permission is not set on this role.',
-						options: {
-							choices: [
-								{ label: 'Owner', value: 'owner' },
-								{ label: 'Group manager', value: 'groupManager' },
-								{ label: 'Manager', value: 'manager' },
-								{ label: 'Teammate', value: 'teammate' },
-								{ label: 'Guest', value: 'guest' },
-								{ label: 'Anonymous', value: 'anonymous' },
-							],
-						},
-						isRequired: false,
-					},
-					description: {
-						label: 'Description',
-						type: 'text',
-						isRequired: false,
-					},
-					dateDeleted: { type: 'number', isRequired: false },
-					isPublic: {
-						label: 'Public',
-						type: 'boolean',
-						hint:
-							'Should I let people that are not part of this organization this role?',
-						isRequired: false,
-					},
-					id: { type: 'id', isRequired: true },
-				},
-			},
 		},
 		{
 			eventNameWithOptionalNamespace: 'who-am-i',
+			emitPayloadSchema: {
+				id: 'whoAmITargetAndPayload',
+				fields: {
+					payload: {
+						type: 'schema',
+						isRequired: true,
+						options: { schema: { id: 'whoAmIEmitPayload', fields: {} } },
+					},
+				},
+			},
 			responsePayloadSchema: {
 				id: 'authenticateResponsePayload',
 				fields: {
@@ -3719,9 +4296,10 @@ export const testEventContract = buildEventContract({
 					},
 				},
 			},
-			emitPayloadSchema: { id: 'whoAmIEmitPayload', fields: {} },
 		},
 	],
-} as const)
+} as const
+
+validateEventContract(testEventContract)
 
 export type TestEventContract = typeof testEventContract

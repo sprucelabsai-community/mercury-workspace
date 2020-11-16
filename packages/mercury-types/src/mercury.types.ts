@@ -112,7 +112,7 @@ export default interface MercuryEventEmitter<Contract extends EventContract> {
 					| Promise<SchemaValues<IEventSignature['responsePayloadSchema']>>
 					| SchemaValues<IEventSignature['responsePayloadSchema']>
 			: Promise<void> | void
-	): void
+	): Promise<void>
 
 	off(
 		eventName: EventNames<Contract>,
