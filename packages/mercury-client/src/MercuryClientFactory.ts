@@ -3,12 +3,13 @@ import { ConnectionOptions, MercuryClient } from './client.types'
 import { DEFAULT_HOST } from './constants'
 import SpruceError from './errors/SpruceError'
 import MercurySocketIoClient from './MercurySocketIoClient'
+import MutableContractClient from './tests/MutableContractClient'
 
 export default class MercuryClientFactory {
 	public static async Client<Contract extends EventContract>(
 		connectionOptions: ConnectionOptions
 	): Promise<MercuryClient<Contract>> {
-		const { host = DEFAULT_HOST, contracts } = connectionOptions
+		const { host = DEFAULT_HOST, contracts, isTest = false } = connectionOptions
 
 		if (host.substr(0, 4) !== 'http') {
 			throw new SpruceError({ code: 'INVALID_PROTOCOL' })
@@ -39,7 +40,10 @@ export default class MercuryClientFactory {
 
 		const eventContract: Contract = unifiedContract as any
 
-		const client = new MercurySocketIoClient<Contract>({
+		const Client = isTest ? MutableContractClient : MercurySocketIoClient
+
+		//@ts-ignore
+		const client = new Client<Contract>({
 			host,
 			reconnection: false,
 			rejectUnauthorized: !connectionOptions?.allowSelfSignedCrt,
