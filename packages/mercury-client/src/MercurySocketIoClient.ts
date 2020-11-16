@@ -72,7 +72,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					originalError,
 				})
 			default:
-				debugger
 				return new SpruceError({
 					code: 'UNKNOWN_ERROR',
 					originalError,
