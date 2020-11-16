@@ -180,7 +180,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		const results = await this.emit('register-listeners', {
 			payload: { eventNamesWithOptionalNamespace: [eventName] },
 		})
-		
+
 		if (results.totalErrors > 0) {
 			const options = results.responses[0].errors?.[0] ?? 'UNKNOWN_ERROR'
 			throw AbstractSpruceError.parse(options, SpruceError)
