@@ -49,7 +49,7 @@ export default class TestClient<Contract extends EventContract>
 		return results
 	}
 
-	public on<
+	public async on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
 		IEventSignature extends DeepReadonly<
@@ -67,7 +67,7 @@ export default class TestClient<Contract extends EventContract>
 					| Promise<SchemaValues<IEventSignature['responsePayloadSchema']>>
 					| SchemaValues<IEventSignature['responsePayloadSchema']>
 			: Promise<void> | void
-	): void {}
+	): Promise<void> {}
 
 	public off(
 		_eventName: Extract<

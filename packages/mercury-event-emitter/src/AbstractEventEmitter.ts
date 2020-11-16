@@ -197,7 +197,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		return { actualPayload, actualCallback }
 	}
 
-	public on<
+	public async on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
 		IEventSignature extends DeepReadonly<
