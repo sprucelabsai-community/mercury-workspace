@@ -117,14 +117,14 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	@test()
-	protected static async cantListenToEventThatDoesNotExist() {
+	protected static async getsAccessDeniedWhenTryingToListenToUnknownEventAnonymously() {
 		const client = await this.connect()
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
 			client.on('waka-waka', () => {})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
+		errorAssertUtil.assertError(err, 'UNAUTHORIZED_ACCESS')
 	}
 
 	@test()
