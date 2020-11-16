@@ -139,7 +139,7 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 	protected static async onWithPayload() {
 		const client = new TestClient<TestContract>()
 
-		client.on('spruce.testWithPayload', async (payload) => {
+		await client.on('spruce.testWithPayload', async (payload) => {
 			assert.isExactType<typeof payload, { emitPayloadField: string }>(true)
 
 			return {
@@ -152,7 +152,7 @@ export default class TypesWorkTest extends AbstractSpruceTest {
 	protected static async onWithoutPayload() {
 		const client = new TestClient<TestContract>()
 
-		client.on('spruce.testWithoutPayload', () => {})
+		await client.on('spruce.testWithoutPayload', () => {})
 	}
 
 	@test('Handles target and payload (always passes, types will fail)')
