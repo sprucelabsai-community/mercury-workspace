@@ -97,7 +97,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static tracksListeners() {
-		this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', () => {})
 	}
 
 	@test()
@@ -108,13 +108,13 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	@test()
 	protected static listenCountIncrements() {
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 0)
-		this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', () => {})
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 1)
 	}
 
 	@test()
 	protected static oneListenerCanBeCleared() {
-		this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', () => {})
 		const numForgotten = this.emitter.off('eventOne')
 		assert.isEqual(numForgotten, 1)
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 0)
@@ -122,8 +122,8 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static twoListenersCanBeCleared() {
-		this.emitter.on('eventOne', () => {})
-		this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', () => {})
 
 		const numForgotten = this.emitter.off('eventOne')
 
@@ -135,8 +135,8 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	protected static specificListenerCanBeCleared() {
 		const cb = () => {}
 
-		this.emitter.on('eventOne', cb)
-		this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', cb)
+		void this.emitter.on('eventOne', () => {})
 
 		let numForgotten = this.emitter.off('eventOne', cb)
 
@@ -149,8 +149,8 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static clearingListenersHonorsEventName() {
-		this.emitter.on('eventOne', () => {})
-		this.emitter.on('eventTwo', () => {})
+		void this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventTwo', () => {})
 
 		this.emitter.off('eventOne')
 
@@ -162,7 +162,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	protected static async emittingTriggersCallback() {
 		let fired = false
 
-		this.emitter.on('eventOne', () => {
+		void this.emitter.on('eventOne', () => {
 			fired = true
 		})
 
@@ -175,7 +175,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	protected static async emitPassesThroughEmitPayload() {
 		let payload: any | undefined
 
-		this.emitter.on('eventWithEmitPayload', (p) => {
+		void this.emitter.on('eventWithEmitPayload', (p) => {
 			payload = p
 		})
 
@@ -188,7 +188,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async oneListenerCanRespondWithPayload() {
-		this.emitter.on('eventWithResponsePayload', () => {
+		void this.emitter.on('eventWithResponsePayload', () => {
 			return {
 				requiredTextField: 'foo bar',
 			}
@@ -212,11 +212,11 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async multipleListenersCanRespondWithPayloads() {
-		this.emitter.on('eventWithResponsePayload', () => ({
+		void this.emitter.on('eventWithResponsePayload', () => ({
 			requiredTextField: 'foo bar',
 		}))
 
-		this.emitter.on('eventWithResponsePayload', () => ({
+		void this.emitter.on('eventWithResponsePayload', () => ({
 			requiredTextField: 'hello world',
 		}))
 
@@ -243,11 +243,11 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async emitCanListenToEachListener() {
-		this.emitter.on('eventWithResponsePayload', () => ({
+		void this.emitter.on('eventWithResponsePayload', () => ({
 			requiredTextField: 'foo bar',
 		}))
 
-		this.emitter.on('eventWithResponsePayload', () => ({
+		void this.emitter.on('eventWithResponsePayload', () => ({
 			requiredTextField: 'hello world',
 		}))
 
@@ -276,11 +276,11 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async emitAndRespondCanEachHandlePayloads() {
-		this.emitter.on('eventWithEmitAndResponsePayload', () => ({
+		void this.emitter.on('eventWithEmitAndResponsePayload', () => ({
 			requiredTextField: 'foo bar',
 		}))
 
-		this.emitter.on('eventWithEmitAndResponsePayload', () => ({
+		void this.emitter.on('eventWithEmitAndResponsePayload', () => ({
 			requiredTextField: 'hello world',
 		}))
 
@@ -361,7 +361,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async reportsBackSingleErrorFromListeners() {
-		this.emitter.on('eventOne', () => {
+		void this.emitter.on('eventOne', () => {
 			throw new Error('oh no!')
 		})
 
@@ -373,11 +373,11 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async reportsBackOneErrorOneSuccessFromListeners() {
-		this.emitter.on('eventOne', () => {
+		void this.emitter.on('eventOne', () => {
 			throw new Error('oh no!')
 		})
 
-		this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', () => {})
 
 		const totalListeners = 2
 		const expectedErrors = ['oh no!', undefined]
@@ -387,15 +387,15 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async reportsBackMultipleErrorsFromListeners() {
-		this.emitter.on('eventOne', () => {
+		void this.emitter.on('eventOne', () => {
 			throw new Error('oh no!')
 		})
 
-		this.emitter.on('eventOne', () => {
+		void this.emitter.on('eventOne', () => {
 			throw new Error('oh yes!')
 		})
 
-		this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', () => {})
 
 		const totalListeners = 3
 		const expectedErrors = ['oh no!', 'oh yes!', undefined]
