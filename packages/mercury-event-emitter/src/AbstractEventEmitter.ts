@@ -223,13 +223,13 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		this.listenersByEvent[eventName].push(cb)
 	}
 
-	public off(
+	public async off(
 		eventName: Extract<
 			Contract['eventSignatures'][number]['eventNameWithOptionalNamespace'],
 			string
 		>,
 		cb?: () => void
-	): number {
+	): Promise<number> {
 		if (cb) {
 			let found = false
 			this.listenersByEvent[eventName] = this.listenersByEvent[
