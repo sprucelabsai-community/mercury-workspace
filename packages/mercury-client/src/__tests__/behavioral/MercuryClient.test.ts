@@ -153,6 +153,35 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async skillsCanListenToEachOther() {
+		const {
+			org,
+			skill1,
+			skill1Client,
+			skill2Client,
+		} = await this.setup2SkillsAndOneEvent()
+
+		let newEventTriggered = false
+
+		//@ts-ignore
+		await skill2Client.on(`${skill1.slug}.will-send-vip`, () => {
+			newEventTriggered = true
+			return {
+				messages: ['hello world'],
+			}
+		})
+
+		//@ts-ignore
+		const results = await skill1Client.emit(`${skill1.slug}.will-send-vip`, {
+			target: {
+				organizationId: org.id,
+			},
+		})
+
+		assert.isEqual(results.totalErrors, 0)
+		assert.isTrue(newEventTriggered)
+	}
+
+	private static async setup2SkillsAndOneEvent() {
 		const client = await this.connect()
 
 		await this.signupDemoPerson(client)
@@ -180,25 +209,124 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 		assert.isEqual(registerResults.totalErrors, 0)
 
-		let newEventTriggered = false
+		return { client, org, skill1, skill1Client, skill2Client }
+	}
+
+	@test()
+	protected static async emitterGetsCalledBackForEachListener() {
+		const {
+			client,
+			org,
+			skill1,
+			skill1Client,
+			skill2Client,
+		} = await this.setup2SkillsAndOneEvent()
+
+		const {
+			skillClient: skill3Client,
+		} = await this.createInstallAndLoginAsSkill(client, org)
+
+		const {
+			skillClient: skill4Client,
+		} = await this.createInstallAndLoginAsSkill(client, org)
+
+		let listenTriggerCount = 0
 
 		//@ts-ignore
 		await skill2Client.on(`${skill1.slug}.will-send-vip`, () => {
-			newEventTriggered = true
+			listenTriggerCount++
+			return {
+				messages: ['hello from skill 2'],
+			}
+		})
+
+		//@ts-ignore
+		await skill3Client.on(`${skill1.slug}.will-send-vip`, () => {
+			listenTriggerCount++
+			return {
+				messages: ['hello from skill 3'],
+			}
+		})
+
+		//@ts-ignore
+		await skill4Client.on(`${skill1.slug}.will-send-vip`, () => {
+			listenTriggerCount++
+			return {
+				messages: ['hello from skill 4'],
+			}
+		})
+
+		let responseTriggerCount = 0
+
+		await skill1Client.emit(
+			//@ts-ignore
+			`${skill1.slug}.will-send-vip`,
+			{
+				target: {
+					organizationId: org.id,
+				},
+			},
+			() => {
+				responseTriggerCount++
+			}
+		)
+
+		assert.isEqual(listenTriggerCount, 3)
+		assert.isEqual(responseTriggerCount, 3)
+	}
+
+	@test()
+	protected static async offRemovesListener() {
+		const {
+			org,
+			skill1,
+			skill1Client,
+			skill2Client,
+		} = await this.setup2SkillsAndOneEvent()
+
+		let listenerTriggerCount = 0
+
+		const eventName = `${skill1.slug}.will-send-vip`
+
+		//@ts-ignore
+		await skill2Client.on(eventName, () => {
+			listenerTriggerCount++
 			return {
 				messages: ['hello world'],
 			}
 		})
 
 		//@ts-ignore
-		const results = await skill1Client.emit(`${skill1.slug}.will-send-vip`, {
+		await skill1Client.emit(eventName, {
 			target: {
 				organizationId: org.id,
 			},
 		})
 
-		assert.isEqual(results.totalErrors, 0)
-		assert.isTrue(newEventTriggered)
+		//@ts-ignore
+		const offCount = await skill2Client.off(eventName)
+		assert.isEqual(offCount, 1)
+
+		//@ts-ignore
+		await skill1Client.emit(eventName, {
+			target: {
+				organizationId: org.id,
+			},
+		})
+
+		assert.isEqual(listenerTriggerCount, 1)
+	}
+
+	@test()
+	protected static async offErrorsWithUnknownEvent() {
+		const { skill1Client } = await this.setup2SkillsAndOneEvent()
+
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			skill1Client.off('event-does-not-exist')
+		)
+
+		errorAssertUtil.assertError(err, 'INVALID_EVENT')
 	}
 
 	private static generateWillSendVipEventSignature(

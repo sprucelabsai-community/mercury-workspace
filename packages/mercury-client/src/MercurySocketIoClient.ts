@@ -102,7 +102,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					? SchemaValues<EmitSchema>
 					: never)
 			| EmitCallback<MappedContract, EventName>,
-		_cb?: EmitCallback<MappedContract, EventName>
+		cb?: EmitCallback<MappedContract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
 		const signature = this.getEventSignatureByName<MappedContract>(eventName)
 
@@ -121,6 +121,15 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise(
 			(resolve) => {
+				const ioName = socketIoEventUtil.toSocketName(eventName)
+				const singleResponseName = eventName + ':response'
+
+				if (cb) {
+					this.socket?.on(singleResponseName, (response: any) => {
+						void cb(response)
+					})
+				}
+
 				const args: any[] = []
 
 				if (payload) {
@@ -128,10 +137,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				}
 
 				args.push((results: any) => {
+					this.socket?.off(singleResponseName)
 					resolve(results)
 				})
-
-				const ioName = socketIoEventUtil.toSocketName(eventName)
 
 				this.socket?.emit(ioName, ...args)
 			}
@@ -199,14 +207,33 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		)
 	}
 
-	public off(
-		_eventName: Extract<
+	public async off(
+		eventName: Extract<
 			Contract['eventSignatures'][number]['eventNameWithOptionalNamespace'],
 			string
-		>,
-		_cb?: () => void
-	): number {
-		return 1
+		>
+	): Promise<number> {
+		return new Promise((resolve, reject) => {
+			this.socket?.emit(
+				'un-register-listeners',
+				{
+					payload: {
+						eventNamesWithOptionalNamespace: [eventName],
+					},
+				},
+				(results: any) => {
+					if (results.totalErrors > 0) {
+						const err = AbstractSpruceError.parse(
+							results.responses[0].errors[0],
+							SpruceError
+						)
+						reject(err)
+					} else {
+						resolve(results.responses[0].payload.unRegisterCount)
+					}
+				}
+			)
+		})
 	}
 
 	public async disconnect() {

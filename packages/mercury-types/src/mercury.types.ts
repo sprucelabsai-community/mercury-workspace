@@ -117,6 +117,5 @@ export default interface MercuryEventEmitter<Contract extends EventContract> {
 	off(
 		eventName: EventNames<Contract>,
 		cb?: (payload?: Record<string, any>) => void
-	): number
+	): Promise<number>
 }
-export {}

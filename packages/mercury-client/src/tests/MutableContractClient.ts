@@ -44,6 +44,7 @@ export default class MutableContractClient<
 				eventNameWithOptionalNamespace: eventName,
 			})
 		}
+
 		return sig
 	}
 }

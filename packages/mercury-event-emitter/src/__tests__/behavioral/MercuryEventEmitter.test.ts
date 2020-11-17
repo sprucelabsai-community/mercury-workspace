@@ -113,37 +113,37 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	}
 
 	@test()
-	protected static oneListenerCanBeCleared() {
+	protected static async oneListenerCanBeCleared() {
 		void this.emitter.on('eventOne', () => {})
-		const numForgotten = this.emitter.off('eventOne')
+		const numForgotten = await this.emitter.off('eventOne')
 		assert.isEqual(numForgotten, 1)
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 0)
 	}
 
 	@test()
-	protected static twoListenersCanBeCleared() {
+	protected static async twoListenersCanBeCleared() {
 		void this.emitter.on('eventOne', () => {})
 		void this.emitter.on('eventOne', () => {})
 
-		const numForgotten = this.emitter.off('eventOne')
+		const numForgotten = await this.emitter.off('eventOne')
 
 		assert.isEqual(numForgotten, 2)
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 0)
 	}
 
 	@test()
-	protected static specificListenerCanBeCleared() {
+	protected static async specificListenerCanBeCleared() {
 		const cb = () => {}
 
 		void this.emitter.on('eventOne', cb)
 		void this.emitter.on('eventOne', () => {})
 
-		let numForgotten = this.emitter.off('eventOne', cb)
+		let numForgotten = await this.emitter.off('eventOne', cb)
 
 		assert.isEqual(numForgotten, 1)
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 1)
 
-		numForgotten = this.emitter.off('eventOne', () => {})
+		numForgotten = await this.emitter.off('eventOne', () => {})
 		assert.isEqual(numForgotten, 0)
 	}
 
@@ -152,7 +152,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		void this.emitter.on('eventOne', () => {})
 		void this.emitter.on('eventTwo', () => {})
 
-		this.emitter.off('eventOne')
+		void this.emitter.off('eventOne')
 
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 0)
 		assert.isEqual(this.testEmitter.listenCount('eventTwo'), 1)

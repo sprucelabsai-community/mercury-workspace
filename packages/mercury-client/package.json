@@ -88,7 +88,8 @@
 						"cantEmitEventWithWithUnexpectedPayload": "F8",
 						"factoryReturnsSocketIoClient": "F12",
 						"canRunHealthCheck": "F13",
-						"skillsCanListenToEachOther": "F22"
+						"skillsCanListenToEachOther": "F22",
+						"emitterGetsCalledBackForEachListener": "F23"
 					}
 				}
 			]

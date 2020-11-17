@@ -69,12 +69,12 @@ export default class TestClient<Contract extends EventContract>
 			: Promise<void> | void
 	): Promise<void> {}
 
-	public off(
+	public async off(
 		_eventName: Extract<
 			Contract['eventSignatures'][number]['eventNameWithOptionalNamespace'],
 			string
 		>
-	): number {
+	): Promise<number> {
 		return 0
 	}
 }
