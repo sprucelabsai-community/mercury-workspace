@@ -152,7 +152,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		void this.emitter.on('eventOne', () => {})
 		void this.emitter.on('eventTwo', () => {})
 
-		this.emitter.off('eventOne')
+		void this.emitter.off('eventOne')
 
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 0)
 		assert.isEqual(this.testEmitter.listenCount('eventTwo'), 1)
