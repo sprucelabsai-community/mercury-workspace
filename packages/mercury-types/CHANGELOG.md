@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v11.1.3...v12.0.0) (2020-11-17)
+
+
+### Features
+
+* off, listen to each event response ([df9cc80](https://github.com/sprucelabsai/mercury-workspace/commit/df9cc80))
+
+
+
+
+
 ## [11.1.3](https://github.com/sprucelabsai/mercury-workspace/compare/v11.1.2...v11.1.3) (2020-11-17)
 
 **Note:** Version bump only for package @sprucelabs/mercury-types
