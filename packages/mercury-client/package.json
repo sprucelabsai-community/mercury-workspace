@@ -39,20 +39,20 @@
 		"@sprucelabs/mercury-types": "^12.0.0",
 		"@sprucelabs/schema": "^15.0.0",
 		"dotenv": "^8.2.0",
-		"socket.io-client": "^2.3.1"
+		"socket.io-client": "^3.0.2"
 	},
 	"devDependencies": {
 		"@sprucelabs/babel-plugin-schema": "^3.1.2",
 		"@sprucelabs/jest-sheets-reporter": "^1.2.5",
 		"@sprucelabs/semantic-release": "^4.0.6",
-		"@sprucelabs/test-utils": "^2.0.144",
+		"@sprucelabs/test-utils": "^2.0.169",
 		"@types/debug": "^4.1.5",
 		"@types/faker": "^5.1.4",
 		"@types/socket.io-client": "^1.4.34",
 		"arkit": "^1.6.4",
 		"concurrently": "^5.3.0",
 		"eslint": "^7.13.0",
-		"eslint-config-spruce": "^10.9.107",
+		"eslint-config-spruce": "^10.9.108",
 		"jest": "^26.6.3",
 		"prettier": "^2.1.2",
 		"rollup": "^2.33.2",
