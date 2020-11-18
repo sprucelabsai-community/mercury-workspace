@@ -40,7 +40,7 @@
 		"@babel/plugin-transform-runtime": "^7.11.5",
 		"@babel/preset-env": "^7.11.5",
 		"@babel/preset-typescript": "^7.10.4",
-		"@sprucelabs/babel-plugin-schema": "^3.1.0",
+		"@sprucelabs/babel-plugin-schema": ">=3.1.0",
 		"babel-plugin-module-resolver": "^4.0.0",
 		"conventional-changelog-sprucelabs": "^1.1.2",
 		"eslint": "^7.11.0",
@@ -49,5 +49,22 @@
 		"prettier": "^2.1.2",
 		"typescript": "^4.0.3",
 		"yarn-upgrade-all": "^0.5.4"
+	},
+	"yarn-upgrade-all": {
+		"ignore": [
+			"socket.io",
+			"socket.io-client",
+			"@sprucelabs/babel-plugin-schema",
+			"@sprucelabs/error",
+			"@sprucelabs/jest-sheets-reporter",
+			"@sprucelabs/log",
+			"@sprucelabs/mercury-types",
+			"@sprucelabs/schema",
+			"@sprucelabs/semantic-release",
+			"@sprucelabs/spruce-core-schemas",
+			"@sprucelabs/spruce-skill-utils",
+			"@sprucelabs/test",
+			"@sprucelabs/test-utils"
+		]
 	}
 }

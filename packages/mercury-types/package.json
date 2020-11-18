@@ -69,5 +69,22 @@
 		"moduleNameMapper": {
 			"^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
 		}
+	},
+	"yarn-upgrade-all": {
+		"ignore": [
+			"socket.io",
+			"socket.io-client",
+			"@sprucelabs/babel-plugin-schema",
+			"@sprucelabs/error",
+			"@sprucelabs/jest-sheets-reporter",
+			"@sprucelabs/log",
+			"@sprucelabs/mercury-types",
+			"@sprucelabs/schema",
+			"@sprucelabs/semantic-release",
+			"@sprucelabs/spruce-core-schemas",
+			"@sprucelabs/spruce-skill-utils",
+			"@sprucelabs/test",
+			"@sprucelabs/test-utils"
+		]
 	}
 }
