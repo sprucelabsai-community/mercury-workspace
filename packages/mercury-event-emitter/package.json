@@ -39,7 +39,7 @@
 	"dependencies": {
 		"@sprucelabs/error": "^3.0.0",
 		"@sprucelabs/mercury-types": "^13.0.0",
-		"@sprucelabs/schema": "^16.0.0"
+		"@sprucelabs/schema": ">=16.0.0"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": "^4.0.6",
