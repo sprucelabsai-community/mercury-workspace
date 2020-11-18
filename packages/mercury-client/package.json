@@ -35,17 +35,17 @@
 		"test.watch": "jest --watch"
 	},
 	"dependencies": {
-		"@sprucelabs/error": "^3.0.0",
-		"@sprucelabs/mercury-types": "^13.0.1",
+		"@sprucelabs/error": ">=3.0.0",
+		"@sprucelabs/mercury-types": ">=13.0.1",
 		"@sprucelabs/schema": ">=16.0.0",
 		"dotenv": "^8.2.0",
 		"socket.io-client": "^2.3.1"
 	},
 	"devDependencies": {
-		"@sprucelabs/babel-plugin-schema": "^3.1.2",
-		"@sprucelabs/jest-sheets-reporter": "^1.2.5",
-		"@sprucelabs/semantic-release": "^4.0.6",
-		"@sprucelabs/test-utils": "^2.0.144",
+		"@sprucelabs/babel-plugin-schema": ">=3.1.2",
+		"@sprucelabs/jest-sheets-reporter": ">=1.2.5",
+		"@sprucelabs/semantic-release": ">=4.0.6",
+		"@sprucelabs/test-utils": ">=2.0.144",
 		"@types/debug": "^4.1.5",
 		"@types/faker": "^5.1.4",
 		"@types/socket.io-client": "^1.4.34",
