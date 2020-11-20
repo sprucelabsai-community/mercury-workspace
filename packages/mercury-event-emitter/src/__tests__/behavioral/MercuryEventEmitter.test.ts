@@ -8,9 +8,9 @@ import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 import SpruceError from '../../errors/SpruceError'
 
-class EventEmitter<Contract extends EventContract> extends AbstractEventEmitter<
-	Contract
-> {
+class EventEmitter<
+	Contract extends EventContract
+> extends AbstractEventEmitter<Contract> {
 	public listenCount(eventName: EventNames<Contract>) {
 		return (this.listenersByEvent[eventName] || []).length
 	}

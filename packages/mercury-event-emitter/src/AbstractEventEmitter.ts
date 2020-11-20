@@ -200,9 +200,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	public async on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends DeepReadonly<
-			EventSignature
-		> = MappedContract[EventName],
+		IEventSignature extends DeepReadonly<EventSignature> = MappedContract[EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
 			? IEventSignature['emitPayloadSchema']
 			: never
