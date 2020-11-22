@@ -1,14 +1,12 @@
 import AbstractSpruceError from '@sprucelabs/error'
 import {
-	ContractMapper,
 	EmitCallback,
 	EventSignature,
-	KeyOf,
 	MercuryAggregateResponse,
 	MercuryEventEmitter,
 	EventContract,
-	DeepReadonly,
 	MercurySingleResponse,
+	EventNames,
 } from '@sprucelabs/mercury-types'
 import { ISchema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
 import SpruceError from './errors/SpruceError'
@@ -27,29 +25,23 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	}
 
 	public async emit<
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends DeepReadonly<EventSignature> = DeepReadonly<
-			MappedContract[EventName]
-		>,
-		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
-			? IEventSignature['emitPayloadSchema']
-			: never,
-		ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
-			? IEventSignature['responsePayloadSchema']
-			: never,
-		ResponsePayload = ResponseSchema extends ISchema
-			? SchemaValues<ResponseSchema>
-			: never
+	EventName extends EventNames<Contract>,
+IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
+EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
+	? IEventSignature['emitPayloadSchema']
+	: never,
+ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
+	? IEventSignature['responsePayloadSchema']
+	: never
 	>(
 		eventName: EventName,
 		payload?:
 			| (EmitSchema extends SchemaValues<EmitSchema>
 					? SchemaValues<EmitSchema>
 					: never)
-			| EmitCallback<MappedContract, EventName>,
-		cb?: EmitCallback<MappedContract, EventName>
-	): Promise<MercuryAggregateResponse<ResponsePayload>> {
+			| EmitCallback<Contract, EventName>,
+		cb?: EmitCallback<Contract, EventName>
+	): Promise<MercuryAggregateResponse<SchemaValues<ResponseSchema>>> {
 		const { actualPayload, actualCallback } = this.normalizePayloadAndCallback(
 			payload,
 			cb
@@ -91,15 +83,12 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 			totalResponses: listeners.length,
 			totalErrors,
 			responses,
-		} as MercuryAggregateResponse<ResponsePayload>
+		} as MercuryAggregateResponse<SchemaValues<ResponseSchema>>
 	}
 
 	private async emitOne<
-		EventName extends KeyOf<MappedContract>,
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		IEventSignature extends DeepReadonly<EventSignature> = DeepReadonly<
-			MappedContract[EventName]
-		>,
+		EventName extends EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
 			? IEventSignature['responsePayloadSchema']
 			: never,
@@ -137,7 +126,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 				emitCallbackPayload.errors = [error]
 			}
 
-			await (options.actualCallback as EmitCallback<MappedContract, EventName>)(
+			await (options.actualCallback as EmitCallback<Contract, EventName>)(
 				emitCallbackPayload
 			)
 		}
@@ -154,7 +143,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	}
 
 	private validatePayload(
-		schema: DeepReadonly<ISchema> | undefined | null,
+		schema: ISchema | undefined | null,
 		actualPayload: any,
 		eventName: string
 	) {
@@ -172,23 +161,29 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		}
 	}
 
-	private getValidEventNames() {
-		return this.contract.eventSignatures.map(
-			(e) => e.eventNameWithOptionalNamespace
-		)
+	private getEventNames() {
+		return Object.keys(this.contract.eventSignatures)
+	}
+
+	private getNamedEventSignatures(): {eventNameWithOptionalNamespace: string, signature: EventSignature}[] {
+		const names = this.getEventNames()
+		return names.map(name => ({
+			eventNameWithOptionalNamespace: name,
+			signature: this.contract.eventSignatures[name]
+		}))
 	}
 
 	private findEventSignatureByName(eventName: string) {
-		const sig = this.contract.eventSignatures.find(
-			(sig) => sig.eventNameWithOptionalNamespace === eventName
+		const event = this.getNamedEventSignatures().find(
+			(event) => event.eventNameWithOptionalNamespace === eventName
 		)
 
-		if (!sig) {
-			const validNames = this.getValidEventNames()
+		if (!event) {
+			const validNames = this.getEventNames()
 			throw new SpruceError({ code: 'INVALID_EVENT_NAME', validNames })
 		}
 
-		return sig
+		return event.signature
 	}
 
 	private normalizePayloadAndCallback(payload: any, cb: any) {
@@ -198,9 +193,8 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	}
 
 	public async on<
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends DeepReadonly<EventSignature> = MappedContract[EventName],
+		EventName extends EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
 			? IEventSignature['emitPayloadSchema']
 			: never
@@ -222,10 +216,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	}
 
 	public async off(
-		eventName: Extract<
-			Contract['eventSignatures'][number]['eventNameWithOptionalNamespace'],
-			string
-		>,
+		eventName: EventNames<Contract>,
 		cb?: () => void
 	): Promise<number> {
 		if (cb) {

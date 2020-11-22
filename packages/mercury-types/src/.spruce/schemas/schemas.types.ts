@@ -156,8 +156,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface IEventSignature {
 			
 				
-				'eventNameWithOptionalNamespace': string
-				
 				'responsePayloadSchema'?: (SpruceSchema.ISchema)| undefined | null
 				
 				'emitPayloadSchema'?: (SpruceSchema.ISchema)| undefined | null
@@ -173,12 +171,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'MercuryTypes',
 			name: 'Event Signature',
 			    fields: {
-			            /** . */
-			            'eventNameWithOptionalNamespace': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
 			            /** . */
 			            'responsePayloadSchema': {
 			                type: 'raw',
@@ -210,10 +202,35 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
 
 		
+		interface IEventSignaturesByName {
+				/** . */
+				[eventName:string]: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
+		}
+
+		interface IEventSignaturesByNameSchema extends SpruceSchema.ISchema {
+			id: 'eventSignaturesByName',
+			version: 'v2020_09_01',
+			namespace: 'MercuryTypes',
+			name: '',
+			dynamicFieldSignature: { 
+			    type: 'schema',
+			    keyName: 'eventName',
+			    isRequired: true,
+			    options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatureSchema,}
+			}		}
+
+		type EventSignaturesByNameEntity = SchemaEntity<SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignaturesByNameSchema>
+
+	}
+
+
+	namespace SpruceSchemas.MercuryTypes.v2020_09_01 {
+
+		
 		interface IEventContract {
 			
 				
-				'eventSignatures': SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature[]
+				'eventSignatures': SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignaturesByName
 		}
 
 		interface IEventContractSchema extends SpruceSchema.ISchema {
@@ -226,8 +243,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'eventSignatures': {
 			                type: 'schema',
 			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignatureSchema,}
+			                options: {schema: SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignaturesByNameSchema,}
 			            },
 			    }
 		}

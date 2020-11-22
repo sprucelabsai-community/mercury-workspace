@@ -4,7 +4,7 @@ import { EventContract } from '../mercury.types'
 
 export default function buildEventContract<C extends EventContract>(
 	contract: C
-) {
+): C {
 	validateSchemaValues(eventContractSchema, contract)
-	return contract
+	return contract as C
 }

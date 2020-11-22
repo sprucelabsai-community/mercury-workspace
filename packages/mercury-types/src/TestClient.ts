@@ -4,17 +4,15 @@ import MercuryEventEmitter, {
 	EmitCallback,
 	EventContract,
 	EventSignature,
-	ContractMapper,
 	KeyOf,
-	DeepReadonly,
+	EventNames,
 } from './mercury.types'
 
 export default class TestClient<Contract extends EventContract>
 	implements MercuryEventEmitter<Contract> {
 	public async emit<
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends EventSignature = MappedContract[EventName],
+		EventName extends EventNames<Contract> = EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
 			? IEventSignature['emitPayloadSchema']
 			: never,
@@ -28,9 +26,9 @@ export default class TestClient<Contract extends EventContract>
 		_eventName: EventName,
 		_payload:
 			| (EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never)
-			| EmitCallback<MappedContract, EventName>
+			| EmitCallback<Contract, EventName>
 			| undefined,
-		_cb?: EmitCallback<MappedContract, EventName> | undefined
+		_cb?: EmitCallback<Contract, EventName> | undefined
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
 		//@ts-ignore
 		const results = {
@@ -50,9 +48,10 @@ export default class TestClient<Contract extends EventContract>
 	}
 
 	public async on<
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends DeepReadonly<EventSignature> = MappedContract[EventName],
+		EventName extends KeyOf<Contract['eventSignatures']> = KeyOf<
+			Contract['eventSignatures']
+		>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
 			? IEventSignature['emitPayloadSchema']
 			: never
@@ -67,12 +66,7 @@ export default class TestClient<Contract extends EventContract>
 			: Promise<void> | void
 	): Promise<void> {}
 
-	public async off(
-		_eventName: Extract<
-			Contract['eventSignatures'][number]['eventNameWithOptionalNamespace'],
-			string
-		>
-	): Promise<number> {
+	public async off(_eventName: EventNames<Contract>): Promise<number> {
 		return 0
 	}
 }

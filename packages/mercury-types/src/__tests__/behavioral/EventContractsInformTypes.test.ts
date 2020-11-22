@@ -1,7 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
-import { EventContract } from '../../mercury.types'
+import { EventContract, EventNames } from '../../mercury.types'
 import TestClient from '../../TestClient'
+import buildEventContract from '../../utilities/buildEventContract'
 import validateEventContract from '../../utilities/validateEventContract'
 
 const responsePayload = buildSchema({
@@ -27,23 +28,21 @@ const emitPayload = buildSchema({
 })
 
 interface TestContract extends EventContract {
-	eventSignatures: [
-		{
-			eventNameWithOptionalNamespace: 'spruce.testWithPayload'
+	eventSignatures: {
+		'spruce.testWithPayload': {
 			responsePayloadSchema: typeof responsePayload
 			emitPayloadSchema: typeof emitPayload
-		},
-		{
-			eventNameWithOptionalNamespace: 'spruce.testWithoutPayload'
 		}
-	]
+		'spruce.testWithoutPayload': {
+			responsePayloadSchema: null
+		}
+	}
 }
 
-const signupContract = {
-	eventSignatures: [
-		{
-			eventNameWithOptionalNamespace: 'sign-up',
-			responsePayloadSchema: {
+const signupContract = buildEventContract({
+	eventSignatures: {
+		'sign-up': {
+			responsePayloadSchema: buildSchema({
 				id: 'response',
 				fields: {
 					id: {
@@ -51,15 +50,15 @@ const signupContract = {
 						isRequired: true,
 					},
 				},
-			},
-			emitPayloadSchema: {
+			}),
+			emitPayloadSchema: buildSchema({
 				id: 'targetAndPayload',
 				fields: {
 					target: {
 						type: 'schema',
 						isRequired: true,
 						options: {
-							schema: {
+							schema: buildSchema({
 								id: 'target',
 								fields: {
 									organizationId: {
@@ -72,14 +71,14 @@ const signupContract = {
 										type: 'text',
 									},
 								},
-							},
+							}),
 						},
 					},
 					payload: {
 						type: 'schema',
 						isRequired: true,
 						options: {
-							schema: {
+							schema: buildSchema({
 								id: 'payload',
 								fields: {
 									firstName: {
@@ -91,20 +90,27 @@ const signupContract = {
 										isRequired: true,
 									},
 								},
-							},
+							}),
 						},
 					},
 				},
-			},
+			}),
 		},
-	],
-} as const
+		'log-out': {},
+	},
+})
 
 validateEventContract(signupContract)
 
 type SignupContract = typeof signupContract
 
 export default class TypesWorkTest extends AbstractSpruceTest {
+	@test('Can pull event names (always passes, types will fail)')
+	protected static async canPullEventNames() {
+		type Names = EventNames<SignupContract>
+		assert.isExactType<Names, 'sign-up' | 'log-out'>(true)
+	}
+
 	@test('Emitting with contract with payload (always passes, types will fail)')
 	protected static async emitWithPayload() {
 		const client = new TestClient<TestContract>()
