@@ -1,9 +1,7 @@
 import AbstractSpruceError from '@sprucelabs/error'
 import { MercuryEventEmitterErrorOptions } from './errors.types'
 
-export default class SpruceError extends AbstractSpruceError<
-	MercuryEventEmitterErrorOptions
-> {
+export default class SpruceError extends AbstractSpruceError<MercuryEventEmitterErrorOptions> {
 	public friendlyMessage(): string {
 		const { options } = this
 

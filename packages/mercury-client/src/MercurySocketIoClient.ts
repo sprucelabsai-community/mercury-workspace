@@ -43,7 +43,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			this.socket?.on('connect', () => {
 				this.socket?.removeAllListeners()
 
-				resolve()
+				resolve(undefined)
 			})
 
 			this.socket?.on('timeout', (err: string) => {
@@ -168,9 +168,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	public async on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends DeepReadonly<
-			EventSignature
-		> = MappedContract[EventName],
+		IEventSignature extends DeepReadonly<EventSignature> = MappedContract[EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
 			? IEventSignature['emitPayloadSchema']
 			: never
@@ -242,7 +240,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				this.socket?.on('disconnect', () => {
 					this.socket?.removeAllListeners()
 					this.socket = undefined
-					resolve()
+					resolve(undefined)
 				})
 
 				this.socket?.disconnect()
