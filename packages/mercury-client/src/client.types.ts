@@ -7,9 +7,9 @@ export interface ConnectionOptions {
 	contracts: EventContract[]
 }
 
-export type MercuryClient<Contract extends EventContract> = MercuryEventEmitter<
-	Contract
-> & {
+export type MercuryClient<
+	Contract extends EventContract
+> = MercuryEventEmitter<Contract> & {
 	disconnect: () => Promise<void>
 	isConnected: () => boolean
 }
