@@ -15,10 +15,16 @@ export interface DeepReadonlyArray<T> extends ReadonlyArray<DeepReadonly<T>> {}
 export type DeepReadonlyObject<T> = {
 	readonly [P in keyof T]: DeepReadonly<T[P]>
 }
-export type EventSignature = DeepReadonly<SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature>
-export type EventContract = DeepReadonly<SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract>
+export type EventSignature = DeepReadonly<
+	SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
+>
+export type EventContract = DeepReadonly<
+	SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract
+>
 export type MutableEventContract = SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract
-export type Permission = DeepReadonly<SpruceSchemas.MercuryTypes.v2020_09_01.IPermission>
+export type Permission = DeepReadonly<
+	SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
+>
 type Statuses = typeof authorizerStatuses
 export type AuthorizerStatus = Statuses[number]['name']
 export type PermissionContract = SpruceSchemas.MercuryTypes.v2020_09_01.IPermissionContract
@@ -45,9 +51,13 @@ export declare type EventNames<
 	EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>
 > = EventName
 export declare type EmitCallback<
-	MappedContract extends ContractMapper<EventContract> = ContractMapper<EventContract>,
+	MappedContract extends ContractMapper<EventContract> = ContractMapper<
+		EventContract
+	>,
 	EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-	IEventSignature extends DeepReadonly<EventSignature> = MappedContract[EventName],
+	IEventSignature extends DeepReadonly<
+		EventSignature
+	> = MappedContract[EventName],
 	ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
 		? IEventSignature['responsePayloadSchema']
 		: never,
@@ -87,7 +97,9 @@ export default interface MercuryEventEmitter<Contract extends EventContract> {
 	on<
 		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
 		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends DeepReadonly<EventSignature> = MappedContract[EventName],
+		IEventSignature extends DeepReadonly<
+			EventSignature
+		> = MappedContract[EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
 			? IEventSignature['emitPayloadSchema']
 			: never
