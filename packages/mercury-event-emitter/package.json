@@ -44,9 +44,9 @@
 	"devDependencies": {
 		"@sprucelabs/semantic-release": ">=4.0.6",
 		"@sprucelabs/test": ">=7.2.0",
-		"eslint": "^7.13.0",
-		"eslint-config-spruce": "^10.9.109",
-		"typescript": "^4.0.5"
+		"eslint": "^7.14.0",
+		"eslint-config-spruce": "^10.9.111",
+		"typescript": "^4.1.2"
 	},
 	"jest": {
 		"maxWorkers": 4,
