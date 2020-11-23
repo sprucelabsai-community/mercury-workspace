@@ -4,7 +4,6 @@
 	"name": "spruce-mercury-workspace",
 	"description": "All the tools you need to connect to a Mercury compatible API. 💥",
 	"workspaces": [
-		"packages/mercury-types",
 		"packages/mercury-client",
 		"packages/mercury-event-emitter"
 	],
