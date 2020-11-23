@@ -9,5 +9,10 @@ export default buildErrorSchema({
 			type: 'text',
 			isRequired: true,
 		},
+		validNames: {
+			type: 'text',
+			isArray: true,
+			isRequired: true,
+		},
 	},
 })

@@ -5,7 +5,6 @@ import { authorizerStatuses } from './constants'
 
 export type EventContract = SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract
 export type EventSignature = SpruceSchemas.MercuryTypes.v2020_09_01.IEventSignature
-export type MutableEventContract = SpruceSchemas.MercuryTypes.v2020_09_01.IEventContract
 export type Permission = SpruceSchemas.MercuryTypes.v2020_09_01.IPermission
 type Statuses = typeof authorizerStatuses
 export type AuthorizerStatus = Statuses[number]['name']

@@ -28,7 +28,8 @@
 	},
 	"include": [
 		"./*.ts",
-		"./**/*.ts"
+		"./**/*.ts",
+		"../mercury-types/src/utilities/contract.utility.ts"
 	],
 	"exclude": [
 		"build",

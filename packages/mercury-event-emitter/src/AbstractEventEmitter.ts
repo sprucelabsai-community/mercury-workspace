@@ -7,13 +7,14 @@ import {
 	EventContract,
 	MercurySingleResponse,
 	EventNames,
+	eventContractUtil,
 } from '@sprucelabs/mercury-types'
 import { ISchema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
 import SpruceError from './errors/SpruceError'
 
 export default class AbstractEventEmitter<Contract extends EventContract>
 	implements MercuryEventEmitter<Contract> {
-	private contract: EventContract
+	private eventContract: EventContract
 
 	protected listenersByEvent: Record<
 		string,
@@ -21,18 +22,18 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	> = {}
 
 	public constructor(contract: EventContract) {
-		this.contract = contract
+		this.eventContract = contract
 	}
 
 	public async emit<
-	EventName extends EventNames<Contract>,
-IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
-	? IEventSignature['emitPayloadSchema']
-	: never,
-ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
-	? IEventSignature['responsePayloadSchema']
-	: never
+		EventName extends EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
+		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
+			? IEventSignature['emitPayloadSchema']
+			: never,
+		ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
+			? IEventSignature['responsePayloadSchema']
+			: never
 	>(
 		eventName: EventName,
 		payload?:
@@ -47,7 +48,10 @@ ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extend
 			cb
 		)
 
-		const eventSignature = this.findEventSignatureByName(eventName)
+		const eventSignature = eventContractUtil.getSignatureByName(
+			this.eventContract,
+			eventName
+		)
 		const emitSchema = eventSignature.emitPayloadSchema
 
 		this.validatePayload(
@@ -159,31 +163,6 @@ ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extend
 				})
 			}
 		}
-	}
-
-	private getEventNames() {
-		return Object.keys(this.contract.eventSignatures)
-	}
-
-	private getNamedEventSignatures(): {eventNameWithOptionalNamespace: string, signature: EventSignature}[] {
-		const names = this.getEventNames()
-		return names.map(name => ({
-			eventNameWithOptionalNamespace: name,
-			signature: this.contract.eventSignatures[name]
-		}))
-	}
-
-	private findEventSignatureByName(eventName: string) {
-		const event = this.getNamedEventSignatures().find(
-			(event) => event.eventNameWithOptionalNamespace === eventName
-		)
-
-		if (!event) {
-			const validNames = this.getEventNames()
-			throw new SpruceError({ code: 'INVALID_EVENT_NAME', validNames })
-		}
-
-		return event.signature
 	}
 
 	private normalizePayloadAndCallback(payload: any, cb: any) {

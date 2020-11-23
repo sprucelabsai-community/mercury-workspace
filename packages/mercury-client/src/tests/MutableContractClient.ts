@@ -1,50 +1,43 @@
 import {
-	ContractMapper,
 	EventContract,
 	EventSignature,
-	KeyOf,
+	EventNames,
+	eventContractUtil,
 } from '@sprucelabs/mercury-types'
-import SpruceError from '../errors/SpruceError'
 import MercurySocketIoClient from '../MercurySocketIoClient'
 
 export default class MutableContractClient<
 	Contract extends EventContract
 > extends MercurySocketIoClient<Contract> {
-	private static inMemoryContract: EventContract = { eventSignatures: [] }
+	private static inMemoryContract: EventContract = { eventSignatures: {} }
 	public static mixinContract(contract: EventContract) {
 		const newContract = {
-			eventSignatures: [
+			eventSignatures: {
 				...this.inMemoryContract.eventSignatures,
 				...contract.eventSignatures,
-			],
+			},
 		} as const
 
 		this.inMemoryContract = newContract
 	}
 
-	protected getEventSignatureByName<
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>
-	>(eventName: EventName): EventSignature {
-		const inMemorySig = MutableContractClient.inMemoryContract.eventSignatures.find(
-			(sig) => sig.eventNameWithOptionalNamespace === eventName
-		)
+	protected getEventSignatureByName<EventName extends EventNames<Contract>>(
+		eventNameWithOptionalNamespace: EventName
+	): EventSignature {
+		try {
+			const inMemorySig = eventContractUtil.getSignatureByName(
+				MutableContractClient.inMemoryContract,
+				eventNameWithOptionalNamespace
+			)
 
-		if (inMemorySig) {
 			return inMemorySig
+		} catch (err) {
+			const sig = eventContractUtil.getSignatureByName(
+				this.eventContract,
+				eventNameWithOptionalNamespace
+			)
+
+			return sig
 		}
-
-		const sig = this.eventContract.eventSignatures.find(
-			(sig) => sig.eventNameWithOptionalNamespace === eventName
-		)
-
-		if (!sig) {
-			throw new SpruceError({
-				code: 'INVALID_EVENT_NAME',
-				eventNameWithOptionalNamespace: eventName,
-			})
-		}
-
-		return sig
 	}
 }

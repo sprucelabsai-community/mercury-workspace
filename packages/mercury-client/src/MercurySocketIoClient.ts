@@ -1,12 +1,11 @@
 import AbstractSpruceError from '@sprucelabs/error'
 import {
-	ContractMapper,
-	DeepReadonly,
 	EmitCallback,
 	EventContract,
+	EventNames,
 	EventSignature,
-	KeyOf,
 	MercuryAggregateResponse,
+	eventContractUtil,
 } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { ISchema, SchemaValues } from '@sprucelabs/schema'
@@ -81,11 +80,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public async emit<
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends DeepReadonly<EventSignature> = DeepReadonly<
-			MappedContract[EventName]
-		>,
+		EventName extends EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
 			? IEventSignature['emitPayloadSchema']
 			: never,
@@ -101,10 +97,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			| (EmitSchema extends SchemaValues<EmitSchema>
 					? SchemaValues<EmitSchema>
 					: never)
-			| EmitCallback<MappedContract, EventName>,
-		cb?: EmitCallback<MappedContract, EventName>
+			| EmitCallback<Contract, EventName>,
+		cb?: EmitCallback<Contract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
-		const signature = this.getEventSignatureByName<MappedContract>(eventName)
+		const signature = eventContractUtil.getSignatureByName(
+			this.eventContract,
+			eventName
+		)
 
 		if (signature.emitPayloadSchema) {
 			try {
@@ -148,27 +147,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		return results
 	}
 
-	protected getEventSignatureByName<
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>
-	>(eventName: EventName) {
-		const sig = this.eventContract.eventSignatures.find(
-			(sig) => sig.eventNameWithOptionalNamespace === eventName
-		)
-
-		if (!sig) {
-			throw new SpruceError({
-				code: 'INVALID_EVENT_NAME',
-				eventNameWithOptionalNamespace: eventName,
-			})
-		}
-		return sig
-	}
-
 	public async on<
-		MappedContract extends ContractMapper<Contract> = ContractMapper<Contract>,
-		EventName extends KeyOf<MappedContract> = KeyOf<MappedContract>,
-		IEventSignature extends DeepReadonly<EventSignature> = MappedContract[EventName],
+		EventName extends EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
 			? IEventSignature['emitPayloadSchema']
 			: never
@@ -205,12 +186,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		)
 	}
 
-	public async off(
-		eventName: Extract<
-			Contract['eventSignatures'][number]['eventNameWithOptionalNamespace'],
-			string
-		>
-	): Promise<number> {
+	public async off(eventName: EventNames<Contract>): Promise<number> {
 		return new Promise((resolve, reject) => {
 			this.socket?.emit(
 				'un-register-listeners',
