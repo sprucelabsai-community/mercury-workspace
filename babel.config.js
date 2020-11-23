@@ -21,18 +21,6 @@ module.exports = (api) => {
 		],
 		overrides: [
 			{
-				test: 'packages/mercury-types',
-				plugins: [[
-					'module-resolver',
-					{
-						root: ['./'],
-						alias: {
-							'#spruce': './src/.spruce',
-						},
-					},
-				]]
-			},
-			{
 				test: 'packages/mercury-event-emitter',
 				plugins: [[
 					'module-resolver',

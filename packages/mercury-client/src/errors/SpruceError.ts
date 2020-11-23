@@ -11,10 +11,6 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = 'You must connect via the https protocol.'
 				break
 
-			case 'INVALID_EVENT_NAME':
-				message = `${options.eventNameWithOptionalNamespace} is not in the event contract. Check your spelling and try pulling the latest contracts.`
-				break
-
 			case 'UNEXPECTED_PAYLOAD':
 				message = 'A Unexpected payload just happened!'
 				break

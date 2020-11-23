@@ -1,4 +1,4 @@
-import { EventContract, MutableEventContract } from '@sprucelabs/mercury-types'
+import { EventContract } from '@sprucelabs/mercury-types'
 import { ConnectionOptions, MercuryClient } from './client.types'
 import { DEFAULT_HOST } from './constants'
 import SpruceError from './errors/SpruceError'
@@ -29,16 +29,18 @@ export default class MercuryClientFactory {
 			})
 		}
 
-		const unifiedContract: MutableEventContract = {
-			eventSignatures: [],
+		const unifiedContract: EventContract = {
+			eventSignatures: {},
 		}
 
 		for (const contract of contracts) {
-			const c = contract as MutableEventContract
-			unifiedContract.eventSignatures.push(...c.eventSignatures)
+			unifiedContract.eventSignatures = {
+				...unifiedContract.eventSignatures,
+				...contract.eventSignatures,
+			}
 		}
 
-		const eventContract: Contract = unifiedContract as any
+		const eventContract = unifiedContract as Contract
 
 		const Client = isTest ? MutableContractClient : MercurySocketIoClient
 

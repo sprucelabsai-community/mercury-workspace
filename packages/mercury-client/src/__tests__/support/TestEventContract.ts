@@ -1,10 +1,9 @@
-import { validateEventContract } from '@sprucelabs/mercury-types'
+import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
 
-export const testEventContract = {
-	eventSignatures: [
-		{
-			eventNameWithOptionalNamespace: 'authenticate',
+export const testEventContract = buildEventContract({
+	eventSignatures: {
+		authenticate: {
 			emitPayloadSchema: {
 				id: 'authenticateTargetAndPayload',
 				fields: {
@@ -182,8 +181,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'can-listen',
+		'can-listen': {
 			emitPayloadSchema: {
 				id: 'canListenTargetAndPayload',
 				fields: {
@@ -220,8 +218,7 @@ export const testEventContract = {
 				fields: { can: { type: 'boolean' } },
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'confirm-pin',
+		'confirm-pin': {
 			emitPayloadSchema: {
 				id: 'confirmPinTargetAndPayload',
 				fields: {
@@ -323,8 +320,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'create-location',
+		'create-location': {
 			emitPayloadSchema: {
 				id: 'createLocationTargetAndPayload',
 				fields: {
@@ -814,8 +810,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'create-organization',
+		'create-organization': {
 			emitPayloadSchema: {
 				id: 'createOrganizationTargetAndPayload',
 				fields: {
@@ -862,8 +857,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'create-role',
+		'create-role': {
 			emitPayloadSchema: {
 				id: 'createRoleTargetAndPayload',
 				fields: {
@@ -969,8 +963,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'delete-location',
+		'delete-location': {
 			emitPayloadSchema: {
 				id: 'deleteLocationTargetAndPayload',
 				fields: {
@@ -1242,8 +1235,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'delete-organization',
+		'delete-organization': {
 			emitPayloadSchema: {
 				id: 'deleteOrganizationTargetAndPayload',
 				fields: {
@@ -1290,8 +1282,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'delete-role',
+		'delete-role': {
 			emitPayloadSchema: {
 				id: 'deleteRoleTargetAndPayload',
 				fields: {
@@ -1374,8 +1365,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'get-event-contracts',
+		'get-event-contracts': {
 			emitPayloadSchema: {
 				id: 'getEventContractsTargetAndPayload',
 				fields: {
@@ -1389,8 +1379,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'get-location',
+		'get-location': {
 			emitPayloadSchema: {
 				id: 'getLocationTargetAndPayload',
 				fields: {
@@ -1662,8 +1651,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'get-organization',
+		'get-organization': {
 			emitPayloadSchema: {
 				id: 'getOrganizationTargetAndPayload',
 				fields: {
@@ -1710,8 +1698,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'get-role',
+		'get-role': {
 			emitPayloadSchema: {
 				id: 'getRoleTargetAndPayload',
 				fields: {
@@ -1791,8 +1778,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'health',
+		health: {
 			responsePayloadSchema: buildSchema({
 				id: 'healthResponsePayload',
 				fields: {
@@ -1831,8 +1817,7 @@ export const testEventContract = {
 				},
 			}),
 		},
-		{
-			eventNameWithOptionalNamespace: 'install-skill',
+		'install-skill': {
 			emitPayloadSchema: {
 				id: 'installSkillTargetAndPayload',
 				fields: {
@@ -1864,8 +1849,7 @@ export const testEventContract = {
 			},
 			responsePayloadSchema: { id: 'installSkillResponsePayload', fields: {} },
 		},
-		{
-			eventNameWithOptionalNamespace: 'list-locations',
+		'list-locations': {
 			emitPayloadSchema: {
 				id: 'listLocationsTargetAndPayload',
 				fields: {
@@ -2138,8 +2122,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'list-organizations',
+		'list-organizations': {
 			emitPayloadSchema: {
 				id: 'listOrganizationsTargetAndPayload',
 				fields: {
@@ -2178,8 +2161,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'list-roles',
+		'list-roles': {
 			emitPayloadSchema: {
 				id: 'listRolesTargetAndPayload',
 				fields: {
@@ -2260,8 +2242,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'register-events',
+		'register-events': {
 			emitPayloadSchema: {
 				id: 'registerEventsTargetAndPayload',
 				fields: {
@@ -2285,948 +2266,46 @@ export const testEventContract = {
 													eventSignatures: {
 														type: 'schema',
 														isRequired: true,
-														isArray: true,
 														options: {
 															schema: {
-																id: 'eventSignature',
-																version: 'v2020_09_01',
-																namespace: 'MercuryTypes',
-																name: 'Event Signature',
-																fields: {
-																	eventNameWithOptionalNamespace: {
-																		type: 'text',
-																		isRequired: true,
-																	},
-																	responsePayloadSchema: {
-																		type: 'raw',
-																		options: {
-																			valueType: 'SpruceSchema.ISchema',
-																		},
-																	},
-																	emitPayloadSchema: {
-																		type: 'raw',
-																		options: {
-																			valueType: 'SpruceSchema.ISchema',
-																		},
-																	},
-																	listenPermissionContract: {
-																		type: 'schema',
-																		options: {
-																			schema: {
-																				id: 'permissionContract',
-																				version: 'v2020_09_01',
-																				namespace: 'MercuryTypes',
-																				name: 'Permission contract',
-																				fields: {
-																					id: {
-																						type: 'text',
-																						isRequired: true,
+																id: 'eventSignaturesByName',
+																dynamicFieldSignature: {
+																	keyName: 'eventName',
+																	type: 'schema',
+																	isRequired: true,
+																	options: {
+																		schema: {
+																			id: 'eventSignature',
+																			name: 'Event Signature',
+																			description: '',
+																			fields: {
+																				responsePayloadSchema: {
+																					type: 'raw',
+																					options: {
+																						valueType: 'SpruceSchema.ISchema',
 																					},
-																					name: {
-																						label: 'Name',
-																						type: 'text',
-																						isRequired: true,
-																						hint:
-																							'Human readable name for this contract',
+																				},
+																				emitPayloadSchema: {
+																					type: 'raw',
+																					options: {
+																						valueType: 'SpruceSchema.ISchema',
 																					},
-																					description: {
-																						label: 'Description',
-																						type: 'text',
-																					},
-																					requireAllPermissions: {
-																						label: 'Require all permissions',
-																						type: 'boolean',
-																						defaultValue: false,
-																					},
-																					permissions: {
-																						type: 'schema',
-																						isRequired: true,
-																						isArray: true,
-																						options: {
-																							schema: {
-																								id: 'permission',
-																								version: 'v2020_09_01',
-																								namespace: 'MercuryTypes',
-																								name: 'Permission',
-																								fields: {
-																									id: {
-																										label: 'id',
-																										type: 'text',
-																										isRequired: true,
-																										hint:
-																											'Hyphen separated di for this permission, e.g. can-unlock-doors',
-																									},
-																									name: {
-																										label: 'Name',
-																										type: 'text',
-																										isRequired: true,
-																										hint:
-																											'Human readable name for this permission',
-																									},
-																									description: {
-																										label: 'Description',
-																										type: 'text',
-																									},
-																									requireAllStatuses: {
-																										label:
-																											'Require all statuses',
-																										type: 'boolean',
-																										defaultValue: false,
-																									},
-																									defaultsByRoleBase: {
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'defaultsByRole',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													owner: {
-																														label: 'Owner',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													groupManager: {
-																														label:
-																															'Group manager',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													manager: {
-																														label: 'Manager',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													teammate: {
-																														label: 'Teammate',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													guest: {
-																														label: 'Guest',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													anonymous: {
-																														label: 'Anonymous',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																												},
-																											},
-																										},
-																									},
-																									can: {
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																								},
-																							},
+																				},
+																				listenPermissionContract: {
+																					type: 'schema',
+																					options: {
+																						schemaId: {
+																							id: 'permissionContract',
+																							version: 'v2020_09_01',
 																						},
 																					},
 																				},
-																			},
-																		},
-																	},
-																	emitPermissionContract: {
-																		type: 'schema',
-																		options: {
-																			schema: {
-																				id: 'permissionContract',
-																				version: 'v2020_09_01',
-																				namespace: 'MercuryTypes',
-																				name: 'Permission contract',
-																				fields: {
-																					id: {
-																						type: 'text',
-																						isRequired: true,
-																					},
-																					name: {
-																						label: 'Name',
-																						type: 'text',
-																						isRequired: true,
-																						hint:
-																							'Human readable name for this contract',
-																					},
-																					description: {
-																						label: 'Description',
-																						type: 'text',
-																					},
-																					requireAllPermissions: {
-																						label: 'Require all permissions',
-																						type: 'boolean',
-																						defaultValue: false,
-																					},
-																					permissions: {
-																						type: 'schema',
-																						isRequired: true,
-																						isArray: true,
-																						options: {
-																							schema: {
-																								id: 'permission',
-																								version: 'v2020_09_01',
-																								namespace: 'MercuryTypes',
-																								name: 'Permission',
-																								fields: {
-																									id: {
-																										label: 'id',
-																										type: 'text',
-																										isRequired: true,
-																										hint:
-																											'Hyphen separated di for this permission, e.g. can-unlock-doors',
-																									},
-																									name: {
-																										label: 'Name',
-																										type: 'text',
-																										isRequired: true,
-																										hint:
-																											'Human readable name for this permission',
-																									},
-																									description: {
-																										label: 'Description',
-																										type: 'text',
-																									},
-																									requireAllStatuses: {
-																										label:
-																											'Require all statuses',
-																										type: 'boolean',
-																										defaultValue: false,
-																									},
-																									defaultsByRoleBase: {
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'defaultsByRole',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													owner: {
-																														label: 'Owner',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													groupManager: {
-																														label:
-																															'Group manager',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													manager: {
-																														label: 'Manager',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													teammate: {
-																														label: 'Teammate',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													guest: {
-																														label: 'Guest',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																													anonymous: {
-																														label: 'Anonymous',
-																														type: 'schema',
-																														options: {
-																															schema: {
-																																id:
-																																	'statusFlags',
-																																version:
-																																	'v2020_09_01',
-																																namespace:
-																																	'MercuryTypes',
-																																name: '',
-																																fields: {
-																																	default: {
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'What is the fallback if no status is set?',
-																																	},
-																																	clockedIn: {
-																																		label:
-																																			'Clocked in',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Is the person clocked in and ready to rock?',
-																																	},
-																																	clockedOut: {
-																																		label:
-																																			'Clocked out',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'When someone is not working (off the clock).',
-																																	},
-																																	onPrem: {
-																																		label:
-																																			'On premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			'Are they at work (maybe working, maybe visiting).',
-																																	},
-																																	offPrem: {
-																																		label:
-																																			'Off premise',
-																																		type:
-																																			'boolean',
-																																		hint:
-																																			"They aren't at the office or shop.",
-																																	},
-																																},
-																															},
-																														},
-																													},
-																												},
-																											},
-																										},
-																									},
-																									can: {
-																										type: 'schema',
-																										options: {
-																											schema: {
-																												id: 'statusFlags',
-																												version: 'v2020_09_01',
-																												namespace:
-																													'MercuryTypes',
-																												name: '',
-																												fields: {
-																													default: {
-																														type: 'boolean',
-																														hint:
-																															'What is the fallback if no status is set?',
-																													},
-																													clockedIn: {
-																														label: 'Clocked in',
-																														type: 'boolean',
-																														hint:
-																															'Is the person clocked in and ready to rock?',
-																													},
-																													clockedOut: {
-																														label:
-																															'Clocked out',
-																														type: 'boolean',
-																														hint:
-																															'When someone is not working (off the clock).',
-																													},
-																													onPrem: {
-																														label: 'On premise',
-																														type: 'boolean',
-																														hint:
-																															'Are they at work (maybe working, maybe visiting).',
-																													},
-																													offPrem: {
-																														label:
-																															'Off premise',
-																														type: 'boolean',
-																														hint:
-																															"They aren't at the office or shop.",
-																													},
-																												},
-																											},
-																										},
-																									},
-																								},
-																							},
+																				emitPermissionContract: {
+																					type: 'schema',
+																					options: {
+																						schemaId: {
+																							id: 'permissionContract',
+																							version: 'v2020_09_01',
 																						},
 																					},
 																				},
@@ -3252,8 +2331,7 @@ export const testEventContract = {
 				fields: {},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'register-listeners',
+		'register-listeners': {
 			emitPayloadSchema: {
 				id: 'registerListenersTargetAndPayload',
 				fields: {
@@ -3276,8 +2354,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'register-skill',
+		'register-skill': {
 			emitPayloadSchema: {
 				id: 'registerSkillTargetAndPayload',
 				fields: {
@@ -3351,8 +2428,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'request-pin',
+		'request-pin': {
 			emitPayloadSchema: {
 				id: 'requestPinTargetAndPayload',
 				fields: {
@@ -3373,8 +2449,7 @@ export const testEventContract = {
 				fields: { challenge: { type: 'text', isRequired: true } },
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'scramble-account',
+		'scramble-account': {
 			emitPayloadSchema: {
 				id: 'scrambleAccountTargetAndPayload',
 				fields: {
@@ -3392,8 +2467,7 @@ export const testEventContract = {
 				fields: {},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'un-register-events',
+		'un-register-events': {
 			emitPayloadSchema: {
 				id: 'unRegisterEventsTargetAndPayload',
 				fields: {
@@ -3420,8 +2494,7 @@ export const testEventContract = {
 				fields: {},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'uninstall-skill',
+		'uninstall-skill': {
 			emitPayloadSchema: {
 				id: 'uninstallSkillTargetAndPayload',
 				fields: {
@@ -3456,8 +2529,7 @@ export const testEventContract = {
 				fields: {},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'update-location',
+		'update-location': {
 			emitPayloadSchema: {
 				id: 'updateLocationTargetAndPayload',
 				fields: {
@@ -3957,8 +3029,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'update-organization',
+		'update-organization': {
 			emitPayloadSchema: {
 				id: 'updateOrganizationTargetAndPayload',
 				fields: {
@@ -4013,8 +3084,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'update-role',
+		'update-role': {
 			emitPayloadSchema: {
 				id: 'updateRoleTargetAndPayload',
 				fields: {
@@ -4127,8 +3197,7 @@ export const testEventContract = {
 				},
 			},
 		},
-		{
-			eventNameWithOptionalNamespace: 'who-am-i',
+		'who-am-i': {
 			emitPayloadSchema: {
 				id: 'whoAmITargetAndPayload',
 				fields: {
@@ -4297,9 +3366,7 @@ export const testEventContract = {
 				},
 			},
 		},
-	],
-} as const
-
-validateEventContract(testEventContract)
+	},
+})
 
 export type TestEventContract = typeof testEventContract

@@ -11,27 +11,35 @@ import * as SpruceSchema from '@sprucelabs/schema'
 export declare namespace SpruceErrors.MercuryClient {
 
 	
-	export interface IInvalidEventName {
+	export interface IConnectionFailed {
 		
 			
-			'eventNameWithOptionalNamespace': string
+			'host': string
+			
+			'statusCode': number
 	}
 
-	export interface IInvalidEventNameSchema extends SpruceSchema.ISchema {
-		id: 'invalidEventName',
+	export interface IConnectionFailedSchema extends SpruceSchema.ISchema {
+		id: 'connectionFailed',
 		namespace: 'MercuryClient',
-		name: 'Invalid event name',
+		name: 'Connection failed',
 		    fields: {
 		            /** . */
-		            'eventNameWithOptionalNamespace': {
+		            'host': {
 		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'statusCode': {
+		                type: 'number',
 		                isRequired: true,
 		                options: undefined
 		            },
 		    }
 	}
 
-	export type InvalidEventNameEntity = SchemaEntity<SpruceErrors.MercuryClient.IInvalidEventNameSchema>
+	export type ConnectionFailedEntity = SchemaEntity<SpruceErrors.MercuryClient.IConnectionFailedSchema>
 
 }
 
@@ -95,43 +103,6 @@ export declare namespace SpruceErrors.MercuryClient {
 	}
 
 	export type UnexpectedPayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.IUnexpectedPayloadSchema>
-
-}
-
-
-
-export declare namespace SpruceErrors.MercuryClient {
-
-	
-	export interface IConnectionFailed {
-		
-			
-			'host': string
-			
-			'statusCode': number
-	}
-
-	export interface IConnectionFailedSchema extends SpruceSchema.ISchema {
-		id: 'connectionFailed',
-		namespace: 'MercuryClient',
-		name: 'Connection failed',
-		    fields: {
-		            /** . */
-		            'host': {
-		                type: 'text',
-		                isRequired: true,
-		                options: undefined
-		            },
-		            /** . */
-		            'statusCode': {
-		                type: 'number',
-		                isRequired: true,
-		                options: undefined
-		            },
-		    }
-	}
-
-	export type ConnectionFailedEntity = SchemaEntity<SpruceErrors.MercuryClient.IConnectionFailedSchema>
 
 }
 

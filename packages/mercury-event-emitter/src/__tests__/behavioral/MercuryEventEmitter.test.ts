@@ -2,6 +2,7 @@ import {
 	EventNames,
 	MercuryEventEmitter,
 	EventContract,
+	buildEventContract,
 } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
@@ -16,16 +17,11 @@ class EventEmitter<
 	}
 }
 
-const contract = {
-	eventSignatures: [
-		{
-			eventNameWithOptionalNamespace: 'eventOne',
-		},
-		{
-			eventNameWithOptionalNamespace: 'eventTwo',
-		},
-		{
-			eventNameWithOptionalNamespace: 'eventWithEmitPayload',
+const contract = buildEventContract({
+	eventSignatures: {
+		eventOne: {},
+		eventTwo: {},
+		eventWithEmitPayload: {
 			emitPayloadSchema: buildSchema({
 				id: 'emitPayloadWithOptionalTextField',
 				name: 'Emit payload with optional text field',
@@ -36,8 +32,7 @@ const contract = {
 				},
 			}),
 		},
-		{
-			eventNameWithOptionalNamespace: 'eventWithResponsePayload',
+		eventWithResponsePayload: {
 			responsePayloadSchema: buildSchema({
 				id: 'responsePayloadWithRequiredTextField',
 				name: 'responsePayloadWithRequiredTextField',
@@ -49,8 +44,7 @@ const contract = {
 				},
 			}),
 		},
-		{
-			eventNameWithOptionalNamespace: 'eventWithEmitAndResponsePayload',
+		eventWithEmitAndResponsePayload: {
 			emitPayloadSchema: buildSchema({
 				id: 'emitPayloadWithRequiredTextField',
 				name: 'emitPayloadWithRequiredTextField',
@@ -72,8 +66,8 @@ const contract = {
 				},
 			}),
 		},
-	],
-} as const
+	},
+})
 
 type Contract = typeof contract
 

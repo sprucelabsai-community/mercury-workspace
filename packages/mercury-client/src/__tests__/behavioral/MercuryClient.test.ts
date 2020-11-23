@@ -1,4 +1,4 @@
-import { MutableEventContract } from '@sprucelabs/mercury-types'
+import { EventContract } from '@sprucelabs/mercury-types'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { MercuryClient, ConnectionOptions } from '../../client.types'
@@ -326,18 +326,15 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 			skill1Client.off('event-does-not-exist')
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_EVENT')
+		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
 	private static generateWillSendVipEventSignature(
 		slug?: string
-	): MutableEventContract {
-		const contract: MutableEventContract = {
-			eventSignatures: [
-				{
-					eventNameWithOptionalNamespace: `${
-						slug ? `${slug}.` : ''
-					}will-send-vip`,
+	): EventContract {
+		const contract: EventContract = {
+			eventSignatures: {
+				[`${slug ? `${slug}.` : ''}will-send-vip`]: {
 					emitPayloadSchema: {
 						id: 'willSendVipTargetAndPayload',
 						fields: {
@@ -368,7 +365,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 						},
 					},
 				},
-			],
+			},
 		}
 
 		return contract
