@@ -100,10 +100,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			| EmitCallback<Contract, EventName>,
 		cb?: EmitCallback<Contract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
-		const signature = eventContractUtil.getSignatureByName(
-			this.eventContract,
-			eventName
-		)
+		const signature = this.getEventSignatureByName(eventName)
 
 		if (signature.emitPayloadSchema) {
 			try {
@@ -145,6 +142,12 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		)
 
 		return results
+	}
+
+	protected getEventSignatureByName<EventName extends EventNames<Contract>>(
+		eventName: EventName
+	) {
+		return eventContractUtil.getSignatureByName(this.eventContract, eventName)
 	}
 
 	public async on<
