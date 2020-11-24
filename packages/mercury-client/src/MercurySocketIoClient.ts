@@ -8,7 +8,7 @@ import {
 	eventContractUtil,
 } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
-import { ISchema, SchemaValues } from '@sprucelabs/schema'
+import { Schema, SchemaValues } from '@sprucelabs/schema'
 import io from 'socket.io-client'
 import { MercuryClient } from './client.types'
 import SpruceError from './errors/SpruceError'
@@ -82,13 +82,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	public async emit<
 		EventName extends EventNames<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
+		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
 			: never,
-		ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
+		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
 			? IEventSignature['responsePayloadSchema']
 			: never,
-		ResponsePayload = ResponseSchema extends ISchema
+		ResponsePayload = ResponseSchema extends Schema
 			? SchemaValues<ResponseSchema>
 			: never
 	>(
@@ -105,7 +105,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		if (signature.emitPayloadSchema) {
 			try {
 				validateSchemaValues(
-					signature.emitPayloadSchema as ISchema,
+					signature.emitPayloadSchema as Schema,
 					payload ?? {}
 				)
 			} catch (err) {
@@ -153,14 +153,14 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	public async on<
 		EventName extends EventNames<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
+		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
 			: never
 	>(
 		eventName: EventName,
 		cb: (
-			payload: EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never
-		) => IEventSignature['responsePayloadSchema'] extends ISchema
+			payload: EmitSchema extends Schema ? SchemaValues<EmitSchema> : never
+		) => IEventSignature['responsePayloadSchema'] extends Schema
 			?
 					| Promise<SchemaValues<IEventSignature['responsePayloadSchema']>>
 					| SchemaValues<IEventSignature['responsePayloadSchema']>
