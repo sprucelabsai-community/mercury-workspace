@@ -9,7 +9,7 @@ import {
 	EventNames,
 	eventContractUtil,
 } from '@sprucelabs/mercury-types'
-import { ISchema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
+import { Schema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
 import SpruceError from './errors/SpruceError'
 
 export default class AbstractEventEmitter<Contract extends EventContract>
@@ -28,10 +28,10 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	public async emit<
 		EventName extends EventNames<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
+		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
 			: never,
-		ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
+		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
 			? IEventSignature['responsePayloadSchema']
 			: never
 	>(
@@ -93,10 +93,10 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	private async emitOne<
 		EventName extends EventNames<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		ResponseSchema extends ISchema = IEventSignature['responsePayloadSchema'] extends ISchema
+		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
 			? IEventSignature['responsePayloadSchema']
 			: never,
-		ResponsePayload = ResponseSchema extends ISchema
+		ResponsePayload = ResponseSchema extends Schema
 			? SchemaValues<ResponseSchema>
 			: never
 	>(options: {
@@ -147,7 +147,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	}
 
 	private validatePayload(
-		schema: ISchema | undefined | null,
+		schema: Schema | undefined | null,
 		actualPayload: any,
 		eventName: string
 	) {
@@ -174,14 +174,14 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 	public async on<
 		EventName extends EventNames<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		EmitSchema extends ISchema = IEventSignature['emitPayloadSchema'] extends ISchema
+		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
 			: never
 	>(
 		eventName: EventName,
 		cb: (
-			payload: EmitSchema extends ISchema ? SchemaValues<EmitSchema> : never
-		) => IEventSignature['responsePayloadSchema'] extends ISchema
+			payload: EmitSchema extends Schema ? SchemaValues<EmitSchema> : never
+		) => IEventSignature['responsePayloadSchema'] extends Schema
 			?
 					| Promise<SchemaValues<IEventSignature['responsePayloadSchema']>>
 					| SchemaValues<IEventSignature['responsePayloadSchema']>
