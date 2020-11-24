@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v13.0.5...v14.0.0) (2020-11-24)
+
+
+### Breaking Changes
+
+* move to keyed events ([0adb711](https://github.com/sprucelabsai/mercury-workspace/commit/0adb711))
+
+
+
+
+
 ## [13.0.5](https://github.com/sprucelabsai/mercury-workspace/compare/v13.0.4...v13.0.5) (2020-11-22)
 
 **Note:** Version bump only for package spruce-mercury-workspace
