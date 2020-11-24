@@ -19,7 +19,7 @@ export declare namespace SpruceErrors.MercuryClient {
 			'statusCode': number
 	}
 
-	export interface IConnectionFailedSchema extends SpruceSchema.ISchema {
+	export interface IConnectionFailedSchema extends SpruceSchema.Schema {
 		id: 'connectionFailed',
 		namespace: 'MercuryClient',
 		name: 'Connection failed',
@@ -52,7 +52,7 @@ export declare namespace SpruceErrors.MercuryClient {
 		
 	}
 
-	export interface IInvalidPayloadSchema extends SpruceSchema.ISchema {
+	export interface IInvalidPayloadSchema extends SpruceSchema.Schema {
 		id: 'invalidPayload',
 		namespace: 'MercuryClient',
 		name: 'Invalid payload',
@@ -73,7 +73,7 @@ export declare namespace SpruceErrors.MercuryClient {
 		
 	}
 
-	export interface IInvalidProtocolSchema extends SpruceSchema.ISchema {
+	export interface IInvalidProtocolSchema extends SpruceSchema.Schema {
 		id: 'invalidProtocol',
 		namespace: 'MercuryClient',
 		name: 'Invalid protocol',
@@ -94,7 +94,7 @@ export declare namespace SpruceErrors.MercuryClient {
 		
 	}
 
-	export interface IUnexpectedPayloadSchema extends SpruceSchema.ISchema {
+	export interface IUnexpectedPayloadSchema extends SpruceSchema.Schema {
 		id: 'unexpectedPayload',
 		namespace: 'MercuryClient',
 		name: 'Unexpected payload',
