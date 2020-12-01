@@ -11,7 +11,7 @@ export default class MercuryClientFactory {
 	): Promise<MercuryClient<Contract>> {
 		const {
 			host = DEFAULT_HOST,
-			contracts = [],
+			contracts,
 			isTest = false,
 		} = connectionOptions || { contracts: [] }
 
@@ -19,14 +19,7 @@ export default class MercuryClientFactory {
 			throw new SpruceError({ code: 'INVALID_PROTOCOL' })
 		}
 
-		if (!contracts) {
-			throw new SpruceError({
-				code: 'MISSING_PARAMETERS',
-				parameters: ['contracts'],
-			})
-		}
-
-		if (!Array.isArray(contracts)) {
+		if (contracts && !Array.isArray(contracts)) {
 			throw new SpruceError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['contracts'],
@@ -37,14 +30,17 @@ export default class MercuryClientFactory {
 			eventSignatures: {},
 		}
 
-		for (const contract of contracts) {
+		for (const contract of contracts ?? []) {
 			unifiedContract.eventSignatures = {
 				...unifiedContract.eventSignatures,
 				...contract.eventSignatures,
 			}
 		}
 
-		const eventContract = unifiedContract as Contract
+		const eventContract =
+			contracts && contracts.length > 0
+				? (unifiedContract as Contract)
+				: undefined
 
 		const Client = isTest ? MutableContractClient : MercurySocketIoClient
 

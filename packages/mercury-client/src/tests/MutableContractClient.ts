@@ -32,10 +32,12 @@ export default class MutableContractClient<
 
 			return inMemorySig
 		} catch (err) {
-			const sig = eventContractUtil.getSignatureByName(
-				this.eventContract,
-				eventNameWithOptionalNamespace
-			)
+			const sig = this.eventContract
+				? eventContractUtil.getSignatureByName(
+						this.eventContract,
+						eventNameWithOptionalNamespace
+				  )
+				: {}
 
 			return sig
 		}

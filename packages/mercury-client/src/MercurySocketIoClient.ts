@@ -24,10 +24,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private ioOptions: IoOptions
 	private socket?: SocketIOClient.Socket
 
-	protected eventContract: Contract
+	protected eventContract?: Contract
 
 	public constructor(
-		options: { host: string; eventContract: Contract } & IoOptions
+		options: { host: string; eventContract?: Contract } & IoOptions
 	) {
 		const { host, eventContract, ...ioOptions } = options
 		this.host = host
@@ -147,6 +147,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	protected getEventSignatureByName<EventName extends EventNames<Contract>>(
 		eventName: EventName
 	) {
+		if (!this.eventContract) {
+			return {}
+		}
 		return eventContractUtil.getSignatureByName(this.eventContract, eventName)
 	}
 

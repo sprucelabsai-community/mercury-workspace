@@ -38,6 +38,14 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	@test()
+	protected static async canGetResponseWithoutTypesWithNoContract() {
+		const client = await MercuryClientFactory.Client({ host: TEST_HOST })
+		this.clients.push(client)
+		const results = await client.emit('get-event-contracts')
+		assert.isTruthy(results)
+	}
+
+	@test()
 	protected static async connectingToBadProtocolThrows() {
 		const err = await assert.doesThrowAsync(() =>
 			MercuryClientFactory.Client({ host: 'aoeu://tasty.org', contracts: [] })
