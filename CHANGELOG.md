@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.4.0](https://github.com/sprucelabsai/mercury-workspace/compare/v14.3.2...v14.4.0) (2020-12-01)
+
+
+### Features
+
+* eventContractUtil.unifyContracts to mix contracts together. ([0bc1f70](https://github.com/sprucelabsai/mercury-workspace/commit/0bc1f70))
+
+
+
+
+
 ## [14.3.2](https://github.com/sprucelabsai/mercury-workspace/compare/v14.3.1...v14.3.2) (2020-12-01)
 
 **Note:** Version bump only for package spruce-mercury-workspace
