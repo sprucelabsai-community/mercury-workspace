@@ -38,7 +38,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": ">=4.0.1",
-		"@sprucelabs/mercury-types": ">=14.0.0",
+		"@sprucelabs/mercury-types": ">=14.1.0",
 		"@sprucelabs/schema": ">=17.0.1"
 	},
 	"devDependencies": {
