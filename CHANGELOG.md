@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.2.0](https://github.com/sprucelabsai/mercury-workspace/compare/v14.1.0...v14.2.0) (2020-12-01)
+
+
+### Features
+
+* mercury client no longer needs a contract, dependency updates, ([2d5f4ac](https://github.com/sprucelabsai/mercury-workspace/commit/2d5f4ac))
+
+
+
+
+
 # [14.1.0](https://github.com/sprucelabsai/mercury-workspace/compare/v14.0.1...v14.1.0) (2020-11-24)
 
 
