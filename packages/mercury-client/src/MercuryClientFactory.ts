@@ -7,9 +7,13 @@ import MutableContractClient from './tests/MutableContractClient'
 
 export default class MercuryClientFactory {
 	public static async Client<Contract extends EventContract>(
-		connectionOptions: ConnectionOptions
+		connectionOptions?: ConnectionOptions
 	): Promise<MercuryClient<Contract>> {
-		const { host = DEFAULT_HOST, contracts, isTest = false } = connectionOptions
+		const {
+			host = DEFAULT_HOST,
+			contracts = [],
+			isTest = false,
+		} = connectionOptions || { contracts: [] }
 
 		if (host.substr(0, 4) !== 'http') {
 			throw new SpruceError({ code: 'INVALID_PROTOCOL' })
@@ -22,7 +26,7 @@ export default class MercuryClientFactory {
 			})
 		}
 
-		if (!Array.isArray(contracts) || contracts.length === 0) {
+		if (!Array.isArray(contracts)) {
 			throw new SpruceError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['contracts'],
@@ -54,6 +58,6 @@ export default class MercuryClientFactory {
 
 		await client.connect()
 
-		return client
+		return client as MercuryClient<Contract>
 	}
 }

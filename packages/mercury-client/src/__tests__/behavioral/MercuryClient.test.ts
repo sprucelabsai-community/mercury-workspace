@@ -32,22 +32,8 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	@test()
-	protected static async throwsWhenMissingContracts() {
-		let err = await assert.doesThrowAsync(() =>
-			//@ts-ignore
-			MercuryClientFactory.Client({})
-		)
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['contracts'],
-		})
-
-		err = await assert.doesThrowAsync(() =>
-			//@ts-ignore
-			MercuryClientFactory.Client({ contracts: [] })
-		)
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['contracts'],
-		})
+	protected static async allowsEmptyContracts() {
+		await MercuryClientFactory.Client({ host: TEST_HOST })
 	}
 
 	@test()
