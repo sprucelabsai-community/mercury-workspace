@@ -33,7 +33,8 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async allowsEmptyContracts() {
-		await MercuryClientFactory.Client({ host: TEST_HOST })
+		const client = await MercuryClientFactory.Client({ host: TEST_HOST })
+		this.clients.push(client)
 	}
 
 	@test()
