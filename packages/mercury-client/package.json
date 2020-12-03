@@ -47,7 +47,7 @@
 		"@sprucelabs/semantic-release": ">=4.0.6",
 		"@sprucelabs/test-utils": ">=2.0.144",
 		"@types/debug": "^4.1.5",
-		"@types/faker": "^5.1.4",
+		"@types/faker": "^5.1.5",
 		"@types/socket.io-client": "^1.4.34",
 		"arkit": "^1.6.4",
 		"concurrently": "^5.3.0",
