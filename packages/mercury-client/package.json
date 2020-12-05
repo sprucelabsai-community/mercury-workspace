@@ -52,7 +52,7 @@
 		"arkit": "^1.6.4",
 		"concurrently": "^5.3.0",
 		"eslint": "^7.15.0",
-		"eslint-config-spruce": "^10.9.118",
+		"eslint-config-spruce": "^10.9.119",
 		"jest": "^26.6.3",
 		"prettier": "^2.2.1",
 		"rollup": "^2.34.1",
