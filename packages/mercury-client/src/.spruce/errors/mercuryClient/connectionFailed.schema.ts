@@ -3,7 +3,7 @@ import { SpruceErrors } from '../errors.types'
 
 
 
-const connectionFailedSchema: SpruceErrors.MercuryClient.IConnectionFailedSchema  = {
+const connectionFailedSchema: SpruceErrors.MercuryClient.ConnectionFailedSchema  = {
 	id: 'connectionFailed',
 	namespace: 'MercuryClient',
 	name: 'Connection failed',

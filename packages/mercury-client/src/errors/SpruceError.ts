@@ -12,11 +12,11 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'UNEXPECTED_PAYLOAD':
-				message = 'A Unexpected payload just happened!'
+				message = `You passed a payload to "${options.eventNameWithOptionalNamespace}" that has no emit payload defined.`
 				break
 
 			case 'INVALID_PAYLOAD':
-				message = 'A Invalid payload just happened!'
+				message = `The payload you passed to "${options.eventNameWithOptionalNamespace}" is invalid.`
 				break
 
 			case 'CONNECTION_FAILED':

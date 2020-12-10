@@ -3,7 +3,7 @@ import { SpruceErrors } from '../errors.types'
 
 
 
-const invalidProtocolSchema: SpruceErrors.MercuryClient.IInvalidProtocolSchema  = {
+const invalidProtocolSchema: SpruceErrors.MercuryClient.InvalidProtocolSchema  = {
 	id: 'invalidProtocol',
 	namespace: 'MercuryClient',
 	name: 'Invalid protocol',

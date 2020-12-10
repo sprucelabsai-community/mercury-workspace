@@ -3,11 +3,17 @@ import { SpruceErrors } from '../errors.types'
 
 
 
-const invalidPayloadSchema: SpruceErrors.MercuryClient.IInvalidPayloadSchema  = {
+const invalidPayloadSchema: SpruceErrors.MercuryClient.InvalidPayloadSchema  = {
 	id: 'invalidPayload',
 	namespace: 'MercuryClient',
 	name: 'Invalid payload',
 	    fields: {
+	            /** . */
+	            'eventNameWithOptionalNamespace': {
+	                type: 'text',
+	                isRequired: true,
+	                options: undefined
+	            },
 	    }
 }
 

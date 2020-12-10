@@ -98,7 +98,9 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 			client.emit('health', { taco: 'bravo' })
 		)
 
-		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD')
+		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD', {
+			eventNameWithOptionalNamespace: 'health',
+		})
 	}
 
 	@test()
@@ -130,7 +132,9 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 			client.emit('request-pin', {})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD')
+		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD', {
+			eventNameWithOptionalNamespace: 'request-pin',
+		})
 	}
 
 	@test()

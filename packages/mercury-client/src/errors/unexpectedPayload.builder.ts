@@ -4,5 +4,10 @@ export default buildErrorSchema({
 	id: 'unexpectedPayload',
 	name: 'Unexpected payload',
 	description: '',
-	fields: {},
+	fields: {
+		eventNameWithOptionalNamespace: {
+			type: 'text',
+			isRequired: true,
+		},
+	},
 })

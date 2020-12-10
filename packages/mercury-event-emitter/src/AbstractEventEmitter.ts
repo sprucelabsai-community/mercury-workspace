@@ -54,12 +54,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		)
 		const emitSchema = eventSignature.emitPayloadSchema
 
-		this.validatePayload(
-			emitSchema,
-
-			actualPayload,
-			eventName
-		)
+		this.validatePayload(emitSchema, actualPayload, eventName)
 
 		const listeners = this.listenersByEvent[eventName] || []
 		let totalErrors = 0

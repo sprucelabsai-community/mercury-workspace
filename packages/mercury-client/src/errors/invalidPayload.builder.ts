@@ -4,5 +4,10 @@ export default buildErrorSchema({
 	id: 'invalidPayload',
 	name: 'Invalid payload',
 	description: '',
-	fields: {},
+	fields: {
+		eventNameWithOptionalNamespace: {
+			type: 'text',
+			isRequired: true,
+		},
+	},
 })

@@ -109,10 +109,17 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					payload ?? {}
 				)
 			} catch (err) {
-				throw new SpruceError({ code: 'INVALID_PAYLOAD', originalError: err })
+				throw new SpruceError({
+					code: 'INVALID_PAYLOAD',
+					originalError: err,
+					eventNameWithOptionalNamespace: eventName,
+				})
 			}
 		} else if (payload) {
-			throw new SpruceError({ code: 'UNEXPECTED_PAYLOAD' })
+			throw new SpruceError({
+				code: 'UNEXPECTED_PAYLOAD',
+				eventNameWithOptionalNamespace: eventName,
+			})
 		}
 
 		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise(
