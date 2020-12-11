@@ -36,7 +36,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": ">=4.0.1",
-		"@sprucelabs/mercury-types": ">=14.5.0",
+		"@sprucelabs/mercury-types": ">=14.6.2",
 		"@sprucelabs/schema": ">=18.2.4",
 		"dotenv": "^8.2.0",
 		"socket.io-client": "^2.3.1"
