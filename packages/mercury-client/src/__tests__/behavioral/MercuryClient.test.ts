@@ -328,6 +328,18 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
+	@test()
+	protected static async serverSideErrorsMappedToSpruceErrors() {
+		const client = await this.connect()
+		const response = await client.emit('register-skill', {
+			payload: { name: 'test' },
+		})
+		const errors = response.responses[0].errors
+
+		assert.isTruthy(errors)
+		errorAssertUtil.assertError(errors[0], 'UNAUTHORIZED_ACCESS')
+	}
+
 	private static generateWillSendVipEventSignature(
 		slug?: string
 	): EventContract {

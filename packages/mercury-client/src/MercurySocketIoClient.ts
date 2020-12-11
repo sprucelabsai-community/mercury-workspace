@@ -6,6 +6,7 @@ import {
 	EventSignature,
 	MercuryAggregateResponse,
 	eventContractUtil,
+	MercurySingleResponse,
 } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { Schema, SchemaValues } from '@sprucelabs/schema'
@@ -128,9 +129,16 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				const singleResponseName = eventName + ':response'
 
 				if (cb) {
-					this.socket?.on(singleResponseName, (response: any) => {
-						void cb(response)
-					})
+					this.socket?.on(
+						singleResponseName,
+						(response: MercurySingleResponse<ResponsePayload>) => {
+							void cb(
+								this.mutatingMapSingleResonseErrorsToSpruceErrors(
+									response
+								) as any
+							)
+						}
+					)
 				}
 
 				const args: any[] = []
@@ -148,7 +156,27 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			}
 		)
 
+		return this.mutatingMapAggregateResultsErrorsToSpruceErrors(results)
+	}
+
+	private mutatingMapAggregateResultsErrorsToSpruceErrors<
+		R extends MercuryAggregateResponse<any>
+	>(results: R): R {
+		results.responses = results.responses.map((response) => {
+			return this.mutatingMapSingleResonseErrorsToSpruceErrors(response)
+		})
 		return results
+	}
+
+	private mutatingMapSingleResonseErrorsToSpruceErrors<
+		R extends MercurySingleResponse<any>
+	>(response: R): R {
+		if (response.errors) {
+			response.errors = response.errors.map((err) =>
+				AbstractSpruceError.parse(err, SpruceError)
+			)
+		}
+		return response
 	}
 
 	protected getEventSignatureByName<EventName extends EventNames<Contract>>(

@@ -36,7 +36,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": ">=4.0.1",
-		"@sprucelabs/mercury-types": ">=14.4.1",
+		"@sprucelabs/mercury-types": ">=14.5.0",
 		"@sprucelabs/schema": ">=18.2.4",
 		"dotenv": "^8.2.0",
 		"socket.io-client": "^2.3.1"
@@ -45,7 +45,7 @@
 		"@sprucelabs/babel-plugin-schema": ">=3.1.2",
 		"@sprucelabs/jest-sheets-reporter": ">=1.2.5",
 		"@sprucelabs/semantic-release": ">=4.0.6",
-		"@sprucelabs/test-utils": ">=2.0.405",
+		"@sprucelabs/test-utils": ">=3.0.1",
 		"@types/debug": "^4.1.5",
 		"@types/faker": "^5.1.5",
 		"@types/socket.io-client": "^1.4.34",
