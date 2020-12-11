@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [14.5.2](https://github.com/sprucelabsai/mercury-workspace/compare/v14.5.1...v14.5.2) (2020-12-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [14.5.1](https://github.com/sprucelabsai/mercury-workspace/compare/v14.5.0...v14.5.1) (2020-12-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+# [14.5.0](https://github.com/sprucelabsai/mercury-workspace/compare/v14.4.12...v14.5.0) (2020-12-11)
+
+
+### Features
+
+* map response errors to spruce errors ([51c5e3a](https://github.com/sprucelabsai/mercury-workspace/commit/51c5e3a))
+
+
+
+
+
 ## [14.4.12](https://github.com/sprucelabsai/mercury-workspace/compare/v14.4.11...v14.4.12) (2020-12-10)
 
 **Note:** Version bump only for package spruce-mercury-workspace
