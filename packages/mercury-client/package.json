@@ -25,14 +25,14 @@
 		"build.tsc": "tsc",
 		"build.browser": "rollup -c rollup.config.js && cd browser && mv index.js mercury.min.js",
 		"build.umd": "rollup -c rollup.config.js && mkdir -p build/umd && cd build && sed s/index.js.map/mercury.js.map/ index.js > umd/mercury.js && mv index.js.map umd/mercury.js.map",
-		"build.watch": "concurrently 'yarn build.tsc -w' 'yarn build.browser -w'",
+		"watch.build": "concurrently 'yarn build.tsc -w' 'yarn build.browser -w'",
 		"clean": "rm -rf build/ browser/",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
 		"lint.fix": "eslint --fix '**/*.ts'",
 		"rebuild": "cd .. && yarn rebuild",
 		"release": "semantic-release",
 		"test": "jest",
-		"test.watch": "jest --watch"
+		"watch.tests": "jest --watch"
 	},
 	"dependencies": {
 		"@sprucelabs/error": ">=4.0.1",
