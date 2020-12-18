@@ -172,7 +172,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			return {}
 		}
 
-		return eventContractUtil.getSignatureByName(this.eventContract, eventName)
+		return eventContractUtil.getSignatureByName(
+			this.eventContract,
+			eventName
+		) as EventSignature
 	}
 
 	public async on<
