@@ -7,9 +7,9 @@ import {
 	EventContract,
 	MercurySingleResponse,
 	EventNames,
-	eventContractUtil,
 } from '@sprucelabs/mercury-types'
 import { Schema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
+import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import SpruceError from './errors/SpruceError'
 
 export default class AbstractEventEmitter<Contract extends EventContract>
