@@ -40,14 +40,14 @@
 		"@sprucelabs/error": ">=4.0.1",
 		"@sprucelabs/mercury-types": ">=15.0.1",
 		"@sprucelabs/schema": ">=19.0.0",
-		"@sprucelabs/spruce-event-utils": "^1.0.8"
+		"@sprucelabs/spruce-event-utils": "^1.0.9"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": ">=4.0.6",
 		"@sprucelabs/test": ">=7.3.0",
 		"chokidar-cli": "^2.1.0",
-		"eslint": "^7.15.0",
-		"eslint-config-spruce": "^10.9.122",
+		"eslint": "^7.16.0",
+		"eslint-config-spruce": "^10.9.123",
 		"typescript": "^4.1.3"
 	},
 	"jest": {
