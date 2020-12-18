@@ -1,4 +1,5 @@
-import { EventContract, eventContractUtil } from '@sprucelabs/mercury-types'
+import { EventContract } from '@sprucelabs/mercury-types'
+import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { ConnectionOptions, MercuryClient } from './client.types'
 import { DEFAULT_HOST } from './constants'
 import SpruceError from './errors/SpruceError'

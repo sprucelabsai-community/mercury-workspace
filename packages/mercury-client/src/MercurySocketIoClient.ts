@@ -1,3 +1,4 @@
+/*global SocketIOClient*/
 import AbstractSpruceError from '@sprucelabs/error'
 import {
 	EmitCallback,
@@ -5,18 +6,17 @@ import {
 	EventNames,
 	EventSignature,
 	MercuryAggregateResponse,
-	eventContractUtil,
 	MercurySingleResponse,
-	eventResponseUtil,
 } from '@sprucelabs/mercury-types'
-import { validateSchemaValues } from '@sprucelabs/schema'
-import { Schema, SchemaValues } from '@sprucelabs/schema'
+import { Schema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
+import {
+	eventContractUtil,
+	eventResponseUtil,
+} from '@sprucelabs/spruce-event-utils'
 import io from 'socket.io-client'
 import { MercuryClient } from './client.types'
 import SpruceError from './errors/SpruceError'
 import socketIoEventUtil from './utilities/socketIoEventUtil.utility'
-
-/*global SocketIOClient*/
 
 type IoOptions = SocketIOClient.ConnectOpts
 
@@ -32,6 +32,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		options: { host: string; eventContract?: Contract } & IoOptions
 	) {
 		const { host, eventContract, ...ioOptions } = options
+
 		this.host = host
 		this.ioOptions = ioOptions
 		this.eventContract = eventContract
@@ -170,7 +171,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		if (!this.eventContract) {
 			return {}
 		}
-		return eventContractUtil.getSignatureByName(this.eventContract, eventName)
+
+		return eventContractUtil.getSignatureByName(
+			this.eventContract,
+			eventName
+		) as EventSignature
 	}
 
 	public async on<

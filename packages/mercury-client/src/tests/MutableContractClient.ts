@@ -2,8 +2,8 @@ import {
 	EventContract,
 	EventSignature,
 	EventNames,
-	eventContractUtil,
 } from '@sprucelabs/mercury-types'
+import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import MercurySocketIoClient from '../MercurySocketIoClient'
 
 export default class MutableContractClient<
