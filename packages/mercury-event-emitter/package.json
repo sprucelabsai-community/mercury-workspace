@@ -40,7 +40,7 @@
 		"@sprucelabs/error": ">=4.0.1",
 		"@sprucelabs/mercury-types": ">=15.0.1",
 		"@sprucelabs/schema": ">=19.0.0",
-		"@sprucelabs/spruce-event-utils": "^1.0.7"
+		"@sprucelabs/spruce-event-utils": "^1.0.8"
 	},
 	"devDependencies": {
 		"@sprucelabs/semantic-release": ">=4.0.6",
