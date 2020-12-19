@@ -38,7 +38,7 @@
 		"@sprucelabs/error": ">=4.0.1",
 		"@sprucelabs/mercury-types": ">=15.0.1",
 		"@sprucelabs/schema": ">=19.0.0",
-		"@sprucelabs/spruce-event-utils": "^1.0.9",
+		"@sprucelabs/spruce-event-utils": "^1.0.10",
 		"dotenv": "^8.2.0",
 		"socket.io-client": "^2.3.1"
 	},
