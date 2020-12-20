@@ -14,9 +14,9 @@ import {
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
 import io from 'socket.io-client'
-import { MercuryClient } from './client.types'
-import SpruceError from './errors/SpruceError'
-import socketIoEventUtil from './utilities/socketIoEventUtil.utility'
+import { MercuryClient } from '../client.types'
+import SpruceError from '../errors/SpruceError'
+import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 
 type IoOptions = SocketIOClient.ConnectOpts
 
@@ -244,7 +244,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	public async disconnect() {
 		if (this.socket) {
 			await new Promise((resolve) => {
-				this.socket?.on('disconnect', () => {
+				this.socket?.once('disconnect', () => {
 					this.socket?.removeAllListeners()
 					this.socket = undefined
 					resolve(undefined)

@@ -4,7 +4,7 @@ import {
 	EventNames,
 } from '@sprucelabs/mercury-types'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
-import MercurySocketIoClient from '../MercurySocketIoClient'
+import MercurySocketIoClient from './MercurySocketIoClient'
 
 export default class MutableContractClient<
 	Contract extends EventContract
@@ -19,6 +19,19 @@ export default class MutableContractClient<
 		} as const
 
 		this.inMemoryContract = newContract
+	}
+
+	public mixinContract(contract: EventContract) {
+		MutableContractClient.mixinContract(contract)
+	}
+
+	public handlesEvent(eventNameWithOptionalNamespace: string) {
+		try {
+			this.getEventSignatureByName(eventNameWithOptionalNamespace as any)
+			return true
+		} catch {
+			return false
+		}
 	}
 
 	protected getEventSignatureByName<EventName extends EventNames<Contract>>(

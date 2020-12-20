@@ -2,16 +2,15 @@ import { EventContract } from '@sprucelabs/mercury-types'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { MercuryClient, ConnectionOptions } from '../../client.types'
-import MercuryClientFactory from '../../MercuryClientFactory'
-import MercurySocketIoClient from '../../MercurySocketIoClient'
-import MutableContractClient from '../../tests/MutableContractClient'
+import MercuryClientFactory from '../../clients/MercuryClientFactory'
+import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
+import MutableContractClient from '../../clients/MutableContractClient'
+import { TEST_HOST } from '../../tests/constants'
 import {
 	TestEventContract,
 	testEventContract,
 } from '../support/TestEventContract'
 require('dotenv').config()
-
-const TEST_HOST = process.env.TEST_HOST ?? 'https://localhost:8001'
 
 type Organization = any
 
@@ -388,7 +387,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	) {
 		const skill = await this.createAndInstallDummySkill(client, org)
 
-		const skillClient = await this.connect({ isTest: true })
+		const skillClient = await this.connect()
 		const authResults = await skillClient.emit('authenticate', {
 			payload: {
 				skillId: skill.id,
