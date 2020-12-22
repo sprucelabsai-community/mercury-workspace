@@ -7,7 +7,7 @@
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "14.6.1",
+	"version": "14.6.3",
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
@@ -47,7 +47,7 @@
 		"@sprucelabs/test": ">0",
 		"chokidar-cli": "^2.1.0",
 		"eslint": "^7.16.0",
-		"eslint-config-spruce": "^10.9.124",
+		"eslint-config-spruce": "^10.9.125",
 		"typescript": "^4.1.3"
 	},
 	"jest": {
