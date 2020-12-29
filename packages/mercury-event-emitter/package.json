@@ -47,7 +47,7 @@
 		"@sprucelabs/test": "latest",
 		"chokidar-cli": "^2.1.0",
 		"eslint": "^7.16.0",
-		"eslint-config-spruce": "^10.9.125",
+		"eslint-config-spruce": "^10.9.126",
 		"typescript": "^4.1.3"
 	},
 	"jest": {
