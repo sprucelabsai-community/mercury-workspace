@@ -1,10 +1,10 @@
 const socketIoEventUtil = {
 	toSocketName(name: string): string {
-		return name.replace('.', '_')
+		return name.replace('.', '__')
 	},
 
 	toMercuryName(name: string): string {
-		return name.replace('_', '.')
+		return name.replace('__', '.')
 	},
 }
 

@@ -30,6 +30,7 @@ export default class MercuryClientFactory {
 		}
 
 		const eventContract = eventContractUtil.unifyContracts<Contract>(
+			//@ts-ignore
 			contracts ?? []
 		)
 

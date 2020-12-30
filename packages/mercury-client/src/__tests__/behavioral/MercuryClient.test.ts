@@ -1,4 +1,5 @@
 import { EventContract } from '@sprucelabs/mercury-types'
+import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { MercuryClient, ConnectionOptions } from '../../client.types'
@@ -40,7 +41,23 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	protected static async canGetResponseWithoutTypesWithNoContract() {
 		const client = await MercuryClientFactory.Client({ host: TEST_HOST })
 		this.clients.push(client)
-		const results = await client.emit('get-event-contracts')
+
+		const results = await client.emit('get-event-contracts::v2020_12_25')
+
+		assert.isTruthy(results)
+	}
+
+	@test()
+	protected static async canAddEmitPayloadToAnythingWithoutContract() {
+		const client = await MercuryClientFactory.Client({ host: TEST_HOST })
+		this.clients.push(client)
+
+		//@ts-ignore
+		const results = await client.emit('get-event-contracts::v2020_12_25', {
+			//@ts-ignore
+			payload: { hello: 'world' },
+		})
+
 		assert.isTruthy(results)
 	}
 
@@ -94,7 +111,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		const client = await this.connect()
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
-			client.emit('health', { taco: 'bravo' })
+			client.emit('health::v2020_12_25', { taco: 'bravo' })
 		)
 
 		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD', {
@@ -128,7 +145,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		const client = await this.connect()
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
-			client.emit('request-pin', {})
+			client.emit('request-pin::v2020_12_25', {})
 		)
 
 		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD', {
@@ -139,7 +156,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	@test()
 	protected static async canRunHealthCheck() {
 		const client = await this.connect()
-		const results = await client.emit('health')
+		const results = await client.emit('health::v2020_12_25')
 
 		assert.isEqualDeep(results.responses[0].payload, {
 			skill: { status: 'passed' },
@@ -161,19 +178,22 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		let newEventTriggered = false
 
 		//@ts-ignore
-		await skill2Client.on(`${skill1.slug}.will-send-vip`, () => {
+		await skill2Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
 			newEventTriggered = true
 			return {
 				messages: ['hello world'],
 			}
 		})
 
-		//@ts-ignore
-		const results = await skill1Client.emit(`${skill1.slug}.will-send-vip`, {
-			target: {
-				organizationId: org.id,
-			},
-		})
+		const results = await skill1Client.emit(
+			//@ts-ignore
+			`${skill1.slug}.will-send-vip::v1`,
+			{
+				target: {
+					organizationId: org.id,
+				},
+			}
+		)
 
 		assert.isEqual(results.totalErrors, 0)
 		assert.isTrue(newEventTriggered)
@@ -199,13 +219,16 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 			this.generateWillSendVipEventSignature(skill1.slug)
 		)
 
-		const registerResults = await skill1Client.emit('register-events', {
-			payload: {
-				contract: this.generateWillSendVipEventSignature(),
-			},
-		})
+		const registerResults = await skill1Client.emit(
+			'register-events::v2020_12_25',
+			{
+				payload: {
+					contract: this.generateWillSendVipEventSignature(),
+				},
+			}
+		)
 
-		assert.isEqual(registerResults.totalErrors, 0)
+		eventResponseUtil.getFirstResponseOrThrow(registerResults)
 
 		return { client, org, skill1, skill1Client, skill2Client }
 	}
@@ -231,7 +254,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		let listenTriggerCount = 0
 
 		//@ts-ignore
-		await skill2Client.on(`${skill1.slug}.will-send-vip`, () => {
+		await skill2Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
 			listenTriggerCount++
 			return {
 				messages: ['hello from skill 2'],
@@ -239,7 +262,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		})
 
 		//@ts-ignore
-		await skill3Client.on(`${skill1.slug}.will-send-vip`, () => {
+		await skill3Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
 			listenTriggerCount++
 			return {
 				messages: ['hello from skill 3'],
@@ -247,7 +270,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		})
 
 		//@ts-ignore
-		await skill4Client.on(`${skill1.slug}.will-send-vip`, () => {
+		await skill4Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
 			listenTriggerCount++
 			return {
 				messages: ['hello from skill 4'],
@@ -258,7 +281,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 		await skill1Client.emit(
 			//@ts-ignore
-			`${skill1.slug}.will-send-vip`,
+			`${skill1.slug}.will-send-vip::v1`,
 			{
 				target: {
 					organizationId: org.id,
@@ -284,7 +307,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 		let listenerTriggerCount = 0
 
-		const eventName = `${skill1.slug}.will-send-vip`
+		const eventName = `${skill1.slug}.will-send-vip::v1`
 
 		//@ts-ignore
 		await skill2Client.on(eventName, () => {
@@ -330,7 +353,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	@test()
 	protected static async serverSideErrorsMappedToSpruceErrors() {
 		const client = await this.connect()
-		const response = await client.emit('register-skill', {
+		const response = await client.emit('register-skill::v2020_12_25', {
 			payload: { name: 'test' },
 		})
 		const errors = response.responses[0].errors
@@ -344,7 +367,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	): EventContract {
 		const contract: EventContract = {
 			eventSignatures: {
-				[`${slug ? `${slug}.` : ''}will-send-vip`]: {
+				[`${slug ? `${slug}.` : ''}will-send-vip::v1`]: {
 					emitPayloadSchema: {
 						id: 'willSendVipTargetAndPayload',
 						fields: {
@@ -388,7 +411,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		const skill = await this.createAndInstallDummySkill(client, org)
 
 		const skillClient = await this.connect()
-		const authResults = await skillClient.emit('authenticate', {
+		const authResults = await skillClient.emit('authenticate::v2020_12_25', {
 			payload: {
 				skillId: skill.id,
 				apiKey: skill.apiKey,
@@ -404,7 +427,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		client: MercuryClient<TestEventContract>,
 		org: Organization
 	) {
-		const skill1Results = await client.emit('register-skill', {
+		const skill1Results = await client.emit('register-skill::v2020_12_25', {
 			payload: {
 				name: `Dummy skill ${this.dummySkillCount++} ${new Date().getTime()}`,
 			},
@@ -413,7 +436,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		const skill = skill1Results.responses[0].payload?.skill
 		assert.isTruthy(skill)
 
-		const installResults = await client.emit('install-skill', {
+		const installResults = await client.emit('install-skill::v2020_12_25', {
 			target: {
 				organizationId: org.id,
 			},
@@ -429,7 +452,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		client: MercuryClient<TestEventContract>
 	) {
 		const orgName = `Dummy org ${new Date().getTime()}`
-		const orgResults = await client.emit('create-organization', {
+		const orgResults = await client.emit('create-organization::v2020_12_25', {
 			payload: {
 				name: orgName,
 			},
@@ -445,7 +468,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	private static async signupDemoPerson(
 		client: MercuryClient<TestEventContract>
 	) {
-		const requestPinResults = await client.emit('request-pin', {
+		const requestPinResults = await client.emit('request-pin::v2020_12_25', {
 			payload: {
 				phone: '555-123-4567',
 			},
@@ -455,7 +478,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 		assert.isTruthy(challenge)
 
-		const confirmPinResults = await client.emit('confirm-pin', {
+		const confirmPinResults = await client.emit('confirm-pin::v2020_12_25', {
 			payload: {
 				challenge,
 				pin: '7777',

@@ -12,6 +12,7 @@ import { Schema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
 import {
 	eventContractUtil,
 	eventResponseUtil,
+	eventNameUtil,
 } from '@sprucelabs/spruce-event-utils'
 import io from 'socket.io-client'
 import { MercuryClient } from '../client.types'
@@ -118,7 +119,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					eventNameWithOptionalNamespace: eventName,
 				})
 			}
-		} else if (payload) {
+		} else if (payload && this.eventContract) {
 			throw new SpruceError({
 				code: 'UNEXPECTED_PAYLOAD',
 				eventNameWithOptionalNamespace: eventName,
@@ -127,12 +128,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise(
 			(resolve) => {
-				const ioName = socketIoEventUtil.toSocketName(eventName)
-				const singleResponseName = eventName + ':response'
+				const responseEventName = eventNameUtil.generateResponseEventName(
+					eventName
+				)
 
 				if (cb) {
 					this.socket?.on(
-						singleResponseName,
+						responseEventName,
 						(response: MercurySingleResponse<ResponsePayload>) => {
 							void cb(
 								eventResponseUtil.mutatingMapSingleResonseErrorsToSpruceErrors(
@@ -151,10 +153,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				}
 
 				args.push((results: any) => {
-					this.socket?.off(singleResponseName)
+					this.socket?.off(responseEventName)
 					resolve(results)
 				})
 
+				const ioName = socketIoEventUtil.toSocketName(eventName)
 				this.socket?.emit(ioName, ...args)
 			}
 		)
@@ -195,7 +198,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			: Promise<void> | void
 	) {
 		//@ts-ignore
-		const results = await this.emit('register-listeners', {
+		const results = await this.emit('register-listeners::v2020_12_25', {
 			payload: { eventNamesWithOptionalNamespace: [eventName] },
 		})
 
@@ -203,7 +206,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			const options = results.responses[0].errors?.[0] ?? 'UNKNOWN_ERROR'
 			throw AbstractSpruceError.parse(options, SpruceError)
 		}
-
 		this.socket?.on(
 			eventName,
 			async (targetAndPayload: any, ioCallback: (p: any) => void) => {
@@ -220,7 +222,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	public async off(eventName: EventNames<Contract>): Promise<number> {
 		return new Promise((resolve, reject) => {
 			this.socket?.emit(
-				'un-register-listeners',
+				'un-register-listeners::v2020_12_25',
 				{
 					payload: {
 						eventNamesWithOptionalNamespace: [eventName],

@@ -3,7 +3,7 @@ import { buildSchema } from '@sprucelabs/schema'
 
 export const testEventContract = buildEventContract({
 	eventSignatures: {
-		authenticate: {
+		'authenticate::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'authenticateTargetAndPayload',
 				fields: {
@@ -218,7 +218,7 @@ export const testEventContract = buildEventContract({
 				fields: { can: { type: 'boolean' } },
 			},
 		},
-		'confirm-pin': {
+		'confirm-pin::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'confirmPinTargetAndPayload',
 				fields: {
@@ -810,7 +810,7 @@ export const testEventContract = buildEventContract({
 				},
 			},
 		},
-		'create-organization': {
+		'create-organization::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'createOrganizationTargetAndPayload',
 				fields: {
@@ -1778,7 +1778,7 @@ export const testEventContract = buildEventContract({
 				},
 			},
 		},
-		health: {
+		'health::v2020_12_25': {
 			responsePayloadSchema: buildSchema({
 				id: 'healthResponsePayload',
 				fields: {
@@ -1817,7 +1817,7 @@ export const testEventContract = buildEventContract({
 				},
 			}),
 		},
-		'install-skill': {
+		'install-skill::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'installSkillTargetAndPayload',
 				fields: {
@@ -2242,7 +2242,7 @@ export const testEventContract = buildEventContract({
 				},
 			},
 		},
-		'register-events': {
+		'register-events::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'registerEventsTargetAndPayload',
 				fields: {
@@ -2331,7 +2331,7 @@ export const testEventContract = buildEventContract({
 				fields: {},
 			},
 		},
-		'register-listeners': {
+		'register-listeners::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'registerListenersTargetAndPayload',
 				fields: {
@@ -2354,7 +2354,7 @@ export const testEventContract = buildEventContract({
 				},
 			},
 		},
-		'register-skill': {
+		'register-skill::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'registerSkillTargetAndPayload',
 				fields: {
@@ -2428,7 +2428,7 @@ export const testEventContract = buildEventContract({
 				},
 			},
 		},
-		'request-pin': {
+		'request-pin::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'requestPinTargetAndPayload',
 				fields: {
