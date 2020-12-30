@@ -17,7 +17,7 @@
 		"lint.watch": "lerna run lint.watch --stream --parallel",
 		"build": "lerna run build",
 		"rebuild": "yarn clean.all && yarn && yarn build",
-		"clean.all": "lerna run clean && rm yarn.lock && rm -rf node_modules; for d in packages/*/node_modules; do echo $d; rm -rf $d; done",
+		"clean.all": "lerna run clean && rm -f yarn.lock && rm -rf node_modules; for d in packages/*/node_modules; do echo $d; rm -rf $d; done",
 		"test": "lerna run test --parallel",
 		"watch.tests": "lerna run watch.tests --parallel",
 		"watch.build": "lerna run watch.build --stream --parallel",

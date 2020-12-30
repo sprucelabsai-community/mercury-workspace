@@ -9,7 +9,7 @@ const unexpectedPayloadSchema: SpruceErrors.MercuryClient.UnexpectedPayloadSchem
 	name: 'Unexpected payload',
 	    fields: {
 	            /** . */
-	            'eventNameWithOptionalNamespace': {
+	            'fullyQualifiedEventName': {
 	                type: 'text',
 	                isRequired: true,
 	                options: undefined

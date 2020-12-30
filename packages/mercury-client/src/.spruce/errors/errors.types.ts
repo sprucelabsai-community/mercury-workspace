@@ -14,7 +14,7 @@ export declare namespace SpruceErrors.MercuryClient {
 	export interface InvalidPayload {
 		
 			
-			'eventNameWithOptionalNamespace': string
+			'fullyQualifiedEventName': string
 	}
 
 	export interface InvalidPayloadSchema extends SpruceSchema.Schema {
@@ -23,7 +23,7 @@ export declare namespace SpruceErrors.MercuryClient {
 		name: 'Invalid payload',
 		    fields: {
 		            /** . */
-		            'eventNameWithOptionalNamespace': {
+		            'fullyQualifiedEventName': {
 		                type: 'text',
 		                isRequired: true,
 		                options: undefined
@@ -43,7 +43,7 @@ export declare namespace SpruceErrors.MercuryClient {
 	export interface UnexpectedPayload {
 		
 			
-			'eventNameWithOptionalNamespace': string
+			'fullyQualifiedEventName': string
 	}
 
 	export interface UnexpectedPayloadSchema extends SpruceSchema.Schema {
@@ -52,7 +52,7 @@ export declare namespace SpruceErrors.MercuryClient {
 		name: 'Unexpected payload',
 		    fields: {
 		            /** . */
-		            'eventNameWithOptionalNamespace': {
+		            'fullyQualifiedEventName': {
 		                type: 'text',
 		                isRequired: true,
 		                options: undefined
