@@ -115,7 +115,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		)
 
 		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD', {
-			eventNameWithOptionalNamespace: 'health',
+			fullyQualifiedEventName: 'health',
 		})
 	}
 
@@ -149,7 +149,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		)
 
 		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD', {
-			eventNameWithOptionalNamespace: 'request-pin',
+			fullyQualifiedEventName: 'request-pin',
 		})
 	}
 

@@ -5,7 +5,7 @@ export default buildErrorSchema({
 	name: 'Unexpected payload',
 	description: '',
 	fields: {
-		eventNameWithOptionalNamespace: {
+		fullyQualifiedEventName: {
 			type: 'text',
 			isRequired: true,
 		},

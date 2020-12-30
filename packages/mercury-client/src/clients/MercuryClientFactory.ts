@@ -6,7 +6,7 @@ import SpruceError from '../errors/SpruceError'
 import MutableContractClient from './MutableContractClient'
 
 export type Client<Contract extends EventContract> = MercuryClient<Contract> & {
-	handlesEvent(eventNameWithOptionalNamespace: string): boolean
+	handlesEvent(fullyQualifiedEventName: string): boolean
 	mixinContract(eventContract: EventContract): void
 }
 

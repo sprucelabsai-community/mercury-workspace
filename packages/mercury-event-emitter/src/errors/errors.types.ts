@@ -13,7 +13,7 @@ export type MercuryEventEmitterErrorOptions =
 
 export interface InvalidPayloadErrorOptions extends ISpruceErrorOptions {
 	code: 'INVALID_PAYLOAD'
-	eventNameWithOptionalNamespace: string
+	fullyQualifiedEventName: string
 }
 
 export interface InvalidEventNameErrorOptions extends ISpruceErrorOptions {

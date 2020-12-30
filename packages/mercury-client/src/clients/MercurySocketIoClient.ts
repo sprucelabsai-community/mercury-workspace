@@ -116,13 +116,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				throw new SpruceError({
 					code: 'INVALID_PAYLOAD',
 					originalError: err,
-					eventNameWithOptionalNamespace: eventName,
+					fullyQualifiedEventName: eventName,
 				})
 			}
 		} else if (payload && this.eventContract) {
 			throw new SpruceError({
 				code: 'UNEXPECTED_PAYLOAD',
-				eventNameWithOptionalNamespace: eventName,
+				fullyQualifiedEventName: eventName,
 			})
 		}
 
