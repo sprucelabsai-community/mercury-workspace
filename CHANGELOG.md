@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v14.7.0...v15.0.0) (2020-12-30)
+
+
+### Breaking Changes
+
+* eventNameWithOptionalNamespace -> fullyQualifiedEventName ([70a48ff](https://github.com/sprucelabsai/mercury-workspace/commit/70a48ff))
+
+
+
+
+
 # [14.7.0](https://github.com/sprucelabsai/mercury-workspace/compare/v14.6.6...v14.7.0) (2020-12-30)
 
 
