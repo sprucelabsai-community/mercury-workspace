@@ -206,14 +206,12 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 		const org = await this.createDummyOrg(client)
 
-		const {
-			skill: skill1,
-			skillClient: skill1Client,
-		} = await this.createInstallAndLoginAsSkill(client, org)
+		const createLogin = await this.createInstallAndLoginAsSkill(client, org)
+		const createLogin2 = await this.createInstallAndLoginAsSkill(client, org)
 
-		const {
-			skillClient: skill2Client,
-		} = await this.createInstallAndLoginAsSkill(client, org)
+		const { skill: skill1, skillClient: skill1Client } = await createLogin
+
+		const { skillClient: skill2Client } = await createLogin2
 
 		MutableContractClient.mixinContract(
 			this.generateWillSendVipEventSignature(skill1.slug)
