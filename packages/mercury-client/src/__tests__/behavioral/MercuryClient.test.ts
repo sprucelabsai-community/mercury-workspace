@@ -71,7 +71,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async factoryReturnsSocketIoClient() {
-		const client = await this.connect()
+		const client = await this.Client()
 
 		assert.isTruthy(client instanceof MercurySocketIoClient)
 		assert.isTrue(client.isConnected())
@@ -81,7 +81,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		assert.isFalse(client.isConnected())
 	}
 
-	private static async connect(options?: Partial<ConnectionOptions>) {
+	private static async Client(options?: Partial<ConnectionOptions>) {
 		const { host = TEST_HOST, ...rest } = options || {}
 
 		const client = await MercuryClientFactory.Client<TestEventContract>({
@@ -98,7 +98,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async throwsWithBadEventName() {
-		const client = await this.connect()
+		const client = await this.Client()
 
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => client.emit('health2'))
@@ -108,7 +108,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async cantEmitEventWithWithUnexpectedPayload() {
-		const client = await this.connect()
+		const client = await this.Client()
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
 			client.emit('health::v2020_12_25', { taco: 'bravo' })
@@ -122,7 +122,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	@test()
 	protected static async throwsHelpfulErrorWhenCantReachHost() {
 		const host = 'https://wontfindthisanywhere.com'
-		const err = await assert.doesThrowAsync(() => this.connect({ host }))
+		const err = await assert.doesThrowAsync(() => this.Client({ host }))
 		errorAssertUtil.assertError(err, 'CONNECTION_FAILED', {
 			host,
 			statusCode: 503,
@@ -131,7 +131,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async getsAccessDeniedWhenTryingToListenToUnknownEventAnonymously() {
-		const client = await this.connect()
+		const client = await this.Client()
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
 			client.on('waka-waka', () => {})
@@ -142,7 +142,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async cantEmitEventWithWithInvalidPayload() {
-		const client = await this.connect()
+		const client = await this.Client()
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
 			client.emit('request-pin::v2020_12_25', {})
@@ -155,7 +155,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async canRunHealthCheck() {
-		const client = await this.connect()
+		const client = await this.Client()
 		const results = await client.emit('health::v2020_12_25')
 
 		assert.isEqualDeep(results.responses[0].payload, {
@@ -200,7 +200,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	private static async setup2SkillsAndOneEvent() {
-		const client = await this.connect()
+		const client = await this.Client()
 
 		await this.signupDemoPerson(client)
 
@@ -352,7 +352,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async serverSideErrorsMappedToSpruceErrors() {
-		const client = await this.connect()
+		const client = await this.Client()
 		const response = await client.emit('register-skill::v2020_12_25', {
 			payload: { name: 'test' },
 		})
@@ -410,7 +410,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	) {
 		const skill = await this.createAndInstallDummySkill(client, org)
 
-		const skillClient = await this.connect()
+		const skillClient = await this.Client()
 		const authResults = await skillClient.emit('authenticate::v2020_12_25', {
 			payload: {
 				skillId: skill.id,
@@ -470,7 +470,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	) {
 		const requestPinResults = await client.emit('request-pin::v2020_12_25', {
 			payload: {
-				phone: '555-123-4567',
+				phone: '555-555-5555',
 			},
 		})
 
