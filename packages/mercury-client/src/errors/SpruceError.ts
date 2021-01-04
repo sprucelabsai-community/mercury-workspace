@@ -23,29 +23,31 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `I couldn't connect to ${options.host}. The code I got back was ${options.statusCode}.`
 				break
 
+			case 'NOT_CONNECTED':
+				message = `You cannot ${options.action} when you are not connected to the api.`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}
 
 		// Drop in code and friendly message
 		message = `${message}`
-		const fullMessage = `${message}${
-			options.friendlyMessage && options.friendlyMessage !== message
+		const fullMessage = `${message}${options.friendlyMessage && options.friendlyMessage !== message
 				? `\n\n${options.friendlyMessage}`
 				: ''
-		}`
+			}`
 
 		// Handle repeating text from original message by remove it
-		return `${fullMessage}${
-			this.originalError &&
-			this.originalError.message &&
-			this.originalError.message !== message &&
-			this.originalError.message !== fullMessage
+		return `${fullMessage}${this.originalError &&
+				this.originalError.message &&
+				this.originalError.message !== message &&
+				this.originalError.message !== fullMessage
 				? `\n\nOriginal error: ${this.originalError.message.replace(
-						message,
-						''
-				  )}`
+					message,
+					''
+				)}`
 				: ''
-		}`
+			}`
 	}
 }

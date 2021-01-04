@@ -206,8 +206,8 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 		const org = await this.createDummyOrg(client)
 
-		const createLogin = await this.createInstallAndLoginAsSkill(client, org)
-		const createLogin2 = await this.createInstallAndLoginAsSkill(client, org)
+		const createLogin = this.createInstallAndLoginAsSkill(client, org)
+		const createLogin2 = this.createInstallAndLoginAsSkill(client, org)
 
 		const { skill: skill1, skillClient: skill1Client } = await createLogin
 
@@ -346,6 +346,16 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		)
 
 		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
+	}
+
+	@test()
+	protected static async throwsWhenEmittingWhenNotConnected() {
+		const client = await this.Client()
+		await client.disconnect()
+
+		const err = await assert.doesThrowAsync(() => client.emit('health::v2020_12_25'))
+
+		errorAssertUtil.assertError(err, 'NOT_CONNECTED')
 	}
 
 	@test()

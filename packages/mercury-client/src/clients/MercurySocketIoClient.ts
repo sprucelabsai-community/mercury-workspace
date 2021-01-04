@@ -106,6 +106,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
 		const signature = this.getEventSignatureByName(eventName)
 
+		if (!this.isConnected()) {
+			throw new SpruceError({code: 'NOT_CONNECTED', action: 'emit'})
+		}
+
 		if (signature.emitPayloadSchema) {
 			try {
 				validateSchemaValues(

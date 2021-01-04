@@ -11,19 +11,19 @@ import * as SpruceSchema from '@sprucelabs/schema'
 export declare namespace SpruceErrors.MercuryClient {
 
 	
-	export interface InvalidPayload {
+	export interface NotConnected {
 		
 			
-			'fullyQualifiedEventName': string
+			'action': string
 	}
 
-	export interface InvalidPayloadSchema extends SpruceSchema.Schema {
-		id: 'invalidPayload',
+	export interface NotConnectedSchema extends SpruceSchema.Schema {
+		id: 'notConnected',
 		namespace: 'MercuryClient',
-		name: 'Invalid payload',
+		name: 'Not connected',
 		    fields: {
 		            /** . */
-		            'fullyQualifiedEventName': {
+		            'action': {
 		                type: 'text',
 		                isRequired: true,
 		                options: undefined
@@ -31,7 +31,7 @@ export declare namespace SpruceErrors.MercuryClient {
 		    }
 	}
 
-	export type InvalidPayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.InvalidPayloadSchema>
+	export type NotConnectedEntity = SchemaEntity<SpruceErrors.MercuryClient.NotConnectedSchema>
 
 }
 
@@ -82,6 +82,35 @@ export declare namespace SpruceErrors.MercuryClient {
 	}
 
 	export type InvalidProtocolEntity = SchemaEntity<SpruceErrors.MercuryClient.InvalidProtocolSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
+	export interface InvalidPayload {
+		
+			
+			'fullyQualifiedEventName': string
+	}
+
+	export interface InvalidPayloadSchema extends SpruceSchema.Schema {
+		id: 'invalidPayload',
+		namespace: 'MercuryClient',
+		name: 'Invalid payload',
+		    fields: {
+		            /** . */
+		            'fullyQualifiedEventName': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type InvalidPayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.InvalidPayloadSchema>
 
 }
 
