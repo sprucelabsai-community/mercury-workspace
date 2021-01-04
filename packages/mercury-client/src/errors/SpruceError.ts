@@ -33,21 +33,23 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 
 		// Drop in code and friendly message
 		message = `${message}`
-		const fullMessage = `${message}${options.friendlyMessage && options.friendlyMessage !== message
+		const fullMessage = `${message}${
+			options.friendlyMessage && options.friendlyMessage !== message
 				? `\n\n${options.friendlyMessage}`
 				: ''
-			}`
+		}`
 
 		// Handle repeating text from original message by remove it
-		return `${fullMessage}${this.originalError &&
-				this.originalError.message &&
-				this.originalError.message !== message &&
-				this.originalError.message !== fullMessage
+		return `${fullMessage}${
+			this.originalError &&
+			this.originalError.message &&
+			this.originalError.message !== message &&
+			this.originalError.message !== fullMessage
 				? `\n\nOriginal error: ${this.originalError.message.replace(
-					message,
-					''
-				)}`
+						message,
+						''
+				  )}`
 				: ''
-			}`
+		}`
 	}
 }

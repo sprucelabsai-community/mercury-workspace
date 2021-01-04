@@ -353,7 +353,9 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		const client = await this.Client()
 		await client.disconnect()
 
-		const err = await assert.doesThrowAsync(() => client.emit('health::v2020_12_25'))
+		const err = await assert.doesThrowAsync(() =>
+			client.emit('health::v2020_12_25')
+		)
 
 		errorAssertUtil.assertError(err, 'NOT_CONNECTED')
 	}

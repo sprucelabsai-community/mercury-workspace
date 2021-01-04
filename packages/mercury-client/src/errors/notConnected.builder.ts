@@ -1,15 +1,13 @@
-import  { buildErrorSchema } from '@sprucelabs/schema'
-
+import { buildErrorSchema } from '@sprucelabs/schema'
 
 export default buildErrorSchema({
 	id: 'notConnected',
 	name: 'Not connected',
-    description: '',
+	description: '',
 	fields: {
 		action: {
 			type: 'text',
 			isRequired: true,
 		},
-	}
+	},
 })
-
