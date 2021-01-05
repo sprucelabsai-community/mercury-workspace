@@ -154,7 +154,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 				throw new SpruceError({
 					code: 'INVALID_PAYLOAD',
 					originalError: err,
-					eventName: eventName,
+					eventName,
 				})
 			}
 		}

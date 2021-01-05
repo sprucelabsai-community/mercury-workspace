@@ -415,7 +415,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	private static async TimeoutClient(emitDelay?: number): Promise<any> {
-		const client = await this.Client({ emitTimeoutMs: 500 })
+		const client = await this.Client({ emitTimeoutMs: 100 })
 
 		//@ts-ignore
 		const socket = client.socket as any
