@@ -23,20 +23,26 @@ type IoOptions = SocketIOClient.ConnectOpts
 
 export default class MercurySocketIoClient<Contract extends EventContract>
 	implements MercuryClient<Contract> {
+	protected eventContract?: Contract
+
 	private host: string
 	private ioOptions: IoOptions
 	private socket?: SocketIOClient.Socket
-
-	protected eventContract?: Contract
+	private emitTimeoutMs: number
 
 	public constructor(
-		options: { host: string; eventContract?: Contract } & IoOptions
+		options: {
+			host: string
+			eventContract?: Contract
+			emitTimeoutMs?: number
+		} & IoOptions
 	) {
-		const { host, eventContract, ...ioOptions } = options
+		const { host, eventContract, emitTimeoutMs, ...ioOptions } = options
 
 		this.host = host
 		this.ioOptions = ioOptions
 		this.eventContract = eventContract
+		this.emitTimeoutMs = emitTimeoutMs ?? 10000
 	}
 
 	public async connect() {
@@ -120,18 +126,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				throw new SpruceError({
 					code: 'INVALID_PAYLOAD',
 					originalError: err,
-					fullyQualifiedEventName: eventName,
+					eventName,
 				})
 			}
 		} else if (payload && this.eventContract) {
 			throw new SpruceError({
 				code: 'UNEXPECTED_PAYLOAD',
-				fullyQualifiedEventName: eventName,
+				eventName,
 			})
 		}
 
 		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise(
-			(resolve) => {
+			(resolve, reject) => {
 				const responseEventName = eventNameUtil.generateResponseEventName(
 					eventName
 				)
@@ -156,8 +162,21 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					args.push(payload)
 				}
 
-				args.push((results: any) => {
+				const emitTimeout = setTimeout(() => {
 					this.socket?.off(responseEventName)
+					reject(
+						new SpruceError({
+							code: 'TIMEOUT',
+							eventName,
+							timeoutMs: this.emitTimeoutMs,
+						})
+					)
+				}, this.emitTimeoutMs)
+
+				args.push((results: any) => {
+					clearTimeout(emitTimeout)
+					this.socket?.off(responseEventName)
+
 					resolve(results)
 				})
 

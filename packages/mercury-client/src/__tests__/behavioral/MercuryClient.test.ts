@@ -18,9 +18,15 @@ type Organization = any
 export default class MercuryClientTest extends AbstractSpruceTest {
 	private static clients: MercuryClient<TestEventContract>[] = []
 	private static dummySkillCount = 0
+	private static timeoutClient?: any
 
 	protected static async afterEach() {
 		await super.afterEach()
+
+		if (this.timeoutClient) {
+			this.timeoutClient.socket = null
+		}
+
 		for (const client of this.clients) {
 			await client.disconnect()
 		}
@@ -115,7 +121,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		)
 
 		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD', {
-			fullyQualifiedEventName: 'health',
+			eventName: 'health',
 		})
 	}
 
@@ -149,7 +155,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		)
 
 		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD', {
-			fullyQualifiedEventName: 'request-pin',
+			eventName: 'request-pin',
 		})
 	}
 
@@ -370,6 +376,81 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 		assert.isTruthy(errors)
 		errorAssertUtil.assertError(errors[0], 'UNAUTHORIZED_ACCESS')
+	}
+
+	@test()
+	protected static async timesOutWhenEmittingEventThatIsNeverHandled() {
+		const client = await this.TimeoutClient()
+
+		const err = await assert.doesThrowAsync(() =>
+			client.emit('register-skill::v2020_12_25', {
+				payload: { name: 'test' },
+			})
+		)
+
+		errorAssertUtil.assertError(err, 'TIMEOUT', {
+			eventName: 'register-skill::v2020_12_25',
+		})
+
+		assert.isEqual(client.socket.invocationCounts.off, 1)
+	}
+
+	@test()
+	protected static async timeoutMakesEventualResponseNotCount() {
+		const client = await this.TimeoutClient(12000)
+
+		const err = await assert.doesThrowAsync(() =>
+			client.emit('register-skill::v2020_12_25', {
+				payload: { name: 'test' },
+			})
+		)
+
+		errorAssertUtil.assertError(err, 'TIMEOUT', {
+			eventName: 'register-skill::v2020_12_25',
+		})
+
+		await this.wait(4000)
+
+		assert.isEqual(client.socket.invocationCounts.off, 1)
+	}
+
+	private static async TimeoutClient(emitDelay?: number): Promise<any> {
+		const client = await this.Client({ emitTimeoutMs: 500 })
+
+		//@ts-ignore
+		const socket = client.socket as any
+
+		await new Promise((resolve) => {
+			socket?.once('disconnect', () => {
+				socket?.removeAllListeners()
+				resolve(undefined)
+			})
+
+			socket?.disconnect()
+		})
+
+		//@ts-ignore
+		client.socket = {
+			connected: true,
+			invocationCounts: {
+				off: 0,
+			},
+			emit: (_: any, __: any, cb: () => void) => {
+				if (emitDelay && emitDelay > 0) {
+					setTimeout(cb, emitDelay)
+				}
+			},
+			on: () => {},
+			off() {
+				this.invocationCounts.off++
+			},
+			once: () => {},
+			disconnect: () => {},
+		}
+
+		this.timeoutClient = client
+
+		return client
 	}
 
 	private static generateWillSendVipEventSignature(

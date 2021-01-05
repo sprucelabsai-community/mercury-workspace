@@ -6,7 +6,7 @@ import SpruceError from '../errors/SpruceError'
 import MutableContractClient from './MutableContractClient'
 
 export type Client<Contract extends EventContract> = MercuryClient<Contract> & {
-	handlesEvent(fullyQualifiedEventName: string): boolean
+	handlesEvent(eventName: string): boolean
 	mixinContract(eventContract: EventContract): void
 }
 
@@ -39,6 +39,7 @@ export default class MercuryClientFactory {
 			reconnection: false,
 			rejectUnauthorized: !connectionOptions?.allowSelfSignedCrt,
 			eventContract,
+			emitTimeoutMs: connectionOptions?.emitTimeoutMs,
 		})
 
 		await client.connect()

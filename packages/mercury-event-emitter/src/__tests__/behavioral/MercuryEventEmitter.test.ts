@@ -349,7 +349,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		)) as SpruceError
 
 		this.assertError(error, 'INVALID_PAYLOAD', {
-			fullyQualifiedEventName: 'eventWithEmitPayload',
+			eventName: 'eventWithEmitPayload',
 		})
 	}
 

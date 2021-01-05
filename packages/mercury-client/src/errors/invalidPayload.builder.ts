@@ -5,7 +5,7 @@ export default buildErrorSchema({
 	name: 'Invalid payload',
 	description: '',
 	fields: {
-		fullyQualifiedEventName: {
+		eventName: {
 			type: 'text',
 			isRequired: true,
 		},

@@ -12,11 +12,11 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'UNEXPECTED_PAYLOAD':
-				message = `You passed a payload to "${options.fullyQualifiedEventName}" that has no emit payload defined.`
+				message = `You passed a payload to "${options.eventName}" that has no emit payload defined.`
 				break
 
 			case 'INVALID_PAYLOAD':
-				message = `The payload you passed to "${options.fullyQualifiedEventName}" is invalid.`
+				message = `The payload you passed to "${options.eventName}" is invalid.`
 				break
 
 			case 'CONNECTION_FAILED':
@@ -25,6 +25,12 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 
 			case 'NOT_CONNECTED':
 				message = `You cannot ${options.action} when you are not connected to the api.`
+				break
+
+			case 'TIMEOUT':
+				message = `Dang it, I didn't hear back after emitting "${
+					options.eventName
+				}" for ${options.timeoutMs / 1000} seconds..`
 				break
 
 			default:

@@ -11,6 +11,72 @@ import * as SpruceSchema from '@sprucelabs/schema'
 export declare namespace SpruceErrors.MercuryClient {
 
 	
+	export interface Timeout {
+		
+			
+			'eventName': string
+			
+			'timeoutMs': number
+	}
+
+	export interface TimeoutSchema extends SpruceSchema.Schema {
+		id: 'timeout',
+		namespace: 'MercuryClient',
+		name: 'Timeout',
+		    fields: {
+		            /** . */
+		            'eventName': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'timeoutMs': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type TimeoutEntity = SchemaEntity<SpruceErrors.MercuryClient.TimeoutSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
+	export interface UnexpectedPayload {
+		
+			
+			'eventName': string
+	}
+
+	export interface UnexpectedPayloadSchema extends SpruceSchema.Schema {
+		id: 'unexpectedPayload',
+		namespace: 'MercuryClient',
+		name: 'Unexpected payload',
+		    fields: {
+		            /** . */
+		            'eventName': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type UnexpectedPayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.UnexpectedPayloadSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
 	export interface NotConnected {
 		
 			
@@ -32,35 +98,6 @@ export declare namespace SpruceErrors.MercuryClient {
 	}
 
 	export type NotConnectedEntity = SchemaEntity<SpruceErrors.MercuryClient.NotConnectedSchema>
-
-}
-
-
-
-export declare namespace SpruceErrors.MercuryClient {
-
-	
-	export interface UnexpectedPayload {
-		
-			
-			'fullyQualifiedEventName': string
-	}
-
-	export interface UnexpectedPayloadSchema extends SpruceSchema.Schema {
-		id: 'unexpectedPayload',
-		namespace: 'MercuryClient',
-		name: 'Unexpected payload',
-		    fields: {
-		            /** . */
-		            'fullyQualifiedEventName': {
-		                type: 'text',
-		                isRequired: true,
-		                options: undefined
-		            },
-		    }
-	}
-
-	export type UnexpectedPayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.UnexpectedPayloadSchema>
 
 }
 
@@ -93,7 +130,7 @@ export declare namespace SpruceErrors.MercuryClient {
 	export interface InvalidPayload {
 		
 			
-			'fullyQualifiedEventName': string
+			'eventName': string
 	}
 
 	export interface InvalidPayloadSchema extends SpruceSchema.Schema {
@@ -102,7 +139,7 @@ export declare namespace SpruceErrors.MercuryClient {
 		name: 'Invalid payload',
 		    fields: {
 		            /** . */
-		            'fullyQualifiedEventName': {
+		            'eventName': {
 		                type: 'text',
 		                isRequired: true,
 		                options: undefined

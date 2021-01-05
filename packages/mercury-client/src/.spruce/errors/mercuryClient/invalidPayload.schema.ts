@@ -9,7 +9,7 @@ const invalidPayloadSchema: SpruceErrors.MercuryClient.InvalidPayloadSchema  = {
 	name: 'Invalid payload',
 	    fields: {
 	            /** . */
-	            'fullyQualifiedEventName': {
+	            'eventName': {
 	                type: 'text',
 	                isRequired: true,
 	                options: undefined

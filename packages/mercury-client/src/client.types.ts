@@ -4,6 +4,7 @@ export interface ConnectionOptions {
 	host?: string
 	allowSelfSignedCrt?: boolean
 	contracts?: EventContract[]
+	emitTimeoutMs?: number
 }
 
 export type MercuryClient<

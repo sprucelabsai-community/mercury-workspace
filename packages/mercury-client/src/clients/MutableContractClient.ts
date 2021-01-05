@@ -25,9 +25,9 @@ export default class MutableContractClient<
 		MutableContractClient.mixinContract(contract)
 	}
 
-	public handlesEvent(fullyQualifiedEventName: string) {
+	public handlesEvent(eventName: string) {
 		try {
-			this.getEventSignatureByName(fullyQualifiedEventName as any)
+			this.getEventSignatureByName(eventName as any)
 			return true
 		} catch {
 			return false
@@ -35,21 +35,18 @@ export default class MutableContractClient<
 	}
 
 	protected getEventSignatureByName<EventName extends EventNames<Contract>>(
-		fullyQualifiedEventName: EventName
+		eventName: EventName
 	): EventSignature {
 		try {
 			const inMemorySig = eventContractUtil.getSignatureByName(
 				MutableContractClient.inMemoryContract,
-				fullyQualifiedEventName
+				eventName
 			)
 
 			return inMemorySig
 		} catch (err) {
 			const sig = this.eventContract
-				? eventContractUtil.getSignatureByName(
-						this.eventContract,
-						fullyQualifiedEventName
-				  )
+				? eventContractUtil.getSignatureByName(this.eventContract, eventName)
 				: {}
 
 			return sig

@@ -1,12 +1,16 @@
 import { buildErrorSchema } from '@sprucelabs/schema'
 
 export default buildErrorSchema({
-	id: 'unexpectedPayload',
-	name: 'Unexpected payload',
+	id: 'timeout',
+	name: 'Timeout',
 	description: '',
 	fields: {
 		eventName: {
 			type: 'text',
+			isRequired: true,
+		},
+		timeoutMs: {
+			type: 'number',
 			isRequired: true,
 		},
 	},

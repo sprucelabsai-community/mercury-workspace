@@ -203,7 +203,7 @@ export const testEventContract = buildEventContract({
 											],
 										},
 									},
-									fullyQualifiedEventName: {
+									eventName: {
 										type: 'text',
 										isRequired: true,
 									},
