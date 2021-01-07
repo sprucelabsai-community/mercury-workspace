@@ -6,7 +6,7 @@
 	"files": [
 		"build"
 	],
-	"version": "15.0.8",
+	"version": "15.0.9",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"description": "The simple way to interact with the Spruce Experience Platform",
