@@ -185,7 +185,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			}
 		)
 
-		return eventResponseUtil.mutatingMapAggregateResultsErrorsToSpruceErrors(
+		return eventResponseUtil.mutatingMapAggregateResponseErrorsToSpruceErrors(
 			results,
 			SpruceError
 		)
