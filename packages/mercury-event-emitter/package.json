@@ -30,7 +30,7 @@
 		"rebuild": "cd ../ && yarn rebuild",
 		"clean": "rm -rf build/",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
-		"lint.fix": "eslint --fix '**/*.ts'",
+		"fix.lint": "eslint --fix '**/*.ts'",
 		"lint.watch": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
 		"release": "semantic-release",
 		"test": "jest",

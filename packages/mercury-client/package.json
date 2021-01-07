@@ -28,7 +28,7 @@
 		"watch.build": "concurrently 'yarn build.tsc -w' 'yarn build.browser -w'",
 		"clean": "rm -rf build/ browser/",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
-		"lint.fix": "eslint --fix '**/*.ts'",
+		"fix.lint": "eslint --fix '**/*.ts'",
 		"rebuild": "cd .. && yarn rebuild",
 		"release": "semantic-release",
 		"test": "jest",
