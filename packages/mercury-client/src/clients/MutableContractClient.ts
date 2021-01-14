@@ -38,18 +38,18 @@ export default class MutableContractClient<
 		eventName: EventName
 	): EventSignature {
 		try {
+			const sig = this.eventContract
+				? eventContractUtil.getSignatureByName(this.eventContract, eventName)
+				: {}
+
+			return sig
+		} catch (err) {
 			const inMemorySig = eventContractUtil.getSignatureByName(
 				MutableContractClient.inMemoryContract,
 				eventName
 			)
 
 			return inMemorySig
-		} catch (err) {
-			const sig = this.eventContract
-				? eventContractUtil.getSignatureByName(this.eventContract, eventName)
-				: {}
-
-			return sig
 		}
 	}
 }
