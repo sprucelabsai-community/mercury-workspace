@@ -2342,7 +2342,7 @@ export const testEventContract = buildEventContract({
 							schema: {
 								id: 'registerListenersEmitPayload',
 								fields: {
-									eventNamesWithOptionalNamespace: {
+									fullyQualifiedEventNames: {
 										type: 'text',
 										isRequired: true,
 										isArray: true,
@@ -2478,7 +2478,7 @@ export const testEventContract = buildEventContract({
 							schema: {
 								id: 'unRegisterEventsEmitPayload',
 								fields: {
-									eventNamesWithOptionalNamespace: {
+									fullyQualifiedEventNames: {
 										type: 'text',
 										isRequired: true,
 										isArray: true,

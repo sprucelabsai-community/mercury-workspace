@@ -222,7 +222,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	) {
 		//@ts-ignore
 		const results = await this.emit('register-listeners::v2020_12_25', {
-			payload: { eventNamesWithOptionalNamespace: [eventName] },
+			payload: { fullyQualifiedEventNames: [eventName] },
 		})
 
 		if (results.totalErrors > 0) {
@@ -245,10 +245,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	public async off(eventName: EventNames<Contract>): Promise<number> {
 		return new Promise((resolve, reject) => {
 			this.socket?.emit(
-				'un-register-listeners::v2020_12_25',
+				'unregister-listeners::v2020_12_25',
 				{
 					payload: {
-						eventNamesWithOptionalNamespace: [eventName],
+						fullyQualifiedEventNames: [eventName],
 					},
 				},
 				(results: any) => {
@@ -259,7 +259,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 						)
 						reject(err)
 					} else {
-						resolve(results.responses[0].payload.unRegisterCount)
+						resolve(results.responses[0].payload.unregisterCount)
 					}
 				}
 			)
