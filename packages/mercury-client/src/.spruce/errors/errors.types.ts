@@ -11,43 +11,6 @@ import * as SpruceSchema from '@sprucelabs/schema'
 export declare namespace SpruceErrors.MercuryClient {
 
 	
-	export interface Timeout {
-		
-			
-			'eventName': string
-			
-			'timeoutMs': number
-	}
-
-	export interface TimeoutSchema extends SpruceSchema.Schema {
-		id: 'timeout',
-		namespace: 'MercuryClient',
-		name: 'Timeout',
-		    fields: {
-		            /** . */
-		            'eventName': {
-		                type: 'text',
-		                isRequired: true,
-		                options: undefined
-		            },
-		            /** . */
-		            'timeoutMs': {
-		                type: 'number',
-		                isRequired: true,
-		                options: undefined
-		            },
-		    }
-	}
-
-	export type TimeoutEntity = SchemaEntity<SpruceErrors.MercuryClient.TimeoutSchema>
-
-}
-
-
-
-export declare namespace SpruceErrors.MercuryClient {
-
-	
 	export interface UnexpectedPayload {
 		
 			
@@ -69,6 +32,50 @@ export declare namespace SpruceErrors.MercuryClient {
 	}
 
 	export type UnexpectedPayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.UnexpectedPayloadSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
+	export interface Timeout {
+		
+			
+			'eventName': string
+			
+			'timeoutMs': number
+			
+			'isConnected'?: boolean| undefined | null
+	}
+
+	export interface TimeoutSchema extends SpruceSchema.Schema {
+		id: 'timeout',
+		namespace: 'MercuryClient',
+		name: 'Timeout',
+		    fields: {
+		            /** . */
+		            'eventName': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'timeoutMs': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'isConnected': {
+		                type: 'boolean',
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type TimeoutEntity = SchemaEntity<SpruceErrors.MercuryClient.TimeoutSchema>
 
 }
 

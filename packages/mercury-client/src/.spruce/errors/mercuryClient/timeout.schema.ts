@@ -20,6 +20,11 @@ const timeoutSchema: SpruceErrors.MercuryClient.TimeoutSchema  = {
 	                isRequired: true,
 	                options: undefined
 	            },
+	            /** . */
+	            'isConnected': {
+	                type: 'boolean',
+	                options: undefined
+	            },
 	    }
 }
 

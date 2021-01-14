@@ -13,5 +13,8 @@ export default buildErrorSchema({
 			type: 'number',
 			isRequired: true,
 		},
+		isConnected: {
+			type: 'boolean',
+		},
 	},
 })

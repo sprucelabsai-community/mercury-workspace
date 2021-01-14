@@ -169,6 +169,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 							code: 'TIMEOUT',
 							eventName,
 							timeoutMs: this.emitTimeoutMs,
+							isConnected: this.isConnected(),
 						})
 					)
 				}, this.emitTimeoutMs)

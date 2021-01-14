@@ -31,6 +31,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `Dang it, I didn't hear back after emitting "${
 					options.eventName
 				}" for ${options.timeoutMs / 1000} seconds..`
+
+				if (options.isConnected === false) {
+					message += "\n\nAlso, it appears I'm not connected to the api."
+				}
 				break
 
 			default:

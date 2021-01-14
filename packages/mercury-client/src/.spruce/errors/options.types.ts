@@ -2,11 +2,11 @@ import { SpruceErrors } from "#spruce/errors/errors.types"
 import { SpruceErrorOptions, ErrorOptions as ISpruceErrorOptions} from "@sprucelabs/error"
 import { SchemaErrorOptions } from '@sprucelabs/schema'
 
-export interface TimeoutErrorOptions extends SpruceErrors.MercuryClient.Timeout, ISpruceErrorOptions {
-	code: 'TIMEOUT'
-}
 export interface UnexpectedPayloadErrorOptions extends SpruceErrors.MercuryClient.UnexpectedPayload, ISpruceErrorOptions {
 	code: 'UNEXPECTED_PAYLOAD'
+}
+export interface TimeoutErrorOptions extends SpruceErrors.MercuryClient.Timeout, ISpruceErrorOptions {
+	code: 'TIMEOUT'
 }
 export interface NotConnectedErrorOptions extends SpruceErrors.MercuryClient.NotConnected, ISpruceErrorOptions {
 	code: 'NOT_CONNECTED'
@@ -21,6 +21,6 @@ export interface ConnectionFailedErrorOptions extends SpruceErrors.MercuryClient
 	code: 'CONNECTION_FAILED'
 }
 
-type ErrorOptions = SchemaErrorOptions | SpruceErrorOptions | TimeoutErrorOptions  | UnexpectedPayloadErrorOptions  | NotConnectedErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | ConnectionFailedErrorOptions 
+type ErrorOptions = SchemaErrorOptions | SpruceErrorOptions | UnexpectedPayloadErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | ConnectionFailedErrorOptions 
 
 export default ErrorOptions
