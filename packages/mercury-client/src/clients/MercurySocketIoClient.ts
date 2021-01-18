@@ -136,53 +136,55 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			})
 		}
 
+		const responseEventName = eventNameUtil.generateResponseEventName(eventName)
+
+		if (cb) {
+			this.socket?.on(
+				responseEventName,
+				(response: MercurySingleResponse<ResponsePayload>) => {
+					void cb(
+						eventResponseUtil.mutatingMapSingleResonseErrorsToSpruceErrors(
+							response,
+							SpruceError
+						) as any
+					)
+				}
+			)
+		}
+
+		const args: any[] = []
+
+		if (payload) {
+			args.push(payload)
+		}
+
 		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise(
 			(resolve, reject) => {
-				const responseEventName = eventNameUtil.generateResponseEventName(
-					eventName
-				)
+				try {
+					const emitTimeout = setTimeout(() => {
+						this.socket?.off(responseEventName)
+						reject(
+							new SpruceError({
+								code: 'TIMEOUT',
+								eventName,
+								timeoutMs: this.emitTimeoutMs,
+								isConnected: this.isConnected(),
+							})
+						)
+					}, this.emitTimeoutMs)
 
-				if (cb) {
-					this.socket?.on(
-						responseEventName,
-						(response: MercurySingleResponse<ResponsePayload>) => {
-							void cb(
-								eventResponseUtil.mutatingMapSingleResonseErrorsToSpruceErrors(
-									response,
-									SpruceError
-								) as any
-							)
-						}
-					)
+					args.push((results: any) => {
+						clearTimeout(emitTimeout)
+						this.socket?.off(responseEventName)
+
+						resolve(results)
+					})
+
+					const ioName = socketIoEventUtil.toSocketName(eventName)
+					this.socket?.emit(ioName, ...args)
+				} catch (err) {
+					reject(err)
 				}
-
-				const args: any[] = []
-
-				if (payload) {
-					args.push(payload)
-				}
-
-				const emitTimeout = setTimeout(() => {
-					this.socket?.off(responseEventName)
-					reject(
-						new SpruceError({
-							code: 'TIMEOUT',
-							eventName,
-							timeoutMs: this.emitTimeoutMs,
-							isConnected: this.isConnected(),
-						})
-					)
-				}, this.emitTimeoutMs)
-
-				args.push((results: any) => {
-					clearTimeout(emitTimeout)
-					this.socket?.off(responseEventName)
-
-					resolve(results)
-				})
-
-				const ioName = socketIoEventUtil.toSocketName(eventName)
-				this.socket?.emit(ioName, ...args)
 			}
 		)
 
