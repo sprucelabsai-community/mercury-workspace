@@ -138,18 +138,19 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		const responseEventName = eventNameUtil.generateResponseEventName(eventName)
 
-		if (cb) {
-			this.socket?.on(
-				responseEventName,
-				(response: MercurySingleResponse<ResponsePayload>) => {
-					void cb(
-						eventResponseUtil.mutatingMapSingleResonseErrorsToSpruceErrors(
-							response,
-							SpruceError
-						) as any
-					)
-				}
+		const singleResponseHandler = (
+			response: MercurySingleResponse<ResponsePayload>
+		) => {
+			void cb?.(
+				eventResponseUtil.mutatingMapSingleResonseErrorsToSpruceErrors(
+					response,
+					SpruceError
+				) as any
 			)
+		}
+
+		if (cb) {
+			this.socket?.on(responseEventName, singleResponseHandler)
 		}
 
 		const args: any[] = []
@@ -175,7 +176,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 					args.push((results: any) => {
 						clearTimeout(emitTimeout)
-						this.socket?.off(responseEventName)
+
+						this.socket?.off(responseEventName, singleResponseHandler)
 
 						resolve(results)
 					})
