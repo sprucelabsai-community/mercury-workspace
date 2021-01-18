@@ -2331,6 +2331,33 @@ export const testEventContract = buildEventContract({
 				fields: {},
 			},
 		},
+		'get-event-contracts::v2020_12_25': {
+			responsePayloadSchema: {
+				id: 'getEventContractsResponsePayload',
+				version: 'v2020_12_25',
+				namespace: 'MercuryApi',
+				name: '',
+				fields: {
+					/** . */
+					contracts: {
+						type: 'schema',
+						isRequired: true,
+						isArray: true,
+						options: {
+							schema: {
+								id: 'test',
+								fields: {
+									eventSignatures: {
+										type: 'raw',
+										options: { valueType: 'any' },
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 		'register-listeners::v2020_12_25': {
 			emitPayloadSchema: {
 				id: 'registerListenersTargetAndPayload',

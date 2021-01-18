@@ -24,7 +24,8 @@
                 "5200",
                 "--pattern",
                 "${fileBasenameNoExtension}",
-                "--shouldWatch"
+                "--watchMode",
+                "standard"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/packages/mercury-client"
@@ -36,7 +37,7 @@
             },
             "presentation": {
                 "reveal": "always",
-                "panel": "new"
+                "panel": "dedicated"
             },
             "problemMatcher": []
         },
@@ -45,10 +46,10 @@
             "command": "spruce",
             "args": [
                 "test",
-                "--inspect",
-                "5200",
                 "--shouldHoldAtStart",
-                "true"
+                "true",
+                "--watchMode",
+                "smart"
             ],
             "promptOnClose": false,
             "options": {

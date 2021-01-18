@@ -414,6 +414,63 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		assert.isEqual(client.socket.invocationCounts.off, 1)
 	}
 
+	@test()
+	protected static async canRegisterEventsSimultaniously() {
+		const client = await this.Client()
+		await this.signupDemoPerson(client)
+
+		const org = await this.createDummyOrg(client)
+
+		const {
+			skillClient: originalSkillClient,
+		} = await this.createInstallAndLoginAsSkill(client, org)
+
+		await Promise.all(
+			new Array(5).fill(0).map(async () => {
+				const { skill, skillClient } = await this.createInstallAndLoginAsSkill(
+					client,
+					org
+				)
+
+				const registerResults = await skillClient.emit(
+					'register-events::v2020_12_25',
+					{
+						payload: {
+							contract: this.generateWillSendVipEventSignature(),
+						},
+					}
+				)
+
+				eventResponseUtil.getFirstResponseOrThrow(registerResults)
+
+				const results = await originalSkillClient.emit(
+					'get-event-contracts::v2020_12_25'
+				)
+
+				const { contracts } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+				let found = false
+
+				for (const contract of contracts) {
+					if (contract.eventSignatures?.[`${skill.slug}.will-send-vip::v1`]) {
+						found = true
+						break
+					}
+				}
+
+				assert.isTrue(found)
+			})
+		)
+
+		const results = await originalSkillClient.emit(
+			'get-event-contracts::v2020_12_25'
+		)
+
+		const { contracts } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		assert.isLength(contracts, 5 + 1)
+	}
+
 	private static async TimeoutClient(emitDelay?: number): Promise<any> {
 		const client = await this.Client({ emitTimeoutMs: 100 })
 
