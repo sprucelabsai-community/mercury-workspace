@@ -36,6 +36,16 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 					message += "\n\nAlso, it appears I'm not connected to the api."
 				}
 				break
+			case 'MISSING_PARAMETERS':
+				message = `Oops, you're missing some parameters: ${options.parameters.join(
+					','
+				)}`
+				break
+
+			case 'MISSING_TEST_CACHE_DIR':
+				message =
+					'You must set a test cache dir to test Mercury. Try MercuryFactory.setTestCacheDir().'
+				break
 
 			default:
 				message = super.friendlyMessage()
@@ -49,17 +59,6 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				: ''
 		}`
 
-		// Handle repeating text from original message by remove it
-		return `${fullMessage}${
-			this.originalError &&
-			this.originalError.message &&
-			this.originalError.message !== message &&
-			this.originalError.message !== fullMessage
-				? `\n\nOriginal error: ${this.originalError.message.replace(
-						message,
-						''
-				  )}`
-				: ''
-		}`
+		return fullMessage
 	}
 }

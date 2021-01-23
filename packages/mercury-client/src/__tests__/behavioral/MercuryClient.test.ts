@@ -6,6 +6,7 @@ import { MercuryClient, ConnectionOptions } from '../../client.types'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import MutableContractClient from '../../clients/MutableContractClient'
+import SpruceError from '../../errors/SpruceError'
 import { TEST_HOST } from '../../tests/constants'
 import {
 	TestEventContract,
@@ -616,9 +617,18 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	private static async signupDemoPerson(
 		client: MercuryClient<TestEventContract>
 	) {
+		const phone = process.env.DEMO_PHONE
+
+		if (!phone) {
+			throw new SpruceError({
+				code: 'MISSING_PARAMETERS',
+				parameters: ['env.DEMO_PHONE'],
+			})
+		}
+
 		const requestPinResults = await client.emit('request-pin::v2020_12_25', {
 			payload: {
-				phone: '555-555-5555',
+				phone,
 			},
 		})
 
@@ -629,13 +639,13 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		const confirmPinResults = await client.emit('confirm-pin::v2020_12_25', {
 			payload: {
 				challenge,
-				pin: '7777',
+				pin: phone.substr(-4),
 			},
 		})
 
 		const person = confirmPinResults.responses[0].payload?.person
 
-		assert.isTruthy(person)
+		assert.isTruthy(person, 'Failed to login!')
 
 		return person
 	}

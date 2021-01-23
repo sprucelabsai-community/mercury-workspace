@@ -9,11 +9,11 @@ import MercurySocketIoClient from './MercurySocketIoClient'
 export default class MutableContractClient<
 	Contract extends EventContract
 > extends MercurySocketIoClient<Contract> {
-	private static inMemoryContract: EventContract = { eventSignatures: {} }
+	private static inMemoryContract?: EventContract
 	public static mixinContract(contract: EventContract) {
 		const newContract = {
 			eventSignatures: {
-				...this.inMemoryContract.eventSignatures,
+				...(this.inMemoryContract?.eventSignatures ?? {}),
 				...contract.eventSignatures,
 			},
 		} as const
@@ -38,14 +38,18 @@ export default class MutableContractClient<
 		eventName: EventName
 	): EventSignature {
 		try {
-			const sig = this.eventContract
-				? eventContractUtil.getSignatureByName(this.eventContract, eventName)
-				: {}
+			const sig =
+				this.eventContract || MutableContractClient.inMemoryContract
+					? eventContractUtil.getSignatureByName(
+							this.eventContract ?? { eventSignatures: {} },
+							eventName
+					  )
+					: {}
 
 			return sig
 		} catch (err) {
 			const inMemorySig = eventContractUtil.getSignatureByName(
-				MutableContractClient.inMemoryContract,
+				MutableContractClient.inMemoryContract ?? { eventSignatures: {} },
 				eventName
 			)
 

@@ -40,50 +40,6 @@ export declare namespace SpruceErrors.MercuryClient {
 export declare namespace SpruceErrors.MercuryClient {
 
 	
-	export interface Timeout {
-		
-			
-			'eventName': string
-			
-			'timeoutMs': number
-			
-			'isConnected'?: boolean| undefined | null
-	}
-
-	export interface TimeoutSchema extends SpruceSchema.Schema {
-		id: 'timeout',
-		namespace: 'MercuryClient',
-		name: 'Timeout',
-		    fields: {
-		            /** . */
-		            'eventName': {
-		                type: 'text',
-		                isRequired: true,
-		                options: undefined
-		            },
-		            /** . */
-		            'timeoutMs': {
-		                type: 'number',
-		                isRequired: true,
-		                options: undefined
-		            },
-		            /** . */
-		            'isConnected': {
-		                type: 'boolean',
-		                options: undefined
-		            },
-		    }
-	}
-
-	export type TimeoutEntity = SchemaEntity<SpruceErrors.MercuryClient.TimeoutSchema>
-
-}
-
-
-
-export declare namespace SpruceErrors.MercuryClient {
-
-	
 	export interface NotConnected {
 		
 			
@@ -113,19 +69,19 @@ export declare namespace SpruceErrors.MercuryClient {
 export declare namespace SpruceErrors.MercuryClient {
 
 	
-	export interface InvalidProtocol {
+	export interface MissingTestCacheDir {
 		
 	}
 
-	export interface InvalidProtocolSchema extends SpruceSchema.Schema {
-		id: 'invalidProtocol',
+	export interface MissingTestCacheDirSchema extends SpruceSchema.Schema {
+		id: 'missingTestCacheDir',
 		namespace: 'MercuryClient',
-		name: 'Invalid protocol',
+		name: 'Missing test cache dir',
 		    fields: {
 		    }
 	}
 
-	export type InvalidProtocolEntity = SchemaEntity<SpruceErrors.MercuryClient.InvalidProtocolSchema>
+	export type MissingTestCacheDirEntity = SchemaEntity<SpruceErrors.MercuryClient.MissingTestCacheDirSchema>
 
 }
 
@@ -192,6 +148,71 @@ export declare namespace SpruceErrors.MercuryClient {
 	}
 
 	export type ConnectionFailedEntity = SchemaEntity<SpruceErrors.MercuryClient.ConnectionFailedSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
+	export interface Timeout {
+		
+			
+			'eventName': string
+			
+			'timeoutMs': number
+			
+			'isConnected'?: boolean| undefined | null
+	}
+
+	export interface TimeoutSchema extends SpruceSchema.Schema {
+		id: 'timeout',
+		namespace: 'MercuryClient',
+		name: 'Timeout',
+		    fields: {
+		            /** . */
+		            'eventName': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'timeoutMs': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'isConnected': {
+		                type: 'boolean',
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type TimeoutEntity = SchemaEntity<SpruceErrors.MercuryClient.TimeoutSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
+	export interface InvalidProtocol {
+		
+	}
+
+	export interface InvalidProtocolSchema extends SpruceSchema.Schema {
+		id: 'invalidProtocol',
+		namespace: 'MercuryClient',
+		name: 'Invalid protocol',
+		    fields: {
+		    }
+	}
+
+	export type InvalidProtocolEntity = SchemaEntity<SpruceErrors.MercuryClient.InvalidProtocolSchema>
 
 }
 

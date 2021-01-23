@@ -13,6 +13,8 @@
             "promptOnClose": false,
             "presentation": {
                 "panel": "dedicated",
+                "focus": false,
+                "reveal": "silent"
             }
         },
         {
@@ -42,7 +44,7 @@
             "problemMatcher": []
         },
         {
-            "label": "test.reporter",
+            "label": "client.test.reporter",
             "command": "spruce",
             "args": [
                 "test",
@@ -54,6 +56,32 @@
             "promptOnClose": false,
             "options": {
                 "cwd": "${workspaceFolder}/packages/mercury-client"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "emitter.test.reporter",
+            "command": "spruce",
+            "args": [
+                "test",
+                "--shouldHoldAtStart",
+                "true",
+                "--watchMode",
+                "smart"
+            ],
+            "promptOnClose": false,
+            "options": {
+                "cwd": "${workspaceFolder}/packages/mercury-event-emitter"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
             },
             "group": "test",
             "presentation": {
