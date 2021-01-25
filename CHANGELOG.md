@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.2.0](https://github.com/sprucelabsai/mercury-workspace/compare/v15.1.5...v15.2.0) (2021-01-25)
+
+
+### Features
+
+* default contract support ([8690534](https://github.com/sprucelabsai/mercury-workspace/commit/8690534))
+
+
+
+
+
 ## [15.1.5](https://github.com/sprucelabsai/mercury-workspace/compare/v15.1.4...v15.1.5) (2021-01-25)
 
 **Note:** Version bump only for package spruce-mercury-workspace
