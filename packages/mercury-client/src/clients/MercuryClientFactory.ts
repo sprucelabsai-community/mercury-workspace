@@ -12,13 +12,12 @@ export type Client<Contract extends EventContract> = MercuryClient<Contract> & {
 
 export default class MercuryClientFactory {
 	private static isTestMode = false
+	private static defaultContract: any
 
 	public static async Client<Contract extends EventContract>(
 		connectionOptions?: ConnectionOptions
 	): Promise<Client<Contract>> {
-		const { host = DEFAULT_HOST, contracts } = connectionOptions || {
-			contracts: [],
-		}
+		const { host = DEFAULT_HOST, contracts } = connectionOptions || {}
 
 		if (host.substr(0, 4) !== 'http') {
 			throw new SpruceError({ code: 'INVALID_PROTOCOL' })
@@ -31,10 +30,11 @@ export default class MercuryClientFactory {
 			})
 		}
 
-		const eventContract = eventContractUtil.unifyContracts<Contract>(
-			//@ts-ignore
-			contracts ?? []
-		)
+		const eventContract =
+			!contracts && this.defaultContract
+				? this.defaultContract
+				: //@ts-ignore
+				  eventContractUtil.unifyContracts<Contract>(contracts ?? [])
 
 		let Client = MutableContractClient
 
@@ -61,5 +61,9 @@ export default class MercuryClientFactory {
 
 	public static setIsTestMode(isTestMode: boolean) {
 		this.isTestMode = isTestMode
+	}
+
+	public static setDefaultContract(contract: EventContract) {
+		this.defaultContract = contract
 	}
 }

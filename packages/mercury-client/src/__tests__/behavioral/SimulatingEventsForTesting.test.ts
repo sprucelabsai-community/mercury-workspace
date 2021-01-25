@@ -45,9 +45,12 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 		await client.disconnect()
 	}
 
-	@test()
-	protected static async canEmitEventToSelfForTesting() {
-		const client = await this.connectToApi()
+	@test('can emit to self with default contract', true)
+	@test('can emit to self without default contract', false)
+	protected static async canEmitEventToSelfForTesting(
+		shouldSetDefaultContract: boolean
+	) {
+		const client = await this.connectToApi(shouldSetDefaultContract)
 		let wasFired = false
 
 		await client.on('did-message::v2020_12_25', async () => {
@@ -85,12 +88,14 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 		)
 	}
 
-	private static async connectToApi() {
+	private static async connectToApi(shouldSetDefaultContract = false) {
 		MercuryClientFactory.setIsTestMode(true)
+		shouldSetDefaultContract &&
+			MercuryClientFactory.setDefaultContract(coreEventContracts[0])
 
 		const client = await MercuryClientFactory.Client<CoreEventContract>({
 			host: TEST_HOST,
-			contracts: coreEventContracts,
+			contracts: !shouldSetDefaultContract ? coreEventContracts : undefined,
 		})
 
 		this.clients.push(client)
