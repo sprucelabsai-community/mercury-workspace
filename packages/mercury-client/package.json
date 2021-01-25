@@ -6,7 +6,7 @@
 	"files": [
 		"build"
 	],
-	"version": "15.0.23",
+	"version": "15.1.0",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"description": "The simple way to interact with the Spruce Experience Platform",
@@ -43,10 +43,10 @@
 		"socket.io-client": "^2.3.1"
 	},
 	"devDependencies": {
-		"@sprucelabs/mercury-event-emitter": "^15.0.23",
 		"@sprucelabs/babel-plugin-schema": "latest",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/jest-sheets-reporter": "latest",
+		"@sprucelabs/mercury-event-emitter": "^15.1.0",
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
 		"@sprucelabs/test-utils": "latest",
@@ -56,8 +56,8 @@
 		"arkit": "^1.6.4",
 		"concurrently": "^5.3.0",
 		"eslint": "^7.18.0",
-		"fs-extra": "^9.1.0",
 		"eslint-config-spruce": "^10.9.134",
+		"fs-extra": "^9.1.0",
 		"jest": "^26.6.3",
 		"jest-circus": "^26.6.3",
 		"prettier": "^2.2.1",
