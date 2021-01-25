@@ -43,6 +43,7 @@
 		"socket.io-client": "^2.3.1"
 	},
 	"devDependencies": {
+		"@sprucelabs/mercury-event-emitter": "^15.0.23",
 		"@sprucelabs/babel-plugin-schema": "latest",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/jest-sheets-reporter": "latest",

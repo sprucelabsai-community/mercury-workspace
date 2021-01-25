@@ -1,13 +1,27 @@
-import fsUtil from 'fs'
-import osUtil from 'os'
-import pathUtil from 'path'
+import {
+	coreEventContracts,
+	CoreEventContract,
+} from '@sprucelabs/mercury-types'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { MercuryClientFactory } from '../..'
 import { TEST_HOST } from '../../tests/constants'
 
 export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
+	private static clients: any[] = []
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+	}
+
+	protected static async afterEach() {
+		await super.afterEach()
+		for (const client of this.clients) {
+			await client.disconnect()
+		}
+		this.clients = []
+	}
+
 	@test()
 	protected static testModeFalseByDefault() {
 		assert.isFalse(MercuryClientFactory.isInTestMode())
@@ -19,38 +33,10 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 		assert.isTrue(MercuryClientFactory.isInTestMode())
 	}
 
-	@test()
-	protected static async testModeThrowsIfNoCacheDirSetForContract() {
-		MercuryClientFactory.setIsTestMode(true)
-
-		const err = await assert.doesThrowAsync(() => MercuryClientFactory.Client())
-
-		errorAssertUtil.assertError(err, 'MISSING_TEST_CACHE_DIR')
-	}
-
-	@test()
-	protected static async testModeWritesContractToCacheDir() {
-		const expectedFile = await this.connectAndGetCachedContractFilepath()
-
-		assert.isTrue(fsUtil.existsSync(expectedFile))
-	}
-
 	private static readonly eventName = 'whoami::v2020_12_25'
 
 	@test()
-	protected static async testModeWritesValidContractAndMixesItIntoClient() {
-		const expectedFile = await this.connectAndGetCachedContractFilepath()
-		const contents = fsUtil
-			.readFileSync(expectedFile)
-			.toString()
-			.replace('module.exports =', '')
-
-		const contracts = JSON.parse(contents)
-
-		assert.isArray(contracts)
-		assert.isTruthy(contracts[0].eventSignatures)
-		assert.isTruthy(contracts[0].eventSignatures[this.eventName])
-
+	protected static async testClientHasContracts() {
 		const client = await this.connectToApi()
 
 		assert.isTrue(client.handlesEvent(this.eventName))
@@ -60,37 +46,55 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 	}
 
 	@test()
-	protected static async clientDoesntWriteContractIfItAlreadyExists() {
-		const contractFile = await this.connectAndGetCachedContractFilepath()
-		fsUtil.writeFileSync(
-			contractFile,
-			'module.exports = [{eventSignatures:{"taco-bravo": {}}}]'
-		)
-
+	protected static async canEmitEventToSelfForTesting() {
 		const client = await this.connectToApi()
-		assert.isTrue(client.handlesEvent('taco-bravo'))
+		let wasFired = false
 
-		await client.disconnect()
+		await client.on('did-message::v2020_12_25', async () => {
+			wasFired = true
+		})
+
+		await client.emit('did-message::v2020_12_25', {
+			target: {},
+			payload: {
+				message: {
+					id: 'test',
+					source: {},
+					target: {},
+					body: 'message body',
+					classification: 'incoming',
+					dateCreated: 1,
+				},
+			},
+		})
+
+		assert.isTrue(wasFired)
 	}
 
-	private static async connectAndGetCachedContractFilepath() {
-		MercuryClientFactory.setIsTestMode(true)
-		const cacheDir = this.generateTmpDir()
-
-		MercuryClientFactory.setTestCacheDir(cacheDir)
-
+	@test()
+	protected static async canEmitToApiWhenNoLocalListenerIsSet() {
 		const client = await this.connectToApi()
-		await client.disconnect()
+		const results = await client.emit('get-event-contracts::v2020_12_25')
 
-		const expectedFile = pathUtil.join(cacheDir, 'events.contract.js')
-		return expectedFile
+		const { contracts } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		assert.isArray(contracts)
+		assert.isObject(contracts[0])
+		assert.isObject(
+			contracts[0].eventSignatures['get-event-contracts::v2020_12_25']
+		)
 	}
 
 	private static async connectToApi() {
-		return await MercuryClientFactory.Client({ host: TEST_HOST })
-	}
+		MercuryClientFactory.setIsTestMode(true)
 
-	private static generateTmpDir() {
-		return pathUtil.join(osUtil.tmpdir(), new Date().getTime().toString())
+		const client = await MercuryClientFactory.Client<CoreEventContract>({
+			host: TEST_HOST,
+			contracts: coreEventContracts,
+		})
+
+		this.clients.push(client)
+
+		return client
 	}
 }
