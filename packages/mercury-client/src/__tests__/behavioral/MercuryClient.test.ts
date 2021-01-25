@@ -1,5 +1,12 @@
-import { EventContract } from '@sprucelabs/mercury-types'
-import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
+import {
+	CoreEventContract,
+	coreEventContracts,
+	EventContract,
+} from '@sprucelabs/mercury-types'
+import {
+	eventErrorAssertUtil,
+	eventResponseUtil,
+} from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { MercuryClient, ConnectionOptions } from '../../client.types'
@@ -8,16 +15,15 @@ import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import MutableContractClient from '../../clients/MutableContractClient'
 import SpruceError from '../../errors/SpruceError'
 import { TEST_HOST } from '../../tests/constants'
-import {
-	TestEventContract,
-	testEventContract,
-} from '../support/TestEventContract'
+
 require('dotenv').config()
 
 type Organization = any
 
+type Client = MercuryClient<CoreEventContract>
+
 export default class MercuryClientTest extends AbstractSpruceTest {
-	private static clients: MercuryClient<TestEventContract>[] = []
+	private static clients: Client[] = []
 	private static dummySkillCount = 0
 	private static timeoutClient?: any
 
@@ -91,10 +97,10 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	private static async Client(options?: Partial<ConnectionOptions>) {
 		const { host = TEST_HOST, ...rest } = options || {}
 
-		const client = await MercuryClientFactory.Client<TestEventContract>({
+		const client = await MercuryClientFactory.Client<CoreEventContract>({
 			host,
 			allowSelfSignedCrt: true,
-			contracts: [testEventContract],
+			contracts: coreEventContracts,
 			...rest,
 		})
 
@@ -472,6 +478,26 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		assert.isLength(contracts, 5 + 1)
 	}
 
+	@test()
+	protected static async handlesCantEmitElegantly() {
+		const client = await this.Client()
+		const results = await client.emit('did-message::v2020_12_25', {
+			target: {},
+			payload: {
+				message: {
+					id: '13234',
+					target: {},
+					source: {},
+					classification: 'incoming',
+					body: 'go team!',
+					dateCreated: new Date().getTime(),
+				},
+			},
+		})
+
+		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNAUTHORIZED_ACCESS')
+	}
+
 	private static async TimeoutClient(emitDelay?: number): Promise<any> {
 		const client = await this.Client({ emitTimeoutMs: 100 })
 
@@ -554,7 +580,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	private static async createInstallAndLoginAsSkill(
-		client: MercuryClient<TestEventContract>,
+		client: Client,
 		org: Organization
 	) {
 		const skill = await this.createAndInstallDummySkill(client, org)
@@ -573,7 +599,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	private static async createAndInstallDummySkill(
-		client: MercuryClient<TestEventContract>,
+		client: Client,
 		org: Organization
 	) {
 		const skill1Results = await client.emit('register-skill::v2020_12_25', {
@@ -597,9 +623,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		return skill
 	}
 
-	private static async createDummyOrg(
-		client: MercuryClient<TestEventContract>
-	) {
+	private static async createDummyOrg(client: Client) {
 		const orgName = `Dummy org ${new Date().getTime()}`
 		const orgResults = await client.emit('create-organization::v2020_12_25', {
 			payload: {
@@ -614,9 +638,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		return org
 	}
 
-	private static async signupDemoPerson(
-		client: MercuryClient<TestEventContract>
-	) {
+	private static async signupDemoPerson(client: Client) {
 		const phone = process.env.DEMO_PHONE
 
 		if (!phone) {
