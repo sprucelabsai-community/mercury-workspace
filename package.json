@@ -12,23 +12,23 @@
 		"npm": ">=6"
 	},
 	"scripts": {
-		"lint": "lerna run lint",
-		"fix.lint": "lerna run fix.lint",
-		"lint.watch": "lerna run lint.watch --stream --parallel",
-		"build": "lerna run build",
-		"rebuild": "yarn clean.all && yarn && yarn build",
-		"clean.all": "lerna run clean && rm -f yarn.lock && rm -rf node_modules; for d in packages/*/node_modules; do echo $d; rm -rf $d; done",
-		"test": "lerna run test --parallel",
-		"watch.tests": "lerna run watch.tests --parallel",
-		"watch.build": "lerna run watch.build --stream --parallel",
-		"publish": "lerna publish",
-		"clean": "lerna run clean",
 		"arkit": "lerna run arkit",
 		"arkit.png": "lerna run arkit.png",
+		"build": "lerna run build",
+		"clean": "lerna run clean",
+		"clean.all": "lerna run clean && rm -f yarn.lock && rm -rf node_modules; for d in packages/*/node_modules; do echo $d; rm -rf $d; done",
+		"fix.lint": "lerna run fix.lint",
+		"lint": "lerna run lint",
+		"publish": "lerna publish",
+		"rebuild": "yarn clean.all && yarn && yarn build",
+		"test": "lerna run test --parallel",
 		"upgrade.packages": "yarn upgrade --latest && rm -f yarn.lock && yarn | true && yarn fix.lint || true",
 		"upgrade.packages.workspaces": "yarn && for d in packages/*; do cd $d; yarn-upgrade-all; cd ../..; done",
 		"upgrade.packages.all": "yarn install && yarn upgrade.packages.workspaces && yarn upgrade.packages",
-		"upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build && yarn test"
+		"upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build && yarn test",
+		"watch.build": "lerna run watch.build --stream --parallel",
+		"watch.lint": "lerna run watch.lint --stream --parallel",
+		"watch.tests": "lerna run watch.tests --parallel"
 	},
 	"dependencies": {},
 	"devDependencies": {
@@ -41,9 +41,9 @@
 		"@babel/preset-typescript": "^7.10.4",
 		"@sprucelabs/babel-plugin-schema": "latest",
 		"babel-plugin-module-resolver": "^4.0.0",
-		"conventional-changelog-sprucelabs": "^1.1.2",
+		"conventional-changelog-sprucelabs": "latest",
 		"eslint": "^7.11.0",
-		"eslint-config-spruce": "10.9.135",
+		"eslint-config-spruce": "latest",
 		"lerna": "^3.20.2",
 		"prettier": "^2.2.0",
 		"typescript": "^4.1.2",
@@ -63,7 +63,9 @@
 			"@sprucelabs/spruce-core-schemas",
 			"@sprucelabs/spruce-skill-utils",
 			"@sprucelabs/test",
-			"@sprucelabs/test-utils"
+			"@sprucelabs/test-utils",
+			"conventional-changelog-sprucelabs",
+			"eslint-config-spruce"
 		]
 	}
 }
