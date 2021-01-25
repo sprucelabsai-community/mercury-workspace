@@ -481,6 +481,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	@test()
 	protected static async handlesCantEmitElegantly() {
 		const client = await this.Client()
+
 		const results = await client.emit('did-message::v2020_12_25', {
 			target: {},
 			payload: {
