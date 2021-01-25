@@ -28,7 +28,4 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 
 		await client.disconnect()
 	}
-
-	@test()
-	protected static async canGenerateContractLocally() {}
 }
