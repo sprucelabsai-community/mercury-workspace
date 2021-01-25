@@ -6,7 +6,7 @@
 	"files": [
 		"build"
 	],
-	"version": "15.1.0",
+	"version": "15.1.1",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"description": "The simple way to interact with the Spruce Experience Platform",
@@ -36,7 +36,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^15.1.0",
+		"@sprucelabs/mercury-event-emitter": "^15.1.1",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
