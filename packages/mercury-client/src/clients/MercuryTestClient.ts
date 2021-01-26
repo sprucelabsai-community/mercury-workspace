@@ -14,6 +14,8 @@ export default class MercuryTestClient<
 	Contract extends EventContract
 > extends MutableContractClient<Contract> {
 	private static emitter: any
+	private _isConnected = false
+
 	public constructor(
 		options: Record<string, any> & { host: string; eventContract?: Contract }
 	) {
@@ -46,5 +48,16 @@ export default class MercuryTestClient<
 		}
 	}
 
-	public async connect() {}
+	public async connect() {
+		this._isConnected = true
+	}
+
+	public isConnected() {
+		return this._isConnected
+	}
+
+	public async disconnect() {
+		await super.disconnect()
+		this._isConnected = false
+	}
 }

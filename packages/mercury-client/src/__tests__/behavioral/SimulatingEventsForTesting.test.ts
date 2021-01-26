@@ -118,6 +118,17 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 		assert.isTrue(wasFired)
 	}
 
+	@test()
+	protected static async factoryReturnsSocketIoClient() {
+		const client = await this.connectToApi()
+
+		assert.isTrue(client.isConnected())
+
+		await client.disconnect()
+
+		assert.isFalse(client.isConnected())
+	}
+
 	private static async connectToApi(shouldSetDefaultContract = false) {
 		MercuryClientFactory.setIsTestMode(true)
 		shouldSetDefaultContract &&
