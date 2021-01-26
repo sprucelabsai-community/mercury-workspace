@@ -88,6 +88,36 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 		)
 	}
 
+	@test()
+	protected static async canEmitToSelfUsingToClients() {
+		const [client1, client2] = await Promise.all([
+			this.connectToApi(),
+			this.connectToApi(),
+		])
+
+		let wasFired = false
+
+		await client1.on('did-message::v2020_12_25', async () => {
+			wasFired = true
+		})
+
+		await client2.emit('did-message::v2020_12_25', {
+			target: {},
+			payload: {
+				message: {
+					id: 'test',
+					source: {},
+					target: {},
+					body: 'message body',
+					classification: 'incoming',
+					dateCreated: 1,
+				},
+			},
+		})
+
+		assert.isTrue(wasFired)
+	}
+
 	private static async connectToApi(shouldSetDefaultContract = false) {
 		MercuryClientFactory.setIsTestMode(true)
 		shouldSetDefaultContract &&

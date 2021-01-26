@@ -13,14 +13,16 @@ class InternalEmitter<
 export default class MercuryTestClient<
 	Contract extends EventContract
 > extends MutableContractClient<Contract> {
-	private emitter: any
+	private static emitter: any
 	public constructor(
 		options: Record<string, any> & { host: string; eventContract?: Contract }
 	) {
 		super(options)
-		this.emitter = new InternalEmitter(
-			options.eventContract ?? { eventSignatures: {} }
-		)
+		if (!MercuryTestClient.emitter) {
+			MercuryTestClient.emitter = new InternalEmitter(
+				options.eventContract ?? { eventSignatures: {} }
+			)
+		}
 	}
 
 	public mixinContract(contract: EventContract) {
@@ -28,12 +30,12 @@ export default class MercuryTestClient<
 	}
 
 	public async on(...args: any[]) {
-		return this.emitter.on(...args)
+		return MercuryTestClient.emitter.on(...args)
 	}
 
 	public async emit(...args: any[]) {
-		if (this.emitter.listenCount(args[0]) > 0) {
-			return this.emitter.emit(...args)
+		if (MercuryTestClient.emitter.listenCount(args[0]) > 0) {
+			return MercuryTestClient.emitter.emit(...args)
 		} else {
 			if (!super.isConnected()) {
 				await super.connect()
