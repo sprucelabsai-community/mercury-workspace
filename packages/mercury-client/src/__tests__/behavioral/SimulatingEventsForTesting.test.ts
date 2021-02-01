@@ -129,6 +129,62 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 		assert.isFalse(client.isConnected())
 	}
 
+	@test()
+	protected static async canResetListeners() {
+		MercuryClientFactory.resetTestClient()
+
+		const client = await this.connectToApi()
+		let fireCount = 0
+
+		await client.on('did-message::v2020_12_25', async () => {
+			fireCount++
+		})
+
+		await client.on('did-message::v2020_12_25', async () => {
+			fireCount++
+		})
+
+		await client.emit('did-message::v2020_12_25', {
+			target: {},
+			payload: {
+				message: {
+					id: 'test',
+					source: {},
+					target: {},
+					body: 'message body',
+					classification: 'incoming',
+					dateCreated: 1,
+				},
+			},
+		})
+
+		assert.isEqual(fireCount, 2)
+
+		fireCount = 0
+
+		MercuryClientFactory.resetTestClient()
+
+		await client.on('did-message::v2020_12_25', async () => {
+			fireCount++
+		})
+
+		await client.emit('did-message::v2020_12_25', {
+			target: {},
+			payload: {
+				message: {
+					id: 'test',
+					source: {},
+					target: {},
+					body: 'message body',
+					classification: 'incoming',
+					dateCreated: 1,
+				},
+			},
+		})
+
+		assert.isEqual(fireCount, 1)
+	}
+
 	private static async connectToApi(shouldSetDefaultContract = false) {
 		MercuryClientFactory.setIsTestMode(true)
 		shouldSetDefaultContract &&

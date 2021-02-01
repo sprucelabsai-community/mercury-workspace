@@ -8,6 +8,10 @@ class InternalEmitter<
 	public listenCount(eventName: EventNames<Contract>) {
 		return (this.listenersByEvent[eventName] || []).length
 	}
+
+	public reset() {
+		this.listenersByEvent = {}
+	}
 }
 
 export default class MercuryTestClient<
@@ -59,5 +63,9 @@ export default class MercuryTestClient<
 	public async disconnect() {
 		await super.disconnect()
 		this._isConnected = false
+	}
+
+	public static reset() {
+		MercuryTestClient.emitter?.reset()
 	}
 }
