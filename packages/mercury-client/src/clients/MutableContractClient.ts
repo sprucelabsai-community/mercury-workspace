@@ -11,14 +11,10 @@ export default class MutableContractClient<
 > extends MercurySocketIoClient<Contract> {
 	private static inMemoryContract?: EventContract
 	public static mixinContract(contract: EventContract) {
-		const newContract = {
-			eventSignatures: {
-				...(this.inMemoryContract?.eventSignatures ?? {}),
-				...contract.eventSignatures,
-			},
-		} as const
-
-		this.inMemoryContract = newContract
+		this.inMemoryContract = eventContractUtil.unifyContracts([
+			this.inMemoryContract ?? { eventSignatures: {} },
+			contract,
+		])
 	}
 
 	public mixinContract(contract: EventContract) {

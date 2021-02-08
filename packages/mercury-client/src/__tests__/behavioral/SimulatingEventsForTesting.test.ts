@@ -185,6 +185,35 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 		assert.isEqual(fireCount, 1)
 	}
 
+	@test()
+	protected static async canMixinContractsToTestClient() {
+		const [client1, client2] = await Promise.all([
+			this.connectToApi(),
+			this.connectToApi(),
+		])
+
+		const eventName = 'my-skill.test-event::v2020_02_02'
+		const contract = {
+			eventSignatures: {
+				[eventName]: {},
+			},
+		}
+
+		let hit = false
+
+		client1.mixinContract(contract)
+
+		//@ts-ignore
+		await client2.on(eventName, () => {
+			hit = true
+		})
+
+		//@ts-ignore
+		await client1.emit(eventName)
+
+		assert.isTruthy(hit)
+	}
+
 	private static async connectToApi(shouldSetDefaultContract = false) {
 		MercuryClientFactory.setIsTestMode(true)
 		shouldSetDefaultContract &&

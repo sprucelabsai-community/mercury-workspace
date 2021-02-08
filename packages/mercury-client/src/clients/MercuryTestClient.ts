@@ -1,14 +1,10 @@
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
-import { EventContract, EventNames } from '@sprucelabs/mercury-types'
+import { EventContract } from '@sprucelabs/mercury-types'
 import MutableContractClient from './MutableContractClient'
 
 class InternalEmitter<
 	Contract extends EventContract
 > extends AbstractEventEmitter<Contract> {
-	public listenCount(eventName: EventNames<Contract>) {
-		return (this.listenersByEvent[eventName] || []).length
-	}
-
 	public reset() {
 		this.listenersByEvent = {}
 	}
@@ -33,6 +29,8 @@ export default class MercuryTestClient<
 
 	public mixinContract(contract: EventContract) {
 		MutableContractClient.mixinContract(contract)
+		debugger
+		MercuryTestClient.emitter.mixinContract(contract)
 	}
 
 	public async on(...args: any[]) {

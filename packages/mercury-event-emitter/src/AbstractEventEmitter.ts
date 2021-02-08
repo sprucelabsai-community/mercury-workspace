@@ -141,6 +141,17 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		return response
 	}
 
+	public listenCount(eventName: EventNames<Contract>) {
+		return (this.listenersByEvent[eventName] || []).length
+	}
+
+	public mixinContract(contract: EventContract) {
+		this.eventContract = eventContractUtil.unifyContracts([
+			this.eventContract,
+			contract,
+		]) as EventContract
+	}
+
 	private validatePayload(
 		schema: Schema | undefined | null,
 		actualPayload: any,
