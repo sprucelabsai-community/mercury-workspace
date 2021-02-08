@@ -29,7 +29,6 @@ export default class MercuryTestClient<
 
 	public mixinContract(contract: EventContract) {
 		MutableContractClient.mixinContract(contract)
-		debugger
 		MercuryTestClient.emitter.mixinContract(contract)
 	}
 
