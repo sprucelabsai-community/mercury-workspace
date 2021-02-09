@@ -238,9 +238,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			eventName,
 			async (targetAndPayload: any, ioCallback: (p: any) => void) => {
 				if (cb) {
-					const results = await cb(targetAndPayload)
-					if (ioCallback) {
-						ioCallback(results)
+					try {
+						const results = await cb(targetAndPayload)
+						if (ioCallback) {
+							ioCallback(results)
+						}
+					} catch (err) {
+						ioCallback && ioCallback({ errors: [err] })
 					}
 				}
 			}
