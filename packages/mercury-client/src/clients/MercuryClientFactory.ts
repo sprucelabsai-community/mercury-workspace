@@ -17,7 +17,14 @@ export default class MercuryClientFactory {
 	public static async Client<Contract extends EventContract>(
 		connectionOptions?: ConnectionOptions
 	): Promise<Client<Contract>> {
-		const { host = DEFAULT_HOST, contracts } = connectionOptions || {}
+		const {
+			host = DEFAULT_HOST,
+			contracts,
+			reconnectDelayMs,
+			allowSelfSignedCrt,
+			emitTimeoutMs,
+			shouldReconnect,
+		} = connectionOptions || {}
 
 		if (host.substr(0, 4) !== 'http') {
 			throw new SpruceError({ code: 'INVALID_PROTOCOL' })
@@ -45,9 +52,11 @@ export default class MercuryClientFactory {
 		const client = new Client<Contract>({
 			host,
 			reconnection: false,
-			rejectUnauthorized: !connectionOptions?.allowSelfSignedCrt,
+			reconnectDelayMs,
+			rejectUnauthorized: !allowSelfSignedCrt,
 			eventContract,
-			emitTimeoutMs: connectionOptions?.emitTimeoutMs,
+			emitTimeoutMs,
+			shouldReconnect,
 		})
 
 		await client.connect()

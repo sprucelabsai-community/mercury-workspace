@@ -47,6 +47,14 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 					'You must set a test cache dir to test Mercury. Try MercuryFactory.setTestCacheDir().'
 				break
 
+			case 'UNKNOWN_ERROR':
+				message = 'Oh no! An unknown error ocurred.'
+				if (options.originalError) {
+					message += ' Original error:\n\n'
+					message += options.originalError.message
+				}
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

@@ -15,6 +15,7 @@ export default class MercuryTestClient<
 > extends MutableContractClient<Contract> {
 	private static emitter: any
 	private _isConnected = false
+	private isConnectedToApi = false
 
 	public constructor(
 		options: Record<string, any> & { host: string; eventContract?: Contract }
@@ -41,6 +42,7 @@ export default class MercuryTestClient<
 			return MercuryTestClient.emitter.emit(...args)
 		} else {
 			if (!super.isConnected()) {
+				this.isConnectedToApi = true
 				await super.connect()
 			}
 
@@ -58,7 +60,10 @@ export default class MercuryTestClient<
 	}
 
 	public async disconnect() {
-		await super.disconnect()
+		if (this.isConnectedToApi) {
+			await super.disconnect()
+		}
+
 		this._isConnected = false
 	}
 

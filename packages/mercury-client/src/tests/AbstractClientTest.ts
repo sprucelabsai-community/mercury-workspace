@@ -28,6 +28,16 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		this.clients = []
 	}
 
+	protected static async afterAll() {
+		await super.afterAll()
+
+		for (const client of this.clients) {
+			await client.disconnect()
+		}
+
+		this.clients = []
+	}
+
 	protected static async Client(
 		options?: Partial<ConnectionOptions>
 	): Promise<Client> {
@@ -37,6 +47,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 			host,
 			allowSelfSignedCrt: true,
 			contracts: coreEventContracts,
+			reconnectDelayMs: 0,
 			...rest,
 		})
 
@@ -110,14 +121,10 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		const skill = await this.seedAndInstallDummySkill(client, org)
 
 		const skillClient = await this.Client()
-		const authResults = await skillClient.emit('authenticate::v2020_12_25', {
-			payload: {
-				skillId: skill.id,
-				apiKey: skill.apiKey,
-			},
+		await skillClient.authenticate({
+			skillId: skill.id,
+			apiKey: skill.apiKey,
 		})
-
-		assert.isEqual(authResults.totalErrors, 0)
 
 		return { skill, skillClient }
 	}

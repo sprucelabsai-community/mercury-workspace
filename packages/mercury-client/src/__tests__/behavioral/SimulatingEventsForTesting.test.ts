@@ -40,6 +40,7 @@ export default class SimulatingEventsForTestingTest extends AbstractSpruceTest {
 		const client = await this.connectToApi()
 
 		assert.isTrue(client.handlesEvent(this.eventName))
+
 		assert.isFalse(client.handlesEvent('taco-bravo'))
 
 		await client.disconnect()

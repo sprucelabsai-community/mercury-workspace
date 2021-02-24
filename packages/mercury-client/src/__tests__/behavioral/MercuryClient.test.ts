@@ -237,11 +237,14 @@ export default class MercuryClientTest extends AbstractClientTest {
 		return { client, org, skill1, skill1Client, skill2Client }
 	}
 
-	@test()
-	protected static async emitterGetsCalledBackForEachListener() {
+	@test('each listener gets fired')
+	@test('each listener gets fired even lost connection', true)
+	protected static async emitterGetsCalledBackForEachListener(
+		shouldDisconnect = false
+	) {
 		const {
-			client,
 			org,
+			client,
 			skill1,
 			skill1Client,
 			skill2Client,
@@ -282,6 +285,19 @@ export default class MercuryClientTest extends AbstractClientTest {
 				messages: ['hello from skill 4'],
 			}
 		})
+
+		if (shouldDisconnect) {
+			//@ts-ignore
+			client.socket.disconnect()
+
+			//@ts-ignore
+			skill1Client.socket.disconnect()
+
+			//@ts-ignore
+			skill2Client.socket.disconnect()
+
+			await this.wait(1000)
+		}
 
 		let responseTriggerCount = 0
 
@@ -493,7 +509,10 @@ export default class MercuryClientTest extends AbstractClientTest {
 	}
 
 	private static async TimeoutClient(emitDelay?: number): Promise<any> {
-		const client = await this.Client({ emitTimeoutMs: 100 })
+		const client = await this.Client({
+			emitTimeoutMs: 100,
+			shouldReconnect: false,
+		})
 
 		//@ts-ignore
 		const socket = client.socket as any

@@ -29,20 +29,40 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private ioOptions: IoOptions
 	private socket?: SocketIOClient.Socket
 	private emitTimeoutMs: number
+	private reconnectDelayMs: number
+	private lastAuthOptions?: {
+		skillId?: string | undefined
+		apiKey?: string | undefined
+		token?: string | undefined
+	}
+	private shouldReconnect: boolean
+	private registeredListeners: any[] = []
+	private allowNextEventToBeAuthenticate = false
 
 	public constructor(
 		options: {
 			host: string
 			eventContract?: Contract
 			emitTimeoutMs?: number
+			reconnectDelayMs?: number
+			shouldReconnect?: boolean
 		} & IoOptions
 	) {
-		const { host, eventContract, emitTimeoutMs, ...ioOptions } = options
+		const {
+			host,
+			eventContract,
+			emitTimeoutMs,
+			reconnectDelayMs,
+			shouldReconnect,
+			...ioOptions
+		} = options
 
 		this.host = host
 		this.ioOptions = ioOptions
 		this.eventContract = eventContract
 		this.emitTimeoutMs = emitTimeoutMs ?? 10000
+		this.reconnectDelayMs = reconnectDelayMs ?? 5000
+		this.shouldReconnect = shouldReconnect ?? true
 	}
 
 	public async connect() {
@@ -51,6 +71,19 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		await new Promise((resolve, reject) => {
 			this.socket?.on('connect', () => {
 				this.socket?.removeAllListeners()
+
+				if (this.shouldReconnect) {
+					this.socket?.once('disconnect', async () => {
+						setTimeout(async () => {
+							await this.connect()
+							if (this.lastAuthOptions) {
+								await this.authenticate(this.lastAuthOptions)
+							}
+
+							await this.reregisterAllListeners()
+						}, this.reconnectDelayMs)
+					})
+				}
 
 				resolve(undefined)
 			})
@@ -62,13 +95,25 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			this.socket?.on('connect_error', (err: Record<string, any>) => {
 				const error = this.mapSocketErrorToSpruceError(err)
 				this.socket?.removeAllListeners()
+
 				reject(error)
 			})
 		})
 	}
 
+	private async reregisterAllListeners() {
+		const listeners = this.registeredListeners
+		this.registeredListeners = []
+		const all = Promise.all(
+			listeners.map((listener) => this.on(listener[0], listener[1]))
+		)
+
+		await all
+	}
+
 	public mapSocketErrorToSpruceError(err: Record<string, any>) {
 		const originalError = new Error(err.message)
+
 		//@ts-ignore
 		originalError.socketError = err
 
@@ -110,6 +155,19 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			| EmitCallback<Contract, EventName>,
 		cb?: EmitCallback<Contract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
+		if (
+			!this.allowNextEventToBeAuthenticate &&
+			eventName === 'authenticate::v2020_12_25'
+		) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['eventName'],
+				friendlyMessage: `You can't emit this event directly. Use client.authenticate() so all your auth is preseved.`,
+			})
+		}
+
+		this.allowNextEventToBeAuthenticate = false
+
 		const signature = this.getEventSignatureByName(eventName)
 
 		if (!this.isConnected()) {
@@ -225,6 +283,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					| SchemaValues<IEventSignature['responsePayloadSchema']>
 			: Promise<void> | void
 	) {
+		this.registeredListeners.push([eventName, cb])
+
 		//@ts-ignore
 		const results = await this.emit('register-listeners::v2020_12_25', {
 			payload: { fullyQualifiedEventNames: [eventName] },
@@ -234,6 +294,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			const options = results.responses[0].errors?.[0] ?? 'UNKNOWN_ERROR'
 			throw AbstractSpruceError.parse(options, SpruceError)
 		}
+
 		this.socket?.on(
 			eventName,
 			async (targetAndPayload: any, ioCallback: (p: any) => void) => {
@@ -276,10 +337,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public async disconnect() {
-		if (this.socket) {
+		if (this.isConnected()) {
+			this.socket?.removeAllListeners()
+
 			await new Promise((resolve) => {
 				this.socket?.once('disconnect', () => {
-					this.socket?.removeAllListeners()
 					this.socket = undefined
 					resolve(undefined)
 				})
@@ -296,6 +358,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		token?: string
 	}) {
 		const { skillId, apiKey, token } = options
+
+		this.lastAuthOptions = options
+
+		this.allowNextEventToBeAuthenticate = true
 
 		//@ts-ignore
 		const results = await this.emit('authenticate::v2020_12_25', {
