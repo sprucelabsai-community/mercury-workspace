@@ -1,42 +1,28 @@
-import {
-	CoreEventContract,
-	coreEventContracts,
-	EventContract,
-} from '@sprucelabs/mercury-types'
+import { EventContract } from '@sprucelabs/mercury-types'
 import {
 	eventErrorAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import { MercuryClient, ConnectionOptions } from '../../client.types'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import MutableContractClient from '../../clients/MutableContractClient'
 import SpruceError from '../../errors/SpruceError'
+import AbstractClientTest from '../../tests/AbstractClientTest'
 import { TEST_HOST } from '../../tests/constants'
 
 require('dotenv').config()
 
-type Organization = any
-
-type Client = MercuryClient<CoreEventContract>
-
-export default class MercuryClientTest extends AbstractSpruceTest {
-	private static clients: Client[] = []
-	private static dummySkillCount = 0
+export default class MercuryClientTest extends AbstractClientTest {
 	private static timeoutClient?: any
 
 	protected static async afterEach() {
-		await super.afterEach()
-
 		if (this.timeoutClient) {
 			this.timeoutClient.socket = null
 		}
 
-		for (const client of this.clients) {
-			await client.disconnect()
-		}
+		await super.afterEach()
 	}
 
 	@test()
@@ -52,9 +38,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async canGetResponseWithoutTypesWithNoContract() {
-		const client = await MercuryClientFactory.Client({ host: TEST_HOST })
-		this.clients.push(client)
-
+		const client = await this.Client({ contracts: undefined })
 		const results = await client.emit('get-event-contracts::v2020_12_25')
 
 		assert.isTruthy(results)
@@ -62,8 +46,7 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async canAddEmitPayloadToAnythingWithoutContract() {
-		const client = await MercuryClientFactory.Client({ host: TEST_HOST })
-		this.clients.push(client)
+		const client = await this.Client({ contracts: undefined })
 
 		//@ts-ignore
 		const results = await client.emit('get-event-contracts::v2020_12_25', {
@@ -92,21 +75,6 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		await client.disconnect()
 
 		assert.isFalse(client.isConnected())
-	}
-
-	private static async Client(options?: Partial<ConnectionOptions>) {
-		const { host = TEST_HOST, ...rest } = options || {}
-
-		const client = await MercuryClientFactory.Client<CoreEventContract>({
-			host,
-			allowSelfSignedCrt: true,
-			contracts: coreEventContracts,
-			...rest,
-		})
-
-		this.clients.push(client)
-
-		return client
 	}
 
 	@test()
@@ -241,14 +209,11 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 	}
 
 	private static async setup2SkillsAndOneEvent() {
-		const client = await this.Client()
+		const { client } = await this.loginAsDemoPerson()
+		const org = await this.seedDummyOrg(client)
 
-		await this.signupDemoPerson(client)
-
-		const org = await this.createDummyOrg(client)
-
-		const createLogin = this.createInstallAndLoginAsSkill(client, org)
-		const createLogin2 = this.createInstallAndLoginAsSkill(client, org)
+		const createLogin = this.seedInstallAndLoginAsSkill(client, org)
+		const createLogin2 = this.seedInstallAndLoginAsSkill(client, org)
 
 		const { skill: skill1, skillClient: skill1Client } = await createLogin
 
@@ -282,13 +247,15 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 			skill2Client,
 		} = await this.setup2SkillsAndOneEvent()
 
-		const {
-			skillClient: skill3Client,
-		} = await this.createInstallAndLoginAsSkill(client, org)
+		const { skillClient: skill3Client } = await this.seedInstallAndLoginAsSkill(
+			client,
+			org
+		)
 
-		const {
-			skillClient: skill4Client,
-		} = await this.createInstallAndLoginAsSkill(client, org)
+		const { skillClient: skill4Client } = await this.seedInstallAndLoginAsSkill(
+			client,
+			org
+		)
 
 		let listenTriggerCount = 0
 
@@ -451,18 +418,16 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async canRegisterEventsSimultaniously() {
-		const client = await this.Client()
-		await this.signupDemoPerson(client)
-
-		const org = await this.createDummyOrg(client)
+		const { client } = await this.loginAsDemoPerson()
+		const org = await this.seedDummyOrg(client)
 
 		const {
 			skillClient: originalSkillClient,
-		} = await this.createInstallAndLoginAsSkill(client, org)
+		} = await this.seedInstallAndLoginAsSkill(client, org)
 
 		await Promise.all(
 			new Array(5).fill(0).map(async () => {
-				const { skill, skillClient } = await this.createInstallAndLoginAsSkill(
+				const { skill, skillClient } = await this.seedInstallAndLoginAsSkill(
 					client,
 					org
 				)
@@ -606,98 +571,5 @@ export default class MercuryClientTest extends AbstractSpruceTest {
 		}
 
 		return contract
-	}
-
-	private static async createInstallAndLoginAsSkill(
-		client: Client,
-		org: Organization
-	) {
-		const skill = await this.createAndInstallDummySkill(client, org)
-
-		const skillClient = await this.Client()
-		const authResults = await skillClient.emit('authenticate::v2020_12_25', {
-			payload: {
-				skillId: skill.id,
-				apiKey: skill.apiKey,
-			},
-		})
-
-		assert.isEqual(authResults.totalErrors, 0)
-
-		return { skill, skillClient }
-	}
-
-	private static async createAndInstallDummySkill(
-		client: Client,
-		org: Organization
-	) {
-		const skill1Results = await client.emit('register-skill::v2020_12_25', {
-			payload: {
-				name: `Dummy skill ${this.dummySkillCount++} ${new Date().getTime()}`,
-			},
-		})
-
-		const skill = skill1Results.responses[0].payload?.skill
-		assert.isTruthy(skill)
-
-		const installResults = await client.emit('install-skill::v2020_12_25', {
-			target: {
-				organizationId: org.id,
-			},
-			payload: { skillId: skill.id },
-		})
-
-		assert.isEqual(installResults.totalErrors, 0)
-
-		return skill
-	}
-
-	private static async createDummyOrg(client: Client) {
-		const orgName = `Dummy org ${new Date().getTime()}`
-		const orgResults = await client.emit('create-organization::v2020_12_25', {
-			payload: {
-				name: orgName,
-			},
-		})
-
-		const org = orgResults.responses[0].payload?.organization
-
-		assert.isTruthy(org)
-
-		return org
-	}
-
-	private static async signupDemoPerson(client: Client) {
-		const phone = process.env.DEMO_PHONE
-
-		if (!phone) {
-			throw new SpruceError({
-				code: 'MISSING_PARAMETERS',
-				parameters: ['env.DEMO_PHONE'],
-			})
-		}
-
-		const requestPinResults = await client.emit('request-pin::v2020_12_25', {
-			payload: {
-				phone,
-			},
-		})
-
-		const challenge = requestPinResults.responses[0].payload?.challenge
-
-		assert.isTruthy(challenge)
-
-		const confirmPinResults = await client.emit('confirm-pin::v2020_12_25', {
-			payload: {
-				challenge,
-				pin: phone.substr(-4),
-			},
-		})
-
-		const person = confirmPinResults.responses[0].payload?.person
-
-		assert.isTruthy(person, 'Failed to login!')
-
-		return person
 	}
 }

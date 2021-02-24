@@ -290,6 +290,31 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		return
 	}
 
+	public async authenticate(options: {
+		skillId?: string
+		apiKey?: string
+		token?: string
+	}) {
+		const { skillId, apiKey, token } = options
+
+		//@ts-ignore
+		const results = await this.emit('authenticate::v2020_12_25', {
+			payload: {
+				skillId,
+				apiKey,
+				token,
+			},
+		})
+
+		//@ts-ignore
+		const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		return {
+			skill: auth.skill,
+			person: auth.person,
+		}
+	}
+
 	public isConnected() {
 		return this.socket?.connected ?? false
 	}
