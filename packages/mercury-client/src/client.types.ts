@@ -1,4 +1,8 @@
-import { EventContract, MercuryEventEmitter } from '@sprucelabs/mercury-types'
+import {
+	EventContract,
+	MercuryEventEmitter,
+	SpruceSchemas,
+} from '@sprucelabs/mercury-types'
 
 export interface ConnectionOptions<> {
 	host?: string
@@ -12,4 +16,12 @@ export type MercuryClient<
 > = MercuryEventEmitter<Contract> & {
 	disconnect: () => Promise<void>
 	isConnected: () => boolean
+	authenticate(options: {
+		skillId?: string
+		apiKey?: string
+		token?: string
+	}): Promise<{
+		skill?: SpruceSchemas.Spruce.v2020_07_22.Skill
+		person?: SpruceSchemas.Spruce.v2020_07_22.Person
+	}>
 }
