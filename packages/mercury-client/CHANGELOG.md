@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.23...v16.0.0) (2021-02-24)
+
+
+### Breaking Changes
+
+* authenticate is no longer allowed to be called ([a07dfdd](https://github.com/sprucelabsai/mercury-workspace/commit/a07dfdd))
+
+
+### Features
+
+* authenticate on client ([da803f4](https://github.com/sprucelabsai/mercury-workspace/commit/da803f4))
+
+
+
+
+
 ## [15.2.23](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.22...v15.2.23) (2021-02-23)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
