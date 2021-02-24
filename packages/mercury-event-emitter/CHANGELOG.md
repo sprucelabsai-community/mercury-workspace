@@ -3,6 +3,78 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [15.2.23](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.22...v15.2.23) (2021-02-23)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [15.2.22](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.21...v15.2.22) (2021-02-23)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [15.2.21](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.20...v15.2.21) (2021-02-20)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [15.2.20](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.19...v15.2.20) (2021-02-18)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [15.2.19](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.18...v15.2.19) (2021-02-18)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [15.2.18](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.17...v15.2.18) (2021-02-12)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [15.2.17](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.16...v15.2.17) (2021-02-12)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [15.2.16](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.15...v15.2.16) (2021-02-10)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [15.2.15](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.14...v15.2.15) (2021-02-09)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
 ## [15.2.14](https://github.com/sprucelabsai/mercury-workspace/compare/v15.2.13...v15.2.14) (2021-02-09)
 
 **Note:** Version bump only for package @sprucelabs/mercury-event-emitter
