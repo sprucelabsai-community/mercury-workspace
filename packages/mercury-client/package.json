@@ -33,14 +33,13 @@
 		"build": "yarn build.tsc && yarn build.dist",
 		"build.dist": "tsc --project tsconfig.dist.json",
 		"build.tsc": "tsc",
-		"clean": "rm -rf build/ browser/",
+		"clean": "rm -rf build/",
 		"fix.lint": "eslint --fix '**/*.ts'",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd .. && yarn rebuild",
 		"release": "semantic-release",
 		"test": "jest",
-		"watch.build": "concurrently 'yarn build.tsc -w' 'yarn build.browser -w'",
-		"watch.tests": "jest --watch"
+		"watch.build": "concurrently 'yarn build.tsc -w' 'yarn build.dist -w'"
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
@@ -61,7 +60,6 @@
 		"@types/debug": "^4.1.5",
 		"@types/faker": "^5.1.7",
 		"@types/socket.io-client": "^1.4.35",
-		"arkit": "^1.6.4",
 		"concurrently": "^6.0.0",
 		"eslint": "^7.20.0",
 		"eslint-config-spruce": "latest",
