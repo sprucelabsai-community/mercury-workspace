@@ -3,21 +3,21 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "16.0.0",
+	"version": "16.0.1",
 	"files": [
 		"build"
 	],
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"exports": {
-        ".": {
-            "node": "./build/index.js",
-            "require": "./build/index.js",
-            "import": "./build/esm/index.js",
-            "default": "./build/esm/index.js"
-        }
-    },
-    "module": "./build/esm/index.js",
+		".": {
+			"node": "./build/index.js",
+			"require": "./build/index.js",
+			"import": "./build/esm/index.js",
+			"default": "./build/esm/index.js"
+		}
+	},
+	"module": "./build/esm/index.js",
 	"description": "The simple way to interact with the Spruce Experience Platform",
 	"keywords": [
 		"node",
@@ -44,7 +44,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^16.0.0",
+		"@sprucelabs/mercury-event-emitter": "^16.0.1",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
