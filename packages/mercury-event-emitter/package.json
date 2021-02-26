@@ -3,12 +3,21 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"version": "16.0.0",
 	"files": [
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "16.0.0",
-	"description": "Types for Mercury!",
+	"types": "./build/index.d.ts",
+	"exports": {
+        ".": {
+            "node": "./build/index.js",
+            "require": "./build/index.js",
+            "import": "./build/esm/index.js",
+            "default": "./build/esm/index.js"
+        }
+    },
+    "module": "./build/esm/index.js",	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
 		"components",
@@ -20,8 +29,9 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
-		"build": "yarn build.babel && yarn build.types && yarn build.resolve-paths",
+		"build": "yarn build.babel && yarn build.dist && yarn build.types && yarn build.resolve-paths",
 		"build.babel": "babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
+		"build.dist": "tsc --project tsconfig.dist.json",
 		"build.babel.debug": "node --inspect-brk=5200 ../../node_modules/.bin/babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
 		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts -v",
 		"build.tsc": "tsc",
@@ -61,7 +71,8 @@
 			"<rootDir>/tmp/",
 			"<rootDir>/src/",
 			"<rootDir>/node_modules/",
-			"<rootDir>/build/__tests__/testDirsAndFiles/"
+			"<rootDir>/build/__tests__/testDirsAndFiles/",
+			"<rootDir>/build/esm/"
 		],
 		"testMatch": [
 			"**/__tests__/**/*.test.js?(x)"
