@@ -12,8 +12,6 @@
 		"npm": ">=6"
 	},
 	"scripts": {
-		"arkit": "lerna run arkit",
-		"arkit.png": "lerna run arkit.png",
 		"build": "lerna run build",
 		"clean": "lerna run clean",
 		"clean.all": "lerna run clean && rm -f yarn.lock && rm -rf node_modules; for d in packages/*/node_modules; do echo $d; rm -rf $d; done",
@@ -27,20 +25,11 @@
 		"upgrade.packages.all": "yarn install && yarn upgrade.packages.workspaces && yarn upgrade.packages",
 		"upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build && yarn test",
 		"watch.build": "lerna run watch.build --stream --parallel",
-		"watch.lint": "lerna run watch.lint --stream --parallel",
-		"watch.tests": "lerna run watch.tests --parallel"
+		"watch.lint": "lerna run watch.lint --stream --parallel"
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@babel/cli": "^7.11.6",
-		"@babel/core": "^7.11.6",
-		"@babel/plugin-proposal-class-properties": "^7.10.4",
-		"@babel/plugin-proposal-decorators": "^7.10.5",
-		"@babel/plugin-transform-runtime": "^7.11.5",
-		"@babel/preset-env": "^7.11.5",
-		"@babel/preset-typescript": "^7.10.4",
 		"@sprucelabs/babel-plugin-schema": "latest",
-		"babel-plugin-module-resolver": "^4.0.0",
 		"conventional-changelog-sprucelabs": "latest",
 		"eslint": "^7.11.0",
 		"eslint-config-spruce": "latest",

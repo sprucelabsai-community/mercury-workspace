@@ -30,12 +30,11 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
-		"build": "yarn build.babel && yarn build.dist && yarn build.types && yarn build.resolve-paths",
-		"build.babel": "babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
+		"build": "yarn build.tsc && yarn build.dist && yarn build.resolve-paths",
+		"build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
 		"build.dist": "tsc --project tsconfig.dist.json",
-		"build.babel.debug": "node --inspect-brk=5200 ../../node_modules/.bin/babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
 		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts -v",
-		"build.tsc": "tsc",
+		"build.tsc": "yarn build.copy-files && tsc",
 		"build.types": "tsc --emitDeclarationOnly && echo PASS",
 		"clean": "rm -rf build/",
 		"fix.lint": "eslint --fix '**/*.ts'",
@@ -43,9 +42,8 @@
 		"rebuild": "cd ../ && yarn rebuild",
 		"release": "semantic-release",
 		"test": "jest",
-		"watch.build": "concurrently 'yarn run build.babel --watch' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.types && yarn build.resolve-paths'\"",
-		"watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
-		"watch.tests": "jest --watch"
+		"watch.build": "concurrently 'yarn run build.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.tsc && yarn build.resolve-paths'\"",
+		"watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'"
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
