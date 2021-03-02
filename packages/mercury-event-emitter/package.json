@@ -32,7 +32,8 @@
 	"scripts": {
 		"build": "yarn build.tsc && yarn build.dist && yarn build.resolve-paths",
 		"build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
-		"build.dist": "tsc --project tsconfig.dist.json",
+		"build.dist": "tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
+		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
 		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts -v",
 		"build.tsc": "yarn build.copy-files && tsc",
 		"build.types": "tsc --emitDeclarationOnly && echo PASS",
@@ -52,6 +53,7 @@
 		"@sprucelabs/spruce-event-utils": "latest"
 	},
 	"devDependencies": {
+		"@sprucelabs/esm-postbuild": "^0.0.1",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",

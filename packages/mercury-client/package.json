@@ -31,7 +31,8 @@
 	},
 	"scripts": {
 		"build": "yarn build.tsc && yarn build.dist",
-		"build.dist": "tsc --project tsconfig.dist.json",
+		"build.dist": "tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
+		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
 		"build.tsc": "tsc",
 		"clean": "rm -rf build/",
 		"fix.lint": "eslint --fix '**/*.ts'",
@@ -52,6 +53,7 @@
 	},
 	"devDependencies": {
 		"@sprucelabs/babel-plugin-schema": "latest",
+		"@sprucelabs/esm-postbuild": "^0.0.1",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/jest-sheets-reporter": "latest",
 		"@sprucelabs/semantic-release": "latest",
