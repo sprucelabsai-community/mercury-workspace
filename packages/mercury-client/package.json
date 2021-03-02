@@ -30,8 +30,8 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
-		"build": "yarn build.tsc && yarn build.dist",
-		"build.dist": "tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
+		"build.dev": "yarn build.tsc",
+		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
 		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
 		"build.tsc": "tsc",
 		"clean": "rm -rf build/",
@@ -40,7 +40,7 @@
 		"rebuild": "cd .. && yarn rebuild",
 		"release": "semantic-release",
 		"test": "jest",
-		"watch.build": "concurrently 'yarn build.tsc -w' 'yarn build.dist -w'"
+		"watch.build.dev": "yarn build.tsc -w"
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
@@ -59,13 +59,9 @@
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
 		"@sprucelabs/test-utils": "latest",
-		"@types/debug": "^4.1.5",
-		"@types/faker": "^5.1.7",
 		"@types/socket.io-client": "^1.4.35",
-		"concurrently": "^6.0.0",
 		"eslint": "^7.21.0",
 		"eslint-config-spruce": "latest",
-		"fs-extra": "^9.1.0",
 		"jest": "^26.6.3",
 		"jest-circus": "^26.6.3",
 		"prettier": "^2.2.1",
