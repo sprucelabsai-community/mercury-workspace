@@ -53,7 +53,7 @@
 		"@sprucelabs/spruce-event-utils": "latest"
 	},
 	"devDependencies": {
-		"@sprucelabs/esm-postbuild": "^1.0.0",
+		"@sprucelabs/esm-postbuild": "latest",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
@@ -89,6 +89,7 @@
 			"@sprucelabs/jest-json-reporter",
 			"@sprucelabs/test",
 			"@sprucelabs/error",
+			"@sprucelabs/esm-postbuild",
 			"@sprucelabs/mercury-types",
 			"@sprucelabs/schema",
 			"@sprucelabs/semantic-release",

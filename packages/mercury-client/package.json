@@ -53,7 +53,7 @@
 	},
 	"devDependencies": {
 		"@sprucelabs/babel-plugin-schema": "latest",
-		"@sprucelabs/esm-postbuild": "^1.0.0",
+		"@sprucelabs/esm-postbuild": "latest",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/jest-sheets-reporter": "latest",
 		"@sprucelabs/semantic-release": "latest",
@@ -112,6 +112,7 @@
 			"socket.io",
 			"socket.io-client",
 			"@sprucelabs/babel-plugin-schema",
+			"@sprucelabs/esm-postbuild",
 			"@sprucelabs/jest-json-reporter",
 			"@sprucelabs/jest-sheets-reporter",
 			"@sprucelabs/semantic-release",
