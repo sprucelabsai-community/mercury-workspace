@@ -3,10 +3,10 @@
     "tasks": [
         {
             "type": "npm",
-            "script": "watch.build",
+            "script": "watch.build.dev",
             "group": "build",
             "problemMatcher": [],
-            "label": "watch.build",
+            "label": "watch.build.dev",
             "runOptions": {
                 "runOn": "folderOpen"
             },

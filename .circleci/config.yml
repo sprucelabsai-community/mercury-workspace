@@ -25,7 +25,7 @@ jobs:
       - run: node -v && npm -v && yarn -v
       - run: yarn install
       - run: yarn clean
-      - run: yarn build
+      - run: yarn build.dev
       - run: yarn lint
       - run: yarn test
       - run:
@@ -60,8 +60,8 @@ jobs:
               echo "[npm-publish] detected. No publish necessary 👊"
               circleci-agent step halt
             fi
-      - run: yarn install --frozen-lockfile
-      - run: yarn run build
+      - run: yarn install
+      - run: yarn build.dist
       - run: git config --global user.email "$GIT_AUTHOR_EMAIL"
       - run: git config --global user.name "$GIT_AUTHOR_NAME"
       - run:

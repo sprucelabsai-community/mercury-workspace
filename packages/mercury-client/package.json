@@ -3,12 +3,14 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"version": "16.0.12",
 	"files": [
 		"build"
 	],
-	"version": "15.2.23",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
+	"module": "./build/esm/index.js",
+	"sideEffects": false,
 	"description": "The simple way to interact with the Spruce Experience Platform",
 	"keywords": [
 		"node",
@@ -21,22 +23,21 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
-		"build": "yarn run build.tsc && yarn run build.browser",
-		"build.browser": "rollup -c rollup.config.js && cd browser && mv index.js mercury.min.js",
+		"build.dev": "yarn build.tsc",
+		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
+		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
 		"build.tsc": "tsc",
-		"build.umd": "rollup -c rollup.config.js && mkdir -p build/umd && cd build && sed s/index.js.map/mercury.js.map/ index.js > umd/mercury.js && mv index.js.map umd/mercury.js.map",
-		"clean": "rm -rf build/ browser/",
+		"clean": "rm -rf build/",
 		"fix.lint": "eslint --fix '**/*.ts'",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd .. && yarn rebuild",
 		"release": "semantic-release",
 		"test": "jest",
-		"watch.build": "concurrently 'yarn build.tsc -w' 'yarn build.browser -w'",
-		"watch.tests": "jest --watch"
+		"watch.build.dev": "yarn build.tsc -w"
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^15.2.23",
+		"@sprucelabs/mercury-event-emitter": "^16.0.12",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
@@ -45,27 +46,20 @@
 	},
 	"devDependencies": {
 		"@sprucelabs/babel-plugin-schema": "latest",
+		"@sprucelabs/esm-postbuild": "latest",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/jest-sheets-reporter": "latest",
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
 		"@sprucelabs/test-utils": "latest",
-		"@types/debug": "^4.1.5",
-		"@types/faker": "^5.1.7",
-		"@types/socket.io-client": "^1.4.35",
-		"arkit": "^1.6.4",
-		"concurrently": "^6.0.0",
-		"eslint": "^7.20.0",
+		"@types/socket.io-client": "^1.4.36",
+		"eslint": "^7.22.0",
 		"eslint-config-spruce": "latest",
-		"fs-extra": "^9.1.0",
 		"jest": "^26.6.3",
 		"jest-circus": "^26.6.3",
 		"prettier": "^2.2.1",
-		"rollup": "^2.39.1",
-		"rollup-plugin-terser": "^7.0.2",
-		"rollup-plugin-typescript2": "^0.30.0",
 		"ts-node": "^9.1.1",
-		"typescript": "^4.2.2"
+		"typescript": "^4.2.3"
 	},
 	"jest": {
 		"maxWorkers": 4,
@@ -75,7 +69,8 @@
 			"<rootDir>/tmp/",
 			"<rootDir>/src/",
 			"<rootDir>/node_modules/",
-			"<rootDir>/build/__tests__/testDirsAndFiles/"
+			"<rootDir>/build/__tests__/testDirsAndFiles/",
+			"<rootDir>/build/esm/"
 		],
 		"testMatch": [
 			"**/__tests__/**/*.test.js?(x)"
@@ -106,6 +101,7 @@
 			"socket.io",
 			"socket.io-client",
 			"@sprucelabs/babel-plugin-schema",
+			"@sprucelabs/esm-postbuild",
 			"@sprucelabs/jest-json-reporter",
 			"@sprucelabs/jest-sheets-reporter",
 			"@sprucelabs/semantic-release",

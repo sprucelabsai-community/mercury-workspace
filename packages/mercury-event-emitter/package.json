@@ -3,11 +3,14 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"version": "16.0.12",
 	"files": [
 		"build"
 	],
 	"main": "./build/index.js",
-	"version": "15.2.23",
+	"types": "./build/index.d.ts",
+	"module": "./build/esm/index.js",
+	"sideEffects": false,
 	"description": "Types for Mercury!",
 	"keywords": [
 		"node",
@@ -20,21 +23,21 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
-		"build": "yarn build.babel && yarn build.types && yarn build.resolve-paths",
-		"build.babel": "babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
-		"build.babel.debug": "node --inspect-brk=5200 ../../node_modules/.bin/babel src --out-dir build --extensions \".ts,.tsx\" --root-mode upward --source-maps --copy-files",
+		"build.dev": "yarn build.tsc && yarn build.resolve-paths",
+		"build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
+		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.resolve-paths && yarn build.esm-postbuild",
+		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
 		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts -v",
-		"build.tsc": "tsc",
+		"build.tsc": "yarn build.copy-files && tsc",
 		"build.types": "tsc --emitDeclarationOnly && echo PASS",
 		"clean": "rm -rf build/",
 		"fix.lint": "eslint --fix '**/*.ts'",
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
-		"rebuild": "cd ../ && yarn rebuild",
+		"rebuild": "cd ../ && yarn rebuild.dev",
 		"release": "semantic-release",
 		"test": "jest",
-		"watch.build": "concurrently 'yarn run build.babel --watch' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.types && yarn build.resolve-paths'\"",
-		"watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
-		"watch.tests": "jest --watch"
+		"watch.build.dev": "concurrently 'yarn run build.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.dev'\"",
+		"watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'"
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
@@ -43,15 +46,16 @@
 		"@sprucelabs/spruce-event-utils": "latest"
 	},
 	"devDependencies": {
+		"@sprucelabs/esm-postbuild": "latest",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
 		"chokidar-cli": "^2.1.0",
-		"eslint": "^7.20.0",
-		"eslint-config-spruce": "^10.9.135",
+		"eslint": "^7.22.0",
+		"eslint-config-spruce": "^10.9.136",
 		"jest": "^26.6.3",
 		"jest-circus": "^26.6.3",
-		"typescript": "^4.2.2"
+		"typescript": "^4.2.3"
 	},
 	"jest": {
 		"maxWorkers": 4,
@@ -61,7 +65,8 @@
 			"<rootDir>/tmp/",
 			"<rootDir>/src/",
 			"<rootDir>/node_modules/",
-			"<rootDir>/build/__tests__/testDirsAndFiles/"
+			"<rootDir>/build/__tests__/testDirsAndFiles/",
+			"<rootDir>/build/esm/"
 		],
 		"testMatch": [
 			"**/__tests__/**/*.test.js?(x)"
@@ -72,11 +77,10 @@
 	},
 	"yarn-upgrade-all": {
 		"ignore": [
-			"socket.io",
-			"socket.io-client",
 			"@sprucelabs/jest-json-reporter",
 			"@sprucelabs/test",
 			"@sprucelabs/error",
+			"@sprucelabs/esm-postbuild",
 			"@sprucelabs/mercury-types",
 			"@sprucelabs/schema",
 			"@sprucelabs/semantic-release",
