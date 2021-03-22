@@ -88,7 +88,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		//@ts-ignore
 		client.socket?.disconnect()
 
-		await this.wait(1000)
+		await this.wait(2000)
 
 		assert.isTrue(client.isConnected())
 
@@ -113,7 +113,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		//@ts-ignore
 		client.socket?.disconnect()
 
-		await this.wait(1000)
+		await this.wait(2000)
 
 		assert.isTrue(client.isConnected())
 
@@ -141,14 +141,14 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		//@ts-ignore
 		client.socket?.disconnect()
 
-		await this.wait(1000)
+		await this.wait(2000)
 
 		assert.isFalse(client.isConnected())
 
 		//@ts-ignore
 		client.host = process.env.TEST_HOST
 
-		await this.wait(1000)
+		await this.wait(2000)
 
 		assert.isTrue(client.isConnected())
 
