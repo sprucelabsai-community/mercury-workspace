@@ -74,14 +74,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 				if (this.shouldReconnect) {
 					this.socket?.once('disconnect', async () => {
-						setTimeout(async () => {
-							await this.connect()
-							if (this.lastAuthOptions) {
-								await this.authenticate(this.lastAuthOptions)
-							}
-
-							await this.reregisterAllListeners()
-						}, this.reconnectDelayMs)
+						this.attemptReconnectAfterDelay()
 					})
 				}
 
@@ -99,6 +92,21 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				reject(error)
 			})
 		})
+	}
+
+	private attemptReconnectAfterDelay() {
+		setTimeout(async () => {
+			try {
+				await this.connect()
+				if (this.lastAuthOptions) {
+					await this.authenticate(this.lastAuthOptions)
+				}
+
+				await this.reregisterAllListeners()
+			} catch {
+				await this.attemptReconnectAfterDelay()
+			}
+		}, this.reconnectDelayMs)
 	}
 
 	private async reregisterAllListeners() {

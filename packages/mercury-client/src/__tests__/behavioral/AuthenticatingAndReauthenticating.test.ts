@@ -126,6 +126,35 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		assert.isEqual(whoAmI?.id, person.id)
 	}
 
+	@test()
+	protected static async losingConnectionBecomesMercuryIsDownDoesNotThrowUnhandledException() {
+		const { token } = await this.loginAsDemoPerson()
+
+		const client = await this.Client()
+		await client.authenticate({
+			token,
+		})
+
+		//@ts-ignore
+		client.host = 'https://wontwork.workwont'
+
+		//@ts-ignore
+		client.socket?.disconnect()
+
+		await this.wait(1000)
+
+		assert.isFalse(client.isConnected())
+
+		//@ts-ignore
+		client.host = process.env.TEST_HOST
+
+		await this.wait(1000)
+
+		assert.isTrue(client.isConnected())
+
+		await client.disconnect()
+	}
+
 	private static async Skill() {
 		const { skill } = await this.loginAsDemoSkill()
 		return skill
