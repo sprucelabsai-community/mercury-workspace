@@ -18,13 +18,15 @@ export default class MercuryClientFactory {
 		connectionOptions?: ConnectionOptions
 	): Promise<Client<Contract>> {
 		const {
-			host = DEFAULT_HOST,
+			host: hostOption,
 			contracts,
 			reconnectDelayMs,
 			allowSelfSignedCrt,
 			emitTimeoutMs,
 			shouldReconnect,
 		} = connectionOptions || {}
+
+		const host = hostOption ?? DEFAULT_HOST
 
 		if (host.substr(0, 4) !== 'http') {
 			throw new SpruceError({ code: 'INVALID_PROTOCOL' })

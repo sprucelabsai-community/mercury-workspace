@@ -1,6 +1,7 @@
 import { EventContract } from '@sprucelabs/mercury-types'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { MercuryClientFactory } from '../..'
+import { DEFAULT_HOST } from '../../constants'
 import { TEST_HOST } from '../../tests/constants'
 
 export default class MercuryClientFactoryTest extends AbstractSpruceTest {
@@ -27,5 +28,38 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 		assert.isTrue(client.handlesEvent('my-cool-event'))
 
 		await client.disconnect()
+	}
+
+	@test()
+	protected static async fallsBackToDefaultWhenHostIsUndefined() {
+		const client = await MercuryClientFactory.Client<EventContract>({
+			host: undefined,
+			allowSelfSignedCrt: true,
+			contracts: [
+				{
+					eventSignatures: {},
+				},
+			],
+		})
+
+		//@ts-ignore
+		assert.isEqual(client.host, DEFAULT_HOST)
+	}
+
+	@test()
+	protected static async fallsBackToDefaultWhenHostIsNull() {
+		const client = await MercuryClientFactory.Client<EventContract>({
+			//@ts-ignore
+			host: null,
+			allowSelfSignedCrt: true,
+			contracts: [
+				{
+					eventSignatures: {},
+				},
+			],
+		})
+
+		//@ts-ignore
+		assert.isEqual(client.host, DEFAULT_HOST)
 	}
 }
