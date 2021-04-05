@@ -101,7 +101,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	private attemptReconnectAfterDelay() {
-		this.isReAuthing = true
+		if (this.lastAuthOptions) {
+			this.isReAuthing = true
+		}
+
 		setTimeout(async () => {
 			try {
 				await this.connect()
@@ -111,6 +114,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				}
 
 				await this.reregisterAllListeners()
+
 				this.isReAuthing = false
 			} catch {
 				this.attemptReconnectAfterDelay()
@@ -129,12 +133,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	private mapSocketErrorToSpruceError(err: Record<string, any>) {
-		const originalError = new Error(err.message)
+		const originalError = new Error(err.message ?? err)
 
 		//@ts-ignore
 		originalError.socketError = err
 
 		switch (err.message) {
+			case 'timeout':
+				return new SpruceError({
+					code: 'TIMEOUT',
+					eventName: 'connect',
+					timeoutMs: 10000,
+				})
 			case 'xhr poll error':
 				return new SpruceError({
 					code: 'CONNECTION_FAILED',
@@ -187,7 +197,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		const signature = this.getEventSignatureByName(eventName)
 
-		if (!this.isConnected()) {
+		if (!this.isSocketConnected()) {
 			throw new SpruceError({ code: 'NOT_CONNECTED', action: 'emit' })
 		}
 
@@ -244,7 +254,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 								code: 'TIMEOUT',
 								eventName,
 								timeoutMs: this.emitTimeoutMs,
-								isConnected: this.isConnected(),
+								isConnected: this.isSocketConnected(),
 							})
 						)
 					}, this.emitTimeoutMs)
@@ -364,7 +374,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public async disconnect() {
-		if (this.isConnected()) {
+		if (this.isSocketConnected()) {
 			this.socket?.removeAllListeners()
 
 			await new Promise((resolve) => {
@@ -411,6 +421,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public isConnected() {
-		return (!this.isReAuthing && this.socket?.connected) ?? false
+		return !this.isReAuthing && this.isSocketConnected()
+	}
+
+	private isSocketConnected() {
+		return this.socket?.connected ?? false
 	}
 }
