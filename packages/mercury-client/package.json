@@ -32,7 +32,7 @@
 		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd .. && yarn rebuild",
 		"release": "semantic-release",
-		"test": "jest",
+		"test": "jest --forceExit",
 		"watch.build.dev": "yarn build.tsc -w"
 	},
 	"dependencies": {
