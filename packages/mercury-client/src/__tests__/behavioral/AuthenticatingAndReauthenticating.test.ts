@@ -105,9 +105,9 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		//@ts-ignore
 		client.socket?.disconnect()
 
-		await this.wait(2000)
-
-		assert.isTrue(client.isConnected())
+		do {
+			await this.wait(1000)
+		} while (!client.isConnected())
 
 		const results = await client.emit('whoami::v2020_12_25')
 
@@ -130,9 +130,9 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		//@ts-ignore
 		client.socket?.disconnect()
 
-		await this.wait(2000)
-
-		assert.isTrue(client.isConnected())
+		do {
+			await this.wait(1000)
+		} while (!client.isConnected())
 
 		const results = await client.emit('whoami::v2020_12_25')
 
@@ -165,9 +165,9 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		//@ts-ignore
 		client.host = process.env.TEST_HOST
 
-		await this.wait(2000)
-
-		assert.isTrue(client.isConnected())
+		do {
+			await this.wait(1000)
+		} while (!client.isConnected())
 
 		const results = await client.emit('whoami::v2020_12_25')
 
@@ -195,9 +195,9 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		//@ts-ignore
 		client.host = process.env.TEST_HOST
 
-		await this.wait(2000)
-
-		assert.isTrue(client.isConnected())
+		do {
+			await this.wait(1000)
+		} while (!client.isConnected())
 
 		const results = await client.emit('whoami::v2020_12_25')
 
