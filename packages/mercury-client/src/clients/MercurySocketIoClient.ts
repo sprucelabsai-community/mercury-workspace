@@ -113,7 +113,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				await this.reregisterAllListeners()
 				this.isReAuthing = false
 			} catch {
-				await this.attemptReconnectAfterDelay()
+				this.attemptReconnectAfterDelay()
 			}
 		}, this.reconnectDelayMs)
 	}
@@ -128,7 +128,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		await all
 	}
 
-	public mapSocketErrorToSpruceError(err: Record<string, any>) {
+	private mapSocketErrorToSpruceError(err: Record<string, any>) {
 		const originalError = new Error(err.message)
 
 		//@ts-ignore

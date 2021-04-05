@@ -239,7 +239,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 	}
 
 	@test('each listener gets fired')
-	@test('each listener gets fired even lost connection', true)
+	@test('each listener gets fired after lost connection', true)
 	protected static async emitterGetsCalledBackForEachListener(
 		shouldDisconnect = false
 	) {
