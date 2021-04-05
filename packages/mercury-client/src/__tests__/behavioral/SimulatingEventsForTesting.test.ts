@@ -13,10 +13,6 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	private static readonly eventName = 'whoami::v2020_12_25'
 	private static readonly testEventName = 'my-skill.test-event::v2020_02_02'
 
-	protected static async beforeAll() {
-		//so parent class doesn't set test mode
-	}
-
 	@test()
 	protected static testModeFalseByDefault() {
 		assert.isFalse(MercuryClientFactory.isInTestMode())

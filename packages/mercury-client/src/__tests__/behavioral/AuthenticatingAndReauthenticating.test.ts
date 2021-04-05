@@ -144,7 +144,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	}
 
 	@test()
-	protected static async losingConnectionBecaueMercuryIsDownDoesNotThrowUnhandledException() {
+	protected static async losingConnectionBecauseMercuryIsDownDoesNotThrowUnhandledException() {
 		const { token, person } = await this.loginAsDemoPerson()
 
 		const client = await this.Client()

@@ -29,11 +29,6 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		this.clients = []
 	}
 
-	protected static async beforeAll() {
-		await super.beforeAll()
-		MercuryClientFactory.setIsTestMode(true)
-	}
-
 	protected static async beforeEach() {
 		await super.beforeEach()
 		MercuryTestClient.reset()

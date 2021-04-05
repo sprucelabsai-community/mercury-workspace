@@ -17,10 +17,6 @@ require('dotenv').config()
 export default class MercuryClientTest extends AbstractClientTest {
 	private static timeoutClient?: any
 
-	protected static async beforeAll() {
-		//don't test client
-	}
-
 	protected static async afterEach() {
 		if (this.timeoutClient) {
 			this.timeoutClient.socket = null
