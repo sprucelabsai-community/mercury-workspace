@@ -15,6 +15,7 @@ import SpruceError from './errors/SpruceError'
 export default class AbstractEventEmitter<Contract extends EventContract>
 	implements MercuryEventEmitter<Contract> {
 	private eventContract: EventContract
+	private originalEventContract: EventContract
 
 	protected listenersByEvent: Record<
 		string,
@@ -23,6 +24,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 
 	public constructor(contract: EventContract) {
 		this.eventContract = contract
+		this.originalEventContract = contract
 	}
 
 	public async emit<
@@ -152,7 +154,11 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		]) as EventContract
 	}
 
-	private validatePayload(
+	public resetContracts() {
+		this.eventContract = { ...this.originalEventContract }
+	}
+
+	protected validatePayload(
 		schema: Schema | undefined | null,
 		actualPayload: any,
 		eventName: string

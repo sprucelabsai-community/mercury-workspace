@@ -1,6 +1,9 @@
+import { formatPhoneNumber } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
+import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
+import { DEMO_PHONE } from '../../tests/constants'
 
 export default class ReauthenticatingAfterReconnectTest extends AbstractClientTest {
 	@test()
@@ -60,6 +63,20 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		await client.disconnect()
 
 		assert.isFalse(client.isConnected())
+	}
+
+	@test()
+	protected static async confirmPinFailsValidationClientSideDespiteOneOffLogicForRetainingAuth() {
+		const client = await this.Client()
+
+		const err = await assert.doesThrowAsync(() =>
+			client.emit('confirm-pin::v2020_12_25', {
+				//@ts-ignore
+				fails: true,
+			})
+		)
+
+		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD')
 	}
 
 	@test()
@@ -127,8 +144,8 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	}
 
 	@test()
-	protected static async losingConnectionBecomesMercuryIsDownDoesNotThrowUnhandledException() {
-		const { token } = await this.loginAsDemoPerson()
+	protected static async losingConnectionBecaueMercuryIsDownDoesNotThrowUnhandledException() {
+		const { token, person } = await this.loginAsDemoPerson()
 
 		const client = await this.Client()
 		await client.authenticate({
@@ -152,7 +169,78 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 		assert.isTrue(client.isConnected())
 
-		await client.disconnect()
+		const results = await client.emit('whoami::v2020_12_25')
+
+		const {
+			auth: { person: whoAmI },
+		} = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		assert.isEqual(whoAmI?.id, person.id)
+	}
+
+	@test()
+	protected static async personAuthIsRetainedAfterConfirmingPin() {
+		const { client, person } = await this.loginAsDemoPerson()
+
+		//@ts-ignore
+		client.host = 'https://wontwork.workwont'
+
+		//@ts-ignore
+		client.socket?.disconnect()
+
+		await this.wait(2000)
+
+		assert.isFalse(client.isConnected())
+
+		//@ts-ignore
+		client.host = process.env.TEST_HOST
+
+		await this.wait(2000)
+
+		assert.isTrue(client.isConnected())
+
+		const results = await client.emit('whoami::v2020_12_25')
+
+		const {
+			auth: { person: whoAmI },
+		} = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		assert.isEqual(whoAmI?.id, person.id)
+	}
+
+	@test()
+	protected static async authAsPersonStoresOnClient() {
+		const { token } = await this.loginAsDemoPerson()
+
+		const client = await this.Client()
+		await client.authenticate({
+			token,
+		})
+
+		//@ts-ignore
+		assert.isTruthy(client.auth)
+		//@ts-ignore
+		assert.isTruthy(client.auth.person)
+		//@ts-ignore
+		assert.isEqual(client.auth.person.phone, formatPhoneNumber(DEMO_PHONE))
+	}
+
+	@test()
+	protected static async authAsSkillStoresOnClient() {
+		const skill = await this.Skill()
+
+		const client = await this.Client()
+		await client.authenticate({
+			skillId: skill.id,
+			apiKey: skill.apiKey,
+		})
+
+		//@ts-ignore
+		assert.isTruthy(client.auth)
+		//@ts-ignore
+		assert.isTruthy(client.auth.skill)
+		//@ts-ignore
+		assert.isEqual(client.auth.skill.id, skill.id)
 	}
 
 	private static async Skill() {

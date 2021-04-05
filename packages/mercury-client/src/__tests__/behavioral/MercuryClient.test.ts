@@ -17,6 +17,10 @@ require('dotenv').config()
 export default class MercuryClientTest extends AbstractClientTest {
 	private static timeoutClient?: any
 
+	protected static async beforeAll() {
+		//don't test client
+	}
+
 	protected static async afterEach() {
 		if (this.timeoutClient) {
 			this.timeoutClient.socket = null
@@ -103,6 +107,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 	@test()
 	protected static async throwsHelpfulErrorWhenCantReachHost() {
 		const host = 'https://wontfindthisanywhere.com'
+
 		const err = await assert.doesThrowAsync(() => this.Client({ host }))
 		errorAssertUtil.assertError(err, 'CONNECTION_FAILED', {
 			host,
@@ -215,9 +220,9 @@ export default class MercuryClientTest extends AbstractClientTest {
 		const createLogin = this.seedInstallAndLoginAsSkill(client, org)
 		const createLogin2 = this.seedInstallAndLoginAsSkill(client, org)
 
-		const { skill: skill1, skillClient: skill1Client } = await createLogin
+		const { skill: skill1, client: skill1Client } = await createLogin
 
-		const { skillClient: skill2Client } = await createLogin2
+		const { client: skill2Client } = await createLogin2
 
 		MutableContractClient.mixinContract(
 			this.generateWillSendVipEventSignature(skill1.slug)
@@ -250,12 +255,12 @@ export default class MercuryClientTest extends AbstractClientTest {
 			skill2Client,
 		} = await this.setup2SkillsAndOneEvent()
 
-		const { skillClient: skill3Client } = await this.seedInstallAndLoginAsSkill(
+		const { client: skill3Client } = await this.seedInstallAndLoginAsSkill(
 			client,
 			org
 		)
 
-		const { skillClient: skill4Client } = await this.seedInstallAndLoginAsSkill(
+		const { client: skill4Client } = await this.seedInstallAndLoginAsSkill(
 			client,
 			org
 		)
@@ -438,15 +443,15 @@ export default class MercuryClientTest extends AbstractClientTest {
 		const org = await this.seedDummyOrg(client)
 
 		const {
-			skillClient: originalSkillClient,
+			client: originalSkillClient,
 		} = await this.seedInstallAndLoginAsSkill(client, org)
 
 		await Promise.all(
 			new Array(5).fill(0).map(async () => {
-				const { skill, skillClient } = await this.seedInstallAndLoginAsSkill(
-					client,
-					org
-				)
+				const {
+					skill,
+					client: skillClient,
+				} = await this.seedInstallAndLoginAsSkill(client, org)
 
 				const registerResults = await skillClient.emit(
 					'register-events::v2020_12_25',

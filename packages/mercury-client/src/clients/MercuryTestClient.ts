@@ -1,5 +1,7 @@
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import { EventContract } from '@sprucelabs/mercury-types'
+import { Schema } from '@sprucelabs/schema'
+import { EventSource } from '@sprucelabs/spruce-event-utils'
 import MutableContractClient from './MutableContractClient'
 
 class InternalEmitter<
@@ -7,6 +9,16 @@ class InternalEmitter<
 > extends AbstractEventEmitter<Contract> {
 	public reset() {
 		this.listenersByEvent = {}
+	}
+
+	protected validatePayload(
+		schema: Schema | undefined | null,
+		actualPayload: any,
+		eventName: string
+	) {
+		const payload = { ...actualPayload }
+		delete payload.source
+		return super.validatePayload(schema, payload, eventName)
 	}
 }
 
@@ -28,9 +40,18 @@ export default class MercuryTestClient<
 		}
 	}
 
+	public static resetContracts() {
+		MutableContractClient.resetContracts()
+		MercuryTestClient.emitter?.resetContracts()
+	}
+
 	public mixinContract(contract: EventContract) {
 		MutableContractClient.mixinContract(contract)
 		MercuryTestClient.emitter.mixinContract(contract)
+	}
+
+	public resetContracts() {
+		MercuryTestClient.resetContracts()
 	}
 
 	public async on(...args: any[]) {
@@ -39,7 +60,21 @@ export default class MercuryTestClient<
 
 	public async emit(...args: any[]) {
 		if (MercuryTestClient.emitter.listenCount(args[0]) > 0) {
-			return MercuryTestClient.emitter.emit(...args)
+			const source: EventSource = {}
+			if (this.auth?.person) {
+				source.personId = this.auth.person.id
+			}
+
+			if (this.auth?.skill) {
+				source.skillId = this.auth.skill.id
+			}
+
+			const argsWithSource = [...args]
+			argsWithSource[1] = {
+				...argsWithSource[1],
+				source,
+			}
+			return MercuryTestClient.emitter.emit(...argsWithSource)
 		} else {
 			if (!super.isConnected()) {
 				this.isConnectedToApi = true
@@ -69,5 +104,6 @@ export default class MercuryTestClient<
 
 	public static reset() {
 		MercuryTestClient.emitter?.reset()
+		MercuryTestClient.resetContracts()
 	}
 }

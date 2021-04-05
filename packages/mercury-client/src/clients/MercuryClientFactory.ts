@@ -8,6 +8,7 @@ import MutableContractClient from './MutableContractClient'
 export type Client<Contract extends EventContract> = MercuryClient<Contract> & {
 	handlesEvent(eventName: string): boolean
 	mixinContract(eventContract: EventContract): void
+	resetContracts(): void
 }
 
 export default class MercuryClientFactory {

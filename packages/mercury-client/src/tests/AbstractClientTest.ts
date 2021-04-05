@@ -7,6 +7,7 @@ import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { assert } from '@sprucelabs/test'
 import { ConnectionOptions, MercuryClient } from '../client.types'
 import MercuryClientFactory from '../clients/MercuryClientFactory'
+import MercuryTestClient from '../clients/MercuryTestClient'
 import SpruceError from '../errors/SpruceError'
 import { TEST_HOST } from './constants'
 
@@ -28,6 +29,16 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		this.clients = []
 	}
 
+	protected static async beforeAll() {
+		await super.beforeAll()
+		MercuryClientFactory.setIsTestMode(true)
+	}
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+		MercuryTestClient.reset()
+	}
+
 	protected static async afterAll() {
 		await super.afterAll()
 
@@ -36,6 +47,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		}
 
 		this.clients = []
+		MercuryClientFactory.resetTestClient()
 	}
 
 	protected static async Client(
@@ -126,7 +138,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 			apiKey: skill.apiKey,
 		})
 
-		return { skill, skillClient }
+		return { skill, client: skillClient }
 	}
 
 	protected static async seedAndInstallDummySkill(

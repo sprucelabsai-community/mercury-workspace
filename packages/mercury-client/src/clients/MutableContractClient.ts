@@ -17,8 +17,16 @@ export default class MutableContractClient<
 		])
 	}
 
+	public static resetContracts() {
+		this.inMemoryContract = undefined
+	}
+
 	public mixinContract(contract: EventContract) {
 		MutableContractClient.mixinContract(contract)
+	}
+
+	public resetContracts() {
+		MutableContractClient.resetContracts()
 	}
 
 	public handlesEvent(eventName: string) {

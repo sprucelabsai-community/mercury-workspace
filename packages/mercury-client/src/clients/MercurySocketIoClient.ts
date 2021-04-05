@@ -7,6 +7,7 @@ import {
 	EventSignature,
 	MercuryAggregateResponse,
 	MercurySingleResponse,
+	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import { Schema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
 import {
@@ -38,6 +39,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private shouldReconnect: boolean
 	private registeredListeners: any[] = []
 	private allowNextEventToBeAuthenticate = false
+	protected auth?: {
+		skill?: SpruceSchemas.Spruce.v2020_07_22.Skill
+		person?: SpruceSchemas.Spruce.v2020_07_22.Person
+	}
 
 	public constructor(
 		options: {
@@ -98,6 +103,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		setTimeout(async () => {
 			try {
 				await this.connect()
+
 				if (this.lastAuthOptions) {
 					await this.authenticate(this.lastAuthOptions)
 				}
@@ -242,13 +248,14 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 					args.push((results: any) => {
 						clearTimeout(emitTimeout)
-
+						this.handleConfirmPinResponse(eventName, results)
 						this.socket?.off(responseEventName, singleResponseHandler)
 
 						resolve(results)
 					})
 
 					const ioName = socketIoEventUtil.toSocketName(eventName)
+
 					this.socket?.emit(ioName, ...args)
 				} catch (err) {
 					reject(err)
@@ -260,6 +267,15 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			results,
 			SpruceError
 		)
+	}
+	private handleConfirmPinResponse(eventName: string, results: any) {
+		const payload = results?.responses?.[0]?.payload
+		if (eventName.search('confirm-pin') === 0 && payload?.person) {
+			this.lastAuthOptions = { token: payload.token }
+			this.auth = {
+				person: payload.person,
+			}
+		}
 	}
 
 	protected getEventSignatureByName<EventName extends EventNames<Contract>>(
@@ -382,6 +398,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		//@ts-ignore
 		const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		this.auth = auth
 
 		return {
 			skill: auth.skill,
