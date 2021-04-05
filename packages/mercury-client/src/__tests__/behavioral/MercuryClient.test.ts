@@ -297,7 +297,13 @@ export default class MercuryClientTest extends AbstractClientTest {
 			//@ts-ignore
 			skill2Client.socket.disconnect()
 
-			await this.wait(1000)
+			do {
+				await this.wait(1000)
+			} while (
+				!skill1Client.isConnected() ||
+				!skill2Client.isConnected() ||
+				!client.isConnected()
+			)
 		}
 
 		let responseTriggerCount = 0

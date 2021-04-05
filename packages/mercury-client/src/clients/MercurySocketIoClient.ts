@@ -31,6 +31,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private socket?: SocketIOClient.Socket
 	private emitTimeoutMs: number
 	private reconnectDelayMs: number
+	private isReAuthing = false
 	private lastAuthOptions?: {
 		skillId?: string | undefined
 		apiKey?: string | undefined
@@ -100,6 +101,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	private attemptReconnectAfterDelay() {
+		this.isReAuthing = true
 		setTimeout(async () => {
 			try {
 				await this.connect()
@@ -109,6 +111,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				}
 
 				await this.reregisterAllListeners()
+				this.isReAuthing = false
 			} catch {
 				await this.attemptReconnectAfterDelay()
 			}
@@ -408,6 +411,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public isConnected() {
-		return this.socket?.connected ?? false
+		return (!this.isReAuthing && this.socket?.connected) ?? false
 	}
 }
