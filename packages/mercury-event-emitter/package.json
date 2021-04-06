@@ -36,8 +36,9 @@
 		"rebuild": "cd ../ && yarn rebuild.dev",
 		"release": "semantic-release",
 		"test": "jest",
-		"watch.build.dev": "concurrently 'yarn build.dev' 'yarn build.tsc -w' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.resolve-paths'\"",
-		"watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'"
+		"watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && build.resolve-paths'\"",
+		"watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
+		"watch.tsc": "tsc -w"
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
