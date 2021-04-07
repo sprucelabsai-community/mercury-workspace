@@ -16,8 +16,8 @@ import {
 	eventNameUtil,
 } from '@sprucelabs/spruce-event-utils'
 import io from 'socket.io-client'
-import { MercuryClient } from '../client.types'
 import SpruceError from '../errors/SpruceError'
+import { MercuryClient } from '../types/client.types'
 import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 
 type IoOptions = SocketIOClient.ConnectOpts

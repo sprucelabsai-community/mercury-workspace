@@ -5,10 +5,10 @@ import {
 } from '@sprucelabs/mercury-types'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { assert } from '@sprucelabs/test'
-import { ConnectionOptions, MercuryClient } from '../client.types'
 import MercuryClientFactory from '../clients/MercuryClientFactory'
 import MercuryTestClient from '../clients/MercuryTestClient'
 import SpruceError from '../errors/SpruceError'
+import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import { TEST_HOST } from './constants'
 
 type Client = MercuryClient<CoreEventContract>

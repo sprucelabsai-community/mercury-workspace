@@ -1,2 +1,2 @@
 export { default as MercuryClientFactory } from './clients/MercuryClientFactory'
-export * from './client.types'
+export * from './types/client.types'
