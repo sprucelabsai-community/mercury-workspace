@@ -30,7 +30,7 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@sprucelabs/babel-plugin-schema": "latest",
+		"@sprucelabs/resolve-path-aliases": "latest",
 		"concurrently": "^6.0.0",
 		"conventional-changelog-sprucelabs": "latest",
 		"eslint": "^7.11.0",
@@ -44,11 +44,11 @@
 		"ignore": [
 			"socket.io",
 			"socket.io-client",
-			"@sprucelabs/babel-plugin-schema",
 			"@sprucelabs/error",
 			"@sprucelabs/jest-sheets-reporter",
 			"@sprucelabs/log",
 			"@sprucelabs/mercury-types",
+			"@sprucelabs/resolve-path-aliases",
 			"@sprucelabs/schema",
 			"@sprucelabs/semantic-release",
 			"@sprucelabs/spruce-core-schemas",
