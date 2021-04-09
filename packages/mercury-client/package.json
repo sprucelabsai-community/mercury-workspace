@@ -45,10 +45,10 @@
 		"socket.io-client": "^2.3.1"
 	},
 	"devDependencies": {
-		"@sprucelabs/babel-plugin-schema": "latest",
 		"@sprucelabs/esm-postbuild": "latest",
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/jest-sheets-reporter": "latest",
+		"@sprucelabs/resolve-path-aliases": "latest",
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
 		"@sprucelabs/test-utils": "latest",
@@ -100,10 +100,10 @@
 		"ignore": [
 			"socket.io",
 			"socket.io-client",
-			"@sprucelabs/babel-plugin-schema",
 			"@sprucelabs/esm-postbuild",
 			"@sprucelabs/jest-json-reporter",
 			"@sprucelabs/jest-sheets-reporter",
+			"@sprucelabs/resolve-path-aliases",
 			"@sprucelabs/semantic-release",
 			"@sprucelabs/test",
 			"@sprucelabs/test-utils",
