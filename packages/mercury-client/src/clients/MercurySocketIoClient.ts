@@ -134,6 +134,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 	private mapSocketErrorToSpruceError(err: Record<string, any>) {
 		const originalError = new Error(err.message ?? err)
+		if (err.stack) {
+			originalError.stack = err.stack
+		}
 
 		//@ts-ignore
 		originalError.socketError = err

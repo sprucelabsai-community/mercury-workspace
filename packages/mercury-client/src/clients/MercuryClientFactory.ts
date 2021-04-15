@@ -1,4 +1,4 @@
-import { EventContract } from '@sprucelabs/mercury-types'
+import { EventContract, SkillEventContract } from '@sprucelabs/mercury-types'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { DEFAULT_HOST } from '../constants'
 import SpruceError from '../errors/SpruceError'
@@ -15,9 +15,10 @@ export default class MercuryClientFactory {
 	private static isTestMode = false
 	private static defaultContract: any
 
-	public static async Client<Contract extends EventContract>(
-		connectionOptions?: ConnectionOptions
-	): Promise<Client<Contract>> {
+	public static async Client<
+		Contract extends SkillEventContract = SkillEventContract
+		/** @ts-ignore */
+	>(connectionOptions?: ConnectionOptions): Promise<Client<Contract>> {
 		const {
 			host: hostOption,
 			contracts,
@@ -52,7 +53,7 @@ export default class MercuryClientFactory {
 			Client = require('../clients/MercuryTestClient').default
 		}
 
-		const client = new Client<Contract>({
+		const client = new Client<any>({
 			host,
 			reconnection: false,
 			reconnectDelayMs,
@@ -64,7 +65,7 @@ export default class MercuryClientFactory {
 
 		await client.connect()
 
-		return client as Client<Contract>
+		return client as any
 	}
 
 	public static isInTestMode() {

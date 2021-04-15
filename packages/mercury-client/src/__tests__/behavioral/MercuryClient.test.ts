@@ -32,7 +32,10 @@ export default class MercuryClientTest extends AbstractClientTest {
 
 	@test()
 	protected static async allowsEmptyContracts() {
-		const client = await MercuryClientFactory.Client({ host: TEST_HOST })
+		const client = await MercuryClientFactory.Client({
+			host: TEST_HOST,
+			allowSelfSignedCrt: true,
+		})
 		this.clients.push(client)
 	}
 
@@ -105,6 +108,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 		const host = 'https://wontfindthisanywhere.com'
 
 		const err = await assert.doesThrowAsync(() => this.Client({ host }))
+
 		errorAssertUtil.assertError(err, 'CONNECTION_FAILED', {
 			host,
 			statusCode: 503,

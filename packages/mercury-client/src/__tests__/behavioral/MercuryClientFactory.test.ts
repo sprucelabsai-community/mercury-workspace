@@ -1,4 +1,3 @@
-import { EventContract } from '@sprucelabs/mercury-types'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { MercuryClientFactory } from '../..'
 import { DEFAULT_HOST } from '../../constants'
@@ -7,7 +6,7 @@ import { TEST_HOST } from '../../tests/constants'
 export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 	@test()
 	protected static async clientMixinContract() {
-		const client = await MercuryClientFactory.Client<EventContract>({
+		const client = await MercuryClientFactory.Client({
 			host: TEST_HOST,
 			allowSelfSignedCrt: true,
 			contracts: [
@@ -32,7 +31,7 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async fallsBackToDefaultWhenHostIsUndefined() {
-		const client = await MercuryClientFactory.Client<EventContract>({
+		const client = await MercuryClientFactory.Client({
 			host: undefined,
 			allowSelfSignedCrt: true,
 			contracts: [
@@ -48,7 +47,7 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async fallsBackToDefaultWhenHostIsNull() {
-		const client = await MercuryClientFactory.Client<EventContract>({
+		const client = await MercuryClientFactory.Client({
 			//@ts-ignore
 			host: null,
 			allowSelfSignedCrt: true,
