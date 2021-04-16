@@ -27,7 +27,7 @@
 		"build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
 		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.resolve-paths && yarn build.esm-postbuild",
 		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
-		"build.resolve-paths": "resolve-path-aliases --target build --patterns **/*.js,**/*.d.ts -v",
+		"build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts' -v",
 		"build.tsc": "yarn build.copy-files && tsc",
 		"build.types": "tsc --emitDeclarationOnly && echo PASS",
 		"clean": "rm -rf build/",
