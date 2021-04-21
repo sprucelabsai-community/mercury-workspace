@@ -453,7 +453,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 		} = await this.seedInstallAndLoginAsSkill(client, org)
 
 		await Promise.all(
-			new Array(5).fill(0).map(async () => {
+			new Array(200).fill(0).map(async () => {
 				const {
 					skill,
 					client: skillClient,
@@ -495,7 +495,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 
 		const { contracts } = eventResponseUtil.getFirstResponseOrThrow(results)
 
-		assert.isLength(contracts, 5 + 1)
+		assert.isLength(contracts, 200 + 1)
 	}
 
 	@test()

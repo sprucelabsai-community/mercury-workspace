@@ -320,6 +320,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const client = await MercuryClientFactory.Client<CoreEventContract>({
 			host: TEST_HOST,
 			contracts: !shouldSetDefaultContract ? coreEventContracts : undefined,
+			allowSelfSignedCrt: true,
 		})
 
 		this.clients.push(client)
