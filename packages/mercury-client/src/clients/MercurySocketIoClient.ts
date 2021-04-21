@@ -164,7 +164,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				})
 			default:
 				return new SpruceError({
-					code: ' ',
+					code: 'UNKNOWN_ERROR',
 					originalError,
 					friendlyMessage: `Something went wrong when working with socketio`,
 				})
