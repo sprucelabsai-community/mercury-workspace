@@ -87,8 +87,15 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				resolve(undefined)
 			})
 
-			this.socket?.on('timeout', (err: string) => {
-				reject(err)
+			this.socket?.on('timeout', () => {
+				reject(
+					new SpruceError({
+						code: 'TIMEOUT',
+						eventName: 'connect',
+						timeoutMs: 20000,
+						friendlyMessage: `Uh Oh! I'm having trouble reaching HQ! Double check you have good internet and try again. In the meantime I'll try some things on my side and see what I can do. 🤞`,
+					})
+				)
 			})
 
 			this.socket?.on('connect_error', (err: Record<string, any>) => {
@@ -157,7 +164,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				})
 			default:
 				return new SpruceError({
-					code: 'UNKNOWN_ERROR',
+					code: ' ',
 					originalError,
 					friendlyMessage: `Something went wrong when working with socketio`,
 				})
