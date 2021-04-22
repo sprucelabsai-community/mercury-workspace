@@ -14,6 +14,7 @@ export type Client<Contract extends EventContract> = MercuryClient<Contract> & {
 export default class MercuryClientFactory {
 	private static isTestMode = false
 	private static defaultContract: any
+	private static timeoutMs = 30000
 
 	public static async Client<
 		Contract extends SkillEventContract = SkillEventContract
@@ -24,7 +25,7 @@ export default class MercuryClientFactory {
 			contracts,
 			reconnectDelayMs,
 			allowSelfSignedCrt,
-			emitTimeoutMs,
+			emitTimeoutMs = this.timeoutMs,
 			shouldReconnect,
 		} = connectionOptions || {}
 
@@ -83,5 +84,9 @@ export default class MercuryClientFactory {
 	public static resetTestClient() {
 		const Client = require('../clients/MercuryTestClient').default
 		Client.reset()
+	}
+
+	public static setDefaultTimeoutMs(ms: number) {
+		this.timeoutMs = ms
 	}
 }

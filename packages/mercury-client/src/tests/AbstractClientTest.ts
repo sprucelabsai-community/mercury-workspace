@@ -34,6 +34,11 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		MercuryTestClient.reset()
 	}
 
+	protected static async beforeAll() {
+		await super.beforeAll()
+		MercuryClientFactory.setDefaultTimeoutMs(120 * 1000)
+	}
+
 	protected static async afterAll() {
 		await super.afterAll()
 

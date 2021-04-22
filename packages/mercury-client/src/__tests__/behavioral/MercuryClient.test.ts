@@ -455,7 +455,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 		const eventsToCheck: string[] = []
 
 		await Promise.all(
-			new Array(50).fill(0).map(async () => {
+			new Array(200).fill(0).map(async () => {
 				const {
 					skill,
 					client: skillClient,
