@@ -3,7 +3,7 @@ import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
-import { DEMO_PHONE } from '../../tests/constants'
+import { DEMO_PHONE, TEST_HOST } from '../../tests/constants'
 
 export default class ReauthenticatingAfterReconnectTest extends AbstractClientTest {
 	@test()
@@ -163,7 +163,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		assert.isFalse(client.isConnected())
 
 		//@ts-ignore
-		client.host = process.env.TEST_HOST
+		client.host = TEST_HOST
 
 		do {
 			await this.wait(1000)
