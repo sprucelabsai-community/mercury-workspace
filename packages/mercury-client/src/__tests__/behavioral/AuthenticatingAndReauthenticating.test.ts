@@ -4,6 +4,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { DEMO_PHONE, TEST_HOST } from '../../tests/constants'
+require('dotenv').config()
 
 const DEMO_PHONE_REAUTH = process.env.DEMO_PHONE_REAUTH
 
