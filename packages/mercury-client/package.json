@@ -90,7 +90,8 @@
 						"factoryReturnsSocketIoClient": "F12",
 						"canRunHealthCheck": "F13",
 						"skillsCanListenToEachOther": "F22",
-						"emitterGetsCalledBackForEachListener": "F23"
+						"emitterGetsCalledBackForEachListener": "F23",
+						"canRegisterEventsSimultaniously": "J102"
 					}
 				}
 			]
