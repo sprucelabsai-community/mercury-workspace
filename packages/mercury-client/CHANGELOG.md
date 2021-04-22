@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.1.2](https://github.com/sprucelabsai/mercury-workspace/compare/v16.1.1...v16.1.2) (2021-04-22)
+
+
+### Bug Fixes
+
+* bad push ([d6344db](https://github.com/sprucelabsai/mercury-workspace/commit/d6344db))
+* use DEMO_PHONE_REAUTH consistently ([f0d8e1a](https://github.com/sprucelabsai/mercury-workspace/commit/f0d8e1a))
+
+
+
+
+
 ## [16.1.1](https://github.com/sprucelabsai/mercury-workspace/compare/v16.1.0...v16.1.1) (2021-04-22)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
