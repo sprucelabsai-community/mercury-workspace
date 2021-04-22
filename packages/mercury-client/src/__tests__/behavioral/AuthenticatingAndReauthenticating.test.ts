@@ -185,7 +185,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 	@test()
 	protected static async personAuthIsRetainedAfterConfirmingPin() {
-		const { client, person } = await this.loginAsDemoPerson()
+		const { client, person } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 
 		//@ts-ignore
 		client.host = 'https://wontwork.workwont'
@@ -215,7 +215,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 	@test()
 	protected static async authAsPersonStoresOnClient() {
-		const { token } = await this.loginAsDemoPerson()
+		const { token } = await this.DEMO_PHONE_REAUTH)
 
 		const client = await this.Client()
 		await client.authenticate({
@@ -254,7 +254,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	}
 
 	private static async loginAsDemoSkill() {
-		const { client } = await this.loginAsDemoPerson()
+		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 		const org = await this.seedDummyOrg(client)
 		const skill = await this.seedAndInstallDummySkill(client, org)
 		return { client, skill }
