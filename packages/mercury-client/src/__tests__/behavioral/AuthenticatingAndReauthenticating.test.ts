@@ -3,10 +3,10 @@ import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
-import { DEMO_PHONE, TEST_HOST } from '../../tests/constants'
+import { TEST_HOST } from '../../tests/constants'
 require('dotenv').config()
 
-const DEMO_PHONE_REAUTH = process.env.DEMO_PHONE_REAUTH
+const DEMO_PHONE_REAUTH = process.env.DEMO_PHONE_REAUTH as string
 
 export default class ReauthenticatingAfterReconnectTest extends AbstractClientTest {
 	@test()
@@ -226,8 +226,11 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		assert.isTruthy(client.auth)
 		//@ts-ignore
 		assert.isTruthy(client.auth.person)
-		//@ts-ignore
-		assert.isEqual(client.auth.person.phone, formatPhoneNumber(DEMO_PHONE))
+		assert.isEqual(
+			//@ts-ignore
+			client.auth.person.phone,
+			formatPhoneNumber(DEMO_PHONE_REAUTH)
+		)
 	}
 
 	@test()
