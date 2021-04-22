@@ -444,7 +444,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async canRegisterEventsSimultaniously() {
+	protected static async canRegisterEventsSimultaneously() {
 		const { client } = await this.loginAsDemoPerson()
 		const org = await this.seedDummyOrg(client)
 

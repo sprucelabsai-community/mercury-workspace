@@ -91,7 +91,7 @@
 						"canRunHealthCheck": "F13",
 						"skillsCanListenToEachOther": "F22",
 						"emitterGetsCalledBackForEachListener": "F23",
-						"canRegisterEventsSimultaniously": "I102"
+						"canRegisterEventsSimultaneously": "I102"
 					}
 				}
 			]
