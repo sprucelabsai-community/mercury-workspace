@@ -62,8 +62,8 @@
 		"typescript": "^4.2.4"
 	},
 	"jest": {
-		"maxWorkers": 1,
-		"testTimeout": 120000,
+		"maxWorkers": 5,
+		"testTimeout": 240000,
 		"testEnvironment": "node",
 		"testPathIgnorePatterns": [
 			"<rootDir>/tmp/",
