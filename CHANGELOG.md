@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.1.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.0.25...v16.1.0) (2021-04-22)
+
+
+### Features
+
+* default timeout for all clients created from factory ([78e2ca7](https://github.com/sprucelabsai/mercury-workspace/commit/78e2ca7))
+
+
+
+
+
 ## [16.0.25](https://github.com/sprucelabsai/mercury-workspace/compare/v16.0.24...v16.0.25) (2021-04-15)
 
 **Note:** Version bump only for package spruce-mercury-workspace
