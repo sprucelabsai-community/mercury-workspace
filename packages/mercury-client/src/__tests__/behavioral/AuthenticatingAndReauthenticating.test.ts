@@ -193,7 +193,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		assert.isFalse(client.isConnected())
 
 		//@ts-ignore
-		client.host = process.env.TEST_HOST
+		client.host = TEST_HOST
 
 		do {
 			await this.wait(1000)
