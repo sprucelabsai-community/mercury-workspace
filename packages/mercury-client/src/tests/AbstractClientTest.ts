@@ -68,13 +68,14 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		return client
 	}
 
-	protected static async loginAsDemoPerson(): Promise<{
+	protected static async loginAsDemoPerson(
+		phone = process.env.DEMO_PHONE
+	): Promise<{
 		person: Person
 		client: Client
 		token: string
 	}> {
 		const client = await this.Client()
-		const phone = process.env.DEMO_PHONE
 
 		if (!phone) {
 			throw new SpruceError({

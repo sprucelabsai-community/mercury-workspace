@@ -5,6 +5,8 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { DEMO_PHONE, TEST_HOST } from '../../tests/constants'
 
+const DEMO_PHONE_REAUTH = process.env.DEMO_PHONE_REAUTH
+
 export default class ReauthenticatingAfterReconnectTest extends AbstractClientTest {
 	@test()
 	protected static async authThrowsIfFails() {
@@ -35,7 +37,9 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 	@test()
 	protected static async canAuthAsPerson() {
-		const { client, token, person } = await this.loginAsDemoPerson()
+		const { client, token, person } = await this.loginAsDemoPerson(
+			DEMO_PHONE_REAUTH
+		)
 		const { person: authPerson } = await client.authenticate({
 			token,
 		})
@@ -81,7 +85,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 	@test()
 	protected static async manuallyDisconnectingDoesNotReconnectPerson() {
-		const { token } = await this.loginAsDemoPerson()
+		const { token } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 		const client = await this.Client()
 		await client.authenticate({
 			token,
@@ -120,7 +124,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 	@test()
 	protected static async losingConnectionAsPersonFromApiTriesReconnect() {
-		const { token, person } = await this.loginAsDemoPerson()
+		const { token, person } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 
 		const client = await this.Client()
 		await client.authenticate({
@@ -145,7 +149,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 	@test()
 	protected static async losingConnectionBecauseMercuryIsDownDoesNotThrowUnhandledException() {
-		const { token, person } = await this.loginAsDemoPerson()
+		const { token, person } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 
 		const client = await this.Client()
 		await client.authenticate({

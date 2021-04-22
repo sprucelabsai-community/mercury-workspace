@@ -123,8 +123,16 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				await this.reregisterAllListeners()
 
 				this.isReAuthing = false
-			} catch {
-				this.attemptReconnectAfterDelay()
+			} catch (err) {
+				if (
+					err.options.code === 'TIMEOUT' ||
+					err.options.code === 'CONNECTION_FAILED'
+				) {
+					this.attemptReconnectAfterDelay()
+				} else {
+					console.log(err.message)
+					this.lastAuthOptions = undefined
+				}
 			}
 		}, this.reconnectDelayMs)
 	}
