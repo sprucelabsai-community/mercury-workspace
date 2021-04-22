@@ -4,7 +4,7 @@ import {
 	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 
-export interface ConnectionOptions<> {
+export interface ConnectionOptions {
 	host?: string
 	allowSelfSignedCrt?: boolean
 	contracts?: EventContract[]
