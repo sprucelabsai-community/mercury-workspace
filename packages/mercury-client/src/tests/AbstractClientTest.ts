@@ -57,9 +57,9 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 
 		const client = await MercuryClientFactory.Client<CoreEventContract>({
 			host,
-			allowSelfSignedCrt: true,
 			contracts: coreEventContracts,
 			reconnectDelayMs: 0,
+			emitTimeoutMs: 5000,
 			...rest,
 		})
 

@@ -213,35 +213,6 @@ export default class MercuryClientTest extends AbstractClientTest {
 		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNKNOWN_ERROR')
 	}
 
-	private static async setup2SkillsAndOneEvent() {
-		const { client } = await this.loginAsDemoPerson()
-		const org = await this.seedDummyOrg(client)
-
-		const createLogin = this.seedInstallAndLoginAsSkill(client, org)
-		const createLogin2 = this.seedInstallAndLoginAsSkill(client, org)
-
-		const { skill: skill1, client: skill1Client } = await createLogin
-
-		const { client: skill2Client } = await createLogin2
-
-		MutableContractClient.mixinContract(
-			this.generateWillSendVipEventSignature(skill1.slug)
-		)
-
-		const registerResults = await skill1Client.emit(
-			'register-events::v2020_12_25',
-			{
-				payload: {
-					contract: this.generateWillSendVipEventSignature(),
-				},
-			}
-		)
-
-		eventResponseUtil.getFirstResponseOrThrow(registerResults)
-
-		return { client, org, skill1, skill1Client, skill2Client }
-	}
-
 	@test('each listener gets fired')
 	@test('each listener gets fired after lost connection', true)
 	protected static async emitterGetsCalledBackForEachListener(
@@ -570,6 +541,35 @@ export default class MercuryClientTest extends AbstractClientTest {
 		this.timeoutClient = client
 
 		return client
+	}
+
+	private static async setup2SkillsAndOneEvent() {
+		const { client } = await this.loginAsDemoPerson()
+		const org = await this.seedDummyOrg(client)
+
+		const createLogin = this.seedInstallAndLoginAsSkill(client, org)
+		const createLogin2 = this.seedInstallAndLoginAsSkill(client, org)
+
+		const { skill: skill1, client: skill1Client } = await createLogin
+
+		const { client: skill2Client } = await createLogin2
+
+		MutableContractClient.mixinContract(
+			this.generateWillSendVipEventSignature(skill1.slug)
+		)
+
+		const registerResults = await skill1Client.emit(
+			'register-events::v2020_12_25',
+			{
+				payload: {
+					contract: this.generateWillSendVipEventSignature(),
+				},
+			}
+		)
+
+		eventResponseUtil.getFirstResponseOrThrow(registerResults)
+
+		return { client, org, skill1, skill1Client, skill2Client }
 	}
 
 	private static generateWillSendVipEventSignature(
