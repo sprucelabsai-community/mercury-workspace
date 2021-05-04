@@ -33,7 +33,8 @@
 		"rebuild": "cd .. && yarn rebuild",
 		"release": "semantic-release",
 		"test": "jest --forceExit",
-		"watch.build.dev": "yarn build.tsc -w"
+		"watch.build.dev": "yarn build.tsc -w",
+		"watch.tsc": "tsc -w"
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",

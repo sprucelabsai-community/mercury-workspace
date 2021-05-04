@@ -1,6 +1,7 @@
 import {
 	EventContract,
 	MercuryEventEmitter,
+	SkillEventContract,
 	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 
@@ -14,7 +15,8 @@ export interface ConnectionOptions {
 }
 
 export type MercuryClient<
-	Contract extends EventContract
+	/** @ts-ignore */
+	Contract extends EventContract = SkillEventContract
 > = MercuryEventEmitter<Contract> & {
 	disconnect: () => Promise<void>
 	isConnected: () => boolean
