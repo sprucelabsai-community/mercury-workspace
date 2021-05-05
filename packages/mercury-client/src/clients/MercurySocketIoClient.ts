@@ -364,7 +364,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 						if (ioCallback) {
 							if (!(err instanceof AbstractSpruceError)) {
 								thisErr = new SpruceError({
-									code: 'UNKNOWN_ERROR',
+									//@ts-ignore
+									code: 'LISTENER_ERROR',
 									friendlyMessage: err.message,
 									originalError: err,
 								})

@@ -239,7 +239,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 
 		assert.isEqual(results.totalErrors, 1)
 
-		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNKNOWN_ERROR')
+		eventErrorAssertUtil.assertErrorFromResponse(results, 'LISTENER_ERROR')
 		assert.doesInclude(results.responses[0].errors?.[0].message, 'oh shoot')
 	}
 
