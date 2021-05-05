@@ -213,6 +213,36 @@ export default class MercuryClientTest extends AbstractClientTest {
 		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNKNOWN_ERROR')
 	}
 
+	@test()
+	protected static async nonSpruceErrorsArePassedBack() {
+		const {
+			org,
+			skill1,
+			skill1Client,
+			skill2Client,
+		} = await this.setup2SkillsAndOneEvent()
+
+		//@ts-ignore
+		await skill2Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
+			throw new Error('oh shoot')
+		})
+
+		const results = await skill1Client.emit(
+			//@ts-ignore
+			`${skill1.slug}.will-send-vip::v1`,
+			{
+				target: {
+					organizationId: org.id,
+				},
+			}
+		)
+
+		assert.isEqual(results.totalErrors, 1)
+
+		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNKNOWN_ERROR')
+		assert.doesInclude(results.responses[0].errors?.[0].message, 'oh shoot')
+	}
+
 	@test('each listener gets fired')
 	@test('each listener gets fired after lost connection', true)
 	protected static async emitterGetsCalledBackForEachListener(

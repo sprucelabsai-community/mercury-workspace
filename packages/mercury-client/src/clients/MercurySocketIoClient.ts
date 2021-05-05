@@ -360,7 +360,17 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 							ioCallback(results)
 						}
 					} catch (err) {
-						ioCallback && ioCallback({ errors: [err] })
+						let thisErr = err
+						if (ioCallback) {
+							if (!(err instanceof AbstractSpruceError)) {
+								thisErr = new SpruceError({
+									code: 'UNKNOWN_ERROR',
+									friendlyMessage: err.message,
+									originalError: err,
+								})
+							}
+							ioCallback({ errors: [thisErr] })
+						}
 					}
 				}
 			}
