@@ -42,7 +42,7 @@
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
-		"dotenv": "^8.5.1",
+		"dotenv": "^8.6.0",
 		"socket.io-client": "^2.3.1"
 	},
 	"devDependencies": {
