@@ -154,12 +154,8 @@ export default class MercuryClientTest extends AbstractClientTest {
 
 	@test()
 	protected static async skillsCanListenToEachOther() {
-		const {
-			org,
-			skill1,
-			skill1Client,
-			skill2Client,
-		} = await this.setup2SkillsAndOneEvent()
+		const { org, skill1, skill1Client, skill2Client } =
+			await this.setup2SkillsAndOneEvent()
 
 		let newEventTriggered = false
 
@@ -187,12 +183,8 @@ export default class MercuryClientTest extends AbstractClientTest {
 
 	@test()
 	protected static async errorsInHandlersArePassedBack() {
-		const {
-			org,
-			skill1,
-			skill1Client,
-			skill2Client,
-		} = await this.setup2SkillsAndOneEvent()
+		const { org, skill1, skill1Client, skill2Client } =
+			await this.setup2SkillsAndOneEvent()
 
 		//@ts-ignore
 		await skill2Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
@@ -215,12 +207,8 @@ export default class MercuryClientTest extends AbstractClientTest {
 
 	@test()
 	protected static async nonSpruceErrorsArePassedBack() {
-		const {
-			org,
-			skill1,
-			skill1Client,
-			skill2Client,
-		} = await this.setup2SkillsAndOneEvent()
+		const { org, skill1, skill1Client, skill2Client } =
+			await this.setup2SkillsAndOneEvent()
 
 		//@ts-ignore
 		await skill2Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
@@ -248,13 +236,8 @@ export default class MercuryClientTest extends AbstractClientTest {
 	protected static async emitterGetsCalledBackForEachListener(
 		shouldDisconnect = false
 	) {
-		const {
-			org,
-			client,
-			skill1,
-			skill1Client,
-			skill2Client,
-		} = await this.setup2SkillsAndOneEvent()
+		const { org, client, skill1, skill1Client, skill2Client } =
+			await this.setup2SkillsAndOneEvent()
 
 		const { client: skill3Client } = await this.seedInstallAndLoginAsSkill(
 			client,
@@ -332,12 +315,8 @@ export default class MercuryClientTest extends AbstractClientTest {
 
 	@test()
 	protected static async offRemovesListener() {
-		const {
-			org,
-			skill1,
-			skill1Client,
-			skill2Client,
-		} = await this.setup2SkillsAndOneEvent()
+		const { org, skill1, skill1Client, skill2Client } =
+			await this.setup2SkillsAndOneEvent()
 
 		let listenerTriggerCount = 0
 
@@ -449,18 +428,15 @@ export default class MercuryClientTest extends AbstractClientTest {
 		const { client } = await this.loginAsDemoPerson()
 		const org = await this.seedDummyOrg(client)
 
-		const {
-			client: originalSkillClient,
-		} = await this.seedInstallAndLoginAsSkill(client, org)
+		const { client: originalSkillClient } =
+			await this.seedInstallAndLoginAsSkill(client, org)
 
 		const eventsToCheck: string[] = []
 
 		await Promise.all(
 			new Array(50).fill(0).map(async () => {
-				const {
-					skill,
-					client: skillClient,
-				} = await this.seedInstallAndLoginAsSkill(client, org)
+				const { skill, client: skillClient } =
+					await this.seedInstallAndLoginAsSkill(client, org)
 
 				const registerResults = await skillClient.emit(
 					'register-events::v2020_12_25',
