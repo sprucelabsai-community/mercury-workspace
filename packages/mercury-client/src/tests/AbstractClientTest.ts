@@ -90,9 +90,8 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 			},
 		})
 
-		const { challenge } = eventResponseUtil.getFirstResponseOrThrow(
-			requestPinResults
-		)
+		const { challenge } =
+			eventResponseUtil.getFirstResponseOrThrow(requestPinResults)
 
 		assert.isTruthy(challenge)
 
@@ -103,9 +102,8 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 			},
 		})
 
-		const { person, token } = eventResponseUtil.getFirstResponseOrThrow(
-			confirmPinResults
-		)
+		const { person, token } =
+			eventResponseUtil.getFirstResponseOrThrow(confirmPinResults)
 
 		assert.isTruthy(person, 'Failed to login!')
 

@@ -13,7 +13,8 @@ import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import SpruceError from './errors/SpruceError'
 
 export default class AbstractEventEmitter<Contract extends EventContract>
-	implements MercuryEventEmitter<Contract> {
+	implements MercuryEventEmitter<Contract>
+{
 	private eventContract: EventContract
 	private originalEventContract: EventContract
 
