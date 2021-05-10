@@ -23,7 +23,8 @@ import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 type IoOptions = SocketIOClient.ConnectOpts
 
 export default class MercurySocketIoClient<Contract extends EventContract>
-	implements MercuryClient<Contract> {
+	implements MercuryClient<Contract>
+{
 	protected eventContract?: Contract
 
 	private host: string
@@ -167,7 +168,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				return new SpruceError({
 					code: 'CONNECTION_FAILED',
 					host: this.host,
-					statusCode: err.description,
+					statusCode: +err.description || 503,
 					originalError,
 				})
 			default:
@@ -262,8 +263,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			args.push(payload)
 		}
 
-		const results: MercuryAggregateResponse<ResponsePayload> = await new Promise(
-			(resolve, reject) => {
+		const results: MercuryAggregateResponse<ResponsePayload> =
+			await new Promise((resolve, reject) => {
 				try {
 					const emitTimeout = setTimeout(() => {
 						this.socket?.off(responseEventName)
@@ -291,8 +292,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				} catch (err) {
 					reject(err)
 				}
-			}
-		)
+			})
 
 		return eventResponseUtil.mutatingMapAggregateResponseErrorsToSpruceErrors(
 			results,
@@ -426,7 +426,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		const { skillId, apiKey, token } = options
 
 		this.lastAuthOptions = options
-
 		this.allowNextEventToBeAuthenticate = true
 
 		//@ts-ignore
