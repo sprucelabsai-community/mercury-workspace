@@ -168,7 +168,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				return new SpruceError({
 					code: 'CONNECTION_FAILED',
 					host: this.host,
-					statusCode: err.description,
+					statusCode: +err.description || 503,
 					originalError,
 				})
 			default:
@@ -426,7 +426,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		const { skillId, apiKey, token } = options
 
 		this.lastAuthOptions = options
-
 		this.allowNextEventToBeAuthenticate = true
 
 		//@ts-ignore
