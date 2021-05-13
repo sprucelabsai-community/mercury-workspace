@@ -5,6 +5,10 @@ import {
 	buildEventContract,
 } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
+import {
+	eventErrorAssertUtil,
+	eventResponseUtil,
+} from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 import SpruceError from '../../errors/SpruceError'
@@ -395,6 +399,17 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		const expectedErrors = ['oh no!', 'oh yes!', undefined]
 
 		await this.emitAndAssertExpectedErrors(totalListeners, expectedErrors)
+	}
+
+	@test()
+	protected static async spruceErrorsInListenersAreRetained() {
+		void this.emitter.on('eventOne', () => {
+			throw new SpruceError({ code: 'MISSING_PARAMETERS', parameters: [] })
+		})
+
+		const results = await this.emitter.emit('eventOne')
+
+		eventErrorAssertUtil.assertErrorFromResponse(results, 'MISSING_PARAMETERS')
 	}
 
 	private static async emitAndAssertExpectedErrors(

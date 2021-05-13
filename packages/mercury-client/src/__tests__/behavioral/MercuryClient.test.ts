@@ -206,7 +206,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async nonSpruceErrorsArePassedBack() {
+	protected static async nonSpruceErrorsArePassedBackAsListenerErrors() {
 		const { org, skill1, skill1Client, skill2Client } =
 			await this.setup2SkillsAndOneEvent()
 

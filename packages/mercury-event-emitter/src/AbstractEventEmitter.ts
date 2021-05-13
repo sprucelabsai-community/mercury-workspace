@@ -110,11 +110,15 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		try {
 			responsePayload = await options.listenerCb(options.payload)
 		} catch (err) {
-			error = new SpruceError({
-				code: 'LISTENER_ERROR',
-				originalError: err,
-				listenerIdx: options.idx,
-			})
+			if (err instanceof AbstractSpruceError) {
+				error = err
+			} else {
+				error = new SpruceError({
+					code: 'LISTENER_ERROR',
+					originalError: err,
+					listenerIdx: options.idx,
+				})
+			}
 		}
 
 		if (typeof options.actualCallback === 'function') {
