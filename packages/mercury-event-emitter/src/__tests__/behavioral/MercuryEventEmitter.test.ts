@@ -5,10 +5,7 @@ import {
 	buildEventContract,
 } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
-import {
-	eventErrorAssertUtil,
-	eventResponseUtil,
-} from '@sprucelabs/spruce-event-utils'
+import { eventErrorAssertUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 import SpruceError from '../../errors/SpruceError'
