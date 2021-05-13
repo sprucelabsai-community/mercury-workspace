@@ -16,7 +16,7 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 			],
 		})
 
-		assert.isFalse(client.handlesEvent('my-cool-event'))
+		assert.isFalse(client.doesHandleEvent('my-cool-event'))
 
 		client.mixinContract({
 			eventSignatures: {
@@ -24,7 +24,7 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 			},
 		})
 
-		assert.isTrue(client.handlesEvent('my-cool-event'))
+		assert.isTrue(client.doesHandleEvent('my-cool-event'))
 
 		await client.disconnect()
 	}

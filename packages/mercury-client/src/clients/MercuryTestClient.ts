@@ -1,7 +1,7 @@
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import { EventContract } from '@sprucelabs/mercury-types'
 import { Schema } from '@sprucelabs/schema'
-import { EventSource } from '@sprucelabs/spruce-event-utils'
+import { eventContractUtil, EventSource } from '@sprucelabs/spruce-event-utils'
 import MutableContractClient from './MutableContractClient'
 
 class InternalEmitter<
@@ -9,6 +9,15 @@ class InternalEmitter<
 > extends AbstractEventEmitter<Contract> {
 	public reset() {
 		this.listenersByEvent = {}
+	}
+
+	public doesHandleEvent(eventName: string) {
+		try {
+			eventContractUtil.getSignatureByName(this.eventContract, eventName as any)
+			return true
+		} catch {
+			return false
+		}
 	}
 
 	protected validatePayload(
@@ -19,6 +28,34 @@ class InternalEmitter<
 		const payload = { ...actualPayload }
 		delete payload.source
 		return super.validatePayload(schema, payload, eventName)
+	}
+
+	public mixinOnlyUniqueSignatures(contract: EventContract) {
+		const newSigs = eventContractUtil.getNamedEventSignatures(contract)
+		const oldSigs = eventContractUtil.getNamedEventSignatures(
+			this.eventContract
+		)
+
+		const newContract: EventContract = {
+			eventSignatures: {},
+		}
+
+		for (const newSig of newSigs) {
+			const match = oldSigs.findIndex(
+				(old) => old.fullyQualifiedEventName === newSig.fullyQualifiedEventName
+			)
+			if (match === -1) {
+				newContract.eventSignatures[newSig.fullyQualifiedEventName] =
+					eventContractUtil.getSignatureByName(
+						contract,
+						newSig.fullyQualifiedEventName
+					)
+			}
+		}
+
+		if (Object.keys(newContract.eventSignatures).length > 0) {
+			this.mixinContract(newContract)
+		}
 	}
 }
 
@@ -37,6 +74,8 @@ export default class MercuryTestClient<
 			MercuryTestClient.emitter = new InternalEmitter(
 				options.eventContract ?? { eventSignatures: {} }
 			)
+		} else if (options.eventContract) {
+			MercuryTestClient.emitter.mixinOnlyUniqueSignatures(options.eventContract)
 		}
 	}
 
@@ -48,6 +87,13 @@ export default class MercuryTestClient<
 	public mixinContract(contract: EventContract) {
 		MutableContractClient.mixinContract(contract)
 		MercuryTestClient.emitter.mixinContract(contract)
+	}
+
+	public doesHandleEvent(eventName: string) {
+		return (
+			super.doesHandleEvent(eventName) ||
+			MercuryTestClient.emitter?.doesHandleEvent(eventName)
+		)
 	}
 
 	public resetContracts() {

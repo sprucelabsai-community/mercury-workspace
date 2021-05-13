@@ -1,6 +1,7 @@
 import {
 	coreEventContracts,
 	CoreEventContract,
+	EventContract,
 } from '@sprucelabs/mercury-types'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
@@ -25,12 +26,12 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async testClientHasContracts() {
+	protected static async testClientHandlesDefaultContracts() {
 		const client = await this.connectToApi(true)
 
-		assert.isTrue(client.handlesEvent(this.eventName))
+		assert.isTrue(client.doesHandleEvent(this.eventName))
 
-		assert.isFalse(client.handlesEvent('taco-bravo'))
+		assert.isFalse(client.doesHandleEvent('taco-bravo'))
 
 		await client.disconnect()
 	}
@@ -39,28 +40,28 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	protected static async canResetMixedInContracts() {
 		const client = await this.connectToApi()
 
-		assert.isFalse(client.handlesEvent(this.testEventName))
-		assert.isTrue(client.handlesEvent(this.eventName))
+		assert.isFalse(client.doesHandleEvent(this.testEventName))
+		assert.isTrue(client.doesHandleEvent(this.eventName))
 
 		this.mixinPayloadlessTestEvent(client)
 
-		assert.isTrue(client.handlesEvent(this.testEventName))
-		assert.isTrue(client.handlesEvent(this.eventName))
+		assert.isTrue(client.doesHandleEvent(this.testEventName))
+		assert.isTrue(client.doesHandleEvent(this.eventName))
 
 		assert.doesThrow(() => this.mixinPayloadlessTestEvent(client))
 
-		assert.isTrue(client.handlesEvent(this.testEventName))
-		assert.isTrue(client.handlesEvent(this.eventName))
+		assert.isTrue(client.doesHandleEvent(this.testEventName))
+		assert.isTrue(client.doesHandleEvent(this.eventName))
 
 		client.resetContracts()
 
-		assert.isFalse(client.handlesEvent(this.testEventName))
-		assert.isTrue(client.handlesEvent(this.eventName))
+		assert.isFalse(client.doesHandleEvent(this.testEventName))
+		assert.isTrue(client.doesHandleEvent(this.eventName))
 
 		this.mixinPayloadlessTestEvent(client)
 
-		assert.isTrue(client.handlesEvent(this.testEventName))
-		assert.isTrue(client.handlesEvent(this.eventName))
+		assert.isTrue(client.doesHandleEvent(this.testEventName))
+		assert.isTrue(client.doesHandleEvent(this.eventName))
 	}
 
 	@test('can emit to self with default contract', true)
@@ -226,6 +227,32 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
+	protected static async firstTestClientAddsEventToSecondTestClient() {
+		const client1 = await this.connectToApi(false, {
+			eventSignatures: {
+				'my-new-event': {},
+			},
+		})
+		const client2 = await this.connectToApi()
+
+		assert.isTrue(client1.doesHandleEvent('my-new-event'))
+		assert.isTrue(client2.doesHandleEvent('my-new-event'))
+	}
+
+	@test()
+	protected static async secondTestClientAddsEventToFirstTestClient() {
+		const client1 = await this.connectToApi()
+		const client2 = await this.connectToApi(false, {
+			eventSignatures: {
+				'my-new-event': {},
+			},
+		})
+
+		assert.isTrue(client1.doesHandleEvent('my-new-event'))
+		assert.isTrue(client2.doesHandleEvent('my-new-event'))
+	}
+
+	@test()
 	protected static async includesSourceInEventsEmittedByPerson() {
 		const [client2, { client: client1, person }] = await Promise.all([
 			this.connectToApi(),
@@ -312,14 +339,26 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isUndefined(s.personId)
 	}
 
-	private static async connectToApi(shouldSetDefaultContract = false) {
+	private static async connectToApi(
+		shouldSetDefaultContract = false,
+		contract?: EventContract
+	) {
 		MercuryClientFactory.setIsTestMode(true)
 		shouldSetDefaultContract &&
 			MercuryClientFactory.setDefaultContract(coreEventContracts[0])
 
+		const allContracts = []
+		if (!shouldSetDefaultContract) {
+			allContracts.push(...coreEventContracts)
+		}
+
+		if (contract) {
+			allContracts.push(contract as any)
+		}
+
 		const client = await MercuryClientFactory.Client<CoreEventContract>({
 			host: TEST_HOST,
-			contracts: !shouldSetDefaultContract ? coreEventContracts : undefined,
+			contracts: allContracts.length > 0 ? allContracts : undefined,
 			allowSelfSignedCrt: true,
 		})
 

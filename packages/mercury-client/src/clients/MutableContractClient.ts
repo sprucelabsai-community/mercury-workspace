@@ -29,7 +29,7 @@ export default class MutableContractClient<
 		MutableContractClient.resetContracts()
 	}
 
-	public handlesEvent(eventName: string) {
+	public doesHandleEvent(eventName: string) {
 		try {
 			this.getEventSignatureByName(eventName as any)
 			return true

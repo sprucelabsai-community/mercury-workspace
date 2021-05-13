@@ -15,7 +15,7 @@ import SpruceError from './errors/SpruceError'
 export default class AbstractEventEmitter<Contract extends EventContract>
 	implements MercuryEventEmitter<Contract>
 {
-	private eventContract: EventContract
+	protected eventContract: EventContract
 	private originalEventContract: EventContract
 
 	protected listenersByEvent: Record<
