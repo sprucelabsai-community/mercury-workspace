@@ -4,8 +4,8 @@ import {
 	EventContract,
 } from '@sprucelabs/mercury-types'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
-import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { test, assert } from '@sprucelabs/test'
 import { MercuryClientFactory } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { TEST_HOST } from '../../tests/constants'
