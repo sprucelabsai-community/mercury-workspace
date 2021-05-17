@@ -103,6 +103,7 @@
 		"ignore": [
 			"socket.io",
 			"socket.io-client",
+			"@types/socket.io-client",
 			"@sprucelabs/esm-postbuild",
 			"@sprucelabs/jest-json-reporter",
 			"@sprucelabs/jest-sheets-reporter",
