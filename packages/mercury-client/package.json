@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "16.2.10",
+	"version": "16.2.12",
 	"files": [
 		"build"
 	],
@@ -38,7 +38,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^16.2.10",
+		"@sprucelabs/mercury-event-emitter": "^16.2.12",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
@@ -104,6 +104,7 @@
 		"ignore": [
 			"socket.io",
 			"socket.io-client",
+			"@types/socket.io-client",
 			"@sprucelabs/esm-postbuild",
 			"@sprucelabs/jest-json-reporter",
 			"@sprucelabs/jest-sheets-reporter",
