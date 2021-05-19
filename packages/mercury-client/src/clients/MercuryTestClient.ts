@@ -1,7 +1,15 @@
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
-import { EventContract } from '@sprucelabs/mercury-types'
+import {
+	EventContract,
+	MercuryAggregateResponse,
+} from '@sprucelabs/mercury-types'
 import { Schema } from '@sprucelabs/schema'
-import { eventContractUtil, EventSource } from '@sprucelabs/spruce-event-utils'
+import {
+	eventContractUtil,
+	eventResponseUtil,
+	EventSource,
+} from '@sprucelabs/spruce-event-utils'
+import SpruceError from '../errors/SpruceError'
 import MutableContractClient from './MutableContractClient'
 
 class InternalEmitter<
@@ -57,6 +65,10 @@ class InternalEmitter<
 			this.mixinContract(newContract)
 		}
 	}
+
+	public getContract() {
+		return this.eventContract
+	}
 }
 
 export default class MercuryTestClient<
@@ -104,8 +116,9 @@ export default class MercuryTestClient<
 		return MercuryTestClient.emitter.on(...args)
 	}
 
-	public async emit(...args: any[]) {
-		if (MercuryTestClient.emitter.listenCount(args[0]) > 0) {
+	public async emit(...args: any[]): Promise<MercuryAggregateResponse<any>> {
+		const emitter = MercuryTestClient.emitter
+		if (emitter.listenCount(args[0]) > 0) {
 			const source: EventSource = {}
 			if (this.auth?.person) {
 				source.personId = this.auth.person.id
@@ -120,7 +133,42 @@ export default class MercuryTestClient<
 				...argsWithSource[1],
 				source,
 			}
-			return MercuryTestClient.emitter.emit(...argsWithSource)
+
+			const contract = emitter.getContract()
+			const sig = eventContractUtil.getSignatureByName(contract, args[0])
+
+			if (sig.emitPermissionContract) {
+				const results = await this.emit(
+					'does-honor-permission-contract::v2020_12_25',
+					{
+						target: source,
+						payload: {
+							id: sig.emitPermissionContract.id,
+						},
+					}
+				)
+
+				if (results.totalErrors > 0) {
+					return results as any
+				}
+
+				const { doesHonor } = eventResponseUtil.getFirstResponseOrThrow(results)
+				if (!doesHonor) {
+					return {
+						totalContracts: 1,
+						totalErrors: 1,
+						totalResponses: 1,
+						responses: [
+							{
+								//@ts-ignore
+								errors: [new SpruceError({ code: 'UNAUTHORIZED_ACCESS' })],
+							},
+						],
+					}
+				}
+			}
+
+			return emitter.emit(...argsWithSource)
 		} else {
 			if (!super.isConnected()) {
 				this.isConnectedToApi = true

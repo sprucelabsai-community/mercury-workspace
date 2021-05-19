@@ -2,8 +2,12 @@ import {
 	coreEventContracts,
 	CoreEventContract,
 	EventContract,
+	buildPermissionContract,
 } from '@sprucelabs/mercury-types'
-import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
+import {
+	eventErrorAssertUtil,
+	eventResponseUtil,
+} from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { MercuryClientFactory } from '../..'
@@ -306,21 +310,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async includesSourceInEventsEmittedBySkill() {
-		MercuryClientFactory.setIsTestMode(true)
-
-		const { client: personClient } = await this.loginAsDemoPerson()
-
-		const org = await this.seedDummyOrg(personClient)
-		const {
-			client: skill1Client,
-
-			skill,
-		} = await this.seedInstallAndLoginAsSkill(personClient, org)
-
-		const { client: skill2Client } = await this.seedInstallAndLoginAsSkill(
-			personClient,
-			org
-		)
+		const { personClient, skill1Client, skill2Client, skill1 } =
+			await this.setupOrgAndInstall2Skills()
 
 		this.mixinPayloadlessTestEvent(personClient)
 
@@ -335,8 +326,89 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		await skill1Client.emit(this.testEventName)
 
 		assert.isTruthy(s.skillId)
-		assert.isEqual(s.skillId, skill.id)
+		assert.isEqual(s.skillId, skill1.id)
 		assert.isUndefined(s.personId)
+	}
+
+	@test()
+	protected static async checksPermissionsWhenEmitting() {
+		const { skill1, skill1Client, skill2Client } =
+			await this.setupOrgAndInstall2Skills()
+
+		const eventName = 'event-with-emit-permissions::v2020_05_19'
+		const fqen = `${skill1.slug}.event-with-emit-permissions::v2020_05_19`
+
+		//@ts-ignore
+		skill1Client.mixinContract({
+			eventSignatures: {
+				[fqen]: {
+					emitPermissionContract: this.buildEmitPermContract(),
+				},
+			},
+		})
+
+		const registerEventResults = await skill1Client.emit(
+			'register-events::v2020_12_25',
+			{
+				payload: {
+					contract: {
+						eventSignatures: {
+							[eventName]: {
+								emitPermissionContract: this.buildEmitPermContract(),
+							},
+						},
+					},
+				},
+			}
+		)
+
+		eventResponseUtil.getFirstResponseOrThrow(registerEventResults)
+
+		await skill1Client.on(fqen as any, () => {
+			return {}
+		})
+
+		const response = await skill2Client.emit(fqen as any)
+
+		eventErrorAssertUtil.assertErrorFromResponse(
+			response,
+			'UNAUTHORIZED_ACCESS'
+		)
+	}
+
+	private static buildEmitPermContract() {
+		return buildPermissionContract({
+			name: 'Can emit contract',
+			id: 'can-do-something-contract',
+			permissions: [
+				{
+					id: 'can-create',
+					name: 'Can create',
+					defaultsByRoleBase: {
+						teammate: {
+							default: true,
+						},
+					},
+				},
+			],
+		})
+	}
+
+	private static async setupOrgAndInstall2Skills() {
+		MercuryClientFactory.setIsTestMode(true)
+
+		const { client: personClient } = await this.loginAsDemoPerson()
+
+		const org = await this.seedDummyOrg(personClient)
+		const { client: skill1Client, skill: skill1 } =
+			await this.seedInstallAndLoginAsSkill(personClient, org)
+
+		const { client: skill2Client } = await this.seedInstallAndLoginAsSkill(
+			personClient,
+			org
+		)
+
+		return { personClient, skill1, skill1Client, skill2Client }
 	}
 
 	private static async connectToApi(

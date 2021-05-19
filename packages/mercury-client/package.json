@@ -93,7 +93,8 @@
 						"skillsCanListenToEachOther": "F22",
 						"emitterGetsCalledBackForEachListener": "F23",
 						"canRegisterEventsSimultaneously": "I102",
-						"nonSpruceErrorsArePassedBack": "I111"
+						"nonSpruceErrorsArePassedBack": "I111",
+						"checksPermissionsWhenEmitting": "I138"
 					}
 				}
 			]
