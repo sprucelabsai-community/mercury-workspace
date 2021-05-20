@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.3.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.2.12...v16.3.0) (2021-05-20)
+
+
+### Features
+
+* test emitter honors permission contracts ([23baac4](https://github.com/sprucelabsai/mercury-workspace/commit/23baac4))
+
+
+
+
+
 ## [16.2.12](https://github.com/sprucelabsai/mercury-workspace/compare/v16.2.11...v16.2.12) (2021-05-14)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
