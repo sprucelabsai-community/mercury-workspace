@@ -6,6 +6,7 @@ import {
 import { Schema } from '@sprucelabs/schema'
 import {
 	eventContractUtil,
+	eventNameUtil,
 	eventResponseUtil,
 	EventSource,
 } from '@sprucelabs/spruce-event-utils'
@@ -118,7 +119,9 @@ export default class MercuryTestClient<
 
 	public async emit(...args: any[]): Promise<MercuryAggregateResponse<any>> {
 		const emitter = MercuryTestClient.emitter
-		if (emitter.listenCount(args[0]) > 0) {
+		const fqen = args[0]
+
+		if (emitter.listenCount(fqen) > 0) {
 			const source: EventSource = {}
 			if (this.auth?.person) {
 				source.personId = this.auth.person.id
@@ -135,9 +138,10 @@ export default class MercuryTestClient<
 			}
 
 			const contract = emitter.getContract()
-			const sig = eventContractUtil.getSignatureByName(contract, args[0])
+			const sig = eventContractUtil.getSignatureByName(contract, fqen)
+			const { eventNamespace } = eventNameUtil.split(fqen)
 
-			if (sig.emitPermissionContract) {
+			if (sig.emitPermissionContract && eventNamespace) {
 				const results = await this.emit(
 					'does-honor-permission-contract::v2020_12_25',
 					{
