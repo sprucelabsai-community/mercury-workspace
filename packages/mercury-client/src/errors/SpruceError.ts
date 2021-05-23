@@ -16,7 +16,9 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'INVALID_PAYLOAD':
-				message = `The payload you passed to "${options.eventName}" is invalid.`
+				message = `The payload you passed to "${options.eventName}" is invalid${
+					options.originalError ? `:\n\n${options.originalError.message}` : '.'
+				}`
 				break
 
 			case 'CONNECTION_FAILED':

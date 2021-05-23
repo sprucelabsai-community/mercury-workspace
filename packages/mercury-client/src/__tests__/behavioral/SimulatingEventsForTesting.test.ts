@@ -368,7 +368,24 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			return {}
 		})
 
-		const response = await skill2Client.emit(fqen as any)
+		await this.assertGuestCantEmit(fqen)
+		await this.assertSkillEmitDoesntError(fqen, skill2Client)
+	}
+
+	public static async assertSkillEmitDoesntError(
+		fqen: string,
+		skill2Client: any
+	) {
+		const results = await skill2Client.emit(fqen)
+		eventResponseUtil.getFirstResponseOrThrow(results)
+	}
+
+	private static async assertGuestCantEmit(fqen: string) {
+		const { client: personClient } = await this.loginAsDemoPerson(
+			process.env.DEMO_PHONE_GUEST
+		)
+
+		const response = await personClient.emit(fqen as any)
 
 		eventErrorAssertUtil.assertErrorFromResponse(
 			response,

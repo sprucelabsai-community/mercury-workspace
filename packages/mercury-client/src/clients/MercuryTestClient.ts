@@ -141,7 +141,7 @@ export default class MercuryTestClient<
 			const sig = eventContractUtil.getSignatureByName(contract, fqen)
 			const { eventNamespace } = eventNameUtil.split(fqen)
 
-			if (sig.emitPermissionContract && eventNamespace) {
+			if (source.personId && sig.emitPermissionContract && eventNamespace) {
 				const results = await this.emit(
 					'does-honor-permission-contract::v2020_12_25',
 					{
@@ -157,6 +157,7 @@ export default class MercuryTestClient<
 				}
 
 				const { doesHonor } = eventResponseUtil.getFirstResponseOrThrow(results)
+
 				if (!doesHonor) {
 					return {
 						totalContracts: 1,

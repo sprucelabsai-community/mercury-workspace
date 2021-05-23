@@ -91,6 +91,17 @@ export default class MercuryClientTest extends AbstractClientTest {
 	}
 
 	@test()
+	protected static async throwsWithHelpfulErrorWithInvalidPayload() {
+		const client = await this.Client()
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			client.emit('get-skill::v2020_12_25', { taco: 'true' })
+		)
+
+		assert.doesInclude(err.message, 'taco')
+	}
+
+	@test()
 	protected static async cantEmitEventWithWithUnexpectedPayload() {
 		const client = await this.Client()
 		const err = await assert.doesThrowAsync(() =>
