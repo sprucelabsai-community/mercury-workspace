@@ -369,15 +369,15 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		await this.assertGuestCantEmit(fqen)
 		await this.assertAnonCantEmit(fqen)
-		await this.assertSkillEmitDoesntError(fqen, skill2Client)
+		await this.assertAnotherSkillCantEmit(fqen, skill2Client)
 	}
 
-	private static async assertSkillEmitDoesntError(
+	private static async assertAnotherSkillCantEmit(
 		fqen: string,
 		skill2Client: any
 	) {
 		const results = await skill2Client.emit(fqen)
-		eventResponseUtil.getFirstResponseOrThrow(results)
+		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNAUTHORIZED_ACCESS')
 	}
 
 	private static async assertGuestCantEmit(fqen: string) {
