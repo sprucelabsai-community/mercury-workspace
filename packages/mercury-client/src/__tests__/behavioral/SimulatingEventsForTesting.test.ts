@@ -5,6 +5,7 @@ import {
 	buildPermissionContract,
 } from '@sprucelabs/mercury-types'
 import {
+	buildEmitTargetAndPayloadSchema,
 	eventErrorAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
@@ -13,6 +14,7 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { MercuryClientFactory } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { TEST_HOST } from '../../tests/constants'
+import { MercuryClient } from '../../types/client.types'
 
 export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	private static readonly eventName = 'whoami::v2020_12_25'
@@ -331,7 +333,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async checksPermissionsWhenEmitting() {
-		const { skill1, skill1Client, skill2Client } =
+		const { skill1, skill1Client, skill2Client, org, personClient } =
 			await this.setupOrgAndInstall2Skills()
 
 		const eventName = 'event-with-emit-permissions::v2020_05_19'
@@ -353,6 +355,18 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 					contract: {
 						eventSignatures: {
 							[eventName]: {
+								emitPayloadSchema: buildEmitTargetAndPayloadSchema({
+									eventName,
+									targetSchema: {
+										id: 'test-target',
+										fields: {
+											organizationId: {
+												type: 'id',
+												isRequired: true,
+											},
+										},
+									},
+								}),
 								emitPermissionContract: this.buildEmitPermContract(),
 							},
 						},
@@ -370,6 +384,54 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		await this.assertGuestCantEmit(fqen)
 		await this.assertAnonCantEmit(fqen)
 		await this.assertAnotherSkillCantEmit(fqen, skill2Client)
+		await this.assertTeammateCanEmit({
+			fqen,
+			ownerClient: personClient,
+			organizationId: org.id,
+		})
+	}
+
+	private static async assertTeammateCanEmit(options: {
+		fqen: string
+		ownerClient: MercuryClient
+		organizationId: string
+	}) {
+		const { fqen, ownerClient, organizationId } = options
+
+		const { person: teammate, client: teammateClient } =
+			await this.loginAsDemoPerson(process.env.DEMO_PHONE_TEAMMATE)
+
+		const roleResults = await ownerClient.emit('list-roles::v2020_12_25', {
+			target: {
+				organizationId,
+			},
+			payload: {
+				shouldIncludePrivateRoles: true,
+			},
+		})
+
+		const { roles } = eventResponseUtil.getFirstResponseOrThrow(roleResults)
+		const teammateRole = roles.find((r) => r.base === 'teammate')
+		assert.isTruthy(teammateRole)
+
+		const roleSetResults = await ownerClient.emit('set-role::v2020_12_25', {
+			target: {
+				organizationId,
+			},
+			payload: {
+				personId: teammate.id,
+				roleId: teammateRole.id,
+			},
+		})
+		eventResponseUtil.getFirstResponseOrThrow(roleSetResults)
+
+		const response = await teammateClient.emit(fqen as any, {
+			target: {
+				organizationId,
+			},
+		})
+
+		eventResponseUtil.getFirstResponseOrThrow(response)
 	}
 
 	private static async assertAnotherSkillCantEmit(
@@ -436,7 +498,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			org
 		)
 
-		return { personClient, skill1, skill1Client, skill2Client }
+		return { personClient, skill1, skill1Client, skill2Client, org }
 	}
 
 	private static async connectToApi(

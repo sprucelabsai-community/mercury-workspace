@@ -142,10 +142,17 @@ export default class MercuryTestClient<
 			const { eventNamespace } = eventNameUtil.split(fqen)
 
 			if (sig.emitPermissionContract && eventNamespace) {
+				let { target } = args[1] ?? {}
+				let permTarget = { ...source }
+
+				if (target?.organizationId) {
+					permTarget.organizationId = target.organizationId
+				}
+
 				const results = await this.emit(
 					'does-honor-permission-contract::v2020_12_25',
 					{
-						target: source,
+						target: permTarget,
 						payload: {
 							id: sig.emitPermissionContract.id,
 						},
