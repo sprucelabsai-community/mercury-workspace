@@ -34,7 +34,6 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const client = await this.connectToApi(true)
 
 		assert.isTrue(client.doesHandleEvent(this.eventName))
-
 		assert.isFalse(client.doesHandleEvent('taco-bravo'))
 
 		await client.disconnect()
@@ -369,10 +368,11 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		})
 
 		await this.assertGuestCantEmit(fqen)
+		await this.assertAnonCantEmit(fqen)
 		await this.assertSkillEmitDoesntError(fqen, skill2Client)
 	}
 
-	public static async assertSkillEmitDoesntError(
+	private static async assertSkillEmitDoesntError(
 		fqen: string,
 		skill2Client: any
 	) {
@@ -393,6 +393,17 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		)
 	}
 
+	private static async assertAnonCantEmit(fqen: string) {
+		const client = await this.Client()
+
+		const response = await client.emit(fqen as any)
+
+		eventErrorAssertUtil.assertErrorFromResponse(
+			response,
+			'UNAUTHORIZED_ACCESS'
+		)
+	}
+
 	private static buildEmitPermContract() {
 		return buildPermissionContract({
 			name: 'Can emit contract',
@@ -401,7 +412,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 				{
 					id: 'can-create',
 					name: 'Can create',
-					defaultsByRoleBase: {
+					defaults: {
 						teammate: {
 							default: true,
 						},
