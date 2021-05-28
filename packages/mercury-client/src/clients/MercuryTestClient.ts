@@ -2,6 +2,7 @@ import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import {
 	EventContract,
 	MercuryAggregateResponse,
+	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import { Schema } from '@sprucelabs/schema'
 import {
@@ -141,7 +142,11 @@ export default class MercuryTestClient<
 			const sig = eventContractUtil.getSignatureByName(contract, fqen)
 			const { eventNamespace } = eventNameUtil.split(fqen)
 
-			if (sig.emitPermissionContract && eventNamespace) {
+			if (
+				sig.emitPermissionContract &&
+				this.shouldCheckPermissions(sig) &&
+				eventNamespace
+			) {
 				let { target } = args[1] ?? {}
 				let permTarget = { ...source }
 
@@ -190,6 +195,11 @@ export default class MercuryTestClient<
 			//@ts-ignore
 			return super.emit(...args)
 		}
+	}
+	private shouldCheckPermissions(
+		sig: SpruceSchemas.Mercury.v2020_09_01.EventSignature
+	) {
+		return sig.emitPermissionContract?.permissions?.length > 0
 	}
 
 	public async connect() {

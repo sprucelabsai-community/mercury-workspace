@@ -282,6 +282,42 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
+	protected static async doesNotCheckPermsIfPermissionsIsEmptyArrayOnContract() {
+		const [client2, { client: client1, person }] = await Promise.all([
+			this.connectToApi(),
+			this.loginAsDemoPerson(),
+		])
+
+		const contract: EventContract = {
+			eventSignatures: {
+				[this.testEventName]: {
+					emitPermissionContract: {
+						id: 'test',
+						name: 'Can emit',
+						permissions: [],
+					},
+				},
+			},
+		}
+
+		client2.mixinContract(contract)
+
+		let s: any
+
+		//@ts-ignore
+		await client1.on(this.testEventName, ({ source }) => {
+			s = source
+		})
+
+		//@ts-ignore
+		await client1.emit(this.testEventName)
+
+		assert.isTruthy(s?.personId)
+		assert.isEqual(s?.personId, person.id)
+		assert.isUndefined(s.skillId)
+	}
+
+	@test()
 	protected static async stillValidatesPayloads() {
 		const [client1, client2] = await Promise.all([
 			this.connectToApi(true),
