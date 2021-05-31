@@ -8,22 +8,13 @@ export default class SpruceError extends AbstractSpruceError<MercuryEventEmitter
 		let message: string | undefined
 
 		switch (options?.code) {
+			case 'LISTENER_ERROR':
+				message = `Error in local event listener:\n\n${options.originalError?.message}`
+				break
 			default:
 				message = this.message
 		}
 
-		message = `${options.code}: ${message}`
-		const fullMessage = `${message}${
-			options.friendlyMessage ? `\n\n${options.friendlyMessage}` : ''
-		}`
-
-		return `${fullMessage}${
-			this.originalError && this.originalError.message !== fullMessage
-				? `\n\nOriginal error: ${this.originalError.message.replace(
-						message,
-						''
-				  )}`
-				: ''
-		}`
+		return message
 	}
 }
