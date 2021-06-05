@@ -1,8 +1,4 @@
-import {
-	CoreEventContract,
-	coreEventContracts,
-	SpruceSchemas,
-} from '@sprucelabs/mercury-types'
+import { coreEventContracts, SpruceSchemas } from '@sprucelabs/mercury-types'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { assert } from '@sprucelabs/test'
 import MercuryClientFactory from '../clients/MercuryClientFactory'
@@ -11,7 +7,7 @@ import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import { TEST_HOST } from './constants'
 
-type Client = MercuryClient<CoreEventContract>
+type Client = MercuryClient
 type Person = SpruceSchemas.Spruce.v2020_07_22.Person
 type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
 
@@ -55,7 +51,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 	): Promise<Client> {
 		const { host = TEST_HOST, ...rest } = options || {}
 
-		const client = await MercuryClientFactory.Client<CoreEventContract>({
+		const client = await MercuryClientFactory.Client({
 			host,
 			contracts: coreEventContracts,
 			reconnectDelayMs: 0,

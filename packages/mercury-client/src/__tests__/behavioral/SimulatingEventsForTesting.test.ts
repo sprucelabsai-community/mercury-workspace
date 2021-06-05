@@ -1,6 +1,5 @@
 import {
 	coreEventContracts,
-	CoreEventContract,
 	EventContract,
 	buildPermissionContract,
 } from '@sprucelabs/mercury-types'
@@ -554,7 +553,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			allContracts.push(contract as any)
 		}
 
-		const client = await MercuryClientFactory.Client<CoreEventContract>({
+		const client = await MercuryClientFactory.Client({
 			host: TEST_HOST,
 			contracts: allContracts.length > 0 ? allContracts : undefined,
 			allowSelfSignedCrt: true,
