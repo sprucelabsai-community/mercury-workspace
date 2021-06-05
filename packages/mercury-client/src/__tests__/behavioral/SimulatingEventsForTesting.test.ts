@@ -542,7 +542,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	) {
 		MercuryClientFactory.setIsTestMode(true)
 		shouldSetDefaultContract &&
-			MercuryClientFactory.setDefaultContract(coreEventContracts[0])
+			MercuryClientFactory.setDefaultContract(coreEventContracts[0] as any)
 
 		const allContracts = []
 		if (!shouldSetDefaultContract) {
