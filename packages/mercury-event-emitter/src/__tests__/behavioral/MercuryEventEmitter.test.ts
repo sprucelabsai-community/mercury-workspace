@@ -7,6 +7,7 @@ import {
 import { buildSchema } from '@sprucelabs/schema'
 import { eventErrorAssertUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
+import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 import SpruceError from '../../errors/SpruceError'
 
@@ -407,6 +408,15 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		const results = await this.emitter.emit('eventOne')
 
 		eventErrorAssertUtil.assertErrorFromResponse(results, 'MISSING_PARAMETERS')
+	}
+
+	@test()
+	protected static async throwsWhenAddingListenerNotOnContract() {
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			this.emitter.on('taco', () => {})
+		)
+		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
 	private static async emitAndAssertExpectedErrors(

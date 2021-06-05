@@ -204,6 +204,8 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 					| SchemaValues<IEventSignature['responsePayloadSchema']>
 			: Promise<void> | void
 	) {
+		eventContractUtil.getSignatureByName(this.eventContract, eventName)
+
 		if (!this.listenersByEvent[eventName]) {
 			this.listenersByEvent[eventName] = []
 		}
