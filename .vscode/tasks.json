@@ -121,7 +121,7 @@
             "command": "spruce ${input:spruceCommand}",
             "problemMatcher": [],
             "options": {
-                "cwd": "${workspaceFolder}/packages/mercury-client"
+                "cwd": "${workspaceFolder}/packages/mercury-${input:packageName}"
             },
             "presentation": {
                 "reveal": "always",
@@ -147,6 +147,11 @@
         }
     ],
     "inputs": [
+        {
+            "id": "packageName",
+            "description": "mercury-*",
+            "type": "promptString",
+        },
         {
             "id": "spruceCommand",
             "description": "spruce command",

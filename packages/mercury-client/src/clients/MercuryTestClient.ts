@@ -177,8 +177,15 @@ export default class MercuryTestClient<
 						totalResponses: 1,
 						responses: [
 							{
-								//@ts-ignore
-								errors: [new SpruceError({ code: 'UNAUTHORIZED_ACCESS' })],
+								errors: [
+									new SpruceError({
+										code: 'UNAUTHORIZED_ACCESS',
+										fqen,
+										action: 'emit',
+										target,
+										permissionContractId: sig.emitPermissionContract.id,
+									}),
+								],
 							},
 						],
 					}
@@ -199,7 +206,7 @@ export default class MercuryTestClient<
 	private shouldCheckPermissions(
 		sig: SpruceSchemas.Mercury.v2020_09_01.EventSignature
 	) {
-		return sig.emitPermissionContract?.permissions?.length > 0
+		return sig.emitPermissionContract?.permissions?.length ?? 0 > 0
 	}
 
 	public async connect() {

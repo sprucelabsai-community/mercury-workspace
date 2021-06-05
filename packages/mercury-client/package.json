@@ -7,6 +7,12 @@
 	"files": [
 		"build"
 	],
+	"skill": {
+		"namespace": "mercuryClient",
+		"commandOverrides": {
+			"sync.schemas": "--fetchCoreSchemas false"
+		}
+	},
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"module": "./build/esm/index.js",

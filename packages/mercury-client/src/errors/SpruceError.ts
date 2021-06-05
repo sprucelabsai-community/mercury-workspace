@@ -57,6 +57,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				}
 				break
 
+			case 'UNAUTHORIZED_ACCESS':
+				message = `Not authorized! You cannot ${options.action} \`${options.fqen}\`!`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}
