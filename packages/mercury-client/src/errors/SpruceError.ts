@@ -65,14 +65,8 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = super.friendlyMessage()
 		}
 
-		// Drop in code and friendly message
-		message = `${message}`
-		const fullMessage = `${message}${
-			options.friendlyMessage && options.friendlyMessage !== message
-				? `\n\n${options.friendlyMessage}`
-				: ''
-		}`
+		message = options.friendlyMessage ?? message
 
-		return fullMessage
+		return message
 	}
 }
