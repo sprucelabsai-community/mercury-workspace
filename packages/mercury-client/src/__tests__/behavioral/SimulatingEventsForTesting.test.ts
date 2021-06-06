@@ -281,8 +281,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async doesNotCheckPermsIfPermissionsIsEmptyArrayOnContract() {
-		const [client2, { client: client1, person }] = await Promise.all([
+	protected static async doesCheckPermsIfPermissionsIsEmptyArrayOnContract() {
+		const [client2, { client: client1 }] = await Promise.all([
 			this.connectToApi(),
 			this.loginAsDemoPerson(),
 		])
@@ -309,11 +309,10 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		})
 
 		//@ts-ignore
-		await client1.emit(this.testEventName)
+		const results = await client1.emit(this.testEventName)
 
-		assert.isTruthy(s?.personId)
-		assert.isEqual(s?.personId, person.id)
-		assert.isUndefined(s.skillId)
+		assert.isAbove(results.totalErrors, 0)
+		assert.isFalsy(s)
 	}
 
 	@test()

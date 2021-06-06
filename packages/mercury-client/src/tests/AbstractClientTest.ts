@@ -55,7 +55,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 			host,
 			contracts: coreEventContracts as any,
 			reconnectDelayMs: 0,
-			emitTimeoutMs: 5000,
+			emitTimeoutMs: 10000,
 			...rest,
 		})
 
