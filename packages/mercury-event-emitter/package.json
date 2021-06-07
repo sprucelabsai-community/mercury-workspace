@@ -32,7 +32,7 @@
 		"build.types": "tsc --emitDeclarationOnly && echo PASS",
 		"clean": "rm -rf build/",
 		"fix.lint": "eslint --fix '**/*.ts'",
-		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
+		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd ../ && yarn rebuild.dev",
 		"release": "semantic-release",
 		"test": "jest",
