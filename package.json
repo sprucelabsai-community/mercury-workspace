@@ -31,7 +31,7 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@sprucelabs/resolve-path-aliases": "1.0.13",
+		"@sprucelabs/resolve-path-aliases": "1.0.14",
 		"concurrently": "^6.0.0",
 		"conventional-changelog-sprucelabs": "latest",
 		"eslint": "^7.11.0",
