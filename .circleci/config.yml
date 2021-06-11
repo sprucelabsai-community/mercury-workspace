@@ -25,7 +25,7 @@ jobs:
       - run: node -v && npm -v && yarn -v
       - run: yarn install
       - run: yarn clean
-      - run: yarn build.dev
+      - run: yarn build.ci
       - run: yarn lint
       - run: yarn test
       - run:

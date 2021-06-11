@@ -12,6 +12,7 @@
 		"npm": ">=6"
 	},
 	"scripts": {
+		"build.ci": "lerna run build.ci",
 		"build.dev": "lerna run build.dev",
 		"build.dist": "lerna run build.dist",
 		"clean": "lerna run clean",
