@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "16.3.9",
+	"version": "16.3.17",
 	"files": [
 		"build"
 	],
@@ -23,6 +23,7 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
+		"build.ci": "yarn build.tsc && yarn build.resolve-paths",
 		"build.dev": "yarn build.tsc ; yarn build.resolve-paths",
 		"build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
 		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.resolve-paths && yarn build.esm-postbuild",
@@ -32,7 +33,7 @@
 		"build.types": "tsc --emitDeclarationOnly && echo PASS",
 		"clean": "rm -rf build/",
 		"fix.lint": "eslint --fix '**/*.ts'",
-		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
+		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd ../ && yarn rebuild.dev",
 		"release": "semantic-release",
 		"test": "jest",
@@ -51,10 +52,10 @@
 		"@sprucelabs/jest-json-reporter": "latest",
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
-		"@sprucelabs/test-utils": "^3.0.47",
+		"@sprucelabs/test-utils": "^3.0.49",
 		"chokidar-cli": "^2.1.0",
 		"eslint": "^7.28.0",
-		"eslint-config-spruce": "^10.10.4",
+		"eslint-config-spruce": "^10.10.5",
 		"jest": "^27.0.4",
 		"jest-circus": "^27.0.4",
 		"typescript": "^4.3.2"

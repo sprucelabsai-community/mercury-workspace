@@ -40,13 +40,15 @@
 		"./packages/mercury-event-emitter",
 		"./packages/mercury-types"
 	],
+	"eslint.lintTask.options": "--cache",
 	"eslint.options": {
 		"extensions": [
 			".js",
 			".jsx",
 			".ts",
 			".tsx"
-		]
+		],
+		"cache": true
 	},
 	"typescript.preferences.importModuleSpecifier": "relative",
 	"editor.codeActionsOnSave": {

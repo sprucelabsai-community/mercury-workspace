@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "16.3.9",
+	"version": "16.3.17",
 	"files": [
 		"build"
 	],
@@ -29,13 +29,14 @@
 		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
 	},
 	"scripts": {
+		"build.ci": "yarn build.tsc",
 		"build.dev": "yarn build.tsc",
 		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
 		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
 		"build.tsc": "tsc",
 		"clean": "rm -rf build/",
 		"fix.lint": "eslint --fix '**/*.ts'",
-		"lint": "eslint '**/*.ts' && tsc -p . --noEmit",
+		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd .. && yarn rebuild",
 		"release": "semantic-release",
 		"test": "jest --forceExit",
@@ -44,7 +45,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^16.3.9",
+		"@sprucelabs/mercury-event-emitter": "^16.3.17",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
