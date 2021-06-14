@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "16.3.21",
+	"version": "16.3.22",
 	"files": [
 		"build"
 	],
@@ -37,7 +37,7 @@
 		"clean": "yarn clean.build",
 		"clean.all": "yarn clean.build && yarn clean.dependencies",
 		"clean.build": "rm -rf build/",
-    	"clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
+		"clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
 		"fix.lint": "eslint --fix '**/*.ts'",
 		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd .. && yarn rebuild",
@@ -49,7 +49,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^16.3.21",
+		"@sprucelabs/mercury-event-emitter": "^16.3.22",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",

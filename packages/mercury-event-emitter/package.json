@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "16.3.21",
+  "version": "16.3.22",
   "files": [
     "build"
   ],
@@ -31,9 +31,9 @@
     "build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts' -v",
     "build.tsc": "yarn build.copy-files && tsc",
     "build.types": "tsc --emitDeclarationOnly && echo PASS",
-		"clean": "yarn clean.build",
-		"clean.all": "yarn clean.build && yarn clean.dependencies",
-		"clean.build": "rm -rf build/",
+    "clean": "yarn clean.build",
+    "clean.all": "yarn clean.build && yarn clean.dependencies",
+    "clean.build": "rm -rf build/",
     "clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
     "fix.lint": "eslint --fix '**/*.ts'",
     "lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
