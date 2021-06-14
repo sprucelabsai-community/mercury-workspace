@@ -37,7 +37,7 @@
 		"clean": "yarn clean.build",
 		"clean.all": "yarn clean.build && yarn clean.dependencies",
 		"clean.build": "rm -rf build/",
-    	"clean.dependencies": "rm -rf node_modules/ yarn.lock",
+    	"clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
 		"fix.lint": "eslint --fix '**/*.ts'",
 		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd .. && yarn rebuild",
