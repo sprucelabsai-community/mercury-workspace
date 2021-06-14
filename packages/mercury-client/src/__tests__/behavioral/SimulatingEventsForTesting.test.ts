@@ -425,6 +425,35 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		})
 	}
 
+	@test()
+	protected static async localResponsesAreValidated() {
+		const [client1, client2] = await Promise.all([
+			this.connectToApi(true),
+			this.connectToApi(true),
+		])
+
+		//@ts-ignore
+		await client2.on('confirm-pin::v2020_12_25', async () => {
+			return {
+				token: 'yes!',
+				taco: {} as any,
+			}
+		})
+
+		const results = await client1.emit('confirm-pin::v2020_12_25', {
+			payload: {
+				challenge: '1234',
+				pin: '0000',
+			},
+		})
+
+		assert.isEqual(results.totalErrors, 1)
+		eventErrorAssertUtil.assertErrorFromResponse(
+			results,
+			'INVALID_RESPONSE_PAYLOAD'
+		)
+	}
+
 	private static async assertTeammateCanEmit(options: {
 		fqen: string
 		ownerClient: MercuryClient

@@ -56,21 +56,36 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 			eventName
 		)
 		const emitSchema = eventSignature.emitPayloadSchema
+		const responseSchema = eventSignature.responsePayloadSchema
 
-		this.validatePayload(emitSchema, actualPayload, eventName)
+		this.validateEmitPayload(emitSchema, actualPayload, eventName)
 
 		const listeners = this.listenersByEvent[eventName] || []
 		let totalErrors = 0
 
 		const responses = await Promise.all(
 			listeners.map(async (listenerCb, idx) => {
-				const response = await this.emitOne<EventName>({
+				let response = await this.emitOne<EventName>({
 					idx,
 					listenerCb,
 					payload: actualPayload,
 					totalContracts: listeners.length,
 					actualCallback,
 				})
+
+				if (responseSchema) {
+					try {
+						this.validateResponsePayload(
+							responseSchema,
+							response.payload ?? {},
+							eventName
+						)
+					} catch (err) {
+						response = {
+							errors: [err],
+						}
+					}
+				}
 
 				if (response.errors) {
 					totalErrors += response.errors.length
@@ -163,7 +178,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		this.eventContract = { ...this.originalEventContract }
 	}
 
-	protected validatePayload(
+	protected validateEmitPayload(
 		schema: Schema | undefined | null,
 		actualPayload: any,
 		eventName: string
@@ -175,6 +190,25 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 			} catch (err) {
 				throw new SpruceError({
 					code: 'INVALID_PAYLOAD',
+					originalError: err,
+					eventName,
+				})
+			}
+		}
+	}
+
+	protected validateResponsePayload(
+		schema: Schema | undefined | null,
+		actualPayload: any,
+		eventName: string
+	) {
+		if (schema) {
+			try {
+				//@ts-ignore
+				validateSchemaValues(schema, actualPayload ?? {})
+			} catch (err) {
+				throw new SpruceError({
+					code: 'INVALID_RESPONSE_PAYLOAD',
 					originalError: err,
 					eventName,
 				})

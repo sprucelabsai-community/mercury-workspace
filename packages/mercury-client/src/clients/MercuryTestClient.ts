@@ -29,14 +29,14 @@ class InternalEmitter<
 		}
 	}
 
-	protected validatePayload(
+	protected validateEmitPayload(
 		schema: Schema | undefined | null,
 		actualPayload: any,
 		eventName: string
 	) {
 		const payload = { ...actualPayload }
 		delete payload.source
-		return super.validatePayload(schema, payload, eventName)
+		return super.validateEmitPayload(schema, payload, eventName)
 	}
 
 	public mixinOnlyUniqueSignatures(contract: EventContract) {
@@ -132,9 +132,12 @@ export default class MercuryTestClient<
 			}
 
 			const argsWithSource = [...args]
-			argsWithSource[1] = {
-				...argsWithSource[1],
-				source,
+
+			if (Object.keys(source).length > 0) {
+				argsWithSource[1] = {
+					...argsWithSource[1],
+					source,
+				}
 			}
 
 			const contract = emitter.getContract()
