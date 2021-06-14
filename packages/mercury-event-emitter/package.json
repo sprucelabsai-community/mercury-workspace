@@ -1,93 +1,93 @@
 {
-	"name": "@sprucelabs/mercury-event-emitter",
-	"publishConfig": {
-		"access": "public"
-	},
-	"version": "16.3.17",
-	"files": [
-		"build"
-	],
-	"main": "./build/index.js",
-	"types": "./build/index.d.ts",
-	"module": "./build/esm/index.js",
-	"sideEffects": false,
-	"description": "Types for Mercury!",
-	"keywords": [
-		"node",
-		"components",
-		"sprucebot",
-		"sprucelabs"
-	],
-	"homepage": "https://github.com/sprucelabsai/mercury-workspace",
-	"bugs": {
-		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
-	},
-	"scripts": {
-		"build.ci": "yarn build.tsc && yarn build.resolve-paths",
-		"build.dev": "yarn build.tsc ; yarn build.resolve-paths",
-		"build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
-		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.resolve-paths && yarn build.esm-postbuild",
-		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
-		"build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts' -v",
-		"build.tsc": "yarn build.copy-files && tsc",
-		"build.types": "tsc --emitDeclarationOnly && echo PASS",
-		"clean": "rm -rf build/",
-		"fix.lint": "eslint --fix '**/*.ts'",
-		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
-		"rebuild": "cd ../ && yarn rebuild.dev",
-		"release": "semantic-release",
-		"test": "jest",
-		"watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
-		"watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
-		"watch.tsc": "tsc -w"
-	},
-	"dependencies": {
-		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-types": "latest",
-		"@sprucelabs/schema": "latest",
-		"@sprucelabs/spruce-event-utils": "latest"
-	},
-	"devDependencies": {
-		"@sprucelabs/esm-postbuild": "latest",
-		"@sprucelabs/jest-json-reporter": "latest",
-		"@sprucelabs/semantic-release": "latest",
-		"@sprucelabs/test": "latest",
-		"@sprucelabs/test-utils": "^3.0.49",
-		"chokidar-cli": "^2.1.0",
-		"eslint": "^7.28.0",
-		"eslint-config-spruce": "^10.10.5",
-		"jest": "^27.0.4",
-		"jest-circus": "^27.0.4",
-		"typescript": "^4.3.2"
-	},
-	"jest": {
-		"maxWorkers": 4,
-		"testTimeout": 5000,
-		"testEnvironment": "node",
-		"testPathIgnorePatterns": [
-			"<rootDir>/tmp/",
-			"<rootDir>/src/",
-			"<rootDir>/node_modules/",
-			"<rootDir>/build/__tests__/testDirsAndFiles/",
-			"<rootDir>/build/esm/"
-		],
-		"testMatch": [
-			"**/__tests__/**/*.test.js?(x)"
-		],
-		"moduleNameMapper": {
-			"^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
-		}
-	},
-	"yarn-upgrade-all": {
-		"ignore": [
-			"@sprucelabs/jest-json-reporter",
-			"@sprucelabs/test",
-			"@sprucelabs/error",
-			"@sprucelabs/esm-postbuild",
-			"@sprucelabs/mercury-types",
-			"@sprucelabs/schema",
-			"@sprucelabs/semantic-release",
-			"@sprucelabs/spruce-event-utils"
-		]
-	}
+  "name": "@sprucelabs/mercury-event-emitter",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "16.3.17",
+  "files": [
+    "build"
+  ],
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "module": "./build/esm/index.js",
+  "sideEffects": false,
+  "description": "Types for Mercury!",
+  "keywords": [
+    "node",
+    "components",
+    "sprucebot",
+    "sprucelabs"
+  ],
+  "homepage": "https://github.com/sprucelabsai/mercury-workspace",
+  "bugs": {
+    "url": "https://github.com/sprucelabsai/mercury-workspace/issues"
+  },
+  "scripts": {
+    "build.ci": "yarn build.tsc && yarn build.resolve-paths",
+    "build.dev": "yarn build.tsc ; yarn build.resolve-paths",
+    "build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
+    "build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.resolve-paths && yarn build.esm-postbuild",
+    "build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
+    "build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts' -v",
+    "build.tsc": "yarn build.copy-files && tsc",
+    "build.types": "tsc --emitDeclarationOnly && echo PASS",
+    "clean": "rm -rf build/",
+    "fix.lint": "eslint --fix '**/*.ts'",
+    "lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
+    "rebuild": "cd ../ && yarn rebuild.dev",
+    "release": "semantic-release",
+    "test": "jest",
+    "watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
+    "watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
+    "watch.tsc": "tsc -w"
+  },
+  "dependencies": {
+    "@sprucelabs/error": "latest",
+    "@sprucelabs/mercury-types": "latest",
+    "@sprucelabs/schema": "latest",
+    "@sprucelabs/spruce-event-utils": "latest"
+  },
+  "devDependencies": {
+    "@sprucelabs/esm-postbuild": "latest",
+    "@sprucelabs/jest-json-reporter": "latest",
+    "@sprucelabs/semantic-release": "latest",
+    "@sprucelabs/test": "latest",
+    "@sprucelabs/test-utils": "^3.0.49",
+    "chokidar-cli": "^2.1.0",
+    "eslint": "^7.28.0",
+    "eslint-config-spruce": "^10.10.5",
+    "jest": "^27.0.4",
+    "jest-circus": "^27.0.4",
+    "typescript": "^4.3.2"
+  },
+  "jest": {
+    "maxWorkers": 4,
+    "testTimeout": 5000,
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/tmp/",
+      "<rootDir>/src/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/build/__tests__/testDirsAndFiles/",
+      "<rootDir>/build/esm/"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.js?(x)"
+    ],
+    "moduleNameMapper": {
+      "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
+    }
+  },
+  "yarn-upgrade-all": {
+    "ignore": [
+      "@sprucelabs/jest-json-reporter",
+      "@sprucelabs/test",
+      "@sprucelabs/error",
+      "@sprucelabs/esm-postbuild",
+      "@sprucelabs/mercury-types",
+      "@sprucelabs/schema",
+      "@sprucelabs/semantic-release",
+      "@sprucelabs/spruce-event-utils"
+    ]
+  }
 }

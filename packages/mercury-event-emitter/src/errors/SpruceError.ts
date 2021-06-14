@@ -11,6 +11,19 @@ export default class SpruceError extends AbstractSpruceError<MercuryEventEmitter
 			case 'LISTENER_ERROR':
 				message = `Error in local event listener:\n\n${options.originalError?.message}`
 				break
+			case 'INVALID_PAYLOAD':
+				message = `The emit payload you passed to "${
+					options.eventName
+				}" is invalid${
+					options.originalError ? `:\n\n${options.originalError.message}` : '.'
+				}`
+				break
+
+			case 'INVALID_RESPONSE_PAYLOAD':
+				message = `The response payload to "${options.eventName}" is invalid${
+					options.originalError ? `:\n\n${options.originalError.message}` : '.'
+				}`
+				break
 			default:
 				message = this.message
 		}

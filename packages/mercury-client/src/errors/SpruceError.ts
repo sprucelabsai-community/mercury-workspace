@@ -23,14 +23,6 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				}`
 				break
 
-			case 'INVALID_RESPONSE_PAYLOAD':
-				message = `The response payload you passed to "${
-					options.eventName
-				}" is invalid${
-					options.originalError ? `:\n\n${options.originalError.message}` : '.'
-				}`
-				break
-
 			case 'CONNECTION_FAILED':
 				message = `I couldn't connect to ${options.host}. The code I got back was ${options.statusCode}.`
 				break

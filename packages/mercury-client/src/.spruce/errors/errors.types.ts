@@ -243,35 +243,6 @@ export declare namespace SpruceErrors.MercuryClient {
 export declare namespace SpruceErrors.MercuryClient {
 
 	
-	export interface InvalidResponsePayload {
-		
-			
-			'eventName': string
-	}
-
-	export interface InvalidResponsePayloadSchema extends SpruceSchema.Schema {
-		id: 'invalidResponsePayload',
-		namespace: 'MercuryClient',
-		name: 'Invalid response payload',
-		    fields: {
-		            /** . */
-		            'eventName': {
-		                type: 'text',
-		                isRequired: true,
-		                options: undefined
-		            },
-		    }
-	}
-
-	export type InvalidResponsePayloadEntity = SchemaEntity<SpruceErrors.MercuryClient.InvalidResponsePayloadSchema>
-
-}
-
-
-
-export declare namespace SpruceErrors.MercuryClient {
-
-	
 	export interface InvalidProtocol {
 		
 	}

@@ -17,9 +17,6 @@ export interface NotConnectedErrorOptions extends SpruceErrors.MercuryClient.Not
 export interface MissingTestCacheDirErrorOptions extends SpruceErrors.MercuryClient.MissingTestCacheDir, ISpruceErrorOptions {
 	code: 'MISSING_TEST_CACHE_DIR'
 }
-export interface InvalidResponsePayloadErrorOptions extends SpruceErrors.MercuryClient.InvalidResponsePayload, ISpruceErrorOptions {
-	code: 'INVALID_RESPONSE_PAYLOAD'
-}
 export interface InvalidProtocolErrorOptions extends SpruceErrors.MercuryClient.InvalidProtocol, ISpruceErrorOptions {
 	code: 'INVALID_PROTOCOL'
 }
@@ -30,6 +27,6 @@ export interface ConnectionFailedErrorOptions extends SpruceErrors.MercuryClient
 	code: 'CONNECTION_FAILED'
 }
 
-type ErrorOptions = SchemaErrorOptions | SpruceErrorOptions | UnexpectedPayloadErrorOptions  | UnauthorizedAccessErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | MissingTestCacheDirErrorOptions  | InvalidResponsePayloadErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | ConnectionFailedErrorOptions 
+type ErrorOptions = SchemaErrorOptions | SpruceErrorOptions | UnexpectedPayloadErrorOptions  | UnauthorizedAccessErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | MissingTestCacheDirErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | ConnectionFailedErrorOptions 
 
 export default ErrorOptions
