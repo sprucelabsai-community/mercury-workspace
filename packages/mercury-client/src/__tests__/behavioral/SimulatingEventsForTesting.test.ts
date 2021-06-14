@@ -11,6 +11,7 @@ import {
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { MercuryClientFactory } from '../..'
+import SpruceError from '../../errors/SpruceError'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { TEST_HOST } from '../../tests/constants'
 import { MercuryClient } from '../../types/client.types'
@@ -452,6 +453,30 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			results,
 			'INVALID_RESPONSE_PAYLOAD'
 		)
+	}
+
+	@test()
+	protected static async responsThrowingAnErrorIsPassedThrough() {
+		const [client1, client2] = await Promise.all([
+			this.connectToApi(true),
+			this.connectToApi(true),
+		])
+
+		//@ts-ignore
+		await client2.on('confirm-pin::v2020_12_25', async () => {
+			//@ts-ignore
+			throw new SpruceError({ code: 'TEST' })
+		})
+
+		const results = await client1.emit('confirm-pin::v2020_12_25', {
+			payload: {
+				challenge: '1234',
+				pin: '0000',
+			},
+		})
+
+		assert.isEqual(results.totalErrors, 1)
+		eventErrorAssertUtil.assertErrorFromResponse(results, 'TEST')
 	}
 
 	private static async assertTeammateCanEmit(options: {

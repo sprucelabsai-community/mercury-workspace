@@ -73,7 +73,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 					actualCallback,
 				})
 
-				if (responseSchema) {
+				if (responseSchema && !response.errors) {
 					try {
 						this.validateResponsePayload(
 							responseSchema,
