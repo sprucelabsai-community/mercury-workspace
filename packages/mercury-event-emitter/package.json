@@ -62,7 +62,7 @@
     "eslint-config-spruce": "^10.10.6",
     "jest": "^27.0.4",
     "jest-circus": "^27.0.4",
-    "typescript": "^3.9.10"
+    "typescript": "^4.3.3"
   },
   "jest": {
     "maxWorkers": 4,
