@@ -49,7 +49,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^16.3.30",
+		"@sprucelabs/mercury-event-emitter": "^16.4.0",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
@@ -65,7 +65,7 @@
 		"@sprucelabs/test": "latest",
 		"@sprucelabs/test-utils": "latest",
 		"@types/socket.io-client": "^1.4.36",
-		"eslint": "^7.28.0",
+		"eslint": "^7.29.0",
 		"eslint-config-spruce": "latest",
 		"jest": "^27.0.4",
 		"jest-circus": "^27.0.4",
