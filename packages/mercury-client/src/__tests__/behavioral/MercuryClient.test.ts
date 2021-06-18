@@ -520,6 +520,35 @@ export default class MercuryClientTest extends AbstractClientTest {
 		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNAUTHORIZED_ACCESS')
 	}
 
+	@test()
+	protected static async canDisableAutoRegisterListener() {
+		const { org, skill1, skill1Client, skill2Client } =
+			await this.setup2SkillsAndOneEvent()
+
+		let listenerTriggerCount = 0
+
+		const eventName = `${skill1.slug}.will-send-vip::v1`
+
+		skill2Client.setShouldAutoRegisterListeners(false)
+
+		//@ts-ignore
+		await skill2Client.on(eventName, () => {
+			listenerTriggerCount++
+			return {
+				messages: ['hello world'],
+			}
+		})
+
+		//@ts-ignore
+		await skill1Client.emit(eventName, {
+			target: {
+				organizationId: org.id,
+			},
+		})
+
+		assert.isEqual(listenerTriggerCount, 0)
+	}
+
 	private static async TimeoutClient(emitDelay?: number): Promise<any> {
 		const client = await this.Client({
 			emitTimeoutMs: 100,

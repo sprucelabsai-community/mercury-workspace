@@ -20,6 +20,7 @@ export type MercuryClient<
 > = MercuryEventEmitter<Contract> & {
 	disconnect: () => Promise<void>
 	isConnected: () => boolean
+	setShouldAutoRegisterListeners: (should: boolean) => void
 	authenticate(options: {
 		skillId?: string
 		apiKey?: string

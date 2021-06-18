@@ -45,6 +45,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		skill?: SpruceSchemas.Spruce.v2020_07_22.Skill
 		person?: SpruceSchemas.Spruce.v2020_07_22.Person
 	}
+	private shouldAutoRegisterListeners = true
 
 	public constructor(
 		options: {
@@ -322,6 +323,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		) as EventSignature
 	}
 
+	public setShouldAutoRegisterListeners(should: boolean) {
+		this.shouldAutoRegisterListeners = should
+	}
+
 	public async on<
 		EventName extends EventNames<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
@@ -340,14 +345,16 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	) {
 		this.registeredListeners.push([eventName, cb])
 
-		//@ts-ignore
-		const results = await this.emit('register-listeners::v2020_12_25', {
-			payload: { fullyQualifiedEventNames: [eventName] },
-		})
+		if (this.shouldAutoRegisterListeners) {
+			//@ts-ignore
+			const results = await this.emit('register-listeners::v2020_12_25', {
+				payload: { fullyQualifiedEventNames: [eventName] },
+			})
 
-		if (results.totalErrors > 0) {
-			const options = results.responses[0].errors?.[0] ?? 'UNKNOWN_ERROR'
-			throw AbstractSpruceError.parse(options, SpruceError)
+			if (results.totalErrors > 0) {
+				const options = results.responses[0].errors?.[0] ?? 'UNKNOWN_ERROR'
+				throw AbstractSpruceError.parse(options, SpruceError)
+			}
 		}
 
 		this.socket?.on(
