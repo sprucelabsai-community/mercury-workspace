@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "16.3.19",
+	"version": "16.3.30",
 	"files": [
 		"build"
 	],
@@ -34,10 +34,14 @@
 		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
 		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
 		"build.tsc": "tsc",
-		"clean": "rm -rf build/",
+		"clean": "yarn clean.build",
+		"clean.all": "yarn clean.build && yarn clean.dependencies",
+		"clean.build": "rm -rf build/",
+		"clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
 		"fix.lint": "eslint --fix '**/*.ts'",
 		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd .. && yarn rebuild",
+		"rebuild.dependencies": "cd ../ && yarn rebuild.dependencies",
 		"release": "semantic-release",
 		"test": "jest --forceExit",
 		"watch.build.dev": "yarn build.tsc -w",
@@ -45,7 +49,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^16.3.19",
+		"@sprucelabs/mercury-event-emitter": "^16.3.30",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
@@ -67,7 +71,7 @@
 		"jest-circus": "^27.0.4",
 		"prettier": "^2.3.1",
 		"ts-node": "^10.0.0",
-		"typescript": "^4.3.2"
+		"typescript": "^4.3.4"
 	},
 	"jest": {
 		"maxWorkers": 5,

@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "16.3.19",
+  "version": "16.3.30",
   "files": [
     "build"
   ],
@@ -31,10 +31,14 @@
     "build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts' -v",
     "build.tsc": "yarn build.copy-files && tsc",
     "build.types": "tsc --emitDeclarationOnly && echo PASS",
-    "clean": "rm -rf build/",
+    "clean": "yarn clean.build",
+    "clean.all": "yarn clean.build && yarn clean.dependencies",
+    "clean.build": "rm -rf build/",
+    "clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
     "fix.lint": "eslint --fix '**/*.ts'",
     "lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
     "rebuild": "cd ../ && yarn rebuild.dev",
+    "rebuild.dependencies": "cd ../ && yarn rebuild.dependencies",
     "release": "semantic-release",
     "test": "jest",
     "watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
@@ -52,13 +56,13 @@
     "@sprucelabs/jest-json-reporter": "latest",
     "@sprucelabs/semantic-release": "latest",
     "@sprucelabs/test": "latest",
-    "@sprucelabs/test-utils": "^3.0.49",
+    "@sprucelabs/test-utils": "^3.0.50",
     "chokidar-cli": "^2.1.0",
     "eslint": "^7.28.0",
-    "eslint-config-spruce": "^10.10.5",
+    "eslint-config-spruce": "^10.10.6",
     "jest": "^27.0.4",
     "jest-circus": "^27.0.4",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.4"
   },
   "jest": {
     "maxWorkers": 4,
