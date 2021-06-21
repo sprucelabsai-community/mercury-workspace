@@ -41,9 +41,9 @@
 		"fix.lint": "eslint --fix '**/*.ts'",
 		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
 		"rebuild": "cd .. && yarn rebuild",
-		"rebuild.dependencies": "cd ../ && yarn rebuild.dependencies",
 		"release": "semantic-release",
 		"test": "jest --forceExit",
+		"update.dependencies": "cd ../ && yarn rebuild.dependencies",
 		"watch.build.dev": "yarn build.tsc -w",
 		"watch.tsc": "tsc -w"
 	},

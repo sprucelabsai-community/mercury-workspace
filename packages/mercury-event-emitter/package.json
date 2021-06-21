@@ -38,9 +38,9 @@
     "fix.lint": "eslint --fix '**/*.ts'",
     "lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
     "rebuild": "cd ../ && yarn rebuild.dev",
-    "rebuild.dependencies": "cd ../ && yarn rebuild.dependencies",
     "release": "semantic-release",
     "test": "jest",
+    "update.dependencies": "cd ../ && yarn rebuild.dependencies",
     "watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
     "watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
     "watch.tsc": "tsc -w"
