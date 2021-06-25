@@ -54,7 +54,7 @@
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
 		"dotenv": "^10.0.0",
-		"socket.io-client": "^2.3.1"
+		"socket.io-client": "^4.1.2"
 	},
 	"devDependencies": {
 		"@sprucelabs/esm-postbuild": "latest",
@@ -64,7 +64,7 @@
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
 		"@sprucelabs/test-utils": "latest",
-		"@types/socket.io-client": "^1.4.36",
+		"@types/socket.io-client": "3.0.0",
 		"eslint": "^7.29.0",
 		"eslint-config-spruce": "latest",
 		"jest": "^27.0.5",
@@ -113,9 +113,6 @@
 	},
 	"yarn-upgrade-all": {
 		"ignore": [
-			"socket.io",
-			"socket.io-client",
-			"@types/socket.io-client",
 			"@sprucelabs/esm-postbuild",
 			"@sprucelabs/jest-json-reporter",
 			"@sprucelabs/jest-sheets-reporter",

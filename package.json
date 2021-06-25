@@ -46,8 +46,6 @@
 	},
 	"yarn-upgrade-all": {
 		"ignore": [
-			"socket.io",
-			"socket.io-client",
 			"@sprucelabs/error",
 			"@sprucelabs/jest-sheets-reporter",
 			"@sprucelabs/log",

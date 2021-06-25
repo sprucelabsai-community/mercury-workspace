@@ -1,4 +1,3 @@
-/*global SocketIOClient*/
 import AbstractSpruceError from '@sprucelabs/error'
 import {
 	EmitCallback,
@@ -15,12 +14,12 @@ import {
 	eventResponseUtil,
 	eventNameUtil,
 } from '@sprucelabs/spruce-event-utils'
-import io from 'socket.io-client'
+import io, { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import SpruceError from '../errors/SpruceError'
 import { MercuryClient } from '../types/client.types'
 import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 
-type IoOptions = SocketIOClient.ConnectOpts
+type IoOptions = Partial<ManagerOptions & SocketOptions>
 
 export default class MercurySocketIoClient<Contract extends EventContract>
 	implements MercuryClient<Contract>
@@ -29,7 +28,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 	private host: string
 	private ioOptions: IoOptions
-	private socket?: SocketIOClient.Socket
+	private socket?: Socket
 	private emitTimeoutMs: number
 	private reconnectDelayMs: number
 	private isReAuthing = false
@@ -78,6 +77,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		await new Promise((resolve, reject) => {
 			this.socket?.on('connect', () => {
+				//@ts-ignore
 				this.socket?.removeAllListeners()
 
 				if (this.shouldReconnect) {
@@ -102,6 +102,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 			this.socket?.on('connect_error', (err: Record<string, any>) => {
 				const error = this.mapSocketErrorToSpruceError(err)
+				//@ts-ignore
 				this.socket?.removeAllListeners()
 
 				reject(error)
@@ -359,6 +360,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		this.socket?.on(
 			eventName,
+			//@ts-ignore
 			async (targetAndPayload: any, ioCallback: (p: any) => void) => {
 				if (cb) {
 					try {
@@ -411,6 +413,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 	public async disconnect() {
 		if (this.isSocketConnected()) {
+			//@ts-ignore
 			this.socket?.removeAllListeners()
 
 			await new Promise((resolve) => {
