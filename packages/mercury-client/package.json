@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "16.4.7",
+	"version": "16.4.9",
 	"files": [
 		"build"
 	],
@@ -49,7 +49,7 @@
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^16.4.7",
+		"@sprucelabs/mercury-event-emitter": "^16.4.9",
 		"@sprucelabs/mercury-types": "latest",
 		"@sprucelabs/schema": "latest",
 		"@sprucelabs/spruce-event-utils": "latest",
@@ -64,7 +64,7 @@
 		"@sprucelabs/semantic-release": "latest",
 		"@sprucelabs/test": "latest",
 		"@sprucelabs/test-utils": "latest",
-		"@types/socket.io-client": "3.0.0",
+		"@types/socket.io-client": "^3.0.0",
 		"eslint": "^7.29.0",
 		"eslint-config-spruce": "latest",
 		"jest": "^27.0.5",
