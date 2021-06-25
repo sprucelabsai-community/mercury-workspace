@@ -53,11 +53,13 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 
 			case 'UNKNOWN_ERROR':
 				message = 'Oh no! An unknown error ocurred.'
+
 				if (options.originalError) {
 					message += ' Original error:\n\n'
-					message += options.originalError.message
+					message += options.originalError.stack
 				}
-				break
+
+				return message
 
 			case 'UNAUTHORIZED_ACCESS':
 				message = `Not authorized! You cannot ${options.action} \`${options.fqen}\`!`
