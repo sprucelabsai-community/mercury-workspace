@@ -65,7 +65,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		} = options
 
 		this.host = host
-		this.ioOptions = ioOptions
+		this.ioOptions = { ...ioOptions, withCredentials: false }
 		this.eventContract = eventContract
 		this.emitTimeoutMs = emitTimeoutMs ?? 30000
 		this.reconnectDelayMs = reconnectDelayMs ?? 5000
