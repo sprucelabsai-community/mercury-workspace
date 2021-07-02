@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.6.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.5.0...v16.6.0) (2021-07-02)
+
+
+### Features
+
+* clearDefaltContractOnMercuryClientFactory ([53db4de](https://github.com/sprucelabsai/mercury-workspace/commit/53db4de))
+
+
+
+
+
 # [16.5.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.4.15...v16.5.0) (2021-07-02)
 
 
