@@ -16,4 +16,15 @@ export default class TestingWithDefaultContractsTest extends AbstractClientTest 
 
 		assert.isTrue(MercuryClientFactory.hasDefaultContract())
 	}
+
+	@test()
+	protected static canClearDefaultContract() {
+		MercuryClientFactory.setDefaultContract({
+			eventSignatures: { myEvent: {} },
+		})
+
+		MercuryClientFactory.clearDefaultContract()
+
+		assert.isFalse(MercuryClientFactory.hasDefaultContract())
+	}
 }
