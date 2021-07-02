@@ -121,84 +121,100 @@ export default class MercuryTestClient<
 		const emitter = MercuryTestClient.emitter
 		const fqen = args[0]
 
-		if (emitter.listenCount(fqen) > 0) {
-			const source: EventSource = {}
-			if (this.auth?.person) {
-				source.personId = this.auth.person.id
-			}
-
-			if (this.auth?.skill) {
-				source.skillId = this.auth.skill.id
-			}
-
-			const argsWithSource = [...args]
-
-			if (Object.keys(source).length > 0) {
-				argsWithSource[1] = {
-					...argsWithSource[1],
-					source,
-				}
-			}
-
-			const contract = emitter.getContract()
-			const sig = eventContractUtil.getSignatureByName(contract, fqen)
-			const { eventNamespace } = eventNameUtil.split(fqen)
-
-			if (sig.emitPermissionContract && eventNamespace) {
-				let { target } = args[1] ?? {}
-				let permTarget = { ...source }
-
-				if (target?.organizationId) {
-					permTarget.organizationId = target.organizationId
+		try {
+			if (emitter.listenCount(fqen) > 0) {
+				const source: EventSource = {}
+				if (this.auth?.person) {
+					source.personId = this.auth.person.id
 				}
 
-				const results = await this.emit(
-					'does-honor-permission-contract::v2020_12_25',
-					{
-						target: permTarget,
-						payload: {
-							id: sig.emitPermissionContract.id,
-						},
+				if (this.auth?.skill) {
+					source.skillId = this.auth.skill.id
+				}
+
+				const argsWithSource = [...args]
+
+				if (Object.keys(source).length > 0) {
+					argsWithSource[1] = {
+						...argsWithSource[1],
+						source,
 					}
-				)
-
-				if (results.totalErrors > 0) {
-					return results as any
 				}
 
-				const { doesHonor } = eventResponseUtil.getFirstResponseOrThrow(results)
+				const contract = emitter.getContract()
+				const sig = eventContractUtil.getSignatureByName(contract, fqen)
+				const { eventNamespace } = eventNameUtil.split(fqen)
 
-				if (!doesHonor) {
-					return {
-						totalContracts: 1,
-						totalErrors: 1,
-						totalResponses: 1,
-						responses: [
-							{
-								errors: [
-									new SpruceError({
-										code: 'UNAUTHORIZED_ACCESS',
-										fqen,
-										action: 'emit',
-										target,
-										permissionContractId: sig.emitPermissionContract.id,
-									}),
-								],
+				if (sig.emitPermissionContract && eventNamespace) {
+					let { target } = args[1] ?? {}
+					let permTarget = { ...source }
+
+					if (target?.organizationId) {
+						permTarget.organizationId = target.organizationId
+					}
+
+					const results = await this.emit(
+						'does-honor-permission-contract::v2020_12_25',
+						{
+							target: permTarget,
+							payload: {
+								id: sig.emitPermissionContract.id,
 							},
-						],
+						}
+					)
+
+					if (results.totalErrors > 0) {
+						return results as any
+					}
+
+					const { doesHonor } =
+						eventResponseUtil.getFirstResponseOrThrow(results)
+
+					if (!doesHonor) {
+						return {
+							totalContracts: 1,
+							totalErrors: 1,
+							totalResponses: 1,
+							responses: [
+								{
+									errors: [
+										new SpruceError({
+											code: 'UNAUTHORIZED_ACCESS',
+											fqen,
+											action: 'emit',
+											target,
+											permissionContractId: sig.emitPermissionContract.id,
+										}),
+									],
+								},
+							],
+						}
 					}
 				}
+
+				return emitter.emit(...argsWithSource)
+			} else {
+				if (!super.isConnected()) {
+					this.isConnectedToApi = true
+					await super.connect()
+				}
+
+				//@ts-ignore
+				const results = await super.emit(...args)
+
+				const firstError = results.responses?.[0]?.errors?.[0]
+				if (firstError && firstError.options?.code === 'INVALID_EVENT_NAME') {
+					firstError.options.friendlyMessage = `You may need to create a listener with \`spruce event.listen\`. ${firstError.options.friendlyMessage}`
+				}
+
+				return results
+			}
+		} catch (err) {
+			if (err.options?.code === 'INVALID_EVENT_NAME') {
+				err.message = `${err.message} Double check it's spelled correctly (types are passing) and that you've run \`spruce create.event\` to create the event.`
 			}
 
-			return emitter.emit(...argsWithSource)
-		} else {
-			if (!super.isConnected()) {
-				this.isConnectedToApi = true
-				await super.connect()
-			}
-
-			//@ts-ignore
-			return super.emit(...args)
+			throw err
 		}
 	}
 

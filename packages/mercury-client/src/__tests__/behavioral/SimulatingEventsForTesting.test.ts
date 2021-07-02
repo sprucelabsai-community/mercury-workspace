@@ -479,6 +479,38 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		eventErrorAssertUtil.assertErrorFromResponse(results, 'TEST')
 	}
 
+	@test()
+	protected static async testClientWrapsUnknownEventNameInHelpfulDebugError() {
+		const client = await this.connectToApi(true)
+
+		//@ts-ignore
+		const err = await assert.doesThrowAsync(() => client.emit('waka-awka'))
+
+		assert.doesInclude(err.message, 'spruce create.event')
+	}
+
+	@test()
+	protected static async returnsHelpfulErrorIfEventExistsLocallyButNotRemotely() {
+		const client = await this.connectToApi(true)
+
+		//@ts-ignore
+		client.eventContract = {
+			eventSignatures: {
+				['waka-waka']: {},
+			},
+		}
+
+		//@ts-ignore
+		const results = await client.emit('waka-waka')
+
+		const err = eventErrorAssertUtil.assertErrorFromResponse(
+			results,
+			'INVALID_EVENT_NAME'
+		)
+
+		assert.doesInclude(err.message, 'spruce event.listen')
+	}
+
 	private static async assertTeammateCanEmit(options: {
 		fqen: string
 		ownerClient: MercuryClient
