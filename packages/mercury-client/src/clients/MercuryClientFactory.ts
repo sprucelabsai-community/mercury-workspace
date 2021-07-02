@@ -81,6 +81,10 @@ export default class MercuryClientFactory {
 		this.defaultContract = contract
 	}
 
+	public static hasDefaultContract(): boolean {
+		return !!this.defaultContract
+	}
+
 	public static resetTestClient() {
 		const Client = require('../clients/MercuryTestClient').default
 		Client.reset()
