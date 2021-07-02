@@ -204,7 +204,7 @@ export default class MercuryTestClient<
 
 				const firstError = results.responses?.[0]?.errors?.[0]
 				if (firstError && firstError.options?.code === 'INVALID_EVENT_NAME') {
-					firstError.options.friendlyMessage = `You may need to create a listener with \`spruce event.listen\`. ${firstError.options.friendlyMessage}`
+					firstError.options.friendlyMessage = `You may need to create a listener with \`spruce event.listen\` or boot your skill in your test with \`await this.bootSkill()\` in \`beforeEach()\`. ${firstError.options.friendlyMessage}`
 				}
 
 				return results
