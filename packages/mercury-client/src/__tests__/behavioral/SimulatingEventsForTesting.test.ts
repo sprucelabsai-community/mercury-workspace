@@ -508,7 +508,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			'INVALID_EVENT_NAME'
 		)
 
-		assert.doesInclude(err.message, 'spruce event.listen')
+		assert.doesInclude(err.message, 'spruce listen.event')
 	}
 
 	private static async assertTeammateCanEmit(options: {
