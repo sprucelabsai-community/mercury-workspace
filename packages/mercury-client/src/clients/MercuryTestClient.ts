@@ -78,6 +78,7 @@ export default class MercuryTestClient<
 	private static emitter: any
 	private _isConnected = false
 	private isConnectedToApi = false
+	private connectPromise?: Promise<void>
 
 	public constructor(
 		options: Record<string, any> & { host: string; eventContract?: Contract }
@@ -196,8 +197,10 @@ export default class MercuryTestClient<
 			} else {
 				if (!super.isConnected()) {
 					this.isConnectedToApi = true
-					await super.connect()
+					this.connectPromise = super.connect()
 				}
+
+				await this.connectPromise
 
 				//@ts-ignore
 				const results = await super.emit(...args)

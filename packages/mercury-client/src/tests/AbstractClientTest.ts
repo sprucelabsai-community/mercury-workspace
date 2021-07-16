@@ -113,11 +113,12 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 			},
 		})
 
-		const org = orgResults.responses[0].payload?.organization
+		const { organization } =
+			eventResponseUtil.getFirstResponseOrThrow(orgResults)
 
-		assert.isTruthy(org)
+		assert.isTruthy(organization)
 
-		return org
+		return organization
 	}
 
 	protected static async seedInstallAndLoginAsSkill(

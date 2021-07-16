@@ -113,6 +113,16 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
+	protected static async canHandleRapidFireConnectsToApi() {
+		const client = await this.connectToApi()
+		await Promise.all([
+			client.emit('get-event-contracts::v2020_12_25'),
+			client.emit('get-event-contracts::v2020_12_25'),
+			client.emit('get-event-contracts::v2020_12_25'),
+		])
+	}
+
+	@test()
 	protected static async canEmitToSelfUsingToClients() {
 		const [client1, client2] = await Promise.all([
 			this.connectToApi(),
