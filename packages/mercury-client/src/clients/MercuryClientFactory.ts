@@ -15,6 +15,8 @@ export default class MercuryClientFactory {
 	private static isTestMode = false
 	private static defaultContract: any
 	private static timeoutMs = 30000
+	private static totalClients = 0
+	private static clients: Client<any>[] = []
 
 	public static async Client<
 		Contract extends SkillEventContract = SkillEventContract
@@ -66,6 +68,9 @@ export default class MercuryClientFactory {
 
 		await client.connect()
 
+		this.totalClients++
+		this.clients.push(client)
+
 		return client as any
 	}
 
@@ -96,5 +101,19 @@ export default class MercuryClientFactory {
 
 	public static setDefaultTimeoutMs(ms: number) {
 		this.timeoutMs = ms
+	}
+
+	public static getTotalClients() {
+		return this.totalClients
+	}
+
+	public static reset() {
+		this.totalClients = 0
+		this.clients = []
+		this.resetTestClient()
+	}
+
+	public static getClients() {
+		return this.clients
 	}
 }

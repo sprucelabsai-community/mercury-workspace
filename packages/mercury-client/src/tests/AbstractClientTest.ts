@@ -27,7 +27,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		MercuryTestClient.reset()
+		MercuryClientFactory.reset()
 	}
 
 	protected static async beforeAll() {
@@ -43,7 +43,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		}
 
 		this.clients = []
-		MercuryClientFactory.resetTestClient()
+		MercuryClientFactory.reset()
 	}
 
 	protected static async Client(

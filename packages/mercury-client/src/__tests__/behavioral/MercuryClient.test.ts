@@ -40,6 +40,20 @@ export default class MercuryClientTest extends AbstractClientTest {
 	}
 
 	@test()
+	protected static async factoryClientCountStartsAtZero() {
+		assert.isFunction(MercuryClientFactory.getTotalClients)
+		assert.isEqual(MercuryClientFactory.getTotalClients(), 0)
+		assert.isLength(MercuryClientFactory.getClients(), 0)
+		const client = await this.Client()
+		assert.isEqual(MercuryClientFactory.getTotalClients(), 1)
+		assert.isEqual(MercuryClientFactory.getClients()[0], client)
+
+		const client2 = await this.Client()
+		assert.isEqual(MercuryClientFactory.getTotalClients(), 2)
+		assert.isEqual(MercuryClientFactory.getClients()[1], client2)
+	}
+
+	@test()
 	protected static async canGetResponseWithoutTypesWithNoContract() {
 		const client = await this.Client({ contracts: undefined })
 		const results = await client.emit('get-event-contracts::v2020_12_25')
