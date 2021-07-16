@@ -195,12 +195,7 @@ export default class MercuryTestClient<
 
 				return emitter.emit(...argsWithSource)
 			} else {
-				if (!super.isConnected()) {
-					this.isConnectedToApi = true
-					this.connectPromise = super.connect()
-				}
-
-				await this.connectPromise
+				await this.connectIfNotConnected()
 
 				//@ts-ignore
 				const results = await super.emit(...args)
@@ -219,6 +214,15 @@ export default class MercuryTestClient<
 
 			throw err
 		}
+	}
+
+	private async connectIfNotConnected() {
+		if (!this.isConnectedToApi) {
+			this.isConnectedToApi = true
+			this.connectPromise = super.connect()
+		}
+
+		await this.connectPromise
 	}
 
 	public async connect() {
