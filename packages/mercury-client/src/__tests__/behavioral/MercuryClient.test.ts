@@ -563,6 +563,18 @@ export default class MercuryClientTest extends AbstractClientTest {
 		assert.isEqual(listenerTriggerCount, 0)
 	}
 
+	@test()
+	protected static async notAuthenticatedToStart() {
+		const client = await this.Client()
+		assert.isFalse(client.isAuthenticated())
+	}
+
+	@test()
+	protected static async knowsWhenAuthenticated() {
+		const { client } = await this.loginAsDemoPerson()
+		assert.isTrue(client.isAuthenticated())
+	}
+
 	private static async TimeoutClient(emitDelay?: number): Promise<any> {
 		const client = await this.Client({
 			emitTimeoutMs: 100,

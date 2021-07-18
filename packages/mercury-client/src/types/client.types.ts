@@ -21,6 +21,7 @@ export type MercuryClient<
 	disconnect: () => Promise<void>
 	isConnected: () => boolean
 	setShouldAutoRegisterListeners: (should: boolean) => void
+	isAuthenticated(): boolean
 	authenticate(options: {
 		skillId?: string
 		apiKey?: string

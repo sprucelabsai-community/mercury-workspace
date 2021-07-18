@@ -458,6 +458,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		}
 	}
 
+	public isAuthenticated(): boolean {
+		return !!this.auth
+	}
+
 	public isConnected() {
 		return !this.isReAuthing && this.isSocketConnected()
 	}
