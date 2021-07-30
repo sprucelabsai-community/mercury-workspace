@@ -65,7 +65,7 @@
 		"@sprucelabs/test": "latest",
 		"@sprucelabs/test-utils": "latest",
 		"@types/socket.io-client": "^3.0.0",
-		"eslint": "^7.31.0",
+		"eslint": "^7.32.0",
 		"eslint-config-spruce": "latest",
 		"jest": "^27.0.6",
 		"jest-circus": "^27.0.6",
