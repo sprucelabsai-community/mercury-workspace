@@ -20,6 +20,8 @@ export type MercuryClient<
 > = MercuryEventEmitter<Contract> & {
 	disconnect: () => Promise<void>
 	isConnected: () => boolean
+	getProxyToken: () => string | null
+	setProxyToken: (token: string) => void
 	setShouldAutoRegisterListeners: (should: boolean) => void
 	isAuthenticated(): boolean
 	authenticate(options: {

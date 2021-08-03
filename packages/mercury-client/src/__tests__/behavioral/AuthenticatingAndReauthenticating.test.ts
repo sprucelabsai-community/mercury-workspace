@@ -3,10 +3,8 @@ import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
-import { TEST_HOST } from '../../tests/constants'
+import { DEMO_PHONE_REAUTH, TEST_HOST } from '../../tests/constants'
 require('dotenv').config()
-
-const DEMO_PHONE_REAUTH = process.env.DEMO_PHONE_REAUTH as string
 
 export default class ReauthenticatingAfterReconnectTest extends AbstractClientTest {
 	@test()

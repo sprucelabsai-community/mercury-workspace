@@ -10,7 +10,7 @@ import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import MutableContractClient from '../../clients/MutableContractClient'
 import SpruceError from '../../errors/SpruceError'
 import AbstractClientTest from '../../tests/AbstractClientTest'
-import { TEST_HOST } from '../../tests/constants'
+import { DEMO_PHONE, DEMO_PHONE_PROXY, TEST_HOST } from '../../tests/constants'
 
 require('dotenv').config()
 
@@ -114,20 +114,6 @@ export default class MercuryClientTest extends AbstractClientTest {
 		)
 
 		assert.doesInclude(err.message, 'taco')
-	}
-
-	@test()
-	protected static async cantEmitEventWithWithUnexpectedPayload() {
-		const client = await this.Client()
-
-		const err = await assert.doesThrowAsync(() =>
-			//@ts-ignore
-			client.emit('health::v2020_12_25', { taco: 'bravo' })
-		)
-
-		errorAssertUtil.assertError(err, 'UNEXPECTED_PAYLOAD', {
-			eventName: 'health',
-		})
 	}
 
 	@test()
@@ -573,6 +559,44 @@ export default class MercuryClientTest extends AbstractClientTest {
 	protected static async knowsWhenAuthenticated() {
 		const { client } = await this.loginAsDemoPerson()
 		assert.isTrue(client.isAuthenticated())
+	}
+
+	@test()
+	protected static async noProxyTokenToStart() {
+		const client = await this.Client()
+		assert.isFalsy(client.getProxyToken())
+	}
+
+	@test()
+	protected static async canSetProxyToken() {
+		const client = await this.Client()
+		assert.isFalsy(client.getProxyToken())
+		client.setProxyToken('yummy')
+		assert.isEqual(client.getProxyToken(), 'yummy')
+	}
+
+	@test()
+	protected static async requestsAreMadeWithProxyGoingForward() {
+		const { client: client1, person: person1 } = await this.loginAsDemoPerson(
+			DEMO_PHONE
+		)
+		const { client: client2 } = await this.loginAsDemoPerson(DEMO_PHONE_PROXY)
+
+		const token = `${Math.random()}`
+		await client1.emit('register-proxy-token::v2020_12_25', {
+			payload: {
+				token,
+			},
+		})
+
+		client2.setProxyToken(token)
+
+		const results = await client2.emit('whoami::v2020_12_25')
+
+		const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		assert.isTruthy(auth.person)
+		assert.isEqual(auth.person.id, person1.id)
 	}
 
 	private static async TimeoutClient(emitDelay?: number): Promise<any> {

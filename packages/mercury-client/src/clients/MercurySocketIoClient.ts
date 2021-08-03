@@ -29,6 +29,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private host: string
 	private ioOptions: IoOptions
 	private socket?: Socket
+	private proxyToken: string | null = null
 	private emitTimeoutMs: number
 	private reconnectDelayMs: number
 	private isReAuthing = false
@@ -261,8 +262,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		const args: any[] = []
 
-		if (payload) {
-			args.push(payload)
+		if (payload || this.proxyToken) {
+			const p: Record<string, any> = {
+				...payload,
+			}
+
+			if (this.proxyToken) {
+				p.source = {
+					proxyToken: this.proxyToken,
+				}
+			}
+
+			args.push(p)
 		}
 
 		const results: MercuryAggregateResponse<ResponsePayload> =
@@ -468,5 +479,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 	private isSocketConnected() {
 		return this.socket?.connected ?? false
+	}
+
+	public getProxyToken() {
+		return this.proxyToken
+	}
+
+	public setProxyToken(token: string) {
+		this.proxyToken = token
 	}
 }
