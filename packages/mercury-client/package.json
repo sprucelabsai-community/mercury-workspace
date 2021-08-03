@@ -30,7 +30,7 @@
 	},
 	"scripts": {
 		"build.ci": "yarn build.tsc",
-		"build.dev": "yarn build.tsc",
+		"build.dev": "yarn build.tsc --sourceMap",
 		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
 		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
 		"build.tsc": "tsc",
@@ -45,7 +45,7 @@
 		"test": "jest --forceExit",
 		"update.dependencies": "cd ../ && yarn rebuild.dependencies",
 		"watch.build.dev": "yarn build.tsc -w",
-		"watch.tsc": "tsc -w"
+		"watch.tsc": "tsc -w --sourceMap"
 	},
 	"dependencies": {
 		"@sprucelabs/error": "latest",

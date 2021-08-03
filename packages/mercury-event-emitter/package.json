@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build.ci": "yarn build.tsc && yarn build.resolve-paths",
-    "build.dev": "yarn build.tsc ; yarn build.resolve-paths",
+    "build.dev": "yarn build.tsc --sourceMap ; yarn build.resolve-paths",
     "build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
     "build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.resolve-paths && yarn build.esm-postbuild",
     "build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
@@ -43,7 +43,7 @@
     "update.dependencies": "cd ../ && yarn rebuild.dependencies",
     "watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
     "watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
-    "watch.tsc": "tsc -w"
+    "watch.tsc": "tsc -w --sourceMap"
   },
   "dependencies": {
     "@sprucelabs/error": "latest",
