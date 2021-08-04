@@ -577,6 +577,38 @@ export default class MercuryClientTest extends AbstractClientTest {
 
 	@test()
 	protected static async requestsAreMadeWithProxyGoingForward() {
+		const { client2, token, person1 } = await this.loginAndRegisterToken()
+
+		client2.setProxyToken(token)
+
+		const results = await client2.emit('whoami::v2020_12_25')
+
+		MercuryClientTest.assertPerson1ComesBack(results, person1)
+	}
+
+	@test()
+	protected static async prefersProxyPassedInSource() {
+		const { client2, token, person1 } = await this.loginAndRegisterToken()
+
+		client2.setProxyToken('aoeuaoeuaoeu')
+
+		const results = await client2.emit('whoami::v2020_12_25', {
+			source: {
+				proxyToken: token,
+			},
+		})
+
+		MercuryClientTest.assertPerson1ComesBack(results, person1)
+	}
+
+	private static assertPerson1ComesBack(results: any, person1: any) {
+		const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		assert.isTruthy(auth.person)
+		assert.isEqual(auth.person.id, person1.id)
+	}
+
+	private static async loginAndRegisterToken() {
 		const { client: client1, person: person1 } = await this.loginAsDemoPerson(
 			DEMO_PHONE
 		)
@@ -589,14 +621,7 @@ export default class MercuryClientTest extends AbstractClientTest {
 			},
 		})
 
-		client2.setProxyToken(token)
-
-		const results = await client2.emit('whoami::v2020_12_25')
-
-		const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
-
-		assert.isTruthy(auth.person)
-		assert.isEqual(auth.person.id, person1.id)
+		return { client2, token, person1 }
 	}
 
 	private static async TimeoutClient(emitDelay?: number): Promise<any> {

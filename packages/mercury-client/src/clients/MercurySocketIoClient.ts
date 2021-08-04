@@ -267,7 +267,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				...payload,
 			}
 
-			if (this.proxyToken) {
+			if (this.proxyToken && !p.source) {
 				p.source = {
 					proxyToken: this.proxyToken,
 				}
