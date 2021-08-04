@@ -124,7 +124,9 @@ export default class MercuryTestClient<
 
 		try {
 			if (emitter.listenCount(fqen) > 0) {
-				let source: EventSource = {}
+				let source: EventSource = {
+					...args[1]?.source,
+				}
 				if (this.auth?.person) {
 					source.personId = this.auth.person.id
 				}
@@ -133,7 +135,7 @@ export default class MercuryTestClient<
 					source.skillId = this.auth.skill.id
 				}
 
-				if (this.getProxyToken()) {
+				if (!source.proxyToken && this.getProxyToken()) {
 					source.proxyToken = this.getProxyToken()
 				}
 

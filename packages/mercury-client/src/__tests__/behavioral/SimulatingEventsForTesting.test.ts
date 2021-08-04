@@ -526,7 +526,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async passesThroughProxyTokenAsSourceIfPassed() {
+	protected static async passesThroughProxyIfSetOnClient() {
 		const { personClient, skill1Client, skill2Client, skill1 } =
 			await this.setupOrgAndInstall2Skills()
 
@@ -544,6 +544,36 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		//@ts-ignore
 		await skill1Client.emit(this.testEventName)
+
+		assert.isTruthy(s.skillId)
+		assert.isEqual(s.skillId, skill1.id)
+		assert.isUndefined(s.personId)
+		assert.isEqual(s.proxyToken, proxyToken)
+	}
+
+	@test()
+	protected static async passesThroughProxyIfSentWithPayload() {
+		const { personClient, skill1Client, skill2Client, skill1 } =
+			await this.setupOrgAndInstall2Skills()
+
+		this.mixinPayloadlessTestEvent(personClient)
+
+		let s: any
+
+		//@ts-ignore
+		await skill2Client.on(this.testEventName, ({ source }) => {
+			s = source
+		})
+
+		const proxyToken = 'aoeuaoeuaoeu'
+		skill1Client.setProxyToken('this-should-be-ignored-now')
+
+		//@ts-ignore
+		await skill1Client.emit(this.testEventName, {
+			source: {
+				proxyToken,
+			},
+		})
 
 		assert.isTruthy(s.skillId)
 		assert.isEqual(s.skillId, skill1.id)
