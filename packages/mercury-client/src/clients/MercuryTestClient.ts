@@ -124,13 +124,17 @@ export default class MercuryTestClient<
 
 		try {
 			if (emitter.listenCount(fqen) > 0) {
-				const source: EventSource = {}
+				let source: EventSource = {}
 				if (this.auth?.person) {
 					source.personId = this.auth.person.id
 				}
 
 				if (this.auth?.skill) {
 					source.skillId = this.auth.skill.id
+				}
+
+				if (this.getProxyToken()) {
+					source.proxyToken = this.getProxyToken()
 				}
 
 				const argsWithSource = [...args]

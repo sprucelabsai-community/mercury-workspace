@@ -525,6 +525,32 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.doesInclude(err.message, 'spruce listen.event')
 	}
 
+	@test()
+	protected static async passesThroughProxyTokenAsSourceIfPassed() {
+		const { personClient, skill1Client, skill2Client, skill1 } =
+			await this.setupOrgAndInstall2Skills()
+
+		this.mixinPayloadlessTestEvent(personClient)
+
+		let s: any
+
+		//@ts-ignore
+		await skill2Client.on(this.testEventName, ({ source }) => {
+			s = source
+		})
+
+		const proxyToken = 'aoeuaoeuaoeu'
+		skill1Client.setProxyToken(proxyToken)
+
+		//@ts-ignore
+		await skill1Client.emit(this.testEventName)
+
+		assert.isTruthy(s.skillId)
+		assert.isEqual(s.skillId, skill1.id)
+		assert.isUndefined(s.personId)
+		assert.isEqual(s.proxyToken, proxyToken)
+	}
+
 	private static async assertTeammateCanEmit(options: {
 		fqen: string
 		ownerClient: MercuryClient
