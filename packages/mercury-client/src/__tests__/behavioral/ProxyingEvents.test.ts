@@ -13,7 +13,7 @@ export default class ProxyingEventsTest extends AbstractClientTest {
 			},
 		})
 
-		ProxyingEventsTest.assertPerson1CameBack(results, person1)
+		this.assertPerson1CameBack(results, person1)
 	}
 
 	private static assertPerson1CameBack(results: any, person1: any) {
@@ -26,13 +26,10 @@ export default class ProxyingEventsTest extends AbstractClientTest {
 	private static async loginAndRegisterToken() {
 		const { client, person: person1 } = await this.loginAsDemoPerson()
 		const { client: client2 } = await this.loginAsDemoPerson()
-		const token = `${new Date().getTime()}`
 
-		await client.emit('register-proxy-token::v2020_12_25', {
-			payload: {
-				token,
-			},
-		})
+		const results = await client.emit('register-proxy-token::v2020_12_25')
+
+		const { token } = eventResponseUtil.getFirstResponseOrThrow(results)
 
 		return { person1, token, client2 }
 	}
