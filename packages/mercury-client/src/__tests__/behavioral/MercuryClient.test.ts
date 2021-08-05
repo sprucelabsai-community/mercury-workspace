@@ -614,12 +614,9 @@ export default class MercuryClientTest extends AbstractClientTest {
 		)
 		const { client: client2 } = await this.loginAsDemoPerson(DEMO_PHONE_PROXY)
 
-		const token = `${Math.random()}`
-		await client1.emit('register-proxy-token::v2020_12_25', {
-			payload: {
-				token,
-			},
-		})
+		const results = await client1.emit('register-proxy-token::v2020_12_25')
+
+		const { token } = eventResponseUtil.getFirstResponseOrThrow(results)
 
 		return { client2, token, person1 }
 	}
