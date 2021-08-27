@@ -41,7 +41,7 @@
     "release": "semantic-release",
     "test": "jest",
     "update.dependencies": "cd ../ && yarn rebuild.dependencies",
-    "watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc --sourceMap' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
+    "watch.build.dev": "concurrently 'yarn watch.tsc --sourceMap' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
     "watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
     "watch.tsc": "tsc -w"
   },
