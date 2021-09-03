@@ -80,7 +80,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 							response.payload ?? {},
 							eventName
 						)
-					} catch (err) {
+					} catch (err: any) {
 						response = {
 							errors: [err],
 						}

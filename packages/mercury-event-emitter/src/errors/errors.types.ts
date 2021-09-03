@@ -1,11 +1,7 @@
-import {
-	SpruceErrorOptions,
-	ErrorOptions as ISpruceErrorOptions,
-} from '@sprucelabs/error'
+import { ErrorOptions as ISpruceErrorOptions } from '@sprucelabs/error'
 import { SchemaErrorOptions } from '@sprucelabs/schema'
 
 export type MercuryEventEmitterErrorOptions =
-	| SpruceErrorOptions
 	| SchemaErrorOptions
 	| InvalidPayloadErrorOptions
 	| InvalidEventNameErrorOptions
