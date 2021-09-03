@@ -27,12 +27,11 @@
 		}
 	},
 	"include": [
-		"./*.ts",
-		"./**/*.ts",
-		"../mercury-types/src/utilities/contract.utility.ts"
+		"./src/*.ts",
+		"./src/**/*.ts",
+		"./src/.spruce/**/*"
 	],
 	"exclude": [
-		"build",
-		"browser"
+		"build"
 	]
 }

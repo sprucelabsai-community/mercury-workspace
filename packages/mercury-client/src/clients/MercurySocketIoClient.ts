@@ -8,7 +8,12 @@ import {
 	MercurySingleResponse,
 	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
-import { Schema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
+import {
+	Schema,
+	SchemaError,
+	SchemaValues,
+	validateSchemaValues,
+} from '@sprucelabs/schema'
 import {
 	eventContractUtil,
 	eventResponseUtil,
@@ -127,7 +132,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				await this.reregisterAllListeners()
 
 				this.isReAuthing = false
-			} catch (err) {
+			} catch (err: any) {
 				if (
 					err.options.code === 'TIMEOUT' ||
 					err.options.code === 'CONNECTION_FAILED'
@@ -208,7 +213,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			!this.allowNextEventToBeAuthenticate &&
 			eventName === 'authenticate::v2020_12_25'
 		) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['eventName'],
 				friendlyMessage: `You can't emit this event directly. Use client.authenticate() so all your auth is preseved.`,
@@ -229,7 +234,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					signature.emitPayloadSchema as Schema,
 					payload ?? {}
 				)
-			} catch (err) {
+			} catch (err: any) {
 				throw new SpruceError({
 					code: 'INVALID_PAYLOAD',
 					originalError: err,
@@ -379,7 +384,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 						if (ioCallback) {
 							ioCallback(results)
 						}
-					} catch (err) {
+					} catch (err: any) {
 						let thisErr = err
 						if (ioCallback) {
 							if (!(err instanceof AbstractSpruceError)) {

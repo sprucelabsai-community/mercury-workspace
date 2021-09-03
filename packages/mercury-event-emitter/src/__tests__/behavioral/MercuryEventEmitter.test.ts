@@ -419,6 +419,17 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
+	@test()
+	protected static async rendersTextErrorsInListeners() {
+		void this.emitter.on('eventOne', () => {
+			throw 'uh ooooh!'
+		})
+
+		const results = await this.emitter.emit('eventOne')
+
+		assert.doesInclude(results.responses[0]?.errors?.[0].message, 'uh ooooh!')
+	}
+
 	private static async emitAndAssertExpectedErrors(
 		totalListeners: number,
 		expectedErrors: (string | undefined)[]

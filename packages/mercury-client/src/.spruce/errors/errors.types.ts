@@ -11,6 +11,27 @@ import * as SpruceSchema from '@sprucelabs/schema'
 export declare namespace SpruceErrors.MercuryClient {
 
 	
+	export interface UnknownError {
+		
+	}
+
+	export interface UnknownErrorSchema extends SpruceSchema.Schema {
+		id: 'unknownError',
+		namespace: 'MercuryClient',
+		name: 'Unknown error',
+		    fields: {
+		    }
+	}
+
+	export type UnknownErrorEntity = SchemaEntity<SpruceErrors.MercuryClient.UnknownErrorSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
 	export interface UnexpectedPayload {
 		
 			

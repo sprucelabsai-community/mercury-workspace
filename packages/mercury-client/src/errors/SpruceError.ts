@@ -40,11 +40,6 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 					message += "\n\nAlso, it appears I'm not connected to the api."
 				}
 				break
-			case 'MISSING_PARAMETERS':
-				message = `Oops, you're missing some parameters: ${options.parameters.join(
-					','
-				)}`
-				break
 
 			case 'MISSING_TEST_CACHE_DIR':
 				message =

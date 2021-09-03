@@ -1,130 +1,133 @@
 {
-	"name": "@sprucelabs/mercury-client",
-	"publishConfig": {
-		"access": "public"
-	},
-	"version": "16.10.13",
-	"files": [
-		"build"
-	],
-	"skill": {
-		"namespace": "mercuryClient",
-		"commandOverrides": {
-			"sync.schemas": "--fetchCoreSchemas false"
-		}
-	},
-	"main": "./build/index.js",
-	"types": "./build/index.d.ts",
-	"module": "./build/esm/index.js",
-	"sideEffects": false,
-	"description": "The simple way to interact with the Spruce Experience Platform",
-	"keywords": [
-		"node",
-		"components",
-		"sprucebot",
-		"sprucelabs"
-	],
-	"homepage": "https://github.com/sprucelabsai/mercury-workspace",
-	"bugs": {
-		"url": "https://github.com/sprucelabsai/mercury-workspace/issues"
-	},
-	"scripts": {
-		"build.ci": "yarn build.tsc",
-		"build.dev": "yarn build.tsc --sourceMap",
-		"build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
-		"build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
-		"build.tsc": "tsc",
-		"clean": "yarn clean.build",
-		"clean.all": "yarn clean.build && yarn clean.dependencies",
-		"clean.build": "rm -rf build/",
-		"clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
-		"fix.lint": "eslint --fix '**/*.ts'",
-		"lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
-		"rebuild": "cd .. && yarn rebuild",
-		"release": "semantic-release",
-		"test": "jest --forceExit",
-		"update.dependencies": "cd ../ && yarn rebuild.dependencies",
-		"watch.build.dev": "yarn build.tsc -w --sourceMap",
-		"watch.tsc": "tsc -w"
-	},
-	"dependencies": {
-		"@sprucelabs/error": "latest",
-		"@sprucelabs/mercury-event-emitter": "^16.10.13",
-		"@sprucelabs/mercury-types": "latest",
-		"@sprucelabs/schema": "latest",
-		"@sprucelabs/spruce-event-utils": "latest",
-		"dotenv": "^10.0.0",
-		"socket.io-client": "^4.1.3"
-	},
-	"devDependencies": {
-		"@sprucelabs/esm-postbuild": "latest",
-		"@sprucelabs/jest-json-reporter": "latest",
-		"@sprucelabs/jest-sheets-reporter": "latest",
-		"@sprucelabs/resolve-path-aliases": "latest",
-		"@sprucelabs/semantic-release": "latest",
-		"@sprucelabs/test": "latest",
-		"@sprucelabs/test-utils": "latest",
-		"@types/socket.io-client": "^3.0.0",
-		"eslint": "^7.32.0",
-		"eslint-config-spruce": "latest",
-		"jest": "^27.0.6",
-		"jest-circus": "^27.0.6",
-		"prettier": "^2.3.2",
-		"ts-node": "^10.2.1",
-		"typescript": "^4.3.5"
-	},
-	"jest": {
-		"maxWorkers": 5,
-		"testTimeout": 30000,
-		"testEnvironment": "node",
-		"testPathIgnorePatterns": [
-			"<rootDir>/tmp/",
-			"<rootDir>/src/",
-			"<rootDir>/node_modules/",
-			"<rootDir>/build/__tests__/testDirsAndFiles/",
-			"<rootDir>/build/esm/"
-		],
-		"testMatch": [
-			"**/__tests__/**/*.test.js?(x)"
-		],
-		"moduleNameMapper": {
-			"^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
-		},
-		"reporters": [
-			"default",
-			[
-				"@sprucelabs/jest-sheets-reporter",
-				{
-					"sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
-					"worksheetId": 843037832,
-					"testMap": {
-						"cantEmitEventWithWithUnexpectedPayload": "F8",
-						"factoryReturnsSocketIoClient": "F12",
-						"canRunHealthCheck": "F13",
-						"skillsCanListenToEachOther": "F22",
-						"emitterGetsCalledBackForEachListener": "F23",
-						"canRegisterEventsSimultaneously": "I102",
-						"nonSpruceErrorsArePassedBack": "I111",
-						"checksPermissionsWhenEmitting": "I138"
-					}
-				}
-			]
-		]
-	},
-	"yarn-upgrade-all": {
-		"ignore": [
-			"@sprucelabs/esm-postbuild",
-			"@sprucelabs/jest-json-reporter",
-			"@sprucelabs/jest-sheets-reporter",
-			"@sprucelabs/resolve-path-aliases",
-			"@sprucelabs/semantic-release",
-			"@sprucelabs/test",
-			"@sprucelabs/test-utils",
-			"@sprucelabs/error",
-			"@sprucelabs/mercury-types",
-			"@sprucelabs/schema",
-			"@sprucelabs/spruce-event-utils",
-			"eslint-config-spruce"
-		]
-	}
+  "name": "@sprucelabs/mercury-client",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "16.10.13",
+  "files": [
+    "build"
+  ],
+  "skill": {
+    "namespace": "mercuryClient",
+    "commandOverrides": {
+      "sync.schemas": "--shouldFetchCoreSchemas false"
+    }
+  },
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "module": "./build/esm/index.js",
+  "sideEffects": false,
+  "description": "The simple way to interact with the Spruce Experience Platform",
+  "keywords": [
+    "node",
+    "components",
+    "sprucebot",
+    "sprucelabs"
+  ],
+  "homepage": "https://github.com/sprucelabsai/mercury-workspace",
+  "bugs": {
+    "url": "https://github.com/sprucelabsai/mercury-workspace/issues"
+  },
+  "scripts": {
+    "build.ci": "yarn build.tsc",
+    "build.dev": "yarn build.tsc --sourceMap",
+    "build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.esm-postbuild",
+    "build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
+    "build.tsc": "tsc",
+    "clean": "yarn clean.build",
+    "clean.all": "yarn clean.build && yarn clean.dependencies",
+    "clean.build": "rm -rf build/",
+    "clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
+    "fix.lint": "eslint --fix '**/*.ts'",
+    "lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
+    "rebuild": "cd .. && yarn rebuild",
+    "release": "semantic-release",
+    "test": "jest --forceExit",
+    "update.dependencies": "cd ../ && yarn rebuild.dependencies",
+    "watch.build.dev": "yarn build.tsc -w --sourceMap",
+    "watch.tsc": "tsc -w"
+  },
+  "dependencies": {
+    "@sprucelabs/error": "^5.0.3",
+    "@sprucelabs/mercury-event-emitter": "^16.10.13",
+    "@sprucelabs/mercury-types": "^25.0.16",
+    "@sprucelabs/schema": "^25.1.7",
+    "@sprucelabs/spruce-core-schemas": "^22.5.41",
+    "@sprucelabs/spruce-event-utils": "^15.2.60",
+    "dotenv": "^10.0.0",
+    "socket.io-client": "^4.2.0"
+  },
+  "devDependencies": {
+    "@sprucelabs/esm-postbuild": "^1.0.35",
+    "@sprucelabs/jest-json-reporter": "^6.0.29",
+    "@sprucelabs/jest-sheets-reporter": "^1.2.62",
+    "@sprucelabs/resolve-path-aliases": "^1.0.69",
+    "@sprucelabs/semantic-release": "^4.0.6",
+    "@sprucelabs/spruce-test-fixtures": "^5.4.30",
+    "@sprucelabs/test": "^7.7.56",
+    "@sprucelabs/test-utils": "^3.0.54",
+    "@types/socket.io-client": "^3.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-spruce": "^10.10.10",
+    "jest": "^27.1.0",
+    "jest-circus": "^27.1.0",
+    "prettier": "^2.3.2",
+    "ts-node": "^10.2.1",
+    "tsconfig-paths": "^3.11.0",
+    "typescript": "^4.4.2"
+  },
+  "jest": {
+    "maxWorkers": 5,
+    "testTimeout": 30000,
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/tmp/",
+      "<rootDir>/src/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/build/__tests__/testDirsAndFiles/",
+      "<rootDir>/build/esm/"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.js?(x)"
+    ],
+    "moduleNameMapper": {
+      "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
+    },
+    "reporters": [
+      "default",
+      [
+        "@sprucelabs/jest-sheets-reporter",
+        {
+          "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
+          "worksheetId": 843037832,
+          "testMap": {
+            "cantEmitEventWithWithUnexpectedPayload": "F8",
+            "factoryReturnsSocketIoClient": "F12",
+            "canRunHealthCheck": "F13",
+            "skillsCanListenToEachOther": "F22",
+            "emitterGetsCalledBackForEachListener": "F23",
+            "canRegisterEventsSimultaneously": "I102",
+            "nonSpruceErrorsArePassedBack": "I111",
+            "checksPermissionsWhenEmitting": "I138"
+          }
+        }
+      ]
+    ]
+  },
+  "yarn-upgrade-all": {
+    "ignore": [
+      "@sprucelabs/esm-postbuild",
+      "@sprucelabs/jest-json-reporter",
+      "@sprucelabs/jest-sheets-reporter",
+      "@sprucelabs/resolve-path-aliases",
+      "@sprucelabs/semantic-release",
+      "@sprucelabs/test",
+      "@sprucelabs/test-utils",
+      "@sprucelabs/error",
+      "@sprucelabs/mercury-types",
+      "@sprucelabs/schema",
+      "@sprucelabs/spruce-event-utils",
+      "eslint-config-spruce"
+    ]
+  }
 }

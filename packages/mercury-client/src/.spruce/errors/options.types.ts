@@ -1,7 +1,9 @@
 import { SpruceErrors } from "#spruce/errors/errors.types"
-import { SpruceErrorOptions, ErrorOptions as ISpruceErrorOptions} from "@sprucelabs/error"
-import { SchemaErrorOptions } from '@sprucelabs/schema'
+import { ErrorOptions as ISpruceErrorOptions} from "@sprucelabs/error"
 
+export interface UnknownErrorErrorOptions extends SpruceErrors.MercuryClient.UnknownError, ISpruceErrorOptions {
+	code: 'UNKNOWN_ERROR'
+}
 export interface UnexpectedPayloadErrorOptions extends SpruceErrors.MercuryClient.UnexpectedPayload, ISpruceErrorOptions {
 	code: 'UNEXPECTED_PAYLOAD'
 }
@@ -27,6 +29,6 @@ export interface ConnectionFailedErrorOptions extends SpruceErrors.MercuryClient
 	code: 'CONNECTION_FAILED'
 }
 
-type ErrorOptions = SchemaErrorOptions | SpruceErrorOptions | UnexpectedPayloadErrorOptions  | UnauthorizedAccessErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | MissingTestCacheDirErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | ConnectionFailedErrorOptions 
+type ErrorOptions =  | UnknownErrorErrorOptions  | UnexpectedPayloadErrorOptions  | UnauthorizedAccessErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | MissingTestCacheDirErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | ConnectionFailedErrorOptions 
 
 export default ErrorOptions

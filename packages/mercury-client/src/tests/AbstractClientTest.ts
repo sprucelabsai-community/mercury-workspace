@@ -1,8 +1,8 @@
 import { coreEventContracts, SpruceSchemas } from '@sprucelabs/mercury-types'
+import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { assert } from '@sprucelabs/test'
 import MercuryClientFactory from '../clients/MercuryClientFactory'
-import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import { TEST_HOST } from './constants'
 
@@ -73,7 +73,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		const client = await this.Client()
 
 		if (!phone) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: ['env.DEMO_PHONE'],
 			})

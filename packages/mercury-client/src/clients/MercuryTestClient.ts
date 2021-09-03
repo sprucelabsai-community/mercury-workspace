@@ -213,7 +213,7 @@ export default class MercuryTestClient<
 
 				return results
 			}
-		} catch (err) {
+		} catch (err: any) {
 			if (err.options?.code === 'INVALID_EVENT_NAME') {
 				err.message = `${err.message} Double check it's spelled correctly (types are passing) and that you've run \`spruce create.event\` to create the event.`
 			}

@@ -6,5 +6,8 @@
     "schema",
     "error",
     "test"
-  ]
+  ],
+  "scriptUpdater": {
+    "skips": []
+  }
 }

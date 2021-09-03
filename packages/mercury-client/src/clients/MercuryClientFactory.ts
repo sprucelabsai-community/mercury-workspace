@@ -1,4 +1,5 @@
 import { EventContract, SkillEventContract } from '@sprucelabs/mercury-types'
+import { SchemaError } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { DEFAULT_HOST } from '../constants'
 import SpruceError from '../errors/SpruceError'
@@ -38,7 +39,7 @@ export default class MercuryClientFactory {
 		}
 
 		if (contracts && !Array.isArray(contracts)) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['contracts'],
 			})
