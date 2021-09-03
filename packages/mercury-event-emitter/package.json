@@ -23,7 +23,6 @@
     "url": "https://github.com/sprucelabsai/mercury-workspace/issues"
   },
   "scripts": {
-    "preinstall": "git config core.hooksPath .githooks",
     "build.ci": "yarn build.tsc && yarn build.resolve-paths",
     "build.dev": "yarn build.tsc --sourceMap ; yarn build.resolve-paths",
     "build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
