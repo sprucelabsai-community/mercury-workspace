@@ -32,6 +32,7 @@
 		"./src/.spruce/**/*"
 	],
 	"exclude": [
-		"build"
+		"build",
+		"browser"
 	]
 }
