@@ -124,7 +124,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 
 		try {
 			responsePayload = await options.listenerCb(options.payload)
-		} catch (err) {
+		} catch (err: any) {
 			if (err instanceof AbstractSpruceError) {
 				error = err
 			} else {
@@ -187,7 +187,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 			try {
 				//@ts-ignore
 				validateSchemaValues(schema, actualPayload ?? {})
-			} catch (err) {
+			} catch (err: any) {
 				throw new SpruceError({
 					code: 'INVALID_PAYLOAD',
 					originalError: err,
@@ -206,7 +206,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 			try {
 				//@ts-ignore
 				validateSchemaValues(schema, actualPayload ?? {})
-			} catch (err) {
+			} catch (err: any) {
 				throw new SpruceError({
 					code: 'INVALID_RESPONSE_PAYLOAD',
 					originalError: err,
