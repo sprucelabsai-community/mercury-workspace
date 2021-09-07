@@ -50,7 +50,7 @@
     "@sprucelabs/error": "^5.0.3",
     "@sprucelabs/mercury-types": "^25.0.16",
     "@sprucelabs/schema": "^25.1.7",
-    "@sprucelabs/spruce-core-schemas": "^22.5.43",
+    "@sprucelabs/spruce-core-schemas": "^22.5.44",
     "@sprucelabs/spruce-event-utils": "^15.2.60"
   },
   "devDependencies": {
@@ -58,7 +58,7 @@
     "@sprucelabs/jest-json-reporter": "^6.0.29",
     "@sprucelabs/resolve-path-aliases": "^1.0.69",
     "@sprucelabs/semantic-release": "^4.0.6",
-    "@sprucelabs/spruce-test-fixtures": "^5.4.33",
+    "@sprucelabs/spruce-test-fixtures": "^5.4.34",
     "@sprucelabs/test": "^7.7.56",
     "@sprucelabs/test-utils": "^3.0.54",
     "chokidar-cli": "^3.0.0",
