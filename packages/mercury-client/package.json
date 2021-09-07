@@ -63,7 +63,7 @@
     "@sprucelabs/jest-sheets-reporter": "^1.2.62",
     "@sprucelabs/resolve-path-aliases": "^1.0.69",
     "@sprucelabs/semantic-release": "^4.0.6",
-    "@sprucelabs/spruce-test-fixtures": "^5.4.36",
+    "@sprucelabs/spruce-test-fixtures": "^5.4.37",
     "@sprucelabs/test": "^7.7.56",
     "@sprucelabs/test-utils": "^3.0.54",
     "@types/socket.io-client": "^3.0.0",
