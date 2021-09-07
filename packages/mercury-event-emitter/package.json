@@ -50,7 +50,7 @@
     "@sprucelabs/error": "^5.0.3",
     "@sprucelabs/mercury-types": "^25.0.16",
     "@sprucelabs/schema": "^25.1.7",
-    "@sprucelabs/spruce-core-schemas": "^22.5.42",
+    "@sprucelabs/spruce-core-schemas": "^22.5.43",
     "@sprucelabs/spruce-event-utils": "^15.2.60"
   },
   "devDependencies": {
