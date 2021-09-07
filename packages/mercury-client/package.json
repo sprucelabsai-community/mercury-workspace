@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "16.10.20",
+  "version": "16.10.21",
   "files": [
     "build"
   ],
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.3",
-    "@sprucelabs/mercury-event-emitter": "^16.10.20",
+    "@sprucelabs/mercury-event-emitter": "^16.10.21",
     "@sprucelabs/mercury-types": "^25.0.16",
     "@sprucelabs/schema": "^25.1.7",
     "@sprucelabs/spruce-core-schemas": "^22.5.44",
