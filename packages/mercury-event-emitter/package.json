@@ -7,6 +7,9 @@
   "files": [
     "build"
   ],
+  "skill": {
+    "namespace": "mercuryEventEmitter"
+  },
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "module": "./build/esm/index.js",
@@ -23,49 +26,58 @@
     "url": "https://github.com/sprucelabsai/mercury-workspace/issues"
   },
   "scripts": {
-    "build.ci": "yarn build.tsc && yarn build.resolve-paths",
-    "build.dev": "yarn build.tsc --sourceMap ; yarn build.resolve-paths",
-    "build.copy-files": "mkdir -p build/.spruce && cp -r ./src/.spruce/settings.json ./build/.spruce/",
+    "build.ci": "yarn build.tsc && yarn build.resolve-paths && yarn lint",
+    "build.dev": "yarn build.tsc --sourceMap ; yarn resolve-paths.lint",
+    "build.copy-files": "mkdir -p build && rsync -avzq --exclude='*.ts' ./src/ ./build/",
     "build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.resolve-paths && yarn build.esm-postbuild",
     "build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
-    "build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts' -v",
+    "build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts'",
     "build.tsc": "yarn build.copy-files && tsc",
     "build.types": "tsc --emitDeclarationOnly && echo PASS",
     "clean": "yarn clean.build",
-    "clean.all": "yarn clean.build && yarn clean.dependencies",
+    "clean.all": "yarn clean.dependencies && yarn clean.build",
     "clean.build": "rm -rf build/",
     "clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
-    "fix.lint": "eslint --fix '**/*.ts'",
-    "lint": "eslint --cache '**/*.ts' && tsc -p . --noEmit",
+    "fix.lint": "eslint --fix --cache '**/*.ts'",
+    "lint": "eslint --cache '**/*.ts'",
     "rebuild": "cd ../ && yarn rebuild",
     "release": "semantic-release",
     "test": "jest",
     "update.dependencies": "cd ../ && yarn rebuild.dependencies",
-    "watch.lint": "chokidar 'src/**/*' -c 'yarn lint' && echo 'PASS'",
+    "watch.lint": "concurrently 'yarn lint' \"chokidar 'src/**/*' -c 'yarn lint.tsc'\"",
     "watch.tsc": "tsc -w",
     "post.watch.build": "yarn build.copy-files && yarn build.resolve-paths",
-    "watch.build.dev": "tsc-watch --sourceMap --onCompilationComplete 'yarn post.watch.build'"
+    "watch.build.dev": "tsc-watch --sourceMap --onCompilationComplete 'yarn post.watch.build'",
+    "lint.tsc": "tsc -p . --noEmit",
+    "resolve-paths.lint": "yarn build.resolve-paths ; yarn lint",
+    "upgrade.packages": "yarn-upgrade-all && rm -f yarn.lock ; yarn ; yarn fix.lint ; true",
+    "upgrade.packages.all": "yarn install && yarn upgrade.packages",
+    "upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build.dev && yarn test",
+    "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev"
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.3",
-    "@sprucelabs/mercury-types": "^25.0.16",
-    "@sprucelabs/schema": "^25.1.7",
+    "@sprucelabs/mercury-types": "^26.0.3",
+    "@sprucelabs/schema": "^25.3.1",
     "@sprucelabs/spruce-core-schemas": "^22.5.48",
-    "@sprucelabs/spruce-event-utils": "^15.2.60"
+    "@sprucelabs/spruce-event-utils": "^15.2.84"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.35",
-    "@sprucelabs/jest-json-reporter": "^6.0.29",
+    "@sprucelabs/esm-postbuild": "^1.0.38",
+    "@sprucelabs/jest-json-reporter": "^6.0.32",
     "@sprucelabs/resolve-path-aliases": "^1.0.72",
     "@sprucelabs/semantic-release": "^4.0.6",
     "@sprucelabs/spruce-test-fixtures": "^5.4.49",
-    "@sprucelabs/test": "^7.7.56",
+    "@sprucelabs/test": "^7.7.59",
     "@sprucelabs/test-utils": "^3.0.54",
+    "@types/node": "^16.9.1",
     "chokidar-cli": "^3.0.0",
+    "concurrently": "^6.2.1",
     "eslint": "^7.32.0",
     "eslint-config-spruce": "^10.10.10",
     "jest": "^27.1.1",
     "jest-circus": "^27.1.1",
+    "prettier": "^2.4.0",
     "ts-node": "^10.2.1",
     "tsc-watch": "^4.5.0",
     "tsconfig-paths": "^3.11.0",
@@ -88,17 +100,5 @@
     "moduleNameMapper": {
       "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
     }
-  },
-  "yarn-upgrade-all": {
-    "ignore": [
-      "@sprucelabs/jest-json-reporter",
-      "@sprucelabs/test",
-      "@sprucelabs/error",
-      "@sprucelabs/esm-postbuild",
-      "@sprucelabs/mercury-types",
-      "@sprucelabs/schema",
-      "@sprucelabs/semantic-release",
-      "@sprucelabs/spruce-event-utils"
-    ]
   }
 }

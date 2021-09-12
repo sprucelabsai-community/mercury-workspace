@@ -8,6 +8,10 @@
     "test"
   ],
   "scriptUpdater": {
+    "skipped": [
+      "rebuild",
+      "update.dependencies"
+    ],
     "skips": []
   }
 }

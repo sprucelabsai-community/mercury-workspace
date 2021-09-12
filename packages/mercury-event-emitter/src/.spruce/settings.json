@@ -1,8 +1,8 @@
 {
   "installed": [
     "test",
-    "schema",
-    "error"
+    "error",
+    "schema"
   ],
   "skipped": [
     "skill"
@@ -13,6 +13,10 @@
     ]
   },
   "scriptUpdater": {
+    "skipped": [
+      "rebuild",
+      "update.dependencies"
+    ],
     "skips": []
   }
 }
