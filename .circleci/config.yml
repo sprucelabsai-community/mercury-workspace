@@ -22,6 +22,7 @@ jobs:
           name: "ENV file creation"
           command: |
             [ -n "$BASE64_ENV" ] && echo $BASE64_ENV | base64 --decode > packages/mercury-client/.env
+      - run: which rsync || ( sudo apt-get update -y && sudo apt-get install rsync -y )      
       - run: node -v && npm -v && yarn -v
       - run: yarn install
       - run: yarn clean
@@ -82,6 +83,7 @@ jobs:
           command: |
             TARGETBRANCH=upgrade-$(date '+%Y-%m-%d')
             echo "export TARGETBRANCH=$TARGETBRANCH" >> $BASH_ENV
+      - run: which rsync || ( sudo apt-get update -y && sudo apt-get install rsync -y )
       - run:
           name: "Try to upgrade"
           command: |
