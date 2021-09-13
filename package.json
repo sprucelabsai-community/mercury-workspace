@@ -41,24 +41,6 @@
 		"eslint-config-spruce": "latest",
 		"lerna": "^4.0.0",
 		"prettier": "^2.2.0",
-		"typescript": "^4.1.2",
-		"yarn-upgrade-all": "^0.5.4"
-	},
-	"yarn-upgrade-all": {
-		"ignore": [
-			"@sprucelabs/error",
-			"@sprucelabs/jest-sheets-reporter",
-			"@sprucelabs/log",
-			"@sprucelabs/mercury-types",
-			"@sprucelabs/resolve-path-aliases",
-			"@sprucelabs/schema",
-			"@sprucelabs/semantic-release",
-			"@sprucelabs/spruce-core-schemas",
-			"@sprucelabs/spruce-skill-utils",
-			"@sprucelabs/test",
-			"@sprucelabs/test-utils",
-			"conventional-changelog-sprucelabs",
-			"eslint-config-spruce"
-		]
+		"typescript": "^4.1.2"
 	}
 }
