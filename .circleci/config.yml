@@ -4,7 +4,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:16
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -47,7 +47,7 @@ jobs:
             git push origin
   npm_publish:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:16
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -72,7 +72,7 @@ jobs:
       - run: 'npm run publish -- --yes --force-publish --dist-tag latest --message "chore(release): %v [npm-publish]"'
   upgrade:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:16
     steps:
       - add_ssh_keys:
           fingerprints:

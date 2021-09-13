@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.10.45](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.44...v16.10.45) (2021-09-13)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [16.10.44](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.43...v16.10.44) (2021-09-13)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [16.10.43](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.42...v16.10.43) (2021-09-13)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [16.10.42](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.41...v16.10.42) (2021-09-13)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [16.10.41](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.40...v16.10.41) (2021-09-13)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [16.10.40](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.39...v16.10.40) (2021-09-13)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
 ## [16.10.39](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.38...v16.10.39) (2021-09-11)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
