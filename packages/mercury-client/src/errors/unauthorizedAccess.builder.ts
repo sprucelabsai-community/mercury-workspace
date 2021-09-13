@@ -26,7 +26,10 @@ export default buildErrorSchema({
 			type: 'schema',
 			isRequired: true,
 			options: {
-				schema: eventTargetSchema,
+				schema: {
+					...eventTargetSchema,
+					id: 'unauthorizedTarget',
+				},
 			},
 		},
 		permissionContractId: {

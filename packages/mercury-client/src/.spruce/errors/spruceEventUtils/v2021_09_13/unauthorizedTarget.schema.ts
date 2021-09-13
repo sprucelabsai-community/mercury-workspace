@@ -1,12 +1,13 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
-import { SpruceErrors } from '../errors.types'
+import { SpruceErrors } from '../../errors.types'
 
 
 
-const eventTargetSchema: SpruceErrors.MercuryClient.EventTargetSchema  = {
-	id: 'eventTarget',
-	namespace: 'MercuryClient',
-	name: '',
+const unauthorizedTargetSchema: SpruceErrors.SpruceEventUtils.v2021_09_13.UnauthorizedTargetSchema  = {
+	id: 'unauthorizedTarget',
+	version: 'v2021_09_13',
+	namespace: 'SpruceEventUtils',
+	name: 'event target',
 	    fields: {
 	            /** . */
 	            'locationId': {
@@ -36,6 +37,6 @@ const eventTargetSchema: SpruceErrors.MercuryClient.EventTargetSchema  = {
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(eventTargetSchema)
+SchemaRegistry.getInstance().trackSchema(unauthorizedTargetSchema)
 
-export default eventTargetSchema
+export default unauthorizedTargetSchema

@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceErrors } from '../errors.types'
 
-import eventTargetSchema from '#spruce/errors/mercuryClient/eventTarget.schema'
+import unauthorizedTargetSchema_v2021_09_13 from '#spruce/errors/spruceEventUtils/v2021_09_13/unauthorizedTarget.schema'
 
 const unauthorizedAccessSchema: SpruceErrors.MercuryClient.UnauthorizedAccessSchema  = {
 	id: 'unauthorizedAccess',
@@ -24,7 +24,7 @@ const unauthorizedAccessSchema: SpruceErrors.MercuryClient.UnauthorizedAccessSch
 	            'target': {
 	                type: 'schema',
 	                isRequired: true,
-	                options: {schema: eventTargetSchema,}
+	                options: {schema: unauthorizedTargetSchema_v2021_09_13,}
 	            },
 	            /** . */
 	            'permissionContractId': {
