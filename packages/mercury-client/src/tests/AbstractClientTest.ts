@@ -1,4 +1,5 @@
-import { coreEventContracts, SpruceSchemas } from '@sprucelabs/mercury-types'
+import { coreEventContracts } from '@sprucelabs/mercury-core-events'
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { assert } from '@sprucelabs/test'

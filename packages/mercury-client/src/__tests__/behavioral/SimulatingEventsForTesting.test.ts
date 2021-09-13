@@ -1,5 +1,5 @@
+import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import {
-	coreEventContracts,
 	EventContract,
 	buildPermissionContract,
 } from '@sprucelabs/mercury-types'
