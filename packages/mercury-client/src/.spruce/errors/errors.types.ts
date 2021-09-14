@@ -57,6 +57,7 @@ export declare namespace SpruceErrors.MercuryClient {
 }
 
 
+import '@sprucelabs/spruce-event-utils'
 
 export declare namespace SpruceErrors.SpruceEventUtils.v2021_09_13 {
 
@@ -80,6 +81,7 @@ export declare namespace SpruceErrors.SpruceEventUtils.v2021_09_13 {
 		version: 'v2021_09_13',
 		namespace: 'SpruceEventUtils',
 		name: 'event target',
+		importsWhenRemote: ['import \'@sprucelabs/spruce-event-utils\'',],
 		    fields: {
 		            /** . */
 		            'locationId': {
