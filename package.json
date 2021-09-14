@@ -1,46 +1,52 @@
 {
-	"version": "0.0.1",
-	"private": true,
-	"name": "spruce-mercury-workspace",
-	"description": "All the tools you need to connect to a Mercury compatible API. 💥",
-	"workspaces": [
-		"packages/mercury-client",
-		"packages/mercury-event-emitter"
-	],
-	"engines": {
-		"node": ">=12",
-		"npm": ">=6"
-	},
-	"scripts": {
-		"build.ci": "lerna run build.ci",
-		"build.dev": "lerna run build.dev",
-		"build.dist": "lerna run build.dist",
-		"clean": "lerna run clean",
-		"clean.all": "yarn clean.dependencies && yarn clean.build",
-		"clean.build": "for d in packages/*; do echo $d; cd $d; yarn clean.build; cd ../..; done",
-		"clean.dependencies": "rm -rf node_modules/ yarn.lock && for d in packages/*; do echo $d; cd $d; yarn clean.dependencies; cd ../..; done",
-		"fix.lint": "lerna run fix.lint",
-		"lint": "lerna run lint",
-		"publish": "lerna publish",
-		"rebuild": "yarn clean.all && yarn && yarn build.dev",
-		"test": "lerna run test --parallel",
-		"update.dependencies": "yarn clean.dependencies && yarn",
-		"upgrade.packages": "for d in packages/*; do echo $d; cd $d; spruce upgrade; cd ../..; done",
-		"upgrade.packages.workspaces": "yarn && for d in packages/*; do cd $d; yarn-upgrade-all; cd ../..; done",
-		"upgrade.packages.all": "yarn install && yarn upgrade.packages.workspaces && yarn upgrade.packages",
-		"upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build.dev && yarn test",
-		"watch.build.dev": "lerna run watch.build.dev --stream --parallel",
-		"watch.lint": "lerna run watch.lint --stream --parallel"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"@sprucelabs/resolve-path-aliases": "1.0.72",
-		"concurrently": "^6.0.0",
-		"conventional-changelog-sprucelabs": "latest",
-		"eslint": "^7.11.0",
-		"eslint-config-spruce": "latest",
-		"lerna": "^4.0.0",
-		"prettier": "^2.2.0",
-		"typescript": "^4.1.2"
-	}
+  "version": "0.0.1",
+  "private": true,
+  "name": "spruce-mercury-workspace",
+  "description": "All the tools you need to connect to a Mercury compatible API. 💥",
+  "workspaces": [
+    "packages/mercury-client",
+    "packages/mercury-event-emitter"
+  ],
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6"
+  },
+  "scripts": {
+    "build.ci": "lerna run build.ci",
+    "build.dev": "lerna run build.dev",
+    "build.dist": "lerna run build.dist",
+    "clean": "lerna run clean",
+    "clean.all": "yarn clean.dependencies && yarn clean.build",
+    "clean.build": "for d in packages/*; do echo $d; cd $d; yarn clean.build; cd ../..; done",
+    "clean.dependencies": "rm -rf node_modules/ yarn.lock && for d in packages/*; do echo $d; cd $d; yarn clean.dependencies; cd ../..; done",
+    "fix.lint": "lerna run fix.lint",
+    "lint": "lerna run lint",
+    "publish": "lerna publish",
+    "rebuild": "yarn clean.all && yarn && yarn build.dev",
+    "test": "lerna run test --parallel",
+    "update.dependencies": "yarn clean.dependencies && yarn",
+    "upgrade.packages": "spruce upgrade && for d in packages/*; do echo $d; cd $d; spruce upgrade; cd ../..; done",
+    "upgrade.packages.all": "yarn install && yarn upgrade.packages",
+    "watch.build.dev": "lerna run watch.build.dev --stream --parallel",
+    "watch.lint": "lerna run watch.lint --stream --parallel",
+    "build.copy-files": "true",
+    "build.resolve-paths": "true",
+    "build.tsc": "true",
+    "lint.tsc": "true",
+    "post.watch.build": "true",
+    "resolve-paths.lint": "true",
+    "watch.tsc": "true",
+    "watch.rebuild": "true"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@sprucelabs/resolve-path-aliases": "1.0.72",
+    "concurrently": "^6.0.0",
+    "conventional-changelog-sprucelabs": "latest",
+    "eslint": "^7.11.0",
+    "eslint-config-spruce": "latest",
+    "lerna": "^4.0.0",
+    "prettier": "^2.2.0",
+    "typescript": "^4.1.2"
+  }
 }

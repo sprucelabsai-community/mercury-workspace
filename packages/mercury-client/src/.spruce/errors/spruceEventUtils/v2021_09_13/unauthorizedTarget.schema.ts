@@ -8,6 +8,7 @@ const unauthorizedTargetSchema: SpruceErrors.SpruceEventUtils.v2021_09_13.Unauth
 	version: 'v2021_09_13',
 	namespace: 'SpruceEventUtils',
 	name: 'event target',
+	importsWhenRemote: ['import \'@sprucelabs/spruce-event-utils\'',],
 	    fields: {
 	            /** . */
 	            'locationId': {
