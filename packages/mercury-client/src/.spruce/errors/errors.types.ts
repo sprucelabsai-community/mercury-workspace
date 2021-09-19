@@ -57,65 +57,6 @@ export declare namespace SpruceErrors.MercuryClient {
 }
 
 
-import '@sprucelabs/spruce-event-utils'
-
-export declare namespace SpruceErrors.SpruceEventUtils.v2021_09_13 {
-
-	
-	export interface UnauthorizedTarget {
-		
-			
-			'locationId'?: string| undefined | null
-			
-			'personId'?: string| undefined | null
-			
-			'organizationId'?: string| undefined | null
-			
-			'skillId'?: string| undefined | null
-			
-			'roleId'?: string| undefined | null
-	}
-
-	export interface UnauthorizedTargetSchema extends SpruceSchema.Schema {
-		id: 'unauthorizedTarget',
-		version: 'v2021_09_13',
-		namespace: 'SpruceEventUtils',
-		name: 'event target',
-		importsWhenRemote: ['import \'@sprucelabs/spruce-event-utils\'',],
-		    fields: {
-		            /** . */
-		            'locationId': {
-		                type: 'id',
-		                options: undefined
-		            },
-		            /** . */
-		            'personId': {
-		                type: 'id',
-		                options: undefined
-		            },
-		            /** . */
-		            'organizationId': {
-		                type: 'id',
-		                options: undefined
-		            },
-		            /** . */
-		            'skillId': {
-		                type: 'id',
-		                options: undefined
-		            },
-		            /** . */
-		            'roleId': {
-		                type: 'id',
-		                options: undefined
-		            },
-		    }
-	}
-
-	export type UnauthorizedTargetEntity = SchemaEntity<SpruceErrors.SpruceEventUtils.v2021_09_13.UnauthorizedTargetSchema>
-
-}
-
-
 
 export declare namespace SpruceErrors.MercuryClient {
 
