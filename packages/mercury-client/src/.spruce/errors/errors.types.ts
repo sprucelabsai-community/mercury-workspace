@@ -57,9 +57,8 @@ export declare namespace SpruceErrors.MercuryClient {
 }
 
 
-import '@sprucelabs/spruce-event-utils'
 
-export declare namespace SpruceErrors.SpruceEventUtils.v2021_09_13 {
+export declare namespace SpruceErrors.MercuryClient {
 
 	
 	export interface UnauthorizedTarget {
@@ -78,10 +77,8 @@ export declare namespace SpruceErrors.SpruceEventUtils.v2021_09_13 {
 
 	export interface UnauthorizedTargetSchema extends SpruceSchema.Schema {
 		id: 'unauthorizedTarget',
-		version: 'v2021_09_13',
-		namespace: 'SpruceEventUtils',
-		name: 'event target',
-		importsWhenRemote: ['import \'@sprucelabs/spruce-event-utils\'',],
+		namespace: 'MercuryClient',
+		name: '',
 		    fields: {
 		            /** . */
 		            'locationId': {
@@ -111,7 +108,7 @@ export declare namespace SpruceErrors.SpruceEventUtils.v2021_09_13 {
 		    }
 	}
 
-	export type UnauthorizedTargetEntity = SchemaEntity<SpruceErrors.SpruceEventUtils.v2021_09_13.UnauthorizedTargetSchema>
+	export type UnauthorizedTargetEntity = SchemaEntity<SpruceErrors.MercuryClient.UnauthorizedTargetSchema>
 
 }
 
@@ -127,7 +124,7 @@ export declare namespace SpruceErrors.MercuryClient {
 			
 			'action': ("emit")
 			
-			'target': SpruceErrors.SpruceEventUtils.v2021_09_13.UnauthorizedTarget
+			'target': SpruceErrors.MercuryClient.UnauthorizedTarget
 			
 			'permissionContractId': string
 	}
@@ -153,7 +150,7 @@ export declare namespace SpruceErrors.MercuryClient {
 		            'target': {
 		                type: 'schema',
 		                isRequired: true,
-		                options: {schema: SpruceErrors.SpruceEventUtils.v2021_09_13.UnauthorizedTargetSchema,}
+		                options: {schema: SpruceErrors.MercuryClient.UnauthorizedTargetSchema,}
 		            },
 		            /** . */
 		            'permissionContractId': {

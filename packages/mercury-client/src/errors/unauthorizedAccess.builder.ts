@@ -27,8 +27,8 @@ export default buildErrorSchema({
 			isRequired: true,
 			options: {
 				schema: {
-					...eventTargetSchema,
 					id: 'unauthorizedTarget',
+					fields: eventTargetSchema.fields,
 				},
 			},
 		},
