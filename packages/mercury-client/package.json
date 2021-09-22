@@ -62,17 +62,17 @@
     "watch.tsc": "tsc -w"
   },
   "dependencies": {
-    "@sprucelabs/error": "^5.0.40",
-    "@sprucelabs/mercury-core-events": "^1.2.99",
-    "@sprucelabs/mercury-types": "^26.1.83",
-    "@sprucelabs/schema": "^25.3.55",
-    "@sprucelabs/spruce-core-schemas": "^22.5.122",
-    "@sprucelabs/spruce-event-utils": "^16.0.111",
+    "@sprucelabs/error": "^5.0.41",
+    "@sprucelabs/mercury-core-events": "^1.2.102",
+    "@sprucelabs/mercury-types": "^26.1.85",
+    "@sprucelabs/schema": "^25.3.57",
+    "@sprucelabs/spruce-core-schemas": "^22.5.124",
+    "@sprucelabs/spruce-event-utils": "^16.0.113",
     "dotenv": "^10.0.0",
     "socket.io-client": "^4.2.0"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.82",
+    "@sprucelabs/esm-postbuild": "^1.0.83",
     "@sprucelabs/jest-json-reporter": "^6.0.52",
     "@sprucelabs/jest-sheets-reporter": "^1.2.82",
     "@sprucelabs/mercury-event-emitter": "^16.10.54",
