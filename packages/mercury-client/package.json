@@ -63,11 +63,11 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.43",
-    "@sprucelabs/mercury-core-events": "^1.2.109",
-    "@sprucelabs/mercury-types": "^26.1.90",
-    "@sprucelabs/schema": "^25.3.60",
-    "@sprucelabs/spruce-core-schemas": "^22.5.127",
-    "@sprucelabs/spruce-event-utils": "^16.0.119",
+    "@sprucelabs/mercury-core-events": "^1.2.110",
+    "@sprucelabs/mercury-types": "^26.1.91",
+    "@sprucelabs/schema": "^25.3.61",
+    "@sprucelabs/spruce-core-schemas": "^22.5.128",
+    "@sprucelabs/spruce-event-utils": "^16.0.120",
     "dotenv": "^10.0.0",
     "socket.io-client": "^4.2.0"
   },
