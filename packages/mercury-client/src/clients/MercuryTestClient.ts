@@ -166,6 +166,7 @@ export default class MercuryTestClient<
 							target: permTarget,
 							payload: {
 								id: sig.emitPermissionContract.id,
+								fqen,
 							},
 						}
 					)
