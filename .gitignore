@@ -20,4 +20,6 @@ mercury.min.*
 # Mac
 .DS_Store
 .env
+.env.*
+.env-*
 .eslintcache
