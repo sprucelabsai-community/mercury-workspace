@@ -60,18 +60,18 @@
     "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev"
   },
   "dependencies": {
-    "@sprucelabs/error": "^5.0.207",
-    "@sprucelabs/mercury-types": "^26.1.312",
-    "@sprucelabs/schema": "^25.3.253",
-    "@sprucelabs/spruce-event-utils": "^16.0.346"
+    "@sprucelabs/error": "^5.0.209",
+    "@sprucelabs/mercury-types": "^26.1.316",
+    "@sprucelabs/schema": "^25.3.257",
+    "@sprucelabs/spruce-event-utils": "^16.0.350"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.249",
-    "@sprucelabs/jest-json-reporter": "^6.0.185",
+    "@sprucelabs/esm-postbuild": "^1.0.251",
+    "@sprucelabs/jest-json-reporter": "^6.0.187",
     "@sprucelabs/resolve-path-aliases": "^1.0.208",
     "@sprucelabs/semantic-release": "^4.0.7",
-    "@sprucelabs/test": "^7.7.188",
-    "@sprucelabs/test-utils": "^3.0.171",
+    "@sprucelabs/test": "^7.7.189",
+    "@sprucelabs/test-utils": "^3.0.174",
     "@types/node": "^16.10.2",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^6.3.0",
