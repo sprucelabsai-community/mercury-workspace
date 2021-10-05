@@ -583,7 +583,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 		const results = await client2.emit('whoami::v2020_12_25')
 
-		MercuryClientTest.assertPerson1ComesBack(results, person1)
+		this.assertPerson1ComesBack(results, person1)
 	}
 
 	@test()
@@ -598,7 +598,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			},
 		})
 
-		MercuryClientTest.assertPerson1ComesBack(results, person1)
+		this.assertPerson1ComesBack(results, person1)
 	}
 
 	private static assertPerson1ComesBack(results: any, person1: any) {
