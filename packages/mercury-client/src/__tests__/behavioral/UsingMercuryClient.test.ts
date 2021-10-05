@@ -14,7 +14,7 @@ import { DEMO_PHONE, DEMO_PHONE_PROXY, TEST_HOST } from '../../tests/constants'
 
 require('dotenv').config()
 
-export default class MercuryClientTest extends AbstractClientTest {
+export default class UsingMercuryClient extends AbstractClientTest {
 	private static timeoutClient?: any
 
 	protected static async afterEach() {

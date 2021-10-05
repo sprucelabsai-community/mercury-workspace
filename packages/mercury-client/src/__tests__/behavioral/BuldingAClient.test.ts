@@ -3,7 +3,7 @@ import { MercuryClientFactory } from '../..'
 import { DEFAULT_HOST } from '../../constants'
 import { TEST_HOST } from '../../tests/constants'
 
-export default class MercuryClientFactoryTest extends AbstractSpruceTest {
+export default class BuildingAClientTest extends AbstractSpruceTest {
 	@test()
 	protected static async clientMixinContract() {
 		const client = await MercuryClientFactory.Client({

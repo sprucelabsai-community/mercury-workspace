@@ -81,7 +81,6 @@
     "@sprucelabs/test": "^7.7.189",
     "@sprucelabs/test-utils": "^3.0.174",
     "@types/node": "^16.10.2",
-    "@types/socket.io-client": "^3.0.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^6.3.0",
     "eslint": "^7.32.0",
@@ -126,7 +125,8 @@
             "emitterGetsCalledBackForEachListener": "F23",
             "canRegisterEventsSimultaneously": "I102",
             "nonSpruceErrorsArePassedBack": "I111",
-            "checksPermissionsWhenEmitting": "I138"
+            "checksPermissionsWhenEmitting": "I138",
+            "invokesReconnectAfterDelayWhenConnectionLost": "I326"
           }
         }
       ]

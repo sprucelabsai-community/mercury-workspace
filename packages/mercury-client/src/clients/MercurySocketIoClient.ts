@@ -92,6 +92,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					})
 				}
 
+				this.attachConnectError()
 				resolve(undefined)
 			})
 
@@ -106,13 +107,19 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				)
 			})
 
-			this.socket?.on('connect_error', (err: Record<string, any>) => {
-				const error = this.mapSocketErrorToSpruceError(err)
-				//@ts-ignore
-				this.socket?.removeAllListeners()
+			this.attachConnectError(reject)
+		})
+	}
 
-				reject(error)
-			})
+	private attachConnectError(reject?: (reason?: any) => void) {
+		this.socket?.on('connect_error', (err: Record<string, any>) => {
+			const error = this.mapSocketErrorToSpruceError(err)
+			//@ts-ignore
+			this.socket?.removeAllListeners()
+
+			void this.attemptReconnectAfterDelay()
+
+			reject?.(error)
 		})
 	}
 
@@ -317,6 +324,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			SpruceError
 		)
 	}
+
 	private handleConfirmPinResponse(eventName: string, results: any) {
 		const payload = results?.responses?.[0]?.payload
 		if (eventName.search('confirm-pin') === 0 && payload?.person) {
