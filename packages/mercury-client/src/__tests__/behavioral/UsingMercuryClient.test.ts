@@ -3,7 +3,6 @@ import {
 	eventErrorAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
-import { testLog } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
@@ -301,9 +300,6 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 			do {
 				await this.wait(1000)
-				testLog.info('client', client.isConnected() ? 'Y' : 'N')
-				testLog.info('skillClient1', skill1Client.isConnected() ? 'Y' : 'N')
-				testLog.info('skillClient2', skill2Client.isConnected() ? 'Y' : 'N')
 			} while (
 				!skill1Client.isConnected() ||
 				!skill2Client.isConnected() ||
