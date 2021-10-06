@@ -95,7 +95,7 @@
   },
   "jest": {
     "maxWorkers": 5,
-    "testTimeout": 30000,
+    "testTimeout": 3000000,
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
       "<rootDir>/tmp/",
@@ -126,7 +126,8 @@
             "canRegisterEventsSimultaneously": "I102",
             "nonSpruceErrorsArePassedBack": "I111",
             "checksPermissionsWhenEmitting": "I138",
-            "invokesReconnectAfterDelayWhenConnectionLost": "I326"
+            "invokesReconnectAfterDelayWhenConnectionLost": "I326",
+            "retriesEventIfItFailsAfterTimeout": "I327"
           }
         }
       ]

@@ -38,6 +38,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private emitTimeoutMs: number
 	private reconnectDelayMs: number
 	private isReAuthing = false
+	private reconnectPromise: any = null
 	private lastAuthOptions?: {
 		skillId?: string | undefined
 		apiKey?: string | undefined
@@ -51,6 +52,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		person?: SpruceSchemas.Spruce.v2020_07_22.Person
 	}
 	private shouldAutoRegisterListeners = true
+	private isManuallyDisconnected = false
+	private isReconnecting = false
+	private id: string
+	private skipWaitIfReconnecting = false
+	private maxEmitRetries: number
 
 	public constructor(
 		options: {
@@ -59,6 +65,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			emitTimeoutMs?: number
 			reconnectDelayMs?: number
 			shouldReconnect?: boolean
+			maxEmitRetries?: number
 		} & IoOptions
 	) {
 		const {
@@ -67,6 +74,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			emitTimeoutMs,
 			reconnectDelayMs,
 			shouldReconnect,
+			maxEmitRetries = 5,
 			...ioOptions
 		} = options
 
@@ -76,6 +84,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		this.emitTimeoutMs = emitTimeoutMs ?? 30000
 		this.reconnectDelayMs = reconnectDelayMs ?? 5000
 		this.shouldReconnect = shouldReconnect ?? true
+		this.id = new Date().getTime().toString()
+		this.maxEmitRetries = maxEmitRetries
 	}
 
 	public async connect() {
@@ -88,7 +98,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 				if (this.shouldReconnect) {
 					this.socket?.once('disconnect', async () => {
-						this.attemptReconnectAfterDelay()
+						await this.attemptReconnectAfterDelay()
 					})
 				}
 
@@ -123,37 +133,60 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		})
 	}
 
-	private attemptReconnectAfterDelay() {
-		if (this.lastAuthOptions) {
-			this.isReAuthing = true
+	private async attemptReconnectAfterDelay() {
+		if (this.isReconnecting) {
+			return
 		}
 
-		setTimeout(async () => {
-			try {
-				await this.connect()
+		this.isReconnecting = true
 
-				if (this.lastAuthOptions) {
-					await this.authenticate(this.lastAuthOptions)
-				}
-
-				await this.reregisterAllListeners()
-
-				this.isReAuthing = false
-			} catch (err: any) {
-				if (
-					err.options.code === 'TIMEOUT' ||
-					err.options.code === 'CONNECTION_FAILED'
-				) {
-					this.attemptReconnectAfterDelay()
-				} else {
-					console.log(err.message)
-					this.lastAuthOptions = undefined
-				}
+		this.reconnectPromise = new Promise((resolve: any, reject: any) => {
+			if (this.lastAuthOptions) {
+				this.isReAuthing = true
 			}
-		}, this.reconnectDelayMs)
+
+			setTimeout(async () => {
+				try {
+					await this.connect()
+					this.skipWaitIfReconnecting = true
+
+					if (this.lastAuthOptions) {
+						await this.authenticate(this.lastAuthOptions)
+					}
+
+					await this.reRegisterAllListeners()
+
+					this.isReAuthing = false
+					this.isReconnecting = false
+					this.skipWaitIfReconnecting = false
+					resolve()
+				} catch (err: any) {
+					;(console.error ?? console.log)(err.message)
+
+					this.isReconnecting = false
+					this.skipWaitIfReconnecting = false
+
+					if (
+						err.options.code === 'TIMEOUT' ||
+						err.options.code === 'CONNECTION_FAILED'
+					) {
+						await this.attemptReconnectAfterDelay()
+					} else {
+						this.lastAuthOptions = undefined
+						reject(err)
+					}
+				}
+			}, this.reconnectDelayMs)
+		})
+
+		await this.waitIfReconnecting()
 	}
 
-	private async reregisterAllListeners() {
+	protected async waitIfReconnecting() {
+		await this.reconnectPromise
+	}
+
+	private async reRegisterAllListeners() {
 		const listeners = this.registeredListeners
 		this.registeredListeners = []
 		const all = Promise.all(
@@ -216,6 +249,28 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			| EmitCallback<Contract, EventName>,
 		cb?: EmitCallback<Contract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
+		return this._emit(this.maxEmitRetries, eventName, payload, cb)
+	}
+
+	private async _emit<
+		EventName extends EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
+		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
+			? IEventSignature['responsePayloadSchema']
+			: never,
+		ResponsePayload = ResponseSchema extends Schema
+			? SchemaValues<ResponseSchema>
+			: never
+	>(
+		retriesRemaining: number,
+		eventName: EventName,
+		payload?: any,
+		cb?: EmitCallback<Contract, EventName>
+	) {
+		if (!this.skipWaitIfReconnecting) {
+			await this.waitIfReconnecting()
+		}
+
 		if (
 			!this.allowNextEventToBeAuthenticate &&
 			eventName === 'authenticate::v2020_12_25'
@@ -231,7 +286,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		const signature = this.getEventSignatureByName(eventName)
 
-		if (!this.isSocketConnected()) {
+		if (this.isManuallyDisconnected) {
 			throw new SpruceError({ code: 'NOT_CONNECTED', action: 'emit' })
 		}
 
@@ -291,16 +346,37 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		const results: MercuryAggregateResponse<ResponsePayload> =
 			await new Promise((resolve, reject) => {
 				try {
-					const emitTimeout = setTimeout(() => {
-						this.socket?.off(responseEventName)
-						reject(
-							new SpruceError({
+					const emitTimeout = setTimeout(async () => {
+						this.socket?.off(responseEventName, singleResponseHandler)
+
+						if (retriesRemaining == 0) {
+							const err = new SpruceError({
 								code: 'TIMEOUT',
 								eventName,
 								timeoutMs: this.emitTimeoutMs,
 								isConnected: this.isSocketConnected(),
 							})
-						)
+
+							reject(err)
+							return
+						}
+
+						retriesRemaining--
+
+						try {
+							//@ts-ignore
+							const results = await this._emit(
+								retriesRemaining,
+								eventName,
+								payload,
+								cb
+							)
+
+							//@ts-ignore
+							resolve(results)
+						} catch (err) {
+							reject(err)
+						}
 					}, this.emitTimeoutMs)
 
 					args.push((results: any) => {
@@ -435,7 +511,12 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		})
 	}
 
+	public getId() {
+		return this.id
+	}
+
 	public async disconnect() {
+		this.isManuallyDisconnected = true
 		if (this.isSocketConnected()) {
 			//@ts-ignore
 			this.socket?.removeAllListeners()

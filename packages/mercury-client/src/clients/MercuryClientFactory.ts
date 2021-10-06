@@ -30,6 +30,7 @@ export default class MercuryClientFactory {
 			allowSelfSignedCrt,
 			emitTimeoutMs = this.timeoutMs,
 			shouldReconnect,
+			maxEmitRetries,
 		} = connectionOptions || {}
 
 		const host = hostOption ?? DEFAULT_HOST
@@ -65,6 +66,7 @@ export default class MercuryClientFactory {
 			eventContract,
 			emitTimeoutMs,
 			shouldReconnect,
+			maxEmitRetries,
 		})
 
 		await client.connect()

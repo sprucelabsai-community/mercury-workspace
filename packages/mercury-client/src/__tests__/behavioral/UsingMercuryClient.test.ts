@@ -3,6 +3,7 @@ import {
 	eventErrorAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
+import { testLog } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
@@ -250,7 +251,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		shouldDisconnect = false
 	) {
 		const { org, client, skill1, skill1Client, skill2Client } =
-			await this.setup2SkillsAndOneEvent()
+			await this.setup2SkillsAndOneEvent(process.env.DEMO_PHONE_RECONNECT)
 
 		const { client: skill3Client } = await this.seedInstallAndLoginAsSkill(
 			client,
@@ -300,6 +301,9 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 			do {
 				await this.wait(1000)
+				testLog.info('client', client.isConnected() ? 'Y' : 'N')
+				testLog.info('skillClient1', skill1Client.isConnected() ? 'Y' : 'N')
+				testLog.info('skillClient2', skill2Client.isConnected() ? 'Y' : 'N')
 			} while (
 				!skill1Client.isConnected() ||
 				!skill2Client.isConnected() ||
@@ -400,9 +404,12 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		errorAssertUtil.assertError(errors[0], 'UNAUTHORIZED_ACCESS')
 	}
 
-	@test()
-	protected static async timesOutWhenEmittingEventThatIsNeverHandled() {
-		const client = await this.TimeoutClient()
+	@test('times out when giving up on 1 retry on emit', 1)
+	@test('times out when giving up on 5 retries on emit', 5)
+	protected static async timesOutWhenEmittingEventThatIsNeverHandled(
+		maxEmitRetries: number
+	) {
+		const client = await this.TimeoutClient(undefined, maxEmitRetries)
 
 		const err = await assert.doesThrowAsync(() =>
 			client.emit('register-skill::v2020_12_25', {
@@ -414,7 +421,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			eventName: 'register-skill::v2020_12_25',
 		})
 
-		assert.isEqual(client.socket.invocationCounts.off, 1)
+		assert.isEqual(client.socket.invocationCounts.off, maxEmitRetries + 1)
 	}
 
 	@test()
@@ -433,7 +440,48 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 		await this.wait(4000)
 
-		assert.isEqual(client.socket.invocationCounts.off, 1)
+		assert.isEqual(client.socket.invocationCounts.off, 6)
+	}
+
+	@test('emit timeouts are reset after each emit with 5 retries', 5)
+	@test('emit timeouts are reset after each emit with 3 retries', 3)
+	protected static async emitTimeoutsAreResetAfterEmit(maxEmitRetries: number) {
+		const client = await this.TimeoutClient(undefined, maxEmitRetries)
+
+		await assert.doesThrowAsync(() =>
+			client.emit('register-skill::v2020_12_25', {
+				payload: { name: 'test' },
+			})
+		)
+
+		assert.isEqual(client.socket.invocationCounts.off, maxEmitRetries + 1)
+		client.socket.invocationCounts.off = 0
+
+		await assert.doesThrowAsync(() =>
+			client.emit('register-skill::v2020_12_25', {
+				payload: { name: 'test' },
+			})
+		)
+
+		assert.isEqual(client.socket.invocationCounts.off, maxEmitRetries + 1)
+	}
+
+	@test()
+	protected static async emitTimeoutsAreScopedPerEmit() {
+		const client = await this.TimeoutClient()
+
+		const promise1 = client.emit('register-skill::v2020_12_25', {
+			payload: { name: 'test' },
+		})
+
+		const promise2 = client.emit('register-skill::v2020_12_25', {
+			payload: { name: 'test' },
+		})
+
+		await assert.doesThrowAsync(() => promise1)
+		await assert.doesThrowAsync(() => promise2)
+
+		assert.isEqual(client.socket.invocationCounts.off, 12)
 	}
 
 	@test()
@@ -621,10 +669,14 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		return { client2, token, person1 }
 	}
 
-	private static async TimeoutClient(emitDelay?: number): Promise<any> {
+	private static async TimeoutClient(
+		emitDelay?: number,
+		maxEmitRetries?: number
+	): Promise<any> {
 		const client = await this.Client({
 			emitTimeoutMs: 100,
 			shouldReconnect: false,
+			maxEmitRetries,
 		})
 
 		//@ts-ignore
@@ -663,8 +715,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		return client
 	}
 
-	private static async setup2SkillsAndOneEvent() {
-		const { client } = await this.loginAsDemoPerson()
+	private static async setup2SkillsAndOneEvent(phone?: string) {
+		const { client } = await this.loginAsDemoPerson(phone)
 		const org = await this.seedDummyOrg(client)
 
 		const createLogin = this.seedInstallAndLoginAsSkill(client, org)
