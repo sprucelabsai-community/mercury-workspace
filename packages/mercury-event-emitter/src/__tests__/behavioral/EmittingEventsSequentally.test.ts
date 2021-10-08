@@ -27,7 +27,6 @@ class EventEmitter<
 type Contract = typeof contract
 
 export default class EmittingEventsSequentallyTest extends AbstractSpruceTest {
-	
 	@test('should fire sequentally', true)
 	@test('should fire in parallel', false)
 	protected static async eventsShouldWaitForTheEventBeforeWhenEmittingSequentally(
