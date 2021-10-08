@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.11.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.175...v16.11.0) (2021-10-08)
+
+
+### Features
+
+* emit sequentally ([e06bd75](https://github.com/sprucelabsai/mercury-workspace/commit/e06bd75))
+* sequentally emitting ([2a80d09](https://github.com/sprucelabsai/mercury-workspace/commit/2a80d09))
+
+
+
+
+
 ## [16.10.175](https://github.com/sprucelabsai/mercury-workspace/compare/v16.10.174...v16.10.175) (2021-10-08)
 
 **Note:** Version bump only for package spruce-mercury-workspace
