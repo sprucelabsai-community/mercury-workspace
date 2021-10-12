@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.12.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.11.13...v16.12.0) (2021-10-12)
+
+
+### Features
+
+* improved timeout reporting ([9c51b2a](https://github.com/sprucelabsai/mercury-workspace/commit/9c51b2a))
+
+
+
+
+
 ## [16.11.13](https://github.com/sprucelabsai/mercury-workspace/compare/v16.11.12...v16.11.13) (2021-10-12)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
