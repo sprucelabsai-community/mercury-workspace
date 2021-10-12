@@ -18,7 +18,12 @@
 		"sourceMap": false,
 		"outDir": "build",
 		"baseUrl": ".",
-		"experimentalDecorators": true
+		"experimentalDecorators": true,
+		"paths": {
+			"#spruce/*": [
+				"packages/mercury-client/src/.spruce/*"
+			]
+		}
 	},
 	"include": [
 		"./*.ts",
