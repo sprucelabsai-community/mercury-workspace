@@ -127,7 +127,8 @@
             "nonSpruceErrorsArePassedBack": "I111",
             "checksPermissionsWhenEmitting": "I138",
             "invokesReconnectAfterDelayWhenConnectionLost": "I326",
-            "retriesEventIfItFailsAfterTimeout": "I327"
+            "retriesEventIfItFailsAfterTimeout": "I327",
+            "canReAuthIfTimesOutDuringAuth": "I334"
           }
         }
       ]

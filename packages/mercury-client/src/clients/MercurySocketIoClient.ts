@@ -26,6 +26,7 @@ import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 
 type IoOptions = Partial<ManagerOptions & SocketOptions>
 
+const authenticateFqen = 'authenticate::v2020_12_25'
 export default class MercurySocketIoClient<Contract extends EventContract>
 	implements MercuryClient<Contract>
 {
@@ -57,6 +58,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private id: string
 	private skipWaitIfReconnecting = false
 	private maxEmitRetries: number
+	private authRawResults?: MercuryAggregateResponse<any>
 
 	public constructor(
 		options: {
@@ -273,7 +275,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		if (
 			!this.allowNextEventToBeAuthenticate &&
-			eventName === 'authenticate::v2020_12_25'
+			eventName === authenticateFqen
 		) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
@@ -365,6 +367,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 						retriesRemaining--
 
 						try {
+							if (eventName === authenticateFqen && this.authRawResults) {
+								resolve(this.authRawResults)
+								return
+							}
+
 							//@ts-ignore
 							const results = await this._emit(
 								retriesRemaining,
@@ -556,6 +563,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		//@ts-ignore
 		const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
 
+		this.authRawResults = results
 		this.auth = auth
 
 		return {
