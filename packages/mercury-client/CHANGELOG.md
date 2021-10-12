@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.13.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.12.0...v16.13.0) (2021-10-12)
+
+
+### Features
+
+* re auth gracefully on failed connection during auth ([9204151](https://github.com/sprucelabsai/mercury-workspace/commit/9204151))
+
+
+
+
+
 # [16.12.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.11.13...v16.12.0) (2021-10-12)
 
 
