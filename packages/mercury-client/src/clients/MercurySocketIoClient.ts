@@ -355,6 +355,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 								eventName,
 								timeoutMs: this.emitTimeoutMs,
 								isConnected: this.isSocketConnected(),
+								totalRetries: this.maxEmitRetries,
 							})
 
 							reject(err)

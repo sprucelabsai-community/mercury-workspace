@@ -178,6 +178,8 @@ export declare namespace SpruceErrors.MercuryClient {
 			'timeoutMs': number
 			
 			'isConnected'?: boolean| undefined | null
+			
+			'totalRetries'?: number| undefined | null
 	}
 
 	export interface TimeoutSchema extends SpruceSchema.Schema {
@@ -200,6 +202,11 @@ export declare namespace SpruceErrors.MercuryClient {
 		            /** . */
 		            'isConnected': {
 		                type: 'boolean',
+		                options: undefined
+		            },
+		            /** . */
+		            'totalRetries': {
+		                type: 'number',
 		                options: undefined
 		            },
 		    }
