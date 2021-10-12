@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.11.11](https://github.com/sprucelabsai/mercury-workspace/compare/v16.11.10...v16.11.11) (2021-10-12)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
 ## [16.11.10](https://github.com/sprucelabsai/mercury-workspace/compare/v16.11.9...v16.11.10) (2021-10-09)
 
 **Note:** Version bump only for package @sprucelabs/mercury-event-emitter
