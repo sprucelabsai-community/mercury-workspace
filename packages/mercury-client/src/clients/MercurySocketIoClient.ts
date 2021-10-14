@@ -19,7 +19,7 @@ import {
 	eventResponseUtil,
 	eventNameUtil,
 } from '@sprucelabs/spruce-event-utils'
-import io, { Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
+import { io, Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import SpruceError from '../errors/SpruceError'
 import { MercuryClient } from '../types/client.types'
 import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
