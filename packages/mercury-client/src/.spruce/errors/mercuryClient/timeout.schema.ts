@@ -25,6 +25,11 @@ const timeoutSchema: SpruceErrors.MercuryClient.TimeoutSchema  = {
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** . */
+	            'totalRetries': {
+	                type: 'number',
+	                options: undefined
+	            },
 	    }
 }
 

@@ -416,6 +416,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 			//@ts-ignore
 			this.emitter.on('taco', () => {})
 		)
+
 		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
 	}
 

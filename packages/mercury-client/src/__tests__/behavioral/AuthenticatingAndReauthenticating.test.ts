@@ -234,7 +234,6 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	@test()
 	protected static async authAsSkillStoresOnClient() {
 		const skill = await this.Skill()
-
 		const client = await this.Client()
 		await client.authenticate({
 			skillId: skill.id,
@@ -247,6 +246,22 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		assert.isTruthy(client.auth.skill)
 		//@ts-ignore
 		assert.isEqual(client.auth.skill.id, skill.id)
+	}
+
+	@test()
+	protected static async canReAuthIfTimesOutDuringAuth() {
+		const skill = await this.Skill()
+		const client = await this.Client()
+
+		const promise = client.authenticate({
+			skillId: skill.id,
+			apiKey: skill.apiKey,
+		})
+
+		//@ts-ignore
+		client.socket.disconnect()
+
+		await promise
 	}
 
 	private static async Skill() {

@@ -16,5 +16,8 @@ export default buildErrorSchema({
 		isConnected: {
 			type: 'boolean',
 		},
+		totalRetries: {
+			type: 'number',
+		},
 	},
 })

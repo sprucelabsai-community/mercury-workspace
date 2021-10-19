@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "16.10.142",
+  "version": "16.13.79",
   "files": [
     "build"
   ],
@@ -60,30 +60,31 @@
     "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev"
   },
   "dependencies": {
-    "@sprucelabs/error": "^5.0.136",
-    "@sprucelabs/mercury-types": "^26.1.240",
-    "@sprucelabs/schema": "^25.3.182",
-    "@sprucelabs/spruce-event-utils": "^16.0.276"
+    "@sprucelabs/error": "^5.0.240",
+    "@sprucelabs/mercury-types": "^26.1.470",
+    "@sprucelabs/schema": "^25.3.341",
+    "@sprucelabs/spruce-event-utils": "^16.0.477",
+    "@sprucelabs/spruce-skill-utils": "^20.6.284"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.176",
-    "@sprucelabs/jest-json-reporter": "^6.0.115",
-    "@sprucelabs/resolve-path-aliases": "^1.0.139",
+    "@sprucelabs/esm-postbuild": "^1.0.266",
+    "@sprucelabs/jest-json-reporter": "^6.0.211",
+    "@sprucelabs/resolve-path-aliases": "^1.0.215",
     "@sprucelabs/semantic-release": "^4.0.7",
-    "@sprucelabs/test": "^7.7.118",
-    "@sprucelabs/test-utils": "^3.0.101",
-    "@types/node": "^16.10.2",
+    "@sprucelabs/test": "^7.7.199",
+    "@sprucelabs/test-utils": "^3.0.212",
+    "@types/node": "^16.11.1",
     "chokidar-cli": "^3.0.0",
-    "concurrently": "^6.2.2",
-    "eslint": "^7.32.0",
-    "eslint-config-spruce": "^10.10.12",
-    "jest": "^27.2.4",
-    "jest-circus": "^27.2.4",
+    "concurrently": "^6.3.0",
+    "eslint": "^8.0.1",
+    "eslint-config-spruce": "^10.10.15",
+    "jest": "^27.3.1",
+    "jest-circus": "^27.3.1",
     "prettier": "^2.4.1",
-    "ts-node": "^10.2.1",
+    "ts-node": "^10.3.0",
     "tsc-watch": "^4.5.0",
     "tsconfig-paths": "^3.11.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   },
   "jest": {
     "maxWorkers": 4,

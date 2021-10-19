@@ -12,6 +12,7 @@ export interface ConnectionOptions {
 	emitTimeoutMs?: number
 	reconnectDelayMs?: number
 	shouldReconnect?: boolean
+	maxEmitRetries?: number
 }
 
 export type MercuryClient<

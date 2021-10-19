@@ -3,7 +3,10 @@
 		"module": "commonjs",
 		"esModuleInterop": true,
 		"target": "ES2017",
-		"lib": ["ES2017", "DOM"],
+		"lib": [
+			"ES2017",
+			"DOM"
+		],
 		"declaration": true,
 		"noImplicitAny": true,
 		"forceConsistentCasingInFileNames": true,
@@ -14,8 +17,20 @@
 		"moduleResolution": "node",
 		"sourceMap": false,
 		"outDir": "build",
-		"baseUrl": "."
+		"baseUrl": ".",
+		"experimentalDecorators": true,
+		"paths": {
+			"#spruce/*": [
+				"packages/mercury-client/src/.spruce/*"
+			]
+		}
 	},
-	"include": ["./*.ts", "./**/*.ts"],
-	"exclude": ["**/node_modules/**", "./packages/**/build"]
+	"include": [
+		"./*.ts",
+		"./**/*.ts"
+	],
+	"exclude": [
+		"**/node_modules/**",
+		"./packages/**/build"
+	]
 }

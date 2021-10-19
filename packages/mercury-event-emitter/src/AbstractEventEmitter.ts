@@ -15,17 +15,22 @@ import SpruceError from './errors/SpruceError'
 export default class AbstractEventEmitter<Contract extends EventContract>
 	implements MercuryEventEmitter<Contract>
 {
-	protected eventContract: EventContract
 	private originalEventContract: EventContract
+	private shouldEmitSequentally: boolean
 
+	protected eventContract: EventContract
 	protected listenersByEvent: Record<
 		string,
 		((payload?: any) => any | Promise<any>)[]
 	> = {}
 
-	public constructor(contract: EventContract) {
+	public constructor(
+		contract: EventContract,
+		options?: { shouldEmitSequentally?: boolean }
+	) {
 		this.eventContract = contract
 		this.originalEventContract = contract
+		this.shouldEmitSequentally = options?.shouldEmitSequentally ?? false
 	}
 
 	public async emit<
@@ -63,37 +68,53 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		const listeners = this.listenersByEvent[eventName] || []
 		let totalErrors = 0
 
-		const responses = await Promise.all(
-			listeners.map(async (listenerCb, idx) => {
-				let response = await this.emitOne<EventName>({
-					idx,
-					listenerCb,
-					payload: actualPayload,
-					totalContracts: listeners.length,
-					actualCallback,
-				})
+		const emitOneAndValidate = async (listenerCb: any, idx: number) => {
+			let response = await this.emitOne<EventName>({
+				idx,
+				listenerCb,
+				payload: actualPayload,
+				totalContracts: listeners.length,
+				actualCallback,
+			})
 
-				if (responseSchema && !response.errors) {
-					try {
-						this.validateResponsePayload(
-							responseSchema,
-							response.payload ?? {},
-							eventName
-						)
-					} catch (err: any) {
-						response = {
-							errors: [err],
-						}
+			if (responseSchema && !response.errors) {
+				try {
+					this.validateResponsePayload(
+						responseSchema,
+						response.payload ?? {},
+						eventName
+					)
+				} catch (err: any) {
+					response = {
+						errors: [err],
 					}
 				}
+			}
 
-				if (response.errors) {
-					totalErrors += response.errors.length
-				}
+			if (response.errors) {
+				totalErrors += response.errors.length
+			}
 
-				return response
-			})
-		)
+			return response
+		}
+
+		let responses: any
+
+		if (this.shouldEmitSequentally) {
+			responses = []
+			let idx = 0
+			for (const listener of listeners) {
+				const response = await emitOneAndValidate(listener, idx)
+				responses.push(response)
+				idx++
+			}
+		} else {
+			responses = await Promise.all(
+				listeners.map(async (listenerCb, idx) =>
+					emitOneAndValidate(listenerCb, idx)
+				)
+			)
+		}
 
 		return {
 			totalContracts: listeners.length,

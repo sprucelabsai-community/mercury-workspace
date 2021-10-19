@@ -31,16 +31,21 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `You cannot ${options.action} when you are not connected to the api.`
 				break
 
-			case 'TIMEOUT':
+			case 'TIMEOUT': {
+				const retries = options.totalRetries
+					? ` ${options.totalRetries} times `
+					: ' '
+				const each = options.totalRetries ? ' each ' : ' '
+
 				message = `Dang it, I didn't hear back after emitting "${
 					options.eventName
-				}" for ${options.timeoutMs / 1000} seconds..`
+				}"${retries}for ${options.timeoutMs / 1000} seconds${each}...`
 
 				if (options.isConnected === false) {
 					message += "\n\nAlso, it appears I'm not connected to the api."
 				}
 				break
-
+			}
 			case 'MISSING_TEST_CACHE_DIR':
 				message =
 					'You must set a test cache dir to test Mercury. Try MercuryFactory.setTestCacheDir().'
