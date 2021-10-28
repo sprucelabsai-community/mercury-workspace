@@ -551,7 +551,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		const { skillId, apiKey, token } = options
 
 		if (this.authPromise) {
-			await this.authPromie
+			await this.authPromise
 			return {
 				skill: this.auth?.skill,
 				person: this.auth?.person,
