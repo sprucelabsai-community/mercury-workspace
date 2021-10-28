@@ -280,7 +280,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['eventName'],
-				friendlyMessage: `You can't emit this event directly. Use client.authenticate() so all your auth is preserved.`,
+				friendlyMessage: `You can't emit '${authenticateFqen}' event directly. Use client.authenticate() so all your auth is preserved.`,
 			})
 		}
 
