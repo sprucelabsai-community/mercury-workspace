@@ -562,7 +562,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		this.allowNextEventToBeAuthenticate = true
 
 		//@ts-ignore
-		this.authPromise = await this.emit('authenticate::v2020_12_25', {
+		this.authPromise = this.emit('authenticate::v2020_12_25', {
 			payload: {
 				skillId,
 				apiKey,
