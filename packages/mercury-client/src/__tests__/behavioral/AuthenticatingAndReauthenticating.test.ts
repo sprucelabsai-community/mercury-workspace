@@ -264,6 +264,27 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		await promise
 	}
 
+	@test()
+	protected static async canAuthenticateAsTheSameSkillRepeatedly() {
+		const skill = await this.Skill()
+		const client = await this.Client()
+
+		await Promise.all([
+			client.authenticate({
+				skillId: skill.id,
+				apiKey: skill.apiKey,
+			}),
+			client.authenticate({
+				skillId: skill.id,
+				apiKey: skill.apiKey,
+			}),
+			client.authenticate({
+				skillId: skill.id,
+				apiKey: skill.apiKey,
+			}),
+		])
+	}
+
 	private static async Skill() {
 		const { skill } = await this.loginAsDemoSkill()
 		return skill
