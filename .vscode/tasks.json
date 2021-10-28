@@ -6,10 +6,10 @@
             "command": "yarn",
             "group": "build",
             "args": [
-                "tsc-watch",
-                "--noClear",
-                "-b",
-                "-w"
+                "watch.tsc",
+                "--noEmit",
+                "--project",
+                "tsconfig.json"
             ],
             "runOptions": {
                 "runOn": "folderOpen"
@@ -18,6 +18,9 @@
             "presentation": {
                 "reveal": "never",
                 "focus": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/packages/mercury-client"
             },
             "problemMatcher": {
                 "base": "$tsc-watch",
