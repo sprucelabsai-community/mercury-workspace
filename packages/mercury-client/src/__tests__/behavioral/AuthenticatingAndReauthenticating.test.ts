@@ -285,12 +285,45 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		])
 	}
 
+	@test()
+	protected static async canAuthenticateAsTheSamePersonRepeatedly() {
+		const { token } = await this.loginAsDemoPerson()
+		const client = await this.Client()
+
+		await Promise.all([
+			client.authenticate({
+				token,
+			}),
+			client.authenticate({
+				token,
+			}),
+			client.authenticate({
+				token,
+			}),
+		])
+	}
+
+	@test()
+	protected static async canAuthenticateAsDifferentSkillAfterAuthenticatingAsFirst() {
+		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
+
+		const skill1 = await this.seedDemoSkill(client)
+		await this.seedDemoSkill(client)
+
+		let results = await client.authenticate({
+			skillId: skill1.id,
+			apiKey: skill1.apiKey,
+		})
+
+		assert.isEqualDeep(results.skill?.id, skill1.id)
+	}
+
 	private static async Skill() {
-		const { skill } = await this.loginAsDemoSkill()
+		const { skill } = await this.loginAsDemoSkillAtOrg()
 		return skill
 	}
 
-	private static async loginAsDemoSkill() {
+	private static async loginAsDemoSkillAtOrg() {
 		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 		const org = await this.seedDummyOrg(client)
 		const skill = await this.seedAndInstallDummySkill(client, org)

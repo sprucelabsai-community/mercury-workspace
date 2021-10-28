@@ -59,6 +59,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private skipWaitIfReconnecting = false
 	private maxEmitRetries: number
 	private authRawResults?: MercuryAggregateResponse<any>
+	private authPromise?: any
 
 	public constructor(
 		options: {
@@ -140,6 +141,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			return
 		}
 
+		delete this.authPromise
 		this.isReconnecting = true
 
 		this.reconnectPromise = new Promise((resolve: any, reject: any) => {
@@ -548,17 +550,27 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}) {
 		const { skillId, apiKey, token } = options
 
+		if (this.authPromise) {
+			await this.authPromie
+			return {
+				skill: this.auth?.skill,
+				person: this.auth?.person,
+			}
+		}
+
 		this.lastAuthOptions = options
 		this.allowNextEventToBeAuthenticate = true
 
 		//@ts-ignore
-		const results = await this.emit('authenticate::v2020_12_25', {
+		this.authPromise = await this.emit('authenticate::v2020_12_25', {
 			payload: {
 				skillId,
 				apiKey,
 				token,
 			},
 		})
+
+		const results = await this.authPromise
 
 		//@ts-ignore
 		const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)

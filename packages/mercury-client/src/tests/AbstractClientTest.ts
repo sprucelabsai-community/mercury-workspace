@@ -141,14 +141,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		client: Client,
 		org: Organization
 	) {
-		const skill1Results = await client.emit('register-skill::v2020_12_25', {
-			payload: {
-				name: `Dummy skill ${this.dummySkillCount++} ${new Date().getTime()}`,
-			},
-		})
-
-		const skill = skill1Results.responses[0].payload?.skill
-		assert.isTruthy(skill)
+		const skill = await this.seedDemoSkill(client)
 
 		const installResults = await client.emit('install-skill::v2020_12_25', {
 			target: {
@@ -159,6 +152,18 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 
 		assert.isEqual(installResults.totalErrors, 0)
 
+		return skill
+	}
+
+	protected static async seedDemoSkill(client: Client) {
+		const skill1Results = await client.emit('register-skill::v2020_12_25', {
+			payload: {
+				name: `Dummy skill ${this.dummySkillCount++} ${new Date().getTime()}`,
+			},
+		})
+
+		const skill = skill1Results.responses[0].payload?.skill
+		assert.isTruthy(skill)
 		return skill
 	}
 }
