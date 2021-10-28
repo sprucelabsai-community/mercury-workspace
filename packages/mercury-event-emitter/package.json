@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "16.13.202",
+  "version": "16.13.203",
   "files": [
     "build"
   ],
@@ -11,7 +11,8 @@
     "namespace": "mercuryEventEmitter",
     "upgradeIgnoreList": [
       "@sprucelabs/spruce-test-fixtures",
-      "@sprucelabs/spruce-core-schemas"
+      "@sprucelabs/spruce-core-schemas",
+      "@sprucelabs/spruce-skill-utils"
     ]
   },
   "main": "./build/index.js",
@@ -63,8 +64,7 @@
     "@sprucelabs/error": "^5.0.262",
     "@sprucelabs/mercury-types": "^26.1.632",
     "@sprucelabs/schema": "^25.3.420",
-    "@sprucelabs/spruce-event-utils": "^16.0.652",
-    "@sprucelabs/spruce-skill-utils": "^20.6.370"
+    "@sprucelabs/spruce-event-utils": "^16.0.652"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^1.0.276",
