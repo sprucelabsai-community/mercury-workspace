@@ -28,7 +28,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'NOT_CONNECTED':
-				message = `You cannot ${options.action} when you are not connected to the api.`
+				message = `You cannot ${options.action} after you have manually disconnected from Mercury.`
 				break
 
 			case 'TIMEOUT': {
