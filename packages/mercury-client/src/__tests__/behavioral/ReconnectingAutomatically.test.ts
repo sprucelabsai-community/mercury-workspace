@@ -46,7 +46,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 		await assert.doesThrowAsync(
 			() => client.emit('whoami::v2020_12_25'),
-			'not connected'
+			'after you have manually disconnected'
 		)
 	}
 
