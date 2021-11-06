@@ -1,6 +1,6 @@
 import { EventContract } from '@sprucelabs/mercury-types'
 import {
-	eventErrorAssertUtil,
+	eventAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
@@ -215,7 +215,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		)
 
 		assert.isEqual(results.totalErrors, 1)
-		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNKNOWN_ERROR')
+		eventAssertUtil.assertErrorFromResponse(results, 'UNKNOWN_ERROR')
 	}
 
 	@test()
@@ -240,7 +240,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 		assert.isEqual(results.totalErrors, 1)
 
-		eventErrorAssertUtil.assertErrorFromResponse(results, 'LISTENER_ERROR')
+		eventAssertUtil.assertErrorFromResponse(results, 'LISTENER_ERROR')
 		assert.doesInclude(results.responses[0].errors?.[0].message, 'oh shoot')
 	}
 
@@ -561,7 +561,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			},
 		})
 
-		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNAUTHORIZED_ACCESS')
+		eventAssertUtil.assertErrorFromResponse(results, 'UNAUTHORIZED_ACCESS')
 	}
 
 	@test()

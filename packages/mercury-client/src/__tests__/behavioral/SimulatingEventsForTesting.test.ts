@@ -5,7 +5,7 @@ import {
 } from '@sprucelabs/mercury-types'
 import {
 	buildEmitTargetAndPayloadSchema,
-	eventErrorAssertUtil,
+	eventAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
@@ -463,10 +463,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		})
 
 		assert.isEqual(results.totalErrors, 1)
-		eventErrorAssertUtil.assertErrorFromResponse(
-			results,
-			'INVALID_RESPONSE_PAYLOAD'
-		)
+		eventAssertUtil.assertErrorFromResponse(results, 'INVALID_RESPONSE_PAYLOAD')
 	}
 
 	@test()
@@ -490,7 +487,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		})
 
 		assert.isEqual(results.totalErrors, 1)
-		eventErrorAssertUtil.assertErrorFromResponse(results, 'TEST')
+		eventAssertUtil.assertErrorFromResponse(results, 'TEST')
 	}
 
 	@test()
@@ -517,7 +514,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		//@ts-ignore
 		const results = await client.emit('waka-waka')
 
-		const err = eventErrorAssertUtil.assertErrorFromResponse(
+		const err = eventAssertUtil.assertErrorFromResponse(
 			results,
 			'INVALID_EVENT_NAME'
 		)
@@ -629,7 +626,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		skill2Client: any
 	) {
 		const results = await skill2Client.emit(fqen)
-		eventErrorAssertUtil.assertErrorFromResponse(results, 'UNAUTHORIZED_ACCESS')
+		eventAssertUtil.assertErrorFromResponse(results, 'UNAUTHORIZED_ACCESS')
 	}
 
 	private static async assertGuestCantEmit(fqen: string) {
@@ -639,10 +636,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		const response = await personClient.emit(fqen as any)
 
-		eventErrorAssertUtil.assertErrorFromResponse(
-			response,
-			'UNAUTHORIZED_ACCESS'
-		)
+		eventAssertUtil.assertErrorFromResponse(response, 'UNAUTHORIZED_ACCESS')
 	}
 
 	private static async assertAnonCantEmit(fqen: string) {
@@ -650,10 +644,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		const response = await client.emit(fqen as any)
 
-		eventErrorAssertUtil.assertErrorFromResponse(
-			response,
-			'UNAUTHORIZED_ACCESS'
-		)
+		eventAssertUtil.assertErrorFromResponse(response, 'UNAUTHORIZED_ACCESS')
 	}
 
 	private static buildEmitPermContract() {
