@@ -129,18 +129,36 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async specificListenerCanBeCleared() {
-		const cb = () => {}
+		let cb1Count = 0
+		let cb2Count = 0
 
+		const cb = () => {
+			cb1Count++
+		}
+
+		void this.emitter.on('eventTwo', cb)
 		void this.emitter.on('eventOne', cb)
-		void this.emitter.on('eventOne', () => {})
+		void this.emitter.on('eventOne', () => {
+			cb2Count++
+		})
+		void this.emitter.on('eventTwo', cb)
 
 		let numForgotten = await this.emitter.off('eventOne', cb)
 
 		assert.isEqual(numForgotten, 1)
 		assert.isEqual(this.testEmitter.listenCount('eventOne'), 1)
 
+		await this.emitter.emit('eventOne')
+		assert.isEqual(cb1Count, 0)
+
+		await this.emitter.emit('eventTwo')
+		assert.isEqual(cb2Count, 1)
+
 		numForgotten = await this.emitter.off('eventOne', () => {})
 		assert.isEqual(numForgotten, 0)
+
+		numForgotten = await this.emitter.off('eventTwo', cb)
+		assert.isEqual(numForgotten, 2)
 	}
 
 	@test()

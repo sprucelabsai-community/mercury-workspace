@@ -273,18 +273,18 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		cb?: () => void
 	): Promise<number> {
 		if (cb) {
-			let found = false
+			let numForgotten = 0
 			this.listenersByEvent[eventName] = this.listenersByEvent[
 				eventName
 			]?.filter((listener) => {
 				if (listener === cb) {
-					found = true
-					return true
+					numForgotten++
+					return false
 				}
-				return false
+				return true
 			})
 
-			return found ? 1 : 0
+			return numForgotten
 		} else {
 			const total = (this.listenersByEvent[eventName] || []).length
 			delete this.listenersByEvent[eventName]
