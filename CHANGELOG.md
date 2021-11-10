@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v16.13.286...v17.0.0) (2021-11-10)
+
+
+### Breaking Changes
+
+* type fixes to emprove emit signature on abstract emitter and io client ([4b9d65a](https://github.com/sprucelabsai/mercury-workspace/commit/4b9d65a))
+
+
+
+
+
 ## [16.13.286](https://github.com/sprucelabsai/mercury-workspace/compare/v16.13.285...v16.13.286) (2021-11-10)
 
 **Note:** Version bump only for package spruce-mercury-workspace
