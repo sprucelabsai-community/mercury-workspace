@@ -247,9 +247,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	>(
 		eventName: EventName,
 		payload?:
-			| (EmitSchema extends SchemaValues<EmitSchema>
-					? SchemaValues<EmitSchema>
-					: never)
+			| (EmitSchema extends Schema ? SchemaValues<EmitSchema> : never)
 			| EmitCallback<Contract, EventName>,
 		cb?: EmitCallback<Contract, EventName>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
