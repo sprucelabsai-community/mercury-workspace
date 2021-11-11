@@ -1,5 +1,6 @@
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
+import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
 export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
@@ -35,7 +36,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 	}
 
 	private static async ClientZeroDelay() {
-		return await super.Client({ reconnectDelayMs: 0 })
+		return await this.Client({ reconnectDelayMs: 0 })
 	}
 
 	@test()
@@ -64,5 +65,16 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		const results = await promise
 
 		eventResponseUtil.getFirstResponseOrThrow(results)
+	}
+
+	@test()
+	protected static async failingToConnectDuringAuthDoesntThrowAuthBlockedError() {
+		const client = await this.Client({ emitTimeoutMs: 1 })
+
+		const err = await assert.doesThrowAsync(() =>
+			client.authenticate({ token: 'duh' })
+		)
+
+		errorAssertUtil.assertError(err, 'TIMEOUT')
 	}
 }

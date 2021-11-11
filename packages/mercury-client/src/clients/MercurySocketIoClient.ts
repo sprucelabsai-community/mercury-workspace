@@ -372,6 +372,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 								return
 							}
 
+							this.allowNextEventToBeAuthenticate = true
+
 							//@ts-ignore
 							const results = await this._emit(
 								retriesRemaining,
