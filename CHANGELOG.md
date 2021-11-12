@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.0.19](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.18...v17.0.19) (2021-11-12)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [17.0.18](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.17...v17.0.18) (2021-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [17.0.17](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.16...v17.0.17) (2021-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [17.0.16](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.15...v17.0.16) (2021-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [17.0.15](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.14...v17.0.15) (2021-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [17.0.14](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.13...v17.0.14) (2021-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [17.0.13](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.12...v17.0.13) (2021-11-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
 ## [17.0.12](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.11...v17.0.12) (2021-11-11)
 
 **Note:** Version bump only for package spruce-mercury-workspace
