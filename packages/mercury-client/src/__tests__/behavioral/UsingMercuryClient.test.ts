@@ -145,6 +145,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			})
 		}
 
+		//@ts-ignore
 		await assert.doesThrowAsync(() => client.attemptReconnectAfterDelay())
 
 		assert.isEqual(count, 5)
