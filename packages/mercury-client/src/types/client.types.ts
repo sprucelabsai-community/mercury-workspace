@@ -15,6 +15,10 @@ export interface ConnectionOptions {
 	maxEmitRetries?: number
 }
 
+export declare type MercuryConnectFactory = (
+	options?: ConnectionOptions
+) => Promise<MercuryClient>
+
 export type MercuryClient<
 	/** @ts-ignore */
 	Contract extends EventContract = SkillEventContract
