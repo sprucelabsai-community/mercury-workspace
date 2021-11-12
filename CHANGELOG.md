@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.1.0](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.19...v17.1.0) (2021-11-12)
+
+
+### Features
+
+* introducing MercuryConnectFactory interface to make typing more consistent for developers. ([1080283](https://github.com/sprucelabsai/mercury-workspace/commit/1080283))
+
+
+
+
+
 ## [17.0.19](https://github.com/sprucelabsai/mercury-workspace/compare/v17.0.18...v17.0.19) (2021-11-12)
 
 **Note:** Version bump only for package spruce-mercury-workspace
