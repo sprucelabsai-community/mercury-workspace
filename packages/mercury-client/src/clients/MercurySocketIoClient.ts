@@ -46,6 +46,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		token?: string | undefined
 	}
 	private shouldReconnect: boolean
+	private connectionRetries = 5
 	private registeredListeners: any[] = []
 	private allowNextEventToBeAuthenticate = false
 	protected auth?: {
@@ -125,18 +126,38 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	private attachConnectError(reject?: (reason?: any) => void) {
-		this.socket?.on('connect_error', (err: Record<string, any>) => {
+		this.socket?.on('connect_error', async (err: Record<string, any>) => {
 			const error = this.mapSocketErrorToSpruceError(err)
 			//@ts-ignore
 			this.socket?.removeAllListeners()
 
-			void this.attemptReconnectAfterDelay()
+			this.connectionRetries--
 
-			reject?.(error)
+			if (this.connectionRetries === 0) {
+				reject?.(error)
+				return
+			}
+
+			if (reject) {
+				try {
+					await this.connect()
+				} catch (err) {
+					reject(err)
+				}
+				return
+			}
+
+			try {
+				this.isReconnecting = false
+				await this.attemptReconnectAfterDelay()
+			} catch (err) {
+				//@ts-ignore
+				reject?.(err)
+			}
 		})
 	}
 
-	private async attemptReconnectAfterDelay() {
+	private async attemptReconnectAfterDelay(retriesLeft = this.maxEmitRetries) {
 		if (this.isReconnecting) {
 			return
 		}
@@ -170,11 +191,16 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					this.isReconnecting = false
 					this.skipWaitIfReconnecting = false
 
+					retriesLeft = retriesLeft - 1
+
 					if (
-						err.options.code === 'TIMEOUT' ||
-						err.options.code === 'CONNECTION_FAILED'
+						(err.options.code === 'TIMEOUT' ||
+							err.options.code === 'CONNECTION_FAILED') &&
+						retriesLeft > 0
 					) {
-						await this.attemptReconnectAfterDelay()
+						await this.attemptReconnectAfterDelay(retriesLeft)
+							.then(resolve)
+							.catch(reject)
 					} else {
 						this.lastAuthOptions = undefined
 						reject(err)
@@ -183,7 +209,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			}, this.reconnectDelayMs)
 		})
 
-		await this.waitIfReconnecting()
+		return this.reconnectPromise
 	}
 
 	protected async waitIfReconnecting() {

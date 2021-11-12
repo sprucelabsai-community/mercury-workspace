@@ -120,12 +120,34 @@ export default class UsingMercuryClient extends AbstractClientTest {
 	protected static async throwsHelpfulErrorWhenCantReachHost() {
 		const host = 'https://wontfindthisanywhere.com'
 
-		const err = await assert.doesThrowAsync(() => this.Client({ host }))
+		const err = await assert.doesThrowAsync(() =>
+			this.Client({ host, reconnectDelayMs: 100 })
+		)
 
 		errorAssertUtil.assertError(err, 'CONNECTION_FAILED', {
 			host,
 			statusCode: 503,
 		})
+	}
+
+	@test()
+	protected static async triesToReconnect5TimesMax() {
+		const client = await this.Client({ reconnectDelayMs: 100 })
+
+		let count = 0
+		//@ts-ignore
+		client.connect = () => {
+			count++
+			throw new SpruceError({
+				code: 'CONNECTION_FAILED',
+				host: 'basic',
+				statusCode: 305,
+			})
+		}
+
+		await assert.doesThrowAsync(() => client.attemptReconnectAfterDelay())
+
+		assert.isEqual(count, 5)
 	}
 
 	@test()
