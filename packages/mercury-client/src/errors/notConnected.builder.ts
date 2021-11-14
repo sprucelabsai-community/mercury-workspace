@@ -9,5 +9,9 @@ export default buildErrorSchema({
 			type: 'text',
 			isRequired: true,
 		},
+		fqen: {
+			type: 'id',
+			isRequired: true,
+		},
 	},
 })

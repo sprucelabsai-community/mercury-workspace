@@ -14,6 +14,12 @@ const notConnectedSchema: SpruceErrors.MercuryClient.NotConnectedSchema  = {
 	                isRequired: true,
 	                options: undefined
 	            },
+	            /** . */
+	            'fqen': {
+	                type: 'id',
+	                isRequired: true,
+	                options: undefined
+	            },
 	    }
 }
 

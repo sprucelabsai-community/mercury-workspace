@@ -1,6 +1,7 @@
 {
   "skipped": [
-    "skill"
+    "skill",
+    "event"
   ],
   "installed": [
     "schema",

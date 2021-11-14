@@ -323,7 +323,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		const signature = this.getEventSignatureByName(eventName)
 
 		if (this.isManuallyDisconnected) {
-			throw new SpruceError({ code: 'NOT_CONNECTED', action: 'emit' })
+			throw new SpruceError({
+				code: 'NOT_CONNECTED',
+				action: 'emit',
+				fqen: eventName,
+			})
 		}
 
 		if (signature.emitPayloadSchema) {

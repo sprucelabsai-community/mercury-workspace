@@ -225,6 +225,8 @@ export declare namespace SpruceErrors.MercuryClient {
 		
 			
 			'action': string
+			
+			'fqen': string
 	}
 
 	export interface NotConnectedSchema extends SpruceSchema.Schema {
@@ -235,6 +237,12 @@ export declare namespace SpruceErrors.MercuryClient {
 		            /** . */
 		            'action': {
 		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'fqen': {
+		                type: 'id',
 		                isRequired: true,
 		                options: undefined
 		            },
