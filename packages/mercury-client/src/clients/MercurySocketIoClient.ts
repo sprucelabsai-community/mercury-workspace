@@ -61,6 +61,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private maxEmitRetries: number
 	private authRawResults?: MercuryAggregateResponse<any>
 	private authPromise?: any
+	private shouldRegisterProxyOnReconnect = false
 
 	public constructor(
 		options: {
