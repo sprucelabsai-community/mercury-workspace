@@ -82,8 +82,10 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 	protected static async manuallyDisconnectStopsReconnectAttempts() {
 		const client = await this.Client()
 
+		//@ts-ignore
 		client.host = 'https://wontwork.workwont'
 
+		//@ts-ignore
 		void client.socket.disconnect()
 
 		await this.wait(10)
@@ -92,6 +94,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 		await this.wait(1000)
 
+		//@ts-ignore
 		assert.isFalse(client.isReconnecting)
 	}
 }
