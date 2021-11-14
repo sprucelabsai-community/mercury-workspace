@@ -182,14 +182,29 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					this.connectionRetries = 1
 					await this.connect()
 
+					if (this.isManuallyDisconnected) {
+						this.isReconnecting = false
+						return
+					}
+
 					this.skipWaitIfReconnecting = true
 
 					if (this.lastAuthOptions) {
 						await this.authenticate(this.lastAuthOptions)
 					}
 
+					if (this.isManuallyDisconnected) {
+						this.isReconnecting = false
+						return
+					}
+
 					if (this.shouldRegisterProxyOnReconnect) {
 						await this.registerProxyToken()
+					}
+
+					if (this.isManuallyDisconnected) {
+						this.isReconnecting = false
+						return
 					}
 
 					await this.reRegisterAllListeners()
