@@ -174,7 +174,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 			setTimeout(async () => {
 				try {
+					this.connectionRetries = 1
 					await this.connect()
+
 					this.skipWaitIfReconnecting = true
 
 					if (this.lastAuthOptions) {

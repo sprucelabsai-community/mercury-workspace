@@ -140,10 +140,10 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		const results = await client.emit('whoami::v2020_12_25')
 
 		const {
-			auth: { person: whoAmI },
+			auth: { person: whoami },
 		} = eventResponseUtil.getFirstResponseOrThrow(results)
 
-		assert.isEqual(whoAmI?.id, person.id)
+		assert.isEqual(whoami?.id, person.id)
 	}
 
 	@test()
@@ -151,6 +151,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		const { token, person } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 
 		const client = await this.Client()
+
 		await client.authenticate({
 			token,
 		})
@@ -161,7 +162,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 		//@ts-ignore
 		client.socket?.disconnect()
 
-		await this.wait(2000)
+		await this.wait(100)
 
 		assert.isFalse(client.isConnected())
 
