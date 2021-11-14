@@ -23,7 +23,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 	@test()
 	protected static async reconnectsWhenEmittingEventWhenDisconnected() {
-		const client = await ReconnectingAutomaticallyTest.ClientZeroDelay()
+		const client = await this.ClientZeroDelay()
 
 		//@ts-ignore
 		client.socket.disconnect()
@@ -76,5 +76,22 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		)
 
 		errorAssertUtil.assertError(err, 'TIMEOUT')
+	}
+
+	@test()
+	protected static async manuallyDisconnectStopsReconnectAttempts() {
+		const client = await this.Client()
+
+		client.host = 'https://wontwork.workwont'
+
+		void client.socket.disconnect()
+
+		await this.wait(10)
+
+		await client.disconnect()
+
+		await this.wait(1000)
+
+		assert.isFalse(client.isReconnecting)
 	}
 }

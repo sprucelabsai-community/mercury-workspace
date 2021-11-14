@@ -159,6 +159,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	private async attemptReconnectAfterDelay(retriesLeft = this.maxEmitRetries) {
+		if (this.isManuallyDisconnected) {
+			this.isReconnecting = false
+			return
+		}
+
 		if (this.isReconnecting) {
 			return
 		}
