@@ -16,6 +16,64 @@ export default class ProxyingEventsTest extends AbstractClientTest {
 		this.assertPerson1CameBack(results, person1)
 	}
 
+	@test()
+	protected static async canUseRegisterProxyMethod() {
+		const { client } = await this.loginAsDemoPerson()
+
+		assert.isFunction(client.registerProxyToken)
+		const token = await client.registerProxyToken()
+		const actual = client.getProxyToken()
+
+		assert.isEqual(token, actual)
+	}
+
+	@test()
+	protected static async registerTokenMethodRegistersValidToken() {
+		const { client, person } = await this.loginAsDemoPerson()
+		const { client: client1 } = await this.loginAsDemoPerson()
+
+		assert.isFunction(client.registerProxyToken)
+
+		const token = await client.registerProxyToken()
+
+		await this.assertClientWithTokenComesBackWithPerson(client1, token, person)
+	}
+
+	@test()
+	protected static async clientRegistersNowProxyTokenOnReconnect() {
+		const { client, person } = await this.loginAsDemoPerson()
+
+		const token1 = await client.registerProxyToken()
+
+		//@ts-ignore
+		client.socket.disconnect()
+
+		await this.wait(1000)
+
+		const token2 = client.getProxyToken()
+
+		assert.isTruthy(token2)
+		assert.isNotEqual(token1, token2)
+
+		const { client: client2 } = await this.loginAsDemoPerson()
+
+		await this.assertClientWithTokenComesBackWithPerson(client2, token2, person)
+	}
+
+	private static async assertClientWithTokenComesBackWithPerson(
+		client: any,
+		token: string,
+		person: any
+	) {
+		const results = await client.emit('whoami::v2020_12_25', {
+			source: {
+				proxyToken: token,
+			},
+		})
+
+		this.assertPerson1CameBack(results, person)
+	}
+
 	private static assertPerson1CameBack(results: any, person1: any) {
 		const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
 

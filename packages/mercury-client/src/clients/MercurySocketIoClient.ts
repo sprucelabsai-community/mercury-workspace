@@ -164,6 +164,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		delete this.authPromise
 		this.isReconnecting = true
+		this.proxyToken = null
 
 		this.reconnectPromise = new Promise((resolve: any, reject: any) => {
 			if (this.lastAuthOptions) {
@@ -177,6 +178,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 					if (this.lastAuthOptions) {
 						await this.authenticate(this.lastAuthOptions)
+					}
+
+					if (this.shouldRegisterProxyOnReconnect) {
+						await this.registerProxyToken()
 					}
 
 					await this.reRegisterAllListeners()
@@ -628,5 +633,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 	public setProxyToken(token: string) {
 		this.proxyToken = token
+	}
+
+	public async registerProxyToken() {
+		const results = await this.emit('register-proxy-token::v2020_12_25' as any)
+
+		//@ts-ignore
+		const { token } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		this.setProxyToken(token)
+
+		this.shouldRegisterProxyOnReconnect = true
+
+		return token
 	}
 }

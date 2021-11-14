@@ -15,7 +15,7 @@ export interface ConnectionOptions {
 	maxEmitRetries?: number
 }
 
-export declare type MercuryConnectFactory = (
+export type MercuryConnectFactory = (
 	options?: ConnectionOptions
 ) => Promise<MercuryClient>
 
@@ -27,6 +27,7 @@ export type MercuryClient<
 	isConnected: () => boolean
 	getProxyToken: () => string | null
 	setProxyToken: (token: string) => void
+	registerProxyToken: () => Promise<string>
 	setShouldAutoRegisterListeners: (should: boolean) => void
 	isAuthenticated(): boolean
 	authenticate(options: {
