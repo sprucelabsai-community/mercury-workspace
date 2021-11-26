@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.2.0](https://github.com/sprucelabsai/mercury-workspace/compare/v17.1.113...v17.2.0) (2021-11-26)
+
+
+### Features
+
+* Devs can now check if their Mercury client is a test client or not! ([786c2e1](https://github.com/sprucelabsai/mercury-workspace/commit/786c2e1))
+
+
+
+
+
 ## [17.1.113](https://github.com/sprucelabsai/mercury-workspace/compare/v17.1.112...v17.1.113) (2021-11-26)
 
 **Note:** Version bump only for package spruce-mercury-workspace
