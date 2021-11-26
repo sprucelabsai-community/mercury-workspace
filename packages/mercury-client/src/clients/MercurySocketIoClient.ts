@@ -674,4 +674,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		return token
 	}
+
+	public getIsTestClient() {
+		return false
+	}
 }

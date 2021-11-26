@@ -30,6 +30,7 @@ export type MercuryClient<
 	registerProxyToken: () => Promise<string>
 	setShouldAutoRegisterListeners: (should: boolean) => void
 	isAuthenticated(): boolean
+	getIsTestClient(): boolean
 	authenticate(options: {
 		skillId?: string
 		apiKey?: string

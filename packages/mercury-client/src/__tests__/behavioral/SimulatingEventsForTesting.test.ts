@@ -46,6 +46,27 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
+	protected static async clientKnowsIfIsTestClient() {
+		MercuryClientFactory.setIsTestMode(false)
+
+		const client = await MercuryClientFactory.Client({
+			host: TEST_HOST,
+			allowSelfSignedCrt: true,
+		})
+
+		assert.isFalse(client.getIsTestClient())
+
+		MercuryClientFactory.setIsTestMode(true)
+
+		const client2 = await MercuryClientFactory.Client({
+			host: TEST_HOST,
+			allowSelfSignedCrt: true,
+		})
+
+		assert.isTrue(client2.getIsTestClient())
+	}
+
+	@test()
 	protected static async canResetMixedInContracts() {
 		const client = await this.connectToApi()
 
@@ -519,7 +540,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			'INVALID_EVENT_NAME'
 		)
 
-		assert.doesInclude(err.message, 'spruce listen.event')
+		assert.doesInclude(err.message, 'create.listener')
 	}
 
 	@test()

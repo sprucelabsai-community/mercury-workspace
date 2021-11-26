@@ -252,4 +252,8 @@ export default class MercuryTestClient<
 		MercuryTestClient.emitter?.reset()
 		MercuryTestClient.resetContracts()
 	}
+
+	public getIsTestClient() {
+		return true
+	}
 }
