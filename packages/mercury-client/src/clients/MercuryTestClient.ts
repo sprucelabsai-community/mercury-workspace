@@ -209,7 +209,7 @@ export default class MercuryTestClient<
 
 				const firstError = results.responses?.[0]?.errors?.[0]
 				if (firstError && firstError.options?.code === 'INVALID_EVENT_NAME') {
-					firstError.options.friendlyMessage = `Event not found! Make sure you are booting your skill in your test with \`await this.bootSkill()\`. If you haven't, you'll need to create a listener with \`spruce listen.event\`. More: ${firstError.options.friendlyMessage}`
+					firstError.options.friendlyMessage = `Event not found! Make sure you are booting your skill in your test with \`await this.bootSkill()\`. If you haven't, you'll need to create a listener with \`spruce create.listener\`.\n\nOriginal Error:\n\n${firstError.options.friendlyMessage}`
 				}
 
 				return results
