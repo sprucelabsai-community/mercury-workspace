@@ -79,7 +79,7 @@ export default class MercuryTestClient<
 	private _isConnected = false
 	private isConnectedToApi = false
 	private connectPromise?: Promise<void>
-	private static shouldValidateLocalEvents: boolean
+	private static shouldValidateLocalEvents = true
 
 	public static setShouldValidateLocalEvents(should: boolean) {
 		this.shouldValidateLocalEvents = should
