@@ -79,6 +79,11 @@ export default class MercuryTestClient<
 	private _isConnected = false
 	private isConnectedToApi = false
 	private connectPromise?: Promise<void>
+	private static shouldValidateLocalEvents: boolean
+
+	public static setShouldValidateLocalEvents(should: boolean) {
+		this.shouldValidateLocalEvents = should
+	}
 
 	public constructor(
 		options: Record<string, any> & { host: string; eventContract?: Contract }
@@ -124,83 +129,7 @@ export default class MercuryTestClient<
 
 		try {
 			if (emitter.listenCount(fqen) > 0) {
-				let source: EventSource = {
-					...args[1]?.source,
-				}
-				if (this.auth?.person) {
-					source.personId = this.auth.person.id
-				}
-
-				if (this.auth?.skill) {
-					source.skillId = this.auth.skill.id
-				}
-
-				if (!source.proxyToken && this.getProxyToken()) {
-					source.proxyToken = this.getProxyToken()
-				}
-
-				const argsWithSource = [...args]
-
-				if (Object.keys(source).length > 0) {
-					argsWithSource[1] = {
-						...argsWithSource[1],
-						source,
-					}
-				}
-
-				const contract = emitter.getContract()
-				const sig = eventContractUtil.getSignatureByName(contract, fqen)
-				const { eventNamespace } = eventNameUtil.split(fqen)
-
-				if (sig.emitPermissionContract && eventNamespace) {
-					let { target } = args[1] ?? {}
-					let permTarget = { ...source }
-
-					if (target?.organizationId) {
-						permTarget.organizationId = target.organizationId
-					}
-
-					const results = await this.emit(
-						'does-honor-permission-contract::v2020_12_25',
-						{
-							target: permTarget,
-							payload: {
-								id: sig.emitPermissionContract.id,
-								fqen,
-							},
-						}
-					)
-
-					if (results.totalErrors > 0) {
-						return results as any
-					}
-
-					const { doesHonor } =
-						eventResponseUtil.getFirstResponseOrThrow(results)
-
-					if (!doesHonor) {
-						return {
-							totalContracts: 1,
-							totalErrors: 1,
-							totalResponses: 1,
-							responses: [
-								{
-									errors: [
-										new SpruceError({
-											code: 'UNAUTHORIZED_ACCESS',
-											fqen,
-											action: 'emit',
-											target,
-											permissionContractId: sig.emitPermissionContract.id,
-										}),
-									],
-								},
-							],
-						}
-					}
-				}
-
-				return emitter.emit(...argsWithSource)
+				return this.handleEventLocally(args)
 			} else {
 				await this.connectIfNotConnected()
 
@@ -221,6 +150,114 @@ export default class MercuryTestClient<
 
 			throw err
 		}
+	}
+
+	private async handleEventLocally(
+		args: any[]
+	): Promise<MercuryAggregateResponse<any>> {
+		const emitter = MercuryTestClient.emitter
+		const fqen = args[0]
+
+		let { source, argsWithSource } = this.buildSource(args)
+
+		const contract = emitter.getContract()
+		const sig = eventContractUtil.getSignatureByName(contract, fqen)
+		const { eventNamespace } = eventNameUtil.split(fqen)
+
+		if (sig.emitPermissionContract && eventNamespace) {
+			const doesHonor = await this.optionallyCheckPermissions(
+				args,
+				source,
+				sig.emitPermissionContract.id,
+				fqen
+			)
+
+			if (!doesHonor) {
+				return {
+					totalContracts: 1,
+					totalErrors: 1,
+					totalResponses: 1,
+					responses: [
+						{
+							errors: [
+								new SpruceError({
+									code: 'UNAUTHORIZED_ACCESS',
+									fqen,
+									action: 'emit',
+									target: args[1] ?? {},
+									permissionContractId: sig.emitPermissionContract.id,
+								}),
+							],
+						},
+					],
+				} as any
+			}
+		}
+
+		return emitter.emit(...argsWithSource) as any
+	}
+	private async optionallyCheckPermissions(
+		args: any[],
+		source: any,
+		permissionContractId: any,
+		fqen: string
+	) {
+		if (!MercuryTestClient.shouldValidateLocalEvents) {
+			return true
+		}
+
+		let { target } = args[1] ?? {}
+		let permTarget = { ...source }
+
+		if (target?.organizationId) {
+			permTarget.organizationId = target.organizationId
+		}
+
+		const results = await this.emit(
+			'does-honor-permission-contract::v2020_12_25',
+			{
+				target: permTarget,
+				payload: {
+					id: permissionContractId,
+					fqen,
+				},
+			}
+		)
+
+		if (results.totalErrors > 0) {
+			return results as any
+		}
+
+		const { doesHonor } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		return doesHonor
+	}
+
+	private buildSource(args: any[]) {
+		let source: EventSource = {
+			...args[1]?.source,
+		}
+		if (this.auth?.person) {
+			source.personId = this.auth.person.id
+		}
+
+		if (this.auth?.skill) {
+			source.skillId = this.auth.skill.id
+		}
+
+		if (!source.proxyToken && this.getProxyToken()) {
+			source.proxyToken = this.getProxyToken()
+		}
+
+		const argsWithSource = [...args]
+
+		if (Object.keys(source).length > 0) {
+			argsWithSource[1] = {
+				...argsWithSource[1],
+				source,
+			}
+		}
+		return { source, argsWithSource }
 	}
 
 	private async connectIfNotConnected() {

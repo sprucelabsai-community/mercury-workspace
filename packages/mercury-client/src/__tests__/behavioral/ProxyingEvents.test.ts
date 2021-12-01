@@ -40,7 +40,7 @@ export default class ProxyingEventsTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async clientRegistersNowProxyTokenOnReconnect() {
+	protected static async clientRegistersNewProxyTokenOnReconnect() {
 		const { client, person } = await this.loginAsDemoPerson()
 
 		const token1 = await client.registerProxyToken()
@@ -48,11 +48,13 @@ export default class ProxyingEventsTest extends AbstractClientTest {
 		//@ts-ignore
 		client.socket.disconnect()
 
-		await this.wait(1000)
+		let token2: string | null = null
 
-		const token2 = client.getProxyToken()
+		do {
+			token2 = client.getProxyToken()
+			await this.wait(100)
+		} while (!token2)
 
-		assert.isTruthy(token2)
 		assert.isNotEqual(token1, token2)
 
 		const { client: client2 } = await this.loginAsDemoPerson()
