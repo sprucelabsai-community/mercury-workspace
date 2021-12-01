@@ -340,6 +340,9 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		let wasHit = false
 		client1.on('does-honor-permission-contract::v2020_12_25', () => {
 			wasHit = true
+			return {
+				doesHonor: true,
+			}
 		})
 
 		let s: any
