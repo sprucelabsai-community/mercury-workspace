@@ -172,6 +172,10 @@ export default class MercuryTestClient<
 				fqen
 			)
 
+			if (typeof doesHonor !== 'boolean') {
+				return doesHonor
+			}
+
 			if (!doesHonor) {
 				return {
 					totalContracts: 1,
@@ -201,7 +205,7 @@ export default class MercuryTestClient<
 		source: any,
 		permissionContractId: any,
 		fqen: string
-	) {
+	): Promise<boolean | MercuryAggregateResponse<any>> {
 		if (!MercuryTestClient.shouldValidateLocalEvents) {
 			return true
 		}

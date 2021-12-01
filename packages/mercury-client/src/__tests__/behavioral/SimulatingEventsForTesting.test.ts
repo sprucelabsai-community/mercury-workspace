@@ -337,6 +337,11 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		client2.mixinContract(contract)
 
+		let wasHit = false
+		client1.on('does-honor-permission-contract::v2020_12_25', () => {
+			wasHit = true
+		})
+
 		let s: any
 
 		//@ts-ignore
@@ -349,6 +354,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		assert.isAbove(results.totalErrors, 0)
 		assert.isFalsy(s)
+		assert.isTrue(wasHit)
 	}
 
 	@test()
