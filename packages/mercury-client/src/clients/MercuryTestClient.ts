@@ -2,6 +2,7 @@ import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import {
 	EventContract,
 	MercuryAggregateResponse,
+	SkillEventContract,
 } from '@sprucelabs/mercury-types'
 import { Schema } from '@sprucelabs/schema'
 import {
@@ -73,7 +74,8 @@ class InternalEmitter<
 }
 
 export default class MercuryTestClient<
-	Contract extends EventContract
+	/** @ts-ignore */
+	Contract extends EventContract = SkillEventContract
 > extends MutableContractClient<Contract> {
 	private static emitter: any
 	private _isConnected = false
