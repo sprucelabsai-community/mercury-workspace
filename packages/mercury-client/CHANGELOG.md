@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.4.0](https://github.com/sprucelabsai/mercury-workspace/compare/v17.3.0...v17.4.0) (2021-12-01)
+
+
+### Features
+
+* test client export ([cce0799](https://github.com/sprucelabsai/mercury-workspace/commit/cce0799))
+
+
+
+
+
 # [17.3.0](https://github.com/sprucelabsai/mercury-workspace/compare/v17.2.19...v17.3.0) (2021-12-01)
 
 
