@@ -341,7 +341,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		client1.on('does-honor-permission-contract::v2020_12_25', () => {
 			wasHit = true
 			return {
-				doesHonor: true,
+				doesHonor: false,
 			}
 		})
 
