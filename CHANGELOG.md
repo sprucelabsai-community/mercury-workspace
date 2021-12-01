@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.3.0](https://github.com/sprucelabsai/mercury-workspace/compare/v17.2.19...v17.3.0) (2021-12-01)
+
+
+### Features
+
+* Devs can now disable local event validation, making deving even faster! ([0167686](https://github.com/sprucelabsai/mercury-workspace/commit/0167686))
+
+
+
+
+
 ## [17.2.19](https://github.com/sprucelabsai/mercury-workspace/compare/v17.2.18...v17.2.19) (2021-12-01)
 
 **Note:** Version bump only for package spruce-mercury-workspace
