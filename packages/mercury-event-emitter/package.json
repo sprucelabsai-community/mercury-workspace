@@ -62,9 +62,9 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.317",
-    "@sprucelabs/mercury-types": "^26.1.994",
+    "@sprucelabs/mercury-types": "^26.1.995",
     "@sprucelabs/schema": "^25.4.69",
-    "@sprucelabs/spruce-event-utils": "^17.1.274"
+    "@sprucelabs/spruce-event-utils": "^17.1.275"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^1.0.296",
@@ -76,7 +76,7 @@
     "@types/node": "^16.11.11",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^6.4.0",
-    "eslint": "^8.4.0",
+    "eslint": "^8.4.1",
     "eslint-config-spruce": "^10.10.16",
     "jest": "^27.4.3",
     "jest-circus": "^27.4.2",
