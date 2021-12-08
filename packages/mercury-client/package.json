@@ -79,7 +79,7 @@
     "@sprucelabs/mercury-types": "^26.1.1013",
     "@sprucelabs/resolve-path-aliases": "^1.0.237",
     "@sprucelabs/semantic-release": "^4.0.8",
-    "@sprucelabs/test": "^7.7.250",
+    "@sprucelabs/test": "^7.7.251",
     "@sprucelabs/test-utils": "^3.0.307",
     "@types/node": "^16.11.12",
     "chokidar-cli": "^3.0.0",
