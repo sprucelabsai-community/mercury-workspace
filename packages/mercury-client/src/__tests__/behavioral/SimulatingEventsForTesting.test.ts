@@ -10,7 +10,7 @@ import {
 } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import { MercuryClientFactory } from '../..'
+import { MercuryClientFactory, MercuryTestClient } from '../..'
 import SpruceError from '../../errors/SpruceError'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import {
@@ -316,8 +316,13 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isUndefined(s.skillId)
 	}
 
-	@test()
-	protected static async doesCheckPermsIfPermissionsIsEmptyArrayOnContract() {
+	@test('does not check permissions by default', false)
+	@test('does check permissions by default if array is empty', true)
+	protected static async doesCheckPermsIfPermissionsIsEmptyArrayOnContract(
+		expected: boolean
+	) {
+		MercuryTestClient.setShouldCheckPermissionsOnLocalEvents(expected)
+
 		const [client2, { client: client1 }] = await Promise.all([
 			this.connectToApi(),
 			this.loginAsDemoPerson(),
@@ -326,10 +331,19 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const contract: EventContract = {
 			eventSignatures: {
 				[this.testEventName]: {
+					isGlobal: true,
 					emitPermissionContract: {
 						id: 'test',
 						name: 'Can emit',
 						permissions: [],
+					},
+					responsePayloadSchema: {
+						id: 'response',
+						fields: {
+							hit: {
+								type: 'boolean',
+							},
+						},
 					},
 				},
 			},
@@ -355,9 +369,14 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		//@ts-ignore
 		const results = await client1.emit(this.testEventName)
 
-		assert.isAbove(results.totalErrors, 0)
-		assert.isFalsy(s)
-		assert.isTrue(wasHit)
+		if (expected) {
+			assert.isAbove(results.totalErrors, 0)
+			assert.isFalsy(s)
+		} else {
+			assert.isTruthy(s)
+			assert.isEqual(results.totalErrors, 0)
+		}
+		assert.isEqual(wasHit, expected)
 	}
 
 	@test()
@@ -412,6 +431,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async checksPermissionsWhenEmitting() {
+		MercuryTestClient.setShouldCheckPermissionsOnLocalEvents(true)
+
 		const { skill1, skill1Client, skill2Client, org, personClient } =
 			await this.setupOrgAndInstall2Skills()
 
@@ -422,6 +443,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		skill1Client.mixinContract({
 			eventSignatures: {
 				[fqen]: {
+					isGlobal: true,
 					emitPermissionContract: this.buildEmitPermContract(),
 				},
 			},
@@ -497,7 +519,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async responsThrowingAnErrorIsPassedThrough() {
+	protected static async responseThrowingAnErrorIsPassedThrough() {
 		const [client1, client2] = await Promise.all([
 			this.connectToApi(true),
 			this.connectToApi(true),
@@ -606,6 +628,36 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isEqual(s.skillId, skill1.id)
 		assert.isUndefined(s.personId)
 		assert.isEqual(s.proxyToken, proxyToken)
+	}
+
+	@test()
+	protected static async throwsIfEmitsIsNotGlobalAndTargetDoesNotIncludeOrganizationIdOrLocationId() {
+		MercuryTestClient.setShouldCheckPermissionsOnLocalEvents(false)
+
+		const client = await this.connectToApi(true)
+		const client2 = await this.connectToApi(true)
+
+		const contract: EventContract = {
+			eventSignatures: {
+				[this.testEventName]: {
+					emitPermissionContract: {
+						id: 'test',
+						name: 'Can emit',
+						permissions: [],
+					},
+				},
+			},
+		}
+
+		client.mixinContract(contract)
+
+		await client.on(this.testEventName as any, () => {})
+
+		const err = await assert.doesThrowAsync(() =>
+			client2.emit(this.testEventName as any)
+		)
+
+		errorAssertUtil.assertError(err, 'INVALID_EVENT_SIGNATURE')
 	}
 
 	private static async assertTeammateCanEmit(options: {
@@ -743,7 +795,9 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	private static mixinPayloadlessTestEvent(client: any) {
 		const contract = {
 			eventSignatures: {
-				[this.testEventName]: {},
+				[this.testEventName]: {
+					isGlobal: true,
+				},
 			},
 		}
 

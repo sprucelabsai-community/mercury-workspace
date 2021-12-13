@@ -329,6 +329,43 @@ export declare namespace SpruceErrors.MercuryClient {
 export declare namespace SpruceErrors.MercuryClient {
 
 	
+	export interface InvalidEventSignature {
+		
+			
+			'fqen': string
+			
+			'instructions': string
+	}
+
+	export interface InvalidEventSignatureSchema extends SpruceSchema.Schema {
+		id: 'invalidEventSignature',
+		namespace: 'MercuryClient',
+		name: 'Invalid event contract',
+		    fields: {
+		            /** . */
+		            'fqen': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'instructions': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type InvalidEventSignatureEntity = SchemaEntity<SpruceErrors.MercuryClient.InvalidEventSignatureSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
 	export interface ConnectionFailed {
 		
 			

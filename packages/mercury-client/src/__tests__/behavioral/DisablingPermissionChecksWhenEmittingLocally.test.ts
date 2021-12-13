@@ -20,12 +20,12 @@ export default class DisablingEventValidationWhenEmittingLocallyTest extends Abs
 
 	@test()
 	protected static hasSetter() {
-		assert.isFunction(MercuryTestClient.setShouldValidateLocalEvents)
+		assert.isFunction(MercuryTestClient.setShouldCheckPermissionsOnLocalEvents)
 	}
 
 	@test()
 	protected static async canDisableEventValidation() {
-		MercuryTestClient.setShouldValidateLocalEvents(false)
+		MercuryTestClient.setShouldCheckPermissionsOnLocalEvents(false)
 
 		let wasHit = false
 

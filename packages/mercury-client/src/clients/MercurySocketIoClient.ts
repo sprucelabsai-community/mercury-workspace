@@ -27,6 +27,12 @@ import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 type IoOptions = Partial<ManagerOptions & SocketOptions>
 
 const authenticateFqen = 'authenticate::v2020_12_25'
+export interface AuthenticateOptions {
+	skillId?: string
+	apiKey?: string
+	token?: string
+}
+
 export default class MercurySocketIoClient<Contract extends EventContract>
 	implements MercuryClient<Contract>
 {
@@ -40,7 +46,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private reconnectDelayMs: number
 	private isReAuthing = false
 	private reconnectPromise: any = null
-	private lastAuthOptions?: {
+	protected lastAuthOptions?: {
 		skillId?: string | undefined
 		apiKey?: string | undefined
 		token?: string | undefined
@@ -60,7 +66,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private skipWaitIfReconnecting = false
 	private maxEmitRetries: number
 	private authRawResults?: MercuryAggregateResponse<any>
-	private authPromise?: any
+	protected authPromise?: any
 	private shouldRegisterProxyOnReconnect = false
 
 	public constructor(
@@ -601,11 +607,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		return
 	}
 
-	public async authenticate(options: {
-		skillId?: string
-		apiKey?: string
-		token?: string
-	}) {
+	public async authenticate(options: AuthenticateOptions) {
 		const { skillId, apiKey, token } = options
 
 		if (this.authPromise) {

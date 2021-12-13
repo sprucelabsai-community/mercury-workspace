@@ -65,6 +65,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `Not authorized! You cannot ${options.action} \`${options.fqen}\`!`
 				break
 
+			case 'INVALID_EVENT_SIGNATURE':
+				message = `The signature for '${options.fqen}' is invalid:\n\n${options.instructions}`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

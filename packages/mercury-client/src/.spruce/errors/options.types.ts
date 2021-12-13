@@ -25,10 +25,13 @@ export interface InvalidProtocolErrorOptions extends SpruceErrors.MercuryClient.
 export interface InvalidPayloadErrorOptions extends SpruceErrors.MercuryClient.InvalidPayload, ISpruceErrorOptions {
 	code: 'INVALID_PAYLOAD'
 }
+export interface InvalidEventSignatureErrorOptions extends SpruceErrors.MercuryClient.InvalidEventSignature, ISpruceErrorOptions {
+	code: 'INVALID_EVENT_SIGNATURE'
+}
 export interface ConnectionFailedErrorOptions extends SpruceErrors.MercuryClient.ConnectionFailed, ISpruceErrorOptions {
 	code: 'CONNECTION_FAILED'
 }
 
-type ErrorOptions =  | UnknownErrorErrorOptions  | UnexpectedPayloadErrorOptions  | UnauthorizedAccessErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | MissingTestCacheDirErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | ConnectionFailedErrorOptions 
+type ErrorOptions =  | UnknownErrorErrorOptions  | UnexpectedPayloadErrorOptions  | UnauthorizedAccessErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | MissingTestCacheDirErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | InvalidEventSignatureErrorOptions  | ConnectionFailedErrorOptions 
 
 export default ErrorOptions

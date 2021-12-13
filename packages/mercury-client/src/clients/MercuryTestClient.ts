@@ -3,6 +3,7 @@ import {
 	EventContract,
 	MercuryAggregateResponse,
 	SkillEventContract,
+	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import { Schema } from '@sprucelabs/schema'
 import {
@@ -81,10 +82,11 @@ export default class MercuryTestClient<
 	private _isConnected = false
 	private isConnectedToApi = false
 	private connectPromise?: Promise<void>
-	private static shouldValidateLocalEvents = true
+	private static shouldCheckPermissionsOnLocalEvents = false
+	private shouldHandleAuthenticateLocallyIfListenerSet = true
 
-	public static setShouldValidateLocalEvents(should: boolean) {
-		this.shouldValidateLocalEvents = should
+	public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
+		this.shouldCheckPermissionsOnLocalEvents = should
 	}
 
 	public constructor(
@@ -130,7 +132,7 @@ export default class MercuryTestClient<
 		const fqen = args[0]
 
 		try {
-			if (emitter.listenCount(fqen) > 0) {
+			if (this.getShouldHandleEventLocally(emitter, fqen)) {
 				return this.handleEventLocally(args)
 			} else {
 				await this.connectIfNotConnected()
@@ -154,6 +156,17 @@ export default class MercuryTestClient<
 		}
 	}
 
+	private getShouldHandleEventLocally(emitter: any, fqen: any) {
+		if (
+			!this.shouldHandleAuthenticateLocallyIfListenerSet &&
+			fqen === 'authenticate::v2020_12_25'
+		) {
+			return false
+		}
+
+		return emitter.listenCount(fqen) > 0
+	}
+
 	private async handleEventLocally(
 		args: any[]
 	): Promise<MercuryAggregateResponse<any>> {
@@ -165,6 +178,10 @@ export default class MercuryTestClient<
 		const contract = emitter.getContract()
 		const sig = eventContractUtil.getSignatureByName(contract, fqen)
 		const { eventNamespace } = eventNameUtil.split(fqen)
+
+		if (eventNamespace) {
+			this.assertValidEventSignature(sig, fqen)
+		}
 
 		if (sig.emitPermissionContract && eventNamespace) {
 			const doesHonor = await this.optionallyCheckPermissions(
@@ -202,13 +219,28 @@ export default class MercuryTestClient<
 
 		return emitter.emit(...argsWithSource) as any
 	}
+
+	private assertValidEventSignature(
+		sig: SpruceSchemas.Mercury.v2020_12_25.EventSignature,
+		fqen: string
+	) {
+		if (!sig.isGlobal && !sig.emitPayloadSchema?.fields?.target) {
+			throw new SpruceError({
+				code: 'INVALID_EVENT_SIGNATURE',
+				fqen,
+				instructions:
+					'You have to either set your event to global (event.options.ts, which requires special permissions) or add a target that includes an organizationId or locationId.',
+			})
+		}
+	}
+
 	private async optionallyCheckPermissions(
 		args: any[],
 		source: any,
 		permissionContractId: any,
 		fqen: string
 	): Promise<boolean | MercuryAggregateResponse<any>> {
-		if (!MercuryTestClient.shouldValidateLocalEvents) {
+		if (!MercuryTestClient.shouldCheckPermissionsOnLocalEvents) {
 			return true
 		}
 
@@ -270,6 +302,11 @@ export default class MercuryTestClient<
 		if (!this.isConnectedToApi) {
 			this.isConnectedToApi = true
 			this.connectPromise = super.connect()
+			if (this.lastAuthOptions) {
+				this.authPromise = undefined
+				this.shouldHandleAuthenticateLocallyIfListenerSet = false
+				await this.authenticate(this.lastAuthOptions)
+			}
 		}
 
 		await this.connectPromise
