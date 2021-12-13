@@ -26,7 +26,7 @@ import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 
 type IoOptions = Partial<ManagerOptions & SocketOptions>
 
-const authenticateFqen = 'authenticate::v2020_12_25'
+export const authenticateFqen = 'authenticate::v2020_12_25'
 export interface AuthenticateOptions {
 	skillId?: string
 	apiKey?: string

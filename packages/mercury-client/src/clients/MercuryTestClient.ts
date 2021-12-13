@@ -13,6 +13,7 @@ import {
 	EventSource,
 } from '@sprucelabs/spruce-event-utils'
 import SpruceError from '../errors/SpruceError'
+import { authenticateFqen } from './MercurySocketIoClient'
 import MutableContractClient from './MutableContractClient'
 
 class InternalEmitter<
@@ -135,7 +136,7 @@ export default class MercuryTestClient<
 			if (this.getShouldHandleEventLocally(emitter, fqen)) {
 				return this.handleEventLocally(args)
 			} else {
-				await this.connectIfNotConnected()
+				await this.connectIfNotConnected(fqen)
 
 				//@ts-ignore
 				const results = await super.emit(...args)
@@ -159,7 +160,7 @@ export default class MercuryTestClient<
 	private getShouldHandleEventLocally(emitter: any, fqen: any) {
 		if (
 			!this.shouldHandleAuthenticateLocallyIfListenerSet &&
-			fqen === 'authenticate::v2020_12_25'
+			fqen === authenticateFqen
 		) {
 			return false
 		}
@@ -298,11 +299,11 @@ export default class MercuryTestClient<
 		return { source, argsWithSource }
 	}
 
-	private async connectIfNotConnected() {
+	private async connectIfNotConnected(fqen: string) {
 		if (!this.isConnectedToApi) {
 			this.isConnectedToApi = true
 			this.connectPromise = super.connect()
-			if (this.lastAuthOptions) {
+			if (this.lastAuthOptions && fqen !== authenticateFqen) {
 				this.authPromise = undefined
 				this.shouldHandleAuthenticateLocallyIfListenerSet = false
 				await this.authenticate(this.lastAuthOptions)
