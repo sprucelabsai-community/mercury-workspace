@@ -94,13 +94,19 @@ export default class MercuryTestClient<
 		options: Record<string, any> & { host: string; eventContract?: Contract }
 	) {
 		super(options)
+		MercuryTestClient.getInternalEmitter(options.eventContract)
+	}
+
+	public static getInternalEmitter(contract: EventContract | undefined) {
 		if (!MercuryTestClient.emitter) {
 			MercuryTestClient.emitter = new InternalEmitter(
-				options.eventContract ?? { eventSignatures: {} }
+				contract ?? { eventSignatures: {} }
 			)
-		} else if (options.eventContract) {
-			MercuryTestClient.emitter.mixinOnlyUniqueSignatures(options.eventContract)
+		} else if (contract) {
+			MercuryTestClient.emitter.mixinOnlyUniqueSignatures(contract)
 		}
+
+		return MercuryTestClient.emitter
 	}
 
 	public static resetContracts() {
