@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.1.1](https://github.com/sprucelabsai/mercury-workspace/compare/v18.1.0...v18.1.1) (2021-12-13)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+# [18.1.0](https://github.com/sprucelabsai/mercury-workspace/compare/v18.0.0...v18.1.0) (2021-12-13)
+
+
+### Features
+
+* it is now possible to get the internal emitter off the test client to make simulating local events even EASIER! ([e3b5298](https://github.com/sprucelabsai/mercury-workspace/commit/e3b5298))
+
+
+
+
+
 # [18.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v17.4.85...v18.0.0) (2021-12-13)
 
 
