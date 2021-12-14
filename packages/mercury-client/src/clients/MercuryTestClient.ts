@@ -1,6 +1,7 @@
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import {
 	EventContract,
+	EventNames,
 	MercuryAggregateResponse,
 	SkillEventContract,
 	SpruceSchemas,
@@ -105,6 +106,11 @@ export default class MercuryTestClient<
 		}
 
 		return MercuryTestClient.emitter as MercuryClient
+	}
+
+	public async off(eventName: EventNames<Contract>): Promise<number> {
+		await MercuryTestClient.emitter?.off(eventName)
+		return super.off(eventName)
 	}
 
 	public mixinContract(contract: EventContract) {
