@@ -54,27 +54,6 @@ export default class UsingMercuryClient extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async canGetResponseWithoutTypesWithNoContract() {
-		const client = await this.Client({ contracts: undefined })
-		const results = await client.emit('get-event-contracts::v2020_12_25')
-
-		assert.isTruthy(results)
-	}
-
-	@test()
-	protected static async canAddEmitPayloadToAnythingWithoutContract() {
-		const client = await this.Client({ contracts: undefined })
-
-		//@ts-ignore
-		const results = await client.emit('get-event-contracts::v2020_12_25', {
-			//@ts-ignore
-			payload: { hello: 'world' },
-		})
-
-		assert.isTruthy(results)
-	}
-
-	@test()
 	protected static async connectingToBadProtocolThrows() {
 		const err = await assert.doesThrowAsync(() =>
 			MercuryClientFactory.Client({ host: 'aoeu://tasty.org', contracts: [] })

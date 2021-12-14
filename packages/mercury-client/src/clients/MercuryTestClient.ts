@@ -20,10 +20,6 @@ import MutableContractClient from './MutableContractClient'
 class InternalEmitter<
 	Contract extends EventContract
 > extends AbstractEventEmitter<Contract> {
-	public reset() {
-		this.listenersByEvent = {}
-	}
-
 	public doesHandleEvent(eventName: string) {
 		try {
 			eventContractUtil.getSignatureByName(this.eventContract, eventName as any)
@@ -111,11 +107,6 @@ export default class MercuryTestClient<
 		return MercuryTestClient.emitter as MercuryClient
 	}
 
-	public static resetContracts() {
-		MutableContractClient.resetContracts()
-		MercuryTestClient.emitter?.resetContracts()
-	}
-
 	public mixinContract(contract: EventContract) {
 		MutableContractClient.mixinContract(contract)
 		MercuryTestClient.emitter.mixinContract(contract)
@@ -126,10 +117,6 @@ export default class MercuryTestClient<
 			super.doesHandleEvent(eventName) ||
 			MercuryTestClient.emitter?.doesHandleEvent(eventName)
 		)
-	}
-
-	public resetContracts() {
-		MercuryTestClient.resetContracts()
 	}
 
 	public async on(...args: any[]) {
@@ -338,8 +325,11 @@ export default class MercuryTestClient<
 	}
 
 	public static reset() {
-		MercuryTestClient.emitter?.reset()
-		MercuryTestClient.resetContracts()
+		MutableContractClient.reset()
+		MercuryTestClient.emitter = undefined
+		MercuryTestClient.emitter = MercuryTestClient.getInternalEmitter({
+			eventSignatures: {},
+		})
 	}
 
 	public getIsTestClient() {

@@ -17,16 +17,14 @@ export default class MutableContractClient<
 		])
 	}
 
-	public static resetContracts() {
-		this.inMemoryContract = undefined
-	}
-
 	public mixinContract(contract: EventContract) {
 		MutableContractClient.mixinContract(contract)
 	}
 
-	public resetContracts() {
-		MutableContractClient.resetContracts()
+	public static reset() {
+		this.inMemoryContract = {
+			eventSignatures: {},
+		}
 	}
 
 	public doesHandleEvent(eventName: string) {

@@ -15,7 +15,6 @@ import SpruceError from './errors/SpruceError'
 export default class AbstractEventEmitter<Contract extends EventContract>
 	implements MercuryEventEmitter<Contract>
 {
-	private originalEventContract: EventContract
 	private shouldEmitSequentally: boolean
 
 	protected eventContract: EventContract
@@ -29,7 +28,6 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		options?: { shouldEmitSequentally?: boolean }
 	) {
 		this.eventContract = contract
-		this.originalEventContract = contract
 		this.shouldEmitSequentally = options?.shouldEmitSequentally ?? false
 	}
 
@@ -191,10 +189,6 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 			this.eventContract,
 			contract,
 		]) as EventContract
-	}
-
-	public resetContracts() {
-		this.eventContract = { ...this.originalEventContract }
 	}
 
 	protected validateEmitPayload(

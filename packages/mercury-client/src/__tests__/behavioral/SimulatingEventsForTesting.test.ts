@@ -66,34 +66,6 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isTrue(client2.getIsTestClient())
 	}
 
-	@test()
-	protected static async canResetMixedInContracts() {
-		const client = await this.connectToApi()
-
-		assert.isFalse(client.doesHandleEvent(this.testEventName))
-		assert.isTrue(client.doesHandleEvent(this.eventName))
-
-		this.mixinPayloadlessTestEvent(client)
-
-		assert.isTrue(client.doesHandleEvent(this.testEventName))
-		assert.isTrue(client.doesHandleEvent(this.eventName))
-
-		assert.doesThrow(() => this.mixinPayloadlessTestEvent(client))
-
-		assert.isTrue(client.doesHandleEvent(this.testEventName))
-		assert.isTrue(client.doesHandleEvent(this.eventName))
-
-		client.resetContracts()
-
-		assert.isFalse(client.doesHandleEvent(this.testEventName))
-		assert.isTrue(client.doesHandleEvent(this.eventName))
-
-		this.mixinPayloadlessTestEvent(client)
-
-		assert.isTrue(client.doesHandleEvent(this.testEventName))
-		assert.isTrue(client.doesHandleEvent(this.eventName))
-	}
-
 	@test('can emit to self with default contract', true)
 	@test('can emit to self without default contract', false)
 	protected static async canEmitEventToSelfForTesting(
@@ -189,59 +161,15 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async canResetListeners() {
-		MercuryClientFactory.resetTestClient()
-
+	protected static async canResetClient() {
 		const client = await this.connectToApi()
-		let fireCount = 0
 
-		await client.on('did-message::v2020_12_25', async () => {
-			fireCount++
-		})
+		MercuryTestClient.reset()
+		const err = await assert.doesThrowAsync(() =>
+			client.on('did-message::v2020_12_25', async () => {})
+		)
 
-		await client.on('did-message::v2020_12_25', async () => {
-			fireCount++
-		})
-
-		await client.emit('did-message::v2020_12_25', {
-			target: {},
-			payload: {
-				message: {
-					id: 'test',
-					source: {},
-					target: {},
-					body: 'message body',
-					classification: 'incoming',
-					dateCreated: 1,
-				},
-			},
-		})
-
-		assert.isEqual(fireCount, 2)
-
-		fireCount = 0
-
-		MercuryClientFactory.resetTestClient()
-
-		await client.on('did-message::v2020_12_25', async () => {
-			fireCount++
-		})
-
-		await client.emit('did-message::v2020_12_25', {
-			target: {},
-			payload: {
-				message: {
-					id: 'test',
-					source: {},
-					target: {},
-					body: 'message body',
-					classification: 'incoming',
-					dateCreated: 1,
-				},
-			},
-		})
-
-		assert.isEqual(fireCount, 1)
+		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
 	@test()

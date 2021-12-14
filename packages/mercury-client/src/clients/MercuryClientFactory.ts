@@ -9,7 +9,6 @@ import MutableContractClient from './MutableContractClient'
 export type Client<Contract extends EventContract> = MercuryClient<Contract> & {
 	doesHandleEvent(eventName: string): boolean
 	mixinContract(eventContract: EventContract): void
-	resetContracts(): void
 }
 
 export default class MercuryClientFactory {
@@ -97,7 +96,7 @@ export default class MercuryClientFactory {
 		this.defaultContract = undefined
 	}
 
-	public static resetTestClient() {
+	private static resetTestClient() {
 		const Client = require('../clients/MercuryTestClient').default
 		Client.reset()
 	}
