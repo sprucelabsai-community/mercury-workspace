@@ -12,6 +12,7 @@ import {
 	eventResponseUtil,
 	EventSource,
 } from '@sprucelabs/spruce-event-utils'
+import { MercuryClient } from '..'
 import SpruceError from '../errors/SpruceError'
 import { authenticateFqen } from './MercurySocketIoClient'
 import MutableContractClient from './MutableContractClient'
@@ -106,7 +107,7 @@ export default class MercuryTestClient<
 			MercuryTestClient.emitter.mixinOnlyUniqueSignatures(contract)
 		}
 
-		return MercuryTestClient.emitter
+		return MercuryTestClient.emitter as MercuryClient
 	}
 
 	public static resetContracts() {
