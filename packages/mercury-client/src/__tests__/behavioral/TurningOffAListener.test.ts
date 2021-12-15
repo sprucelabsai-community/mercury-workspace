@@ -8,17 +8,23 @@ export default class TurningOffAListenerTest extends AbstractClientTest {
 		MercuryClientFactory.setIsTestMode(true)
 		const client = await this.Client()
 
-		let wasHit = false
+		await client.emit('whoami::v2020_12_25')
+
+		let hitCount = 0
 
 		await client.on('whoami::v2020_12_25', () => {
-			wasHit = true
+			hitCount++
 			return {} as any
 		})
+
+		await client.emit('whoami::v2020_12_25')
+
+		assert.isEqual(hitCount, 1)
 
 		await client.off('whoami::v2020_12_25')
 
 		await client.emit('whoami::v2020_12_25')
 
-		assert.isFalse(wasHit)
+		assert.isEqual(hitCount, 1)
 	}
 }
