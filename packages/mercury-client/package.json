@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "19.0.21",
+  "version": "19.0.22",
   "files": [
     "build"
   ],
@@ -75,7 +75,7 @@
     "@sprucelabs/jest-json-reporter": "^6.0.286",
     "@sprucelabs/jest-sheets-reporter": "^1.2.284",
     "@sprucelabs/mercury-core-events": "^1.6.319",
-    "@sprucelabs/mercury-event-emitter": "^19.0.21",
+    "@sprucelabs/mercury-event-emitter": "^19.0.22",
     "@sprucelabs/mercury-types": "^26.1.1079",
     "@sprucelabs/resolve-path-aliases": "^1.0.243",
     "@sprucelabs/semantic-release": "^4.0.8",
