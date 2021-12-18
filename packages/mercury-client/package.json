@@ -63,10 +63,10 @@
     "watch.tsc": "tsc -w"
   },
   "dependencies": {
-    "@sprucelabs/error": "^5.0.345",
-    "@sprucelabs/schema": "^25.4.129",
-    "@sprucelabs/spruce-core-schemas": "^22.6.325",
-    "@sprucelabs/spruce-event-utils": "^17.1.369",
+    "@sprucelabs/error": "^5.0.346",
+    "@sprucelabs/schema": "^25.4.130",
+    "@sprucelabs/spruce-core-schemas": "^22.6.326",
+    "@sprucelabs/spruce-event-utils": "^17.1.370",
     "dotenv": "^10.0.0",
     "socket.io-client": "^4.4.0"
   },
@@ -76,11 +76,11 @@
     "@sprucelabs/jest-sheets-reporter": "^1.2.286",
     "@sprucelabs/mercury-core-events": "^1.6.321",
     "@sprucelabs/mercury-event-emitter": "^19.0.24",
-    "@sprucelabs/mercury-types": "^26.1.1081",
+    "@sprucelabs/mercury-types": "^26.1.1082",
     "@sprucelabs/resolve-path-aliases": "^1.0.244",
     "@sprucelabs/semantic-release": "^4.0.8",
     "@sprucelabs/test": "^7.7.264",
-    "@sprucelabs/test-utils": "^3.0.339",
+    "@sprucelabs/test-utils": "^3.0.340",
     "@types/node": "^17.0.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^6.5.0",
