@@ -9,13 +9,42 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 		MercuryClientFactory.setIsTestMode(true)
 	}
 
-	@test('handled locall with [test]', ['test'], 'test.should-have-listener')
+	@test('handled local with [test]', ['test'], 'test.should-have-listener')
 	@test(
-		'handled locall with [heartwood]',
+		'handled local with [heartwood]',
 		['test', 'heartwood'],
 		'heartwood.should-have-listener'
 	)
 	protected static async canSetNamespaceThatMustBeHandledLocally(
+		namespaces: string[],
+		fqen: string
+	) {
+		const client = await this.setNamespacesAndConnect(namespaces, fqen)
+
+		const err = await assert.doesThrowAsync(() => client.emit(fqen))
+
+		errorAssertUtil.assertError(err, 'MUST_HANDLE_LOCALLY')
+
+		const actual = MercuryTestClient.getNamespacesThatMustBeHandledLocally()
+
+		assert.isEqualDeep(actual, namespaces)
+	}
+
+	@test()
+	protected static async settingALocalListenerDoesntThrow() {
+		const client = await this.setNamespacesAndConnect(
+			['test'],
+			'test.should-work'
+		)
+		const client1 = await this.Client()
+
+		//@ts-ignore
+		await client1.on('test.should-work', () => {})
+
+		await client.emit('test.should-work')
+	}
+
+	private static async setNamespacesAndConnect(
 		namespaces: string[],
 		fqen: string
 	) {
@@ -25,16 +54,11 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 
 		client.mixinContract({
 			eventSignatures: {
-				[fqen]: {},
+				[fqen]: {
+					isGlobal: true,
+				},
 			},
 		})
-
-		const err = await assert.doesThrowAsync(() => client.emit(fqen))
-
-		errorAssertUtil.assertError(err, 'MUST_HANDLE_LOCALLY')
-
-		const actual = MercuryTestClient.getNamespacesThatMustBeHandledLocally()
-
-		assert.isEqualDeep(actual, namespaces)
+		return client
 	}
 }

@@ -183,10 +183,7 @@ export default class MercuryTestClient<
 				eventNamespace
 			) > -1
 		) {
-			throw new SpruceError({
-				code: 'MUST_HANDLE_LOCALLY',
-				fqen,
-			})
+			return true
 		}
 
 		return emitter.listenCount(fqen) > 0
@@ -197,6 +194,13 @@ export default class MercuryTestClient<
 	): Promise<MercuryAggregateResponse<any>> {
 		const emitter = MercuryTestClient.emitter
 		const fqen = args[0]
+
+		if (MercuryTestClient.emitter.listenCount(fqen) === 0) {
+			throw new SpruceError({
+				code: 'MUST_HANDLE_LOCALLY',
+				fqen,
+			})
+		}
 
 		let { source, argsWithSource } = this.buildSource(args)
 
