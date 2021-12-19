@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.2.0](https://github.com/sprucelabsai/mercury-workspace/compare/v19.1.1...v19.2.0) (2021-12-19)
+
+
+### Features
+
+* Devs can now pull the events that should be handled locally ([eed44c2](https://github.com/sprucelabsai/mercury-workspace/commit/eed44c2))
+
+
+
+
+
 ## [19.1.1](https://github.com/sprucelabsai/mercury-workspace/compare/v19.1.0...v19.1.1) (2021-12-19)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
