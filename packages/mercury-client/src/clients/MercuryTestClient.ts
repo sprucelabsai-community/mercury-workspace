@@ -83,9 +83,14 @@ export default class MercuryTestClient<
 	private connectPromise?: Promise<void>
 	private static shouldCheckPermissionsOnLocalEvents = false
 	private shouldHandleAuthenticateLocallyIfListenerSet = true
+	private static namespacesThatHaveToBeHandledLocally: string[] = []
 
 	public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
 		this.shouldCheckPermissionsOnLocalEvents = should
+	}
+
+	public static setNamespacesThatMustBeHandledLocally(namespaces: string[]) {
+		this.namespacesThatHaveToBeHandledLocally = namespaces
 	}
 
 	public constructor(
@@ -134,7 +139,7 @@ export default class MercuryTestClient<
 		const fqen = args[0]
 
 		try {
-			if (this.getShouldHandleEventLocally(emitter, fqen)) {
+			if (this.shouldHandleEventLocally(emitter, fqen)) {
 				return this.handleEventLocally(args)
 			} else {
 				await this.connectIfNotConnected(fqen)
@@ -158,12 +163,26 @@ export default class MercuryTestClient<
 		}
 	}
 
-	private getShouldHandleEventLocally(emitter: any, fqen: any) {
+	private shouldHandleEventLocally(emitter: any, fqen: any) {
 		if (
 			!this.shouldHandleAuthenticateLocallyIfListenerSet &&
 			fqen === authenticateFqen
 		) {
 			return false
+		}
+
+		const { eventNamespace } = eventNameUtil.split(fqen)
+
+		if (
+			eventNamespace &&
+			MercuryTestClient.namespacesThatHaveToBeHandledLocally.indexOf(
+				eventNamespace
+			) > -1
+		) {
+			throw new SpruceError({
+				code: 'MUST_HANDLE_LOCALLY',
+				fqen,
+			})
 		}
 
 		return emitter.listenCount(fqen) > 0

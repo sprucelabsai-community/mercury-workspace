@@ -258,6 +258,35 @@ export declare namespace SpruceErrors.MercuryClient {
 export declare namespace SpruceErrors.MercuryClient {
 
 	
+	export interface MustHandleLocally {
+		
+			
+			'fqen': string
+	}
+
+	export interface MustHandleLocallySchema extends SpruceSchema.Schema {
+		id: 'mustHandleLocally',
+		namespace: 'MercuryClient',
+		name: 'Must handle locally',
+		    fields: {
+		            /** . */
+		            'fqen': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type MustHandleLocallyEntity = SchemaEntity<SpruceErrors.MercuryClient.MustHandleLocallySchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
 	export interface MissingTestCacheDir {
 		
 	}

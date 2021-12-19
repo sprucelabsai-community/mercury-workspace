@@ -69,6 +69,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `The signature for '${options.fqen}' is invalid:\n\n${options.instructions}`
 				break
 
+			case 'MUST_HANDLE_LOCALLY':
+				message = `'${options.fqen}' must be handled locally. Make sure you have created a listener using 'spruce create.listener' and have booted your skill using 'this.bootSkill()' in your test!`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}
