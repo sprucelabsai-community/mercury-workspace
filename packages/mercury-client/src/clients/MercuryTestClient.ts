@@ -93,6 +93,10 @@ export default class MercuryTestClient<
 		this.namespacesThatHaveToBeHandledLocally = namespaces
 	}
 
+	public static getNamespacesThatMustBeHandledLocally() {
+		return this.namespacesThatHaveToBeHandledLocally
+	}
+
 	public constructor(
 		options: Record<string, any> & { host: string; eventContract?: Contract }
 	) {

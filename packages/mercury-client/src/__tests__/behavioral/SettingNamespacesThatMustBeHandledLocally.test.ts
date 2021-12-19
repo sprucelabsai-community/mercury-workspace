@@ -32,5 +32,9 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 		const err = await assert.doesThrowAsync(() => client.emit(fqen))
 
 		errorAssertUtil.assertError(err, 'MUST_HANDLE_LOCALLY')
+
+		const actual = MercuryTestClient.getNamespacesThatMustBeHandledLocally()
+
+		assert.isEqualDeep(actual, namespaces)
 	}
 }
