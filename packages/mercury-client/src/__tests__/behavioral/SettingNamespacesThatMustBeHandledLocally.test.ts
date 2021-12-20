@@ -31,6 +31,16 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 	}
 
 	@test()
+	protected static async niceErrorForUnhandledEvent() {
+		const client = await this.setNamespacesAndConnect(['profile'], '')
+		const err = await assert.doesThrowAsync(() =>
+			client.emit('profile.get-down!')
+		)
+
+		errorAssertUtil.assertError(err, 'MUST_CREATE_EVENT')
+	}
+
+	@test()
 	protected static async settingALocalListenerDoesntThrow() {
 		const client = await this.setNamespacesAndConnect(
 			['test'],
@@ -48,7 +58,7 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 		namespaces: string[],
 		fqen: string
 	) {
-		const client = (await this.Client({})) as MercuryTestClient
+		const client = await this.TestClient()
 
 		MercuryTestClient.setNamespacesThatMustBeHandledLocally(namespaces)
 
@@ -60,5 +70,9 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 			},
 		})
 		return client
+	}
+
+	private static async TestClient() {
+		return (await this.Client({})) as MercuryTestClient
 	}
 }

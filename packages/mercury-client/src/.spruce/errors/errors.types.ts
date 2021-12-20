@@ -287,6 +287,35 @@ export declare namespace SpruceErrors.MercuryClient {
 export declare namespace SpruceErrors.MercuryClient {
 
 	
+	export interface MustCreateEvent {
+		
+			
+			'fqen': string
+	}
+
+	export interface MustCreateEventSchema extends SpruceSchema.Schema {
+		id: 'mustCreateEvent',
+		namespace: 'MercuryClient',
+		name: 'must create event',
+		    fields: {
+		            /** . */
+		            'fqen': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type MustCreateEventEntity = SchemaEntity<SpruceErrors.MercuryClient.MustCreateEventSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.MercuryClient {
+
+	
 	export interface MissingTestCacheDir {
 		
 	}

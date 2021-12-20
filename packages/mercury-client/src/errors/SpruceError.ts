@@ -73,6 +73,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `'${options.fqen}' must be handled locally. Make sure you have created a listener using 'spruce create.listener' and have booted your skill using 'this.bootSkill()' in your test!`
 				break
 
+			case 'MUST_CREATE_EVENT':
+				message = `The event '${options.fqen}' was not found! That means it's time to create it with 'spruce create.event'.`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

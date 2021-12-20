@@ -195,6 +195,13 @@ export default class MercuryTestClient<
 		const emitter = MercuryTestClient.emitter
 		const fqen = args[0]
 
+		if (!MercuryTestClient.emitter.doesHandleEvent(fqen)) {
+			throw new SpruceError({
+				code: 'MUST_CREATE_EVENT',
+				fqen,
+			})
+		}
+
 		if (MercuryTestClient.emitter.listenCount(fqen) === 0) {
 			throw new SpruceError({
 				code: 'MUST_HANDLE_LOCALLY',

@@ -19,6 +19,9 @@ export interface NotConnectedErrorOptions extends SpruceErrors.MercuryClient.Not
 export interface MustHandleLocallyErrorOptions extends SpruceErrors.MercuryClient.MustHandleLocally, ISpruceErrorOptions {
 	code: 'MUST_HANDLE_LOCALLY'
 }
+export interface MustCreateEventErrorOptions extends SpruceErrors.MercuryClient.MustCreateEvent, ISpruceErrorOptions {
+	code: 'MUST_CREATE_EVENT'
+}
 export interface MissingTestCacheDirErrorOptions extends SpruceErrors.MercuryClient.MissingTestCacheDir, ISpruceErrorOptions {
 	code: 'MISSING_TEST_CACHE_DIR'
 }
@@ -35,6 +38,6 @@ export interface ConnectionFailedErrorOptions extends SpruceErrors.MercuryClient
 	code: 'CONNECTION_FAILED'
 }
 
-type ErrorOptions =  | UnknownErrorErrorOptions  | UnexpectedPayloadErrorOptions  | UnauthorizedAccessErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | MustHandleLocallyErrorOptions  | MissingTestCacheDirErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | InvalidEventSignatureErrorOptions  | ConnectionFailedErrorOptions 
+type ErrorOptions =  | UnknownErrorErrorOptions  | UnexpectedPayloadErrorOptions  | UnauthorizedAccessErrorOptions  | TimeoutErrorOptions  | NotConnectedErrorOptions  | MustHandleLocallyErrorOptions  | MustCreateEventErrorOptions  | MissingTestCacheDirErrorOptions  | InvalidProtocolErrorOptions  | InvalidPayloadErrorOptions  | InvalidEventSignatureErrorOptions  | ConnectionFailedErrorOptions 
 
 export default ErrorOptions
