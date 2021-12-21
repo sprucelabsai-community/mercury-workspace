@@ -209,7 +209,7 @@ export default class MercuryTestClient<
 			})
 		}
 
-		let { source, argsWithSource } = this.buildSource(args)
+		let { argsWithSource } = this.buildSource(args)
 
 		const contract = emitter.getContract()
 		const sig = eventContractUtil.getSignatureByName(contract, fqen)
@@ -222,7 +222,6 @@ export default class MercuryTestClient<
 		if (sig.emitPermissionContract && eventNamespace) {
 			const doesHonor = await this.optionallyCheckPermissions(
 				args,
-				source,
 				sig.emitPermissionContract.id,
 				fqen
 			)
@@ -272,7 +271,6 @@ export default class MercuryTestClient<
 
 	private async optionallyCheckPermissions(
 		args: any[],
-		source: any,
 		permissionContractId: any,
 		fqen: string
 	): Promise<boolean | MercuryAggregateResponse<any>> {
@@ -281,10 +279,16 @@ export default class MercuryTestClient<
 		}
 
 		let { target } = args[1] ?? {}
-		let permTarget = { ...source }
+		const permTarget: Record<string, any> = {}
 
 		if (target?.organizationId) {
 			permTarget.organizationId = target.organizationId
+		}
+
+		if (target.locationId) {
+			throw new Error(
+				'checking permissions against a location is not supported. Add to mercury-workspace -> mercury-client'
+			)
 		}
 
 		const results = await this.emit(
