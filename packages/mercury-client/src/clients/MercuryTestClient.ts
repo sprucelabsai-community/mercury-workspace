@@ -285,7 +285,7 @@ export default class MercuryTestClient<
 			permTarget.organizationId = target.organizationId
 		}
 
-		if (target.locationId) {
+		if (target?.locationId) {
 			throw new Error(
 				'checking permissions against a location is not supported. Add to mercury-workspace -> mercury-client'
 			)
