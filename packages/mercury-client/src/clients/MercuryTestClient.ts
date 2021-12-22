@@ -148,10 +148,8 @@ export default class MercuryTestClient<
 			} else {
 				await this.connectIfNotConnected(fqen)
 
-				let { argsWithSource } = this.buildSource(args)
-
 				//@ts-ignore
-				const results = await super.emit(...argsWithSource)
+				const results = await super.emit(...args)
 
 				const firstError = results.responses?.[0]?.errors?.[0]
 				if (firstError && firstError.options?.code === 'INVALID_EVENT_NAME') {
