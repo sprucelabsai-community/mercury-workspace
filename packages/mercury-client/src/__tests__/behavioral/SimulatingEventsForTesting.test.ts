@@ -614,6 +614,34 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isEqual(passedSource.proxyToken, teammateToken)
 	}
 
+	@test()
+	protected static async proxyNotSentToAuthenticate() {
+		MercuryClientFactory.setIsTestMode(true)
+
+		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
+		const token = await client.registerProxyToken()
+
+		let passedSource: any
+
+		//@ts-ignore
+		await client.on('authenticate::v2020_12_25', ({ source }) => {
+			passedSource = source
+			return {
+				type: 'authenticated',
+				auth: {},
+			}
+		})
+
+		const anon = await this.Client()
+		anon.setProxyToken(token)
+
+		await anon.authenticate({
+			token: '234234234234',
+		})
+
+		assert.isFalsy(passedSource?.proxyToken)
+	}
+
 	private static async assertTeammateCanEmit(options: {
 		fqen: string
 		ownerClient: MercuryClient

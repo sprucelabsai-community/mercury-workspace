@@ -323,7 +323,11 @@ export default class MercuryTestClient<
 			source.skillId = this.auth.skill.id
 		}
 
-		if (!source.proxyToken && this.getProxyToken()) {
+		if (
+			args[0] !== 'authenticate::v2020_12_25' &&
+			!source.proxyToken &&
+			this.getProxyToken()
+		) {
 			source.proxyToken = this.getProxyToken()
 		}
 
