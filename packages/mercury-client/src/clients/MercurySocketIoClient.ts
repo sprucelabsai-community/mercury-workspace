@@ -400,7 +400,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				...payload,
 			}
 
-			if (this.proxyToken && !p.source) {
+			if (eventName !== authenticateFqen && this.proxyToken && !p.source) {
 				p.source = {
 					proxyToken: this.proxyToken,
 				}

@@ -1,4 +1,7 @@
-import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
+import {
+	eventAssertUtil,
+	eventResponseUtil,
+} from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
@@ -60,6 +63,24 @@ export default class ProxyingEventsTest extends AbstractClientTest {
 		const { client: client2 } = await this.loginAsDemoPerson()
 
 		await this.assertClientWithTokenComesBackWithPerson(client2, token2, person)
+	}
+
+	@test()
+	protected static async proxyTokenNotSentToAuthenticate() {
+		const anonClient = await this.Client()
+		const { client } = await this.loginAsDemoPerson()
+
+		const token = await client.registerProxyToken()
+
+		anonClient.setProxyToken(token)
+
+		const err = await assert.doesThrowAsync(() =>
+			anonClient.authenticate({
+				token: '234234',
+			})
+		)
+
+		eventAssertUtil.assertError(err, 'INVALID_AUTH_TOKEN')
 	}
 
 	private static async assertClientWithTokenComesBackWithPerson(
