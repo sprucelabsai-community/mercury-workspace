@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "19.2.16",
+  "version": "19.2.18",
   "files": [
     "build"
   ],
@@ -62,9 +62,9 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.353",
-    "@sprucelabs/mercury-types": "^26.1.1103",
-    "@sprucelabs/schema": "^25.5.1",
-    "@sprucelabs/spruce-event-utils": "^17.1.391"
+    "@sprucelabs/mercury-types": "^26.1.1104",
+    "@sprucelabs/schema": "^25.5.2",
+    "@sprucelabs/spruce-event-utils": "^17.1.392"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^1.0.310",
