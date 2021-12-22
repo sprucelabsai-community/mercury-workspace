@@ -588,6 +588,32 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		errorAssertUtil.assertError(err, 'INVALID_EVENT_SIGNATURE')
 	}
 
+	@test()
+	protected static async passesThroughTestProxy() {
+		MercuryClientFactory.setIsTestMode(true)
+
+		const { client: teammateClient } = await this.loginAsDemoPerson(
+			DEMO_PHONE_GUEST
+		)
+		const { client: guestClient } = await this.loginAsDemoPerson(
+			DEMO_PHONE_GUEST
+		)
+
+		const client = await this.Client()
+		let passedSource: any
+		await client.on('whoami::v2020_12_25', async ({ source }) => {
+			passedSource = source
+			return {} as any
+		})
+
+		const teammateToken = await teammateClient.registerProxyToken()
+		guestClient.setProxyToken(teammateToken)
+
+		await guestClient.emit('whoami::v2020_12_25')
+
+		assert.isEqual(passedSource.proxyToken, teammateToken)
+	}
+
 	private static async assertTeammateCanEmit(options: {
 		fqen: string
 		ownerClient: MercuryClient
