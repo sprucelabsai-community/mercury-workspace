@@ -1,9 +1,15 @@
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { MercuryClientFactory } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
 export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
+	protected static async beforeEach() {
+		await super.beforeEach()
+		MercuryClientFactory.setIsTestMode(false)
+	}
+
 	@test()
 	protected static async invokesReconnectAfterDelayWhenConnectionLost() {
 		const client = await this.ClientZeroDelay()
@@ -35,10 +41,6 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		eventResponseUtil.getFirstResponseOrThrow(results)
 	}
 
-	private static async ClientZeroDelay() {
-		return await this.Client({ reconnectDelayMs: 0 })
-	}
-
 	@test()
 	protected static async shouldThrowWhenEmittingAfterManualDisconnect() {
 		const client = await this.ClientZeroDelay()
@@ -53,18 +55,13 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 	@test()
 	protected static async retriesEventIfItFailsAfterTimeout() {
-		const client = await this.ClientZeroDelay()
+		await this.assertRetriesEmitOnDisconnect()
+	}
 
-		const promise = client.emit('whoami::v2020_12_25')
-
-		//@ts-ignore
-		client.socket.disconnect()
-
-		await this.wait(100)
-
-		const results = await promise
-
-		eventResponseUtil.getFirstResponseOrThrow(results)
+	@test()
+	protected static async retriesEventIfItFailsAfterTimeoutWithTestClient() {
+		MercuryClientFactory.setIsTestMode(true)
+		await this.assertRetriesEmitOnDisconnect()
 	}
 
 	@test()
@@ -96,5 +93,26 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 		//@ts-ignore
 		assert.isFalse(client.isReconnecting)
+	}
+
+	private static async ClientZeroDelay() {
+		return await this.Client({ reconnectDelayMs: 0 })
+	}
+
+	private static async assertRetriesEmitOnDisconnect() {
+		const client = await this.ClientZeroDelay()
+
+		const promise = client.emit('whoami::v2020_12_25')
+
+		await this.wait(1000)
+
+		//@ts-ignore
+		client.socket.disconnect()
+
+		await this.wait(100)
+
+		const results = await promise
+
+		eventResponseUtil.getFirstResponseOrThrow(results)
 	}
 }

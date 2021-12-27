@@ -357,6 +357,9 @@ export default class MercuryTestClient<
 	}
 
 	public async connect() {
+		if (this._isConnected) {
+			await super.connect()
+		}
 		this._isConnected = true
 	}
 
