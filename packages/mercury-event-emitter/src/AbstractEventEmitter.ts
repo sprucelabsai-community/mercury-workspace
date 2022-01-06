@@ -148,7 +148,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		const { payloads, errors } =
 			eventResponseUtil.getAllResponsePayloadsAndErrors(results, SpruceError)
 
-		if (errors?.length ?? 0 > 0) {
+		if (errors?.[0]) {
 			throw errors[0]
 		}
 
