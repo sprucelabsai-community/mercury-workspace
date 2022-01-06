@@ -1,15 +1,16 @@
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
+import { EventContract } from '@sprucelabs/mercury-types'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { assert } from '@sprucelabs/test'
 import MercuryClientFactory from '../clients/MercuryClientFactory'
+import MutableContractClient from '../clients/MutableContractClient'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import { TEST_HOST } from './constants'
 
 type Client = MercuryClient
 type Person = SpruceSchemas.Spruce.v2020_07_22.Person
-type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
 
 export default class AbstractClientTest extends AbstractSpruceTest {
 	private static dummySkillCount = 0
@@ -125,9 +126,9 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 
 	protected static async seedInstallAndLoginAsSkill(
 		client: Client,
-		org: Organization
+		orgId: string
 	) {
-		const skill = await this.seedAndInstallDummySkill(client, org)
+		const skill = await this.seedAndInstallDummySkill(client, orgId)
 
 		const skillClient = await this.Client()
 		await skillClient.authenticate({
@@ -140,13 +141,13 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 
 	protected static async seedAndInstallDummySkill(
 		client: Client,
-		org: Organization
+		orgId: string
 	) {
 		const skill = await this.seedDemoSkill(client)
 
 		const installResults = await client.emit('install-skill::v2020_12_25', {
 			target: {
-				organizationId: org.id,
+				organizationId: orgId,
 			},
 			payload: { skillId: skill.id },
 		})
@@ -166,5 +167,66 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		const skill = skill1Results.responses[0].payload?.skill
 		assert.isTruthy(skill)
 		return skill
+	}
+
+	protected static async registerEvent(
+		namespace: string,
+		client: MercuryClient
+	) {
+		const sig = this.generateWillSendVipEventSignature(namespace)
+
+		MutableContractClient.mixinContract(sig)
+
+		const registerResults = await client.emit('register-events::v2020_12_25', {
+			payload: {
+				contract: this.generateWillSendVipEventSignature(),
+			},
+		})
+
+		eventResponseUtil.getFirstResponseOrThrow(registerResults)
+
+		return sig
+	}
+
+	protected static generateWillSendVipEventSignature(
+		slug?: string
+	): EventContract {
+		const contract: EventContract = {
+			eventSignatures: {
+				[`${slug ? `${slug}.` : ''}will-send-vip::v1`]: {
+					emitPayloadSchema: {
+						id: 'willSendVipTargetAndPayload',
+						fields: {
+							target: {
+								type: 'schema',
+								isRequired: true,
+								options: {
+									schema: {
+										id: 'willSendVipTarget',
+										fields: {
+											organizationId: {
+												type: 'text',
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					responsePayloadSchema: {
+						id: 'testEventResponsePayload',
+						fields: {
+							messages: {
+								type: 'text',
+								isArray: true,
+								isRequired: true,
+							},
+						},
+					},
+				},
+			},
+		}
+
+		return contract
 	}
 }

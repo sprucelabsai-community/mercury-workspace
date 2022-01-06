@@ -9,7 +9,10 @@ import {
 	EventNames,
 } from '@sprucelabs/mercury-types'
 import { Schema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
-import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
+import {
+	eventContractUtil,
+	eventResponseUtil,
+} from '@sprucelabs/spruce-event-utils'
 import SpruceError from './errors/SpruceError'
 
 export default class AbstractEventEmitter<Contract extends EventContract>
@@ -118,6 +121,38 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 			totalErrors,
 			responses,
 		} as MercuryAggregateResponse<SchemaValues<ResponseSchema>>
+	}
+
+	public async emitAndFlattenResponses<
+		EventName extends EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
+		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
+			? IEventSignature['emitPayloadSchema']
+			: never,
+		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
+			? IEventSignature['responsePayloadSchema']
+			: never
+	>(
+		eventName: EventName,
+		payload?:
+			| (EmitSchema extends Schema ? SchemaValues<EmitSchema> : never)
+			| EmitCallback<Contract, EventName>,
+		cb?: EmitCallback<Contract, EventName>
+	): Promise<SchemaValues<ResponseSchema>[]> {
+		const results = await this.emit(eventName, payload, cb)
+
+		if (results.totalResponses === 0) {
+			return []
+		}
+
+		const { payloads, errors } =
+			eventResponseUtil.getAllResponsePayloadsAndErrors(results, SpruceError)
+
+		if (errors?.length ?? 0 > 0) {
+			throw errors[0]
+		}
+
+		return payloads as any
 	}
 
 	private async emitOne<

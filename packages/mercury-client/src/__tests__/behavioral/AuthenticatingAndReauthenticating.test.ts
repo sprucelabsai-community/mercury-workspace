@@ -327,7 +327,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	private static async loginAsDemoSkillAtOrg() {
 		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 		const org = await this.seedDummyOrg(client)
-		const skill = await this.seedAndInstallDummySkill(client, org)
+		const skill = await this.seedAndInstallDummySkill(client, org.id)
 		return { client, skill }
 	}
 }

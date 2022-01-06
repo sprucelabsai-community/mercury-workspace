@@ -314,6 +314,37 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		return this._emit(this.maxEmitRetries, eventName, payload, cb)
 	}
 
+	public async emitAndFlattenResponses<
+		EventName extends EventNames<Contract>,
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
+		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
+			? IEventSignature['emitPayloadSchema']
+			: never,
+		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
+			? IEventSignature['responsePayloadSchema']
+			: never,
+		ResponsePayload = ResponseSchema extends Schema
+			? SchemaValues<ResponseSchema>
+			: never
+	>(
+		eventName: EventName,
+		payload?:
+			| (EmitSchema extends Schema ? SchemaValues<EmitSchema> : never)
+			| EmitCallback<Contract, EventName>,
+		cb?: EmitCallback<Contract, EventName>
+	): Promise<ResponsePayload[]> {
+		const results = await this.emit(eventName, payload, cb)
+
+		const { payloads, errors } =
+			eventResponseUtil.getAllResponsePayloadsAndErrors(results, SpruceError)
+
+		if (errors?.[0]) {
+			throw errors[0]
+		}
+
+		return payloads as any
+	}
+
 	private async _emit<
 		EventName extends EventNames<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
@@ -455,6 +486,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 					args.push((results: any) => {
 						clearTimeout(emitTimeout)
+
 						this.handleConfirmPinResponse(eventName, results)
 						this.socket?.off(responseEventName, singleResponseHandler)
 

@@ -2,14 +2,13 @@ import {
 	EventNames,
 	MercuryEventEmitter,
 	EventContract,
-	buildEventContract,
 } from '@sprucelabs/mercury-types'
-import { buildSchema } from '@sprucelabs/schema'
 import { eventAssertUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 import SpruceError from '../../errors/SpruceError'
+import { TestContract, testContract } from './testContract'
 
 class EventEmitter<
 	Contract extends EventContract
@@ -19,70 +18,16 @@ class EventEmitter<
 	}
 }
 
-const contract = buildEventContract({
-	eventSignatures: {
-		eventOne: {},
-		eventTwo: {},
-		eventWithEmitPayload: {
-			emitPayloadSchema: buildSchema({
-				id: 'emitPayloadWithOptionalTextField',
-				name: 'Emit payload with optional text field',
-				fields: {
-					optionalTextField: {
-						type: 'text',
-					},
-				},
-			}),
-		},
-		eventWithResponsePayload: {
-			responsePayloadSchema: buildSchema({
-				id: 'responsePayloadWithRequiredTextField',
-				name: 'responsePayloadWithRequiredTextField',
-				fields: {
-					requiredTextField: {
-						type: 'text',
-						isRequired: true,
-					},
-				},
-			}),
-		},
-		eventWithEmitAndResponsePayload: {
-			emitPayloadSchema: buildSchema({
-				id: 'emitPayloadWithRequiredTextField',
-				name: 'emitPayloadWithRequiredTextField',
-				fields: {
-					requiredTextField: {
-						type: 'text',
-						isRequired: true,
-					},
-				},
-			}),
-			responsePayloadSchema: buildSchema({
-				id: 'secondPayloadWithRequiredTextField',
-				name: 'secondPayloadWithRequiredTextField',
-				fields: {
-					requiredTextField: {
-						type: 'text',
-						isRequired: true,
-					},
-				},
-			}),
-		},
-	},
-})
-
-type Contract = typeof contract
-
 export default class MercuryEventEmitterTest extends AbstractSpruceTest {
-	private static emitter: MercuryEventEmitter<Contract>
+	private static emitter: MercuryEventEmitter<TestContract>
 
 	// only use test emitter when accessing methods to make private state public
-	private static testEmitter: EventEmitter<Contract>
+	private static testEmitter: EventEmitter<TestContract>
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.testEmitter = new EventEmitter(contract)
-		this.emitter = this.testEmitter as MercuryEventEmitter<Contract>
+		this.testEmitter = new EventEmitter(testContract)
+		this.emitter = this.testEmitter as MercuryEventEmitter<TestContract>
 	}
 
 	@test()

@@ -1,4 +1,3 @@
-import { EventContract } from '@sprucelabs/mercury-types'
 import {
 	eventAssertUtil,
 	eventResponseUtil,
@@ -7,7 +6,6 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
-import MutableContractClient from '../../clients/MutableContractClient'
 import SpruceError from '../../errors/SpruceError'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { DEMO_PHONE, DEMO_PHONE_PROXY, TEST_HOST } from '../../tests/constants'
@@ -724,63 +722,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 		const { client: skill2Client } = await createLogin2
 
-		MutableContractClient.mixinContract(
-			this.generateWillSendVipEventSignature(skill1.slug)
-		)
-
-		const registerResults = await skill1Client.emit(
-			'register-events::v2020_12_25',
-			{
-				payload: {
-					contract: this.generateWillSendVipEventSignature(),
-				},
-			}
-		)
-
-		eventResponseUtil.getFirstResponseOrThrow(registerResults)
+		await this.registerEvent(skill1.slug, skill1Client)
 
 		return { client, org, skill1, skill1Client, skill2Client }
-	}
-
-	private static generateWillSendVipEventSignature(
-		slug?: string
-	): EventContract {
-		const contract: EventContract = {
-			eventSignatures: {
-				[`${slug ? `${slug}.` : ''}will-send-vip::v1`]: {
-					emitPayloadSchema: {
-						id: 'willSendVipTargetAndPayload',
-						fields: {
-							target: {
-								type: 'schema',
-								isRequired: true,
-								options: {
-									schema: {
-										id: 'willSendVipTarget',
-										fields: {
-											organizationId: {
-												type: 'text',
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					responsePayloadSchema: {
-						id: 'testEventResponsePayload',
-						fields: {
-							messages: {
-								type: 'text',
-								isArray: true,
-								isRequired: true,
-							},
-						},
-					},
-				},
-			},
-		}
-
-		return contract
 	}
 }
