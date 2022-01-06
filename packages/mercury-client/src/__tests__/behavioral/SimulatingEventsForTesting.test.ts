@@ -736,11 +736,11 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		const org = await this.seedDummyOrg(personClient)
 		const { client: skill1Client, skill: skill1 } =
-			await this.seedInstallAndLoginAsSkill(personClient, org)
+			await this.seedInstallAndLoginAsSkill(personClient, org.id)
 
 		const { client: skill2Client } = await this.seedInstallAndLoginAsSkill(
 			personClient,
-			org
+			org.id
 		)
 
 		return { personClient, skill1, skill1Client, skill2Client, org }
