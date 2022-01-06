@@ -254,12 +254,12 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 		const { client: skill3Client } = await this.seedInstallAndLoginAsSkill(
 			client,
-			org
+			org.id
 		)
 
 		const { client: skill4Client } = await this.seedInstallAndLoginAsSkill(
 			client,
-			org
+			org.id
 		)
 
 		let listenTriggerCount = 0
@@ -486,14 +486,14 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const org = await this.seedDummyOrg(client)
 
 		const { client: originalSkillClient } =
-			await this.seedInstallAndLoginAsSkill(client, org)
+			await this.seedInstallAndLoginAsSkill(client, org.id)
 
 		const eventsToCheck: string[] = []
 
 		await Promise.all(
 			new Array(50).fill(0).map(async () => {
 				const { skill, client: skillClient } =
-					await this.seedInstallAndLoginAsSkill(client, org)
+					await this.seedInstallAndLoginAsSkill(client, org.id)
 
 				const registerResults = await skillClient.emit(
 					'register-events::v2020_12_25',
@@ -715,8 +715,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const { client } = await this.loginAsDemoPerson(phone)
 		const org = await this.seedDummyOrg(client)
 
-		const createLogin = this.seedInstallAndLoginAsSkill(client, org)
-		const createLogin2 = this.seedInstallAndLoginAsSkill(client, org)
+		const createLogin = this.seedInstallAndLoginAsSkill(client, org.id)
+		const createLogin2 = this.seedInstallAndLoginAsSkill(client, org.id)
 
 		const { skill: skill1, client: skill1Client } = await createLogin
 
