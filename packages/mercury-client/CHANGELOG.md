@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.3.0](https://github.com/sprucelabsai/mercury-workspace/compare/v19.2.86...v19.3.0) (2022-01-06)
+
+
+### Features
+
+* Devs can now emitAndFlattenResponses, making working in the platform even easier! ([db4535f](https://github.com/sprucelabsai/mercury-workspace/commit/db4535f))
+
+
+
+
+
 ## [19.2.86](https://github.com/sprucelabsai/mercury-workspace/compare/v19.2.85...v19.2.86) (2022-01-06)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
