@@ -62,23 +62,23 @@
     "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev"
   },
   "dependencies": {
-    "@sprucelabs/error": "^5.0.370",
-    "@sprucelabs/mercury-types": "^26.2.50",
-    "@sprucelabs/schema": "^25.6.51",
-    "@sprucelabs/spruce-event-utils": "^17.1.520"
+    "@sprucelabs/error": "^5.0.371",
+    "@sprucelabs/mercury-types": "^26.2.51",
+    "@sprucelabs/schema": "^25.6.52",
+    "@sprucelabs/spruce-event-utils": "^17.1.521"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.323",
-    "@sprucelabs/jest-json-reporter": "^6.0.305",
-    "@sprucelabs/resolve-path-aliases": "^1.0.251",
+    "@sprucelabs/esm-postbuild": "^1.0.324",
+    "@sprucelabs/jest-json-reporter": "^6.0.306",
+    "@sprucelabs/resolve-path-aliases": "^1.0.252",
     "@sprucelabs/semantic-release": "^4.0.8",
-    "@sprucelabs/test": "^7.7.271",
-    "@sprucelabs/test-utils": "^3.0.372",
+    "@sprucelabs/test": "^7.7.272",
+    "@sprucelabs/test-utils": "^3.0.373",
     "@types/node": "^17.0.8",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^7.0.0",
     "eslint": "^8.6.0",
-    "eslint-config-spruce": "^10.11.0",
+    "eslint-config-spruce": "^10.11.1",
     "jest": "^27.4.7",
     "jest-circus": "^27.4.6",
     "prettier": "^2.5.1",
