@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v19.3.47...v20.0.0) (2022-01-18)
+
+
+### Breaking Changes
+
+* Can no longer pass empty object as payload when emitting events with no emit payload ([6568694](https://github.com/sprucelabsai/mercury-workspace/commit/6568694))
+
+
+
+
+
 ## [19.3.47](https://github.com/sprucelabsai/mercury-workspace/compare/v19.3.46...v19.3.47) (2022-01-18)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
