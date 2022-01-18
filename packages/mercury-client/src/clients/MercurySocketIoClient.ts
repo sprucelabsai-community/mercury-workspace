@@ -377,8 +377,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		this.allowNextEventToBeAuthenticate = false
 
-		const signature = this.getEventSignatureByName(eventName)
-
 		if (this.isManuallyDisconnected) {
 			throw new SpruceError({
 				code: 'NOT_CONNECTED',
@@ -387,25 +385,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			})
 		}
 
-		if (signature.emitPayloadSchema) {
-			try {
-				validateSchemaValues(
-					signature.emitPayloadSchema as Schema,
-					payload ?? {}
-				)
-			} catch (err: any) {
-				throw new SpruceError({
-					code: 'INVALID_PAYLOAD',
-					originalError: err,
-					eventName,
-				})
-			}
-		} else if (payload && this.eventContract) {
-			throw new SpruceError({
-				code: 'UNEXPECTED_PAYLOAD',
-				eventName,
-			})
-		}
+		this.assertValidEmitTargetAndPayload(eventName, payload)
 
 		const responseEventName = eventNameUtil.generateResponseEventName(eventName)
 
@@ -505,6 +485,31 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			results,
 			SpruceError
 		)
+	}
+
+	protected assertValidEmitTargetAndPayload<
+		EventName extends EventNames<Contract>
+	>(eventName: EventName, payload: any) {
+		const signature = this.getEventSignatureByName(eventName)
+		if (signature.emitPayloadSchema) {
+			try {
+				validateSchemaValues(
+					signature.emitPayloadSchema as Schema,
+					payload ?? {}
+				)
+			} catch (err: any) {
+				throw new SpruceError({
+					code: 'INVALID_PAYLOAD',
+					originalError: err,
+					eventName,
+				})
+			}
+		} else if (payload && this.eventContract) {
+			throw new SpruceError({
+				code: 'UNEXPECTED_PAYLOAD',
+				eventName,
+			})
+		}
 	}
 
 	private handleConfirmPinResponse(eventName: string, results: any) {

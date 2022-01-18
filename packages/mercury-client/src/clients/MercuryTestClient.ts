@@ -194,6 +194,7 @@ export default class MercuryTestClient<
 	): Promise<MercuryAggregateResponse<any>> {
 		const emitter = MercuryTestClient.emitter
 		const fqen = args[0]
+		const payload = args[1]
 
 		if (!MercuryTestClient.emitter.doesHandleEvent(fqen)) {
 			throw new SpruceError({
@@ -208,6 +209,8 @@ export default class MercuryTestClient<
 				fqen,
 			})
 		}
+
+		this.assertValidEmitTargetAndPayload(fqen, payload)
 
 		let { argsWithSource } = this.buildSource(args)
 

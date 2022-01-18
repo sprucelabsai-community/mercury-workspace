@@ -367,11 +367,24 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const eventName = 'event-with-emit-permissions::v2020_05_19'
 		const fqen = `${skill1.slug}.event-with-emit-permissions::v2020_05_19`
 
+		const targetWithOrgId = buildEmitTargetAndPayloadSchema({
+			eventName,
+			targetSchema: {
+				id: 'test-target',
+				fields: {
+					organizationId: {
+						type: 'id',
+						isRequired: true,
+					},
+				},
+			},
+		})
+
 		//@ts-ignore
 		skill1Client.mixinContract({
 			eventSignatures: {
 				[fqen]: {
-					isGlobal: true,
+					emitPayloadSchema: targetWithOrgId,
 					emitPermissionContract: this.buildEmitPermContract(),
 				},
 			},
@@ -384,18 +397,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 					contract: {
 						eventSignatures: {
 							[eventName]: {
-								emitPayloadSchema: buildEmitTargetAndPayloadSchema({
-									eventName,
-									targetSchema: {
-										id: 'test-target',
-										fields: {
-											organizationId: {
-												type: 'id',
-												isRequired: true,
-											},
-										},
-									},
-								}),
+								emitPayloadSchema: targetWithOrgId,
 								emitPermissionContract: this.buildEmitPermContract(),
 							},
 						},
@@ -410,9 +412,9 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			return {}
 		})
 
-		await this.assertGuestCantEmit(fqen)
-		await this.assertAnonCantEmit(fqen)
-		await this.assertAnotherSkillCantEmit(fqen, skill2Client)
+		await this.assertGuestCantEmit(fqen, org.id)
+		await this.assertAnonCantEmit(fqen, org.id)
+		await this.assertAnotherSkillCantEmit(fqen, skill2Client, org.id)
 		await this.assertTeammateCanEmit({
 			fqen,
 			ownerClient: personClient,
@@ -533,7 +535,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const { personClient, skill1Client, skill2Client, skill1 } =
 			await this.setupOrgAndInstall2Skills()
 
-		this.mixinPayloadlessTestEvent(personClient)
+		this.mixinPayloadlessTestEventWithSource(personClient)
 
 		let s: any
 
@@ -642,6 +644,23 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isFalsy(passedSource?.proxyToken)
 	}
 
+	@test()
+	protected static async throwsWhenPassingEmptyTargetAndPayloadToEVentWithNoEmitPayloadSchema() {
+		MercuryClientFactory.setIsTestMode(true)
+		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
+
+		//@ts-ignore
+		delete client.eventContract.eventSignatures['whoami::v2020_12_25']
+			.emitPayloadSchema
+
+		await client.on('whoami::v2020_12_25', () => ({
+			type: 'anonymous' as const,
+			auth: {},
+		}))
+
+		await assert.doesThrowAsync(() => client.emit('whoami::v2020_12_25', {}))
+	}
+
 	private static async assertTeammateCanEmit(options: {
 		fqen: string
 		ownerClient: MercuryClient
@@ -687,26 +706,39 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	private static async assertAnotherSkillCantEmit(
 		fqen: string,
-		skill2Client: any
+		skill2Client: any,
+		orgId: string
 	) {
-		const results = await skill2Client.emit(fqen)
+		const results = await skill2Client.emit(fqen, {
+			target: {
+				organizationId: orgId,
+			},
+		})
 		eventAssertUtil.assertErrorFromResponse(results, 'UNAUTHORIZED_ACCESS')
 	}
 
-	private static async assertGuestCantEmit(fqen: string) {
+	private static async assertGuestCantEmit(fqen: string, orgId: string) {
 		const { client: personClient } = await this.loginAsDemoPerson(
 			DEMO_PHONE_GUEST
 		)
 
-		const response = await personClient.emit(fqen as any)
+		const response = await personClient.emit(fqen as any, {
+			target: {
+				organizationId: orgId,
+			},
+		})
 
 		eventAssertUtil.assertErrorFromResponse(response, 'UNAUTHORIZED_ACCESS')
 	}
 
-	private static async assertAnonCantEmit(fqen: string) {
+	private static async assertAnonCantEmit(fqen: string, orgId: string) {
 		const client = await this.Client()
 
-		const response = await client.emit(fqen as any)
+		const response = await client.emit(fqen as any, {
+			target: {
+				organizationId: orgId,
+			},
+		})
 
 		eventAssertUtil.assertErrorFromResponse(response, 'UNAUTHORIZED_ACCESS')
 	}
@@ -779,6 +811,21 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			eventSignatures: {
 				[this.testEventName]: {
 					isGlobal: true,
+				},
+			},
+		}
+
+		client.mixinContract(contract)
+	}
+
+	private static mixinPayloadlessTestEventWithSource(client: any) {
+		const contract = {
+			eventSignatures: {
+				[this.testEventName]: {
+					isGlobal: true,
+					emitPayloadSchema: buildEmitTargetAndPayloadSchema({
+						eventName: this.testEventName,
+					}),
 				},
 			},
 		}

@@ -65,7 +65,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async failingToConnectDuringAuthDoesntThrowAuthBlockedError() {
+	protected static async timingOutDuringAuthDoesntThrowAuthBlockedError() {
 		const client = await this.Client({ emitTimeoutMs: 1 })
 
 		const err = await assert.doesThrowAsync(() =>
