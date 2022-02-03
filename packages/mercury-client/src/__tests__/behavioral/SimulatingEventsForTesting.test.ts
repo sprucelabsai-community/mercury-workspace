@@ -661,7 +661,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		await assert.doesThrowAsync(() => client.emit('whoami::v2020_12_25', {}))
 	}
 
-	@test.only()
+	@test()
 	protected static async callbackInvokedForEachResponse() {
 		MercuryClientFactory.setIsTestMode(true)
 		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
