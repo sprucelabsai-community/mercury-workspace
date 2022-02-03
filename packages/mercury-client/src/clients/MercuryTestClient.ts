@@ -336,7 +336,11 @@ export default class MercuryTestClient<
 
 		const argsWithSource = [...args]
 
-		if (Object.keys(source).length > 0) {
+		if (
+			argsWithSource[1] &&
+			typeof argsWithSource[1] !== 'function' &&
+			Object.keys(source).length > 0
+		) {
 			argsWithSource[1] = {
 				...argsWithSource[1],
 				source,
