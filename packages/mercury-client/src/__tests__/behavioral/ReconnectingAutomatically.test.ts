@@ -1,6 +1,6 @@
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { MercuryClientFactory } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
@@ -72,7 +72,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 			client.authenticate({ token: 'duh' })
 		)
 
-		errorAssertUtil.assertError(err, 'TIMEOUT')
+		errorAssert.assertError(err, 'TIMEOUT')
 	}
 
 	@test()

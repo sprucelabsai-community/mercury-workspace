@@ -9,7 +9,7 @@ import {
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { MercuryClientFactory, MercuryTestClient } from '../..'
 import SpruceError from '../../errors/SpruceError'
 import AbstractClientTest from '../../tests/AbstractClientTest'
@@ -169,7 +169,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			client.on('did-message::v2020_12_25', async () => {})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
+		errorAssert.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
 	@test()
@@ -330,7 +330,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD')
+		errorAssert.assertError(err, 'INVALID_PAYLOAD')
 
 		assert.isFalse(hit)
 	}
@@ -587,7 +587,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			client2.emit(this.testEventName as any)
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_EVENT_SIGNATURE')
+		errorAssert.assertError(err, 'INVALID_EVENT_SIGNATURE')
 	}
 
 	@test()
@@ -659,6 +659,26 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		}))
 
 		await assert.doesThrowAsync(() => client.emit('whoami::v2020_12_25', {}))
+	}
+
+	@test.only()
+	protected static async callbackInvokedForEachResponse() {
+		MercuryClientFactory.setIsTestMode(true)
+		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
+
+		await client.on('list-organizations::v2020_12_25', () => {
+			return {
+				organizations: [],
+			}
+		})
+
+		let wasHit = false
+
+		await client.emit('list-organizations::v2020_12_25', () => {
+			wasHit = true
+		})
+
+		assert.isTrue(wasHit)
 	}
 
 	private static async assertTeammateCanEmit(options: {

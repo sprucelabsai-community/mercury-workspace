@@ -3,7 +3,7 @@ import {
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import SpruceError from '../../errors/SpruceError'
@@ -56,7 +56,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const err = await assert.doesThrowAsync(() =>
 			MercuryClientFactory.Client({ host: 'aoeu://tasty.org', contracts: [] })
 		)
-		errorAssertUtil.assertError(err, 'INVALID_PROTOCOL')
+		errorAssert.assertError(err, 'INVALID_PROTOCOL')
 	}
 
 	@test()
@@ -78,7 +78,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => client.emit('health2'))
 
-		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
+		errorAssert.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
 	@test()
@@ -101,7 +101,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			this.Client({ host, reconnectDelayMs: 100 })
 		)
 
-		errorAssertUtil.assertError(err, 'CONNECTION_FAILED', {
+		errorAssert.assertError(err, 'CONNECTION_FAILED', {
 			host,
 			statusCode: 503,
 		})
@@ -136,7 +136,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			client.on('waka-waka', () => {})
 		)
 
-		errorAssertUtil.assertError(err, 'UNAUTHORIZED_ACCESS')
+		errorAssert.assertError(err, 'UNAUTHORIZED_ACCESS')
 	}
 
 	@test()
@@ -147,7 +147,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			client.emit('request-pin::v2020_12_25', {})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD', {
+		errorAssert.assertError(err, 'INVALID_PAYLOAD', {
 			eventName: 'request-pin',
 		})
 	}
@@ -373,7 +373,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			skill1Client.off('event-does-not-exist')
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
+		errorAssert.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
 	@test()
@@ -385,7 +385,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			client.emit('health::v2020_12_25')
 		)
 
-		errorAssertUtil.assertError(err, 'NOT_CONNECTED')
+		errorAssert.assertError(err, 'NOT_CONNECTED')
 	}
 
 	@test()
@@ -397,7 +397,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const errors = response.responses[0].errors
 
 		assert.isTruthy(errors)
-		errorAssertUtil.assertError(errors[0], 'UNAUTHORIZED_ACCESS')
+		errorAssert.assertError(errors[0], 'UNAUTHORIZED_ACCESS')
 	}
 
 	@test('times out when giving up on 1 retry on emit', 1)
@@ -413,7 +413,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'TIMEOUT', {
+		errorAssert.assertError(err, 'TIMEOUT', {
 			eventName: 'register-skill::v2020_12_25',
 		})
 
@@ -430,7 +430,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'TIMEOUT', {
+		errorAssert.assertError(err, 'TIMEOUT', {
 			eventName: 'register-skill::v2020_12_25',
 		})
 

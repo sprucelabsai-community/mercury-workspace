@@ -5,7 +5,7 @@ import {
 } from '@sprucelabs/mercury-types'
 import { eventAssertUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 import SpruceError from '../../errors/SpruceError'
 import { TestContract, testContract } from './testContract'
@@ -289,6 +289,27 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 	}
 
 	@test()
+	protected static async respondsToEachCallbackWithoutPayload() {
+		void this.emitter.on('eventWithResponsePayload', () => ({
+			requiredTextField: 'foo bar',
+		}))
+
+		void this.emitter.on('eventWithResponsePayload', () => ({
+			requiredTextField: 'hello world',
+		}))
+
+		void this.emitter.on('eventWithResponsePayload', () => ({
+			requiredTextField: 'hello world',
+		}))
+
+		let hitCount = 0
+		await this.emitter.emit('eventWithResponsePayload', () => {
+			hitCount++
+		})
+		assert.isEqual(hitCount, 3)
+	}
+
+	@test()
 	protected static async emittingBadEventThrows() {
 		const error = (await assert.doesThrowAsync(() =>
 			//@ts-ignore
@@ -380,7 +401,7 @@ export default class MercuryEventEmitterTest extends AbstractSpruceTest {
 			this.emitter.on('taco', () => {})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_EVENT_NAME')
+		errorAssert.assertError(err, 'INVALID_EVENT_NAME')
 	}
 
 	@test()

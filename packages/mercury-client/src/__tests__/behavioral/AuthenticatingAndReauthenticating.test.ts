@@ -1,7 +1,7 @@
 import { formatPhoneNumber } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { DEMO_PHONE_REAUTH, TEST_HOST } from '../../tests/constants'
 require('dotenv').config()
@@ -79,7 +79,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PAYLOAD')
+		errorAssert.assertError(err, 'INVALID_PAYLOAD')
 	}
 
 	@test()

@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { MercuryClientFactory, MercuryTestClient } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
@@ -23,7 +23,7 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 
 		const err = await assert.doesThrowAsync(() => client.emit(fqen))
 
-		errorAssertUtil.assertError(err, 'MUST_HANDLE_LOCALLY')
+		errorAssert.assertError(err, 'MUST_HANDLE_LOCALLY')
 
 		const actual = MercuryTestClient.getNamespacesThatMustBeHandledLocally()
 
@@ -37,7 +37,7 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 			client.emit('profile.get-down!')
 		)
 
-		errorAssertUtil.assertError(err, 'MUST_CREATE_EVENT')
+		errorAssert.assertError(err, 'MUST_CREATE_EVENT')
 	}
 
 	@test()
