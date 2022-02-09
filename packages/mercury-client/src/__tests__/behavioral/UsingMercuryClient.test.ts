@@ -485,7 +485,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		assert.isEqual(client.socket.invocationCounts.off, 12)
 	}
 
-	@test.only()
+	@test()
 	protected static async canRegisterEventsSimultaneously() {
 		const { client } = await this.loginAsDemoPerson()
 		const org = await this.seedDummyOrg(client)
