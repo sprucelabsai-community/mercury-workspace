@@ -122,7 +122,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			count++
 			throw new SpruceError({
 				code: 'CONNECTION_FAILED',
-				host: 'basic',
+				host: 'no-found',
 				statusCode: 305,
 			})
 		}
@@ -485,7 +485,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		assert.isEqual(client.socket.invocationCounts.off, 12)
 	}
 
-	@test()
+	@test.only()
 	protected static async canRegisterEventsSimultaneously() {
 		const { client } = await this.loginAsDemoPerson()
 		const org = await this.seedDummyOrg(client)
@@ -496,11 +496,13 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const eventsToCheck: string[] = []
 
 		await Promise.all(
-			new Array(50).fill(0).map(async () => {
+			new Array(50).fill(0).map(async (_, idx) => {
+				this.skillName = `Simultanious skill ${idx}`
+
 				const { skill, client: skillClient } =
 					await this.seedInstallAndLoginAsSkill(client, org.id)
 
-				const registerResults = await skillClient.emit(
+				await skillClient.emitAndFlattenResponses(
 					'register-events::v2020_12_25',
 					{
 						payload: {
@@ -509,13 +511,10 @@ export default class UsingMercuryClient extends AbstractClientTest {
 					}
 				)
 
-				eventResponseUtil.getFirstResponseOrThrow(registerResults)
-
-				const results = await originalSkillClient.emit(
-					'get-event-contracts::v2020_12_25'
-				)
-
-				const { contracts } = eventResponseUtil.getFirstResponseOrThrow(results)
+				const [{ contracts }] =
+					await originalSkillClient.emitAndFlattenResponses(
+						'get-event-contracts::v2020_12_25'
+					)
 
 				let found = false
 

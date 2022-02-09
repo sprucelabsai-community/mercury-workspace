@@ -15,6 +15,7 @@ type Person = SpruceSchemas.Spruce.v2020_07_22.Person
 export default class AbstractClientTest extends AbstractSpruceTest {
 	private static dummySkillCount = 0
 	protected static clients: Client[] = []
+	protected static skillName = 'Dummy skill'
 
 	protected static async afterEach() {
 		await super.afterEach()
@@ -160,7 +161,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 	protected static async seedDemoSkill(client: Client) {
 		const skill1Results = await client.emit('register-skill::v2020_12_25', {
 			payload: {
-				name: `Dummy skill ${++this.dummySkillCount} ${
+				name: `${this.skillName} ${++this.dummySkillCount} ${
 					new Date().getTime() * Math.random()
 				}`,
 			},
