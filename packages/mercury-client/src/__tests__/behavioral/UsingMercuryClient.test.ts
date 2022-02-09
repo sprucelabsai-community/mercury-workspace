@@ -496,7 +496,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const eventsToCheck: string[] = []
 
 		await Promise.all(
-			new Array(50).fill(0).map(async (_, idx) => {
+			new Array(20).fill(0).map(async (_, idx) => {
 				this.skillName = `Simultanious skill ${idx}`
 
 				const { skill, client: skillClient } =
