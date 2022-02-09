@@ -376,9 +376,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				parameters: ['eventName'],
 				friendlyMessage: `You can't emit '${authenticateFqen}' event directly. Use client.authenticate() so all your auth is preserved.`,
 			})
+		} else if (eventName === authenticateFqen) {
+			this.allowNextEventToBeAuthenticate = false
 		}
-
-		this.allowNextEventToBeAuthenticate = false
 
 		if (this.isManuallyDisconnected) {
 			throw new SpruceError({

@@ -84,7 +84,7 @@ export default class MercuryTestClient<
 	private static shouldCheckPermissionsOnLocalEvents = false
 	private shouldHandleAuthenticateLocallyIfListenerSet = true
 	private static namespacesThatHaveToBeHandledLocally: string[] = []
-	private shouldWaitForDelayedConnect = true
+	private shouldWaitForDelayedConnectIfAuthing = true
 
 	public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
 		this.shouldCheckPermissionsOnLocalEvents = should
@@ -352,11 +352,13 @@ export default class MercuryTestClient<
 	private async connectIfNotConnected(fqen: string) {
 		if (!this.isConnectedToApi) {
 			this.isConnectedToApi = true
-
 			this.connectPromise = this.delayedConnectAndAuth(fqen)
 		}
 
-		if (!this.shouldWaitForDelayedConnect) {
+		if (
+			!this.shouldWaitForDelayedConnectIfAuthing &&
+			fqen === authenticateFqen
+		) {
 			return
 		}
 
@@ -369,7 +371,8 @@ export default class MercuryTestClient<
 		if (this.lastAuthOptions && fqen !== authenticateFqen) {
 			this.authPromise = undefined
 			this.shouldHandleAuthenticateLocallyIfListenerSet = false
-			this.shouldWaitForDelayedConnect = false
+			this.shouldWaitForDelayedConnectIfAuthing = false
+
 			await this.authenticate(this.lastAuthOptions)
 		}
 	}

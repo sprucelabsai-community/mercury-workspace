@@ -11,7 +11,7 @@ export default class LocallyHandlingAuthenticateDelaysConnectTest extends Abstra
 
 	@test()
 	protected static async locallyHandlingAuthenticateDelaysConnect() {
-		const { skillClient, skill } = await this.mockAuthAndGetClient()
+		const { skillClient, skill } = await this.mockAuthAndGetSkillClient()
 
 		//@ts-ignore
 		assert.isFalse(skillClient.isConnectedToApi)
@@ -29,25 +29,41 @@ export default class LocallyHandlingAuthenticateDelaysConnectTest extends Abstra
 
 	@test()
 	protected static async delayedConnectHandlesManyParallelRequests() {
-		const { skillClient } = await this.mockAuthAndGetClient()
+		const { skillClient } = await this.mockAuthAndGetSkillClient()
 
 		//@ts-ignore
 		assert.isFalse(skillClient.isConnectedToApi)
+
+		const auth = skillClient.authenticate.bind(skillClient)
+
+		let midAuthResults: any
+
+		skillClient.authenticate = (...args: any[]) => {
+			void skillClient
+				.emit('whoami::v2020_12_25')
+				.then((results) => (midAuthResults = results))
+
+			//@ts-ignore
+			return auth(...args)
+		}
 
 		const all = await Promise.all([
 			skillClient.emit('whoami::v2020_12_25'),
 			skillClient.emit('whoami::v2020_12_25'),
 			skillClient.emit('whoami::v2020_12_25'),
 			skillClient.emit('whoami::v2020_12_25'),
-			skillClient.emit('whoami::v2020_12_25'),
 		])
 
-		for (const response of all) {
+		while (!midAuthResults) {
+			this.wait(100)
+		}
+
+		for (const response of [...all, midAuthResults]) {
 			assert.isEqual(response.responses[0].payload?.type, 'authenticated')
 		}
 	}
 
-	private static async mockAuthAndGetClient() {
+	private static async mockAuthAndGetSkillClient() {
 		const { client: creatorClient, person } = await this.loginAsDemoPerson()
 		const skill = await this.seedDemoSkill(creatorClient)
 		const skillClient = await this.Client()
