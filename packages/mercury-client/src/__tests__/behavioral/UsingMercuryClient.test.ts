@@ -8,7 +8,12 @@ import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import SpruceError from '../../errors/SpruceError'
 import AbstractClientTest from '../../tests/AbstractClientTest'
-import { DEMO_PHONE, DEMO_PHONE_PROXY, TEST_HOST } from '../../tests/constants'
+import {
+	DEMO_PHONE,
+	DEMO_PHONE_PROXY,
+	DEMO_PHONE_RECONNECT,
+	TEST_HOST,
+} from '../../tests/constants'
 
 require('dotenv').config()
 
@@ -250,7 +255,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		shouldDisconnect = false
 	) {
 		const { org, client, skill1, skill1Client, skill2Client } =
-			await this.setup2SkillsAndOneEvent(process.env.DEMO_PHONE_RECONNECT)
+			await this.setup2SkillsAndOneEvent(DEMO_PHONE_RECONNECT)
 
 		const { client: skill3Client } = await this.seedInstallAndLoginAsSkill(
 			client,
