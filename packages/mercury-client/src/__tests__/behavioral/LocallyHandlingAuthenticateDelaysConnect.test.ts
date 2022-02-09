@@ -11,11 +11,48 @@ export default class LocallyHandlingAuthenticateDelaysConnectTest extends Abstra
 
 	@test()
 	protected static async locallyHandlingAuthenticateDelaysConnect() {
-		const { client, person } = await this.loginAsDemoPerson()
-		const skill = await this.seedDemoSkill(client)
-		const client2 = await this.Client()
+		const { skillClient, skill } = await this.mockAuthAndGetClient()
 
-		await client.on('authenticate::v2020_12_25', async () => {
+		//@ts-ignore
+		assert.isFalse(skillClient.isConnectedToApi)
+
+		const results = await skillClient.emit('whoami::v2020_12_25')
+
+		//@ts-ignore
+		assert.isTrue(skillClient.isConnectedToApi)
+
+		const { auth, type } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+		assert.isEqual(type, 'authenticated')
+		assert.doesInclude(skill, auth.skill)
+	}
+
+	@test()
+	protected static async delayedConnectHandlesManyParallelRequests() {
+		const { skillClient } = await this.mockAuthAndGetClient()
+
+		//@ts-ignore
+		assert.isFalse(skillClient.isConnectedToApi)
+
+		const all = await Promise.all([
+			skillClient.emit('whoami::v2020_12_25'),
+			skillClient.emit('whoami::v2020_12_25'),
+			skillClient.emit('whoami::v2020_12_25'),
+			skillClient.emit('whoami::v2020_12_25'),
+			skillClient.emit('whoami::v2020_12_25'),
+		])
+
+		for (const response of all) {
+			assert.isEqual(response.responses[0].payload?.type, 'authenticated')
+		}
+	}
+
+	private static async mockAuthAndGetClient() {
+		const { client: creatorClient, person } = await this.loginAsDemoPerson()
+		const skill = await this.seedDemoSkill(creatorClient)
+		const skillClient = await this.Client()
+
+		await creatorClient.on('authenticate::v2020_12_25', async () => {
 			return {
 				type: 'authenticated' as any,
 				auth: {
@@ -31,22 +68,10 @@ export default class LocallyHandlingAuthenticateDelaysConnectTest extends Abstra
 			}
 		})
 
-		await client2.authenticate({
+		await skillClient.authenticate({
 			skillId: skill.id,
 			apiKey: skill.apiKey,
 		})
-
-		//@ts-ignore
-		assert.isFalse(client2.isConnectedToApi)
-
-		const results = await client2.emit('whoami::v2020_12_25')
-
-		//@ts-ignore
-		assert.isTrue(client2.isConnectedToApi)
-
-		const { auth, type } = eventResponseUtil.getFirstResponseOrThrow(results)
-
-		assert.isEqual(type, 'authenticated')
-		assert.doesInclude(skill, auth.skill)
+		return { skillClient, skill }
 	}
 }
