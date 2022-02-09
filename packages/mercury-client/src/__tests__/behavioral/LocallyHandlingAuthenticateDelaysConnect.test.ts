@@ -55,7 +55,7 @@ export default class LocallyHandlingAuthenticateDelaysConnectTest extends Abstra
 		])
 
 		while (!midAuthResults) {
-			this.wait(100)
+			await this.wait(100)
 		}
 
 		for (const response of [...all, midAuthResults]) {
