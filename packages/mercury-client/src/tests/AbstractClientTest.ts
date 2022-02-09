@@ -160,7 +160,9 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 	protected static async seedDemoSkill(client: Client) {
 		const skill1Results = await client.emit('register-skill::v2020_12_25', {
 			payload: {
-				name: `Dummy skill ${this.dummySkillCount++} ${new Date().getTime()}`,
+				name: `Dummy skill ${++this.dummySkillCount} ${
+					new Date().getTime() * Math.random()
+				}`,
 			},
 		})
 
