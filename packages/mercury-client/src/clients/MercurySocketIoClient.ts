@@ -219,7 +219,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					this.isReconnecting = false
 					this.skipWaitIfReconnecting = false
 					resolve()
-					;(console.error ?? console.log)(`Connection re-established with Mercury!`)
+					;(console.error ?? console.log)(
+						`Connection re-established with Mercury!`
+					)
 				} catch (err: any) {
 					;(console.error ?? console.log)(err.message)
 
