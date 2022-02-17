@@ -59,18 +59,7 @@ jobs:
       - spruce/set_target_branch_env
       - spruce/install_rsync
       - spruce/install_cli
-      - run:
-          name: "Try to upgrade"
-          command: |
-            git checkout -b $TARGETBRANCH || git checkout $TARGETBRANCH
-            git reset --hard master
-            git config --global user.email "$GIT_AUTHOR_EMAIL"
-            git config --global user.name "$GIT_AUTHOR_NAME"
-            yarn run upgrade.packages.all
-            if [[ $(git status) != *"modified"* ]]; then 
-              echo "No modifications detected.  No push/PR necessary 👊"
-              circleci-agent step halt
-            fi
+      - spruce/workspace_upgrade_check_for_major
       - spruce/check_for_newline_only_diff
       - spruce/create_pr
 workflows:
