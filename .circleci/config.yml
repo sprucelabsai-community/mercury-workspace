@@ -12,7 +12,10 @@ jobs:
             - "ec:9f:2e:aa:1f:c9:ab:49:57:8f:c0:cd:2e:5b:f3:b0"
       - checkout
       - spruce/check_and_skip_if_npm_publish
-      - spruce/create_env_from_base64_env
+      - run:
+          name: "ENV file creation"
+          command: |
+            [ -n "$BASE64_ENV" ] && echo $BASE64_ENV | base64 --decode > packages/mercury-client/.env
       - spruce/install_rsync
       - run: node -v && npm -v && yarn -v
       - run: yarn install
