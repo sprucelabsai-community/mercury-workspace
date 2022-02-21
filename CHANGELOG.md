@@ -3,6 +3,478 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.94](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.93...v21.0.94) (2022-02-21)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.93](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.92...v21.0.93) (2022-02-21)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.92](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.91...v21.0.92) (2022-02-21)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.91](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.90...v21.0.91) (2022-02-21)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.90](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.89...v21.0.90) (2022-02-21)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.89](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.88...v21.0.89) (2022-02-21)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.88](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.87...v21.0.88) (2022-02-21)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.87](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.86...v21.0.87) (2022-02-20)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.86](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.85...v21.0.86) (2022-02-20)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.85](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.84...v21.0.85) (2022-02-20)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.84](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.83...v21.0.84) (2022-02-20)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.83](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.82...v21.0.83) (2022-02-20)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.82](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.81...v21.0.82) (2022-02-20)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.81](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.80...v21.0.81) (2022-02-20)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.80](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.79...v21.0.80) (2022-02-19)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.79](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.78...v21.0.79) (2022-02-19)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.78](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.77...v21.0.78) (2022-02-19)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.77](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.76...v21.0.77) (2022-02-19)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.76](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.75...v21.0.76) (2022-02-19)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.75](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.74...v21.0.75) (2022-02-19)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.74](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.73...v21.0.74) (2022-02-19)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.73](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.72...v21.0.73) (2022-02-18)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.72](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.71...v21.0.72) (2022-02-18)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.71](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.70...v21.0.71) (2022-02-18)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.70](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.69...v21.0.70) (2022-02-18)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.69](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.68...v21.0.69) (2022-02-18)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.68](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.67...v21.0.68) (2022-02-18)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.67](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.66...v21.0.67) (2022-02-18)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.66](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.65...v21.0.66) (2022-02-18)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.65](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.64...v21.0.65) (2022-02-17)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.64](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.63...v21.0.64) (2022-02-17)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.63](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.62...v21.0.63) (2022-02-17)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.62](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.61...v21.0.62) (2022-02-17)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.61](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.60...v21.0.61) (2022-02-17)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.60](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.59...v21.0.60) (2022-02-17)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.59](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.58...v21.0.59) (2022-02-16)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.58](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.57...v21.0.58) (2022-02-16)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.57](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.56...v21.0.57) (2022-02-16)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.56](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.55...v21.0.56) (2022-02-15)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.55](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.54...v21.0.55) (2022-02-14)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.54](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.53...v21.0.54) (2022-02-14)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.53](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.52...v21.0.53) (2022-02-14)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.52](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.51...v21.0.52) (2022-02-14)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.51](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.50...v21.0.51) (2022-02-14)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.50](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.49...v21.0.50) (2022-02-12)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.49](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.48...v21.0.49) (2022-02-12)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.48](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.47...v21.0.48) (2022-02-12)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.47](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.46...v21.0.47) (2022-02-12)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.46](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.45...v21.0.46) (2022-02-12)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.45](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.44...v21.0.45) (2022-02-12)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.44](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.43...v21.0.44) (2022-02-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.43](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.42...v21.0.43) (2022-02-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.42](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.41...v21.0.42) (2022-02-11)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.41](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.40...v21.0.41) (2022-02-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.40](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.39...v21.0.40) (2022-02-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.39](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.38...v21.0.39) (2022-02-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.38](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.37...v21.0.38) (2022-02-10)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.37](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.36...v21.0.37) (2022-02-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
+## [21.0.36](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.35...v21.0.36) (2022-02-09)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
 ## [21.0.35](https://github.com/sprucelabsai/mercury-workspace/compare/v21.0.34...v21.0.35) (2022-02-09)
 
 **Note:** Version bump only for package spruce-mercury-workspace
