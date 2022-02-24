@@ -64,11 +64,11 @@
   "dependencies": {
     "@sprucelabs/error": "^5.0.405",
     "@sprucelabs/mercury-types": "^27.0.136",
-    "@sprucelabs/schema": "^26.0.136",
+    "@sprucelabs/schema": "^26.0.137",
     "@sprucelabs/spruce-event-utils": "^18.0.140"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.405",
+    "@sprucelabs/esm-postbuild": "^1.0.406",
     "@sprucelabs/jest-json-reporter": "^6.0.331",
     "@sprucelabs/resolve-path-aliases": "^1.0.261",
     "@sprucelabs/semantic-release": "^4.0.8",
