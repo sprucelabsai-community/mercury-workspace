@@ -65,8 +65,8 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.405",
-    "@sprucelabs/schema": "^26.0.140",
-    "@sprucelabs/spruce-core-schemas": "^23.2.8",
+    "@sprucelabs/schema": "^27.0.0",
+    "@sprucelabs/spruce-core-schemas": "^24.0.0",
     "@sprucelabs/spruce-event-utils": "^18.0.141",
     "dotenv": "^16.0.0",
     "socket.io-client": "^4.4.1"
