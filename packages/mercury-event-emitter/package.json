@@ -45,7 +45,7 @@
     "clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
     "clean.dist": "rm -rf build/__tests__ build/esm/__tests__",
     "fix.lint": "NODE_OPTIONS=--max_old_space_size=6144 eslint --fix --cache '**/*.ts'",
-    "lint": "eslint --cache '**/*.ts'",
+    "lint": "NODE_OPTIONS=--max_old_space_size=6144 eslint --cache '**/*.ts'",
     "rebuild": "cd ../ && yarn rebuild",
     "release": "semantic-release",
     "test": "jest",
