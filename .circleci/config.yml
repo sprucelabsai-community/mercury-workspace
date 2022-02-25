@@ -21,7 +21,6 @@ jobs:
       - run: yarn install
       - run: yarn clean
       - run: yarn build.ci
-      - run: yarn lint
       - run: yarn test
       - spruce/exit_if_not_auto_upgrade
       - spruce/merge_auto_upgrade
