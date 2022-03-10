@@ -11,7 +11,10 @@
   "scriptUpdater": {
     "skipped": [
       "rebuild",
-      "update.dependencies"
+      "update.dependencies",
+      "build.tsc",
+      "fix.lint",
+      "lint"
     ],
     "skips": []
   }

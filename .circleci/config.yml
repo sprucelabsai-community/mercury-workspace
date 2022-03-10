@@ -4,7 +4,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:16.14
     working_directory: /mnt/ramdisk
     steps:
       - add_ssh_keys:
@@ -21,13 +21,12 @@ jobs:
       - run: yarn install
       - run: yarn clean
       - run: yarn build.ci
-      - run: yarn lint
       - run: yarn test
       - spruce/exit_if_not_auto_upgrade
       - spruce/merge_auto_upgrade
   npm_publish:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:16.14
     working_directory: /mnt/ramdisk
     steps:
       - add_ssh_keys:
@@ -46,7 +45,7 @@ jobs:
       - run: 'npm run publish -- --yes --force-publish --dist-tag latest --message "chore(release): %v [npm-publish]"'
   upgrade:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:16.14
     working_directory: /mnt/ramdisk
     steps:
       - spruce/check_for_autoupgrade_dns
