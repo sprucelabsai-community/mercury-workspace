@@ -4,6 +4,18 @@ import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
 export default class RequiringLocalListenersTest extends AbstractClientTest {
+	protected static async beforeEach() {
+		await super.beforeEach()
+		MercuryClientFactory.setShouldRequireLocalListeners(false)
+	}
+
+	@test()
+	protected static async cantSetShouldRequireLocalListenersWithoutTestMode() {
+		assert.doesThrow(() =>
+			MercuryClientFactory.setShouldRequireLocalListeners(true)
+		)
+	}
+
 	@test()
 	protected static async canCreateDisablingRemoteCalls() {
 		MercuryClientFactory.setIsTestMode(true)
@@ -27,5 +39,13 @@ export default class RequiringLocalListenersTest extends AbstractClientTest {
 		})
 
 		await client.emit('whoami::v2020_12_25')
+	}
+
+	@test()
+	protected static async knowsIfLocalListenersRequired() {
+		MercuryClientFactory.setIsTestMode(true)
+		assert.isFalse(MercuryClientFactory.getShouldRequireLocalListeners())
+		MercuryClientFactory.setShouldRequireLocalListeners(true)
+		assert.isTrue(MercuryClientFactory.getShouldRequireLocalListeners())
 	}
 }

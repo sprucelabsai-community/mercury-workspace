@@ -123,6 +123,13 @@ export default class MercuryClientFactory {
 	}
 
 	public static setShouldRequireLocalListeners(shouldRequire: boolean) {
+		if (!this.isTestMode) {
+			throw new Error(`You can't require local listeners unless in test mode!`)
+		}
 		this.shouldRequireLocalListeners = shouldRequire
+	}
+
+	public static getShouldRequireLocalListeners() {
+		return this.shouldRequireLocalListeners
 	}
 }
