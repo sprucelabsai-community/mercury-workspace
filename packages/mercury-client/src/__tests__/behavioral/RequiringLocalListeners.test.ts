@@ -1,26 +1,19 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
+import MercuryTestClient from '../../clients/MercuryTestClient'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
 export default class RequiringLocalListenersTest extends AbstractClientTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		MercuryClientFactory.setIsTestMode(true)
-		MercuryClientFactory.setShouldRequireLocalListeners(false)
-	}
-
-	@test()
-	protected static async cantSetShouldRequireLocalListenersWithoutTestMode() {
-		MercuryClientFactory.setIsTestMode(false)
-		assert.doesThrow(() =>
-			MercuryClientFactory.setShouldRequireLocalListeners(true)
-		)
+		MercuryTestClient.setShouldRequireLocalListeners(false)
 	}
 
 	@test()
 	protected static async canCreateDisablingRemoteCalls() {
-		MercuryClientFactory.setShouldRequireLocalListeners(true)
+		MercuryTestClient.setShouldRequireLocalListeners(true)
 
 		const client = await this.connectToApi()
 
@@ -44,9 +37,8 @@ export default class RequiringLocalListenersTest extends AbstractClientTest {
 
 	@test()
 	protected static async knowsIfLocalListenersRequired() {
-		MercuryClientFactory.setIsTestMode(true)
-		assert.isFalse(MercuryClientFactory.getShouldRequireLocalListeners())
-		MercuryClientFactory.setShouldRequireLocalListeners(true)
-		assert.isTrue(MercuryClientFactory.getShouldRequireLocalListeners())
+		assert.isFalse(MercuryTestClient.getShouldRequireLocalListeners())
+		MercuryTestClient.setShouldRequireLocalListeners(true)
+		assert.isTrue(MercuryTestClient.getShouldRequireLocalListeners())
 	}
 }
