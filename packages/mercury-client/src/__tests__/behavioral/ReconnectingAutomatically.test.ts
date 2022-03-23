@@ -66,7 +66,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 	@test()
 	protected static async timingOutDuringAuthDoesntThrowAuthBlockedError() {
-		const client = await this.Client({ emitTimeoutMs: 1 })
+		const client = await this.connectToApi({ emitTimeoutMs: 1 })
 
 		const err = await assert.doesThrowAsync(() =>
 			client.authenticate({ token: 'duh' })
@@ -77,7 +77,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 	@test()
 	protected static async manuallyDisconnectStopsReconnectAttempts() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		//@ts-ignore
 		client.host = 'https://wontwork.workwont'
@@ -96,7 +96,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 	}
 
 	private static async ClientZeroDelay() {
-		return await this.Client({ reconnectDelayMs: 0 })
+		return await this.connectToApi({ reconnectDelayMs: 0 })
 	}
 
 	private static async assertRetriesEmitOnDisconnect() {

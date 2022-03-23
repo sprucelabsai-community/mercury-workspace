@@ -9,7 +9,7 @@ require('dotenv').config()
 export default class ReauthenticatingAfterReconnectTest extends AbstractClientTest {
 	@test()
 	protected static async authThrowsIfFails() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		await assert.doesThrowAsync(() => client.authenticate({}))
 	}
@@ -17,7 +17,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	@test()
 	protected static async canAuthAsSkill() {
 		const skill = await this.Skill()
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		const { skill: authSkill } = await client.authenticate({
 			skillId: skill.id,
@@ -57,7 +57,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	protected static async manuallyDisconnectingDoesNotReconnectSkill() {
 		const skill = await this.Skill()
 
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		await client.authenticate({
 			skillId: skill.id,
 			apiKey: skill.apiKey,
@@ -70,7 +70,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 	@test()
 	protected static async confirmPinFailsValidationClientSideDespiteOneOffLogicForRetainingAuth() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		const err = await assert.doesThrowAsync(() =>
 			client.emit('confirm-pin::v2020_12_25', {
@@ -85,7 +85,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	@test()
 	protected static async manuallyDisconnectingDoesNotReconnectPerson() {
 		const { token } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		await client.authenticate({
 			token,
 		})
@@ -99,7 +99,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	protected static async losingConnectionAsSkillFromApiTriesReconnect() {
 		const skill = await this.Skill()
 
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		await client.authenticate({
 			skillId: skill.id,
 			apiKey: skill.apiKey,
@@ -125,7 +125,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	protected static async losingConnectionAsPersonFromApiTriesReconnect() {
 		const { token, person } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		await client.authenticate({
 			token,
 		})
@@ -150,7 +150,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	protected static async losingConnectionBecauseMercuryIsDownDoesNotThrowUnhandledException() {
 		const { token, person } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		await client.authenticate({
 			token,
@@ -216,7 +216,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	protected static async authAsPersonStoresOnClient() {
 		const { token } = await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		await client.authenticate({
 			token,
 		})
@@ -235,7 +235,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	@test()
 	protected static async authAsSkillStoresOnClient() {
 		const skill = await this.Skill()
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		await client.authenticate({
 			skillId: skill.id,
 			apiKey: skill.apiKey,
@@ -252,7 +252,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	@test()
 	protected static async canReAuthIfTimesOutDuringAuth() {
 		const skill = await this.Skill()
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		const promise = client.authenticate({
 			skillId: skill.id,
@@ -268,7 +268,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	@test()
 	protected static async canAuthenticateAsTheSameSkillRepeatedly() {
 		const skill = await this.Skill()
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		await Promise.all([
 			client.authenticate({
@@ -289,7 +289,7 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 	@test()
 	protected static async canAuthenticateAsTheSamePersonRepeatedly() {
 		const { token } = await this.loginAsDemoPerson()
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		await Promise.all([
 			client.authenticate({

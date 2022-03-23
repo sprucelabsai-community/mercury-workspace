@@ -49,7 +49,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		MercuryClientFactory.reset()
 	}
 
-	protected static async Client(
+	protected static async connectToApi(
 		options?: Partial<ConnectionOptions>
 	): Promise<Client> {
 		const { host = TEST_HOST, ...rest } = options || {}
@@ -74,7 +74,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		client: Client
 		token: string
 	}> {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		if (!phone) {
 			throw new SchemaError({
@@ -131,7 +131,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 	) {
 		const skill = await this.seedAndInstallDummySkill(client, orgId)
 
-		const skillClient = await this.Client()
+		const skillClient = await this.connectToApi()
 		await skillClient.authenticate({
 			skillId: skill.id,
 			apiKey: skill.apiKey,

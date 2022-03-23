@@ -85,6 +85,7 @@ export default class MercuryTestClient<
 	private shouldHandleAuthenticateLocallyIfListenerSet = true
 	private static namespacesThatHaveToBeHandledLocally: string[] = []
 	private shouldWaitForDelayedConnectIfAuthing = true
+	private shouldRequireLocalListeners?: boolean
 
 	public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
 		this.shouldCheckPermissionsOnLocalEvents = should
@@ -99,9 +100,14 @@ export default class MercuryTestClient<
 	}
 
 	public constructor(
-		options: Record<string, any> & { host: string; eventContract?: Contract }
+		options: Record<string, any> & {
+			host: string
+			eventContract?: Contract
+			shouldRequireLocalListeners?: boolean
+		}
 	) {
 		super(options)
+		this.shouldRequireLocalListeners = options.shouldRequireLocalListeners
 		MercuryTestClient.getInternalEmitter(options.eventContract)
 	}
 
@@ -169,6 +175,9 @@ export default class MercuryTestClient<
 	}
 
 	private shouldHandleEventLocally(emitter: any, fqen: any) {
+		if (this.shouldRequireLocalListeners) {
+			return true
+		}
 		if (
 			!this.shouldHandleAuthenticateLocallyIfListenerSet &&
 			fqen === authenticateFqen

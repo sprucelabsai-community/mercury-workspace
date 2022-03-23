@@ -17,6 +17,7 @@ export default class MercuryClientFactory {
 	private static timeoutMs = 30000
 	private static totalClients = 0
 	private static clients: Client<any>[] = []
+	private static shouldRequireLocalListeners = false
 
 	public static async Client<
 		Contract extends SkillEventContract = SkillEventContract
@@ -66,6 +67,8 @@ export default class MercuryClientFactory {
 			emitTimeoutMs,
 			shouldReconnect,
 			maxEmitRetries,
+			//@ts-ignore
+			shouldRequireLocalListeners: this.shouldRequireLocalListeners,
 		})
 
 		await client.connect()
@@ -117,5 +120,9 @@ export default class MercuryClientFactory {
 
 	public static getClients() {
 		return this.clients
+	}
+
+	public static setShouldRequireLocalListeners(shouldRequire: boolean) {
+		this.shouldRequireLocalListeners = shouldRequire
 	}
 }

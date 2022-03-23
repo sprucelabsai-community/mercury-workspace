@@ -46,7 +46,7 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 			['test'],
 			'test.should-work'
 		)
-		const client1 = await this.Client()
+		const client1 = await this.connectToApi()
 
 		//@ts-ignore
 		await client1.on('test.should-work', () => {})
@@ -73,6 +73,6 @@ export default class SettingNamespacesThatMustBeHandledLocallyTest extends Abstr
 	}
 
 	private static async TestClient() {
-		return (await this.Client({})) as MercuryTestClient
+		return (await this.connectToApi({})) as MercuryTestClient
 	}
 }

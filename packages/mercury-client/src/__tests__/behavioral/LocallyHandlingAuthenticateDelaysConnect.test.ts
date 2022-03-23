@@ -66,7 +66,7 @@ export default class LocallyHandlingAuthenticateDelaysConnectTest extends Abstra
 	private static async mockAuthAndGetSkillClient() {
 		const { client: creatorClient, person } = await this.loginAsDemoPerson()
 		const skill = await this.seedDemoSkill(creatorClient)
-		const skillClient = await this.Client()
+		const skillClient = await this.connectToApi()
 
 		await creatorClient.on('authenticate::v2020_12_25', async () => {
 			return {

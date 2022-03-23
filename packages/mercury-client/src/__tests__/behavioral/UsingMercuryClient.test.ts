@@ -47,11 +47,11 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		assert.isFunction(MercuryClientFactory.getTotalClients)
 		assert.isEqual(MercuryClientFactory.getTotalClients(), 0)
 		assert.isLength(MercuryClientFactory.getClients(), 0)
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		assert.isEqual(MercuryClientFactory.getTotalClients(), 1)
 		assert.isEqual(MercuryClientFactory.getClients()[0], client)
 
-		const client2 = await this.Client()
+		const client2 = await this.connectToApi()
 		assert.isEqual(MercuryClientFactory.getTotalClients(), 2)
 		assert.isEqual(MercuryClientFactory.getClients()[1], client2)
 	}
@@ -66,7 +66,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async factoryReturnsSocketIoClient() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		assert.isTruthy(client instanceof MercurySocketIoClient)
 		assert.isTrue(client.isConnected())
@@ -78,7 +78,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async throwsWithBadEventName() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => client.emit('health2'))
@@ -88,7 +88,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async throwsWithHelpfulErrorWithInvalidPayload() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
@@ -103,7 +103,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const host = 'https://wontfindthisanywhere.com'
 
 		const err = await assert.doesThrowAsync(() =>
-			this.Client({ host, reconnectDelayMs: 100 })
+			this.connectToApi({ host, reconnectDelayMs: 100 })
 		)
 
 		errorAssert.assertError(err, 'CONNECTION_FAILED', {
@@ -114,7 +114,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async triesToReconnect5TimesMax() {
-		const client = await this.Client({ reconnectDelayMs: 100 })
+		const client = await this.connectToApi({ reconnectDelayMs: 100 })
 
 		let count = 0
 		//@ts-ignore
@@ -135,7 +135,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async getsAccessDeniedWhenTryingToListenToUnknownEventAnonymously() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
 			client.on('waka-waka', () => {})
@@ -146,7 +146,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async cantEmitEventWithWithInvalidPayload() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
 			client.emit('request-pin::v2020_12_25', {})
@@ -159,7 +159,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async canRunHealthCheck() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		const results = await client.emit('health::v2020_12_25')
 
 		assert.isEqualDeep(results.responses[0].payload, {
@@ -383,7 +383,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async throwsWhenEmittingWhenNotConnected() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		await client.disconnect()
 
 		const err = await assert.doesThrowAsync(() =>
@@ -395,7 +395,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async serverSideErrorsMappedToSpruceErrors() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		const response = await client.emit('register-skill::v2020_12_25', {
 			payload: { name: 'test' },
 		})
@@ -549,7 +549,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async handlesCantEmitElegantly() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		const results = await client.emit('did-message::v2020_12_25', {
 			target: {},
@@ -599,7 +599,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async notAuthenticatedToStart() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		assert.isFalse(client.isAuthenticated())
 	}
 
@@ -611,13 +611,13 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 	@test()
 	protected static async noProxyTokenToStart() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		assert.isFalsy(client.getProxyToken())
 	}
 
 	@test()
 	protected static async canSetProxyToken() {
-		const client = await this.Client()
+		const client = await this.connectToApi()
 		assert.isFalsy(client.getProxyToken())
 		client.setProxyToken('yummy')
 		assert.isEqual(client.getProxyToken(), 'yummy')
@@ -673,7 +673,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		emitDelay?: number,
 		maxEmitRetries?: number
 	): Promise<any> {
-		const client = await this.Client({
+		const client = await this.connectToApi({
 			emitTimeoutMs: 100,
 			shouldReconnect: false,
 			maxEmitRetries,

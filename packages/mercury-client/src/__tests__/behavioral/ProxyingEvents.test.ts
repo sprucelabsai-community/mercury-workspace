@@ -67,7 +67,7 @@ export default class ProxyingEventsTest extends AbstractClientTest {
 
 	@test()
 	protected static async proxyTokenNotSentToAuthenticate() {
-		const anonClient = await this.Client()
+		const anonClient = await this.connectToApi()
 		const { client } = await this.loginAsDemoPerson()
 
 		const token = await client.registerProxyToken()

@@ -6,7 +6,7 @@ export default class TurningOffAListenerTest extends AbstractClientTest {
 	@test()
 	protected static async canCreateTurningOffAListener() {
 		MercuryClientFactory.setIsTestMode(true)
-		const client = await this.Client()
+		const client = await this.connectToApi()
 
 		await client.emit('whoami::v2020_12_25')
 

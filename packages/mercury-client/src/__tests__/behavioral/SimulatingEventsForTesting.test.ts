@@ -37,7 +37,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async testClientHandlesDefaultContracts() {
-		const client = await this.connectToApi(true)
+		const client = await this.connectToApiAsTestClient(true)
 
 		assert.isTrue(client.doesHandleEvent(this.eventName))
 		assert.isFalse(client.doesHandleEvent('taco-bravo'))
@@ -71,7 +71,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	protected static async canEmitEventToSelfForTesting(
 		shouldSetDefaultContract: boolean
 	) {
-		const client = await this.connectToApi(shouldSetDefaultContract)
+		const client = await this.connectToApiAsTestClient(shouldSetDefaultContract)
 		let wasFired = false
 
 		await client.on('did-message::v2020_12_25', async () => {
@@ -97,7 +97,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async canEmitToApiWhenNoLocalListenerIsSet() {
-		const client = await this.connectToApi()
+		const client = await this.connectToApiAsTestClient()
 		const results = await client.emit('get-event-contracts::v2020_12_25')
 
 		const { contracts } = eventResponseUtil.getFirstResponseOrThrow(results)
@@ -111,7 +111,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async canHandleRapidFireConnectsToApi() {
-		const client = await this.connectToApi()
+		const client = await this.connectToApiAsTestClient()
 		await Promise.all([
 			client.emit('get-event-contracts::v2020_12_25'),
 			client.emit('get-event-contracts::v2020_12_25'),
@@ -122,8 +122,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	@test()
 	protected static async canEmitToSelfUsingToClients() {
 		const [client1, client2] = await Promise.all([
-			this.connectToApi(),
-			this.connectToApi(),
+			this.connectToApiAsTestClient(),
+			this.connectToApiAsTestClient(),
 		])
 
 		let wasFired = false
@@ -151,7 +151,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async factoryReturnsSocketIoClient() {
-		const client = await this.connectToApi()
+		const client = await this.connectToApiAsTestClient()
 
 		assert.isTrue(client.isConnected())
 
@@ -162,7 +162,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async canResetClient() {
-		const client = await this.connectToApi()
+		const client = await this.connectToApiAsTestClient()
 
 		MercuryTestClient.reset()
 		const err = await assert.doesThrowAsync(() =>
@@ -175,8 +175,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	@test()
 	protected static async canMixinContractsToTestClient() {
 		const [client1, client2] = await Promise.all([
-			this.connectToApi(),
-			this.connectToApi(),
+			this.connectToApiAsTestClient(),
+			this.connectToApiAsTestClient(),
 		])
 
 		this.mixinPayloadlessTestEvent(client1)
@@ -196,12 +196,12 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async firstTestClientAddsEventToSecondTestClient() {
-		const client1 = await this.connectToApi(false, {
+		const client1 = await this.connectToApiAsTestClient(false, {
 			eventSignatures: {
 				'my-new-event': {},
 			},
 		})
-		const client2 = await this.connectToApi()
+		const client2 = await this.connectToApiAsTestClient()
 
 		assert.isTrue(client1.doesHandleEvent('my-new-event'))
 		assert.isTrue(client2.doesHandleEvent('my-new-event'))
@@ -209,8 +209,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async secondTestClientAddsEventToFirstTestClient() {
-		const client1 = await this.connectToApi()
-		const client2 = await this.connectToApi(false, {
+		const client1 = await this.connectToApiAsTestClient()
+		const client2 = await this.connectToApiAsTestClient(false, {
 			eventSignatures: {
 				'my-new-event': {},
 			},
@@ -223,7 +223,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	@test()
 	protected static async includesSourceInEventsEmittedByPerson() {
 		const [client2, { client: client1, person }] = await Promise.all([
-			this.connectToApi(),
+			this.connectToApiAsTestClient(),
 			this.loginAsDemoPerson(),
 		])
 
@@ -252,7 +252,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		MercuryTestClient.setShouldCheckPermissionsOnLocalEvents(expected)
 
 		const [client2, { client: client1 }] = await Promise.all([
-			this.connectToApi(),
+			this.connectToApiAsTestClient(),
 			this.loginAsDemoPerson(),
 		])
 
@@ -310,8 +310,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	@test()
 	protected static async stillValidatesPayloads() {
 		const [client1, client2] = await Promise.all([
-			this.connectToApi(true),
-			this.connectToApi(true),
+			this.connectToApiAsTestClient(true),
+			this.connectToApiAsTestClient(true),
 		])
 
 		let hit = false
@@ -425,8 +425,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	@test()
 	protected static async localResponsesAreValidated() {
 		const [client1, client2] = await Promise.all([
-			this.connectToApi(true),
-			this.connectToApi(true),
+			this.connectToApiAsTestClient(true),
+			this.connectToApiAsTestClient(true),
 		])
 
 		//@ts-ignore
@@ -451,8 +451,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	@test()
 	protected static async responseThrowingAnErrorIsPassedThrough() {
 		const [client1, client2] = await Promise.all([
-			this.connectToApi(true),
-			this.connectToApi(true),
+			this.connectToApiAsTestClient(true),
+			this.connectToApiAsTestClient(true),
 		])
 
 		//@ts-ignore
@@ -474,7 +474,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async testClientWrapsUnknownEventNameInHelpfulDebugError() {
-		const client = await this.connectToApi(true)
+		const client = await this.connectToApiAsTestClient(true)
 
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => client.emit('waka-awka'))
@@ -484,7 +484,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async returnsHelpfulErrorIfEventExistsLocallyButNotRemotely() {
-		const client = await this.connectToApi(true)
+		const client = await this.connectToApiAsTestClient(true)
 
 		//@ts-ignore
 		client.eventContract = {
@@ -564,8 +564,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	protected static async throwsIfEmitsIsNotGlobalAndTargetDoesNotIncludeOrganizationIdOrLocationId() {
 		MercuryTestClient.setShouldCheckPermissionsOnLocalEvents(false)
 
-		const client = await this.connectToApi(true)
-		const client2 = await this.connectToApi(true)
+		const client = await this.connectToApiAsTestClient(true)
+		const client2 = await this.connectToApiAsTestClient(true)
 
 		const contract: EventContract = {
 			eventSignatures: {
@@ -601,7 +601,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			DEMO_PHONE_GUEST
 		)
 
-		const client = await this.Client()
+		const client = await this.connectToApiAsTestClient()
 		let passedSource: any
 		await client.on('whoami::v2020_12_25', async ({ source }) => {
 			passedSource = source
@@ -634,7 +634,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			}
 		})
 
-		const anon = await this.Client()
+		const anon = await this.connectToApiAsTestClient()
 		anon.setProxyToken(token)
 
 		await anon.authenticate({
@@ -752,7 +752,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	private static async assertAnonCantEmit(fqen: string, orgId: string) {
-		const client = await this.Client()
+		const client = await this.connectToApiAsTestClient()
 
 		const response = await client.emit(fqen as any, {
 			target: {
@@ -798,7 +798,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		return { personClient, skill1, skill1Client, skill2Client, org }
 	}
 
-	private static async connectToApi(
+	private static async connectToApiAsTestClient(
 		shouldSetDefaultContract = false,
 		contract?: EventContract
 	) {
