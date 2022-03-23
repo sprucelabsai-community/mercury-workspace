@@ -6,11 +6,13 @@ import AbstractClientTest from '../../tests/AbstractClientTest'
 export default class RequiringLocalListenersTest extends AbstractClientTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
+		MercuryClientFactory.setIsTestMode(true)
 		MercuryClientFactory.setShouldRequireLocalListeners(false)
 	}
 
 	@test()
 	protected static async cantSetShouldRequireLocalListenersWithoutTestMode() {
+		MercuryClientFactory.setIsTestMode(false)
 		assert.doesThrow(() =>
 			MercuryClientFactory.setShouldRequireLocalListeners(true)
 		)
@@ -18,7 +20,6 @@ export default class RequiringLocalListenersTest extends AbstractClientTest {
 
 	@test()
 	protected static async canCreateDisablingRemoteCalls() {
-		MercuryClientFactory.setIsTestMode(true)
 		MercuryClientFactory.setShouldRequireLocalListeners(true)
 
 		const client = await this.connectToApi()
