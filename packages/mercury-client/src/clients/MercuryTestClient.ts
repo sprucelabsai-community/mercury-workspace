@@ -151,6 +151,14 @@ export default class MercuryTestClient<
 			if (this.shouldHandleEventLocally(emitter, fqen)) {
 				return this.handleEventLocally(args)
 			} else {
+				if (MercuryTestClient.shouldRequireLocalListeners) {
+					throw new SpruceError({
+						code: 'MUST_HANDLE_LOCALLY',
+						fqen,
+						friendlyMessage: `You need to fake a response to ${fqen}. Try 'eventFaker.on(...)'!`,
+					})
+				}
+
 				await this.connectIfNotConnected(fqen)
 
 				//@ts-ignore
@@ -173,9 +181,6 @@ export default class MercuryTestClient<
 	}
 
 	private shouldHandleEventLocally(emitter: any, fqen: any) {
-		if (MercuryTestClient.shouldRequireLocalListeners) {
-			return true
-		}
 		if (
 			!this.shouldHandleAuthenticateLocallyIfListenerSet &&
 			fqen === authenticateFqen
