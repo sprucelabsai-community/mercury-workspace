@@ -62,15 +62,15 @@
     "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev"
   },
   "dependencies": {
-    "@sprucelabs/error": "^5.0.426",
-    "@sprucelabs/mercury-types": "^27.0.187",
-    "@sprucelabs/schema": "^27.1.31",
-    "@sprucelabs/spruce-event-utils": "^19.1.40"
+    "@sprucelabs/error": "^5.0.427",
+    "@sprucelabs/mercury-types": "^27.0.188",
+    "@sprucelabs/schema": "^27.1.32",
+    "@sprucelabs/spruce-event-utils": "^19.1.41"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.426",
-    "@sprucelabs/jest-json-reporter": "^6.0.346",
-    "@sprucelabs/resolve-path-aliases": "^1.1.15",
+    "@sprucelabs/esm-postbuild": "^1.0.427",
+    "@sprucelabs/jest-json-reporter": "^6.0.347",
+    "@sprucelabs/resolve-path-aliases": "^1.1.16",
     "@sprucelabs/semantic-release": "^4.0.8",
     "@sprucelabs/test": "^7.7.293",
     "@sprucelabs/test-utils": "^3.0.504",
@@ -85,7 +85,7 @@
     "ts-node": "^10.7.0",
     "tsc-watch": "^4.6.2",
     "tsconfig-paths": "^3.14.1",
-    "typescript": "^4.6.2"
+    "typescript": "^4.6.3"
   },
   "jest": {
     "maxWorkers": 4,
