@@ -155,7 +155,7 @@ export default class MercuryTestClient<
 					throw new SpruceError({
 						code: 'MUST_HANDLE_LOCALLY',
 						fqen,
-						friendlyMessage: `You need to fake a response to ${fqen}. Try 'eventFaker.on(...)'!`,
+						friendlyMessage: `You need to listen to or fake a response to ${fqen}. Try 'spruce create.listener' or 'eventFaker.on(...)'!`,
 					})
 				}
 
