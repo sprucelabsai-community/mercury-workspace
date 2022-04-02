@@ -63,9 +63,9 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.433",
-    "@sprucelabs/mercury-types": "^27.0.203",
+    "@sprucelabs/mercury-types": "^27.0.204",
     "@sprucelabs/schema": "^27.1.39",
-    "@sprucelabs/spruce-event-utils": "^19.1.56"
+    "@sprucelabs/spruce-event-utils": "^19.1.57"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^1.0.434",
