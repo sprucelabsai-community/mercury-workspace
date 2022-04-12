@@ -13,6 +13,7 @@ import {
 	eventResponseUtil,
 	EventSource,
 } from '@sprucelabs/spruce-event-utils'
+import clone from 'just-clone'
 import { MercuryClient } from '..'
 import SpruceError from '../errors/SpruceError'
 import { authenticateFqen } from './MercurySocketIoClient'
@@ -268,7 +269,9 @@ export default class MercuryTestClient<
 			}
 		}
 
-		return emitter.emit(...argsWithSource) as any
+		const results = (await emitter.emit(...argsWithSource)) as any
+
+		return clone(results)
 	}
 
 	private assertValidEventSignature(

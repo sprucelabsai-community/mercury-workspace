@@ -2,6 +2,7 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import {
 	EventContract,
 	buildPermissionContract,
+	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import {
 	buildEmitTargetAndPayloadSchema,
@@ -31,7 +32,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async canSetTestMode() {
-		MercuryClientFactory.setIsTestMode(true)
+		this.enableTestMode()
 		assert.isTrue(MercuryClientFactory.isInTestMode())
 	}
 
@@ -56,7 +57,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		assert.isFalse(client.getIsTestClient())
 
-		MercuryClientFactory.setIsTestMode(true)
+		this.enableTestMode()
 
 		const client2 = await MercuryClientFactory.Client({
 			host: TEST_HOST,
@@ -179,7 +180,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			this.connectToApiAsTestClient(),
 		])
 
-		this.mixinPayloadlessTestEvent(client1)
+		this.mixinPayloadLessTestEvent(client1)
 
 		let hit = false
 
@@ -227,7 +228,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			this.loginAsDemoPerson(),
 		])
 
-		this.mixinPayloadlessTestEvent(client1)
+		this.mixinPayloadLessTestEvent(client1)
 
 		let s: any
 
@@ -340,7 +341,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const { personClient, skill1Client, skill2Client, skill1 } =
 			await this.setupOrgAndInstall2Skills()
 
-		this.mixinPayloadlessTestEvent(personClient)
+		this.mixinPayloadLessTestEvent(personClient)
 
 		let s: any
 
@@ -477,7 +478,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const client = await this.connectToApiAsTestClient(true)
 
 		//@ts-ignore
-		const err = await assert.doesThrowAsync(() => client.emit('waka-awka'))
+		const err = await assert.doesThrowAsync(() => client.emit('waka-waka'))
 
 		assert.doesInclude(err.message, 'spruce create.event')
 	}
@@ -509,7 +510,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const { personClient, skill1Client, skill2Client, skill1 } =
 			await this.setupOrgAndInstall2Skills()
 
-		this.mixinPayloadlessTestEvent(personClient)
+		this.mixinPayloadLessTestEvent(personClient)
 
 		let s: any
 
@@ -518,7 +519,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			s = source
 		})
 
-		const proxyToken = 'aoeuaoeuaoeu'
+		const proxyToken = 'toast-cheese'
 		skill1Client.setProxyToken(proxyToken)
 
 		//@ts-ignore
@@ -535,7 +536,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		const { personClient, skill1Client, skill2Client, skill1 } =
 			await this.setupOrgAndInstall2Skills()
 
-		this.mixinPayloadlessTestEventWithSource(personClient)
+		this.mixinPayloadLessTestEventWithSource(personClient)
 
 		let s: any
 
@@ -544,7 +545,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			s = source
 		})
 
-		const proxyToken = 'aoeuaoeuaoeu'
+		const proxyToken = 'waste-taco'
 		skill1Client.setProxyToken('this-should-be-ignored-now')
 
 		//@ts-ignore
@@ -592,10 +593,10 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async passesThroughTestProxy() {
-		MercuryClientFactory.setIsTestMode(true)
+		this.enableTestMode()
 
 		const { client: teammateClient } = await this.loginAsDemoPerson(
-			DEMO_PHONE_GUEST
+			DEMO_PHONE_TEAMMATE
 		)
 		const { client: guestClient } = await this.loginAsDemoPerson(
 			DEMO_PHONE_GUEST
@@ -618,9 +619,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async proxyNotSentToAuthenticate() {
-		MercuryClientFactory.setIsTestMode(true)
+		const client = await this.enableTestModeAndLoginAsGuest()
 
-		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
 		const token = await client.registerProxyToken()
 
 		let passedSource: any
@@ -646,8 +646,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async throwsWhenPassingEmptyTargetAndPayloadToEVentWithNoEmitPayloadSchema() {
-		MercuryClientFactory.setIsTestMode(true)
-		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
+		const client = await this.enableTestModeAndLoginAsGuest()
 
 		//@ts-ignore
 		delete client.eventContract.eventSignatures['whoami::v2020_12_25']
@@ -663,8 +662,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 	@test()
 	protected static async callbackInvokedForEachResponse() {
-		MercuryClientFactory.setIsTestMode(true)
-		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
+		const client = await this.enableTestModeAndLoginAsGuest()
 
 		await client.on('list-organizations::v2020_12_25', () => {
 			return {
@@ -679,6 +677,34 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		})
 
 		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async fakedResponsesAreCloned() {
+		const client = await this.enableTestModeAndLoginAsGuest()
+		const org: SpruceSchemas.Spruce.v2020_07_22.Organization = {
+			id: '1234',
+			name: 'Pal',
+			dateCreated: 0,
+			slug: 'buddy',
+		}
+
+		await client.on('list-organizations::v2020_12_25', () => {
+			return {
+				organizations: [org],
+			}
+		})
+
+		const [{ organizations }] = await client.emitAndFlattenResponses(
+			'list-organizations::v2020_12_25'
+		)
+
+		assert.isNotEqual(organizations[0], org)
+	}
+
+	private static async loginAsGuest() {
+		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
+		return client
 	}
 
 	private static async assertTeammateCanEmit(options: {
@@ -782,7 +808,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	private static async setupOrgAndInstall2Skills() {
-		MercuryClientFactory.setIsTestMode(true)
+		this.enableTestMode()
 
 		const { client: personClient } = await this.loginAsDemoPerson()
 
@@ -802,7 +828,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		shouldSetDefaultContract = false,
 		contract?: EventContract
 	) {
-		MercuryClientFactory.setIsTestMode(true)
+		this.enableTestMode()
 		shouldSetDefaultContract &&
 			MercuryClientFactory.setDefaultContract(coreEventContracts[0] as any)
 
@@ -826,7 +852,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		return client
 	}
 
-	private static mixinPayloadlessTestEvent(client: any) {
+	private static mixinPayloadLessTestEvent(client: any) {
 		const contract = {
 			eventSignatures: {
 				[this.testEventName]: {
@@ -838,7 +864,11 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		client.mixinContract(contract)
 	}
 
-	private static mixinPayloadlessTestEventWithSource(client: any) {
+	private static enableTestMode() {
+		MercuryClientFactory.setIsTestMode(true)
+	}
+
+	private static mixinPayloadLessTestEventWithSource(client: any) {
 		const contract = {
 			eventSignatures: {
 				[this.testEventName]: {
@@ -851,5 +881,11 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		}
 
 		client.mixinContract(contract)
+	}
+
+	private static async enableTestModeAndLoginAsGuest() {
+		this.enableTestMode()
+		const client = await this.loginAsGuest()
+		return client
 	}
 }
