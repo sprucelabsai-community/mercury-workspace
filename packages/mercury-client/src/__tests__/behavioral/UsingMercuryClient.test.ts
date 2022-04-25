@@ -1,3 +1,4 @@
+import AbstractSpruceError from '@sprucelabs/error'
 import {
 	eventAssertUtil,
 	eventResponseUtil,
@@ -14,6 +15,7 @@ import {
 	DEMO_PHONE_RECONNECT,
 	TEST_HOST,
 } from '../../tests/constants'
+import { MercuryClient } from '../../types/client.types'
 
 require('dotenv').config()
 
@@ -200,27 +202,37 @@ export default class UsingMercuryClient extends AbstractClientTest {
 	}
 
 	@test()
-	protected static async errorsInHandlersArePassedBack() {
-		const { org, skill1, skill1Client, skill2Client } =
-			await this.setup2SkillsAndOneEvent()
-
+	protected static async errorsInListenersRetainOptions() {
 		//@ts-ignore
-		await skill2Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
-			throw new SpruceError({ code: 'UNKNOWN_ERROR' })
-		})
+		const error = new SpruceError({ code: 'UNKNOWN_ERROR', param: 1, test: 1 })
 
-		const results = await skill1Client.emit(
+		const results = await this.setup2Skills1EventAddThrowingListenerAndEmit(
 			//@ts-ignore
-			`${skill1.slug}.will-send-vip::v1`,
-			{
-				target: {
-					organizationId: org.id,
-				},
-			}
+			error
 		)
 
 		assert.isEqual(results.totalErrors, 1)
-		eventAssertUtil.assertErrorFromResponse(results, 'UNKNOWN_ERROR')
+		eventAssertUtil.assertErrorFromResponse(results, 'UNKNOWN_ERROR', {
+			param: 1,
+			test: 1,
+		})
+	}
+
+	@test()
+	protected static async retainsGeneratedFriendlyMessage() {
+		class TestError extends AbstractSpruceError {
+			public friendlyMessage() {
+				return 'test this dude!'
+			}
+		}
+
+		const results = await this.setup2Skills1EventAddThrowingListenerAndEmit(
+			//@ts-ignore
+			new TestError({ code: 'INVALID_PARAMETERS' })
+		)
+
+		//@ts-ignore
+		assert.isEqual(results.responses[0].errors[0].message, 'test this dude!')
 	}
 
 	@test()
@@ -713,6 +725,39 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		this.timeoutClient = client
 
 		return client
+	}
+
+	private static async setup2Skills1EventAddThrowingListenerAndEmit(
+		error: any
+	) {
+		const { org, skill1, skill1Client, skill2Client } =
+			await this.setup2SkillsAndOneEvent()
+
+		//@ts-ignore
+		await this.throwOnWillSendVip(skill2Client, skill1.slug, error)
+
+		const results = await skill1Client.emit(
+			//@ts-ignore
+			`${skill1.slug}.will-send-vip::v1`,
+			{
+				target: {
+					organizationId: org.id,
+				},
+			}
+		)
+		return results
+	}
+
+	private static async throwOnWillSendVip(
+		client: MercuryClient,
+		namespace: string,
+		error: SpruceError
+	) {
+		//@ts-ignore
+		await client.on(`${namespace}.will-send-vip::v1`, () => {
+			//@ts-ignore
+			throw error
+		})
 	}
 
 	private static async setup2SkillsAndOneEvent(phone?: string) {

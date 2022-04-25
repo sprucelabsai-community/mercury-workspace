@@ -595,7 +595,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 									originalError: err,
 								})
 							}
-							ioCallback({ errors: [thisErr] })
+							ioCallback({ errors: [thisErr.toObject()] })
 						}
 					}
 				}
