@@ -393,16 +393,29 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		this.assertValidEmitTargetAndPayload(eventName, payload)
 
 		const responseEventName = eventNameUtil.generateResponseEventName(eventName)
+		const singleResponsePromises: Promise<void>[] = []
 
-		const singleResponseHandler = (
+		const singleResponseHandler = async (
 			response: MercurySingleResponse<ResponsePayload>
 		) => {
-			void cb?.(
-				eventResponseUtil.mutatingMapSingleResonseErrorsToSpruceErrors(
-					response,
-					SpruceError
-				) as any
-			)
+			if (cb) {
+				let resolve: () => void | undefined
+				singleResponsePromises.push(
+					new Promise((r) => {
+						resolve = r
+					})
+				)
+
+				await cb(
+					eventResponseUtil.mutatingMapSingleResonseErrorsToSpruceErrors(
+						response,
+						SpruceError
+					) as any
+				)
+
+				//@ts-ignore
+				resolve()
+			}
 		}
 
 		if (cb) {
@@ -485,6 +498,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					reject(err)
 				}
 			})
+
+		await Promise.all(singleResponsePromises)
 
 		return eventResponseUtil.mutatingMapAggregateResponseErrorsToSpruceErrors(
 			results,

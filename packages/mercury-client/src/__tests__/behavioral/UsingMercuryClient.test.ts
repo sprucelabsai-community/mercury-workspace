@@ -344,6 +344,55 @@ export default class UsingMercuryClient extends AbstractClientTest {
 	}
 
 	@test()
+	protected static async eachResponseMustFinishBeforeEmitReturns() {
+		const { org, client, skill1, skill1Client, skill2Client } =
+			await this.setup2SkillsAndOneEvent(DEMO_PHONE_RECONNECT)
+
+		const { client: skill3Client } = await this.seedInstallAndLoginAsSkill(
+			client,
+			org.id
+		)
+
+		//@ts-ignore
+		await skill2Client.on(`${skill1.slug}.will-send-vip::v1`, async () => {
+			return {
+				messages: ['hello from skill 2'],
+			}
+		})
+
+		//@ts-ignore
+		await skill3Client.on(`${skill1.slug}.will-send-vip::v1`, async () => {
+			return {
+				messages: ['hello from skill 2'],
+			}
+		})
+
+		let ttl = 1000
+		let hitCount = 0
+		let wasHit = false
+
+		await skill1Client.emit(
+			//@ts-ignore
+			`${skill1.slug}.will-send-vip::v1`,
+			{
+				target: {
+					organizationId: org.id,
+				},
+			},
+			async () => {
+				if (!wasHit) {
+					wasHit = true
+					await new Promise((r) => setTimeout(r, ttl))
+				}
+
+				hitCount++
+			}
+		)
+
+		assert.isEqual(hitCount, 2)
+	}
+
+	@test()
 	protected static async offRemovesListener() {
 		const { org, skill1, skill1Client, skill2Client } =
 			await this.setup2SkillsAndOneEvent()
