@@ -295,10 +295,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 		this.listenersByEvent[eventName].push(cb)
 	}
 
-	public async off(
-		eventName: EventNames<Contract>,
-		cb?: () => void
-	): Promise<number> {
+	public async off(eventName: EventNames<Contract>, cb?: any): Promise<number> {
 		if (cb) {
 			let numForgotten = 0
 			this.listenersByEvent[eventName] = this.listenersByEvent[
