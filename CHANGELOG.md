@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [30.0.12](https://github.com/sprucelabsai/mercury-workspace/compare/v30.0.11...v30.0.12) (2022-06-03)
+
+**Note:** Version bump only for package spruce-mercury-workspace
+
+
+
+
+
 ## [30.0.11](https://github.com/sprucelabsai/mercury-workspace/compare/v30.0.10...v30.0.11) (2022-06-03)
 
 **Note:** Version bump only for package spruce-mercury-workspace
