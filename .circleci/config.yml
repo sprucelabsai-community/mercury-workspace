@@ -21,7 +21,10 @@ jobs:
       - run: yarn install
       - run: yarn clean
       - run: yarn build.ci
-      - run: yarn test
+      - run:
+          name: "running tests"
+          no_output_timeout: 2m
+          command: yarn test
       - spruce/exit_if_not_auto_upgrade
       - spruce/merge_auto_upgrade
   npm_publish:
