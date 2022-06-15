@@ -702,6 +702,37 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isNotEqual(organizations[0], org)
 	}
 
+	@test()
+	protected static async offHonorsCb() {
+		const client = await this.enableTestModeAndLoginAsGuest()
+
+		let cb1Hit = 0
+		let cb2Hit = 0
+
+		const cb1 = () => {
+			cb1Hit++
+			return {
+				type: 'anonymous' as const,
+			}
+		}
+
+		const cb2 = () => {
+			cb2Hit++
+			return {
+				type: 'anonymous' as const,
+			}
+		}
+
+		await client.on('whoami::v2020_12_25', cb1)
+		await client.on('whoami::v2020_12_25', cb2)
+		await client.off('whoami::v2020_12_25', cb2)
+
+		await client.emit('whoami::v2020_12_25')
+
+		assert.isEqual(cb1Hit, 1)
+		assert.isEqual(cb2Hit, 0)
+	}
+
 	private static async loginAsGuest() {
 		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
 		return client
