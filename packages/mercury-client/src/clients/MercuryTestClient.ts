@@ -123,8 +123,8 @@ export default class MercuryTestClient<
 		return MercuryTestClient.emitter as MercuryClient
 	}
 
-	public async off(eventName: EventNames<Contract>): Promise<number> {
-		await MercuryTestClient.emitter?.off(eventName)
+	public async off(eventName: EventNames<Contract>, cb?: any): Promise<number> {
+		await MercuryTestClient.emitter?.off(eventName, cb)
 		return super.off(eventName)
 	}
 
