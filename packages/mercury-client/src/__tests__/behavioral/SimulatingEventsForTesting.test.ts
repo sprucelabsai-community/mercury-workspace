@@ -713,6 +713,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			cb1Hit++
 			return {
 				type: 'anonymous' as const,
+				auth: {},
 			}
 		}
 
@@ -720,11 +721,13 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			cb2Hit++
 			return {
 				type: 'anonymous' as const,
+				auth: {},
 			}
 		}
 
 		await client.on('whoami::v2020_12_25', cb1)
 		await client.on('whoami::v2020_12_25', cb2)
+
 		await client.off('whoami::v2020_12_25', cb2)
 
 		await client.emit('whoami::v2020_12_25')

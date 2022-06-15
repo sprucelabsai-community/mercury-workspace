@@ -78,7 +78,7 @@ export default class MercuryTestClient<
 	/** @ts-ignore */
 	Contract extends EventContract = SkillEventContract
 > extends MutableContractClient<Contract> {
-	private static emitter: any
+	private static emitter: InternalEmitter<any>
 	private _isConnected = false
 	private isConnectedToApi = false
 	private connectPromise?: Promise<void>
@@ -120,12 +120,16 @@ export default class MercuryTestClient<
 			MercuryTestClient.emitter.mixinOnlyUniqueSignatures(contract)
 		}
 
-		return MercuryTestClient.emitter as MercuryClient
+		return MercuryTestClient.emitter as unknown as MercuryClient
 	}
 
 	public async off(eventName: EventNames<Contract>, cb?: any): Promise<number> {
 		await MercuryTestClient.emitter?.off(eventName, cb)
-		return super.off(eventName)
+		if (MercuryTestClient.emitter?.listenCount(eventName) === 0) {
+			return super.off(eventName)
+		} else {
+			return 1
+		}
 	}
 
 	public mixinContract(contract: EventContract) {
@@ -141,6 +145,7 @@ export default class MercuryTestClient<
 	}
 
 	public async on(...args: any[]) {
+		//@ts-ignore
 		return MercuryTestClient.emitter.on(...args)
 	}
 
@@ -269,6 +274,7 @@ export default class MercuryTestClient<
 			}
 		}
 
+		//@ts-ignore
 		const results = (await emitter.emit(...argsWithSource)) as any
 
 		return clone(results)
@@ -413,7 +419,9 @@ export default class MercuryTestClient<
 
 	public static reset() {
 		MutableContractClient.reset()
+		//@ts-ignore
 		MercuryTestClient.emitter = undefined
+		//@ts-ignore
 		MercuryTestClient.emitter = MercuryTestClient.getInternalEmitter({
 			eventSignatures: {},
 		})
