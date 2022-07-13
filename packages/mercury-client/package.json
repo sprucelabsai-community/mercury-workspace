@@ -65,15 +65,15 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.482",
-    "@sprucelabs/schema": "^28.3.2",
-    "@sprucelabs/spruce-core-schemas": "^34.0.30",
+    "@sprucelabs/schema": "^28.3.3",
+    "@sprucelabs/spruce-core-schemas": "^34.0.31",
     "@sprucelabs/spruce-event-utils": "^27.0.37",
     "dotenv": "^16.0.1",
     "just-clone": "^6.0.1",
     "socket.io-client": "^4.5.1"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.514",
+    "@sprucelabs/esm-postbuild": "^1.0.515",
     "@sprucelabs/jest-json-reporter": "^6.0.420",
     "@sprucelabs/jest-sheets-reporter": "^1.3.56",
     "@sprucelabs/mercury-core-events": "^12.0.54",
