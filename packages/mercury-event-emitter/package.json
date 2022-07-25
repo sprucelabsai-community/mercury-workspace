@@ -63,12 +63,12 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.487",
-    "@sprucelabs/mercury-types": "^35.0.55",
+    "@sprucelabs/mercury-types": "^35.0.56",
     "@sprucelabs/schema": "^28.3.16",
-    "@sprucelabs/spruce-event-utils": "^27.0.69"
+    "@sprucelabs/spruce-event-utils": "^27.0.70"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.530",
+    "@sprucelabs/esm-postbuild": "^1.0.531",
     "@sprucelabs/jest-json-reporter": "^6.0.430",
     "@sprucelabs/resolve-path-aliases": "^1.1.75",
     "@sprucelabs/semantic-release": "^4.0.8",
