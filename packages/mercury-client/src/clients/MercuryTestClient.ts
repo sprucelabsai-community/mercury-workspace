@@ -42,30 +42,13 @@ class InternalEmitter<
 	}
 
 	public mixinOnlyUniqueSignatures(contract: EventContract) {
-		const newSigs = eventContractUtil.getNamedEventSignatures(contract)
-		const oldSigs = eventContractUtil.getNamedEventSignatures(
-			this.eventContract
-		)
+		const fqens = Object.keys(contract.eventSignatures)
 
-		const newContract: EventContract = {
-			eventSignatures: {},
-		}
-
-		for (const newSig of newSigs) {
-			const match = oldSigs.findIndex(
-				(old) => old.fullyQualifiedEventName === newSig.fullyQualifiedEventName
-			)
-			if (match === -1) {
-				newContract.eventSignatures[newSig.fullyQualifiedEventName] =
-					eventContractUtil.getSignatureByName(
-						contract,
-						newSig.fullyQualifiedEventName
-					)
+		for (const fqen of fqens) {
+			if (!this.eventContract.eventSignatures[fqen]) {
+				this.eventContract.eventSignatures[fqen] =
+					contract.eventSignatures[fqen]
 			}
-		}
-
-		if (Object.keys(newContract.eventSignatures).length > 0) {
-			this.mixinContract(newContract)
 		}
 	}
 
