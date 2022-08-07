@@ -14,7 +14,6 @@ import {
 	EventSource,
 } from '@sprucelabs/spruce-event-utils'
 import clone from 'just-clone'
-import { MercuryClient } from '..'
 import SpruceError from '../errors/SpruceError'
 import { authenticateFqen } from './MercurySocketIoClient'
 import MutableContractClient from './MutableContractClient'
@@ -93,7 +92,6 @@ export default class MercuryTestClient<
 		MercuryTestClient.getInternalEmitter(options.eventContract)
 	}
 
-	/** @ts-ignore */
 	public static getInternalEmitter(contract?: EventContract) {
 		if (!MercuryTestClient.emitter) {
 			MercuryTestClient.emitter = new InternalEmitter(
@@ -102,7 +100,7 @@ export default class MercuryTestClient<
 		} else if (contract) {
 			MercuryTestClient.emitter.mixinOnlyUniqueSignatures(contract)
 		}
-
+		/** @ts-ignore */
 		return MercuryTestClient.emitter as InternalEmitter<SkillEventContract>
 	}
 
