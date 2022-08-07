@@ -91,7 +91,7 @@ export default class MercuryTestClient<
 		super(options)
 		MercuryTestClient.getInternalEmitter(options.eventContract)
 	}
-
+	/** @ts-ignore */
 	public static getInternalEmitter(contract?: EventContract) {
 		if (!MercuryTestClient.emitter) {
 			MercuryTestClient.emitter = new InternalEmitter(
