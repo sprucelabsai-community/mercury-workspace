@@ -103,7 +103,7 @@ export default class MercuryTestClient<
 			MercuryTestClient.emitter.mixinOnlyUniqueSignatures(contract)
 		}
 
-		return MercuryTestClient.emitter as unknown as MercuryClient
+		return MercuryTestClient.emitter as InternalEmitter<SkillEventContract>
 	}
 
 	public async off(eventName: EventNames<Contract>, cb?: any): Promise<number> {
@@ -113,6 +113,11 @@ export default class MercuryTestClient<
 		} else {
 			return 1
 		}
+	}
+
+	public static mixinContract(contract: EventContract) {
+		MutableContractClient.mixinContract(contract)
+		MercuryTestClient.emitter.mixinContract(contract)
 	}
 
 	public mixinContract(contract: EventContract) {
