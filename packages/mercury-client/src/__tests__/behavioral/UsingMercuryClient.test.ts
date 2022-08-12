@@ -240,14 +240,15 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const { org, skill1, skill1Client, skill2Client } =
 			await this.setup2SkillsAndOneEvent()
 
+		const fqen = `${skill1.slug}.will-send-vip::v1`
 		//@ts-ignore
-		await skill2Client.on(`${skill1.slug}.will-send-vip::v1`, () => {
+		await skill2Client.on(fqen, () => {
 			throw new Error('oh shoot')
 		})
 
 		const results = await skill1Client.emit(
 			//@ts-ignore
-			`${skill1.slug}.will-send-vip::v1`,
+			fqen,
 			{
 				target: {
 					organizationId: org.id,
@@ -257,7 +258,12 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 		assert.isEqual(results.totalErrors, 1)
 
-		eventAssertUtil.assertErrorFromResponse(results, 'LISTENER_ERROR')
+		const err = eventAssertUtil.assertErrorFromResponse(
+			results,
+			'LISTENER_ERROR'
+		)
+		//@ts-ignore
+		assert.isEqual(err.options.fqen, fqen)
 		assert.doesInclude(results.responses[0].errors?.[0].message, 'oh shoot')
 	}
 

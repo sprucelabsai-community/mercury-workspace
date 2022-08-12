@@ -606,6 +606,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 								thisErr = new SpruceError({
 									//@ts-ignore
 									code: 'LISTENER_ERROR',
+									fqen: eventName,
 									friendlyMessage: err.message,
 									originalError: err,
 								})
