@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [31.0.147](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.146...v31.0.147) (2022-08-19)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.146](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.145...v31.0.146) (2022-08-19)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.145](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.144...v31.0.145) (2022-08-17)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.144](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.143...v31.0.144) (2022-08-16)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.143](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.142...v31.0.143) (2022-08-16)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.142](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.141...v31.0.142) (2022-08-16)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.141](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.140...v31.0.141) (2022-08-15)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.140](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.139...v31.0.140) (2022-08-15)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.139](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.138...v31.0.139) (2022-08-14)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.138](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.137...v31.0.138) (2022-08-13)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [31.0.137](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.136...v31.0.137) (2022-08-13)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
 ## [31.0.136](https://github.com/sprucelabsai/mercury-workspace/compare/v31.0.135...v31.0.136) (2022-08-12)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
