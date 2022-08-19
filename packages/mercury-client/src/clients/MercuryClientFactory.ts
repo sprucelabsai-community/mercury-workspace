@@ -54,6 +54,7 @@ export default class MercuryClientFactory {
 		let Client = MutableContractClient
 
 		if (this.isTestMode) {
+			//TODO, make this something fitxures sets to make the test client available
 			Client = require('../clients/MercuryTestClient').default
 		}
 
