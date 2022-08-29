@@ -12,8 +12,7 @@
     "upgradeIgnoreList": [
       "@sprucelabs/spruce-test-fixtures",
       "@sprucelabs/spruce-core-schemas",
-      "@sprucelabs/spruce-skill-utils",
-      "typescript"
+      "@sprucelabs/spruce-skill-utils"
     ]
   },
   "main": "./build/index.js",

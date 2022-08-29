@@ -15,8 +15,7 @@
     "upgradeIgnoreList": [
       "@sprucelabs/spruce-test-fixtures",
       "@sprucelabs/mercury-event-emitter",
-      "@sprucelabs/spruce-skill-utils",
-      "typescript"
+      "@sprucelabs/spruce-skill-utils"
     ]
   },
   "main": "./build/index.js",
