@@ -66,8 +66,8 @@
   "dependencies": {
     "@sprucelabs/error": "^5.0.514",
     "@sprucelabs/schema": "^28.5.16",
-    "@sprucelabs/spruce-core-schemas": "^34.2.109",
-    "@sprucelabs/spruce-event-utils": "^27.0.182",
+    "@sprucelabs/spruce-core-schemas": "^34.2.110",
+    "@sprucelabs/spruce-event-utils": "^27.0.183",
     "dotenv": "^16.0.2",
     "just-clone": "^6.1.1",
     "socket.io-client": "^4.5.2"
@@ -76,9 +76,9 @@
     "@sprucelabs/esm-postbuild": "^1.0.585",
     "@sprucelabs/jest-json-reporter": "^6.0.476",
     "@sprucelabs/jest-sheets-reporter": "^1.3.106",
-    "@sprucelabs/mercury-core-events": "^12.2.22",
+    "@sprucelabs/mercury-core-events": "^12.2.23",
     "@sprucelabs/mercury-event-emitter": "^31.0.208",
-    "@sprucelabs/mercury-types": "^35.0.151",
+    "@sprucelabs/mercury-types": "^35.0.152",
     "@sprucelabs/resolve-path-aliases": "^1.1.101",
     "@sprucelabs/semantic-release": "^4.0.8",
     "@sprucelabs/test": "^7.7.362",
