@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [34.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v33.0.4...v34.0.0) (2022-10-13)
+
+### Breaking Changes
+
+- upgrade for adding listeners ([c249610](https://github.com/sprucelabsai/mercury-workspace/commit/c249610))
+
 ## [33.0.4](https://github.com/sprucelabsai/mercury-workspace/compare/v33.0.3...v33.0.4) (2022-10-13)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
