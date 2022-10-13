@@ -580,7 +580,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		if (this.shouldAutoRegisterListeners) {
 			//@ts-ignore
 			const results = await this.emit('register-listeners::v2020_12_25', {
-				payload: { fullyQualifiedEventNames: [eventName] },
+				payload: { events: [{ eventName }] },
 			})
 
 			if (results.totalErrors > 0) {
