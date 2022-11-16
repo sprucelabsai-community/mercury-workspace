@@ -1,30 +1,8 @@
 import { buildEventContract, EventContract } from '@sprucelabs/mercury-types'
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
+import { buildSchema } from '@sprucelabs/schema'
+import AbstractSpruceTest, { test } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
-
-const contract = buildEventContract({
-	eventSignatures: {
-		event: {
-			responsePayloadSchema: {
-				id: 'response',
-				fields: {
-					num: {
-						type: 'number',
-						options: {
-							isRequired: true,
-						},
-					},
-				},
-			},
-		},
-	},
-})
-
-class EventEmitter<
-	Contract extends EventContract
-> extends AbstractEventEmitter<Contract> {}
-
-type Contract = typeof contract
 
 export default class EmittingEventsSequentallyTest extends AbstractSpruceTest {
 	@test('should fire sequentally', true)
@@ -62,3 +40,27 @@ export default class EmittingEventsSequentallyTest extends AbstractSpruceTest {
 		])
 	}
 }
+
+const contract = buildEventContract({
+	eventSignatures: {
+		event: {
+			responsePayloadSchema: buildSchema({
+				id: 'response',
+				fields: {
+					num: {
+						type: 'number',
+						options: {
+							isRequired: true,
+						},
+					},
+				},
+			}),
+		},
+	},
+})
+
+class EventEmitter<
+	Contract extends EventContract
+> extends AbstractEventEmitter<Contract> {}
+
+type Contract = typeof contract
