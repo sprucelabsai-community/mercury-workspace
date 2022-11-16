@@ -62,18 +62,18 @@
     "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev"
   },
   "dependencies": {
-    "@sprucelabs/error": "^5.0.540",
-    "@sprucelabs/mercury-types": "^37.0.58",
-    "@sprucelabs/schema": "^28.5.66",
-    "@sprucelabs/spruce-event-utils": "^29.1.58"
+    "@sprucelabs/error": "^5.0.541",
+    "@sprucelabs/mercury-types": "^37.0.59",
+    "@sprucelabs/schema": "^28.5.68",
+    "@sprucelabs/spruce-event-utils": "^29.1.59"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^2.0.31",
-    "@sprucelabs/jest-json-reporter": "^6.0.519",
-    "@sprucelabs/resolve-path-aliases": "^1.1.129",
+    "@sprucelabs/esm-postbuild": "^2.0.32",
+    "@sprucelabs/jest-json-reporter": "^6.0.520",
+    "@sprucelabs/resolve-path-aliases": "^1.1.130",
     "@sprucelabs/semantic-release": "^4.0.8",
-    "@sprucelabs/test": "^7.7.386",
-    "@sprucelabs/test-utils": "^3.2.54",
+    "@sprucelabs/test": "^7.7.387",
+    "@sprucelabs/test-utils": "^3.2.56",
     "@types/node": "^18.11.9",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^7.5.0",
@@ -85,7 +85,7 @@
     "ts-node": "^10.9.1",
     "tsc-watch": "^5.0.3",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.3"
   },
   "jest": {
     "maxWorkers": 4,
