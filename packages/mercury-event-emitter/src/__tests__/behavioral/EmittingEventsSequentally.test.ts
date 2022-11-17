@@ -17,26 +17,28 @@ export default class EmittingEventsSequentallyTest extends AbstractSpruceTest {
 		let wasEvent2Hit = false
 
 		await emitter.on('event', async () => {
-			return 0
+			return {
+				num: 0,
+			}
 		})
 
 		await emitter.on('event', async () => {
 			await new Promise((resolve) => setTimeout(resolve, 100))
 			assert.isTrue(wasEvent2Hit !== shouldEmitSequentally)
-			return 1
+			return { num: 1 }
 		})
 
 		await emitter.on('event', async () => {
 			wasEvent2Hit = true
-			return 2
+			return { num: 2 }
 		})
 
 		const results = await emitter.emit('event')
 
 		assert.isEqualDeep(results.responses, [
-			{ payload: 0 },
-			{ payload: 1 },
-			{ payload: 2 },
+			{ payload: { num: 0 } },
+			{ payload: { num: 1 } },
+			{ payload: { num: 2 } },
 		])
 	}
 }
@@ -49,9 +51,8 @@ const contract = buildEventContract({
 				fields: {
 					num: {
 						type: 'number',
-						options: {
-							isRequired: true,
-						},
+						isRequired: true,
+						options: {},
 					},
 				},
 			}),
