@@ -187,8 +187,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			}
 		})
 
-		//@ts-ignore
 		const results = await skill1Client.emit(
+			//@ts-ignore
 			`${skill1.slug}.will-send-vip::v1`,
 			{
 				target: {
@@ -329,8 +329,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 		let responseTriggerCount = 0
 
-		//@ts-ignore
 		await skill1Client.emit(
+			//@ts-ignore
 			`${skill1.slug}.will-send-vip::v1`,
 			{
 				//@ts-ignore
@@ -375,8 +375,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		let hitCount = 0
 		let wasHit = false
 
-		//@ts-ignore
 		await skill1Client.emit(
+			//@ts-ignore
 			`${skill1.slug}.will-send-vip::v1`,
 			{
 				//@ts-ignore
@@ -790,8 +790,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		//@ts-ignore
 		await this.throwOnWillSendVip(skill2Client, skill1.slug, error)
 
-		//@ts-ignore
 		const results = await skill1Client.emit(
+			//@ts-ignore
 			`${skill1.slug}.will-send-vip::v1`,
 			{
 				target: {
