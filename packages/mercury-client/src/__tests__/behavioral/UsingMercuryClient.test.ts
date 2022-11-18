@@ -3,8 +3,8 @@ import {
 	eventAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
-import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { test } from '@sprucelabs/test'
+import { assert, errorAssert } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import SpruceError from '../../errors/SpruceError'
@@ -187,8 +187,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			}
 		})
 
+		//@ts-ignore
 		const results = await skill1Client.emit(
-			//@ts-ignore
 			`${skill1.slug}.will-send-vip::v1`,
 			{
 				target: {
@@ -246,15 +246,12 @@ export default class UsingMercuryClient extends AbstractClientTest {
 			throw new Error('oh shoot')
 		})
 
-		const results = await skill1Client.emit(
-			//@ts-ignore
-			fqen,
-			{
-				target: {
-					organizationId: org.id,
-				},
-			}
-		)
+		//@ts-ignore
+		const results = await skill1Client.emit(fqen, {
+			target: {
+				organizationId: org.id,
+			},
+		})
 
 		assert.isEqual(results.totalErrors, 1)
 
@@ -332,10 +329,11 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
 		let responseTriggerCount = 0
 
+		//@ts-ignore
 		await skill1Client.emit(
-			//@ts-ignore
 			`${skill1.slug}.will-send-vip::v1`,
 			{
+				//@ts-ignore
 				target: {
 					organizationId: org.id,
 				},
@@ -377,10 +375,11 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		let hitCount = 0
 		let wasHit = false
 
+		//@ts-ignore
 		await skill1Client.emit(
-			//@ts-ignore
 			`${skill1.slug}.will-send-vip::v1`,
 			{
+				//@ts-ignore
 				target: {
 					organizationId: org.id,
 				},
@@ -791,8 +790,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		//@ts-ignore
 		await this.throwOnWillSendVip(skill2Client, skill1.slug, error)
 
+		//@ts-ignore
 		const results = await skill1Client.emit(
-			//@ts-ignore
 			`${skill1.slug}.will-send-vip::v1`,
 			{
 				target: {

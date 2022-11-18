@@ -409,9 +409,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 
 		eventResponseUtil.getFirstResponseOrThrow(registerEventResults)
 
-		await skill1Client.on(fqen as any, () => {
-			return {}
-		})
+		await skill1Client.on(fqen as any, async () => {})
 
 		await this.assertGuestCantEmit(fqen, org.id)
 		await this.assertAnonCantEmit(fqen, org.id)
@@ -775,6 +773,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		})
 		eventResponseUtil.getFirstResponseOrThrow(roleSetResults)
 
+		//@ts-ignore
 		const response = await teammateClient.emit(fqen as any, {
 			target: {
 				organizationId,
@@ -802,7 +801,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			DEMO_PHONE_GUEST
 		)
 
-		const response = await personClient.emit(fqen as any, {
+		//@ts-ignore
+		const response = await personClient.emit(fqen, {
 			target: {
 				organizationId: orgId,
 			},
@@ -814,7 +814,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	private static async assertAnonCantEmit(fqen: string, orgId: string) {
 		const client = await this.connectToApiAsTestClient()
 
-		const response = await client.emit(fqen as any, {
+		//@ts-ignore
+		const response = await client.emit(fqen, {
 			target: {
 				organizationId: orgId,
 			},

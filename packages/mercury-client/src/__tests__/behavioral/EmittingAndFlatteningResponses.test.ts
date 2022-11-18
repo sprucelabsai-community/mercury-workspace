@@ -2,7 +2,8 @@ import {
 	eventContractUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
-import { test, assert } from '@sprucelabs/test'
+import { test } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import { MercuryClient } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { DEMO_PHONE_FLATTEN_1 } from '../../tests/constants'
@@ -49,6 +50,7 @@ export default class EmittingAndFlatteningResponsesTest extends AbstractClientTe
 		})
 
 		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
 			client.emitAndFlattenResponses(name, {
 				target: { organizationId: org.id },
 			})
@@ -64,12 +66,14 @@ export default class EmittingAndFlatteningResponsesTest extends AbstractClientTe
 
 		let hitCount = 0
 
+		//@ts-ignore
 		await client.on(name, () => {
 			return {
 				messages: ['first'],
 			}
 		})
 
+		//@ts-ignore
 		await skill2Client.on(name, () => {
 			return {
 				messages: ['second'],
@@ -79,6 +83,7 @@ export default class EmittingAndFlatteningResponsesTest extends AbstractClientTe
 		const results = await client.emitAndFlattenResponses(
 			name,
 			{
+				//@ts-ignore
 				target: {
 					organizationId: org.id,
 				},
@@ -95,7 +100,7 @@ export default class EmittingAndFlatteningResponsesTest extends AbstractClientTe
 	@test()
 	protected static async callsCallbackInFirst() {
 		const { client, name, org } = await this.seedSkillsAndRegisterEvent()
-
+		//@ts-ignore
 		await client.on(name, () => {
 			return {
 				messages: ['first'],
@@ -107,6 +112,7 @@ export default class EmittingAndFlatteningResponsesTest extends AbstractClientTe
 		await client.emitAndFlattenResponses(
 			name,
 			{
+				//@ts-ignore
 				target: {
 					organizationId: org.id,
 				},

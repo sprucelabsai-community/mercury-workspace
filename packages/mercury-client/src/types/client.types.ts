@@ -19,24 +19,22 @@ export type MercuryConnectFactory = (
 	options?: ConnectionOptions
 ) => Promise<MercuryClient>
 
-export type MercuryClient<
-	/** @ts-ignore */
-	Contract extends EventContract = SkillEventContract
-> = MercuryEventEmitter<Contract> & {
-	disconnect: () => Promise<void>
-	isConnected: () => boolean
-	getProxyToken: () => string | null
-	setProxyToken: (token: string) => void
-	registerProxyToken: () => Promise<string>
-	setShouldAutoRegisterListeners: (should: boolean) => void
-	isAuthenticated(): boolean
-	getIsTestClient(): boolean
-	authenticate(options: {
-		skillId?: string
-		apiKey?: string
-		token?: string
-	}): Promise<{
-		skill?: SpruceSchemas.Spruce.v2020_07_22.Skill
-		person?: SpruceSchemas.Spruce.v2020_07_22.Person
-	}>
-}
+export type MercuryClient<Contract extends EventContract = SkillEventContract> =
+	MercuryEventEmitter<Contract> & {
+		disconnect: () => Promise<void>
+		isConnected: () => boolean
+		getProxyToken: () => string | null
+		setProxyToken: (token: string) => void
+		registerProxyToken: () => Promise<string>
+		setShouldAutoRegisterListeners: (should: boolean) => void
+		isAuthenticated(): boolean
+		getIsTestClient(): boolean
+		authenticate(options: {
+			skillId?: string
+			apiKey?: string
+			token?: string
+		}): Promise<{
+			skill?: SpruceSchemas.Spruce.v2020_07_22.Skill
+			person?: SpruceSchemas.Spruce.v2020_07_22.Person
+		}>
+	}
