@@ -25,6 +25,7 @@ export default class MercuryClientFactory {
 			emitTimeoutMs = this.timeoutMs,
 			shouldReconnect,
 			maxEmitRetries,
+			connectionRetries,
 		} = connectionOptions || {}
 
 		const host = hostOption ?? DEFAULT_HOST
@@ -62,6 +63,7 @@ export default class MercuryClientFactory {
 			emitTimeoutMs,
 			shouldReconnect,
 			maxEmitRetries,
+			connectionRetries,
 		})
 
 		await client.connect()
