@@ -145,16 +145,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				return
 			}
 
-			;(console.error ?? console.log)(`Lost connection with Mercury!`)
-
-			if (reject) {
-				try {
-					await this.connect()
-				} catch (err) {
-					reject(err)
-				}
-				return
-			}
+			;(console.error ?? console.log)(error.message)
 
 			try {
 				this.isReconnecting = false
