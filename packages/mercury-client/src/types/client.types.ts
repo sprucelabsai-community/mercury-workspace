@@ -13,6 +13,7 @@ export interface ConnectionOptions {
 	reconnectDelayMs?: number
 	shouldReconnect?: boolean
 	maxEmitRetries?: number
+	connectionRetries?: number
 }
 
 export type MercuryConnectFactory = (

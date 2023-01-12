@@ -21,10 +21,10 @@ import {
 } from '@sprucelabs/spruce-event-utils'
 import { io, Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import SpruceError from '../errors/SpruceError'
-import { MercuryClient } from '../types/client.types'
+import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 
-type IoOptions = Partial<ManagerOptions & SocketOptions>
+type IoOptions = Partial<ManagerOptions & SocketOptions & ConnectionOptions>
 
 export const authenticateFqen = 'authenticate::v2020_12_25'
 export interface AuthenticateOptions {
@@ -73,10 +73,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		options: {
 			host: string
 			eventContract?: Contract
-			emitTimeoutMs?: number
-			reconnectDelayMs?: number
-			shouldReconnect?: boolean
-			maxEmitRetries?: number
 		} & IoOptions
 	) {
 		const {
@@ -86,6 +82,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			reconnectDelayMs,
 			shouldReconnect,
 			maxEmitRetries = 5,
+			connectionRetries,
 			...ioOptions
 		} = options
 
@@ -97,6 +94,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		this.shouldReconnect = shouldReconnect ?? true
 		this.id = new Date().getTime().toString()
 		this.maxEmitRetries = maxEmitRetries
+		this.connectionRetries = connectionRetries ?? 5
 	}
 
 	public async connect() {

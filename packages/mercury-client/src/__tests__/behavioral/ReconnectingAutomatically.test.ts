@@ -1,6 +1,5 @@
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
-import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { assert, errorAssert, test } from '@sprucelabs/test-utils'
 import { MercuryClientFactory } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
@@ -93,6 +92,14 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 		//@ts-ignore
 		assert.isFalse(client.isReconnecting)
+	}
+
+	@test('can set connection retries 1', 1)
+	@test('can set connection retries 2', 2)
+	protected static async canSetConnectionRetries(retries: number) {
+		const client = await this.connectToApi({ connectionRetries: retries })
+		//@ts-ignore
+		assert.isEqual(client.connectionRetries, retries)
 	}
 
 	private static async ClientZeroDelay() {
