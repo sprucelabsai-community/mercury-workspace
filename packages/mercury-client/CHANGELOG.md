@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [35.0.160](https://github.com/sprucelabsai/mercury-workspace/compare/v35.0.159...v35.0.160) (2023-02-24)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
 ## [35.0.159](https://github.com/sprucelabsai/mercury-workspace/compare/v35.0.158...v35.0.159) (2023-02-23)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
