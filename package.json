@@ -41,6 +41,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "lerna": "^6.0.3"
+    "lerna": "^6.5.1"
   }
 }

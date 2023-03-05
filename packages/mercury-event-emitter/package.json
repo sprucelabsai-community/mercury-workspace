@@ -63,9 +63,9 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.0.583",
-    "@sprucelabs/mercury-types": "^38.0.134",
+    "@sprucelabs/mercury-types": "^39.0.0",
     "@sprucelabs/schema": "^28.5.139",
-    "@sprucelabs/spruce-event-utils": "^30.0.152"
+    "@sprucelabs/spruce-event-utils": "^31.0.0"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^2.0.98",
@@ -84,7 +84,7 @@
     "prettier": "^2.8.4",
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.0",
-    "tsconfig-paths": "^3.14.2",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "^4.9.5"
   },
   "jest": {
