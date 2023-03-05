@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v36.0.0...v37.0.0) (2023-03-05)
+
+
+### Breaking Changes
+
+* upgrade ([cd48cf4](https://github.com/sprucelabsai/mercury-workspace/commit/cd48cf4))
+
+
+
+
+
 # [36.0.0](https://github.com/sprucelabsai/mercury-workspace/compare/v35.0.178...v36.0.0) (2023-03-05)
 
 
