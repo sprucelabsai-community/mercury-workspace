@@ -1,9 +1,12 @@
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
+import { SkillEventContract } from '@sprucelabs/mercury-types'
+import AbstractSpruceTest, { test } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import { MercuryClientFactory } from '../..'
+import MutableContractClient from '../../clients/MutableContractClient'
 import { DEFAULT_HOST } from '../../constants'
 import { TEST_HOST } from '../../tests/constants'
 
-export default class BuildingAClientTest extends AbstractSpruceTest {
+export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 	@test()
 	protected static async clientMixinContract() {
 		const client = await MercuryClientFactory.Client({
@@ -61,4 +64,13 @@ export default class BuildingAClientTest extends AbstractSpruceTest {
 		//@ts-ignore
 		assert.isEqual(client.host, DEFAULT_HOST)
 	}
+
+	@test()
+	protected static async canSetClassToCreate() {
+		MercuryClientFactory.ClientClass = SpyClient as any
+		const client = await MercuryClientFactory.Client({})
+		assert.isInstanceOf(client, SpyClient as any)
+	}
 }
+
+class SpyClient extends MutableContractClient<SkillEventContract> {}

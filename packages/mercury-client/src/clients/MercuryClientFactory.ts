@@ -12,6 +12,9 @@ export default class MercuryClientFactory {
 	private static timeoutMs = 30000
 	private static totalClients = 0
 	private static clients: Client<EventContract>[] = []
+	public static ClientClass: new (
+		...args: any[]
+	) => MutableContractClient<EventContract>
 
 	public static async Client<
 		Contract extends SkillEventContract = SkillEventContract
@@ -53,7 +56,8 @@ export default class MercuryClientFactory {
 			Client = require('../clients/MercuryTestClient').default
 		}
 
-		const client = new Client<EventContract>({
+		const client = new (MercuryClientFactory.ClientClass ??
+			Client)<EventContract>({
 			host,
 			reconnection: false,
 			reconnectDelayMs,
