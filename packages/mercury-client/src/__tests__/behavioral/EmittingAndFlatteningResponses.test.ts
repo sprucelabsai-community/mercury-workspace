@@ -2,8 +2,7 @@ import {
 	eventContractUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
-import { test } from '@sprucelabs/test'
-import { assert } from '@sprucelabs/test-utils'
+import { assert, test } from '@sprucelabs/test-utils'
 import { MercuryClient } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { DEMO_PHONE_FLATTEN_1 } from '../../tests/constants'

@@ -1,6 +1,6 @@
 import { SkillEventContract } from '@sprucelabs/mercury-types'
-import AbstractSpruceTest, { test } from '@sprucelabs/test'
-import { assert } from '@sprucelabs/test-utils'
+import AbstractSpruceTest from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import { MercuryClientFactory } from '../..'
 import MutableContractClient from '../../clients/MutableContractClient'
 import { DEFAULT_HOST } from '../../constants'

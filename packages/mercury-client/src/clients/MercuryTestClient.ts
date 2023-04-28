@@ -1,7 +1,7 @@
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import {
 	EventContract,
-	EventNames,
+	EventName,
 	MercuryAggregateResponse,
 	SkillEventContract,
 	SpruceSchemas,
@@ -104,7 +104,7 @@ export default class MercuryTestClient<
 		return MercuryTestClient.emitter as InternalEmitter<SkillEventContract>
 	}
 
-	public async off(eventName: EventNames<Contract>, cb?: any): Promise<number> {
+	public async off(eventName: EventName<Contract>, cb?: any): Promise<number> {
 		await MercuryTestClient.emitter?.off(eventName, cb)
 		if (MercuryTestClient.emitter?.listenCount(eventName) === 0) {
 			return super.off(eventName)

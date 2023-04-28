@@ -1,6 +1,5 @@
 import { buildEventContract } from '@sprucelabs/mercury-types'
-import { test } from '@sprucelabs/test'
-import { generateId } from '@sprucelabs/test-utils'
+import { generateId, test } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercuryTestClient from '../../clients/MercuryTestClient'
 import AbstractClientTest from '../../tests/AbstractClientTest'

@@ -1,5 +1,5 @@
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { MercuryClient, MercuryClientFactory } from '../..'
 import MercuryTestClient from '../../clients/MercuryTestClient'
 import AbstractClientTest from '../../tests/AbstractClientTest'

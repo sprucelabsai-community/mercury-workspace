@@ -9,7 +9,7 @@ import {
 	eventAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { MercuryClientFactory, MercuryTestClient } from '../..'
 import SpruceError from '../../errors/SpruceError'

@@ -1,7 +1,7 @@
 import { buildEventContract, EventContract } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
-import AbstractSpruceTest, { test } from '@sprucelabs/test'
-import { assert } from '@sprucelabs/test-utils'
+import AbstractSpruceTest from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import AbstractEventEmitter from '../../AbstractEventEmitter'
 
 export default class EmittingEventsSequentallyTest extends AbstractSpruceTest {

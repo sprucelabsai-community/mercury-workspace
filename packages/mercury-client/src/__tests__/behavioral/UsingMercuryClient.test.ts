@@ -3,8 +3,7 @@ import {
 	eventAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
-import { test } from '@sprucelabs/test'
-import { assert, errorAssert } from '@sprucelabs/test-utils'
+import { assert, errorAssert, test } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import SpruceError from '../../errors/SpruceError'

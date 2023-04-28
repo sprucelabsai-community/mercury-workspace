@@ -2,7 +2,7 @@ import AbstractSpruceError from '@sprucelabs/error'
 import {
 	EmitCallback,
 	EventContract,
-	EventNames,
+	EventName,
 	EventSignature,
 	MercuryAggregateResponse,
 	MercurySingleResponse,
@@ -291,7 +291,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public async emit<
-		EventName extends EventNames<Contract>,
+		Name extends EventName<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
@@ -303,17 +303,17 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			? SchemaValues<ResponseSchema>
 			: never
 	>(
-		eventName: EventName,
+		eventName: Name,
 		payload?:
 			| (EmitSchema extends Schema ? SchemaValues<EmitSchema> : never)
-			| EmitCallback<Contract, EventName>,
-		cb?: EmitCallback<Contract, EventName>
+			| EmitCallback<Contract, Name>,
+		cb?: EmitCallback<Contract, Name>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
 		return this._emit(this.maxEmitRetries, eventName, payload, cb)
 	}
 
 	public async emitAndFlattenResponses<
-		EventName extends EventNames<Contract>,
+		Name extends EventName<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
@@ -325,11 +325,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			? SchemaValues<ResponseSchema>
 			: never
 	>(
-		eventName: EventName,
+		eventName: Name,
 		payload?:
 			| (EmitSchema extends Schema ? SchemaValues<EmitSchema> : never)
-			| EmitCallback<Contract, EventName>,
-		cb?: EmitCallback<Contract, EventName>
+			| EmitCallback<Contract, Name>,
+		cb?: EmitCallback<Contract, Name>
 	): Promise<ResponsePayload[]> {
 		const results = await this.emit(eventName, payload, cb)
 
@@ -344,7 +344,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	private async _emit<
-		EventName extends EventNames<Contract>,
+		Name extends EventName<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
 			? IEventSignature['responsePayloadSchema']
@@ -354,9 +354,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			: never
 	>(
 		retriesRemaining: number,
-		eventName: EventName,
+		eventName: Name,
 		payload?: any,
-		cb?: EmitCallback<Contract, EventName>
+		cb?: EmitCallback<Contract, Name>
 	) {
 		if (!this.skipWaitIfReconnecting) {
 			await this.waitIfReconnecting()
@@ -500,9 +500,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		)
 	}
 
-	protected assertValidEmitTargetAndPayload<
-		EventName extends EventNames<Contract>
-	>(eventName: EventName, payload: any) {
+	protected assertValidEmitTargetAndPayload<Name extends EventName<Contract>>(
+		eventName: Name,
+		payload: any
+	) {
 		const signature = this.getEventSignatureByName(eventName)
 		if (signature.emitPayloadSchema) {
 			try {
@@ -535,8 +536,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		}
 	}
 
-	protected getEventSignatureByName<EventName extends EventNames<Contract>>(
-		eventName: EventName
+	protected getEventSignatureByName<Name extends EventName<Contract>>(
+		eventName: Name
 	) {
 		if (!this.eventContract) {
 			return {}
@@ -553,13 +554,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public async on<
-		EventName extends EventNames<Contract>,
+		Name extends EventName<Contract>,
 		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
 		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
 			: never
 	>(
-		eventName: EventName,
+		eventName: Name,
 		cb: (
 			payload: EmitSchema extends Schema ? SchemaValues<EmitSchema> : never
 		) => IEventSignature['responsePayloadSchema'] extends Schema
@@ -612,7 +613,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		)
 	}
 
-	public async off(eventName: EventNames<Contract>): Promise<number> {
+	public async off(eventName: EventName<Contract>): Promise<number> {
 		return new Promise((resolve, reject) => {
 			if (!this.socket || !this.auth) {
 				resolve(0)
