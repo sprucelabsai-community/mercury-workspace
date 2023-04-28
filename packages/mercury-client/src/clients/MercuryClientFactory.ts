@@ -15,7 +15,6 @@ export default class MercuryClientFactory {
 
 	public static async Client<
 		Contract extends SkillEventContract = SkillEventContract
-		/** @ts-ignore */
 	>(connectionOptions?: ConnectionOptions): Promise<Client<Contract>> {
 		const {
 			host: hostOption,

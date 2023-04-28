@@ -1,6 +1,8 @@
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { assert, errorAssert, test } from '@sprucelabs/test-utils'
+import { Socket } from 'socket.io-client'
 import { MercuryClientFactory } from '../..'
+import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
 export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
@@ -102,6 +104,29 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		assert.isEqual(client.connectionRetries, retries)
 	}
 
+	@test()
+	protected static async failingToConnectAtFirstReturnsClientFromOriginalConnection() {
+		const connectionErrorSocket = new ConnectionErrorSocket()
+		const successSocket = new SuccessSocket()
+		const sockets = [connectionErrorSocket, successSocket]
+
+		MercurySocketIoClient.io = function () {
+			return sockets.shift()!
+		}
+
+		const promise = this.connectToApi()
+
+		await this.wait(1000)
+
+		connectionErrorSocket.emitConnectionError()
+
+		await this.wait(1000)
+
+		successSocket.emitConnect()
+
+		await promise
+	}
+
 	private static async ClientZeroDelay() {
 		return await this.connectToApi({ reconnectDelayMs: 0 })
 	}
@@ -121,5 +146,31 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		const results = await promise
 
 		eventResponseUtil.getFirstResponseOrThrow(results)
+	}
+}
+
+class ConnectionErrorSocket extends Socket {
+	public constructor() {
+		super({} as any, {} as any)
+	}
+	public connect(): this {
+		return this
+	}
+
+	public emitConnectionError() {
+		this.emitReserved('connect_error', new Error('fail'))
+	}
+}
+
+class SuccessSocket extends Socket {
+	public constructor() {
+		super({} as any, {} as any)
+	}
+	public connect(): this {
+		return this
+	}
+
+	public emitConnect() {
+		this.emitReserved('connect')
 	}
 }

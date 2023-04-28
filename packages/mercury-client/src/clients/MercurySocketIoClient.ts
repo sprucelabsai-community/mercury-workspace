@@ -24,20 +24,12 @@ import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 
-type IoOptions = Partial<ManagerOptions & SocketOptions & ConnectionOptions>
-
-export const authenticateFqen = 'authenticate::v2020_12_25'
-export interface AuthenticateOptions {
-	skillId?: string
-	apiKey?: string
-	token?: string
-}
-
 export default class MercurySocketIoClient<Contract extends EventContract>
 	implements MercuryClient<Contract>
 {
 	protected eventContract?: Contract
 
+	public static io = io
 	private host: string
 	private ioOptions: IoOptions
 	private socket?: Socket
@@ -98,7 +90,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 
 	public async connect() {
-		this.socket = io(this.host, this.ioOptions)
+		this.socket = MercurySocketIoClient.io(this.host, this.ioOptions)
 
 		await new Promise((resolve, reject) => {
 			this.socket?.on('connect', () => {
@@ -106,7 +98,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				this.socket?.removeAllListeners()
 
 				if (this.shouldReconnect) {
-					this.socket?.once('disconnect', async () => {
+					this.socket?.once('disconnect', async (opts) => {
+						this.log('Mercury disconnected, reason:', opts)
 						await this.attemptReconnectAfterDelay()
 					})
 				}
@@ -126,11 +119,14 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				)
 			})
 
-			this.attachConnectError(reject)
+			this.attachConnectError(reject, resolve as Resolve)
 		})
 	}
 
-	private attachConnectError(reject?: (reason?: any) => void) {
+	private attachConnectError(
+		reject?: (reason?: any) => void,
+		resolve?: Resolve
+	) {
 		this.socket?.on('connect_error', async (err: Record<string, any>) => {
 			const error = this.mapSocketErrorToSpruceError(err)
 			//@ts-ignore
@@ -138,16 +134,18 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 			this.connectionRetries--
 
+			this.log('Failed to connect to Mercury', error.message)
+			this.log('Connection retries left', `${this.connectionRetries}`)
+
 			if (this.connectionRetries === 0) {
 				reject?.(error)
 				return
 			}
 
-			;(console.error ?? console.log)(error.message)
-
 			try {
 				this.isReconnecting = false
 				await this.attemptReconnectAfterDelay()
+				resolve?.()
 			} catch (err) {
 				//@ts-ignore
 				reject?.(err)
@@ -165,7 +163,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			return
 		}
 
+		this.log('Attempting to reconnect...')
+
 		delete this.authPromise
+
 		this.isReconnecting = true
 		this.proxyToken = null
 
@@ -177,6 +178,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			setTimeout(async () => {
 				try {
 					this.connectionRetries = 1
+
 					await this.connect()
 
 					if (this.isManuallyDisconnected) {
@@ -210,9 +212,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 					this.isReconnecting = false
 					this.skipWaitIfReconnecting = false
 					resolve()
-					;(console.error ?? console.log)(
-						`Connection re-established with Mercury!`
-					)
+					this.log(`Connection re-established with Mercury!`)
 				} catch (err: any) {
 					;(console.error ?? console.log)(err.message)
 
@@ -238,6 +238,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		})
 
 		return this.reconnectPromise
+	}
+
+	private log(...args: any[]) {
+		return (console.error ?? console.log)(...args)
 	}
 
 	protected async waitIfReconnecting() {
@@ -731,3 +735,14 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		return false
 	}
 }
+
+type IoOptions = Partial<ManagerOptions & SocketOptions & ConnectionOptions>
+
+export const authenticateFqen = 'authenticate::v2020_12_25'
+export interface AuthenticateOptions {
+	skillId?: string
+	apiKey?: string
+	token?: string
+}
+
+type Resolve = () => void
