@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [39.1.0](https://github.com/sprucelabsai-community/mercury-workspace/compare/v39.0.37...v39.1.0) (2023-04-28)
+
+
+### Features
+
+* can set class on factory for better testing ([60092a5](https://github.com/sprucelabsai-community/mercury-workspace/commit/60092a5))
+
+
+
+
+
 ## [39.0.37](https://github.com/sprucelabsai-community/mercury-workspace/compare/v39.0.36...v39.0.37) (2023-04-28)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
