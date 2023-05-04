@@ -339,6 +339,8 @@ export declare namespace SpruceErrors.MercuryClient {
 	
 	export interface InvalidProtocol {
 		
+			
+			'uri': string
 	}
 
 	export interface InvalidProtocolSchema extends SpruceSchema.Schema {
@@ -346,6 +348,12 @@ export declare namespace SpruceErrors.MercuryClient {
 		namespace: 'MercuryClient',
 		name: 'Invalid protocol',
 		    fields: {
+		            /** . */
+		            'uri': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
 		    }
 	}
 

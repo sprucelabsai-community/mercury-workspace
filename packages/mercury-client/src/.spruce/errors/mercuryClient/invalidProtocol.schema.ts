@@ -8,6 +8,12 @@ const invalidProtocolSchema: SpruceErrors.MercuryClient.InvalidProtocolSchema  =
 	namespace: 'MercuryClient',
 	name: 'Invalid protocol',
 	    fields: {
+	            /** . */
+	            'uri': {
+	                type: 'text',
+	                isRequired: true,
+	                options: undefined
+	            },
 	    }
 }
 

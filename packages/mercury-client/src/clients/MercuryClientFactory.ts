@@ -33,7 +33,7 @@ export default class MercuryClientFactory {
 		const host = hostOption ?? DEFAULT_HOST
 
 		if (host.substr(0, 4) !== 'http') {
-			throw new SpruceError({ code: 'INVALID_PROTOCOL' })
+			throw new SpruceError({ code: 'INVALID_PROTOCOL', uri: host })
 		}
 
 		if (contracts && !Array.isArray(contracts)) {

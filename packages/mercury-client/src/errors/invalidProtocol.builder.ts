@@ -4,5 +4,10 @@ export default buildErrorSchema({
 	id: 'invalidProtocol',
 	name: 'Invalid protocol',
 	description: '',
-	fields: {},
+	fields: {
+		uri: {
+			type: 'text',
+			isRequired: true,
+		},
+	},
 })
