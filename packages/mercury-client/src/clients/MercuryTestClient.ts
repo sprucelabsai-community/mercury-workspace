@@ -17,10 +17,18 @@ import clone from 'just-clone'
 import SpruceError from '../errors/SpruceError'
 import { authenticateFqen } from './MercurySocketIoClient'
 import MutableContractClient from './MutableContractClient'
+import { connectionStatusContract } from './statusChangePayloadSchema'
 
 class InternalEmitter<
 	Contract extends EventContract
 > extends AbstractEventEmitter<Contract> {
+	public constructor(contract: Contract) {
+		const mixed = eventContractUtil.unifyContracts([
+			contract,
+			connectionStatusContract,
+		])!
+		super(mixed)
+	}
 	public doesHandleEvent(eventName: string) {
 		try {
 			eventContractUtil.getSignatureByName(this.eventContract, eventName as any)

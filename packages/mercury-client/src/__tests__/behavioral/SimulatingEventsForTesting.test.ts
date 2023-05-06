@@ -734,6 +734,24 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isEqual(cb2Hit, 0)
 	}
 
+	@test.only()
+	protected static async canEmitStatusChangeEventForTesting() {
+		const client = await this.enableTestModeAndLoginAsGuest()
+
+		let hit = false
+
+		await client.on('connection-status-change', () => {
+			hit = true
+		})
+
+		await client.emitAndFlattenResponses('connection-status-change', {
+			payload: {
+				status: 'connected' as const,
+			},
+		})
+		assert.isTrue(hit)
+	}
+
 	private static async loginAsGuest() {
 		const { client } = await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
 		return client

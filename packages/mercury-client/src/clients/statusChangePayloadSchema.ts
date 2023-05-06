@@ -1,3 +1,4 @@
+import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildSchema } from '@sprucelabs/schema'
 
 const statusChangePayloadSchema = buildSchema({
@@ -45,3 +46,12 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		}
 	}
 }
+
+export const connectionStatusContract = buildEventContract({
+	id: 'connectionStatus',
+	eventSignatures: {
+		'connection-status-change': {
+			emitPayloadSchema: statusChangePayloadSchema,
+		},
+	},
+})
