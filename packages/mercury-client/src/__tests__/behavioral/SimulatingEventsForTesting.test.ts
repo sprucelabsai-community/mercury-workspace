@@ -734,7 +734,7 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 		assert.isEqual(cb2Hit, 0)
 	}
 
-	@test.only()
+	@test()
 	protected static async canEmitStatusChangeEventForTesting() {
 		const client = await this.enableTestModeAndLoginAsGuest()
 

@@ -74,6 +74,7 @@ export default class AbstractClientTest extends AbstractSpruceTest {
 		client: Client
 		token: string
 	}> {
+		debugger
 		const client = await this.connectToApi()
 
 		if (!phone) {

@@ -51,7 +51,7 @@ export const connectionStatusContract = buildEventContract({
 	id: 'connectionStatus',
 	eventSignatures: {
 		'connection-status-change': {
-			emitPayloadSchema: statusChangePayloadSchema,
+			emitPayloadSchema: statusChangeTargetAndPayloadSchema,
 		},
 	},
 })

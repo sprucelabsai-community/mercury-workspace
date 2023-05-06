@@ -22,13 +22,6 @@ import { connectionStatusContract } from './statusChangePayloadSchema'
 class InternalEmitter<
 	Contract extends EventContract
 > extends AbstractEventEmitter<Contract> {
-	public constructor(contract: Contract) {
-		const mixed = eventContractUtil.unifyContracts([
-			contract,
-			connectionStatusContract,
-		])!
-		super(mixed)
-	}
 	public doesHandleEvent(eventName: string) {
 		try {
 			eventContractUtil.getSignatureByName(this.eventContract, eventName as any)
@@ -96,8 +89,13 @@ export default class MercuryTestClient<
 			eventContract?: Contract
 		}
 	) {
-		super(options)
-		MercuryTestClient.getInternalEmitter(options.eventContract)
+		const mixed = eventContractUtil.unifyContracts([
+			options.eventContract ?? { eventSignatures: {} },
+			connectionStatusContract,
+		])!
+
+		super({ ...options, eventContract: mixed as Contract })
+		MercuryTestClient.getInternalEmitter(mixed)
 	}
 	/** @ts-ignore */
 	public static getInternalEmitter(contract?: EventContract) {
