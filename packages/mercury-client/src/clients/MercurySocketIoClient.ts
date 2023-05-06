@@ -7,11 +7,13 @@ import {
 	MercuryAggregateResponse,
 	MercurySingleResponse,
 	SpruceSchemas,
+	buildEventContract,
 } from '@sprucelabs/mercury-types'
 import {
 	Schema,
 	SchemaError,
 	SchemaValues,
+	buildSchema,
 	validateSchemaValues,
 } from '@sprucelabs/schema'
 import {
@@ -45,7 +47,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	}
 	private shouldReconnect: boolean
 	private connectionRetries = 5
-	private registeredListeners: any[] = []
+	private registeredListeners: [eventName: any, cb: (...opts: any) => any][] =
+		[]
 	private allowNextEventToBeAuthenticate = false
 	protected auth?: {
 		skill?: SpruceSchemas.Spruce.v2020_07_22.Skill
@@ -80,7 +83,12 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		this.host = host
 		this.ioOptions = { ...ioOptions, withCredentials: false }
-		this.eventContract = eventContract
+		this.eventContract = eventContractUtil.unifyContracts([
+			eventContract ?? {
+				eventSignatures: {},
+			},
+			statusContract,
+		])! as Contract
 		this.emitTimeoutMs = emitTimeoutMs ?? 30000
 		this.reconnectDelayMs = reconnectDelayMs ?? 5000
 		this.shouldReconnect = shouldReconnect ?? true
@@ -92,10 +100,14 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	public async connect() {
 		this.socket = MercurySocketIoClient.io(this.host, this.ioOptions)
 
+		this.emitStatusChange('connecting')
+
 		await new Promise((resolve, reject) => {
 			this.socket?.on('connect', () => {
 				//@ts-ignore
 				this.socket?.removeAllListeners()
+
+				this.emitStatusChange('connected')
 
 				if (this.shouldReconnect) {
 					this.socket?.once('disconnect', async (opts) => {
@@ -120,6 +132,17 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			})
 
 			this.attachConnectError(reject, resolve as Resolve)
+		})
+	}
+
+	private emitStatusChange(
+		status: 'connecting' | 'connected' | 'disconnected'
+	) {
+		//@ts-ignore
+		void this.emit('connection-status-change', {
+			payload: {
+				status,
+			},
 		})
 	}
 
@@ -163,6 +186,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			return
 		}
 
+		this.emitStatusChange('disconnected')
 		this.log('Attempting to reconnect...')
 
 		delete this.authPromise
@@ -304,12 +328,35 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			: never
 	>(
 		eventName: Name,
-		payload?:
+		targetAndPayload?:
 			| (EmitSchema extends Schema ? SchemaValues<EmitSchema> : never)
 			| EmitCallback<Contract, Name>,
 		cb?: EmitCallback<Contract, Name>
 	): Promise<MercuryAggregateResponse<ResponsePayload>> {
-		return this._emit(this.maxEmitRetries, eventName, payload, cb)
+		const isLocalEvent = this.isEventLocal<Name>(eventName)
+
+		if (isLocalEvent) {
+			const listeners = this.registeredListeners.filter(
+				(r) => r[0] === eventName
+			)
+
+			for (const listener of listeners) {
+				const cb = listener?.[1]
+
+				cb?.({
+					//@ts-ignore
+					payload: targetAndPayload?.payload,
+				})
+			}
+			return {
+				responses: [],
+				totalContracts: 0,
+				totalErrors: 0,
+				totalResponses: 0,
+			}
+		}
+
+		return this._emit(this.maxEmitRetries, eventName, targetAndPayload, cb)
 	}
 
 	public async emitAndFlattenResponses<
@@ -571,7 +618,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	) {
 		this.registeredListeners.push([eventName, cb])
 
-		if (this.shouldAutoRegisterListeners) {
+		const isLocalEvent = this.isEventLocal<Name>(eventName)
+
+		if (isLocalEvent) {
+			return
+		}
+
+		if (!isLocalEvent && this.shouldAutoRegisterListeners) {
 			//@ts-ignore
 			const results = await this.emit('register-listeners::v2020_12_25', {
 				payload: { events: [{ eventName }] },
@@ -611,6 +664,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				}
 			}
 		)
+	}
+
+	private isEventLocal<Name extends EventName<Contract>>(eventName: Name) {
+		return eventName === 'connection-status-change'
 	}
 
 	public async off(eventName: EventName<Contract>): Promise<number> {
@@ -747,3 +804,59 @@ export interface AuthenticateOptions {
 }
 
 type Resolve = () => void
+
+const statusChangePayloadSchema = buildSchema({
+	id: 'connectionStatusChangeEmitPayload',
+	fields: {
+		status: {
+			type: 'select',
+			isRequired: true,
+			options: {
+				choices: [
+					{
+						label: 'Connecting',
+						value: 'connecting',
+					} as const,
+					{
+						label: 'Connected',
+						value: 'connected',
+					} as const,
+					{
+						label: 'Disconnected',
+						value: 'disconnected',
+					} as const,
+				],
+			},
+		},
+	},
+})
+
+const statusChangeTargetAndPayloadSchema = buildSchema({
+	id: 'connectionStatusChangeEmitTargetAndPayload',
+	fields: {
+		payload: {
+			type: 'schema',
+			isRequired: true,
+			options: { schema: statusChangePayloadSchema },
+		},
+	},
+})
+
+type StatusChangeTargetAndPayloadSchema =
+	typeof statusChangeTargetAndPayloadSchema
+const statusContract = buildEventContract({
+	id: 'connection-status',
+	eventSignatures: {
+		'connection-status-change': {
+			emitPayloadSchema: statusChangeTargetAndPayloadSchema,
+		},
+	},
+})
+
+declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
+	interface SkillEventSignatures {
+		'connection-status-change': {
+			emitPayloadSchema: StatusChangeTargetAndPayloadSchema
+		}
+	}
+}

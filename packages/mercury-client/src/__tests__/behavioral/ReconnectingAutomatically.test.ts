@@ -127,6 +127,98 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		await promise
 	}
 
+	@test()
+	protected static async canAddStatusChangeListener() {
+		const { client, socket } = await this.connectWithEmittingSocket()
+
+		const passedStatuses: string[] = []
+
+		await client.on('connection-status-change', ({ payload }) => {
+			passedStatuses.push(payload.status)
+		})
+
+		this.patchMercuryEmitToThrow(client)
+
+		socket.emitDisconnect()
+
+		await this.wait(10)
+
+		assert.isEqualDeep(passedStatuses, ['disconnected', 'connecting'])
+	}
+
+	@test()
+	protected static async canAddMultipleStatusChangeListeners() {
+		let { client, socket } = await this.connectWithEmittingSocket()
+
+		let hitCount = 0
+
+		await client.on('connection-status-change', ({ payload }) => {
+			if (payload.status === 'disconnected') {
+				hitCount++
+			}
+		})
+
+		await client.on('connection-status-change', ({ payload }) => {
+			if (payload.status === 'disconnected') {
+				hitCount++
+			}
+		})
+
+		socket.emitDisconnect()
+
+		await this.wait(10)
+
+		assert.isEqual(hitCount, 2)
+	}
+
+	@test()
+	protected static async emitsStatusChangeForAttemptingReconnect() {
+		let { client } = await this.connectWithEmittingSocket()
+
+		let passedStatuses: string[] = []
+		let statusAtConnect: string[] = []
+
+		client.on('connection-status-change', ({ payload }) => {
+			passedStatuses.push(payload.status)
+		})
+
+		//@ts-ignore
+		const promise = client.attemptReconnectAfterDelay(0)
+		//@ts-ignore
+		const oldConnect = client.connect.bind(client)
+		//@ts-ignore
+		client.connect = async () => {
+			const results = await oldConnect()
+
+			statusAtConnect = [...passedStatuses]
+
+			return results
+		}
+
+		assert.isEqualDeep(passedStatuses, ['disconnected'])
+
+		await promise
+
+		assert.isEqualDeep(statusAtConnect, [
+			'disconnected',
+			'connecting',
+			'connected',
+		])
+	}
+
+	private static async connectWithEmittingSocket() {
+		let socket: ReservedEmittingSocket | undefined
+		MercurySocketIoClient.io = function (options: any, args: any) {
+			socket = new ReservedEmittingSocket(options, args)
+			setTimeout(() => socket?.emitConnect(), 1)
+			return socket
+		} as any
+
+		const client = await this.connectToApi({ shouldReconnect: true })
+		assert.isTruthy(socket)
+		return { client, socket }
+	}
+
 	private static async ClientZeroDelay() {
 		return await this.connectToApi({ reconnectDelayMs: 0 })
 	}
@@ -146,6 +238,13 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		const results = await promise
 
 		eventResponseUtil.getFirstResponseOrThrow(results)
+	}
+
+	private static patchMercuryEmitToThrow(client: any) {
+		//@ts-ignore
+		client._emit = () => {
+			assert.fail('should not be called on local events')
+		}
 	}
 }
 
@@ -172,5 +271,23 @@ class SuccessSocket extends Socket {
 
 	public emitConnect() {
 		this.emitReserved('connect')
+	}
+}
+
+class ReservedEmittingSocket extends Socket {
+	public constructor(options: any, args: any) {
+		super(options, args)
+	}
+
+	public connect(): this {
+		return this
+	}
+
+	public emitConnect() {
+		this.emitReserved('connect')
+	}
+
+	public emitDisconnect() {
+		this.emitReserved('disconnect', 'io client disconnect')
 	}
 }
