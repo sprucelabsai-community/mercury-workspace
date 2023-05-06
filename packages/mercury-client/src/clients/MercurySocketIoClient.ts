@@ -7,7 +7,6 @@ import {
 	MercuryAggregateResponse,
 	MercurySingleResponse,
 	SpruceSchemas,
-	buildEventContract,
 } from '@sprucelabs/mercury-types'
 import {
 	Schema,
@@ -83,12 +82,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		this.host = host
 		this.ioOptions = { ...ioOptions, withCredentials: false }
-		this.eventContract = eventContractUtil.unifyContracts([
-			eventContract ?? {
-				eventSignatures: {},
-			},
-			statusContract,
-		])! as Contract
+		this.eventContract = eventContract
 		this.emitTimeoutMs = emitTimeoutMs ?? 30000
 		this.reconnectDelayMs = reconnectDelayMs ?? 5000
 		this.shouldReconnect = shouldReconnect ?? true
@@ -844,14 +838,6 @@ const statusChangeTargetAndPayloadSchema = buildSchema({
 
 type StatusChangeTargetAndPayloadSchema =
 	typeof statusChangeTargetAndPayloadSchema
-const statusContract = buildEventContract({
-	id: 'connection-status',
-	eventSignatures: {
-		'connection-status-change': {
-			emitPayloadSchema: statusChangeTargetAndPayloadSchema,
-		},
-	},
-})
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
