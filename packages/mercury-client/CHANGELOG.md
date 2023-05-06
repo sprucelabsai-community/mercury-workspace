@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [40.1.0](https://github.com/sprucelabsai-community/mercury-workspace/compare/v40.0.6...v40.1.0) (2023-05-06)
+
+
+### Features
+
+* client now lets you listen to connect and disconnect events! ([a89cb4f](https://github.com/sprucelabsai-community/mercury-workspace/commit/a89cb4f))
+
+
+
+
+
 ## [40.0.6](https://github.com/sprucelabsai-community/mercury-workspace/compare/v40.0.5...v40.0.6) (2023-05-06)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
