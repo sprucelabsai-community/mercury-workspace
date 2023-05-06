@@ -178,7 +178,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		let passedStatuses: string[] = []
 		let statusAtConnect: string[] = []
 
-		client.on('connection-status-change', ({ payload }) => {
+		await client.on('connection-status-change', ({ payload }) => {
 			passedStatuses.push(payload.status)
 		})
 
