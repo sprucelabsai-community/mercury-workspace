@@ -39,6 +39,8 @@ const statusChangeTargetAndPayloadSchema = buildSchema({
 type StatusChangeTargetAndPayloadSchema =
 	typeof statusChangeTargetAndPayloadSchema
 
+type StatusChangePayloadSchema = typeof statusChangePayloadSchema
+
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
 		'connection-status-change': {
@@ -55,3 +57,6 @@ export const connectionStatusContract = buildEventContract({
 		},
 	},
 })
+
+export type ConnectionStatus =
+	StatusChangePayloadSchema['fields']['status']['options']['choices'][number]['value']
