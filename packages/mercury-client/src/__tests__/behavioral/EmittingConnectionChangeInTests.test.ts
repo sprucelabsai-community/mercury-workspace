@@ -18,6 +18,14 @@ export default class EmittingConnectionChangeInTestsTest extends AbstractClientT
 				status: 'disconnected',
 			},
 		})
+
+		const client = await this.connectToApi()
+
+		await client.emitAndFlattenResponses('connection-status-change', {
+			payload: {
+				status: 'disconnected',
+			},
+		})
 	}
 
 	@test()
