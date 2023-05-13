@@ -1,3 +1,4 @@
+import { buildSchema } from '@sprucelabs/schema'
 import { test } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercuryTestClient from '../../clients/MercuryTestClient'
@@ -11,7 +12,6 @@ export default class EmittingConnectionChangeInTestsTest extends AbstractClientT
 
 	@test()
 	protected static async canEmitWithoutCrashing() {
-		MercuryClientFactory.setIsTestMode(true)
 		const emitter = MercuryTestClient.getInternalEmitter()
 		await emitter.emitAndFlattenResponses('connection-status-change', {
 			payload: {
@@ -33,5 +33,38 @@ export default class EmittingConnectionChangeInTestsTest extends AbstractClientT
 		//@ts-ignore
 		delete MercuryTestClient.emitter
 		await this.connectToApi()
+	}
+
+	@test()
+	protected static async settingEventContractOnTestClientOverridesWhateverIsInTheInternalEmitter() {
+		const emitter = MercuryTestClient.getInternalEmitter({
+			eventSignatures: {
+				'request-pin::v2020_12_25': {
+					emitPayloadSchema: buildSchema({
+						id: 'requestPinEmitPayload',
+						fields: {
+							firstName: {
+								type: 'text',
+								isRequired: true,
+							},
+						},
+					}),
+				},
+			},
+		})
+
+		const client = await this.connectToApi()
+
+		await client.on('request-pin::v2020_12_25', () => {
+			return {
+				challenge: 'aoeu',
+			}
+		})
+
+		await emitter.emitAndFlattenResponses('request-pin::v2020_12_25', {
+			payload: {
+				phone: '5555555555',
+			},
+		})
 	}
 }

@@ -52,6 +52,14 @@ class InternalEmitter<
 		}
 	}
 
+	public overrideSignatures(contract: EventContract) {
+		const fqens = Object.keys(contract.eventSignatures)
+
+		for (const fqen of fqens) {
+			this.eventContract.eventSignatures[fqen] = contract.eventSignatures[fqen]
+		}
+	}
+
 	public getContract() {
 		return this.eventContract
 	}
@@ -75,7 +83,9 @@ export default class MercuryTestClient<
 		return MercuryTestClient.emitter.getContract() as Contract
 	}
 
-	protected set eventContract(_contract: Contract) {}
+	protected set eventContract(contract: Contract) {
+		MercuryTestClient.getInternalEmitter().overrideSignatures(contract)
+	}
 
 	public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
 		this.shouldCheckPermissionsOnLocalEvents = should
