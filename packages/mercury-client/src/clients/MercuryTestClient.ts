@@ -78,7 +78,7 @@ export default class MercuryTestClient<
 	private static namespacesThatHaveToBeHandledLocally: string[] = []
 	private shouldWaitForDelayedConnectIfAuthing = true
 	private static shouldRequireLocalListeners = false
-	//@ts-ignore
+	/** @ts-ignore */
 	protected get eventContract() {
 		return MercuryTestClient.emitter.getContract() as Contract
 	}
