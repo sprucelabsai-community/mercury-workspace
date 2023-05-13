@@ -4,6 +4,11 @@ import MercuryTestClient from '../../clients/MercuryTestClient'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
 export default class EmittingConnectionChangeInTestsTest extends AbstractClientTest {
+	protected static async beforeEach() {
+		await super.beforeEach()
+		MercuryClientFactory.setIsTestMode(true)
+	}
+
 	@test()
 	protected static async canEmitWithoutCrashing() {
 		MercuryClientFactory.setIsTestMode(true)
@@ -13,5 +18,12 @@ export default class EmittingConnectionChangeInTestsTest extends AbstractClientT
 				status: 'disconnected',
 			},
 		})
+	}
+
+	@test()
+	protected static async doesntCrashTryingToMixinTwice() {
+		//@ts-ignore
+		delete MercuryTestClient.emitter
+		await this.connectToApi()
 	}
 }
