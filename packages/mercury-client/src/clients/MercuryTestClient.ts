@@ -70,6 +70,12 @@ export default class MercuryTestClient<
 	private static namespacesThatHaveToBeHandledLocally: string[] = []
 	private shouldWaitForDelayedConnectIfAuthing = true
 	private static shouldRequireLocalListeners = false
+	//@ts-ignore
+	protected get eventContract() {
+		return MercuryTestClient.emitter.getContract() as Contract
+	}
+
+	protected set eventContract(_contract: Contract) {}
 
 	public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
 		this.shouldCheckPermissionsOnLocalEvents = should
@@ -202,6 +208,7 @@ export default class MercuryTestClient<
 		args: any[]
 	): Promise<MercuryAggregateResponse<any>> {
 		const emitter = MercuryTestClient.emitter
+
 		const fqen = args[0]
 		const payload = args[1]
 

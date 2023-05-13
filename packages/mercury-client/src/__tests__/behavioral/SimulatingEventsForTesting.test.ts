@@ -485,12 +485,11 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	protected static async returnsHelpfulErrorIfEventExistsLocallyButNotRemotely() {
 		const client = await this.connectToApiAsTestClient(true)
 
-		//@ts-ignore
-		client.eventContract = {
+		MercuryTestClient.getInternalEmitter().mixinContract({
 			eventSignatures: {
 				['waka-waka']: {},
 			},
-		}
+		})
 
 		//@ts-ignore
 		const results = await client.emit('waka-waka')
