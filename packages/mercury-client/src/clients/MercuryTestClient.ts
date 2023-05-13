@@ -89,10 +89,8 @@ export default class MercuryTestClient<
 			eventContract?: Contract
 		}
 	) {
-		const mixed = eventContractUtil.unifyContracts([
-			options.eventContract ?? { eventSignatures: {} },
-			connectionStatusContract,
-		])!
+		const contract = options.eventContract
+		const mixed = mixinConnectionEvents(contract)
 
 		super({ ...options, eventContract: mixed as Contract })
 		MercuryTestClient.getInternalEmitter(mixed)
@@ -100,9 +98,8 @@ export default class MercuryTestClient<
 	/** @ts-ignore */
 	public static getInternalEmitter(contract?: EventContract) {
 		if (!MercuryTestClient.emitter) {
-			MercuryTestClient.emitter = new InternalEmitter(
-				contract ?? { eventSignatures: {} }
-			)
+			const mixed = mixinConnectionEvents(contract)
+			MercuryTestClient.emitter = new InternalEmitter(mixed)
 		} else if (contract) {
 			MercuryTestClient.emitter.mixinOnlyUniqueSignatures(contract)
 		}
@@ -430,4 +427,13 @@ export default class MercuryTestClient<
 	public static getShouldRequireLocalListeners() {
 		return this.shouldRequireLocalListeners
 	}
+}
+function mixinConnectionEvents<
+	/** @ts-ignore */
+	Contract extends EventContract = SkillEventContract
+>(contract: Contract | undefined) {
+	return eventContractUtil.unifyContracts([
+		contract ?? { eventSignatures: {} },
+		connectionStatusContract,
+	])!
 }
