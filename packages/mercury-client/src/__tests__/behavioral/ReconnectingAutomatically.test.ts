@@ -1,14 +1,17 @@
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { assert, errorAssert, test } from '@sprucelabs/test-utils'
 import { Socket } from 'socket.io-client'
-import { MercuryClientFactory } from '../..'
+import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import AbstractClientTest from '../../tests/AbstractClientTest'
+import { ConnectionOptions, MercuryClient } from '../../types/client.types'
 
 export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
+	private static lastSocket?: ReservedEmittingSocket
 	protected static async beforeEach() {
 		await super.beforeEach()
 		MercuryClientFactory.setIsTestMode(false)
+		this.lastSocket = undefined
 	}
 
 	@test()
@@ -206,17 +209,82 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		])
 	}
 
-	private static async connectWithEmittingSocket() {
-		let socket: ReservedEmittingSocket | undefined
-		MercurySocketIoClient.io = function (options: any, args: any) {
-			socket = new ReservedEmittingSocket(options, args)
-			setTimeout(() => socket?.emitConnect(), 1)
-			return socket
-		} as any
+	@test('retrying to connect emits status change', 10)
+	protected static async emitRetriesTracksAccurately(retries: number) {
+		const startingRetries = retries
+		const { client } = await this.connectWithEmittingSocket({
+			connectionRetries: retries,
+		})
 
-		const client = await this.connectToApi({ shouldReconnect: true })
-		assert.isTruthy(socket)
-		return { client, socket }
+		this.disableConnect()
+		this.emitDisconnect()
+
+		retries = await this.waitAndAssertRetriesDecrement(retries, client)
+
+		this.emitConnectError()
+
+		retries = await this.waitAndAssertRetriesDecrement(retries, client)
+
+		this.emitConnectError()
+
+		await this.waitAndAssertRetriesDecrement(retries, client)
+
+		this.enableConnect()
+
+		this.emitConnect()
+
+		await this.wait(1000)
+
+		assert.isEqual(client.connectionRetriesRemaining, startingRetries)
+
+		await client.disconnect()
+	}
+
+	private static emitConnect() {
+		this.lastSocket?.emitConnect()
+	}
+
+	private static enableConnect() {
+		this.lastSocket?.enableConnect()
+	}
+
+	private static emitConnectError() {
+		this.lastSocket?.emitConnectionError()
+	}
+
+	private static emitDisconnect() {
+		this.lastSocket?.emitDisconnect()
+	}
+
+	private static disableConnect() {
+		this.lastSocket?.disableConnect()
+	}
+
+	private static async waitAndAssertRetriesDecrement(
+		retries: number,
+		client: ClientWithConnectionAttempts
+	) {
+		await this.wait(100)
+		retries--
+		assert.isEqual(client.connectionRetriesRemaining, retries)
+		return retries
+	}
+
+	private static async connectWithEmittingSocket(
+		options?: Partial<ConnectionOptions>
+	) {
+		MercurySocketIoClient.io = ((options: any, args: any) => {
+			this.lastSocket = new ReservedEmittingSocket(options, args)
+			setTimeout(() => this.lastSocket?.emitConnect(), 1)
+			return this.lastSocket
+		}) as any
+
+		const client = (await this.connectToApi({
+			shouldReconnect: true,
+			...options,
+		})) as ClientWithConnectionAttempts
+		assert.isTruthy(this.lastSocket)
+		return { client, socket: this.lastSocket }
 	}
 
 	private static async ClientZeroDelay() {
@@ -275,12 +343,33 @@ class SuccessSocket extends Socket {
 }
 
 class ReservedEmittingSocket extends Socket {
+	private static shouldAllowConnect = true
+
 	public constructor(options: any, args: any) {
 		super(options, args)
 	}
 
 	public connect(): this {
 		return this
+	}
+
+	public async disableConnect() {
+		ReservedEmittingSocket.shouldAllowConnect = false
+	}
+
+	public async enableConnect() {
+		ReservedEmittingSocket.shouldAllowConnect = true
+	}
+
+	public emitReserved(event: string, ...args: any[]) {
+		if (event === 'connect' && !ReservedEmittingSocket.shouldAllowConnect) {
+			return this
+		}
+		return super.emitReserved(event as any, ...args)
+	}
+
+	public emitConnectionError() {
+		this.emitReserved('connect_error', new Error('connection error'))
 	}
 
 	public emitConnect() {
@@ -290,4 +379,8 @@ class ReservedEmittingSocket extends Socket {
 	public emitDisconnect() {
 		this.emitReserved('disconnect', 'io client disconnect')
 	}
+}
+
+type ClientWithConnectionAttempts = MercuryClient & {
+	connectionRetriesRemaining: number
 }

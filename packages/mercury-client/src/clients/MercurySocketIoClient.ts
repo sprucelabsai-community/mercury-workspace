@@ -44,7 +44,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		token?: string | undefined
 	}
 	private shouldReconnect: boolean
-	private connectionRetries = 5
+	private connectionRetriesRemaining = 5
+	private connectionRetries: number
 	private registeredListeners: [eventName: any, cb: (...opts: any) => any][] =
 		[]
 	private allowNextEventToBeAuthenticate = false
@@ -87,6 +88,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		this.shouldReconnect = shouldReconnect ?? true
 		this.id = new Date().getTime().toString()
 		this.maxEmitRetries = maxEmitRetries
+		this.connectionRetriesRemaining = connectionRetries ?? 5
 		this.connectionRetries = connectionRetries ?? 5
 	}
 
@@ -97,8 +99,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 		await new Promise((resolve, reject) => {
 			this.socket?.on('connect', () => {
+				this.connectionRetriesRemaining = this.connectionRetries
+
 				//@ts-ignore
 				this.socket?.removeAllListeners()
+				this.log(`Connection established!`)
 
 				this.emitStatusChange('connected')
 
@@ -148,12 +153,10 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			//@ts-ignore
 			this.socket?.removeAllListeners()
 
-			this.connectionRetries--
-
 			this.log('Failed to connect to Mercury', error.message)
-			this.log('Connection retries left', `${this.connectionRetries}`)
+			this.log('Connection retries left', `${this.connectionRetriesRemaining}`)
 
-			if (this.connectionRetries === 0) {
+			if (this.connectionRetriesRemaining === 0) {
 				reject?.(error)
 				return
 			}
@@ -194,7 +197,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 			setTimeout(async () => {
 				try {
-					this.connectionRetries = 1
+					this.connectionRetriesRemaining--
 
 					await this.connect()
 
