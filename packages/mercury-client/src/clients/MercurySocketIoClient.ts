@@ -61,7 +61,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private maxEmitRetries: number
 	private authRawResults?: MercuryAggregateResponse<any>
 	protected authPromise?: any
-	private shouldRegisterProxyOnReconnect = false
+	protected shouldRegisterProxyOnReconnect = false
 
 	public constructor(
 		options: {
@@ -105,7 +105,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 				this.socket?.removeAllListeners()
 				this.log(`Connection established!`)
 
-				this.emitStatusChange('connected')
+				if (!this.isReconnecting) {
+					this.emitStatusChange('connected')
+				}
 
 				if (this.shouldReconnect) {
 					this.socket?.once('disconnect', async (opts) => {
@@ -196,68 +198,74 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 			}
 
 			setTimeout(async () => {
-				try {
-					this.connectionRetriesRemaining--
-
-					await this.connect()
-
-					if (this.isManuallyDisconnected) {
-						this.isReconnecting = false
-						return
-					}
-
-					this.skipWaitIfReconnecting = true
-
-					if (this.lastAuthOptions) {
-						await this.authenticate(this.lastAuthOptions)
-					}
-
-					if (this.isManuallyDisconnected) {
-						this.isReconnecting = false
-						return
-					}
-
-					if (this.shouldRegisterProxyOnReconnect) {
-						await this.registerProxyToken()
-					}
-
-					if (this.isManuallyDisconnected) {
-						this.isReconnecting = false
-						return
-					}
-
-					await this.reRegisterAllListeners()
-
-					this.isReAuthing = false
-					this.isReconnecting = false
-					this.skipWaitIfReconnecting = false
-					resolve()
-					this.log(`Connection re-established with Mercury!`)
-				} catch (err: any) {
-					;(console.error ?? console.log)(err.message)
-
-					this.isReconnecting = false
-					this.skipWaitIfReconnecting = false
-
-					retriesLeft = retriesLeft - 1
-
-					if (
-						(err.options.code === 'TIMEOUT' ||
-							err.options.code === 'CONNECTION_FAILED') &&
-						retriesLeft > 0
-					) {
-						await this.attemptReconnectAfterDelay(retriesLeft)
-							.then(resolve)
-							.catch(reject)
-					} else {
-						this.lastAuthOptions = undefined
-						reject(err)
-					}
-				}
+				await this.reconnect(resolve, reject, retriesLeft)
 			}, this.reconnectDelayMs)
 		})
 
 		return this.reconnectPromise
+	}
+
+	protected async reconnect(resolve: any, reject: any, retriesLeft: number) {
+		try {
+			this.connectionRetriesRemaining--
+
+			await this.connect()
+
+			if (this.isManuallyDisconnected) {
+				this.isReconnecting = false
+				return
+			}
+
+			this.skipWaitIfReconnecting = true
+
+			if (this.lastAuthOptions) {
+				await this.authenticate(this.lastAuthOptions)
+			}
+
+			if (this.isManuallyDisconnected) {
+				this.isReconnecting = false
+				return
+			}
+
+			if (this.shouldRegisterProxyOnReconnect) {
+				await this.registerProxyToken()
+			}
+
+			if (this.isManuallyDisconnected) {
+				this.isReconnecting = false
+				return
+			}
+
+			await this.reRegisterAllListeners()
+
+			this.emitStatusChange('connected')
+
+			this.isReAuthing = false
+			this.isReconnecting = false
+			this.skipWaitIfReconnecting = false
+			resolve()
+			this.log(`Connection re-established with Mercury!`)
+		} catch (err: any) {
+			;(console.error ?? console.log)(err.message)
+
+			this.isReconnecting = false
+			this.skipWaitIfReconnecting = false
+
+			retriesLeft = retriesLeft - 1
+
+			if (
+				(err.options.code === 'TIMEOUT' ||
+					err.options.code === 'CONNECTION_FAILED') &&
+				retriesLeft > 0
+			) {
+				await this.attemptReconnectAfterDelay(retriesLeft)
+					.then(resolve)
+					.catch(reject)
+			} else {
+				this.lastAuthOptions = undefined
+				reject(err)
+			}
+		}
 	}
 
 	private log(...args: any[]) {

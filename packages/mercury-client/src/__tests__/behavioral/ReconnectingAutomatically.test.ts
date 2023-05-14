@@ -3,6 +3,8 @@ import { assert, errorAssert, test } from '@sprucelabs/test-utils'
 import { Socket } from 'socket.io-client'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
+import MutableContractClient from '../../clients/MutableContractClient'
+import { ConnectionStatus } from '../../clients/statusChangePayloadSchema'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { ConnectionOptions, MercuryClient } from '../../types/client.types'
 
@@ -179,7 +181,6 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		let { client } = await this.connectWithEmittingSocket()
 
 		let passedStatuses: string[] = []
-		let statusAtConnect: string[] = []
 
 		await client.on('connection-status-change', ({ payload }) => {
 			passedStatuses.push(payload.status)
@@ -187,22 +188,12 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
 		//@ts-ignore
 		const promise = client.attemptReconnectAfterDelay(0)
-		//@ts-ignore
-		const oldConnect = client.connect.bind(client)
-		//@ts-ignore
-		client.connect = async () => {
-			const results = await oldConnect()
-
-			statusAtConnect = [...passedStatuses]
-
-			return results
-		}
 
 		assert.isEqualDeep(passedStatuses, ['disconnected'])
 
 		await promise
 
-		assert.isEqualDeep(statusAtConnect, [
+		assert.isEqualDeep(passedStatuses, [
 			'disconnected',
 			'connecting',
 			'connected',
@@ -238,6 +229,50 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		assert.isEqual(client.connectionRetriesRemaining, startingRetries)
 
 		await client.disconnect()
+	}
+
+	@test()
+	protected static async emitsConnectAfterReconnectReRegisterProxyAndListeners() {
+		const client = await this.connectAsProxySpy()
+
+		const statuses: (ConnectionStatus | 'proxy' | 'listeners')[] = []
+		await client.on('connection-status-change', ({ payload }) => {
+			statuses.push(payload.status)
+		})
+
+		client.setShouldRegisterProxyOnReconnect(true)
+		await client.connect()
+
+		assert.isEqualDeep(statuses, ['connecting', 'connected'])
+
+		client.connect = async () => {}
+		client.registerProxyToken = async () => {
+			statuses.push('proxy')
+		}
+		//@ts-ignore
+		client.reRegisterAllListeners = async () => {
+			statuses.push('listeners')
+		}
+
+		await client.reconnect(
+			() => {},
+			() => {},
+			10
+		)
+
+		assert.isEqualDeep(statuses, [
+			'connecting',
+			'connected',
+			'proxy',
+			'listeners',
+			'connected',
+		])
+	}
+
+	private static async connectAsProxySpy() {
+		MercuryClientFactory.ClientClass = ProxySpyClient as any
+		const client = (await this.connectToApi()) as ProxySpyClient
+		return client
 	}
 
 	private static emitConnect() {
@@ -383,4 +418,18 @@ class ReservedEmittingSocket extends Socket {
 
 type ClientWithConnectionAttempts = MercuryClient & {
 	connectionRetriesRemaining: number
+}
+
+class ProxySpyClient extends MutableContractClient<any> {
+	public setShouldRegisterProxyOnReconnect(should: boolean) {
+		this.shouldRegisterProxyOnReconnect = should
+	}
+
+	public async reconnect(
+		resolve: any,
+		reject: any,
+		retriesLeft: number
+	): Promise<void> {
+		return super.reconnect(resolve, reject, retriesLeft)
+	}
 }
