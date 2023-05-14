@@ -353,11 +353,11 @@ class ReservedEmittingSocket extends Socket {
 		return this
 	}
 
-	public async disableConnect() {
+	public disableConnect() {
 		ReservedEmittingSocket.shouldAllowConnect = false
 	}
 
-	public async enableConnect() {
+	public enableConnect() {
 		ReservedEmittingSocket.shouldAllowConnect = true
 	}
 
