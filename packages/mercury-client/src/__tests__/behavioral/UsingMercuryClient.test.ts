@@ -104,7 +104,7 @@ export default class UsingMercuryClient extends AbstractClientTest {
 		const host = 'https://wontfindthisanywhere.com'
 
 		const err = await assert.doesThrowAsync(() =>
-			this.connectToApi({ host, reconnectDelayMs: 100 })
+			this.connectToApi({ host, reconnectDelayMs: 10, connectionRetries: 0 })
 		)
 
 		errorAssert.assertError(err, 'CONNECTION_FAILED', {
