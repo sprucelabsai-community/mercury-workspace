@@ -284,6 +284,14 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 			statuses.push(payload.status)
 		})
 
+		let authCount = 0
+		//@ts-ignore
+		client.lastAuthOptions = true
+		//@ts-ignore
+		client.authenticate = async () => {
+			authCount++
+		}
+
 		await this.enableAndEmitConnect()
 
 		assert.isEqualDeep(statuses, ['connected'])
@@ -294,6 +302,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		await this.enableAndEmitConnect()
 
 		assert.isEqualDeep(statuses, ['connected'])
+		assert.isEqual(authCount, 2)
 	}
 
 	private static async enableAndEmitConnect() {
