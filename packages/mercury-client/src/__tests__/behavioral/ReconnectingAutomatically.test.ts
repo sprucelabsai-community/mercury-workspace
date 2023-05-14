@@ -269,6 +269,54 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 		])
 	}
 
+	@test()
+	protected static async onlyEmitsConnectedOnceWhenReconnecting() {
+		const { client } = await this.connectWithEmittingSocket({
+			reconnectDelayMs: 10,
+			connectionRetries: 99,
+		})
+
+		let statuses: ConnectionStatus[] = []
+
+		await this.disableConnectAndSendMultipleConnectErrors()
+
+		await client.on('connection-status-change', ({ payload }) => {
+			statuses.push(payload.status)
+		})
+
+		await this.enableAndEmitConnect()
+
+		assert.isEqualDeep(statuses, ['connected'])
+
+		await this.disableConnectAndSendMultipleConnectErrors()
+
+		statuses = []
+		await this.enableAndEmitConnect()
+
+		assert.isEqualDeep(statuses, ['connected'])
+	}
+
+	private static async enableAndEmitConnect() {
+		this.enableConnect()
+		this.emitConnect()
+		await this.wait(1000)
+	}
+
+	private static async disableConnectAndSendMultipleConnectErrors() {
+		this.disableConnect()
+		this.emitDisconnect()
+
+		await this.wait(10)
+		this.emitConnectError()
+		await this.wait(10)
+		this.emitConnectError()
+		await this.wait(10)
+		this.emitConnectError()
+		await this.wait(10)
+		this.emitConnectError()
+		await this.wait(10)
+	}
+
 	private static async connectAsProxySpy() {
 		MercuryClientFactory.ClientClass = ProxySpyClient as any
 		const client = (await this.connectToApi()) as ProxySpyClient

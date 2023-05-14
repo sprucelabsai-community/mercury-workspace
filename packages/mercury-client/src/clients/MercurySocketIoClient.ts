@@ -62,6 +62,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	private authRawResults?: MercuryAggregateResponse<any>
 	protected authPromise?: any
 	protected shouldRegisterProxyOnReconnect = false
+	private reconnectKey?: number
 
 	public constructor(
 		options: {
@@ -208,8 +209,14 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 	protected async reconnect(resolve: any, reject: any, retriesLeft: number) {
 		try {
 			this.connectionRetriesRemaining--
+			const key = new Date().getTime()
+			this.reconnectKey = key
 
 			await this.connect()
+
+			if (this.reconnectKey !== key) {
+				return
+			}
 
 			if (this.isManuallyDisconnected) {
 				this.isReconnecting = false
