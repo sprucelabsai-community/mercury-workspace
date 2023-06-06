@@ -4,12 +4,13 @@ import {
 	buildPermissionContract,
 	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
+import { Location } from '@sprucelabs/spruce-core-schemas'
 import {
 	buildEmitTargetAndPayloadSchema,
 	eventAssertUtil,
 	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { MercuryClientFactory, MercuryTestClient } from '../..'
 import SpruceError from '../../errors/SpruceError'
@@ -749,6 +750,52 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 			},
 		})
 		assert.isTrue(hit)
+	}
+
+	@test()
+	protected static async payloadsAndResponsesAreCloned() {
+		const client = await this.enableTestModeAndLoginAsGuest()
+		const city = generateId()
+		const location1: Location = {
+			id: generateId(),
+			dateCreated: 0,
+			slug: generateId(),
+			name: generateId(),
+			organizationId: generateId(),
+			address: {
+				city,
+				country: generateId(),
+				province: generateId(),
+				street1: generateId(),
+				zip: generateId(),
+			},
+		}
+
+		let passedTarget:
+			| SpruceSchemas.Mercury.v2020_12_25.GetLocationTarget
+			| undefined
+
+		await client.on('get-location::v2020_12_25', ({ target }) => {
+			passedTarget = target
+			return {
+				location: location1,
+			}
+		})
+
+		const target = {
+			locationId: generateId(),
+		}
+		const [{ location: results }] = await client.emitAndFlattenResponses(
+			'get-location::v2020_12_25',
+			{
+				target,
+			}
+		)
+
+		results.address.city = 'changed'
+		assert.isEqual(city, location1.address.city)
+		assert.isNotEqual(results.address, location1.address)
+		assert.isNotEqual(passedTarget, target)
 	}
 
 	private static async loginAsGuest() {

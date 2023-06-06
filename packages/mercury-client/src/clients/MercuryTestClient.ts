@@ -374,7 +374,7 @@ export default class MercuryTestClient<
 				source,
 			}
 		}
-		return { source, argsWithSource }
+		return { source, argsWithSource: clone(argsWithSource) }
 	}
 
 	private async connectIfNotConnected(fqen: string) {
