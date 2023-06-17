@@ -65,9 +65,9 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^5.1.11",
-    "@sprucelabs/schema": "^28.6.48",
-    "@sprucelabs/spruce-core-schemas": "^38.1.50",
-    "@sprucelabs/spruce-event-utils": "^37.0.64",
+    "@sprucelabs/schema": "^28.6.49",
+    "@sprucelabs/spruce-core-schemas": "^38.1.51",
+    "@sprucelabs/spruce-event-utils": "^37.0.65",
     "dotenv": "^16.3.0",
     "just-clone": "^6.2.0",
     "socket.io-client": "^4.6.2"
@@ -78,7 +78,7 @@
     "@sprucelabs/jest-sheets-reporter": "^3.0.24",
     "@sprucelabs/mercury-core-events": "^21.1.60",
     "@sprucelabs/mercury-event-emitter": "^40.1.72",
-    "@sprucelabs/mercury-types": "^45.0.51",
+    "@sprucelabs/mercury-types": "^45.0.52",
     "@sprucelabs/resolve-path-aliases": "^1.1.227",
     "@sprucelabs/semantic-release": "^4.0.8",
     "@sprucelabs/test": "^7.7.453",
