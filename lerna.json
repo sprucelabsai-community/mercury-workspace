@@ -1,13 +1,13 @@
 {
-	"npmClient": "yarn",
-	"version": "40.1.85",
-	"command": {
-		"publish": {
-			"allowBranch": [
-				"master"
-			],
-			"conventionalCommits": true,
-			"changelogPreset": "sprucelabs"
-		}
-	}
+  "npmClient": "yarn",
+  "version": "41.0.0",
+  "command": {
+    "publish": {
+      "allowBranch": [
+        "master"
+      ],
+      "conventionalCommits": true,
+      "changelogPreset": "sprucelabs"
+    }
+  }
 }
