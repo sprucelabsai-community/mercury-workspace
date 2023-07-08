@@ -275,8 +275,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 		}
 	}
 
-	private log(...args: any[]) {
-		return console.log(...args)
+	private log(..._args: any[]) {
+		// return console.log(...args)
 	}
 
 	protected async waitIfReconnecting() {
