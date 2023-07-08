@@ -7,6 +7,7 @@ import {
 	EventContract,
 	MercurySingleResponse,
 	EventNames,
+	ListenerCallback,
 } from '@sprucelabs/mercury-types'
 import { Schema, SchemaValues, validateSchemaValues } from '@sprucelabs/schema'
 import {
@@ -272,20 +273,8 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 
 	public async on<
 		EventName extends EventNames<Contract>,
-		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
-			? IEventSignature['emitPayloadSchema']
-			: never
-	>(
-		eventName: EventName,
-		cb: (
-			payload: EmitSchema extends Schema ? SchemaValues<EmitSchema> : never
-		) => IEventSignature['responsePayloadSchema'] extends Schema
-			?
-					| Promise<SchemaValues<IEventSignature['responsePayloadSchema']>>
-					| SchemaValues<IEventSignature['responsePayloadSchema']>
-			: Promise<void> | void
-	) {
+		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName]
+	>(eventName: EventName, cb: ListenerCallback<IEventSignature>) {
 		eventContractUtil.getSignatureByName(this.eventContract, eventName)
 
 		if (!this.listenersByEvent[eventName]) {
