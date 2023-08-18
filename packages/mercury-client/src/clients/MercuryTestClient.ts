@@ -296,7 +296,7 @@ export default class MercuryTestClient<
 				code: 'INVALID_EVENT_SIGNATURE',
 				fqen,
 				instructions:
-					'You have to either set your event to global (event.options.ts, which requires special permissions) or add a target that includes an organizationId or locationId.',
+					'Oh not! You have to either create an event using `spruce create.event`, set your event to global (event.options.ts, which requires special permissions) or add a target that includes an organizationId or locationId. Choose wisely!',
 			})
 		}
 	}
