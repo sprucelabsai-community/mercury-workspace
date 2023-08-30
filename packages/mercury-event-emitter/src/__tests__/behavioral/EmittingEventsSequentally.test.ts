@@ -61,7 +61,7 @@ const contract = buildEventContract({
 })
 
 class EventEmitter<
-	Contract extends EventContract
+	Contract extends EventContract,
 > extends AbstractEventEmitter<Contract> {}
 
 type Contract = typeof contract

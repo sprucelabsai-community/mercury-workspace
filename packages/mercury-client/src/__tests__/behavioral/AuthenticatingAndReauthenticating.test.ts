@@ -36,9 +36,8 @@ export default class ReauthenticatingAfterReconnectTest extends AbstractClientTe
 
 	@test()
 	protected static async canAuthAsPerson() {
-		const { client, token, person } = await this.loginAsDemoPerson(
-			DEMO_PHONE_REAUTH
-		)
+		const { client, token, person } =
+			await this.loginAsDemoPerson(DEMO_PHONE_REAUTH)
 		const { person: authPerson } = await client.authenticate({
 			token,
 		})

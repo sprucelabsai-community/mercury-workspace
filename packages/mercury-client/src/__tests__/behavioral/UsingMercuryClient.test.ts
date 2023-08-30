@@ -722,9 +722,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
 	}
 
 	private static async loginAndRegisterToken() {
-		const { client: client1, person: person1 } = await this.loginAsDemoPerson(
-			DEMO_PHONE
-		)
+		const { client: client1, person: person1 } =
+			await this.loginAsDemoPerson(DEMO_PHONE)
 		const { client: client2 } = await this.loginAsDemoPerson(DEMO_PHONE_PROXY)
 
 		const results = await client1.emit('register-proxy-token::v2020_12_25')

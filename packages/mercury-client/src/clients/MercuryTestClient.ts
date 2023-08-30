@@ -20,7 +20,7 @@ import MutableContractClient from './MutableContractClient'
 import { connectionStatusContract } from './statusChangePayloadSchema'
 
 class InternalEmitter<
-	Contract extends EventContract
+	Contract extends EventContract,
 > extends AbstractEventEmitter<Contract> {
 	public doesHandleEvent(eventName: string) {
 		try {
@@ -67,7 +67,7 @@ class InternalEmitter<
 
 export default class MercuryTestClient<
 	/** @ts-ignore */
-	Contract extends EventContract = SkillEventContract
+	Contract extends EventContract = SkillEventContract,
 > extends MutableContractClient<Contract> {
 	private static emitter: InternalEmitter<any>
 	private _isConnected = false
@@ -448,7 +448,7 @@ export default class MercuryTestClient<
 }
 function mixinConnectionEvents<
 	/** @ts-ignore */
-	Contract extends EventContract = SkillEventContract
+	Contract extends EventContract = SkillEventContract,
 >(contract: Contract | undefined) {
 	return eventContractUtil.unifyContracts([
 		contract ?? { eventSignatures: {} },

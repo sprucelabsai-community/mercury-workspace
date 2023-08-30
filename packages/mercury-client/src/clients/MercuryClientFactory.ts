@@ -17,7 +17,7 @@ export default class MercuryClientFactory {
 	) => MutableContractClient<EventContract>
 
 	public static async Client<
-		Contract extends SkillEventContract = SkillEventContract
+		Contract extends SkillEventContract = SkillEventContract,
 	>(connectionOptions?: ConnectionOptions): Promise<Client<Contract>> {
 		const {
 			host: hostOption,

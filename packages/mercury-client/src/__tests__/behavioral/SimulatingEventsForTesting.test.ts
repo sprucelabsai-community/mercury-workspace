@@ -593,12 +593,10 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	protected static async passesThroughTestProxy() {
 		this.enableTestMode()
 
-		const { client: teammateClient } = await this.loginAsDemoPerson(
-			DEMO_PHONE_TEAMMATE
-		)
-		const { client: guestClient } = await this.loginAsDemoPerson(
-			DEMO_PHONE_GUEST
-		)
+		const { client: teammateClient } =
+			await this.loginAsDemoPerson(DEMO_PHONE_TEAMMATE)
+		const { client: guestClient } =
+			await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
 
 		const client = await this.connectToApiAsTestClient()
 		let passedSource: any
@@ -861,9 +859,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	}
 
 	private static async assertGuestCantEmit(fqen: string, orgId: string) {
-		const { client: personClient } = await this.loginAsDemoPerson(
-			DEMO_PHONE_GUEST
-		)
+		const { client: personClient } =
+			await this.loginAsDemoPerson(DEMO_PHONE_GUEST)
 
 		//@ts-ignore
 		const response = await personClient.emit(fqen, {

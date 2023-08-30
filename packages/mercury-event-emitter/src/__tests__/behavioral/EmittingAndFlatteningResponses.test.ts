@@ -5,7 +5,7 @@ import AbstractEventEmitter from '../../AbstractEventEmitter'
 import { TestContract, testContract } from './testContract'
 
 class EventEmitter<
-	Contract extends EventContract
+	Contract extends EventContract,
 > extends AbstractEventEmitter<Contract> {}
 
 export default class EmittingAndFlatteningResponsesTest extends AbstractSpruceTest {
