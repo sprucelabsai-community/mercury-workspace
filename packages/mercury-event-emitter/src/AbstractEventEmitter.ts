@@ -37,13 +37,16 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 
 	public async emit<
 		EventName extends EventNames<Contract>,
-		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
+		IEventSignature extends
+			EventSignature = Contract['eventSignatures'][EventName],
+		EmitSchema extends
+			Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
 			: never,
-		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
+		ResponseSchema extends
+			Schema = IEventSignature['responsePayloadSchema'] extends Schema
 			? IEventSignature['responsePayloadSchema']
-			: never
+			: never,
 	>(
 		eventName: EventName,
 		payload?:
@@ -126,13 +129,16 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 
 	public async emitAndFlattenResponses<
 		EventName extends EventNames<Contract>,
-		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
+		IEventSignature extends
+			EventSignature = Contract['eventSignatures'][EventName],
+		EmitSchema extends
+			Schema = IEventSignature['emitPayloadSchema'] extends Schema
 			? IEventSignature['emitPayloadSchema']
 			: never,
-		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
+		ResponseSchema extends
+			Schema = IEventSignature['responsePayloadSchema'] extends Schema
 			? IEventSignature['responsePayloadSchema']
-			: never
+			: never,
 	>(
 		eventName: EventName,
 		payload?:
@@ -158,13 +164,15 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 
 	private async emitOne<
 		EventName extends EventNames<Contract>,
-		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
+		IEventSignature extends
+			EventSignature = Contract['eventSignatures'][EventName],
+		ResponseSchema extends
+			Schema = IEventSignature['responsePayloadSchema'] extends Schema
 			? IEventSignature['responsePayloadSchema']
 			: never,
 		ResponsePayload = ResponseSchema extends Schema
 			? SchemaValues<ResponseSchema>
-			: never
+			: never,
 	>(options: {
 		idx: number
 		listenerCb: (payload?: any) => Promise<ResponsePayload>
@@ -273,7 +281,8 @@ export default class AbstractEventEmitter<Contract extends EventContract>
 
 	public async on<
 		EventName extends EventNames<Contract>,
-		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName]
+		IEventSignature extends
+			EventSignature = Contract['eventSignatures'][EventName],
 	>(eventName: EventName, cb: ListenerCallback<IEventSignature>) {
 		eventContractUtil.getSignatureByName(this.eventContract, eventName)
 

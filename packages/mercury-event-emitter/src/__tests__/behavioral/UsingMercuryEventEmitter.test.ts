@@ -11,7 +11,7 @@ import SpruceError from '../../errors/SpruceError'
 import { TestContract, testContract } from './testContract'
 
 class EventEmitter<
-	Contract extends EventContract
+	Contract extends EventContract,
 > extends AbstractEventEmitter<Contract> {
 	public listenCount(eventName: EventNames<Contract>) {
 		return (this.listenersByEvent[eventName] || []).length

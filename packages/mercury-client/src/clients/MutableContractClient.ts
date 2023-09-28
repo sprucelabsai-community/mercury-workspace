@@ -7,7 +7,7 @@ import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import MercurySocketIoClient from './MercurySocketIoClient'
 
 export default class MutableContractClient<
-	Contract extends EventContract
+	Contract extends EventContract,
 > extends MercurySocketIoClient<Contract> {
 	private static inMemoryContract?: EventContract
 	public static mixinContract(contract: EventContract) {
