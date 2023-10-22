@@ -67,7 +67,7 @@
     "@sprucelabs/error": "^5.1.37",
     "@sprucelabs/schema": "^29.0.71",
     "@sprucelabs/spruce-core-schemas": "^39.0.104",
-    "@sprucelabs/spruce-event-utils": "^38.0.114",
+    "@sprucelabs/spruce-event-utils": "^38.0.115",
     "dotenv": "^16.3.1",
     "just-clone": "^6.2.0",
     "socket.io-client": "^4.7.2"
