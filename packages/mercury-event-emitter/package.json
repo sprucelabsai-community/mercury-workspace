@@ -62,15 +62,15 @@
     "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev"
   },
   "dependencies": {
-    "@sprucelabs/error": "^5.1.43",
+    "@sprucelabs/error": "^5.1.44",
     "@sprucelabs/mercury-types": "^46.0.115",
     "@sprucelabs/schema": "^29.0.83",
-    "@sprucelabs/spruce-event-utils": "^38.0.136"
+    "@sprucelabs/spruce-event-utils": "^38.0.137"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^5.0.91",
-    "@sprucelabs/jest-json-reporter": "^7.0.118",
-    "@sprucelabs/resolve-path-aliases": "^1.1.259",
+    "@sprucelabs/esm-postbuild": "^5.0.92",
+    "@sprucelabs/jest-json-reporter": "^7.0.119",
+    "@sprucelabs/resolve-path-aliases": "^1.1.260",
     "@sprucelabs/semantic-release": "^4.0.8",
     "@sprucelabs/test": "^8.0.27",
     "@sprucelabs/test-utils": "^4.0.70",
@@ -81,7 +81,7 @@
     "eslint-config-spruce": "^10.13.6",
     "jest": "^29.7.0",
     "jest-circus": "^29.7.0",
-    "prettier": "^3.0.3",
+    "prettier": "^3.1.0",
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
     "tsconfig-paths": "^4.2.0",
