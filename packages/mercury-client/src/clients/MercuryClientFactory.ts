@@ -47,7 +47,7 @@ export default class MercuryClientFactory {
 			!contracts && this.defaultContract
 				? this.defaultContract
 				: //@ts-ignore
-				  eventContractUtil.unifyContracts<Contract>(contracts ?? [])
+					eventContractUtil.unifyContracts<Contract>(contracts ?? [])
 
 		let Client = MutableContractClient
 

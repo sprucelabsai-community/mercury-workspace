@@ -45,7 +45,7 @@ export default class MutableContractClient<
 					? eventContractUtil.getSignatureByName(
 							this.eventContract ?? { eventSignatures: {} },
 							eventName
-					  )
+						)
 					: {}
 
 			return sig
