@@ -70,7 +70,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'MUST_HANDLE_LOCALLY':
-				message = `'${options.fqen}' must be handled locally. Make sure you have created a listener using 'spruce create.listener' and have booted your skill using 'await this.bootSkill()' in your test!`
+				message = `'${options.fqen}' must be handled locally. You have 2 options:\n\n1. Make sure you have created a listener using 'spruce create.listener' and have booted your skill using 'await this.bootSkill()'\n\n2. Use eventFaker.on(...) to setup a listener in your test!`
 				break
 
 			case 'MUST_CREATE_EVENT':
