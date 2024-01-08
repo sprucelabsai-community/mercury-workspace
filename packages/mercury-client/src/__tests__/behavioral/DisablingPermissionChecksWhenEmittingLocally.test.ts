@@ -11,6 +11,7 @@ export default class DisablingEventValidationWhenEmittingLocallyTest extends Abs
 
 		MercuryClientFactory.setIsTestMode(true)
 		MercuryClientFactory.setDefaultContract(coreEventContracts[0] as any)
+		MercuryTestClient.setShouldRequireLocalListeners(false)
 
 		const client = await this.connectToApi()
 		assert.isTrue(client.getIsTestClient())
