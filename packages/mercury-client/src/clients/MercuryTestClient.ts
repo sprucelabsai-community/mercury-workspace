@@ -229,8 +229,6 @@ export default class MercuryTestClient<
 			})
 		}
 
-		debugger
-
 		if (
 			MercuryTestClient.shouldRequireLocalListeners &&
 			MercuryTestClient.emitter.listenCount(fqen) === 0

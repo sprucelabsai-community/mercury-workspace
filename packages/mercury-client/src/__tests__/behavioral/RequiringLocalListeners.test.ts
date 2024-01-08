@@ -1,10 +1,8 @@
-import { buildSchema } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercuryTestClient from '../../clients/MercuryTestClient'
 import AbstractClientTest from '../../tests/AbstractClientTest'
-import TestingWithDefaultContractsTest from './TestingWithDefaultContracts.test'
 
 export default class RequiringLocalListenersTest extends AbstractClientTest {
 	protected static async beforeEach() {
