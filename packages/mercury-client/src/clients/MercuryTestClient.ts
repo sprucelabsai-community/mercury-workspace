@@ -157,11 +157,10 @@ export default class MercuryTestClient<
 	}
 
 	public async emit(...args: any[]): Promise<MercuryAggregateResponse<any>> {
-		const emitter = MercuryTestClient.emitter
 		const fqen = args[0]
 
 		try {
-			if (this.shouldHandleEventLocally(emitter, fqen)) {
+			if (this.shouldHandleEventLocally(fqen)) {
 				return this.handleEventLocally(args)
 			} else {
 				if (
@@ -196,7 +195,8 @@ export default class MercuryTestClient<
 		}
 	}
 
-	private shouldHandleEventLocally(emitter: any, fqen: any) {
+	private shouldHandleEventLocally(fqen: any) {
+		const emitter = MercuryTestClient.emitter
 		if (
 			!this.shouldHandleAuthenticateLocallyIfListenerSet &&
 			fqen === authenticateFqen

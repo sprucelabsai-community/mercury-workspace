@@ -693,8 +693,9 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
 	public async off(eventName: EventName<Contract>): Promise<number> {
 		return new Promise((resolve, reject) => {
-			if (!this.socket || !this.auth) {
+			if (!this.socket || !this.auth || this.isEventLocal(eventName)) {
 				resolve(0)
+				return
 			}
 			this.socket?.emit(
 				'unregister-listeners::v2020_12_25',

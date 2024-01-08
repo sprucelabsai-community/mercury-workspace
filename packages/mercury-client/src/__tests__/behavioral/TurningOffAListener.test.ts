@@ -30,4 +30,14 @@ export default class TurningOffAListenerTest extends AbstractClientTest {
 
 		assert.isEqual(hitCount, 1)
 	}
+
+	@test()
+	protected static async turningOffConnectionStatusChangeListenerDoesnNotThrow() {
+		MercuryClientFactory.setIsTestMode(false)
+		const client = await this.connectToApi()
+		//@ts-ignore
+		client.socket.emit = async () => assert.fail('Should not have been called')
+		debugger
+		await client.off('connection-status-change')
+	}
 }
