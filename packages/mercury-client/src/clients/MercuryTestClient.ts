@@ -77,7 +77,8 @@ export default class MercuryTestClient<
 	private shouldHandleAuthenticateLocallyIfListenerSet = true
 	private static namespacesThatHaveToBeHandledLocally: string[] = []
 	private shouldWaitForDelayedConnectIfAuthing = true
-	private static shouldRequireLocalListeners = false
+	private static shouldRequireLocalListeners = true
+
 	/** @ts-ignore */
 	protected get eventContract() {
 		return MercuryTestClient.emitter.getContract() as Contract
@@ -230,7 +231,7 @@ export default class MercuryTestClient<
 		}
 
 		if (
-			MercuryTestClient.shouldRequireLocalListeners &&
+			MercuryTestClient.shouldRequireLocalListeners !== false &&
 			MercuryTestClient.emitter.listenCount(fqen) === 0
 		) {
 			throw new SpruceError({

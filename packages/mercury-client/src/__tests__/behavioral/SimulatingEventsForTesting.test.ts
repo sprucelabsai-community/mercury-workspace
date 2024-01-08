@@ -26,6 +26,11 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
 	private static readonly eventName = 'whoami::v2020_12_25'
 	private static readonly testEventName = 'my-skill.test-event::v2020_02_02'
 
+	protected static async beforeEach() {
+		await super.beforeEach()
+		MercuryTestClient.setShouldRequireLocalListeners(false)
+	}
+
 	@test()
 	protected static testModeFalseByDefault() {
 		assert.isFalse(MercuryClientFactory.isInTestMode())
