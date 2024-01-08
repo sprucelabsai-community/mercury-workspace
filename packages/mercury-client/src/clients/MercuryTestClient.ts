@@ -204,6 +204,10 @@ export default class MercuryTestClient<
 			return false
 		}
 
+		if (fqen === 'connection-status-change') {
+			return true
+		}
+
 		const { eventNamespace } = eventNameUtil.split(fqen)
 
 		if (
@@ -237,6 +241,14 @@ export default class MercuryTestClient<
 			MercuryTestClient.shouldRequireLocalListeners !== false &&
 			MercuryTestClient.emitter.listenCount(fqen) === 0
 		) {
+			if (fqen === 'connection-status-change') {
+				return {
+					responses: [],
+					totalContracts: 0,
+					totalErrors: 0,
+					totalResponses: 0,
+				}
+			}
 			throw new SpruceError({
 				code: 'MUST_HANDLE_LOCALLY',
 				fqen,
