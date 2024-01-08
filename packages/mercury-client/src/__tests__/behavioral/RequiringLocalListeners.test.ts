@@ -1,8 +1,10 @@
+import { buildSchema } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercuryTestClient from '../../clients/MercuryTestClient'
 import AbstractClientTest from '../../tests/AbstractClientTest'
+import TestingWithDefaultContractsTest from './TestingWithDefaultContracts.test'
 
 export default class RequiringLocalListenersTest extends AbstractClientTest {
 	protected static async beforeEach() {
@@ -40,5 +42,21 @@ export default class RequiringLocalListenersTest extends AbstractClientTest {
 		assert.isFalse(MercuryTestClient.getShouldRequireLocalListeners())
 		MercuryTestClient.setShouldRequireLocalListeners(true)
 		assert.isTrue(MercuryTestClient.getShouldRequireLocalListeners())
+	}
+
+	@test()
+	protected static async canDisableLocalListenersEvenIfSetToListenerForNamespace() {
+		MercuryTestClient.setNamespacesThatMustBeHandledLocally(['lumena'])
+		MercuryTestClient.setShouldRequireLocalListeners(false)
+		const client = (await this.connectToApi()) as MercuryTestClient
+		client.mixinContract({
+			eventSignatures: {
+				'lumena.test': {
+					isGlobal: true,
+				},
+			},
+		})
+
+		await client.emitAndFlattenResponses('lumena.test' as any)
 	}
 }

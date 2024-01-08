@@ -229,7 +229,12 @@ export default class MercuryTestClient<
 			})
 		}
 
-		if (MercuryTestClient.emitter.listenCount(fqen) === 0) {
+		debugger
+
+		if (
+			MercuryTestClient.shouldRequireLocalListeners &&
+			MercuryTestClient.emitter.listenCount(fqen) === 0
+		) {
 			throw new SpruceError({
 				code: 'MUST_HANDLE_LOCALLY',
 				fqen,
