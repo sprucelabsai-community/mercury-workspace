@@ -1,12 +1,13 @@
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test-utils'
-import { MercuryClientFactory } from '../..'
+import { MercuryClientFactory, MercuryTestClient } from '../..'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 
 export default class LocallyHandlingAuthenticateDelaysConnectTest extends AbstractClientTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		MercuryClientFactory.setIsTestMode(true)
+		MercuryTestClient.setShouldRequireLocalListeners(false)
 	}
 
 	@test()

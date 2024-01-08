@@ -3,6 +3,7 @@ import { assert, errorAssert, test } from '@sprucelabs/test-utils'
 import { Socket } from 'socket.io-client'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
+import MercuryTestClient from '../../clients/MercuryTestClient'
 import MutableContractClient from '../../clients/MutableContractClient'
 import { ConnectionStatus } from '../../clients/statusChangePayloadSchema'
 import AbstractClientTest from '../../tests/AbstractClientTest'
@@ -13,6 +14,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		MercuryClientFactory.setIsTestMode(false)
+		MercuryTestClient.setShouldRequireLocalListeners(false)
 		this.lastSocket = undefined
 	}
 

@@ -164,7 +164,10 @@ export default class MercuryTestClient<
 			if (this.shouldHandleEventLocally(emitter, fqen)) {
 				return this.handleEventLocally(args)
 			} else {
-				if (MercuryTestClient.shouldRequireLocalListeners) {
+				if (
+					MercuryTestClient.shouldRequireLocalListeners &&
+					fqen !== 'connection-status-change'
+				) {
 					throw new SpruceError({
 						code: 'MUST_HANDLE_LOCALLY',
 						fqen,
