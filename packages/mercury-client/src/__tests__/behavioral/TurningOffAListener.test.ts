@@ -37,7 +37,7 @@ export default class TurningOffAListenerTest extends AbstractClientTest {
 		const client = await this.connectToApi()
 		//@ts-ignore
 		client.socket.emit = async () => assert.fail('Should not have been called')
-		debugger
+
 		await client.off('connection-status-change')
 	}
 }
