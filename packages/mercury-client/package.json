@@ -70,7 +70,7 @@
     "@sprucelabs/spruce-event-utils": "^38.0.207",
     "dotenv": "^16.3.1",
     "just-clone": "^6.2.0",
-    "socket.io-client": "^4.7.3"
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^5.0.122",
