@@ -23,3 +23,5 @@ tmp/
 
 .env
 .eslintcache
+
+**/.spruce/*cache.json

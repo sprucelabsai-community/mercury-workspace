@@ -21,3 +21,5 @@ mercury.min.*
 # Mac
 .DS_Store
 .eslintcache
+
+**/.spruce/*cache.json

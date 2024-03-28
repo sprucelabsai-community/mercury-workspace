@@ -8,6 +8,9 @@
     "skill"
   ],
   "writer": {
+    "skipped": [
+      ".gitignore"
+    ],
     "skips": [
       "src/index.ts"
     ]
