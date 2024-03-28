@@ -1,26 +1,26 @@
 {
-	"skipped": [
-		"skill",
-		"event"
-	],
-	"installed": [
-		"schema",
-		"error",
-		"test"
-	],
-	"writer": {
-		"skipped": [
-			".gitignore"
-		]
-	},
-	"scriptUpdater": {
-		"skipped": [
-			"rebuild",
-			"update.dependencies",
-			"build.tsc",
-			"fix.lint",
-			"lint"
-		],
-		"skips": []
-	}
+  "skipped": [
+    "skill",
+    "event"
+  ],
+  "installed": [
+    "schema",
+    "error",
+    "test"
+  ],
+  "writer": {
+    "skipped": [
+      ".gitignore"
+    ]
+  },
+  "scriptUpdater": {
+    "skipped": [
+      "rebuild",
+      "update.dependencies",
+      "build.tsc",
+      "fix.lint",
+      "lint"
+    ],
+    "skips": []
+  }
 }
