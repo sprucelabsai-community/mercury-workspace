@@ -1,7 +1,7 @@
 import { buildErrorSchema } from '@sprucelabs/schema'
 
 export default buildErrorSchema({
-	id: 'unknownError',
-	name: 'Unknown error',
-	fields: {},
+    id: 'unknownError',
+    name: 'Unknown error',
+    fields: {},
 })
