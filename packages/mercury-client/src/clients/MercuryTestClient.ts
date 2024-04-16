@@ -114,23 +114,22 @@ export default class MercuryTestClient<
         const contract = options.eventContract
 
         super({ ...options, eventContract: contract as Contract })
-		
-		if(!MercuryTestClient.emitter)  {
-			MercuryTestClient.getInternalEmitter(contract) 
-		} else {
-			MercuryTestClient.emitter.overrideSignatures(contract)
-		}
+
+        if (!MercuryTestClient.emitter) {
+            MercuryTestClient.getInternalEmitter(contract)
+        } else if (contract) {
+            MercuryTestClient.emitter.overrideSignatures(contract)
+        }
     }
     /** @ts-ignore */
     public static getInternalEmitter(contract?: EventContract) {
-		
-		if (!MercuryTestClient.emitter) {
-			MercuryTestClient.emitter = new InternalEmitter({
-				eventSignatures: {},
+        if (!MercuryTestClient.emitter) {
+            MercuryTestClient.emitter = new InternalEmitter({
+                eventSignatures: {},
             })
         }
-		
-		const mixed = mixinConnectionEvents(contract)
+
+        const mixed = mixinConnectionEvents(contract)
         MercuryTestClient.emitter.mixinOnlyUniqueSignatures(mixed)
 
         /** @ts-ignore */
