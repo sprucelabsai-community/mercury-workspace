@@ -67,6 +67,10 @@ class InternalEmitter<
     public getContract() {
         return this.eventContract
     }
+
+    public setContract(contract: Contract) {
+        this.eventContract = contract
+    }
 }
 
 export default class MercuryTestClient<
@@ -88,7 +92,7 @@ export default class MercuryTestClient<
     }
 
     protected set eventContract(contract: Contract) {
-        this._eventContract = contract as Contract
+        MercuryTestClient.emitter?.setContract(contract)
     }
 
     public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
