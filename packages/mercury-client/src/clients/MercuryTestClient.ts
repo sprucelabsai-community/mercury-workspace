@@ -87,9 +87,9 @@ export default class MercuryTestClient<
         return MercuryTestClient.emitter.getContract() as Contract
     }
 
-	protected set eventContract(contract: Contract) {
-		this._eventContract = contract as Contract
-	}
+    protected set eventContract(contract: Contract) {
+        this._eventContract = contract as Contract
+    }
 
     public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
         this.shouldCheckPermissionsOnLocalEvents = should
@@ -158,7 +158,7 @@ export default class MercuryTestClient<
             MercuryTestClient.emitter?.doesHandleEvent(eventName)
         )
     }
- 
+
     public async on(...args: any[]) {
         //@ts-ignore
         return MercuryTestClient.emitter.on(...args)

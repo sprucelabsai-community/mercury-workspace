@@ -28,13 +28,13 @@ export default class MercurySocketIoClient<Contract extends EventContract>
     implements MercuryClient<Contract>
 {
     protected _eventContract?: Contract
-	protected get eventContract() {
-		return this._eventContract as Contract
-	}
+    protected get eventContract() {
+        return this._eventContract as Contract
+    }
 
-	protected set eventContract(contract: Contract) {
-		this._eventContract = contract
-	}
+    protected set eventContract(contract: Contract) {
+        this._eventContract = contract
+    }
 
     public static io = io
     private host: string
