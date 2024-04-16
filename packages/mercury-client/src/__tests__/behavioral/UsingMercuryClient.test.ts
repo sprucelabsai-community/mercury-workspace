@@ -209,9 +209,9 @@ export default class UsingMercuryClient extends AbstractClientTest {
 
     @test()
     protected static async errorsInListenersRetainOptions() {
-        //@ts-ignore
-        const error = new SpruceError({
-            code: 'UNKNOWN_ERROR',
+		const error = new SpruceError({
+			code: 'UNKNOWN_ERROR',
+			//@ts-ignore
             param: 1,
             test: 1,
         })
@@ -241,8 +241,8 @@ export default class UsingMercuryClient extends AbstractClientTest {
             new TestError({ code: 'INVALID_PARAMETERS' })
         )
 
-        //@ts-ignore
         assert.isEqual(
+			//@ts-ignore
             results.responses[0].errors[0].message,
             'test this dude!'
         )
