@@ -91,9 +91,7 @@ export default class MercuryTestClient<
         return MercuryTestClient.emitter.getContract() as Contract
     }
 
-    protected set eventContract(contract: Contract) {
-        MercuryTestClient.emitter?.setContract(contract)
-    }
+    protected set eventContract(contract: Contract) {}
 
     public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
         this.shouldCheckPermissionsOnLocalEvents = should
@@ -116,20 +114,25 @@ export default class MercuryTestClient<
         const contract = options.eventContract
 
         super({ ...options, eventContract: contract as Contract })
-
-        MercuryTestClient.getInternalEmitter(contract)
+		
+		if(!MercuryTestClient.emitter)  {
+			MercuryTestClient.getInternalEmitter(contract) 
+		} else {
+			MercuryTestClient.emitter.overrideSignatures(contract)
+		}
     }
     /** @ts-ignore */
     public static getInternalEmitter(contract?: EventContract) {
-        const mixed = mixinConnectionEvents(contract)
-
-        if (!MercuryTestClient.emitter) {
-            MercuryTestClient.emitter = new InternalEmitter({
-                eventSignatures: {},
+		
+		if (!MercuryTestClient.emitter) {
+			MercuryTestClient.emitter = new InternalEmitter({
+				eventSignatures: {},
             })
         }
-
+		
+		const mixed = mixinConnectionEvents(contract)
         MercuryTestClient.emitter.mixinOnlyUniqueSignatures(mixed)
+
         /** @ts-ignore */
         return MercuryTestClient.emitter as InternalEmitter<SkillEventContract>
     }
