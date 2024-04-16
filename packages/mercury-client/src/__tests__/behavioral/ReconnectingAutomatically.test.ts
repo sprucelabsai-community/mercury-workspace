@@ -387,17 +387,22 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
     private static async assertRetriesEmitOnDisconnect() {
         const client = await this.ClientZeroDelay()
-
+		
         const promise = client.emit('whoami::v2020_12_25')
-
+		debugger
+		
         await this.wait(1000)
-
+		debugger
+		
         //@ts-ignore
         client.socket.disconnect()
-
+		debugger
+		
         await this.wait(100)
-
+		debugger
+		
         const results = await promise
+		debugger
 
         eventResponseUtil.getFirstResponseOrThrow(results)
     }

@@ -83,14 +83,13 @@ export default class MercuryTestClient<
     private shouldWaitForDelayedConnectIfAuthing = true
     private static shouldRequireLocalListeners = true
 
-    /** @ts-ignore */
     protected get eventContract() {
         return MercuryTestClient.emitter.getContract() as Contract
     }
 
-    protected set eventContract(contract: Contract) {
-        MercuryTestClient.getInternalEmitter().overrideSignatures(contract)
-    }
+	protected set eventContract(contract: Contract) {
+		this._eventContract = contract as Contract
+	}
 
     public static setShouldCheckPermissionsOnLocalEvents(should: boolean) {
         this.shouldCheckPermissionsOnLocalEvents = should
@@ -159,7 +158,7 @@ export default class MercuryTestClient<
             MercuryTestClient.emitter?.doesHandleEvent(eventName)
         )
     }
-
+ 
     public async on(...args: any[]) {
         //@ts-ignore
         return MercuryTestClient.emitter.on(...args)

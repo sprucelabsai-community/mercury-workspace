@@ -27,7 +27,14 @@ import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 export default class MercurySocketIoClient<Contract extends EventContract>
     implements MercuryClient<Contract>
 {
-    protected eventContract?: Contract
+    protected _eventContract?: Contract
+	protected get eventContract() {
+		return this._eventContract as Contract
+	}
+
+	protected set eventContract(contract: Contract) {
+		this._eventContract = contract
+	}
 
     public static io = io
     private host: string
@@ -83,7 +90,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
         this.host = host
         this.ioOptions = { ...ioOptions, withCredentials: false }
-        this.eventContract = eventContract
+        this.eventContract = eventContract as Contract
         this.emitTimeoutMs = emitTimeoutMs ?? 30000
         this.reconnectDelayMs = reconnectDelayMs ?? 5000
         this.shouldReconnect = shouldReconnect ?? true
