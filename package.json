@@ -29,7 +29,6 @@
     "upgrade.packages.only": "yarn add -D lerna -W ; for d in packages/*; do echo $d; cd $d; spruce upgrade.dependencies; cd ../..; done",
     "upgrade.packages.all": "yarn install && yarn upgrade.packages",
     "watch.build.dev": "lerna run watch.build.dev --stream --parallel",
-    "watch.lint": "lerna run watch.lint --stream --parallel",
     "build.copy-files": "true",
     "build.resolve-paths": "true",
     "build.tsc": "true",
