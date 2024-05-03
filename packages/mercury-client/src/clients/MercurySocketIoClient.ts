@@ -43,6 +43,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
     private proxyToken: string | null = null
     private emitTimeoutMs: number
     private reconnectDelayMs: number
+    private listenerMap = new WeakMap<any, any>()
     private isReAuthing = false
     private reconnectPromise: any = null
     protected lastAuthOptions?: {
@@ -362,27 +363,48 @@ export default class MercurySocketIoClient<Contract extends EventContract>
         const isLocalEvent = this.isEventLocal<Name>(eventName)
 
         if (isLocalEvent) {
-            const listeners = this.registeredListeners.filter(
-                (r) => r[0] === eventName
+            return this.handleLocalEmit<Name, IEventSignature, EmitSchema>(
+                eventName,
+                targetAndPayload
             )
-
-            for (const listener of listeners) {
-                const cb = listener?.[1]
-
-                cb?.({
-                    //@ts-ignore
-                    payload: targetAndPayload?.payload,
-                })
-            }
-            return {
-                responses: [],
-                totalContracts: 0,
-                totalErrors: 0,
-                totalResponses: 0,
-            }
         }
 
         return this._emit(this.maxEmitRetries, eventName, targetAndPayload, cb)
+    }
+
+    private handleLocalEmit<
+        Name extends EventName<Contract>,
+        IEventSignature extends
+            EventSignature = Contract['eventSignatures'][EventName],
+        EmitSchema extends
+            Schema = IEventSignature['emitPayloadSchema'] extends Schema
+            ? IEventSignature['emitPayloadSchema']
+            : never,
+    >(
+        eventName: Name,
+        targetAndPayload:
+            | (EmitSchema extends Schema ? SchemaValues<EmitSchema> : never)
+            | EmitCallback<Contract, Name>
+            | undefined
+    ) {
+        const listeners = this.registeredListeners.filter(
+            (r) => r[0] === eventName
+        )
+
+        for (const listener of listeners) {
+            const cb = listener?.[1]
+
+            cb?.({
+                //@ts-ignore
+                payload: targetAndPayload?.payload,
+            })
+        }
+        return {
+            responses: [],
+            totalContracts: 0,
+            totalErrors: 0,
+            totalResponses: 0,
+        }
     }
 
     public async emitAndFlattenResponses<
@@ -691,33 +713,40 @@ export default class MercurySocketIoClient<Contract extends EventContract>
             }
         }
 
-        this.socket?.on(
-            eventName,
-            //@ts-ignore
-            async (targetAndPayload: any, ioCallback: (p: any) => void) => {
-                if (cb) {
-                    try {
-                        const results = await cb(targetAndPayload)
-                        if (ioCallback) {
-                            ioCallback(results)
+        const listener = async (
+            targetAndPayload: any,
+            ioCallback: (p: any) => void
+        ) => {
+            if (cb) {
+                try {
+                    const results = await cb(targetAndPayload)
+                    if (ioCallback) {
+                        ioCallback(results)
+                    }
+                } catch (err: any) {
+                    let thisErr = err
+                    if (ioCallback) {
+                        if (!(err instanceof AbstractSpruceError)) {
+                            thisErr = new SpruceError({
+                                //@ts-ignore
+                                code: 'LISTENER_ERROR',
+                                fqen: eventName,
+                                friendlyMessage: err.message,
+                                originalError: err,
+                            })
                         }
-                    } catch (err: any) {
-                        let thisErr = err
-                        if (ioCallback) {
-                            if (!(err instanceof AbstractSpruceError)) {
-                                thisErr = new SpruceError({
-                                    //@ts-ignore
-                                    code: 'LISTENER_ERROR',
-                                    fqen: eventName,
-                                    friendlyMessage: err.message,
-                                    originalError: err,
-                                })
-                            }
-                            ioCallback({ errors: [thisErr.toObject()] })
-                        }
+                        ioCallback({ errors: [thisErr.toObject()] })
                     }
                 }
             }
+        }
+
+        this.listenerMap.set(cb, listener)
+
+        this.socket?.on(
+            eventName,
+            //@ts-ignore
+            listener
         )
     }
 
@@ -725,7 +754,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
         return eventName === 'connection-status-change'
     }
 
-    public async off(eventName: EventName<Contract>): Promise<number> {
+    public async off(
+        eventName: EventName<Contract>,
+        cb?: () => void
+    ): Promise<number> {
+        this.removeLocalListener(cb, eventName)
         return new Promise((resolve, reject) => {
             if (!this.socket || !this.auth || this.isEventLocal(eventName)) {
                 resolve(0)
@@ -751,6 +784,19 @@ export default class MercurySocketIoClient<Contract extends EventContract>
                 }
             )
         })
+    }
+
+    private removeLocalListener(
+        cb: (() => void) | undefined,
+        eventName: EventName<Contract>
+    ) {
+        const listener = this.listenerMap.get(cb)
+        if (listener) {
+            this.listenerMap.delete(cb)
+            this.socket?.off(eventName, listener)
+        } else {
+            this.socket?.removeAllListeners(eventName)
+        }
     }
 
     public getId() {
