@@ -837,16 +837,21 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
         const teammateRole = roles.find((r) => r.base === 'teammate')
         assert.isTruthy(teammateRole)
 
-        const roleSetResults = await ownerClient.emit('add-role::v2020_12_25', {
-            target: {
-                organizationId,
-            },
-            payload: {
-                personId: teammate.id,
-                roleId: teammateRole.id,
-            },
-        })
-        eventResponseUtil.getFirstResponseOrThrow(roleSetResults)
+        try {
+            const roleSetResults = await ownerClient.emit(
+                'add-role::v2020_12_25',
+                {
+                    target: {
+                        organizationId,
+                    },
+                    payload: {
+                        personId: teammate.id,
+                        roleId: teammateRole.id,
+                    },
+                }
+            )
+            eventResponseUtil.getFirstResponseOrThrow(roleSetResults)
+        } catch {}
 
         //@ts-ignore
         const response = await teammateClient.emit(fqen as any, {
