@@ -19,11 +19,11 @@ import {
     eventResponseUtil,
     eventNameUtil,
 } from '@sprucelabs/spruce-event-utils'
+import { buildLog } from '@sprucelabs/spruce-skill-utils'
 import { io, Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
-import { buildLog } from '@sprucelabs/spruce-skill-utils'
 
 export default class MercurySocketIoClient<Contract extends EventContract>
     implements MercuryClient<Contract>
@@ -38,7 +38,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
     }
 
     public static io = io
-	private log = buildLog('MercurySocketIoClient')
+    private log = buildLog('MercurySocketIoClient')
     private host: string
     private ioOptions: IoOptions
     private socket?: Socket
@@ -262,7 +262,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
             this.isReAuthing = false
             this.isReconnecting = false
             this.skipWaitIfReconnecting = false
-			
+
             resolve()
         } catch (err: any) {
             ;(console.error ?? console.log)(err.message)
