@@ -23,6 +23,7 @@ import { io, Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
+import { buildLog } from '@sprucelabs/spruce-skill-utils'
 
 export default class MercurySocketIoClient<Contract extends EventContract>
     implements MercuryClient<Contract>
@@ -37,6 +38,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
     }
 
     public static io = io
+	private log = buildLog('MercurySocketIoClient')
     private host: string
     private ioOptions: IoOptions
     private socket?: Socket
@@ -110,9 +112,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
             this.socket?.on('connect', () => {
                 this.connectionRetriesRemaining = this.connectionRetries
 
-                //@ts-ignore
                 this.socket?.removeAllListeners()
-                this.log(`Connection established!`)
 
                 if (!this.isReconnecting) {
                     this.emitStatusChange('connected')
@@ -120,7 +120,7 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
                 if (this.shouldReconnect) {
                     this.socket?.once('disconnect', async (opts) => {
-                        this.log('Mercury disconnected, reason:', opts)
+                        this.log.error('Mercury disconnected, reason:', opts)
                         await this.attemptReconnectAfterDelay()
                     })
                 }
@@ -164,8 +164,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
             //@ts-ignore
             this.socket?.removeAllListeners()
 
-            this.log('Failed to connect to Mercury', error.message)
-            this.log(
+            this.log.error('Failed to connect to Mercury', error.message)
+            this.log.error(
                 'Connection retries left',
                 `${this.connectionRetriesRemaining}`
             )
@@ -199,7 +199,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
         }
 
         this.emitStatusChange('disconnected')
-        this.log('Attempting to reconnect...')
 
         delete this.authPromise
 
@@ -263,8 +262,8 @@ export default class MercurySocketIoClient<Contract extends EventContract>
             this.isReAuthing = false
             this.isReconnecting = false
             this.skipWaitIfReconnecting = false
+			
             resolve()
-            this.log(`Connection re-established with Mercury!`)
         } catch (err: any) {
             ;(console.error ?? console.log)(err.message)
 
@@ -286,10 +285,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
                 reject(err)
             }
         }
-    }
-
-    private log(..._args: any[]) {
-        // return console.log(...args)
     }
 
     protected async waitIfReconnecting() {
