@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+		"skipLibCheck": true,
         "module": "es2015",
         "target": "es6",
         "lib": [
