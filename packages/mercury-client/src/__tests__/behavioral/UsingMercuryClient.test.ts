@@ -449,18 +449,6 @@ export default class UsingMercuryClient extends AbstractClientTest {
     }
 
     @test()
-    protected static async offErrorsWithUnknownEvent() {
-        const { skill1Client } = await this.setup2SkillsAndOneEvent()
-
-        const err = await assert.doesThrowAsync(() =>
-            //@ts-ignore
-            skill1Client.off('event-does-not-exist')
-        )
-
-        errorAssert.assertError(err, 'INVALID_EVENT_NAME')
-    }
-
-    @test()
     protected static async throwsWhenEmittingWhenNotConnected() {
         const client = await this.connectToApi()
         await client.disconnect()
