@@ -8,7 +8,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 
         switch (options?.code) {
             case 'INVALID_PROTOCOL':
-                message = `You must connect via the https protocol. The uri you used was ${options.uri}!`
+                message = `Unable to connect to Mercury using the uri you provided. The uri you provide was "${options.uri}"!`
                 break
 
             case 'UNEXPECTED_PAYLOAD':
