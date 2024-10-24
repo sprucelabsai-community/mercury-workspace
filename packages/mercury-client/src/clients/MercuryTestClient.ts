@@ -360,8 +360,7 @@ export default class MercuryTestClient<
             )
         }
 
-		const {eventNamespace} = eventNameUtil.split(fqen)
-		
+        const { eventNamespace } = eventNameUtil.split(fqen)
 
         const results = await this.emit(
             'does-honor-permission-contract::v2020_12_25',
