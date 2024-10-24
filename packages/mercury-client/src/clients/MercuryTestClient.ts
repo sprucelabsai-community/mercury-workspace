@@ -360,13 +360,15 @@ export default class MercuryTestClient<
             )
         }
 
+		const {eventNamespace} = eventNameUtil.split(fqen)
+		
+
         const results = await this.emit(
             'does-honor-permission-contract::v2020_12_25',
             {
                 target: permTarget,
                 payload: {
-                    id: permissionContractId,
-                    fqen,
+                    id: `${eventNamespace}.${permissionContractId}`,
                 },
             }
         )
