@@ -70,7 +70,7 @@
     "@sprucelabs/semantic-release": "^5.0.2",
     "@sprucelabs/test": "^9.0.55",
     "@sprucelabs/test-utils": "^5.1.466",
-    "@types/node": "^22.7.9",
+    "@types/node": "^22.8.0",
     "chokidar-cli": "^3.0.0",
     "eslint": "^9.13.0",
     "eslint-config-spruce": "^11.2.26",
