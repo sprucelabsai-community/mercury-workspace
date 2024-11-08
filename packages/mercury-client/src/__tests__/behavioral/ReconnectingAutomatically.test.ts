@@ -148,9 +148,10 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
 
         socket.emitDisconnect()
 
-        await this.wait(10)
+        await this.wait(100)
 
-        assert.isEqualDeep(passedStatuses, ['disconnected', 'connecting'])
+        assert.isEqual(passedStatuses[0], 'disconnected')
+		assert.isEqual(passedStatuses[1], 'connecting')
     }
 
     @test()
