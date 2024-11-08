@@ -151,7 +151,7 @@ export default class ReconnectingAutomaticallyTest extends AbstractClientTest {
         await this.wait(100)
 
         assert.isEqual(passedStatuses[0], 'disconnected')
-		assert.isEqual(passedStatuses[1], 'connecting')
+        assert.isEqual(passedStatuses[1], 'connecting')
     }
 
     @test()
