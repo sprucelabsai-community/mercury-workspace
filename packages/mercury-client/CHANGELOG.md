@@ -3,6 +3,318 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [42.0.597](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.596...v42.0.597) (2024-11-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.596](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.595...v42.0.596) (2024-11-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.595](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.594...v42.0.595) (2024-11-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.594](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.593...v42.0.594) (2024-11-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.593](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.592...v42.0.593) (2024-11-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.592](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.591...v42.0.592) (2024-11-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.591](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.590...v42.0.591) (2024-11-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.590](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.589...v42.0.590) (2024-11-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.589](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.588...v42.0.589) (2024-11-04)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.588](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.587...v42.0.588) (2024-11-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.587](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.586...v42.0.587) (2024-11-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.586](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.585...v42.0.586) (2024-11-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.585](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.584...v42.0.585) (2024-11-01)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.584](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.583...v42.0.584) (2024-11-01)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.583](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.582...v42.0.583) (2024-11-01)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.582](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.581...v42.0.582) (2024-11-01)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.581](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.580...v42.0.581) (2024-11-01)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.580](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.579...v42.0.580) (2024-11-01)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.579](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.578...v42.0.579) (2024-10-31)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.578](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.577...v42.0.578) (2024-10-31)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.577](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.576...v42.0.577) (2024-10-31)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.576](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.575...v42.0.576) (2024-10-31)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.575](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.574...v42.0.575) (2024-10-31)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.574](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.573...v42.0.574) (2024-10-31)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.573](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.572...v42.0.573) (2024-10-30)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.572](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.571...v42.0.572) (2024-10-30)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.571](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.570...v42.0.571) (2024-10-30)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.570](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.569...v42.0.570) (2024-10-30)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.569](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.568...v42.0.569) (2024-10-30)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.568](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.567...v42.0.568) (2024-10-29)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.567](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.566...v42.0.567) (2024-10-27)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.566](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.565...v42.0.566) (2024-10-26)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.565](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.564...v42.0.565) (2024-10-26)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.564](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.563...v42.0.564) (2024-10-26)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.563](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.562...v42.0.563) (2024-10-26)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.562](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.561...v42.0.562) (2024-10-26)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.561](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.560...v42.0.561) (2024-10-26)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.560](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.559...v42.0.560) (2024-10-25)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
+## [42.0.559](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.555...v42.0.559) (2024-10-25)
+
+**Note:** Version bump only for package @sprucelabs/mercury-client
+
+
+
+
+
 ## [42.0.555](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.554...v42.0.555) (2024-10-22)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
