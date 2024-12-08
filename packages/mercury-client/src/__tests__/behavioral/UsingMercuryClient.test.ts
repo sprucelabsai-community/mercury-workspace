@@ -142,14 +142,14 @@ export default class UsingMercuryClient extends AbstractClientTest {
     }
 
     @test()
-    protected static async getsAccessDeniedWhenTryingToListenToUnknownEventAnonymously() {
+    protected static async getsMissingVersionWhenTryingToListenToBadEventAnonymously() {
         const client = await this.connectToApi()
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             client.on('waka-waka', () => {})
         )
 
-        errorAssert.assertError(err, 'UNAUTHORIZED_ACCESS')
+        errorAssert.assertError(err, 'MISSING_VERSION')
     }
 
     @test()
