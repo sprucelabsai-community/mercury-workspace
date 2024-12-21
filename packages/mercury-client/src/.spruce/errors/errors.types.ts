@@ -71,15 +71,15 @@ export declare namespace SpruceErrors.MercuryClient {
 	export interface UnauthorizedTarget {
 		
 			
-			'locationId'?: string| undefined | null
+			'locationId'?: string | undefined | null
 			
-			'personId'?: string| undefined | null
+			'personId'?: string | undefined | null
 			
-			'organizationId'?: string| undefined | null
+			'organizationId'?: string | undefined | null
 			
-			'skillId'?: string| undefined | null
+			'skillId'?: string | undefined | null
 			
-			'roleId'?: string| undefined | null
+			'roleId'?: string | undefined | null
 	}
 
 	export interface UnauthorizedTargetSchema extends SpruceSchema.Schema {
@@ -182,9 +182,9 @@ export declare namespace SpruceErrors.MercuryClient {
 			
 			'timeoutMs': number
 			
-			'isConnected'?: boolean| undefined | null
+			'isConnected'?: boolean | undefined | null
 			
-			'totalRetries'?: number| undefined | null
+			'totalRetries'?: number | undefined | null
 	}
 
 	export interface TimeoutSchema extends SpruceSchema.Schema {
