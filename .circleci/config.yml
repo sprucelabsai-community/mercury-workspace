@@ -23,7 +23,7 @@ jobs:
       - run: yarn build.ci
       - run:
           name: "running tests"
-          no_output_timeout: 2m
+          no_output_timeout: 5m
           command: yarn test
       - spruce/exit_if_not_auto_upgrade
       - spruce/merge_auto_upgrade
