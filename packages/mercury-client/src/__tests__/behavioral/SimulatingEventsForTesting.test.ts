@@ -71,6 +71,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
         })
 
         assert.isTrue(client2.getIsTestClient())
+
+        await client.disconnect()
     }
 
     @test('can emit to self with default contract', true)

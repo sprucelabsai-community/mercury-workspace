@@ -46,6 +46,8 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 
         //@ts-ignore
         assert.isEqual(client.host, DEFAULT_HOST)
+
+        await client.disconnect()
     }
 
     @test()
@@ -63,6 +65,7 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
 
         //@ts-ignore
         assert.isEqual(client.host, DEFAULT_HOST)
+        await client.disconnect()
     }
 
     @test()
@@ -70,6 +73,7 @@ export default class MercuryClientFactoryTest extends AbstractSpruceTest {
         MercuryClientFactory.ClientClass = SpyClient as any
         const client = await MercuryClientFactory.Client({})
         assert.isInstanceOf(client, SpyClient as any)
+        await client.disconnect()
     }
 }
 
