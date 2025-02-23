@@ -104,7 +104,6 @@ export default class MercurySocketIoClient<Contract extends EventContract>
     }
 
     public async connect() {
-        
         this.socket = MercurySocketIoClient.io(this.host, this.ioOptions)
 
         this.emitStatusChange('connecting')
