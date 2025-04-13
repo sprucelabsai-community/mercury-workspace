@@ -58,10 +58,10 @@
     "watch.rebuild": "yarn run clean.all && yarn install && yarn run watch.build.dev"
   },
   "dependencies": {
-    "@sprucelabs/error": "^6.0.595",
-    "@sprucelabs/mercury-types": "^47.2.70",
-    "@sprucelabs/schema": "^31.0.82",
-    "@sprucelabs/spruce-event-utils": "^40.2.78"
+    "@sprucelabs/error": "^6.0.596",
+    "@sprucelabs/mercury-types": "^47.2.71",
+    "@sprucelabs/schema": "^31.0.83",
+    "@sprucelabs/spruce-event-utils": "^40.2.79"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^6.0.561",
