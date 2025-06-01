@@ -805,8 +805,8 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
             }
         )
 
-        results.address.city = 'changed'
-        assert.isEqual(city, location1.address.city)
+        results.address!.city = 'changed'
+        assert.isEqual(city, location1.address!.city)
         assert.isNotEqual(results.address, location1.address)
         assert.isNotEqual(passedTarget, target)
     }
