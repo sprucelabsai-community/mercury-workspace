@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [43.0.0](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.811...v43.0.0) (2025-06-10)
+
+
+### Breaking Changes
+
+* jest upgrade ([ebefc30](https://github.com/sprucelabsai-community/mercury-workspace/commit/ebefc30))
+
+
+
+
+
 ## [42.0.811](https://github.com/sprucelabsai-community/mercury-workspace/compare/v42.0.810...v42.0.811) (2025-06-07)
 
 **Note:** Version bump only for package @sprucelabs/mercury-event-emitter
