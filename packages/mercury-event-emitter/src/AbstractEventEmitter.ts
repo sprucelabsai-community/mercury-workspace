@@ -160,7 +160,7 @@ export default class AbstractEventEmitter<Contract extends EventContract>
             throw errors[0]
         }
 
-        return payloads as any
+        return payloads as SchemaValues<ResponseSchema>[]
     }
 
     private async emitOne<
@@ -243,7 +243,6 @@ export default class AbstractEventEmitter<Contract extends EventContract>
     ) {
         if (schema) {
             try {
-                //@ts-ignore
                 validateSchemaValues(schema, actualPayload ?? {})
             } catch (err: any) {
                 throw new SpruceError({
@@ -262,7 +261,6 @@ export default class AbstractEventEmitter<Contract extends EventContract>
     ) {
         if (schema) {
             try {
-                //@ts-ignore
                 validateSchemaValues(schema, actualPayload ?? {})
             } catch (err: any) {
                 throw new SpruceError({
