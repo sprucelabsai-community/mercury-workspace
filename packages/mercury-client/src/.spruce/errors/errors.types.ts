@@ -80,6 +80,8 @@ export declare namespace SpruceErrors.MercuryClient {
 			'skillId'?: string | undefined | null
 			
 			'roleId'?: string | undefined | null
+			
+			'email'?: string | undefined | null
 	}
 
 	export interface UnauthorizedTargetSchema extends SpruceSchema.Schema {
@@ -110,6 +112,11 @@ export declare namespace SpruceErrors.MercuryClient {
 		            /** . */
 		            'roleId': {
 		                type: 'id',
+		                options: undefined
+		            },
+		            /** . */
+		            'email': {
+		                type: 'email',
 		                options: undefined
 		            },
 		    }
