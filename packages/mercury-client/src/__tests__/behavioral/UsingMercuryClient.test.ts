@@ -157,11 +157,11 @@ export default class UsingMercuryClient extends AbstractClientTest {
         const client = await this.connectToApi()
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
-            client.emit('request-pin::v2020_12_25', {})
+            client.emit('confirm-pin::v2020_12_25', {})
         )
 
         errorAssert.assertError(err, 'INVALID_PAYLOAD', {
-            eventName: 'request-pin',
+            eventName: 'confirm-pin',
         })
     }
 
