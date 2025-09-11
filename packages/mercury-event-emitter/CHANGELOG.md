@@ -3,6 +3,214 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [43.0.119](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.118...v43.0.119) (2025-09-06)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.118](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.117...v43.0.118) (2025-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.117](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.116...v43.0.117) (2025-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.116](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.115...v43.0.116) (2025-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.115](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.114...v43.0.115) (2025-09-05)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.114](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.113...v43.0.114) (2025-09-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.113](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.112...v43.0.113) (2025-09-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.112](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.111...v43.0.112) (2025-09-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.111](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.110...v43.0.111) (2025-09-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.110](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.109...v43.0.110) (2025-09-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.109](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.108...v43.0.109) (2025-09-02)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.108](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.107...v43.0.108) (2025-08-30)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.107](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.106...v43.0.107) (2025-08-30)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.106](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.105...v43.0.106) (2025-08-27)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.105](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.104...v43.0.105) (2025-08-27)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.104](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.103...v43.0.104) (2025-08-27)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.103](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.102...v43.0.103) (2025-08-27)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.102](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.101...v43.0.102) (2025-08-27)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.101](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.100...v43.0.101) (2025-08-24)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.100](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.99...v43.0.100) (2025-08-24)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.99](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.98...v43.0.99) (2025-08-24)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.98](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.97...v43.0.98) (2025-08-24)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.97](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.96...v43.0.97) (2025-08-23)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.96](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.95...v43.0.96) (2025-08-19)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.95](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.94...v43.0.95) (2025-08-19)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
+## [43.0.94](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.93...v43.0.94) (2025-08-16)
+
+**Note:** Version bump only for package @sprucelabs/mercury-event-emitter
+
+
+
+
+
 ## [43.0.93](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.0.92...v43.0.93) (2025-08-15)
 
 **Note:** Version bump only for package @sprucelabs/mercury-event-emitter
