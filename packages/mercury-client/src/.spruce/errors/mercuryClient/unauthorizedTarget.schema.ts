@@ -33,11 +33,6 @@ const unauthorizedTargetSchema: SpruceErrors.MercuryClient.UnauthorizedTargetSch
 	                type: 'id',
 	                options: undefined
 	            },
-	            /** . */
-	            'email': {
-	                type: 'email',
-	                options: undefined
-	            },
 	    }
 }
 
