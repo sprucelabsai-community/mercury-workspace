@@ -118,5 +118,5 @@ type Socket interface {
 	Emit(event string, args ...any) error
 	On(event socketTypes.EventName, listeners ...socketTypes.EventListener) error
 	Connected() bool
-	Disconnect() error
+	Disconnect() Socket
 }
