@@ -3,19 +3,16 @@ package mercuryclientgo
 import (
 	"fmt"
 	"sync"
-	"sync/atomic"
 
 	ioClient "github.com/zishang520/socket.io/clients/socket/v3"
 	socketTypes "github.com/zishang520/socket.io/v3/pkg/types"
 )
 
 type Client struct {
-	socket      Socket
-	isConnected atomic.Bool
+	socket Socket
 }
 
 func (c *Client) Connect(url string) error {
-	c.isConnected.Store(false)
 
 	socket, err := GetConnect()(url, nil)
 	if err != nil {
@@ -35,13 +32,11 @@ func (c *Client) Connect(url string) error {
 
 	socket.On("connect", func(...any) {
 		println("Connected to server")
-		c.isConnected.Store(true)
 		finish(nil)
 	})
 
-	socket.On("disconnect", func(...any) {
-		println("Disconnected from server")
-		c.isConnected.Store(false)
+	socket.On("disconnect", func(args ...any) {
+		fmt.Println(append([]any{"Disconnected:"}, args...)...)
 	})
 
 	socket.On("error", func(args ...any) {
@@ -50,7 +45,6 @@ func (c *Client) Connect(url string) error {
 
 	socket.On("connect_error", func(args ...any) {
 		fmt.Println(append([]any{"Connection Error:"}, args...)...)
-		c.isConnected.Store(false)
 
 		var connErr error
 		if len(args) > 0 {
@@ -67,12 +61,15 @@ func (c *Client) Connect(url string) error {
 	})
 
 	if socket.Connected() {
-		c.isConnected.Store(true)
 		finish(nil)
 	}
 
 	waitErr := <-done
 	if waitErr != nil {
+		if c.socket != nil {
+			c.socket.Disconnect()
+			c.socket = nil
+		}
 		return waitErr
 	}
 
@@ -82,27 +79,32 @@ func (c *Client) Connect(url string) error {
 func (c *Client) Disconnect() {
 	if c.socket != nil {
 		c.socket.Disconnect()
-		c.socket = nil
 	}
-	c.isConnected.Store(false)
 }
 
 func (c *Client) IsConnected() bool {
-	return c.isConnected.Load()
+	return c.socket.Connected()
+}
+
+type Socket interface {
+	Emit(event string, args ...any) error
+	On(event string, listeners ...socketTypes.EventListener) error
+	Connected() bool
+	Disconnect() Socket
 }
 
 type ConnectFunc func(string, ioClient.OptionsInterface) (Socket, error)
 
 var (
 	connectMu sync.RWMutex
-	connectFn ConnectFunc = ioClient.Connect
+	connectFn ConnectFunc = defaultConnect
 )
 
 func SetConnect(fn ConnectFunc) {
 	connectMu.Lock()
 	defer connectMu.Unlock()
 	if fn == nil {
-		connectFn = ioClient.Connect
+		connectFn = defaultConnect
 		return
 	}
 	connectFn = fn
@@ -114,9 +116,38 @@ func GetConnect() ConnectFunc {
 	return connectFn
 }
 
-type Socket interface {
-	Emit(event string, args ...any) error
-	On(event socketTypes.EventName, listeners ...socketTypes.EventListener) error
-	Connected() bool
-	Disconnect() Socket
+func defaultConnect(url string, opts ioClient.OptionsInterface) (Socket, error) {
+	socket, err := ioClient.Connect(url, opts)
+	if err != nil {
+		return nil, err
+	}
+	return newSocketIoClient(socket), nil
+}
+
+type SocketIoClient struct {
+	socket *ioClient.Socket
+}
+
+func newSocketIoClient(socket *ioClient.Socket) Socket {
+	if socket == nil {
+		return nil
+	}
+	return &SocketIoClient{socket: socket}
+}
+
+func (s *SocketIoClient) Emit(event string, args ...any) error {
+	return s.socket.Emit(event, args...)
+}
+
+func (s *SocketIoClient) On(event string, listeners ...socketTypes.EventListener) error {
+	return s.socket.On(socketTypes.EventName(event), listeners...)
+}
+
+func (s *SocketIoClient) Connected() bool {
+	return s.socket.Connected()
+}
+
+func (s *SocketIoClient) Disconnect() Socket {
+	s.socket.Disconnect()
+	return s
 }

@@ -1,5 +1,7 @@
 package mercuryclientgo
 
+import "os"
+
 type Factory struct{}
 
 type MercuryClient interface {
@@ -14,4 +16,18 @@ func (f *Factory) Client(baseURL string) (MercuryClient, error) {
 		return nil, err
 	}
 	return client, nil
+}
+
+func MakeMercuryClient(baseURL ...string) (MercuryClient, error) {
+	host := os.Getenv("HOST")
+
+	if len(baseURL) > 0 {
+		host = baseURL[0]
+	}
+
+	if host == "" {
+		host = "http://localhost:8081"
+	}
+	factory := Factory{}
+	return factory.Client(host)
 }
