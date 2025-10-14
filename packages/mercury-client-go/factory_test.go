@@ -56,4 +56,14 @@ func TestFactory(t *testing.T) {
 		assert.False(t, client.IsConnected(), "Client should not be connected when socket client is not connected")
 
 	})
+
+	t.Run("Can emit whoami and get back anon", func(t *testing.T) {
+		beforeEach(t)
+		client, _ := MakeMercuryClient()
+		auth, err := client.Emit("whoami::v2020_12_25")
+		assert.NoError(t, err, "Emit whoami should not return an error")
+		assert.NotNil(t, auth, "Emit whoami should return a response")
+
+		client.Disconnect()
+	})
 }

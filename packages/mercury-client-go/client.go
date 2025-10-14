@@ -13,7 +13,6 @@ type Client struct {
 }
 
 func (c *Client) Connect(url string) error {
-
 	socket, err := GetConnect()(url, nil)
 	if err != nil {
 		return err
@@ -84,6 +83,10 @@ func (c *Client) Disconnect() {
 
 func (c *Client) IsConnected() bool {
 	return c.socket.Connected()
+}
+
+func (c *Client) Emit(event string, args ...any) (Response, error) {
+	return Response{}, nil
 }
 
 type Socket interface {

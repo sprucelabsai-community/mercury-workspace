@@ -4,12 +4,6 @@ import "os"
 
 type Factory struct{}
 
-type MercuryClient interface {
-	Connect(url string) error
-	Disconnect()
-	IsConnected() bool
-}
-
 func (f *Factory) Client(baseURL string) (MercuryClient, error) {
 	client := &Client{}
 	if err := client.Connect(baseURL); err != nil {
@@ -30,4 +24,13 @@ func MakeMercuryClient(baseURL ...string) (MercuryClient, error) {
 	}
 	factory := Factory{}
 	return factory.Client(host)
+}
+
+type Response struct{}
+
+type MercuryClient interface {
+	Connect(url string) error
+	Disconnect()
+	IsConnected() bool
+	Emit(event string, args ...any) (Response, error)
 }
