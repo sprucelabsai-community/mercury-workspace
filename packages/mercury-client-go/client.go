@@ -6,17 +6,18 @@ import (
 	"sync/atomic"
 
 	ioClient "github.com/zishang520/socket.io/clients/socket/v3"
+	socketTypes "github.com/zishang520/socket.io/v3/pkg/types"
 )
 
 type Client struct {
-	socket      *ioClient.Socket
+	socket      Socket
 	isConnected atomic.Bool
 }
 
 func (c *Client) Connect(url string) error {
 	c.isConnected.Store(false)
 
-	socket, err := ioClient.Connect(url, nil)
+	socket, err := GetConnect()(url, nil)
 	if err != nil {
 		return err
 	}
@@ -90,7 +91,7 @@ func (c *Client) IsConnected() bool {
 	return c.isConnected.Load()
 }
 
-type ConnectFunc func(string, ioClient.OptionsInterface) (*ioClient.Socket, error)
+type ConnectFunc func(string, ioClient.OptionsInterface) (Socket, error)
 
 var (
 	connectMu sync.RWMutex
@@ -111,4 +112,11 @@ func GetConnect() ConnectFunc {
 	connectMu.RLock()
 	defer connectMu.RUnlock()
 	return connectFn
+}
+
+type Socket interface {
+	Emit(event string, args ...any) error
+	On(event socketTypes.EventName, listeners ...socketTypes.EventListener) error
+	Connected() bool
+	Disconnect() error
 }
