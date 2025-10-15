@@ -1,19 +1,48 @@
 package mercuryclientgo
 
 import (
+	"encoding/json"
 	"fmt"
 	"sync"
+	"time"
 
 	ioClient "github.com/zishang520/socket.io/clients/socket/v3"
 	socketTypes "github.com/zishang520/socket.io/v3/pkg/types"
 )
 
-type Client struct {
-	socket Socket
-}
+type (
+	Client struct {
+		socket Socket
+	}
 
-func (c *Client) Connect(url string) error {
-	socket, err := GetConnect()(url, nil)
+	Socket interface {
+		Emit(event string, args ...any) error
+		On(event string, listeners ...socketTypes.EventListener) error
+		Connected() bool
+		Disconnect() Socket
+	}
+
+	ConnectFunc func(string, ioClient.OptionsInterface) (Socket, error)
+
+	SocketIoClient struct {
+		socket *ioClient.Socket
+	}
+
+	emitResponse struct {
+		resp []ResponsePayload
+		err  error
+	}
+)
+
+func (c *Client) Connect(url string, opts MercuryClientOptions) error {
+	socketOptions := ioClient.DefaultOptions()
+	if opts.TimeoutSec > 0 {
+		socketOptions.SetTimeout(time.Duration(opts.TimeoutSec * int(time.Second)))
+	}
+
+	socketOptions.SetReconnection(opts.ShouldRetryConnect)
+	socket, err := GetConnect()(url, socketOptions)
+
 	if err != nil {
 		return err
 	}
@@ -40,6 +69,10 @@ func (c *Client) Connect(url string) error {
 
 	socket.On("error", func(args ...any) {
 		fmt.Println(append([]any{"Error:"}, args...)...)
+	})
+
+	socket.On("reconnect_error", func(args ...any) {
+		fmt.Println(append([]any{"Reconnect Error:"}, args...)...)
 	})
 
 	socket.On("connect_error", func(args ...any) {
@@ -85,18 +118,47 @@ func (c *Client) IsConnected() bool {
 	return c.socket.Connected()
 }
 
-func (c *Client) Emit(event string, args ...any) (Response, error) {
-	return Response{}, nil
-}
+func (c *Client) Emit(event string, args ...TargetAndPayload) ([]ResponsePayload, error) {
 
-type Socket interface {
-	Emit(event string, args ...any) error
-	On(event string, listeners ...socketTypes.EventListener) error
-	Connected() bool
-	Disconnect() Socket
-}
+	done := make(chan emitResponse, 1)
 
-type ConnectFunc func(string, ioClient.OptionsInterface) (Socket, error)
+	targetAndPayload := TargetAndPayload{}
+
+	if len(args) > 0 {
+		targetAndPayload = args[0]
+	}
+
+	c.socket.Emit(event, targetAndPayload, func(response []any, err error) {
+		if len(response) > 0 {
+			data, err := json.Marshal(response[0])
+			if err != nil {
+				done <- emitResponse{nil, err}
+				return
+			}
+
+			var aggregateResponse MercuryAggregateResponse
+			if err := json.Unmarshal(data, &aggregateResponse); err != nil {
+				done <- emitResponse{nil, err}
+				return
+			}
+
+			singleResponses := aggregateResponse.Responses
+			var resp []ResponsePayload
+			for _, single := range singleResponses {
+				resp = append(resp, single.Payload)
+			}
+
+			done <- emitResponse{resp, nil}
+			return
+		}
+
+		fmt.Println("In callback with response:", response)
+	})
+
+	emitResponse := <-done
+
+	return emitResponse.resp, emitResponse.err
+}
 
 var (
 	connectMu sync.RWMutex
@@ -127,10 +189,6 @@ func defaultConnect(url string, opts ioClient.OptionsInterface) (Socket, error) 
 	return newSocketIoClient(socket), nil
 }
 
-type SocketIoClient struct {
-	socket *ioClient.Socket
-}
-
 func newSocketIoClient(socket *ioClient.Socket) Socket {
 	if socket == nil {
 		return nil
@@ -148,6 +206,10 @@ func (s *SocketIoClient) On(event string, listeners ...socketTypes.EventListener
 
 func (s *SocketIoClient) Connected() bool {
 	return s.socket.Connected()
+}
+
+func (s *SocketIoClient) Connect() {
+	s.socket.Connect()
 }
 
 func (s *SocketIoClient) Disconnect() Socket {

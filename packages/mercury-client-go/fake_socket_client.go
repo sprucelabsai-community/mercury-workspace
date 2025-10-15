@@ -6,14 +6,14 @@ import (
 )
 
 type FakeSocketClient struct {
-	url          string
+	host         string
 	opts         ioClient.OptionsInterface
 	is_connected bool
 }
 
-func FakeSocketConnect(url string, opts ioClient.OptionsInterface) (Socket, error) {
+func FakeSocketConnect(host string, opts ioClient.OptionsInterface) (Socket, error) {
 	client := &FakeSocketClient{
-		url:  url,
+		host: host,
 		opts: opts,
 	}
 
@@ -40,4 +40,12 @@ func (s *FakeSocketClient) Disconnect() Socket {
 
 func (s *FakeSocketClient) SetConnected(connected bool) {
 	s.is_connected = connected
+}
+
+func (s *FakeSocketClient) GetOptions() ioClient.OptionsInterface {
+	return s.opts
+}
+
+func (s *FakeSocketClient) GetHost() string {
+	return s.host
 }

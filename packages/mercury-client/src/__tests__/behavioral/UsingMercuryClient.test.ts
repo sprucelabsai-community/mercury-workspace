@@ -8,6 +8,7 @@ import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import SpruceError from '../../errors/SpruceError'
 import AbstractClientTest from '../../tests/AbstractClientTest'
+import 'dotenv/config'
 import {
     DEMO_PHONE,
     DEMO_PHONE_PROXY,
@@ -16,7 +17,6 @@ import {
 } from '../../tests/constants'
 import { MercuryClient } from '../../types/client.types'
 
-require('dotenv').config()
 
 export default class UsingMercuryClient extends AbstractClientTest {
     private static timeoutClient?: any
