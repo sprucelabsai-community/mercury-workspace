@@ -17,6 +17,17 @@ jobs:
           command: |
             [ -n "$BASE64_ENV" ] && echo $BASE64_ENV | base64 --decode > packages/mercury-client/.env
       - spruce/install_rsync
+      - run:
+          name: Install Go
+          command: |
+            curl -sSfL https://go.dev/dl/go1.24.3.linux-amd64.tar.gz -o /tmp/go.tar.gz
+            sudo tar -C /usr/local -xzf /tmp/go.tar.gz
+            echo 'export PATH=$PATH:/usr/local/go/bin' >> "$BASH_ENV"
+      - run:
+          name: Verify Go install
+          command: |
+            source "$BASH_ENV"
+            go version
       - run: node -v && npm -v && yarn -v
       - run: yarn install
       - run: yarn clean
