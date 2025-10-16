@@ -4,8 +4,7 @@ import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractClientTest from '../../tests/AbstractClientTest'
 import { DEMO_PHONE_REAUTH, TEST_HOST } from '../../tests/constants'
-require('dotenv').config()
-
+import 'dotenv/config'
 export default class ReauthenticatingAfterReconnectTest extends AbstractClientTest {
     @test()
     protected static async authThrowsIfFails() {
