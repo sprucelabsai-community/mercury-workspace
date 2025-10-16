@@ -69,7 +69,7 @@ func MakeMercuryClient(opts ...MercuryClientOptions) (MercuryClient, error) {
 	}
 
 	if host == "" {
-		host = "http://localhost:8081"
+		host = "https://mercury.spruce.ai"
 	}
 
 	factory := Factory{}
