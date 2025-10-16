@@ -17,7 +17,6 @@ import {
 } from '../../tests/constants'
 import { MercuryClient } from '../../types/client.types'
 
-
 export default class UsingMercuryClient extends AbstractClientTest {
     private static timeoutClient?: any
 
