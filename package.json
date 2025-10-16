@@ -17,16 +17,16 @@
     "build.dist": "lerna run build.dist",
     "clean": "lerna run clean",
     "clean.all": "yarn clean.dependencies && yarn clean.build",
-    "clean.build": "for d in packages/*; do echo $d; cd $d; yarn clean.build; cd ../..; done",
-    "clean.dependencies": "rm -rf node_modules/ yarn.lock && for d in packages/*; do echo $d; cd $d; yarn clean.dependencies; cd ../..; done",
+    "clean.build": "for d in packages/*; do case \"$(basename \"$d\")\" in *-go) continue ;; esac; echo $d; (cd \"$d\" && yarn clean.build); done",
+    "clean.dependencies": "rm -rf node_modules/ yarn.lock && for d in packages/*; do case \"$(basename \"$d\")\" in *-go) continue ;; esac; echo $d; (cd \"$d\" && yarn clean.dependencies); done",
     "fix.lint": "lerna run fix.lint",
     "lint": "lerna run lint",
     "publish": "lerna publish",
     "rebuild": "yarn clean.all && yarn && yarn build.dev",
     "test": "lerna run test --parallel",
     "update.dependencies": "yarn clean.dependencies && yarn",
-    "upgrade.packages": "yarn add -D lerna -W ; for d in packages/*; do echo $d; cd $d; spruce upgrade || true; cd ../..; done",
-    "upgrade.packages.only": "yarn add -D lerna -W ; for d in packages/*; do echo $d; cd $d; spruce upgrade.dependencies || true; cd ../..; done",
+    "upgrade.packages": "yarn add -D lerna -W ; for d in packages/*; do case \"$(basename \"$d\")\" in *-go) continue ;; esac; echo $d; (cd \"$d\" && spruce upgrade || true); done",
+    "upgrade.packages.only": "yarn add -D lerna -W ; for d in packages/*; do case \"$(basename \"$d\")\" in *-go) continue ;; esac; echo $d; (cd \"$d\" && spruce upgrade.dependencies || true); done",
     "upgrade.packages.all": "yarn install && yarn upgrade.packages",
     "watch.build.dev": "lerna run watch.build.dev --stream --parallel",
     "build.copy-files": "true",
@@ -40,6 +40,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "lerna": "^8.2.3"
+    "lerna": "^9.0.0"
   }
 }
