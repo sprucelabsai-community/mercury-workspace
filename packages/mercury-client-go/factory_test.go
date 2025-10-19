@@ -94,28 +94,43 @@ func TestFactory(t *testing.T) {
 		beforeEach(t)
 		client, _ := MakeClientWithTestHost()
 
-		requestPinResponse, _ := client.Emit("request-pin::v2020_12_25", TargetAndPayload{
-			Payload: map[string]any{
-				"phone": "+1 555-555-5555",
-			},
-		})
-		first := requestPinResponse[0]
-		challenge := first["challenge"].(string)
-
-		confirmPinResponse, _ := client.Emit("confirm-pin::v2020_12_25", TargetAndPayload{
-			Payload: map[string]any{
-				"challenge": challenge,
-				"pin":       "0000",
-			},
-		})
-
-		person := confirmPinResponse[0]["person"].(map[string]any)
+		person := login(client, "+1 555-555-5555")
 
 		authResponse := emitWhoAmI(t, client)
 		authMap := authResponse["auth"].(map[string]any)
 		authPerson := authMap["person"].(map[string]any)
 		require.Equal(t, person["id"], authPerson["id"], "Person id should match")
 	})
+
+	t.Run("Handles one skill emitting to another skill", func(t *testing.T) {
+		beforeEach(t)
+		// _ := MakeClientWithTestHost()
+	})
+}
+
+// func seedRandomOrg(client MercuryClient) map[string]any {
+// 	// orgName := fmt.Sprintf("Test Org %s", uuid.NewString())
+// 	return map[string]any{}
+// }
+
+func login(client MercuryClient, phone string) map[string]any {
+	requestPinResponse, _ := client.Emit("request-pin::v2020_12_25", TargetAndPayload{
+		Payload: map[string]any{
+			"phone": phone,
+		},
+	})
+	first := requestPinResponse[0]
+	challenge := first["challenge"].(string)
+
+	confirmPinResponse, _ := client.Emit("confirm-pin::v2020_12_25", TargetAndPayload{
+		Payload: map[string]any{
+			"challenge": challenge,
+			"pin":       "0000",
+		},
+	})
+
+	person := confirmPinResponse[0]["person"].(map[string]any)
+	return person
 }
 
 func emitWhoAmI(t *testing.T, client MercuryClient) map[string]any {
@@ -138,7 +153,6 @@ func MakeFakeClient(opts ...MercuryClientOptions) (*FakeSocketClient, MercuryCli
 func MakeClientWithTestHost(opts ...MercuryClientOptions) (MercuryClient, error) {
 	host := os.Getenv("TEST_HOST")
 	if host == "" {
-		// raise error
 		return nil, fmt.Errorf("TEST_HOST environment variable is not set")
 	}
 
