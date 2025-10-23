@@ -2,6 +2,8 @@ package mercuryclientgo
 
 import (
 	"os"
+
+	spruce "github.com/sprucelabsai-community/spruce-core-schemas/v41/pkg/schemas"
 )
 
 type (
@@ -33,16 +35,29 @@ type (
 		Responses      []MercurySingleResponse `json:"responses"`
 	}
 
+	AuthenticatePayload struct {
+		SkillId string
+		ApiKey  string
+		Token   string
+	}
+
+	AuthenticatResponse struct {
+		Skill  *spruce.Skill
+		Person *spruce.Person
+	}
+
 	MercuryClient interface {
 		Connect(url string, opts MercuryClientOptions) error
 		Disconnect()
 		IsConnected() bool
 		Emit(event string, targetAndPayload ...TargetAndPayload) ([]map[string]any, error)
+		Authenticate(opts AuthenticatePayload) (*AuthenticatResponse, error)
 	}
 )
 
 func (f *Factory) Client(host string, opts ...MercuryClientOptions) (MercuryClient, error) {
 	client := &Client{}
+
 	var options MercuryClientOptions
 	if len(opts) > 0 {
 		options = opts[0]

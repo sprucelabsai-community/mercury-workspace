@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 
+	schemas "github.com/sprucelabsai-community/spruce-core-schemas/v41/pkg/schemas/spruce/v2020_07_22"
 	ioClient "github.com/zishang520/socket.io/clients/socket/v3"
 	socketTypes "github.com/zishang520/socket.io/v3/pkg/types"
 )
@@ -158,6 +159,47 @@ func (c *Client) Emit(event string, args ...TargetAndPayload) ([]ResponsePayload
 	emitResponse := <-done
 
 	return emitResponse.resp, emitResponse.err
+}
+
+func (c *Client) Authenticate(opts AuthenticatePayload) (*AuthenticatResponse, error) {
+	results, err := c.Emit("authenticate::v2020_12_25", TargetAndPayload{
+		Payload: map[string]any{
+			"skillId": opts.SkillId,
+			"apiKey":  opts.ApiKey,
+			"token":   opts.Token,
+		},
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println("Authenticate response:", results)
+
+	auth, ok := results[0]["auth"].(map[string]any)
+	if !ok || len(auth) == 0 {
+		return nil, fmt.Errorf("auth field not found in response")
+	}
+
+	authResponse := &AuthenticatResponse{}
+
+	if skillValues, ok := auth["skill"].(map[string]any); ok {
+		skill, err := schemas.MakeSkill(skillValues)
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse skill: %w", err)
+		}
+		authResponse.Skill = skill
+	}
+
+	if personValues, ok := auth["person"].(map[string]any); ok {
+		person, err := schemas.MakePerson(personValues)
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse person: %w", err)
+		}
+		authResponse.Person = person
+	}
+
+	return authResponse, nil
 }
 
 var (

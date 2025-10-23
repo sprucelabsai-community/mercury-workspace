@@ -6,7 +6,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/joho/godotenv"
+	spruce "github.com/sprucelabsai-community/spruce-core-schemas/v41/pkg/schemas"
+	schemas "github.com/sprucelabsai-community/spruce-core-schemas/v41/pkg/schemas/spruce/v2020_07_22"
 	"github.com/stretchr/testify/require"
 )
 
@@ -76,44 +79,152 @@ func TestFactory(t *testing.T) {
 
 	})
 
-	t.Run("Defaults host is https://mercury.spruce.ai", func(t *testing.T) {
+	t.Run("defaults host is https://mercury.spruce.ai", func(t *testing.T) {
 		beforeEach(t)
 		fake, _ := MakeFakeClient()
 		require.Equal(t, "https://mercury.spruce.ai", fake.GetHost(), "Default host should be https://mercury.spruce.ai")
 	})
 
-	t.Run("Can emit whoami and get back anon", func(t *testing.T) {
+	t.Run("can emit whoami and get back anon", func(t *testing.T) {
 		beforeEach(t)
 		client, _ := MakeClientWithTestHost()
-		authMap := emitWhoAmI(t, client)
-		require.Equal(t, "anonymous", authMap["type"], "Auth should be anonymous")
+		_, authType := emitWhoAmI(t, client)
+		require.Equal(t, "anonymous", authType, "Auth should be anonymous")
 		client.Disconnect()
 	})
 
-	t.Run("Can login and get back whoami", func(t *testing.T) {
+	t.Run("can login and get back whoami", func(t *testing.T) {
 		beforeEach(t)
-		client, _ := MakeClientWithTestHost()
-
-		person := login(client, "+1 555-555-5555")
-
-		authResponse := emitWhoAmI(t, client)
-		authMap := authResponse["auth"].(map[string]any)
-		authPerson := authMap["person"].(map[string]any)
-		require.Equal(t, person["id"], authPerson["id"], "Person id should match")
+		client, person, _ := loginAsDemoPerson("+1 555-555-5555")
+		person2, _ := emitWhoAmI(t, client)
+		require.Equal(t, person.Id, person2.Id, "Person id should match")
 	})
 
-	t.Run("Handles one skill emitting to another skill", func(t *testing.T) {
+	t.Run("can authenticate as person in new client", func(t *testing.T) {
 		beforeEach(t)
-		// _ := MakeClientWithTestHost()
+		_, person, token := loginAsDemoPerson("+1 555-555-5555")
+		fmt.Println("Logged in as person:", person)
+
+		client, _ := MakeClientWithTestHost()
+		client.Authenticate(AuthenticatePayload{
+			Token: token,
+		})
+
+		person2, _ := emitWhoAmI(t, client)
+		require.Equal(t, person.Id, person2.Id, "Person id should match")
+	})
+
+	t.Run("handles one skill emitting to another skill", func(t *testing.T) {
+		beforeEach(t)
+		client, _, _ := loginAsDemoPerson("+1 555-555-5555")
+		org, err := seedRandomOrg(client)
+		require.NoError(t, err, "Seeding organization should not return an error")
+
+		skill1Client := seedSkillInstallToOrgAndLoginAsSkill(t, client, org)
+		skill2Client := seedSkillInstallToOrgAndLoginAsSkill(t, client, org)
+
+		results, err := skill1Client.Emit('register-events::v2020_12_25')
+
+
 	})
 }
 
-// func seedRandomOrg(client MercuryClient) map[string]any {
-// 	// orgName := fmt.Sprintf("Test Org %s", uuid.NewString())
-// 	return map[string]any{}
-// }
+func seedSkillInstallToOrgAndLoginAsSkill(t *testing.T, client MercuryClient, org *spruce.Organization) MercuryClient {
+	skill, err := seedRandomSkill(client)
+	require.NoError(t, err, "Seeding skill should not return an error")
+	fmt.Println("Seeded skill:", skill)
+	err = installSkill(client, org.Id, skill.Id)
+	require.NoError(t, err, "Installing skill should not return an error")
 
-func login(client MercuryClient, phone string) map[string]any {
+	skill1Client, err := loginAsSkill(skill)
+	require.NoError(t, err, "Logging in as skill1 should not return an error")
+	return skill1Client
+}
+
+func loginAsSkill(skill *spruce.Skill) (MercuryClient, error) {
+	client, _ := MakeClientWithTestHost()
+	_, err := client.Authenticate(AuthenticatePayload{
+		SkillId: skill.Id,
+		ApiKey:  skill.ApiKey,
+	})
+
+	return client, err
+}
+
+func loginAsDemoPerson(phone string) (MercuryClient, *spruce.Person, string) {
+	client, _ := MakeClientWithTestHost()
+	person, token := login(client, phone)
+	return client, person, token
+}
+
+func seedRandomOrg(client MercuryClient) (*spruce.Organization, error) {
+	orgName := fmt.Sprintf("Test Org %s", uuid.NewString())
+	results, err := client.Emit("create-organization::v2020_12_25", TargetAndPayload{
+		Payload: map[string]any{
+			"name": orgName,
+		},
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println("Create organization results:", results)
+	first := results[0]
+
+	orgValues, ok := first["organization"].(map[string]any)
+	if !ok {
+		return nil, fmt.Errorf("organization field not found in response")
+	}
+
+	org, err := schemas.MakeOrganization(orgValues)
+	if err != nil {
+		return nil, err
+	}
+
+	return org, nil
+}
+
+func seedRandomSkill(client MercuryClient) (*spruce.Skill, error) {
+	skillName := fmt.Sprintf("Test Skill %s", uuid.NewString())
+	results, err := client.Emit("register-skill::v2020_12_25", TargetAndPayload{
+		Payload: map[string]any{
+			"name": skillName,
+		},
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	first := results[0]
+	skillValues, ok := first["skill"].(map[string]any)
+
+	if !ok {
+		return nil, fmt.Errorf("skill field not found in response")
+	}
+
+	skill, err := schemas.MakeSkill(skillValues)
+	if err != nil {
+		return nil, err
+	}
+
+	return skill, nil
+}
+
+func installSkill(client MercuryClient, orgId string, skillId string) error {
+	_, err := client.Emit("install-skill::v2020_12_25", TargetAndPayload{
+		Target: map[string]any{
+			"organizationId": orgId,
+		},
+		Payload: map[string]any{
+			"skillId": skillId,
+		},
+	})
+	return err
+}
+
+func login(client MercuryClient, phone string) (*spruce.Person, string) {
 	requestPinResponse, _ := client.Emit("request-pin::v2020_12_25", TargetAndPayload{
 		Payload: map[string]any{
 			"phone": phone,
@@ -129,17 +240,34 @@ func login(client MercuryClient, phone string) map[string]any {
 		},
 	})
 
-	person := confirmPinResponse[0]["person"].(map[string]any)
-	return person
+	first = confirmPinResponse[0]
+	token := first["token"].(string)
+	personValues := first["person"].(map[string]any)
+	person, _ := schemas.MakePerson(personValues)
+
+	return person, token
 }
 
-func emitWhoAmI(t *testing.T, client MercuryClient) map[string]any {
+func emitWhoAmI(t *testing.T, client MercuryClient) (*spruce.Person, string) {
 	auth, err := client.Emit("whoami::v2020_12_25")
 	require.NoError(t, err, "Emit whoami should not return an error")
 	require.NotNil(t, auth, "Emit whoami should return a response")
 	require.Equal(t, 1, len(auth), "Emit whoami should return one response")
-	authMap := auth[0]
-	return authMap
+	first := auth[0]
+
+	authMap := first["auth"].(map[string]any)
+
+	authType := first["type"].(string)
+	if authType == "anonymous" {
+		return nil, "anonymous"
+	}
+
+	authPerson := authMap["person"].(map[string]any)
+	person, err := schemas.MakePerson(authPerson)
+	require.NoError(t, err, "Making person from whoami response should not return an error")
+	require.NotNil(t, person, "Person from whoami should not be nil")
+
+	return person, authType
 }
 
 func MakeFakeClient(opts ...MercuryClientOptions) (*FakeSocketClient, MercuryClient) {
