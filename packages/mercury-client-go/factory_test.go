@@ -19,7 +19,6 @@ func beforeEach(t *testing.T) {
 }
 
 func TestFactory(t *testing.T) {
-
 	godotenv.Load(".env")
 
 	t.Run("can get back client", func(t *testing.T) {
@@ -98,11 +97,14 @@ func TestFactory(t *testing.T) {
 		client, person, _ := loginAsDemoPerson("+1 555-555-5555")
 		person2, _ := emitWhoAmI(t, client)
 		require.Equal(t, person.Id, person2.Id, "Person id should match")
+		client.Disconnect()
 	})
 
 	t.Run("can authenticate as person in new client", func(t *testing.T) {
 		beforeEach(t)
-		_, person, token := loginAsDemoPerson("+1 555-555-5555")
+		c, person, token := loginAsDemoPerson("+1 555-555-5555")
+		c.Disconnect()
+
 		fmt.Println("Logged in as person:", person)
 
 		client, _ := MakeClientWithTestHost()
@@ -112,21 +114,152 @@ func TestFactory(t *testing.T) {
 
 		person2, _ := emitWhoAmI(t, client)
 		require.Equal(t, person.Id, person2.Id, "Person id should match")
+
+		client.Disconnect()
+	})
+
+	t.Run("Remote throwing should return error", func(t *testing.T) {
+		beforeEach(t)
+		client, _ := MakeClientWithTestHost()
+		_, err := client.Emit("this-event-does-not-exist::v2020_12_25")
+		require.Error(t, err, "Emitting non-existent event should return an error")
+
+		client.Disconnect()
 	})
 
 	t.Run("handles one skill emitting to another skill", func(t *testing.T) {
 		beforeEach(t)
-		client, _, _ := loginAsDemoPerson("+1 555-555-5555")
-		org, err := seedRandomOrg(client)
-		require.NoError(t, err, "Seeding organization should not return an error")
+		org, skill1Client, skill2Client, fqen := loginCreatOrgSetup2SkillsAndRegisterEventContractAsSkill1(t)
 
-		skill1Client := seedSkillInstallToOrgAndLoginAsSkill(t, client, org)
-		skill2Client := seedSkillInstallToOrgAndLoginAsSkill(t, client, org)
+		var wasHit = false
+		messages := []string{generateRandomId(), generateRandomId(), generateRandomId()}
 
-		results, err := skill1Client.Emit('register-events::v2020_12_25')
+		skill2Client.On(fqen, func(targetAndPayload TargetAndPayload) any {
+			wasHit = true
+			return map[string]any{
+				"messages": messages,
+			}
+		})
 
+		results := emitSkillEvent(t, skill1Client, fqen, org.Id)
+
+		require.True(t, wasHit, "Event handler should have been hit")
+		require.Equal(t, 1, len(results), "There should be one result")
+
+		first := results[0]
+		returnedMessages, ok := first["messages"].([]any)
+
+		require.True(t, ok, "Messages field should be present in response")
+
+		require.Equal(t, len(messages), len(returnedMessages), "Returned messages length should match sent messages length")
+		require.Equal(t, messages[0], returnedMessages[0], "Returned message should match sent message")
+
+		skill1Client.Disconnect()
+		skill2Client.Disconnect()
+	})
+
+	t.Run("listeners get actual target and payload", func(t *testing.T) {
+		beforeEach(t)
+		org, skill1Client, skill2Client, fqen := loginCreatOrgSetup2SkillsAndRegisterEventContractAsSkill1(t)
+
+		var passedTargetAndPayload TargetAndPayload
+		skill2Client.On(fqen, func(targetAndPayload TargetAndPayload) any {
+			passedTargetAndPayload = targetAndPayload
+			return map[string]any{
+				"messages": []string{generateRandomId()},
+			}
+		})
+
+		actualTargetAndPayload := TargetAndPayload{
+			Target: map[string]any{
+				"organizationId": org.Id,
+			},
+			Payload: map[string]any{
+				"message": generateRandomId(),
+			},
+		}
+
+		_, err := skill1Client.Emit(fqen, actualTargetAndPayload)
+		require.NoError(t, err, "Emitting custom event should not return an error")
+
+		// check passed and actual match
+		require.Equal(t, actualTargetAndPayload.Target, passedTargetAndPayload.Target, "Targets should match")
+		require.Equal(t, actualTargetAndPayload.Payload, passedTargetAndPayload.Payload, "Payloads should match")
+
+		skill1Client.Disconnect()
+		skill2Client.Disconnect()
 
 	})
+
+	t.Run("can turn off listeners", func(t *testing.T) {
+		org, skill1Client, skill2Client, fqen := loginCreatOrgSetup2SkillsAndRegisterEventContractAsSkill1(t)
+
+		hitCount := 0
+		skill2Client.On(fqen, func(targetAndPayload TargetAndPayload) any {
+			hitCount++
+			return map[string]any{
+				"messages": []string{generateRandomId()},
+			}
+		})
+
+		emitSkillEvent(t, skill1Client, fqen, org.Id)
+
+		skill2Client.Off(fqen)
+
+		emitSkillEvent(t, skill1Client, fqen, org.Id)
+
+		require.Equal(t, 1, hitCount, "Hit count should be 1 after turning off listener")
+
+		skill1Client.Disconnect()
+		skill2Client.Disconnect()
+	})
+}
+
+func emitSkillEvent(t *testing.T, skill1Client MercuryClient, fqen string, orgId string) []ResponsePayload {
+	results, err := skill1Client.Emit(fqen, TargetAndPayload{
+		Target: map[string]any{
+			"organizationId": orgId,
+		},
+		Payload: map[string]any{
+			"message": generateRandomId(),
+		},
+	})
+
+	require.NoError(t, err, "Emitting event should not return an error")
+	require.NotNil(t, results, "Results should not be nil")
+
+	return results
+}
+
+func loginCreatOrgSetup2SkillsAndRegisterEventContractAsSkill1(t *testing.T) (*spruce.Organization, MercuryClient, MercuryClient, string) {
+	client, _, _ := loginAsDemoPerson("+1 555-555-5555")
+	org := seedRandomOrg(t, client)
+	skill1Client := seedSkillInstallToOrgAndLoginAsSkill(t, client, org)
+	skill2Client := seedSkillInstallToOrgAndLoginAsSkill(t, client, org)
+	fqen := registerTestContract(t, skill1Client)
+
+	client.Disconnect()
+	return org, skill1Client, skill2Client, fqen
+}
+
+func registerEvents(t *testing.T, client MercuryClient, eventContract EventContract) string {
+	results, err := client.Emit("register-events::v2020_12_25", TargetAndPayload{
+		Payload: map[string]any{
+			"contract": eventContract,
+		},
+	})
+
+	require.NoError(t, err, "Registering events should not return an error")
+	require.NotNil(t, results, "Registering events should return results")
+
+	first := results[0]
+	fqenValues, ok := first["fqens"].([]any)
+	require.True(t, ok, "FQENS slice should be present in response")
+	require.NotEmpty(t, fqenValues, "FQENS slice should not be empty")
+
+	fqen, ok := fqenValues[0].(string)
+	require.True(t, ok, "First FQEN entry should be a string")
+	return fqen
 }
 
 func seedSkillInstallToOrgAndLoginAsSkill(t *testing.T, client MercuryClient, org *spruce.Organization) MercuryClient {
@@ -157,32 +290,29 @@ func loginAsDemoPerson(phone string) (MercuryClient, *spruce.Person, string) {
 	return client, person, token
 }
 
-func seedRandomOrg(client MercuryClient) (*spruce.Organization, error) {
-	orgName := fmt.Sprintf("Test Org %s", uuid.NewString())
+func generateRandomId() string {
+	return uuid.NewString()
+}
+
+func seedRandomOrg(t *testing.T, client MercuryClient) *spruce.Organization {
+	orgName := fmt.Sprintf("Test Org %s", generateRandomId())
 	results, err := client.Emit("create-organization::v2020_12_25", TargetAndPayload{
 		Payload: map[string]any{
 			"name": orgName,
 		},
 	})
 
-	if err != nil {
-		return nil, err
-	}
+	require.NoError(t, err, "Seeding organization should not return an error")
 
 	fmt.Println("Create organization results:", results)
 	first := results[0]
 
 	orgValues, ok := first["organization"].(map[string]any)
-	if !ok {
-		return nil, fmt.Errorf("organization field not found in response")
-	}
-
+	require.True(t, ok, "Organization field should be present in response")
 	org, err := schemas.MakeOrganization(orgValues)
-	if err != nil {
-		return nil, err
-	}
+	require.NoError(t, err, "Making organization from response should not return an error")
 
-	return org, nil
+	return org
 }
 
 func seedRandomSkill(client MercuryClient) (*spruce.Skill, error) {
@@ -285,4 +415,72 @@ func MakeClientWithTestHost(opts ...MercuryClientOptions) (MercuryClient, error)
 	}
 
 	return MakeMercuryClient(append(opts, MercuryClientOptions{Host: host})...)
+}
+
+type EventContract map[string]any
+
+func generateWillSendVipEventSignature(slug ...string) EventContract {
+	namespace := ""
+	if len(slug) > 0 && slug[0] != "" {
+		namespace = slug[0] + "."
+	}
+
+	return EventContract{
+		"eventSignatures": map[string]any{
+			fmt.Sprintf("%swill-send-vip::v1", namespace): map[string]any{
+				"emitPayloadSchema": map[string]any{
+					"id": "willSendVipTargetAndPayload",
+					"fields": map[string]any{
+						"target": map[string]any{
+							"type":       "schema",
+							"isRequired": true,
+							"options": map[string]any{
+								"schema": map[string]any{
+									"id": "willSendVipTarget",
+									"fields": map[string]any{
+										"organizationId": map[string]any{
+											"type": "text",
+										},
+									},
+								},
+							},
+						},
+						"payload": map[string]any{
+							"type":       "schema",
+							"isRequired": true,
+							"options": map[string]any{
+								"schema": map[string]any{
+									"id": "willSendVipPayload",
+									"fields": map[string]any{
+										"message": map[string]any{
+											"type": "text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				"responsePayloadSchema": map[string]any{
+					"id": "testEventResponsePayload",
+					"fields": map[string]any{
+						"messages": map[string]any{
+							"type":       "text",
+							"isArray":    true,
+							"isRequired": true,
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func registerTestContract(t *testing.T, client MercuryClient) string {
+	eventContract := generateWillSendVipEventSignature()
+	require.NotNil(t, eventContract, "Expected event contract to be generated")
+
+	fqen := registerEvents(t, client, eventContract)
+	fmt.Println("Registered FQEN:", fqen)
+	return fqen
 }

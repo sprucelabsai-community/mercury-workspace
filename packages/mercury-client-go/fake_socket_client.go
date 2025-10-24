@@ -49,3 +49,7 @@ func (s *FakeSocketClient) GetOptions() ioClient.OptionsInterface {
 func (s *FakeSocketClient) GetHost() string {
 	return s.host
 }
+
+func (s *FakeSocketClient) Off(event string, listener socketTypes.EventListener) bool {
+	return false
+}

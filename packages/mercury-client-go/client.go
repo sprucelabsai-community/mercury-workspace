@@ -3,11 +3,13 @@ package mercuryclientgo
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 	"sync"
 	"time"
 
 	schemas "github.com/sprucelabsai-community/spruce-core-schemas/v41/pkg/schemas/spruce/v2020_07_22"
 	ioClient "github.com/zishang520/socket.io/clients/socket/v3"
+	serverSocket "github.com/zishang520/socket.io/servers/socket/v3"
 	socketTypes "github.com/zishang520/socket.io/v3/pkg/types"
 )
 
@@ -19,6 +21,7 @@ type (
 	Socket interface {
 		Emit(event string, args ...any) error
 		On(event string, listeners ...socketTypes.EventListener) error
+		Off(event string, listener socketTypes.EventListener) bool
 		Connected() bool
 		Disconnect() Socket
 	}
@@ -129,7 +132,9 @@ func (c *Client) Emit(event string, args ...TargetAndPayload) ([]ResponsePayload
 		targetAndPayload = args[0]
 	}
 
-	c.socket.Emit(event, targetAndPayload, func(response []any, err error) {
+	mappedEventName := toSocketName(event)
+
+	c.socket.Emit(mappedEventName, targetAndPayload, func(response []any, err error) {
 		if len(response) > 0 {
 			data, err := json.Marshal(response[0])
 			if err != nil {
@@ -147,9 +152,20 @@ func (c *Client) Emit(event string, args ...TargetAndPayload) ([]ResponsePayload
 			var resp []ResponsePayload
 			for _, single := range singleResponses {
 				resp = append(resp, single.Payload)
+				if len(single.Errors) > 0 {
+					errMsg := single.Errors[0]
+					if errMsg != "" {
+						err = fmt.Errorf("error from emit: %v", errMsg)
+						break
+					}
+				}
 			}
 
-			done <- emitResponse{resp, nil}
+			if resp == nil {
+				resp = []ResponsePayload{}
+			}
+
+			done <- emitResponse{resp, err}
 			return
 		}
 
@@ -159,6 +175,11 @@ func (c *Client) Emit(event string, args ...TargetAndPayload) ([]ResponsePayload
 	emitResponse := <-done
 
 	return emitResponse.resp, emitResponse.err
+}
+
+func toSocketName(event string) string {
+	// replace dots (.) with double underscores (__)
+	return strings.ReplaceAll(event, ".", "__")
 }
 
 func (c *Client) Authenticate(opts AuthenticatePayload) (*AuthenticatResponse, error) {
@@ -200,6 +221,112 @@ func (c *Client) Authenticate(opts AuthenticatePayload) (*AuthenticatResponse, e
 	}
 
 	return authResponse, nil
+}
+
+func (c *Client) On(event string, listener MercuryListener) {
+	results, err := c.Emit("register-listeners::v2020_12_25", TargetAndPayload{
+		Payload: map[string]any{
+			"events": []map[string]string{
+				{
+					"eventName": event,
+				},
+			},
+		},
+	})
+
+	fmt.Println("Register listeners response:", results, err)
+
+	handler := func(args ...any) {
+		fmt.Println("Event received:", event, args, listener)
+
+		var ack serverSocket.Ack
+		argLen := len(args)
+		if argLen > 0 {
+			if maybeAck, ok := args[argLen-1].(serverSocket.Ack); ok && maybeAck != nil {
+				ack = maybeAck
+				args = args[:argLen-1]
+				argLen--
+			}
+		}
+
+		var handlerErr error
+		var targetAndPayload TargetAndPayload
+
+		if argLen > 0 {
+			if err := mapToStruct(args[0], &targetAndPayload); err != nil {
+				handlerErr = fmt.Errorf("failed to parse target and payload: %w", err)
+			}
+		}
+
+		fmt.Println("Parsed targetAndPayload:", targetAndPayload)
+
+		var response any
+
+		if listener != nil && handlerErr == nil {
+			defer func() {
+				if recoverErr := recover(); recoverErr != nil {
+					handlerErr = fmt.Errorf("listener panic: %v", recoverErr)
+				}
+			}()
+			response = listener(targetAndPayload)
+
+			if errVal, ok := response.(error); ok && errVal != nil {
+				handlerErr = errVal
+				response = nil
+			}
+		}
+
+		if ack == nil {
+			return
+		}
+
+		if handlerErr != nil {
+			errorAck := map[string]any{
+				"errors": []any{
+					map[string]any{
+						"code":            "LISTENER_ERROR",
+						"friendlyMessage": handlerErr.Error(),
+						"fqen":            event,
+						"originalError":   handlerErr.Error(),
+					},
+				},
+			}
+			ack([]any{errorAck}, nil)
+			return
+		}
+
+		if response != nil {
+			ack([]any{response}, nil)
+			return
+		}
+
+		ack(nil, nil)
+	}
+
+	c.socket.On(event, handler)
+
+	if socketEvent := toSocketName(event); socketEvent != event {
+		c.socket.On(socketEvent, handler)
+	}
+}
+
+func (c *Client) Off(event string, listeners ...MercuryListener) {
+	results, err := c.Emit("unregister-listeners::v2020_12_25", TargetAndPayload{
+		Payload: map[string]any{
+			"fullyQualifiedEventNames": []string{event},
+		},
+	})
+
+	fmt.Println("Unregister listeners response:", results, err)
+	c.socket.Off(event, nil)
+}
+
+func mapToStruct(data any, out any) error {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(bytes, out)
 }
 
 var (
@@ -257,4 +384,9 @@ func (s *SocketIoClient) Connect() {
 func (s *SocketIoClient) Disconnect() Socket {
 	s.socket.Disconnect()
 	return s
+}
+
+func (s *SocketIoClient) Off(event string, listener socketTypes.EventListener) bool {
+	s.socket.RemoveAllListeners(socketTypes.EventName(event))
+	return true
 }

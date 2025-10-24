@@ -16,6 +16,7 @@ type (
 	}
 
 	TargetAndPayload struct {
+		Source  map[string]any `json:"source,omitempty"`
 		Target  map[string]any `json:"target,omitempty"`
 		Payload map[string]any `json:"payload,omitempty"`
 	}
@@ -46,12 +47,16 @@ type (
 		Person *spruce.Person
 	}
 
+	MercuryListener = func(targetAndPayload TargetAndPayload) any
+
 	MercuryClient interface {
 		Connect(url string, opts MercuryClientOptions) error
 		Disconnect()
 		IsConnected() bool
-		Emit(event string, targetAndPayload ...TargetAndPayload) ([]map[string]any, error)
+		Emit(event string, targetAndPayload ...TargetAndPayload) ([]ResponsePayload, error)
 		Authenticate(opts AuthenticatePayload) (*AuthenticatResponse, error)
+		On(event string, listener MercuryListener)
+		Off(event string, listener ...MercuryListener)
 	}
 )
 

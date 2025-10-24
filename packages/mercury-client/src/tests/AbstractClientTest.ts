@@ -4,11 +4,11 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import MercuryClientFactory from '../clients/MercuryClientFactory'
 import MutableContractClient from '../clients/MutableContractClient'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import { TEST_HOST } from './constants'
-import { assert } from '@sprucelabs/test-utils'
 
 type Client = MercuryClient
 type Person = SpruceSchemas.Spruce.v2020_07_22.Person
