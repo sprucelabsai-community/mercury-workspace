@@ -15,11 +15,7 @@ jobs:
       - run:
           name: "ENV file creation"
           command: |
-            if [ -n "$BASE64_ENV" ]; then
-              echo "$BASE64_ENV" | base64 --decode > packages/mercury-client/.env
-              mkdir -p packages/mercury-client-go
-              cp packages/mercury-client/.env packages/mercury-client-go/.env
-            fi
+            [ -n "$BASE64_ENV" ] && echo $BASE64_ENV | base64 --decode > packages/mercury-client/.env
       - spruce/install_rsync
       - run:
           name: Install Go
