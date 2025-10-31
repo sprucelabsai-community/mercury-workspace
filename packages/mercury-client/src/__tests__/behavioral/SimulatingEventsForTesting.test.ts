@@ -505,10 +505,9 @@ export default class SimulatingEventsForTestingTest extends AbstractClientTest {
             },
         })
 
-		
         //@ts-ignore
         const results = await client.emit('waka-waka')
-		
+
         const err = eventAssertUtil.assertErrorFromResponse(
             results,
             'INVALID_EVENT_NAME'
