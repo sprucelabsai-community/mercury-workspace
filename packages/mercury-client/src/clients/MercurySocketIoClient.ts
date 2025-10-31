@@ -120,7 +120,12 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
                 if (this.shouldReconnect) {
                     this.socket?.once('disconnect', async (opts) => {
-                        this.log.error('Mercury disconnected from', this.host, 'reason:', opts)
+                        this.log.error(
+                            'Mercury disconnected from',
+                            this.host,
+                            'reason:',
+                            opts
+                        )
                         await this.attemptReconnectAfterDelay()
                     })
                 }
