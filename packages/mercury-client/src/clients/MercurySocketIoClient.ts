@@ -169,7 +169,11 @@ export default class MercurySocketIoClient<Contract extends EventContract>
             //@ts-ignore
             this.socket?.removeAllListeners()
 
-            this.log.error('Failed to connect to Mercury at', this.host, error.message)
+            this.log.error(
+                'Failed to connect to Mercury at',
+                this.host,
+                error.message
+            )
             this.log.error(
                 'Connection retries left',
                 `${this.connectionRetriesRemaining}`
