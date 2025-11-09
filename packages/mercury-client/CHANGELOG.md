@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [45.0.0](https://github.com/sprucelabsai-community/mercury-workspace/compare/v44.0.0...v45.0.0) (2025-11-09)
+
+
+### Breaking Changes
+
+* upgarde ([c3a5342](https://github.com/sprucelabsai-community/mercury-workspace/commit/c3a5342))
+
+
+
+
+
 # [44.0.0](https://github.com/sprucelabsai-community/mercury-workspace/compare/v43.1.10...v44.0.0) (2025-11-09)
 
 
