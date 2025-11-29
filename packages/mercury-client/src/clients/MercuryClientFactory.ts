@@ -60,6 +60,7 @@ export default class MercuryClientFactory {
             MercuryClientFactory.ClientClass ?? Client
             //@ts-ignore
         )<EventContract>({
+            //@ts-ignore
             host,
             reconnection: false,
             reconnectDelayMs,
