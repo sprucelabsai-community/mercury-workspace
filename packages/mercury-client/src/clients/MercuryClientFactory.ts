@@ -6,8 +6,6 @@ import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import MutableContractClient from './MutableContractClient'
 
-
-
 export default class MercuryClientFactory {
     private static isTestMode = false
     private static defaultContract: any
@@ -56,9 +54,8 @@ export default class MercuryClientFactory {
             Client = require('../clients/MercuryTestClient').default
         }
 
-        const client = new (
-            (MercuryClientFactory.ClientClass ?? Client) as any
-        )({
+        const client = new ((MercuryClientFactory.ClientClass ??
+            Client) as any)({
             host,
             reconnection: false,
             reconnectDelayMs,
@@ -127,5 +124,6 @@ export type Client<Contract extends EventContract> = MercuryClient<Contract> & {
     mixinContract(eventContract: EventContract): void
 }
 
-
-type ClientConstructor<Contract extends EventContract> = new (...args: any[]) => MutableContractClient<Contract>
+type ClientConstructor<Contract extends EventContract> = new (
+    ...args: any[]
+) => MutableContractClient<Contract>
