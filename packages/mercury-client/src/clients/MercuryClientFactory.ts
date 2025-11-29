@@ -57,9 +57,8 @@ export default class MercuryClientFactory {
         }
 
         const client = new (
-            MercuryClientFactory.ClientClass ??
+            MercuryClientFactory.ClientClass ?? Client
             //@ts-ignore
-            Client
         )<EventContract>({
             host,
             reconnection: false,
