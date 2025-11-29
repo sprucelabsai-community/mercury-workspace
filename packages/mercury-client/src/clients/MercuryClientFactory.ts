@@ -56,9 +56,11 @@ export default class MercuryClientFactory {
             Client = require('../clients/MercuryTestClient').default
         }
 
-        const client = new (MercuryClientFactory.ClientClass ??
+        const client = new (
+            MercuryClientFactory.ClientClass ??
             //@ts-ignore
-            Client)<EventContract>({
+            Client
+        )<EventContract>({
             host,
             reconnection: false,
             reconnectDelayMs,

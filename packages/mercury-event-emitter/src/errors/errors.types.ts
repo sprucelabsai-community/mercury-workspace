@@ -13,8 +13,7 @@ export interface InvalidPayloadErrorOptions extends ISpruceErrorOptions {
     eventName: string
 }
 
-export interface InvalidResponsePayloadErrorOptions
-    extends ISpruceErrorOptions {
+export interface InvalidResponsePayloadErrorOptions extends ISpruceErrorOptions {
     code: 'INVALID_RESPONSE_PAYLOAD'
     eventName: string
 }

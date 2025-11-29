@@ -25,9 +25,9 @@ import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import socketIoEventUtil from '../utilities/socketIoEventUtil.utility'
 
-export default class MercurySocketIoClient<Contract extends EventContract>
-    implements MercuryClient<Contract>
-{
+export default class MercurySocketIoClient<
+    Contract extends EventContract,
+> implements MercuryClient<Contract> {
     protected _eventContract?: Contract
     protected get eventContract() {
         return this._eventContract as Contract
@@ -344,16 +344,16 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
     public async emit<
         Name extends EventName<Contract>,
-        IEventSignature extends
-            EventSignature = Contract['eventSignatures'][EventName],
-        EmitSchema extends
-            Schema = IEventSignature['emitPayloadSchema'] extends Schema
-            ? IEventSignature['emitPayloadSchema']
-            : never,
-        ResponseSchema extends
-            Schema = IEventSignature['responsePayloadSchema'] extends Schema
-            ? IEventSignature['responsePayloadSchema']
-            : never,
+        IEventSignature extends EventSignature =
+            Contract['eventSignatures'][EventName],
+        EmitSchema extends Schema =
+            IEventSignature['emitPayloadSchema'] extends Schema
+                ? IEventSignature['emitPayloadSchema']
+                : never,
+        ResponseSchema extends Schema =
+            IEventSignature['responsePayloadSchema'] extends Schema
+                ? IEventSignature['responsePayloadSchema']
+                : never,
         ResponsePayload = ResponseSchema extends Schema
             ? SchemaValues<ResponseSchema>
             : never,
@@ -378,12 +378,12 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
     private handleLocalEmit<
         Name extends EventName<Contract>,
-        IEventSignature extends
-            EventSignature = Contract['eventSignatures'][EventName],
-        EmitSchema extends
-            Schema = IEventSignature['emitPayloadSchema'] extends Schema
-            ? IEventSignature['emitPayloadSchema']
-            : never,
+        IEventSignature extends EventSignature =
+            Contract['eventSignatures'][EventName],
+        EmitSchema extends Schema =
+            IEventSignature['emitPayloadSchema'] extends Schema
+                ? IEventSignature['emitPayloadSchema']
+                : never,
     >(
         eventName: Name,
         targetAndPayload:
@@ -413,16 +413,16 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
     public async emitAndFlattenResponses<
         Name extends EventName<Contract>,
-        IEventSignature extends
-            EventSignature = Contract['eventSignatures'][EventName],
-        EmitSchema extends
-            Schema = IEventSignature['emitPayloadSchema'] extends Schema
-            ? IEventSignature['emitPayloadSchema']
-            : never,
-        ResponseSchema extends
-            Schema = IEventSignature['responsePayloadSchema'] extends Schema
-            ? IEventSignature['responsePayloadSchema']
-            : never,
+        IEventSignature extends EventSignature =
+            Contract['eventSignatures'][EventName],
+        EmitSchema extends Schema =
+            IEventSignature['emitPayloadSchema'] extends Schema
+                ? IEventSignature['emitPayloadSchema']
+                : never,
+        ResponseSchema extends Schema =
+            IEventSignature['responsePayloadSchema'] extends Schema
+                ? IEventSignature['responsePayloadSchema']
+                : never,
         ResponsePayload = ResponseSchema extends Schema
             ? SchemaValues<ResponseSchema>
             : never,
@@ -450,12 +450,12 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
     private async _emit<
         Name extends EventName<Contract>,
-        IEventSignature extends
-            EventSignature = Contract['eventSignatures'][EventName],
-        ResponseSchema extends
-            Schema = IEventSignature['responsePayloadSchema'] extends Schema
-            ? IEventSignature['responsePayloadSchema']
-            : never,
+        IEventSignature extends EventSignature =
+            Contract['eventSignatures'][EventName],
+        ResponseSchema extends Schema =
+            IEventSignature['responsePayloadSchema'] extends Schema
+                ? IEventSignature['responsePayloadSchema']
+                : never,
         ResponsePayload = ResponseSchema extends Schema
             ? SchemaValues<ResponseSchema>
             : never,
@@ -676,12 +676,12 @@ export default class MercurySocketIoClient<Contract extends EventContract>
 
     public async on<
         Name extends EventName<Contract>,
-        IEventSignature extends
-            EventSignature = Contract['eventSignatures'][EventName],
-        EmitSchema extends
-            Schema = IEventSignature['emitPayloadSchema'] extends Schema
-            ? IEventSignature['emitPayloadSchema']
-            : never,
+        IEventSignature extends EventSignature =
+            Contract['eventSignatures'][EventName],
+        EmitSchema extends Schema =
+            IEventSignature['emitPayloadSchema'] extends Schema
+                ? IEventSignature['emitPayloadSchema']
+                : never,
     >(
         eventName: Name,
         cb: (
