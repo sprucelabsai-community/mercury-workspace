@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [45.1.0](https://github.com/sprucelabsai-community/mercury-workspace/compare/v45.0.34...v45.1.0) (2026-01-07)
+
+
+### Features
+
+* add exports field for proper ESM support in Node.js ([07cf073](https://github.com/sprucelabsai-community/mercury-workspace/commit/07cf073))
+
+
+
+
+
 ## [45.0.34](https://github.com/sprucelabsai-community/mercury-workspace/compare/v45.0.33...v45.0.34) (2026-01-07)
 
 **Note:** Version bump only for package @sprucelabs/mercury-client
