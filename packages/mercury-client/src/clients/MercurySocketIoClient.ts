@@ -19,7 +19,7 @@ import {
     eventResponseUtil,
     eventNameUtil,
 } from '@sprucelabs/spruce-event-utils'
-import { buildLog } from '@sprucelabs/spruce-skill-utils'
+import { buildLog, Log } from '@sprucelabs/spruce-skill-utils'
 import { io, Socket, SocketOptions, ManagerOptions } from 'socket.io-client'
 import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
@@ -38,10 +38,10 @@ export default class MercurySocketIoClient<
     }
 
     public static io = io
-    private log = buildLog('MercurySocketIoClient')
+    private log: Log
     private host: string
     private ioOptions: IoOptions
-    private socket?: Socket
+    protected socket?: Socket
     private proxyToken: string | null = null
     private emitTimeoutMs: number
     private reconnectDelayMs: number
@@ -88,10 +88,12 @@ export default class MercurySocketIoClient<
             shouldReconnect,
             maxEmitRetries = 5,
             connectionRetries,
+            log,
             ...ioOptions
         } = options
 
         this.host = host
+        this.log = log ?? buildLog('MercurySocketIoClient')
         this.ioOptions = { ...ioOptions, withCredentials: false }
         this.eventContract = eventContract as Contract
         this.emitTimeoutMs = emitTimeoutMs ?? 30000

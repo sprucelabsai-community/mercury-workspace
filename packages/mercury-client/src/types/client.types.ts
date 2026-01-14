@@ -4,6 +4,7 @@ import {
     SkillEventContract,
     SpruceSchemas,
 } from '@sprucelabs/mercury-types'
+import { Log } from '@sprucelabs/spruce-skill-utils'
 
 export interface ConnectionOptions {
     host?: string
@@ -14,6 +15,7 @@ export interface ConnectionOptions {
     shouldReconnect?: boolean
     maxEmitRetries?: number
     connectionRetries?: number
+    log?: Log
 }
 
 export type MercuryConnectFactory = (

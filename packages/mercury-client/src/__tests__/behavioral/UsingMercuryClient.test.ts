@@ -1,9 +1,12 @@
+import EventEmitter from 'events'
 import AbstractSpruceError from '@sprucelabs/error'
 import {
     eventAssertUtil,
     eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
+import { buildLog } from '@sprucelabs/spruce-skill-utils'
 import { assert, errorAssert, test } from '@sprucelabs/test-utils'
+import { Socket } from 'socket.io-client'
 import MercuryClientFactory from '../../clients/MercuryClientFactory'
 import MercurySocketIoClient from '../../clients/MercurySocketIoClient'
 import SpruceError from '../../errors/SpruceError'
@@ -721,6 +724,29 @@ export default class UsingMercuryClient extends AbstractClientTest {
         this.assertPerson1ComesBack(results, person1)
     }
 
+    @test()
+    protected static async canInjectCustomLogger() {
+        let wasHit = false
+
+        const socketio = new FakeSocket()
+        MercurySocketIoClient.io = () => socketio as unknown as Socket
+
+        const log = buildLog('TEST', {
+            transportsByLevel: {
+                ERROR: () => {
+                    wasHit = true
+                },
+            },
+        })
+
+        await this.connectToApi({ log })
+
+        assert.isFalse(wasHit, 'Custom logger was hit too early!')
+        socketio.emit('connect_error', new Error('Test error'))
+
+        assert.isTrue(wasHit, 'Custom logger was not hit!')
+    }
+
     private static assertPerson1ComesBack(results: any, person1: any) {
         const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
 
@@ -834,5 +860,106 @@ export default class UsingMercuryClient extends AbstractClientTest {
         await this.registerEvent(skill1.slug, skill1Client)
 
         return { client, org, skill1, skill1Client, skill2Client }
+    }
+}
+
+class FakeSocket extends EventEmitter {
+    public connected = false
+    public fireConnectRightAway = true
+
+    public constructor() {
+        super()
+    }
+
+    public get disconnected(): boolean {
+        return !this.connected
+    }
+
+    public get active(): boolean {
+        return this.connected
+    }
+
+    public get volatile(): this {
+        return this
+    }
+
+    public on(event: string, listener: (...args: any[]) => void): this {
+        super.on(event, listener)
+        if (event === 'connect' && this.fireConnectRightAway) {
+            setImmediate(() => {
+                listener()
+            })
+        }
+        return this
+    }
+
+    public connect(): this {
+        this.connected = true
+        this.emit('connect')
+        return this
+    }
+
+    public open(): this {
+        return this.connect()
+    }
+
+    public disconnect(): this {
+        this.connected = false
+        return this
+    }
+
+    public close(): this {
+        return this.disconnect()
+    }
+
+    public send(..._args: any[]): this {
+        return this
+    }
+
+    public compress(_compress: boolean): this {
+        return this
+    }
+
+    public timeout(_timeout: number): any {
+        return this
+    }
+
+    public emitWithAck<Ev extends string>(
+        _ev: Ev,
+        ..._args: any[]
+    ): Promise<any> {
+        return Promise.resolve()
+    }
+
+    public onAny(_listener: (...args: any[]) => void): this {
+        return this
+    }
+
+    public prependAny(_listener: (...args: any[]) => void): this {
+        return this
+    }
+
+    public offAny(_listener?: (...args: any[]) => void): this {
+        return this
+    }
+
+    public listenersAny(): ((...args: any[]) => void)[] {
+        return []
+    }
+
+    public onAnyOutgoing(_listener: (...args: any[]) => void): this {
+        return this
+    }
+
+    public prependAnyOutgoing(_listener: (...args: any[]) => void): this {
+        return this
+    }
+
+    public offAnyOutgoing(_listener?: (...args: any[]) => void): this {
+        return this
+    }
+
+    public listenersAnyOutgoing(): ((...args: any[]) => void)[] {
+        return []
     }
 }

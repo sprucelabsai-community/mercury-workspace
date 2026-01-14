@@ -26,6 +26,7 @@ export default class MercuryClientFactory {
             shouldReconnect,
             maxEmitRetries,
             connectionRetries,
+            log,
         } = connectionOptions || {}
 
         const host = hostOption ?? DEFAULT_HOST
@@ -65,6 +66,7 @@ export default class MercuryClientFactory {
             shouldReconnect,
             maxEmitRetries,
             connectionRetries,
+            log,
         })
 
         await client.connect()

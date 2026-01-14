@@ -10,9 +10,10 @@
 		"**/node_modules/**": true,
 	},
 	"search.exclude": {
-		"**/node_modules/**": false,
+		"**/node_modules/**": true,
 		"**/browser/**": false,
 	},
+
 	"[javascript]": {
 		"editor.formatOnSave": false
 	},
@@ -34,15 +35,6 @@
 		"./packages/mercury-types"
 	],
 	"eslint.lintTask.options": "--cache",
-	"eslint.options": {
-		"extensions": [
-			".js",
-			".jsx",
-			".ts",
-			".tsx"
-		],
-		"cache": true
-	},
 	"typescript.preferences.importModuleSpecifier": "relative",
 	"cSpell.ignorePaths": [
 		"**/package-lock.json",
@@ -66,7 +58,6 @@
 	"circleci.persistedProjectSelection": [
 		"gh/sprucelabsai-community/mercury-workspace"
 	],
-	"eslint.useFlatConfig": true,
 	"eslint.enable": true,
 	"eslint.validate": [
 		"javascript",
