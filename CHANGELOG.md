@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [46.1.0](https://github.com/sprucelabsai-community/mercury-workspace/compare/v46.0.1...v46.1.0) (2026-01-14)
+
+
+### Features
+
+* can pass custom log to io client ([5675e54](https://github.com/sprucelabsai-community/mercury-workspace/commit/5675e54))
+
+
+
+
+
 ## [46.0.1](https://github.com/sprucelabsai-community/mercury-workspace/compare/v46.0.0...v46.0.1) (2026-01-08)
 
 **Note:** Version bump only for package spruce-mercury-workspace
