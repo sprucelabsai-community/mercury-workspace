@@ -49,7 +49,7 @@ export default class MutableContractClient<
                     : {}
 
             return sig
-        } catch (err) {
+        } catch {
             const inMemorySig = eventContractUtil.getSignatureByName(
                 MutableContractClient.inMemoryContract ?? {
                     eventSignatures: {},
