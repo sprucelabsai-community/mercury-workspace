@@ -1,10 +1,13 @@
 import { EventContract, SkillEventContract } from '@sprucelabs/mercury-types'
+import { createRequire } from 'module'
 import { SchemaError } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { DEFAULT_HOST } from '../constants'
 import SpruceError from '../errors/SpruceError'
 import { ConnectionOptions, MercuryClient } from '../types/client.types'
 import MutableContractClient from './MutableContractClient'
+
+const requireCompat = createRequire(process.cwd() + '/')
 
 export default class MercuryClientFactory {
     private static isTestMode = false
@@ -52,7 +55,7 @@ export default class MercuryClientFactory {
 
         if (this.isTestMode) {
             //TODO, make this something fitxures sets to make the test client available
-            Client = require('../clients/MercuryTestClient').default
+            Client = requireCompat('../clients/MercuryTestClient').default
         }
 
         const client = new ((MercuryClientFactory.ClientClass ??
@@ -98,7 +101,7 @@ export default class MercuryClientFactory {
     }
 
     private static resetTestClient() {
-        const Client = require('../clients/MercuryTestClient').default
+        const Client = requireCompat('../clients/MercuryTestClient').default
         Client.reset()
     }
 
