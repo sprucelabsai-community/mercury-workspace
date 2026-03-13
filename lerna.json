@@ -1,6 +1,6 @@
 {
   "npmClient": "yarn",
-  "version": "46.1.14",
+  "version": "46.1.15",
   "command": {
     "publish": {
       "allowBranch": [
